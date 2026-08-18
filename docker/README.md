@@ -113,7 +113,7 @@ export COMPOSE_DOCKER_CLI_BUILD=1
 | Service Name | Host Port | Internal Port | Memory Limit | Build Context |
 | :--- | :--- | :--- | :--- | :--- |
 | **`app` (SG Portal & Dev-Dashboard)** | `3001`, `3002`, `3003` | 3001, 3002, 3003 | 1024M | Root Monorepo |
-| **`db` (PostgreSQL 15)** | `5433` | 5432 | 256M | Official Image |
+| **`db` (PostgreSQL 17)** | `5433` | 5432 | 256M | Official Image |
 | **`reference-expenses`** | `8085` | 8085 | 256M | `sandbox/apps/reference-expenses` |
 | **`reference-go`** | `8086` | 8086 | 128M | `sandbox/apps/reference-go` |
 | **`reference-python`** | `8087` | 8087 | 256M | `sandbox/apps/reference-python` |

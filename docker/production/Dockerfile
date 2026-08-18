@@ -50,7 +50,7 @@ FROM oven/bun:1.2-alpine AS runner
 RUN apk add --no-cache \
     bash \
     python3 \
-    postgresql15-client \
+    postgresql-client \
     ca-certificates \
     docker-cli
 

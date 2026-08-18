@@ -115,3 +115,4 @@
 2026-08-18 10:07 | Hardened toolchain/run-checks.sh with zero-orphan process lifecycle and scoped security audits
 2026-08-18 10:10 | Fixed tab delimiter parsing in pre-commit git ls-files hygiene check
 2026-08-18 10:15 | Resolved CI/CD Postgres UUID casting error for slug queries in permissionEngine and admin routes
+2026-08-18 10:52 | Added auto-recovery for Postgres volume mismatches and upgraded Dockerfiles to PostgreSQL 17 client

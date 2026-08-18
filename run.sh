@@ -278,6 +278,50 @@ check_docker_daemon() {
   return 0
 }
 
+wait_for_postgres() {
+  local container_name="${1:-$DB_CONTAINER_NAME}"
+  local env_file="${2:-config/envs/docker.development.env}"
+  local max_wait=30
+  local count=0
+  local recovered=0
+
+  echo -e "${BLUE}Waiting for PostgreSQL database container to be ready...${RESET}"
+  while [ $count -lt $max_wait ]; do
+    if docker exec "${container_name}" pg_isready -U lifeos -d org_db >/dev/null 2>&1; then
+      echo -e "${GREEN}✓ Database container ready.${RESET}"
+      return 0
+    fi
+
+    # Detect PostgreSQL version incompatibility in volume
+    if [ $recovered -eq 0 ]; then
+      local db_logs
+      db_logs=$(docker logs "${container_name}" --tail 25 2>&1 || true)
+      if echo "$db_logs" | grep -q "FATAL:  database files are incompatible"; then
+        echo -e "${YELLOW}⚠ Incompatible PostgreSQL volume detected. Auto-recovering clean data volume...${RESET}"
+        if [ -f "$env_file" ]; then
+          docker compose -f docker/development/docker-compose.yaml --env-file "$env_file" down -v --remove-orphans >/dev/null 2>&1 || true
+          docker compose -f docker/development/docker-compose.yaml --env-file "$env_file" up -d db >/dev/null 2>&1 || true
+        else
+          docker compose -f docker/development/docker-compose.yaml down -v --remove-orphans >/dev/null 2>&1 || true
+          docker compose -f docker/development/docker-compose.yaml up -d db >/dev/null 2>&1 || true
+        fi
+        recovered=1
+        sleep 2
+      fi
+    fi
+
+    sleep 1
+    count=$((count + 1))
+  done
+
+  if ! docker exec "${container_name}" pg_isready -U lifeos -d org_db >/dev/null 2>&1; then
+    echo -e "${RED}❌ Database failed to become healthy. Logs:${RESET}"
+    docker logs "${container_name}" --tail 20 2>&1 || true
+    return 1
+  fi
+  return 0
+}
+
 # ------------------------------------------------------------------------------
 # 1. SETUP COMMAND (Interactive or Direct)
 # ------------------------------------------------------------------------------
@@ -332,11 +376,9 @@ cmd_setup() {
 
   echo -e "${BLUE}[4/5] Spawning database container (${DB_CONTAINER_NAME}) & seeding schemas...${RESET}"
   docker compose -f docker/development/docker-compose.yaml up -d db
-  echo -e "Waiting for PostgreSQL database container to be healthy..."
-  until docker exec "${DB_CONTAINER_NAME}" pg_isready -U lifeos -d org_db &>/dev/null; do
-    sleep 1
-  done
-  echo -e "${GREEN}✓ Database container ready.${RESET}"
+  if ! wait_for_postgres "${DB_CONTAINER_NAME}" "config/envs/docker.development.env"; then
+    exit 1
+  fi
   bun core/src/database/initialize-local-db.ts
 
   echo -e "${BLUE}[5/5] Bundling Forge SDK & Dev Dashboard assets...${RESET}"
@@ -662,11 +704,9 @@ run_stack() {
     echo -e "${BLUE}Configuring PostgreSQL database container...${RESET}"
     docker compose -f docker/development/docker-compose.yaml --env-file "$env_file" up -d db
 
-    echo -e "${BLUE}Waiting for database container to be ready...${RESET}"
-    until docker exec "${DB_CONTAINER_NAME}" pg_isready -U lifeos -d org_db >/dev/null 2>&1; do
-      sleep 1
-    done
-    echo -e "${GREEN}Database is ready!${RESET}"
+    if ! wait_for_postgres "${DB_CONTAINER_NAME}" "$env_file"; then
+      exit 1
+    fi
 
     echo -e "${BLUE}Syncing database schemas...${RESET}"
     bun core/src/database/initialize-local-db.ts

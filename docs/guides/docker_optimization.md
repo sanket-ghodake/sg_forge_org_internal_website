@@ -32,7 +32,7 @@ docker/
 ### 2. RAM Memory Resource Caps
 - Added strict memory resource limits (`deploy.resources.limits.memory`) across all development containers to prevent host RAM exhaustion:
   - `app` (Next.js / Node / Bun): **1024MB RAM** (with `NODE_OPTIONS=--max-old-space-size=512`)
-  - `db` (PostgreSQL 15): **256MB RAM**
+  - `db` (PostgreSQL 17): **256MB RAM**
   - `reference-expenses`: **256MB RAM**
   - `reference-python`: **256MB RAM**
   - `telemetry-dashboard`: **256MB RAM**
