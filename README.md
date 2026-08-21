@@ -37,18 +37,24 @@ run.bat dev
 
 ```text
 .
-├── apps/                          # 🏢 Core platform services & shared libraries
-│   ├── landing/                   # 1. Public Landing Page (Port 80/443 root)
-│   ├── auth/                      # 2. Central Auth & JWT Token Issuer
-│   ├── portal/                    # 3. Main Workspace & Org Canvas (Port 3001)
-│   ├── dev-dashboard/             # 4. Developer Monitoring Dashboard (Port 3002)
-│   ├── dev-hub/                   # 5. Developer Hub & Playground (Port 3003)
-│   ├── sdk/                       # 6. Forge SDK bridge library (@forge/sdk)
-│   ├── ui/                        # 7. Meta Astryx UI tokens & components (@forge/ui)
-│   └── types/                     # 8. Shared TypeScript domain models (@forge/types)
+├── apps/                          # 🏢 Core Platform Codebase
+│   ├── src/                       # 📦 Platform Services & Shared Libraries
+│   │   ├── landing/               # 1. Public Landing Page (Port 80/443 root)
+│   │   ├── auth/                  # 2. Central Auth & JWT Token Issuer
+│   │   ├── portal/                # 3. Main Workspace & Org Canvas (Port 3001)
+│   │   ├── dev-dashboard/         # 4. Developer Monitoring Dashboard (Port 3002)
+│   │   ├── dev-hub/               # 5. Developer Hub & Playground (Port 3003)
+│   │   ├── sdk/                   # 6. Forge SDK bridge library (@forge/sdk)
+│   │   ├── ui/                    # 7. Meta Astryx UI tokens & components (@forge/ui)
+│   │   └── types/                 # 8. Shared TypeScript domain models (@forge/types)
+│   └── test/                      # 🧪 5-Tier Test Suites (unit, integration, e2e, contract, security)
 │
 ├── forge-apps/                    # 🧩 Independent Micro-Apps (Dockerized)
 │   └── app-template/              # Standard starter template
+│
+├── docker/                        # 🐳 Docker Environments
+│   ├── dev/                       # docker-compose.yml (Development)
+│   └── prod/                      # docker-compose.yml (Production)
 │
 ├── proxy/                         # 🔀 Unified Reverse Proxy (Caddy / Nginx)
 │   └── Caddyfile

@@ -16,12 +16,12 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@forge/sdk": ["apps/sdk/src/index.ts"],
-      "@forge/sdk/*": ["apps/sdk/src/*"],
-      "@forge/ui": ["apps/ui/src/index.ts"],
-      "@forge/ui/*": ["apps/ui/src/*"],
-      "@forge/types": ["apps/types/src/index.ts"],
-      "@forge/types/*": ["apps/types/src/*"]
+      "@forge/sdk": ["apps/src/sdk/src/index.ts"],
+      "@forge/sdk/*": ["apps/src/sdk/src/*"],
+      "@forge/ui": ["apps/src/ui/src/index.ts"],
+      "@forge/ui/*": ["apps/src/ui/src/*"],
+      "@forge/types": ["apps/src/types/src/index.ts"],
+      "@forge/types/*": ["apps/src/types/src/*"]
     }
   },
   "include": [

@@ -124,3 +124,4 @@
 2026-08-21 07:24 | Refactored architecture to Option C: colocated all services and libraries under apps/ and forge-apps/
 2026-08-21 07:26 | Re-audited and consolidated all agent directives, tech stack baselines, and workforce domain routers
 2026-08-21 07:31 | Initialized root test/ suites (unit, integration, e2e, contract, security), docker/ (dev, prod), and apps/ (src, test) structures
+2026-08-21 07:33 | Restructured apps/ into apps/src/ (services & libs) and apps/test/ (5-tier testing suites)

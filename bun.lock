@@ -9,14 +9,14 @@
         "typescript": "^5.6.3",
       },
     },
-    "apps/auth": {
+    "apps/src/auth": {
       "name": "@forge/auth",
       "version": "2.0.0",
       "dependencies": {
         "@forge/types": "workspace:*",
       },
     },
-    "apps/dev-dashboard": {
+    "apps/src/dev-dashboard": {
       "name": "@forge/dev-dashboard",
       "version": "2.0.0",
       "dependencies": {
@@ -24,7 +24,7 @@
         "@forge/ui": "workspace:*",
       },
     },
-    "apps/dev-hub": {
+    "apps/src/dev-hub": {
       "name": "@forge/dev-hub",
       "version": "2.0.0",
       "dependencies": {
@@ -33,7 +33,7 @@
         "@forge/ui": "workspace:*",
       },
     },
-    "apps/landing": {
+    "apps/src/landing": {
       "name": "@forge/landing",
       "version": "2.0.0",
       "dependencies": {
@@ -41,7 +41,7 @@
         "@forge/ui": "workspace:*",
       },
     },
-    "apps/portal": {
+    "apps/src/portal": {
       "name": "@forge/portal",
       "version": "2.0.0",
       "dependencies": {
@@ -50,18 +50,18 @@
         "@forge/ui": "workspace:*",
       },
     },
-    "apps/sdk": {
+    "apps/src/sdk": {
       "name": "@forge/sdk",
       "version": "2.0.0",
       "dependencies": {
         "@forge/types": "workspace:*",
       },
     },
-    "apps/types": {
+    "apps/src/types": {
       "name": "@forge/types",
       "version": "2.0.0",
     },
-    "apps/ui": {
+    "apps/src/ui": {
       "name": "@forge/ui",
       "version": "2.0.0",
     },
@@ -78,21 +78,21 @@
   "packages": {
     "@forge-apps/template": ["@forge-apps/template@workspace:forge-apps/app-template"],
 
-    "@forge/auth": ["@forge/auth@workspace:apps/auth"],
+    "@forge/auth": ["@forge/auth@workspace:apps/src/auth"],
 
-    "@forge/dev-dashboard": ["@forge/dev-dashboard@workspace:apps/dev-dashboard"],
+    "@forge/dev-dashboard": ["@forge/dev-dashboard@workspace:apps/src/dev-dashboard"],
 
-    "@forge/dev-hub": ["@forge/dev-hub@workspace:apps/dev-hub"],
+    "@forge/dev-hub": ["@forge/dev-hub@workspace:apps/src/dev-hub"],
 
-    "@forge/landing": ["@forge/landing@workspace:apps/landing"],
+    "@forge/landing": ["@forge/landing@workspace:apps/src/landing"],
 
-    "@forge/portal": ["@forge/portal@workspace:apps/portal"],
+    "@forge/portal": ["@forge/portal@workspace:apps/src/portal"],
 
-    "@forge/sdk": ["@forge/sdk@workspace:apps/sdk"],
+    "@forge/sdk": ["@forge/sdk@workspace:apps/src/sdk"],
 
-    "@forge/types": ["@forge/types@workspace:apps/types"],
+    "@forge/types": ["@forge/types@workspace:apps/src/types"],
 
-    "@forge/ui": ["@forge/ui@workspace:apps/ui"],
+    "@forge/ui": ["@forge/ui@workspace:apps/src/ui"],
 
     "@types/node": ["@types/node@22.20.1", "", { "dependencies": { "undici-types": "~6.21.0" } }, "sha512-EANqOCF9QFyra+4pfxUcX9STKJpCLjMbObVzljIJomAWSnuSIEAvyzEU53GaajbXJEgdh0iEcPL+DGvpUd4k1Q=="],
 

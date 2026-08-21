@@ -30,13 +30,13 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1787277244.6970098,
-    "ast_hash": "1aea8de935bb05eb46f4d566dac41741",
+    "mtime": 1787277356.5296588,
+    "ast_hash": "d69e5c05f9d4ce48ff1576e4f20e2b33",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1787277251.1350687,
-    "ast_hash": "1aea8de935bb05eb46f4d566dac41741",
+    "mtime": 1787277362.6131659,
+    "ast_hash": "d69e5c05f9d4ce48ff1576e4f20e2b33",
     "semantic_hash": ""
   },
   "docs/setup/WORKFLOW_SETUP.md": {
@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "logs/WORKLOGS.md": {
-    "mtime": 1787276987.9916124,
-    "ast_hash": "4d036bf39c454496c7d4cb1cb3950705",
+    "mtime": 1787277371.1914797,
+    "ast_hash": "0512e231c224e3ca7269c5d084fdf5ef",
     "semantic_hash": ""
   },
   "docs/setup/PORTABLE_SETUP.md": {
@@ -95,8 +95,8 @@
     "semantic_hash": ""
   },
   "GEMINI.md": {
-    "mtime": 1787277251.7150738,
-    "ast_hash": "1aea8de935bb05eb46f4d566dac41741",
+    "mtime": 1787277363.4880953,
+    "ast_hash": "d69e5c05f9d4ce48ff1576e4f20e2b33",
     "semantic_hash": ""
   },
   "apps/auth/package.json": {
@@ -197,6 +197,51 @@
   "apps/ui/src/index.ts": {
     "mtime": 1787276362.1362472,
     "ast_hash": "68492ab1765143b10ed452acf9da7c1b",
+    "semantic_hash": ""
+  },
+  "apps/auth/src/index.ts": {
+    "mtime": 1787277625.4542322,
+    "ast_hash": "74d0c1f23e648bd05d8ad8ce8badb5e6",
+    "semantic_hash": ""
+  },
+  "apps/dev-dashboard/src/index.ts": {
+    "mtime": 1787277639.3835332,
+    "ast_hash": "3ca51d27ee941e13d0e2c45206d470e3",
+    "semantic_hash": ""
+  },
+  "apps/dev-hub/src/index.ts": {
+    "mtime": 1787277645.7192206,
+    "ast_hash": "ed170a30d24a5f290e53381058023da0",
+    "semantic_hash": ""
+  },
+  "apps/landing/src/index.ts": {
+    "mtime": 1787277619.4205403,
+    "ast_hash": "3c3e6c5d81356a1c9460d3182b41e58f",
+    "semantic_hash": ""
+  },
+  "apps/portal/src/index.ts": {
+    "mtime": 1787277633.7948117,
+    "ast_hash": "cad8351f795a9c3d6d377fb819c9cc6b",
+    "semantic_hash": ""
+  },
+  "test/unit/sdk.test.ts": {
+    "mtime": 1787277652.70388,
+    "ast_hash": "ce56d9e5540a1f205e68aa92ac1f8c79",
+    "semantic_hash": ""
+  },
+  "docker/dev/docker-compose.yml": {
+    "mtime": 1787277600.520526,
+    "ast_hash": "c6165064c32852325a3fbd0b3dd2428d",
+    "semantic_hash": ""
+  },
+  "docker/prod/docker-compose.yml": {
+    "mtime": 1787277606.437214,
+    "ast_hash": "fb77f528c0371f5fa207206c68b46256",
+    "semantic_hash": ""
+  },
+  "test/README.md": {
+    "mtime": 1787277613.3468535,
+    "ast_hash": "7fd1945246a662fe8691e402c78d3e25",
     "semantic_hash": ""
   }
 }

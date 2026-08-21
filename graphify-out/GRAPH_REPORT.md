@@ -1,7 +1,7 @@
 # Graph Report - org_website_clone  (2026-08-21)
 
 ## Corpus Check
-- 38 files · ~51,499 words
+- 38 files · ~51,566 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c7e3049b`
+- Built from commit: `d73dd237`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -66,10 +66,10 @@
 
 ## Surprising Connections (you probably didn't know these)
 - `ForgeClient` --references--> `UserContext`  [EXTRACTED]
-  apps/sdk/src/index.ts → apps/types/src/index.ts
+  apps/src/sdk/src/index.ts → apps/src/types/src/index.ts
 
 ## Import Cycles
-- 1-file cycle: `apps/sdk/src/index.ts -> apps/sdk/src/index.ts`
+- 1-file cycle: `apps/src/sdk/src/index.ts -> apps/src/sdk/src/index.ts`
 
 ## Communities (36 total, 7 thin omitted)
 

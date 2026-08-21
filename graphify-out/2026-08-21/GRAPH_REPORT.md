@@ -1,11 +1,11 @@
 # Graph Report - org_website_clone  (2026-08-21)
 
 ## Corpus Check
-- 31 files · ~50,527 words
+- 38 files · ~51,499 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 310 nodes · 284 edges · 30 communities (28 shown, 2 thin omitted)
+- 334 nodes · 302 edges · 36 communities (29 shown, 7 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
@@ -32,7 +32,13 @@
 - [[_COMMUNITY_ui-molecules.test.ts|ui-molecules.test.ts]]
 - [[_COMMUNITY_compilerOptions|compilerOptions]]
 - [[_COMMUNITY_suitesindex.ts|suites/index.ts]]
+- [[_COMMUNITY_Community 17|Community 17]]
+- [[_COMMUNITY_Community 18|Community 18]]
 - [[_COMMUNITY_ui-organisms.test.ts|ui-organisms.test.ts]]
+- [[_COMMUNITY_Community 20|Community 20]]
+- [[_COMMUNITY_Community 21|Community 21]]
+- [[_COMMUNITY_Community 22|Community 22]]
+- [[_COMMUNITY_Community 23|Community 23]]
 - [[_COMMUNITY_telemetry-dashboardapp.json|telemetry-dashboard/app.json]]
 - [[_COMMUNITY_run.sh script|run.sh script]]
 - [[_COMMUNITY_reference-expensespackage.json|reference-expenses/package.json]]
@@ -55,8 +61,8 @@
 6. `🛑 THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS` - 11 edges
 7. `Developer Setup Guide — Org Website (2026 Standalone Stack)` - 8 edges
 8. `scripts` - 7 edges
-9. `AI AGENT DIRECTIVES - ORG_WEBSITE (2026 TECH STACK)` - 6 edges
-10. `AI AGENT DIRECTIVES - ORG_WEBSITE (2026 TECH STACK)` - 6 edges
+9. `AI AGENT DIRECTIVES - SG FORGE (2026 CLEAN ARCHITECTURE)` - 7 edges
+10. `AI AGENT DIRECTIVES - SG FORGE (2026 CLEAN ARCHITECTURE)` - 7 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `ForgeClient` --references--> `UserContext`  [EXTRACTED]
@@ -65,7 +71,7 @@
 ## Import Cycles
 - 1-file cycle: `apps/sdk/src/index.ts -> apps/sdk/src/index.ts`
 
-## Communities (30 total, 2 thin omitted)
+## Communities (36 total, 7 thin omitted)
 
 ### Community 0 - "devDependencies"
 Cohesion: 0.12
@@ -131,6 +137,10 @@ Nodes (5): 📌 Executive Summary, ⚡ High-Level Traffic & Interaction Flow, �
 Cohesion: 0.33
 Nodes (5): main, name, type, types, version
 
+### Community 17 - "Community 17"
+Cohesion: 0.50
+Nodes (3): ⚡ Running Test Suites, 🧪 SG Forge 5-Tier Testing Suite, 📁 Testing Directory Structure
+
 ### Community 19 - "ui-organisms.test.ts"
 Cohesion: 0.33
 Nodes (5): main, name, type, types, version
@@ -148,8 +158,8 @@ Cohesion: 0.22
 Nodes (8): 1. Operating System Compatibility Matrix, 2. 1-Command Developer Onboarding, 3. Bundled Portable Tooling & Binaries, 4. System Diagnostics, Linux, macOS & WSL2, Tool Command Quick Reference, Windows Native (CMD / PowerShell), Zero-Host-Install Portable Developer & Agent Ecosystem
 
 ### Community 65 - "manager-operations/app.json"
-Cohesion: 0.13
-Nodes (14): 10. Observability & Single-Line Worklog, 1. Correctness, Grounding & "No Guessing", 2. Cybersecurity & Zero-Trust (OWASP ASVS 5.0), 3. Multi-Tenant Data Isolation & Dedicated Turso DB per App, 4. Directional Architectural Boundaries, 5. Clean Package Aliases (Zero Traversal Sprawl), 6. Risk-Tiered 5-Tier Testing Rigor (3A Pattern), 7. Zero Host Install & Portable FOSS Tooling (+6 more)
+Cohesion: 0.11
+Nodes (17): 10. Code Preservation, Observability & Single-Line Worklog, 1. Correctness, Grounding & "No Guessing", 2. Cybersecurity & Zero-Trust (OWASP ASVS 5.0), 3. Multi-Tenant Data Isolation & Dedicated Turso DB per App, 4. Directional Architectural Boundaries, 5. Clean Package Aliases (Zero Traversal Sprawl), 6. Risk-Tiered 5-Tier Testing Rigor (3A Pattern), 7. Zero Host Install & Portable FOSS Tooling (+9 more)
 
 ### Community 72 - "compilerOptions"
 Cohesion: 0.09
@@ -168,36 +178,36 @@ Cohesion: 0.50
 Nodes (3): Architectural Layer, Description, Quality & Compliance Checklist
 
 ### Community 163 - "AI AGENT DIRECTIVES - ORG_WEBSITE (2026 TECH STACK)"
-Cohesion: 0.13
-Nodes (14): 10. Observability & Single-Line Worklog, 1. Correctness, Grounding & "No Guessing", 2. Cybersecurity & Zero-Trust (OWASP ASVS 5.0), 3. Multi-Tenant Data Isolation & Dedicated Turso DB per App, 4. Directional Architectural Boundaries, 5. Clean Package Aliases (Zero Traversal Sprawl), 6. Risk-Tiered 5-Tier Testing Rigor (3A Pattern), 7. Zero Host Install & Portable FOSS Tooling (+6 more)
+Cohesion: 0.11
+Nodes (17): 10. Code Preservation, Observability & Single-Line Worklog, 1. Correctness, Grounding & "No Guessing", 2. Cybersecurity & Zero-Trust (OWASP ASVS 5.0), 3. Multi-Tenant Data Isolation & Dedicated Turso DB per App, 4. Directional Architectural Boundaries, 5. Clean Package Aliases (Zero Traversal Sprawl), 6. Risk-Tiered 5-Tier Testing Rigor (3A Pattern), 7. Zero Host Install & Portable FOSS Tooling (+9 more)
 
 ### Community 165 - "AI AGENT DIRECTIVES - ORG_WEBSITE (2026 TECH STACK)"
-Cohesion: 0.13
-Nodes (14): 10. Observability & Single-Line Worklog, 1. Correctness, Grounding & "No Guessing", 2. Cybersecurity & Zero-Trust (OWASP ASVS 5.0), 3. Multi-Tenant Data Isolation & Dedicated Turso DB per App, 4. Directional Architectural Boundaries, 5. Clean Package Aliases (Zero Traversal Sprawl), 6. Risk-Tiered 5-Tier Testing Rigor (3A Pattern), 7. Zero Host Install & Portable FOSS Tooling (+6 more)
+Cohesion: 0.11
+Nodes (17): 10. Code Preservation, Observability & Single-Line Worklog, 1. Correctness, Grounding & "No Guessing", 2. Cybersecurity & Zero-Trust (OWASP ASVS 5.0), 3. Multi-Tenant Data Isolation & Dedicated Turso DB per App, 4. Directional Architectural Boundaries, 5. Clean Package Aliases (Zero Traversal Sprawl), 6. Risk-Tiered 5-Tier Testing Rigor (3A Pattern), 7. Zero Host Install & Portable FOSS Tooling (+9 more)
 
 ### Community 174 - "AI AGENT DIRECTIVES - ORG_WEBSITE (2026 TECH STACK)"
 Cohesion: 0.12
 Nodes (16): 10. Observability, Worklogs & Documentation Integrity, 1. Correctness, Grounding & "No Guessing", 2. Cybersecurity & Zero-Trust (OWASP ASVS 5.0), 3. Multi-Tenant Data Isolation, 4. Directional Architectural Boundaries, 5. Strict Absolute Path Aliases (Zero Relative Imports), 6. Risk-Tiered Testing Rigor (3A Pattern), 7. Zero Host Install & Portable FOSS Tooling (+8 more)
 
 ## Knowledge Gaps
-- **219 isolated node(s):** `name`, `version`, `private`, `type`, `dev` (+214 more)
+- **234 isolated node(s):** `name`, `version`, `private`, `type`, `dev` (+229 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **What connects `name`, `version`, `private` to the rest of the system?**
-  _219 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _234 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `devDependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
 - **Should `manager-operations/app.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected._
 - **Should `compilerOptions` be split into smaller, more focused modules?**
   _Cohesion score 0.08695652173913043 - nodes in this community are weakly interconnected._
 - **Should `🛠 Core Components` be split into smaller, more focused modules?**
   _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
 - **Should `AI AGENT DIRECTIVES - ORG_WEBSITE (2026 TECH STACK)` be split into smaller, more focused modules?**
-  _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected._
 - **Should `AI AGENT DIRECTIVES - ORG_WEBSITE (2026 TECH STACK)` be split into smaller, more focused modules?**
-  _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected._
