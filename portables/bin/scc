@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Standalone Portable Wrapper for SCC (Code Counter)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+WORKSPACE_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+
+SCC_BIN="$WORKSPACE_ROOT/portables/scc/scc"
+
+if [ -x "$SCC_BIN" ]; then
+  exec "$SCC_BIN" "$@"
+elif command -v scc &>/dev/null; then
+  exec scc "$@"
+else
+  echo "Error: Portable scc executable not found at $SCC_BIN" >&2
+  exit 1
+fi

@@ -1,0 +1,127 @@
+{
+  "communities": {
+    "0": [
+      "package",
+      "package_description",
+      "package_main",
+      "package_name",
+      "package_scripts",
+      "package_scripts_run_dev",
+      "package_scripts_setup",
+      "package_type",
+      "package_version"
+    ],
+    "1": [
+      "admin_queryengine",
+      "admin_queryengine_executeadminquery",
+      "database_connection",
+      "database_connection_client",
+      "database_connection_db",
+      "database_initialize_local_db",
+      "database_initialize_local_db_main"
+    ],
+    "2": [
+      "auth_sessionmanager",
+      "auth_sessionmanager_getsession",
+      "auth_sessionmanager_usersession",
+      "middleware_authguard",
+      "middleware_authguard_middleware"
+    ],
+    "3": [
+      "package_dependencies",
+      "package_dependencies_drizzle_orm",
+      "package_dependencies_iron_session",
+      "package_dependencies_jose",
+      "package_dependencies_pg"
+    ],
+    "4": [
+      "package_devdependencies",
+      "package_devdependencies_bun_types",
+      "package_devdependencies_drizzle_kit",
+      "package_devdependencies_types_node",
+      "package_devdependencies_typescript"
+    ],
+    "5": [
+      "database_schema",
+      "database_schema_structuralmetadata",
+      "database_schema_systemlogs",
+      "database_schema_users"
+    ],
+    "6": ["tailwind_config"]
+  },
+  "cohesion": {
+    "0": 0.2222222222222222,
+    "1": 0.38095238095238093,
+    "2": 0.4,
+    "3": 0.4,
+    "4": 0.4,
+    "5": 0.5,
+    "6": 1.0
+  },
+  "gods": [
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "degree": 3
+    },
+    {
+      "id": "database_connection_db",
+      "label": "db",
+      "degree": 3
+    },
+    {
+      "id": "auth_sessionmanager_getsession",
+      "label": "getSession()",
+      "degree": 2
+    },
+    {
+      "id": "middleware_authguard_middleware",
+      "label": "middleware()",
+      "degree": 2
+    },
+    {
+      "id": "package_main",
+      "label": "main",
+      "degree": 1
+    },
+    {
+      "id": "package_scripts_setup",
+      "label": "setup",
+      "degree": 1
+    },
+    {
+      "id": "package_scripts_run_dev",
+      "label": "run-dev",
+      "degree": 1
+    },
+    {
+      "id": "package_dependencies_drizzle_orm",
+      "label": "drizzle-orm",
+      "degree": 1
+    },
+    {
+      "id": "package_dependencies_pg",
+      "label": "pg",
+      "degree": 1
+    },
+    {
+      "id": "package_dependencies_jose",
+      "label": "jose",
+      "degree": 1
+    }
+  ],
+  "surprises": [
+    {
+      "source": "middleware()",
+      "target": "getSession()",
+      "source_files": ["src/backend/middleware/authGuard.ts", "src/backend/auth/sessionManager.ts"],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source"
+    }
+  ],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

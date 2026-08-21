@@ -1,0 +1,13 @@
+# ==============================================================================
+# SG Forge 2.0 - Production Environment Compose
+# ==============================================================================
+services:
+  proxy:
+    image: caddy:2-alpine
+    container_name: forge-proxy-prod
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../../proxy/Caddyfile:/etc/caddy/Caddyfile:ro
+    restart: always

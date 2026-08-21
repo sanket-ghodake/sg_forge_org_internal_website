@@ -1,6 +1,6 @@
 # ==============================================================================
-# Git Attributes Configuration (Google / Amazon Enterprise Standard)
-# Auto-normalization of line endings, binary identification, and export controls
+# Git Attributes Configuration (Google & Meta Enterprise Standard)
+# Auto-normalization of line endings, binary identification, Linguist & export controls
 # ==============================================================================
 
 # 1. Default Behavior
@@ -10,6 +10,7 @@
 *.sh text eol=lf
 *.bash text eol=lf
 *.zsh text eol=lf
+*.fish text eol=lf
 entrypoint.sh text eol=lf
 run.sh text eol=lf
 Dockerfile* text eol=lf
@@ -18,6 +19,7 @@ Dockerfile* text eol=lf
 *.bat text eol=crlf
 *.cmd text eol=crlf
 *.ps1 text eol=crlf
+*.vbs text eol=crlf
 
 # 4. Source Code & Configuration Files (Strict LF)
 *.ts text eol=lf
@@ -27,10 +29,13 @@ Dockerfile* text eol=lf
 *.mjs text eol=lf
 *.cjs text eol=lf
 *.json text eol=lf
+*.jsonc text eol=lf
+*.json5 text eol=lf
 *.toml text eol=lf
 *.yaml text eol=lf
 *.yml text eol=lf
 *.md text eol=lf
+*.mdx text eol=lf
 *.sql text eol=lf
 *.css text eol=lf
 *.scss text eol=lf
@@ -38,51 +43,125 @@ Dockerfile* text eol=lf
 *.svg text eol=lf
 *.py text eol=lf
 *.go text eol=lf
+*.proto text eol=lf
+Makefile text eol=lf
 .env* text eol=lf
 .gitignore text eol=lf
 .dockerignore text eol=lf
 .gitattributes text eol=lf
 .editorconfig text eol=lf
+.prettierignore text eol=lf
+.eslintignore text eol=lf
+.commitlintrc.json text eol=lf
+.gitleaks.toml text eol=lf
+.sqlfluffignore text eol=lf
+.antigravityignore text eol=lf
+.copilotignore text eol=lf
+.cursorignore text eol=lf
+.graphifyignore text eol=lf
+.cursorrules text eol=lf
+CLAUDE.md text eol=lf
+AGENTS.md text eol=lf
 
-# 5. Binary Media & Fonts (Preserve raw bytes)
+# 5. Append-Only Worklog Union Merge Driver
+logs/WORKLOGS.md merge=union
+
+# 6. Binary Media, Fonts & Documents (Preserve raw bytes)
 *.png binary
 *.jpg binary
 *.jpeg binary
 *.gif binary
 *.ico binary
 *.webp binary
+*.avif binary
+*.heic binary
+*.bmp binary
+*.tiff binary
+*.psd binary
+*.ai binary
 *.woff binary
 *.woff2 binary
 *.ttf binary
 *.eot binary
 *.otf binary
+*.mp3 binary
+*.mp4 binary
+*.mov binary
+*.avi binary
+*.webm binary
+*.wav binary
+*.ogg binary
+*.flac binary
+*.mkv binary
 *.pdf binary
+*.epub binary
 
-# 6. Binary Archives & Executables
+# 7. Binary Archives & Executables
+*.tar binary
 *.tar.gz binary
 *.tgz binary
 *.zip binary
 *.7z binary
 *.rar binary
+*.gz binary
+*.bz2 binary
+*.xz binary
+*.zst binary
 *.exe binary
 *.bin binary
 *.dll binary
 *.so binary
 *.dylib binary
 *.wasm binary
+*.apk binary
+*.dmg binary
+*.iso binary
 
-# 7. Database Files (Binary)
+# 8. Database Files & Keystores (Binary)
 *.db binary
 *.sqlite binary
 *.sqlite3 binary
 *.dump binary
 *.rdb binary
+*.keystore binary
+*.jks
+*.p12 binary
+*.pfx binary
 
-# 8. GitHub Linguist & Export Rules
+# 9. GitHub Linguist & Generated / Excluded Rules
 bun.lock linguist-generated=true
-bun.lockb binary
+bun.lockb binary linguist-generated=true
+package-lock.json linguist-generated=true
+pnpm-lock.yaml linguist-generated=true
+yarn.lock linguist-generated=true
+*.tsbuildinfo linguist-generated=true
+*.d.ts.map linguist-generated=true
+*.min.js linguist-generated=true
+*.min.css linguist-generated=true
+core/src/backend/dev-dashboard/dashboard.js linguist-generated=true
+core/src/frontend/public/sdk/forge-sdk.js linguist-generated=true
+core/src/database/migrations/meta/* linguist-generated=true
 test/dummy-data/* linguist-generated=true
+docs/security/sbom/* linguist-generated=true
+site/security/sbom/* linguist-generated=true
+site/search/* linguist-generated=true
+
+# 10. Archive Export Controls
 .github export-ignore
 .agents export-ignore
 .husky export-ignore
 .gemini export-ignore
+.gitleaks.toml export-ignore
+portables export-ignore
+.changeset export-ignore
+test export-ignore
+sandbox/scratch export-ignore
+.precommit_container_logs export-ignore
+logs export-ignore
+.cursorrules export-ignore
+.cursorignore export-ignore
+.copilotignore export-ignore
+.antigravityignore export-ignore
+.graphifyignore export-ignore
+.sqlfluffignore export-ignore
+.dependency-cruiser.json export-ignore

@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
+# ==============================================================================
+# SG Forge - Modular Corporate Portal Engine
+# ==============================================================================
+# File:        .agents/hooks/append-log.sh
+# Domain:      Core
+# Layer:       Source Module
+# Description: SG Forge platform component.
+# Standards:   POSIX Shell Strict Mode | Zero Host Modification
+# ==============================================================================
+
 # Token-efficient log appender
 # Usage: ./.agents/hooks/append-log.sh "brief summary"
 
@@ -20,5 +30,4 @@ fi
 sed -i -e :a -e '/^\n*$/{$d;N;ba' -e '}' "$LOG_FILE" 2>/dev/null || true
 
 echo "$TIMESTAMP | $1" >> "$LOG_FILE"
-
 

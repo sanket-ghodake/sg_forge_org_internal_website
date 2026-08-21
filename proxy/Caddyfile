@@ -1,0 +1,49 @@
+# ==============================================================================
+# SG Forge - Unified Reverse Proxy & Dynamic App Router Gateway
+# ==============================================================================
+
+:80 {
+    # Logging
+    log {
+        output stdout
+        format console
+    }
+
+    # Public Landing Page (Root)
+    handle / {
+        reverse_proxy http://127.0.0.1:3000
+    }
+
+    # Main Portal (Port 3001)
+    handle_path /portal* {
+        reverse_proxy http://127.0.0.1:3001
+    }
+
+    # Central Auth Service
+    handle_path /auth* {
+        reverse_proxy http://127.0.0.1:3000
+    }
+
+    # Developer Monitoring Dashboard (Port 3002)
+    handle_path /devcenter* {
+        reverse_proxy http://127.0.0.1:3002
+    }
+
+    # Developer Hub & SDK Playground (Port 3003)
+    handle_path /gateway* {
+        reverse_proxy http://127.0.0.1:3003
+    }
+
+    # Dynamic Micro-Apps Catch-All Routing (:8085+)
+    handle_path /apps/expenses* {
+        reverse_proxy http://127.0.0.1:8085
+    }
+
+    handle_path /apps/billing* {
+        reverse_proxy http://127.0.0.1:8086
+    }
+
+    handle_path /apps/telemetry* {
+        reverse_proxy http://127.0.0.1:8087
+    }
+}

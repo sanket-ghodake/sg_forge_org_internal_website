@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+WORKSPACE_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+VENV_LIZARD="$WORKSPACE_ROOT/.venv/bin/lizard"
+if [ -x "$VENV_LIZARD" ]; then
+  exec "$VENV_LIZARD" "$@"
+else
+  PYTHON="$WORKSPACE_ROOT/.venv/bin/python3"
+  if [ -x "$PYTHON" ]; then
+    exec "$PYTHON" -m lizard "$@"
+  elif command -v lizard &>/dev/null; then
+    exec lizard "$@"
+  else
+    echo "Error: lizard not found in local .venv or host." >&2
+    exit 1
+  fi
+fi

@@ -1,0 +1,15 @@
+{
+  "name": "@forge/dev-hub",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "echo 'Dev Hub service ready'",
+    "build": "echo 'Dev Hub built'"
+  },
+  "dependencies": {
+    "@forge/types": "workspace:*",
+    "@forge/ui": "workspace:*",
+    "@forge/sdk": "workspace:*"
+  }
+}

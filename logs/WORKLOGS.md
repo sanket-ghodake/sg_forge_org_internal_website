@@ -116,3 +116,11 @@
 2026-08-18 10:10 | Fixed tab delimiter parsing in pre-commit git ls-files hygiene check
 2026-08-18 10:15 | Resolved CI/CD Postgres UUID casting error for slug queries in permissionEngine and admin routes
 2026-08-18 10:52 | Added auto-recovery for Postgres volume mismatches and upgraded Dockerfiles to PostgreSQL 17 client
+2026-08-20 22:45 | Designed modular clean architecture specification for SG Forge 2.0 with per-app Turso DB, Astryx UI, and Caddy reverse proxy
+2026-08-21 06:55 | Created idea blueprint specification docs and architecture infographics in idea/ directory
+2026-08-21 07:10 | Initialized clean SG Forge 2.0 foundation with portable runtimes and modular architecture
+2026-08-21 07:15 | Cleaned legacy monolithic directories, obsolete scripts, and synchronized agent directives across all models
+2026-08-21 07:18 | Synchronized all ignore files and re-indexed graphify knowledge graph
+2026-08-21 07:24 | Refactored architecture to Option C: colocated all services and libraries under apps/ and forge-apps/
+2026-08-21 07:26 | Re-audited and consolidated all agent directives, tech stack baselines, and workforce domain routers
+2026-08-21 07:31 | Initialized root test/ suites (unit, integration, e2e, contract, security), docker/ (dev, prod), and apps/ (src, test) structures

@@ -1,0 +1,15 @@
+{
+  "name": "@forge-apps/template",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "./scripts/run.sh dev",
+    "test": "./scripts/test.sh"
+  },
+  "dependencies": {
+    "@forge/sdk": "workspace:*",
+    "@forge/ui": "workspace:*",
+    "@forge/types": "workspace:*"
+  }
+}

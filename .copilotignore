@@ -1,6 +1,5 @@
 # ==============================================================================
-# GitHub Copilot Ignore Configuration
-# Prevents sensitive files, massive dependencies, binaries and caches from being indexed
+# Antigravity Ignore Configuration - SG Forge Monorepo (2026 LTS)
 # ==============================================================================
 
 # Dependencies & Isolated Runtimes
@@ -10,20 +9,28 @@ portables/
 .node_env/
 .venv/
 __pycache__/
+**/*.pyc
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
 
 # Build & Compilation Outputs
 .next/
 **/.next/
 dist/
+**/dist/
 build/
+**/build/
 out/
-site/
+**/out/
 .cache/
 **/.cache/
+.turbo/
 *.tsbuildinfo
-core/src/backend/dev-dashboard/dashboard.js
+**/*.tsbuildinfo
+*.d.ts.map
 
-# Sensitive Credentials & Keys
+# Sensitive Credentials, Keys & Certificates
 .env
 .env.*
 !.env.example
@@ -32,31 +39,27 @@ core/src/backend/dev-dashboard/dashboard.js
 *.crt
 *.p12
 *.pfx
-certs/
-ssl/
 
-# Database Files & Storage Volumes
-volume/
+# Database Files & Dumps
 *.sqlite
 *.sqlite3
+*.sqlite3-journal
+*.sqlite-wal
+*.sqlite-shm
 *.dump
 *.db
+*.db-journal
+*.db-wal
+*.db-shm
+backups/
 
-# Large Mock Data & Test Logs
-test/coverage/
-coverage/
-test/dummy-data/
-test_output.log
+# Logs
+logs/*.log
 *.log
+**/*.log
 
-# Internal Agent Graph State
+# Knowledge Graph Outputs & System
 graphify-out/
-currently_working.md
-.caveman_state.json
-
-# Lockfiles & System
-bun.lock
-package-lock.json
+.git/
 .DS_Store
 Thumbs.db
-.git/

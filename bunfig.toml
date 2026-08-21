@@ -9,6 +9,15 @@ pathIgnorePatterns = [
   "**/portables/**",
   "**/dist/**",
   "**/build/**",
+  "**/out/**",
+  "**/site/**",
   "**/.next/**",
-  "**/.github/**"
+  "**/.github/**",
+  "**/.venv/**",
+  "**/.node_env/**",
+  "**/coverage/**",
+  "**/graphify-out/**",
+  "**/volume/**",
+  "**/sandbox/scratch/**",
+  "**/docs/**"
 ]

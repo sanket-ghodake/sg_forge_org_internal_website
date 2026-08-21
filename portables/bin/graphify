@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+WORKSPACE_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+VENV_GRAPHIFY="$WORKSPACE_ROOT/.venv/bin/graphify"
+HOST_GRAPHIFY="$HOME/.local/bin/graphify"
+if [ -x "$VENV_GRAPHIFY" ]; then
+  exec "$VENV_GRAPHIFY" "$@"
+elif [ -x "$HOST_GRAPHIFY" ]; then
+  exec "$HOST_GRAPHIFY" "$@"
+elif command -v graphify &>/dev/null; then
+  exec graphify "$@"
+else
+  PYTHON="$WORKSPACE_ROOT/.venv/bin/python3"
+  if [ -x "$PYTHON" ]; then
+    exec "$PYTHON" -m graphify "$@"
+  else
+    echo "Error: Graphify not available in local .venv or host." >&2
+    exit 1
+  fi
+fi
