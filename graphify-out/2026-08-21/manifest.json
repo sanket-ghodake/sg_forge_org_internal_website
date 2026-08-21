@@ -15,8 +15,8 @@
     "semantic_hash": ""
   },
   "run.sh": {
-    "mtime": 1787282999.4356039,
-    "ast_hash": "d6ff8840a3168eed7eda144d345e6e62",
+    "mtime": 1787283618.2828546,
+    "ast_hash": "c30ce4de23cc43d9028352a4baced1be",
     "semantic_hash": ""
   },
   ".github/workflows/ci.yml": {
@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "logs/WORKLOGS.md": {
-    "mtime": 1787283350.164182,
-    "ast_hash": "9da2e3ef36086e596fc015b87ca7ea3c",
+    "mtime": 1787283646.824944,
+    "ast_hash": "68c5ffb953504814db0767b046c89ba7",
     "semantic_hash": ""
   },
   "docs/setup/PORTABLE_SETUP.md": {
@@ -280,13 +280,18 @@
     "semantic_hash": ""
   },
   "scripts/verify-gate.ts": {
-    "mtime": 1787282943.1274688,
-    "ast_hash": "9881216bfdd6bd050a6074b05f4cb501",
+    "mtime": 1787283629.3258896,
+    "ast_hash": "d064128f242153e790873b929ccfe12d",
     "semantic_hash": ""
   },
   "docs/tools/PORTABLE_TOOLCHAIN.md": {
     "mtime": 1787283330.2261586,
     "ast_hash": "c58e887c7a5d6eaec1d6b8d75f7a1722",
+    "semantic_hash": ""
+  },
+  "apps/src/auth/src/server.ts": {
+    "mtime": 1787283601.9938016,
+    "ast_hash": "3b71e4be9824e950b73407ed26fafe66",
     "semantic_hash": ""
   }
 }

@@ -124,6 +124,46 @@
       "norm_label": "authservice"
     },
     {
+      "label": "server.ts",
+      "file_type": "code",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_src_auth_src_server_ts_src_server",
+      "community": 16,
+      "norm_label": "server.ts"
+    },
+    {
+      "label": "logger",
+      "file_type": "code",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "apps_src_auth_src_server_ts_src_server_logger",
+      "community": 16,
+      "norm_label": "logger"
+    },
+    {
+      "label": "PORT",
+      "file_type": "code",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "apps_src_auth_src_server_ts_src_server_port",
+      "community": 16,
+      "norm_label": "port"
+    },
+    {
+      "label": "startAuthServer()",
+      "file_type": "code",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "src_server_startauthserver",
+      "community": 16,
+      "norm_label": "startauthserver()"
+    },
+    {
       "label": "package.json",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/package.json",
@@ -1913,7 +1953,7 @@
       "label": "tier2Checks",
       "file_type": "code",
       "source_file": "scripts/verify-gate.ts",
-      "source_location": "L275",
+      "source_location": "L276",
       "_origin": "ast",
       "id": "scripts_verify_gate_tier2checks",
       "community": 25,
@@ -1923,7 +1963,7 @@
       "label": "reportPath",
       "file_type": "code",
       "source_file": "scripts/verify-gate.ts",
-      "source_location": "L378",
+      "source_location": "L379",
       "_origin": "ast",
       "id": "scripts_verify_gate_reportpath",
       "community": 25,
@@ -4094,6 +4134,91 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "apps_src_auth_src_server_ts_src_server",
+      "target": "apps_src_auth_src_server_ts_src_server_logger",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "apps_src_auth_src_server_ts_src_server",
+      "target": "apps_src_auth_src_server_ts_src_server_port",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_src_auth_src_server_ts_src_server",
+      "target": "src_index_createlogger",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_src_auth_src_server_ts_src_server",
+      "target": "src_index_createsafehandler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "apps_src_auth_src_server_ts_src_server",
+      "target": "src_index_getastryxheaderhtml",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "apps_src_auth_src_server_ts_src_server",
+      "target": "src_index_getastryxstyles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "apps_src_auth_src_server_ts_src_server",
+      "target": "src_server_startauthserver",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "src_server_startauthserver",
+      "target": "src_index_createsafehandler"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "apps/dev-dashboard/package.json",
       "source_location": "L10",
       "weight": 1.0,
@@ -4745,9 +4870,9 @@
       "source_file": "apps/src/landing/src/server.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_landing_src_server_ts_src_server",
-      "target": "src_server_routegroup",
-      "confidence_score": 1.0
+      "target": "src_server_routegroup"
     },
     {
       "relation": "contains",
@@ -4755,9 +4880,9 @@
       "source_file": "apps/src/landing/src/server.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_landing_src_server_ts_src_server",
-      "target": "src_server_routeitem",
-      "confidence_score": 1.0
+      "target": "src_server_routeitem"
     },
     {
       "relation": "contains",

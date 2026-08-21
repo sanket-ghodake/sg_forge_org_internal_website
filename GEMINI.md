@@ -10,12 +10,12 @@ Before writing code, running commands, or staging/committing changes, verify:
 1. [ ] **RTK Command Prefix**: Every bash command MUST be prefixed with `rtk` (e.g. `rtk git status`, `rtk bun test`, `rtk git add .`).
 2. [ ] **Zero Host Modification**: All runtimes/tools strictly use portable repo binaries (`portables/bun/bin/bun`, `portables/bin/*`) or Docker. ZERO host modifications (`apt`, `brew`, `npm -g`, `pip install`).
 3. [ ] **500-Line Soft File Cap**: Source files must remain cohesive and **$\le 500$ lines** ($\le 300$ lines ideal). Block files exceeding 500 lines without explicit domain aggregation exemption.
-4. **Strict Meta Astryx UI**: Frontend UI code MUST strictly use Meta Astryx design tokens and components (`@forge/ui`). ZERO bespoke unapproved CSS or random component libraries.
+4. [ ] **Strict Meta Astryx UI**: Frontend UI code MUST strictly use Meta Astryx design tokens and components (`@forge/ui`). ZERO bespoke unapproved CSS or random component libraries.
 5. [ ] **Centralized Logging & Error Handling**: Services MUST use `createLogger` and `createSafeHandler` from `@forge/sdk` (Google SRE standard structured JSON logs & RFC 7807 problem responses).
 6. [ ] **Dedicated Turso DB Isolation**: Dedicated Turso (libSQL) database per Forge App. Micro-apps MUST NEVER query another app's database.
 7. [ ] **Clean Package Aliases**: Imports must use `@forge/sdk`, `@forge/ui`, `@forge/types`. ZERO relative traversal sprawl (`../../..`).
 8. [ ] **Zero-Trust Security (OWASP ASVS 5.0)**: Zero SQL injection, parameterized queries only, safe subprocess args, no hardcoded secrets or credentials.
-9. [ ] **No Unrequested Commits/Browsers**: Do NOT auto-commit git or open browsers unless explicitly requested by the user.
+9. [ ] **Conventional Commits & Audit Reports**: Commits MUST follow Conventional Commits 1.0 (`<type>(<scope>): <summary>`). Every commit auto-includes its audit report in `logs/reports/YYYY-MM/`.
 10. [ ] **Single-Line Worklog**: Task completion appends strictly ONE single line to `logs/WORKLOGS.md` (`YYYY-MM-DD HH:mm | <brief>`).
 
 ---
@@ -55,9 +55,9 @@ Before writing code, running commands, or staging/committing changes, verify:
 - **100% Branch Coverage** required on Auth, RBAC, and Iframe Sandbox boundaries.
 - Mandatory **3A Pattern** (Arrange, Act, Assert) across all unit and integration tests.
 
-### 9. Environment-Driven Configuration & Hot-Reloading
-- Zero hardcoded ports or credentials. Everything driven from `.env` (`${LANDING_PORT:-3000}`, etc.).
-- Development containers and native scripts run with `bun --watch` for instant hot-reloading without image rebuilds.
+### 9. Conventional Commits 1.0 & Bidirectional Audit Linking
+- All commits follow `<type>(<scope>): <short imperative description>` (types: `feat`, `fix`, `refactor`, `perf`, `test`, `tool`, `docs`, `chore`).
+- Pre-commit quality reports are automatically staged into `logs/reports/YYYY-MM/` and referenced in commit history.
 
 ### 10. Code Preservation, Observability & Single-Line Worklog
 - **Comprehensive Header Comments & TSDoc**: Every file begins with standard header comment block; all exports have TSDoc descriptions.

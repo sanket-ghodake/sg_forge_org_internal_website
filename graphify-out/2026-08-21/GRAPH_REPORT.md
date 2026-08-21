@@ -1,12 +1,12 @@
 # Graph Report - org_website_clone  (2026-08-21)
 
 ## Corpus Check
-- 47 files · ~58,543 words
+- 48 files · ~58,818 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 397 nodes · 404 edges · 38 communities (32 shown, 6 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 8 edges (avg confidence: 0.8)
+- 401 nodes · 412 edges · 38 communities (32 shown, 6 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
@@ -56,9 +56,9 @@
 
 ## God Nodes (most connected - your core abstractions)
 1. `compilerOptions` - 17 edges
-2. `getAstryxStyles()` - 15 edges
-3. `getAstryxHeaderHtml()` - 15 edges
-4. `createSafeHandler()` - 11 edges
+2. `getAstryxStyles()` - 16 edges
+3. `getAstryxHeaderHtml()` - 16 edges
+4. `createSafeHandler()` - 13 edges
 5. `🛑 THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS` - 11 edges
 6. `🛑 THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS` - 11 edges
 7. `🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)` - 11 edges
@@ -75,8 +75,8 @@
   forge-apps/expenses/src/server.ts → apps/src/ui/src/index.ts
 - `renderAppHtml()` --calls--> `getAstryxHeaderHtml()`  [INFERRED]
   forge-apps/telemetry/src/server.ts → apps/src/ui/src/index.ts
-- `startDevDashboardServer()` --calls--> `createSafeHandler()`  [INFERRED]
-  apps/src/dev-dashboard/src/server.ts → apps/src/sdk/src/index.ts
+- `startAuthServer()` --calls--> `createSafeHandler()`  [INFERRED]
+  apps/src/auth/src/server.ts → apps/src/sdk/src/index.ts
 
 ## Import Cycles
 - 1-file cycle: `apps/src/sdk/src/index.ts -> apps/src/sdk/src/index.ts`
@@ -148,8 +148,8 @@ Cohesion: 0.33
 Nodes (5): main, name, type, types, version
 
 ### Community 16 - "suites/index.ts"
-Cohesion: 0.09
-Nodes (30): logger, PORT, logger, PORT, logger, PORT, logger, PORT (+22 more)
+Cohesion: 0.08
+Nodes (33): logger, PORT, logger, PORT, logger, PORT, logger, PORT (+25 more)
 
 ### Community 17 - "Community 17"
 Cohesion: 0.50
@@ -212,7 +212,7 @@ Cohesion: 0.12
 Nodes (16): 10. Observability, Worklogs & Documentation Integrity, 1. Correctness, Grounding & "No Guessing", 2. Cybersecurity & Zero-Trust (OWASP ASVS 5.0), 3. Multi-Tenant Data Isolation, 4. Directional Architectural Boundaries, 5. Strict Absolute Path Aliases (Zero Relative Imports), 6. Risk-Tiered Testing Rigor (3A Pattern), 7. Zero Host Install & Portable FOSS Tooling (+8 more)
 
 ## Knowledge Gaps
-- **259 isolated node(s):** `name`, `version`, `private`, `type`, `dev` (+254 more)
+- **261 isolated node(s):** `name`, `version`, `private`, `type`, `dev` (+256 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -220,16 +220,16 @@ Nodes (16): 10. Observability, Worklogs & Documentation Integrity, 1. Correctnes
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `createSafeHandler()` connect `suites/index.ts` to `Community 24`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **Why does `createLogger()` connect `suites/index.ts` to `Community 24`?**
-  _High betweenness centrality (0.005) - this node is a cross-community bridge._
+  _High betweenness centrality (0.006) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `getAstryxStyles()` (e.g. with `renderAppHtml()` and `renderAppHtml()`) actually correct?**
   _`getAstryxStyles()` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 2 inferred relationships involving `getAstryxHeaderHtml()` (e.g. with `renderAppHtml()` and `renderAppHtml()`) actually correct?**
   _`getAstryxHeaderHtml()` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 4 inferred relationships involving `createSafeHandler()` (e.g. with `startDevDashboardServer()` and `startDevHubServer()`) actually correct?**
-  _`createSafeHandler()` has 4 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 5 inferred relationships involving `createSafeHandler()` (e.g. with `startAuthServer()` and `startDevDashboardServer()`) actually correct?**
+  _`createSafeHandler()` has 5 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `name`, `version`, `private` to the rest of the system?**
-  _259 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _261 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `devDependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._

@@ -1,16 +1,16 @@
 # Graph Report - org_website_clone  (2026-08-21)
 
 ## Corpus Check
-- 48 files · ~58,818 words
+- 50 files · ~60,242 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 401 nodes · 412 edges · 38 communities (32 shown, 6 thin omitted)
+- 414 nodes · 424 edges · 40 communities (34 shown, 6 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `20217312`
+- Built from commit: `618acdbc`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -41,6 +41,8 @@
 - [[_COMMUNITY_Community 23|Community 23]]
 - [[_COMMUNITY_Community 24|Community 24]]
 - [[_COMMUNITY_Community 25|Community 25]]
+- [[_COMMUNITY_Community 26|Community 26]]
+- [[_COMMUNITY_Community 27|Community 27]]
 - [[_COMMUNITY_telemetry-dashboardapp.json|telemetry-dashboard/app.json]]
 - [[_COMMUNITY_run.sh script|run.sh script]]
 - [[_COMMUNITY_reference-expensespackage.json|reference-expenses/package.json]]
@@ -81,7 +83,7 @@
 ## Import Cycles
 - 1-file cycle: `apps/src/sdk/src/index.ts -> apps/src/sdk/src/index.ts`
 
-## Communities (38 total, 6 thin omitted)
+## Communities (40 total, 6 thin omitted)
 
 ### Community 0 - "devDependencies"
 Cohesion: 0.12
@@ -164,8 +166,16 @@ Cohesion: 0.13
 Nodes (9): ForgeAppManifest, ForgeClient, ForgeClientOptions, ForgeLogger, LogEntry, LogLevel, PostMessageEvent, UserContext (+1 more)
 
 ### Community 25 - "Community 25"
-Cohesion: 0.20
-Nodes (7): REPO_ROOT, reportPath, REPORTS_DIR, Tier1Check, tier1Results, Tier2Check, tier2Checks
+Cohesion: 0.14
+Nodes (13): AGENTS_REPORTS_DIR, agentsReportPath, latestCommitReportPath, LOGS_REPORTS_DIR, monthlyDir, monthlyReportPath, now, REPO_ROOT (+5 more)
+
+### Community 26 - "Community 26"
+Cohesion: 0.50
+Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
+
+### Community 27 - "Community 27"
+Cohesion: 0.50
+Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
 
 ### Community 39 - "telemetry-dashboard/app.json"
 Cohesion: 0.25
@@ -212,7 +222,7 @@ Cohesion: 0.12
 Nodes (16): 10. Observability, Worklogs & Documentation Integrity, 1. Correctness, Grounding & "No Guessing", 2. Cybersecurity & Zero-Trust (OWASP ASVS 5.0), 3. Multi-Tenant Data Isolation, 4. Directional Architectural Boundaries, 5. Strict Absolute Path Aliases (Zero Relative Imports), 6. Risk-Tiered Testing Rigor (3A Pattern), 7. Zero Host Install & Portable FOSS Tooling (+8 more)
 
 ## Knowledge Gaps
-- **261 isolated node(s):** `name`, `version`, `private`, `type`, `dev` (+256 more)
+- **269 isolated node(s):** `name`, `version`, `private`, `type`, `dev` (+264 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -222,7 +232,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `createSafeHandler()` connect `suites/index.ts` to `Community 24`?**
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **Why does `createLogger()` connect `suites/index.ts` to `Community 24`?**
-  _High betweenness centrality (0.006) - this node is a cross-community bridge._
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `getAstryxStyles()` (e.g. with `renderAppHtml()` and `renderAppHtml()`) actually correct?**
   _`getAstryxStyles()` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 2 inferred relationships involving `getAstryxHeaderHtml()` (e.g. with `renderAppHtml()` and `renderAppHtml()`) actually correct?**
@@ -230,6 +240,6 @@ _Questions this graph is uniquely positioned to answer:_
 - **Are the 5 inferred relationships involving `createSafeHandler()` (e.g. with `startAuthServer()` and `startDevDashboardServer()`) actually correct?**
   _`createSafeHandler()` has 5 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `name`, `version`, `private` to the rest of the system?**
-  _261 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _269 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `devDependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._

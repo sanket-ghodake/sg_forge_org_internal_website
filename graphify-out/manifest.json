@@ -30,13 +30,13 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1787281863.057109,
-    "ast_hash": "b6ed57a56eb27abd79f985c29f00cab3",
+    "mtime": 1787284170.97908,
+    "ast_hash": "4a7ca68068b13772238b44fce6adc1f9",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1787281868.570223,
-    "ast_hash": "b6ed57a56eb27abd79f985c29f00cab3",
+    "mtime": 1787284176.7460887,
+    "ast_hash": "4a7ca68068b13772238b44fce6adc1f9",
     "semantic_hash": ""
   },
   "docs/setup/WORKFLOW_SETUP.md": {
@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "logs/WORKLOGS.md": {
-    "mtime": 1787283546.8696122,
-    "ast_hash": "1edfe16ef1dc465cc5e553cb0fd91ddb",
+    "mtime": 1787283781.1803174,
+    "ast_hash": "b8a6f3e3e78c5b6ac58c8822cd6543fb",
     "semantic_hash": ""
   },
   "docs/setup/PORTABLE_SETUP.md": {
@@ -95,8 +95,8 @@
     "semantic_hash": ""
   },
   "GEMINI.md": {
-    "mtime": 1787281869.4492412,
-    "ast_hash": "b6ed57a56eb27abd79f985c29f00cab3",
+    "mtime": 1787284177.51609,
+    "ast_hash": "4a7ca68068b13772238b44fce6adc1f9",
     "semantic_hash": ""
   },
   "forge-apps/app-template/package.json": {
@@ -280,8 +280,8 @@
     "semantic_hash": ""
   },
   "scripts/verify-gate.ts": {
-    "mtime": 1787283629.3258896,
-    "ast_hash": "d064128f242153e790873b929ccfe12d",
+    "mtime": 1787284127.3700118,
+    "ast_hash": "a1dc2e08dc72ae6120429b75d2ef812a",
     "semantic_hash": ""
   },
   "docs/tools/PORTABLE_TOOLCHAIN.md": {
@@ -292,6 +292,16 @@
   "apps/src/auth/src/server.ts": {
     "mtime": 1787283601.9938016,
     "ast_hash": "3b71e4be9824e950b73407ed26fafe66",
+    "semantic_hash": ""
+  },
+  "logs/reports/2026-08/REPORT_20260821_091941.md": {
+    "mtime": 1787284181.4520957,
+    "ast_hash": "14cb58b505b09074763c1e281575838e",
+    "semantic_hash": ""
+  },
+  "logs/reports/LATEST_COMMIT_REPORT.md": {
+    "mtime": 1787284181.4520957,
+    "ast_hash": "14cb58b505b09074763c1e281575838e",
     "semantic_hash": ""
   }
 }
