@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'bun:test';
 import { themeTokens, ASTRYX_VERSION } from '@forge/ui';
-import { createLogger, createSafeHandler } from '@forge/sdk';
+import { createLogger, createSafeHandler, loadServiceRegistry } from '@forge/sdk';
 
 describe('SG Forge Base Sanity', () => {
   it('loads UI theme tokens accurately across dark and light modes', () => {
@@ -30,5 +30,21 @@ describe('SG Forge Base Sanity', () => {
     const body = await response.json();
     expect(body.title).toBe('Internal Server Error');
     expect(body.service).toBe('test-service');
+  });
+
+  it('dynamically parses service registry from environment variables', () => {
+    const services = loadServiceRegistry();
+    expect(Array.isArray(services)).toBe(true);
+    expect(services.length).toBeGreaterThanOrEqual(5);
+
+    const portal = services.find((s) => s.id === 'portal');
+    expect(portal).toBeDefined();
+    expect(portal?.port).toBe(3001);
+    expect(portal?.path).toBe('/portal');
+
+    const expenses = services.find((s) => s.id === 'expenses');
+    expect(expenses).toBeDefined();
+    expect(expenses?.port).toBe(8085);
+    expect(expenses?.path).toBe('/apps/expenses');
   });
 });

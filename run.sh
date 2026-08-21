@@ -20,6 +20,7 @@ function show_help() {
     echo "Core Development & Testing:"
     echo "  setup                 Bootstrap workspace dependencies & portable runtimes"
     echo "  dev                   Start all platform services natively in parallel"
+    echo "  sync-proxy            Auto-generate proxy/Caddyfile dynamically from .env"
     echo "  test [unit|all]       Run 5-tier test suites"
     echo "  doctor                Run pre-flight diagnostics & environment check"
     echo "  clean                 Clean build caches and temporary logs"
@@ -57,10 +58,17 @@ case "$CMD" in
         echo "✅ Using Portable RTK: $($RTK --version 2>/dev/null || echo 'Ready')"
         echo "📦 Installing workspace packages with Bun..."
         $PORTABLE_BUN install
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
         echo "✨ Setup completed successfully! Run './run.sh dev' or './run.sh docker up' to start."
         ;;
 
+    sync-proxy)
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
+        ;;
+
     dev)
+        echo "🔀 [SG Forge] Synchronizing dynamic reverse proxy routes from .env..."
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
         echo "🚀 [SG Forge] Starting all platform services in parallel..."
         $PORTABLE_BUN run apps/src/landing/src/server.ts &
         $PORTABLE_BUN run apps/src/auth/src/server.ts &
@@ -75,6 +83,7 @@ case "$CMD" in
 
     verify)
         echo "🛡️ [SG Forge] Running Automated AI Agent Quality Gate..."
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
         $PORTABLE_BUN run "$REPO_ROOT/scripts/verify-gate.ts"
         ;;
 
@@ -147,6 +156,8 @@ case "$CMD" in
         ACTION="${2:-up}"
         case "$ACTION" in
             up)
+                echo "🔀 [SG Forge] Synchronizing dynamic reverse proxy routes from .env..."
+                $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
                 echo "🐳 [SG Forge] Starting Docker Dev Stack (Named Volumes & Resource Limits)..."
                 docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" up -d
                 echo "✨ Stack running! Access Platform Hub at http://localhost/"

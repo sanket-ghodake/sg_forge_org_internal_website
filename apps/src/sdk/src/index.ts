@@ -4,6 +4,7 @@
  */
 
 import type { UserContext, PostMessageEvent } from '@forge/types';
+export * from './registry';
 
 // ==============================================================================
 // 1. Google-Standard Centralized Structured Logger (JSON / Console)

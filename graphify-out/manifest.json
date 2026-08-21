@@ -15,8 +15,8 @@
     "semantic_hash": ""
   },
   "run.sh": {
-    "mtime": 1787283618.2828546,
-    "ast_hash": "c30ce4de23cc43d9028352a4baced1be",
+    "mtime": 1787334973.3868253,
+    "ast_hash": "0feda30a95c6524f6ed0d03bad6c69b5",
     "semantic_hash": ""
   },
   ".github/workflows/ci.yml": {
@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "logs/WORKLOGS.md": {
-    "mtime": 1787283781.1803174,
-    "ast_hash": "b8a6f3e3e78c5b6ac58c8822cd6543fb",
+    "mtime": 1787334468.6236804,
+    "ast_hash": "3f98c0f3cb41422d8211898655fe229b",
     "semantic_hash": ""
   },
   "docs/setup/PORTABLE_SETUP.md": {
@@ -145,13 +145,13 @@
     "semantic_hash": ""
   },
   "docker/dev/docker-compose.yml": {
-    "mtime": 1787281535.7355785,
-    "ast_hash": "319edc83029488b18c685935ec885ba5",
+    "mtime": 1787334260.3557854,
+    "ast_hash": "9e2a92c02d3338147556d7837040283a",
     "semantic_hash": ""
   },
   "docker/prod/docker-compose.yml": {
-    "mtime": 1787280392.6075459,
-    "ast_hash": "4fd86acf326c3b3345c856f740e8b3b0",
+    "mtime": 1787334271.0411336,
+    "ast_hash": "09b1b611e5f3b60d80bc98d144651d69",
     "semantic_hash": ""
   },
   "apps/src/auth/package.json": {
@@ -210,8 +210,8 @@
     "semantic_hash": ""
   },
   "apps/src/sdk/src/index.ts": {
-    "mtime": 1787281520.9259863,
-    "ast_hash": "02f594e4e4b4f704d2b1fcae06717c68",
+    "mtime": 1787334922.112109,
+    "ast_hash": "382108c23a2050b57657319e36c10bcc",
     "semantic_hash": ""
   },
   "apps/src/types/package.json": {
@@ -235,8 +235,8 @@
     "semantic_hash": ""
   },
   "apps/test/unit/sdk.test.ts": {
-    "mtime": 1787281586.0384667,
-    "ast_hash": "0fe2811a3a1289f595de960113962cab",
+    "mtime": 1787334983.4599621,
+    "ast_hash": "0f0147c76292a078c239ec28fd8a9b22",
     "semantic_hash": ""
   },
   "apps/test/README.md": {
@@ -255,8 +255,8 @@
     "semantic_hash": ""
   },
   "apps/src/landing/src/server.ts": {
-    "mtime": 1787283530.1545515,
-    "ast_hash": "dac8f3cce0db3a231cd4155e40236749",
+    "mtime": 1787334962.0236695,
+    "ast_hash": "db32fa8b3c9c9b445350bef1e53448fc",
     "semantic_hash": ""
   },
   "apps/src/portal/src/server.ts": {
@@ -285,8 +285,8 @@
     "semantic_hash": ""
   },
   "docs/tools/PORTABLE_TOOLCHAIN.md": {
-    "mtime": 1787283330.2261586,
-    "ast_hash": "c58e887c7a5d6eaec1d6b8d75f7a1722",
+    "mtime": 1787334997.0421445,
+    "ast_hash": "708cc513fb4ddf49de68b183327fbf27",
     "semantic_hash": ""
   },
   "apps/src/auth/src/server.ts": {
@@ -300,8 +300,33 @@
     "semantic_hash": ""
   },
   "logs/reports/LATEST_COMMIT_REPORT.md": {
-    "mtime": 1787284181.4520957,
-    "ast_hash": "14cb58b505b09074763c1e281575838e",
+    "mtime": 1787334988.7470334,
+    "ast_hash": "be8781e74d348849a5f2c4729a150700",
+    "semantic_hash": ""
+  },
+  "logs/reports/2026-08/REPORT_20260821_231437.md": {
+    "mtime": 1787334277.512342,
+    "ast_hash": "71122f3a8f5ea510a0ef6176700e88cc",
+    "semantic_hash": ""
+  },
+  "logs/reports/2026-08/REPORT_20260821_231739.md": {
+    "mtime": 1787334459.3374531,
+    "ast_hash": "6f01dcd3da5e78028547d7abdb48aea7",
+    "semantic_hash": ""
+  },
+  "apps/src/sdk/src/registry.ts": {
+    "mtime": 1787334909.896933,
+    "ast_hash": "ceb1c555c99f6e984d5a716401c669c3",
+    "semantic_hash": ""
+  },
+  "scripts/generate-proxy.ts": {
+    "mtime": 1787334936.6753159,
+    "ast_hash": "6f2698763708fd7524aaa90552a3624d",
+    "semantic_hash": ""
+  },
+  "logs/reports/2026-08/REPORT_20260821_232628.md": {
+    "mtime": 1787334988.7470334,
+    "ast_hash": "be8781e74d348849a5f2c4729a150700",
     "semantic_hash": ""
   }
 }

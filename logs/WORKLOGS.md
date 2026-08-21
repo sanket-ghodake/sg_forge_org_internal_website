@@ -142,3 +142,6 @@
 2026-08-21 09:10 | Configured apps/src/auth as dedicated independent server with server.ts and updated pre-commit logging gate
 2026-08-21 09:12 | Committed modular monorepo reorganization v2, 2-tier quality gate, portable open-source toolchain, and developer documentation (commit 618acdb)
 2026-08-21 09:19 | Configured Conventional Commits hook, commit-msg validator, and automated commit audit report staging into logs/reports/YYYY-MM/
+2026-08-21 23:14 | Parameterized Caddyfile reverse proxy routes and ingress paths to be 100% dynamically driven from .env
+2026-08-21 23:17 | Implemented dynamic app auto-discovery from forge-apps manifests and 100% environment-driven path overrides via .env
+2026-08-21 23:26 | Implemented dynamic declarative service registry in .env, generate-proxy.ts Caddy generator, and automated Landing Hub cards

@@ -29,6 +29,8 @@ services:
       - ../../proxy/Caddyfile:/etc/caddy/Caddyfile:ro
       - forge_caddy_data:/data
       - forge_caddy_config:/config
+    env_file:
+      - ../../.env
     networks:
       - forge-net
     restart: unless-stopped

@@ -25,9 +25,14 @@
 
 ---
 
-## 🛠️ Detailed Usage & Command Reference
+### 1. 🔀 Dynamic Ingress Sync (`scripts/generate-proxy.ts`)
+* **What it does**: Reads single-source `.env` app registry (`APP_<ID>="..."`) and auto-generates `proxy/Caddyfile` with zero syntax errors.
+* **Execution**:
+  ```bash
+  ./run.sh sync-proxy
+  ```
 
-### 1. 🔒 Gitleaks (`v8.30.1`)
+### 2. 🔒 Gitleaks (`v8.30.1`)
 * **What it does**: Audits staged git diffs and source files for high-entropy tokens (AWS, Stripe, OpenAI, Google keys, RSA keys).
 * **Execution**:
   ```bash

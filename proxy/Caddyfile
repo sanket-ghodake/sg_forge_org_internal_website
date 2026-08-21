@@ -1,50 +1,52 @@
 # ==============================================================================
-# SG Forge - Unified Reverse Proxy & Dynamic App Router Gateway (Caddy)
+# SG Forge - Unified Reverse Proxy Gateway (Auto-Generated from .env)
+# DO NOT EDIT DIRECTLY: Modify routes in .env and run './run.sh sync-proxy'
+# Generated at: 2026-08-21T17:56:28.548Z
 # ==============================================================================
 
 :80 {
-    # Logging
+    # Structured Logging
     log {
         output stdout
         format console
     }
 
-    # 1. Developer Monitoring Dashboard (/devcenter)
-    handle_path /devcenter* {
-        reverse_proxy http://dev-dashboard:3002
-    }
-
-    # 2. Developer Hub & SDK Playground (/gateway)
-    handle_path /gateway* {
-        reverse_proxy http://dev-hub:3003
-    }
-
-    # 3. Main Workspace & Org Canvas (/portal)
+    # Main Workspace & Org Canvas (portal)
     handle_path /portal* {
         reverse_proxy http://portal:3001
     }
 
-    # 4. Central Auth Service (/auth)
-    handle /auth* {
-        reverse_proxy http://landing:3000
+    # Developer Dashboard (devcenter)
+    handle_path /devcenter* {
+        reverse_proxy http://dev-dashboard:3002
     }
 
-    # 5. Micro-App: Expenses (/apps/expenses)
+    # Developer Hub & SDK Playground (gateway)
+    handle_path /gateway* {
+        reverse_proxy http://dev-hub:3003
+    }
+
+    # Central Identity & Auth (auth)
+    handle_path /auth* {
+        reverse_proxy http://auth:3004
+    }
+
+    # Expense Approval Engine (expenses)
     handle_path /apps/expenses* {
         reverse_proxy http://app-expenses:8085
     }
 
-    # 6. Micro-App: Billing (/apps/billing)
+    # Invoicing & Billing Service (billing)
     handle_path /apps/billing* {
         reverse_proxy http://app-billing:8086
     }
 
-    # 7. Micro-App: Telemetry (/apps/telemetry)
+    # Live Telemetry Dashboard (telemetry)
     handle_path /apps/telemetry* {
         reverse_proxy http://app-telemetry:8087
     }
 
-    # 8. Public Platform Hub (Root Ingress /)
+    # Public Platform Hub (Root Ingress)
     handle {
         reverse_proxy http://landing:3000
     }
