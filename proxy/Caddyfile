@@ -1,5 +1,5 @@
 # ==============================================================================
-# SG Forge - Unified Reverse Proxy & Dynamic App Router Gateway
+# SG Forge - Unified Reverse Proxy & Dynamic App Router Gateway (Caddy)
 # ==============================================================================
 
 :80 {
@@ -9,41 +9,43 @@
         format console
     }
 
-    # Public Landing Page (Root)
-    handle / {
-        reverse_proxy http://127.0.0.1:3000
-    }
-
-    # Main Portal (Port 3001)
-    handle_path /portal* {
-        reverse_proxy http://127.0.0.1:3001
-    }
-
-    # Central Auth Service
-    handle_path /auth* {
-        reverse_proxy http://127.0.0.1:3000
-    }
-
-    # Developer Monitoring Dashboard (Port 3002)
+    # 1. Developer Monitoring Dashboard (/devcenter)
     handle_path /devcenter* {
-        reverse_proxy http://127.0.0.1:3002
+        reverse_proxy http://dev-dashboard:3002
     }
 
-    # Developer Hub & SDK Playground (Port 3003)
+    # 2. Developer Hub & SDK Playground (/gateway)
     handle_path /gateway* {
-        reverse_proxy http://127.0.0.1:3003
+        reverse_proxy http://dev-hub:3003
     }
 
-    # Dynamic Micro-Apps Catch-All Routing (:8085+)
+    # 3. Main Workspace & Org Canvas (/portal)
+    handle_path /portal* {
+        reverse_proxy http://portal:3001
+    }
+
+    # 4. Central Auth Service (/auth)
+    handle /auth* {
+        reverse_proxy http://landing:3000
+    }
+
+    # 5. Micro-App: Expenses (/apps/expenses)
     handle_path /apps/expenses* {
-        reverse_proxy http://127.0.0.1:8085
+        reverse_proxy http://app-expenses:8085
     }
 
+    # 6. Micro-App: Billing (/apps/billing)
     handle_path /apps/billing* {
-        reverse_proxy http://127.0.0.1:8086
+        reverse_proxy http://app-billing:8086
     }
 
+    # 7. Micro-App: Telemetry (/apps/telemetry)
     handle_path /apps/telemetry* {
-        reverse_proxy http://127.0.0.1:8087
+        reverse_proxy http://app-telemetry:8087
+    }
+
+    # 8. Public Platform Hub (Root Ingress /)
+    handle {
+        reverse_proxy http://landing:3000
     }
 }

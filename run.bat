@@ -14,17 +14,18 @@ if "%1"=="dev" goto dev
 if "%1"=="doctor" goto doctor
 if "%1"=="clean" goto clean
 if "%1"=="test" goto test
+if "%1"=="docker" goto docker
 goto help
 
 :setup
 echo ⚡ [SG Forge] Bootstrapping portable environment on Windows...
 bun install
-echo ✨ Setup completed successfully! Run 'run.bat dev' to start.
+echo ✨ Setup completed successfully! Run 'run.bat dev' or 'run.bat docker up' to start.
 goto end
 
 :dev
 echo 🚀 [SG Forge] Starting development services...
-bun run dev
+bun run apps/src/landing/src/server.ts
 goto end
 
 :doctor
@@ -45,11 +46,23 @@ echo 🧪 [SG Forge] Running tests...
 bun test
 goto end
 
+:docker
+if "%2"=="up" (
+    docker compose -f "%REPO_ROOT%docker\dev\docker-compose.yml" up -d
+) else if "%2"=="down" (
+    docker compose -f "%REPO_ROOT%docker\dev\docker-compose.yml" down
+) else if "%2"=="status" (
+    docker compose -f "%REPO_ROOT%docker\dev\docker-compose.yml" ps
+) else (
+    echo Usage: run.bat docker [up ^| down ^| status]
+)
+goto end
+
 :help
 echo ======================================================================
 echo 🚀 SG Forge Platform Orchestrator (Windows 2026 LTS)
 echo ======================================================================
-echo Usage: run.bat [setup ^| dev ^| doctor ^| clean ^| test]
+echo Usage: run.bat [setup ^| dev ^| doctor ^| clean ^| test ^| docker]
 echo ======================================================================
 goto end
 

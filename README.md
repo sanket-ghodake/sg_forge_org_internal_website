@@ -25,6 +25,7 @@ run.bat dev
 ## 🧭 Master Documentation & Architecture
 
 * **[Master Blueprint & Specifications](file:///home/sanket/Desktop/Sanket/org_website_clone/idea/README.md)**: Full architecture breakdown, diagrams, and design specifications.
+* **[Portable Open-Source Toolchain Manual](file:///home/sanket/Desktop/Sanket/org_website_clone/docs/tools/PORTABLE_TOOLCHAIN.md)**: Complete guide to Gitleaks, Biome, Knip, Autocannon, Repomix, SCC, RTK, and Astryx CLI.
 * **[System Topology & Port Routing](file:///home/sanket/Desktop/Sanket/org_website_clone/idea/01_ARCHITECTURE.md)**: Reverse proxy ingress (Port 80/443), portal (3001), dev dashboard (3002), dev hub (3003), and micro-apps (8085+).
 * **[Forge Micro-Apps Spec](file:///home/sanket/Desktop/Sanket/org_website_clone/idea/02_FORGE_APPS_SPEC.md)**: App anatomy, dedicated Turso DB per app, and the Forge SDK bridge.
 * **[Security & RBAC Blueprint](file:///home/sanket/Desktop/Sanket/org_website_clone/idea/03_SECURITY_AND_RBAC.md)**: Zero-trust iframe sandboxing, scoped JWT tokens, and automated snapshots.
@@ -50,20 +51,20 @@ run.bat dev
 │   └── test/                      # 🧪 5-Tier Test Suites (unit, integration, e2e, contract, security)
 │
 ├── forge-apps/                    # 🧩 Independent Micro-Apps (Dockerized)
-│   └── app-template/              # Standard starter template
+│   ├── expenses/                  # Expense Approval Engine (Port 8085)
+│   ├── billing/                   # Invoicing & Billing Service (Port 8086)
+│   └── telemetry/                 # Live Telemetry Dashboard (Port 8087)
 │
 ├── docker/                        # 🐳 Docker Environments
-│   ├── dev/                       # docker-compose.yml (Development)
+│   ├── dev/                       # docker-compose.yml (Development - Hot Reloading)
 │   └── prod/                      # docker-compose.yml (Production)
 │
 ├── proxy/                         # 🔀 Unified Reverse Proxy (Caddy / Nginx)
 │   └── Caddyfile
 │
 ├── portables/                     # 🧰 Standalone FOSS Runtimes (Zero Host Modification)
-│   ├── bun/                       # Portable Bun v1.3.14 (LTS 2026)
-│   ├── rtk/                       # RTK Token Optimizer v0.42.3
-│   ├── astryx/                    # Meta Astryx UI Tooling
-│   └── caveman/                   # Caveman Ultra Compression CLI
+│   ├── bin/                       # gitleaks, biome, knip, hadolint, autocannon, repomix, scc, rtk, astryx
+│   └── bun/                       # Portable Bun v1.3.14 (LTS 2026)
 │
 ├── idea/                          # 💡 Master System Blueprints & Infographics
 ├── run.sh                         # ⚡ Linux / macOS / WSL2 Orchestration CLI
@@ -72,8 +73,15 @@ run.bat dev
 
 ---
 
-## 🩺 System Diagnostics & Health Check
+## 🛡️ Pre-Commit Quality Gate & Diagnostics
 
 ```bash
+# Run 2-Tier Quality Gate (Deterministic Scanners + AI Agent Digest):
+./run.sh verify
+
+# Run System Diagnostics:
 ./run.sh doctor
+
+# Run HTTP Latency Benchmark:
+./run.sh benchmark
 ```

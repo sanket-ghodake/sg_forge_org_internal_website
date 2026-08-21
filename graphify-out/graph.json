@@ -124,6 +124,46 @@
       "norm_label": "authservice"
     },
     {
+      "label": "server.ts",
+      "file_type": "code",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_src_auth_src_server_ts_src_server",
+      "community": 16,
+      "norm_label": "server.ts"
+    },
+    {
+      "label": "logger",
+      "file_type": "code",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "apps_src_auth_src_server_ts_src_server_logger",
+      "community": 16,
+      "norm_label": "logger"
+    },
+    {
+      "label": "PORT",
+      "file_type": "code",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "apps_src_auth_src_server_ts_src_server_port",
+      "community": 16,
+      "norm_label": "port"
+    },
+    {
+      "label": "startAuthServer()",
+      "file_type": "code",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "src_server_startauthserver",
+      "community": 16,
+      "norm_label": "startauthserver()"
+    },
+    {
       "label": "package.json",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/package.json",
@@ -252,6 +292,56 @@
       "id": "src_index_devdashboardservice",
       "community": 20,
       "norm_label": "devdashboardservice"
+    },
+    {
+      "label": "server.ts",
+      "file_type": "code",
+      "source_file": "apps/src/dev-dashboard/src/server.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_src_dev_dashboard_src_server_ts_src_server",
+      "community": 16,
+      "norm_label": "server.ts"
+    },
+    {
+      "label": "PORT",
+      "file_type": "code",
+      "source_file": "apps/src/dev-dashboard/src/server.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "apps_src_dev_dashboard_src_server_ts_src_server_port",
+      "community": 16,
+      "norm_label": "port"
+    },
+    {
+      "label": "logger",
+      "file_type": "code",
+      "source_file": "apps/src/dev-dashboard/src/server.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "apps_src_dev_dashboard_src_server_ts_src_server_logger",
+      "community": 16,
+      "norm_label": "logger"
+    },
+    {
+      "label": "renderDashboardHtml()",
+      "file_type": "code",
+      "source_file": "apps/src/dev-dashboard/src/server.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "src_server_renderdashboardhtml",
+      "community": 16,
+      "norm_label": "renderdashboardhtml()"
+    },
+    {
+      "label": "startDevDashboardServer()",
+      "file_type": "code",
+      "source_file": "apps/src/dev-dashboard/src/server.ts",
+      "source_location": "L53",
+      "_origin": "ast",
+      "id": "src_server_startdevdashboardserver",
+      "community": 16,
+      "norm_label": "startdevdashboardserver()"
     },
     {
       "label": "package.json",
@@ -394,6 +484,56 @@
       "norm_label": "devhubservice"
     },
     {
+      "label": "server.ts",
+      "file_type": "code",
+      "source_file": "apps/src/dev-hub/src/server.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_src_dev_hub_src_server_ts_src_server",
+      "community": 16,
+      "norm_label": "server.ts"
+    },
+    {
+      "label": "PORT",
+      "file_type": "code",
+      "source_file": "apps/src/dev-hub/src/server.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "apps_src_dev_hub_src_server_ts_src_server_port",
+      "community": 16,
+      "norm_label": "port"
+    },
+    {
+      "label": "logger",
+      "file_type": "code",
+      "source_file": "apps/src/dev-hub/src/server.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "apps_src_dev_hub_src_server_ts_src_server_logger",
+      "community": 16,
+      "norm_label": "logger"
+    },
+    {
+      "label": "renderDevHubHtml()",
+      "file_type": "code",
+      "source_file": "apps/src/dev-hub/src/server.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "src_server_renderdevhubhtml",
+      "community": 16,
+      "norm_label": "renderdevhubhtml()"
+    },
+    {
+      "label": "startDevHubServer()",
+      "file_type": "code",
+      "source_file": "apps/src/dev-hub/src/server.ts",
+      "source_location": "L53",
+      "_origin": "ast",
+      "id": "src_server_startdevhubserver",
+      "community": 16,
+      "norm_label": "startdevhubserver()"
+    },
+    {
       "label": "package.json",
       "file_type": "code",
       "source_file": "apps/src/landing/package.json",
@@ -522,6 +662,86 @@
       "id": "src_index_landingservice",
       "community": 22,
       "norm_label": "landingservice"
+    },
+    {
+      "label": "server.ts",
+      "file_type": "code",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_src_landing_src_server_ts_src_server",
+      "community": 16,
+      "norm_label": "server.ts"
+    },
+    {
+      "label": "logger",
+      "file_type": "code",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "apps_src_landing_src_server_ts_src_server_logger",
+      "community": 16,
+      "norm_label": "logger"
+    },
+    {
+      "label": "PORT",
+      "file_type": "code",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "apps_src_landing_src_server_ts_src_server_port",
+      "community": 16,
+      "norm_label": "port"
+    },
+    {
+      "label": "RouteItem",
+      "file_type": "code",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "src_server_routeitem",
+      "community": 16,
+      "norm_label": "routeitem"
+    },
+    {
+      "label": "RouteGroup",
+      "file_type": "code",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "src_server_routegroup",
+      "community": 16,
+      "norm_label": "routegroup"
+    },
+    {
+      "label": "routes",
+      "file_type": "code",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "src_server_routes",
+      "community": 16,
+      "norm_label": "routes"
+    },
+    {
+      "label": "renderHtml()",
+      "file_type": "code",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L113",
+      "_origin": "ast",
+      "id": "src_server_renderhtml",
+      "community": 16,
+      "norm_label": "renderhtml()"
+    },
+    {
+      "label": "startLandingServer()",
+      "file_type": "code",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L184",
+      "_origin": "ast",
+      "id": "src_server_startlandingserver",
+      "community": 16,
+      "norm_label": "startlandingserver()"
     },
     {
       "label": "package.json",
@@ -664,6 +884,56 @@
       "norm_label": "portalservice"
     },
     {
+      "label": "server.ts",
+      "file_type": "code",
+      "source_file": "apps/src/portal/src/server.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_src_portal_src_server_ts_src_server",
+      "community": 16,
+      "norm_label": "server.ts"
+    },
+    {
+      "label": "PORT",
+      "file_type": "code",
+      "source_file": "apps/src/portal/src/server.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "apps_src_portal_src_server_ts_src_server_port",
+      "community": 16,
+      "norm_label": "port"
+    },
+    {
+      "label": "logger",
+      "file_type": "code",
+      "source_file": "apps/src/portal/src/server.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "apps_src_portal_src_server_ts_src_server_logger",
+      "community": 16,
+      "norm_label": "logger"
+    },
+    {
+      "label": "renderPortalHtml()",
+      "file_type": "code",
+      "source_file": "apps/src/portal/src/server.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "src_server_renderportalhtml",
+      "community": 16,
+      "norm_label": "renderportalhtml()"
+    },
+    {
+      "label": "startPortalServer()",
+      "file_type": "code",
+      "source_file": "apps/src/portal/src/server.ts",
+      "source_location": "L53",
+      "_origin": "ast",
+      "id": "src_server_startportalserver",
+      "community": 16,
+      "norm_label": "startportalserver()"
+    },
+    {
       "label": "package.json",
       "file_type": "code",
       "source_file": "apps/src/sdk/package.json",
@@ -750,57 +1020,177 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_sdk_src_index_ts_src_index",
-      "community": 6,
+      "community": 24,
       "norm_label": "index.ts"
+    },
+    {
+      "label": "LogLevel",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "src_index_loglevel",
+      "community": 24,
+      "norm_label": "loglevel"
+    },
+    {
+      "label": "LogEntry",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "src_index_logentry",
+      "community": 24,
+      "norm_label": "logentry"
+    },
+    {
+      "label": "ForgeLogger",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "src_index_forgelogger",
+      "community": 24,
+      "norm_label": "forgelogger"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "src_index_forgelogger_constructor",
+      "community": 24,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": ".log()",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "src_index_forgelogger_log",
+      "community": 24,
+      "norm_label": ".log()"
+    },
+    {
+      "label": ".debug()",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L50",
+      "_origin": "ast",
+      "id": "src_index_forgelogger_debug",
+      "community": 24,
+      "norm_label": ".debug()"
+    },
+    {
+      "label": ".info()",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L51",
+      "_origin": "ast",
+      "id": "src_index_forgelogger_info",
+      "community": 24,
+      "norm_label": ".info()"
+    },
+    {
+      "label": ".warn()",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L52",
+      "_origin": "ast",
+      "id": "src_index_forgelogger_warn",
+      "community": 24,
+      "norm_label": ".warn()"
+    },
+    {
+      "label": ".error()",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L53",
+      "_origin": "ast",
+      "id": "src_index_forgelogger_error",
+      "community": 24,
+      "norm_label": ".error()"
+    },
+    {
+      "label": ".fatal()",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L54",
+      "_origin": "ast",
+      "id": "src_index_forgelogger_fatal",
+      "community": 24,
+      "norm_label": ".fatal()"
+    },
+    {
+      "label": "createLogger()",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L57",
+      "_origin": "ast",
+      "id": "src_index_createlogger",
+      "community": 16,
+      "norm_label": "createlogger()"
+    },
+    {
+      "label": "createSafeHandler()",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L64",
+      "_origin": "ast",
+      "id": "src_index_createsafehandler",
+      "community": 16,
+      "norm_label": "createsafehandler()"
     },
     {
       "label": "ForgeClientOptions",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L8",
+      "source_location": "L105",
       "_origin": "ast",
       "id": "src_index_forgeclientoptions",
-      "community": 6,
+      "community": 24,
       "norm_label": "forgeclientoptions"
     },
     {
       "label": "ForgeClient",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L13",
+      "source_location": "L110",
       "_origin": "ast",
       "id": "src_index_forgeclient",
-      "community": 6,
+      "community": 24,
       "norm_label": "forgeclient"
     },
     {
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L18",
+      "source_location": "L115",
       "_origin": "ast",
       "id": "src_index_forgeclient_constructor",
-      "community": 6,
+      "community": 24,
       "norm_label": ".constructor()"
     },
     {
       "label": ".init()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L20",
+      "source_location": "L117",
       "_origin": "ast",
       "id": "src_index_forgeclient_init",
-      "community": 6,
+      "community": 24,
       "norm_label": ".init()"
     },
     {
       "label": ".fetch()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L59",
+      "source_location": "L156",
       "_origin": "ast",
       "id": "src_index_forgeclient_fetch",
-      "community": 6,
+      "community": 24,
       "norm_label": ".fetch()"
     },
     {
@@ -870,7 +1260,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_types_src_index_ts_src_index",
-      "community": 6,
+      "community": 24,
       "norm_label": "index.ts"
     },
     {
@@ -880,7 +1270,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_index_userrole",
-      "community": 6,
+      "community": 24,
       "norm_label": "userrole"
     },
     {
@@ -890,7 +1280,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "src_index_usercontext",
-      "community": 6,
+      "community": 24,
       "norm_label": "usercontext"
     },
     {
@@ -900,7 +1290,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "src_index_forgeappmanifest",
-      "community": 6,
+      "community": 24,
       "norm_label": "forgeappmanifest"
     },
     {
@@ -910,7 +1300,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "src_index_postmessageevent",
-      "community": 6,
+      "community": 24,
       "norm_label": "postmessageevent"
     },
     {
@@ -987,11 +1377,31 @@
       "label": "themeTokens",
       "file_type": "code",
       "source_file": "apps/src/ui/src/index.ts",
-      "source_location": "L6",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "src_index_themetokens",
       "community": 16,
       "norm_label": "themetokens"
+    },
+    {
+      "label": "getAstryxStyles()",
+      "file_type": "code",
+      "source_file": "apps/src/ui/src/index.ts",
+      "source_location": "L52",
+      "_origin": "ast",
+      "id": "src_index_getastryxstyles",
+      "community": 16,
+      "norm_label": "getastryxstyles()"
+    },
+    {
+      "label": "getAstryxHeaderHtml()",
+      "file_type": "code",
+      "source_file": "apps/src/ui/src/index.ts",
+      "source_location": "L347",
+      "_origin": "ast",
+      "id": "src_index_getastryxheaderhtml",
+      "community": 16,
+      "norm_label": "getastryxheaderhtml()"
     },
     {
       "label": "sdk.test.ts",
@@ -1122,6 +1532,126 @@
       "id": "app_template_package_dependencies_forge_types",
       "community": 1,
       "norm_label": "@forge/types"
+    },
+    {
+      "label": "server.ts",
+      "file_type": "code",
+      "source_file": "forge-apps/billing/src/server.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "forge_apps_billing_src_server_ts_src_server",
+      "community": 16,
+      "norm_label": "server.ts"
+    },
+    {
+      "label": "PORT",
+      "file_type": "code",
+      "source_file": "forge-apps/billing/src/server.ts",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "forge_apps_billing_src_server_ts_src_server_port",
+      "community": 16,
+      "norm_label": "port"
+    },
+    {
+      "label": "renderAppHtml()",
+      "file_type": "code",
+      "source_file": "forge-apps/billing/src/server.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "forge_apps_billing_src_server_ts_src_server_renderapphtml",
+      "community": 16,
+      "norm_label": "renderapphtml()"
+    },
+    {
+      "label": "startBillingServer()",
+      "file_type": "code",
+      "source_file": "forge-apps/billing/src/server.ts",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "src_server_startbillingserver",
+      "community": 16,
+      "norm_label": "startbillingserver()"
+    },
+    {
+      "label": "server.ts",
+      "file_type": "code",
+      "source_file": "forge-apps/expenses/src/server.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "forge_apps_expenses_src_server_ts_src_server",
+      "community": 16,
+      "norm_label": "server.ts"
+    },
+    {
+      "label": "PORT",
+      "file_type": "code",
+      "source_file": "forge-apps/expenses/src/server.ts",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "forge_apps_expenses_src_server_ts_src_server_port",
+      "community": 16,
+      "norm_label": "port"
+    },
+    {
+      "label": "renderAppHtml()",
+      "file_type": "code",
+      "source_file": "forge-apps/expenses/src/server.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "forge_apps_expenses_src_server_ts_src_server_renderapphtml",
+      "community": 16,
+      "norm_label": "renderapphtml()"
+    },
+    {
+      "label": "startExpensesServer()",
+      "file_type": "code",
+      "source_file": "forge-apps/expenses/src/server.ts",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "src_server_startexpensesserver",
+      "community": 16,
+      "norm_label": "startexpensesserver()"
+    },
+    {
+      "label": "server.ts",
+      "file_type": "code",
+      "source_file": "forge-apps/telemetry/src/server.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "forge_apps_telemetry_src_server_ts_src_server",
+      "community": 16,
+      "norm_label": "server.ts"
+    },
+    {
+      "label": "PORT",
+      "file_type": "code",
+      "source_file": "forge-apps/telemetry/src/server.ts",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "forge_apps_telemetry_src_server_ts_src_server_port",
+      "community": 16,
+      "norm_label": "port"
+    },
+    {
+      "label": "renderAppHtml()",
+      "file_type": "code",
+      "source_file": "forge-apps/telemetry/src/server.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "forge_apps_telemetry_src_server_ts_src_server_renderapphtml",
+      "community": 16,
+      "norm_label": "renderapphtml()"
+    },
+    {
+      "label": "startTelemetryServer()",
+      "file_type": "code",
+      "source_file": "forge-apps/telemetry/src/server.ts",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "src_server_starttelemetryserver",
+      "community": 16,
+      "norm_label": "starttelemetryserver()"
     },
     {
       "label": "package.json",
@@ -1338,6 +1868,106 @@
       "id": "run_show_help",
       "community": 41,
       "norm_label": "show_help()"
+    },
+    {
+      "label": "verify-gate.ts",
+      "file_type": "code",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "scripts_verify_gate",
+      "community": 25,
+      "norm_label": "verify-gate.ts"
+    },
+    {
+      "label": "REPO_ROOT",
+      "file_type": "code",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "scripts_verify_gate_repo_root",
+      "community": 25,
+      "norm_label": "repo_root"
+    },
+    {
+      "label": "REPORTS_DIR",
+      "file_type": "code",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "scripts_verify_gate_reports_dir",
+      "community": 25,
+      "norm_label": "reports_dir"
+    },
+    {
+      "label": "Tier1Check",
+      "file_type": "code",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "scripts_verify_gate_tier1check",
+      "community": 25,
+      "norm_label": "tier1check"
+    },
+    {
+      "label": "Tier2Check",
+      "file_type": "code",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L33",
+      "_origin": "ast",
+      "id": "scripts_verify_gate_tier2check",
+      "community": 25,
+      "norm_label": "tier2check"
+    },
+    {
+      "label": "tier1Results",
+      "file_type": "code",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "scripts_verify_gate_tier1results",
+      "community": 25,
+      "norm_label": "tier1results"
+    },
+    {
+      "label": "runTier1Check()",
+      "file_type": "code",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L44",
+      "_origin": "ast",
+      "id": "scripts_verify_gate_runtier1check",
+      "community": 25,
+      "norm_label": "runtier1check()"
+    },
+    {
+      "label": "getAllFiles()",
+      "file_type": "code",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L73",
+      "_origin": "ast",
+      "id": "scripts_verify_gate_getallfiles",
+      "community": 25,
+      "norm_label": "getallfiles()"
+    },
+    {
+      "label": "tier2Checks",
+      "file_type": "code",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L276",
+      "_origin": "ast",
+      "id": "scripts_verify_gate_tier2checks",
+      "community": 25,
+      "norm_label": "tier2checks"
+    },
+    {
+      "label": "reportPath",
+      "file_type": "code",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L379",
+      "_origin": "ast",
+      "id": "scripts_verify_gate_reportpath",
+      "community": 25,
+      "norm_label": "reportpath"
     },
     {
       "label": "tsconfig.json",
@@ -1960,130 +2590,130 @@
       "norm_label": "agents.md"
     },
     {
-      "label": "AI AGENT DIRECTIVES - SG FORGE (2026 CLEAN ARCHITECTURE)",
+      "label": "AI AGENT DIRECTIVES - SG FORGE (2026 CLEAN ARCHITECTURE & ENGINEERING STANDARDS)",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "agents_ai_agent_directives_sg_forge_2026_clean_architecture",
+      "id": "agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
       "community": 165,
-      "norm_label": "ai agent directives - sg forge (2026 clean architecture)"
+      "norm_label": "ai agent directives - sg forge (2026 clean architecture & engineering standards)"
     },
     {
-      "label": "\u26a1 SESSION PRE-FLIGHT & PER-TURN CHECKLIST",
+      "label": "\u26a1 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (10 CHECKS)",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "agents_session_pre_flight_per_turn_checklist",
+      "id": "agents_1_pre_flight_pre_commit_verification_gate_10_checks",
       "community": 165,
-      "norm_label": "\u26a1 session pre-flight & per-turn checklist"
+      "norm_label": "\u26a1 1. pre-flight & pre-commit verification gate (10 checks)"
     },
     {
-      "label": "\ud83d\uded1 THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS",
+      "label": "\ud83d\uded1 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L22",
+      "source_location": "L23",
       "_origin": "ast",
-      "id": "agents_the_10_non_negotiable_engineering_invariants",
+      "id": "agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
       "community": 165,
-      "norm_label": "\ud83d\uded1 the 10 non-negotiable engineering invariants"
+      "norm_label": "\ud83d\uded1 2. the 10 non-negotiable engineering invariants (google & meta standard)"
     },
     {
       "label": "1. Correctness, Grounding & \"No Guessing\"",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L24",
+      "source_location": "L25",
       "_origin": "ast",
       "id": "agents_1_correctness_grounding_no_guessing",
       "community": 165,
       "norm_label": "1. correctness, grounding & \"no guessing\""
     },
     {
-      "label": "2. Cybersecurity & Zero-Trust (OWASP ASVS 5.0)",
+      "label": "2. Strict File Size Governance & 500-Line Soft Cap",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L29",
       "_origin": "ast",
-      "id": "agents_2_cybersecurity_zero_trust_owasp_asvs_5_0",
+      "id": "agents_2_strict_file_size_governance_500_line_soft_cap",
       "community": 165,
-      "norm_label": "2. cybersecurity & zero-trust (owasp asvs 5.0)"
+      "norm_label": "2. strict file size governance & 500-line soft cap"
     },
     {
-      "label": "3. Multi-Tenant Data Isolation & Dedicated Turso DB per App",
+      "label": "3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`)",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L35",
+      "source_location": "L34",
       "_origin": "ast",
-      "id": "agents_3_multi_tenant_data_isolation_dedicated_turso_db_per_app",
+      "id": "agents_3_strict_ui_standard_meta_astryx_design_system_forge_ui",
       "community": 165,
-      "norm_label": "3. multi-tenant data isolation & dedicated turso db per app"
+      "norm_label": "3. strict ui standard: meta astryx design system (`@forge/ui`)"
     },
     {
-      "label": "4. Directional Architectural Boundaries",
+      "label": "4. Centralized Structured Logging & RFC 7807 Error Boundaries",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L39",
       "_origin": "ast",
-      "id": "agents_4_directional_architectural_boundaries",
+      "id": "agents_4_centralized_structured_logging_rfc_7807_error_boundaries",
       "community": 165,
-      "norm_label": "4. directional architectural boundaries"
+      "norm_label": "4. centralized structured logging & rfc 7807 error boundaries"
     },
     {
-      "label": "5. Clean Package Aliases (Zero Traversal Sprawl)",
+      "label": "5. Multi-Tenant Data Isolation & Dedicated Turso DB per App",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L43",
       "_origin": "ast",
-      "id": "agents_5_clean_package_aliases_zero_traversal_sprawl",
+      "id": "agents_5_multi_tenant_data_isolation_dedicated_turso_db_per_app",
       "community": 165,
-      "norm_label": "5. clean package aliases (zero traversal sprawl)"
+      "norm_label": "5. multi-tenant data isolation & dedicated turso db per app"
     },
     {
-      "label": "6. Risk-Tiered 5-Tier Testing Rigor (3A Pattern)",
+      "label": "6. Directional Architectural Boundaries & Clean Modularity",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L46",
+      "source_location": "L47",
       "_origin": "ast",
-      "id": "agents_6_risk_tiered_5_tier_testing_rigor_3a_pattern",
+      "id": "agents_6_directional_architectural_boundaries_clean_modularity",
       "community": 165,
-      "norm_label": "6. risk-tiered 5-tier testing rigor (3a pattern)"
+      "norm_label": "6. directional architectural boundaries & clean modularity"
     },
     {
-      "label": "7. Zero Host Install & Portable FOSS Tooling",
+      "label": "7. Clean Package Aliases (Zero Traversal Sprawl)",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L51",
       "_origin": "ast",
-      "id": "agents_7_zero_host_install_portable_foss_tooling",
+      "id": "agents_7_clean_package_aliases_zero_traversal_sprawl",
       "community": 165,
-      "norm_label": "7. zero host install & portable foss tooling"
+      "norm_label": "7. clean package aliases (zero traversal sprawl)"
     },
     {
-      "label": "8. Feature Colocation & Clean Maintainability",
+      "label": "8. Risk-Tiered 5-Tier Testing Rigor (3A Pattern)",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L55",
+      "source_location": "L54",
       "_origin": "ast",
-      "id": "agents_8_feature_colocation_clean_maintainability",
+      "id": "agents_8_risk_tiered_5_tier_testing_rigor_3a_pattern",
       "community": 165,
-      "norm_label": "8. feature colocation & clean maintainability"
+      "norm_label": "8. risk-tiered 5-tier testing rigor (3a pattern)"
     },
     {
-      "label": "9. Minimal Change Principle & Diff Budget",
+      "label": "9. Environment-Driven Configuration & Hot-Reloading",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L59",
+      "source_location": "L58",
       "_origin": "ast",
-      "id": "agents_9_minimal_change_principle_diff_budget",
+      "id": "agents_9_environment_driven_configuration_hot_reloading",
       "community": 165,
-      "norm_label": "9. minimal change principle & diff budget"
+      "norm_label": "9. environment-driven configuration & hot-reloading"
     },
     {
       "label": "10. Code Preservation, Observability & Single-Line Worklog",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L63",
+      "source_location": "L62",
       "_origin": "ast",
       "id": "agents_10_code_preservation_observability_single_line_worklog",
       "community": 165,
@@ -2093,41 +2723,21 @@
       "label": "\ud83d\udee0\ufe0f TECH STACK BASELINE (2026 LTS)",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L69",
+      "source_location": "L68",
       "_origin": "ast",
       "id": "agents_tech_stack_baseline_2026_lts",
       "community": 165,
       "norm_label": "\ud83d\udee0\ufe0f tech stack baseline (2026 lts)"
     },
     {
-      "label": "\ud83e\udded DOMAIN RULE ROUTER (READ BEFORE EDITING SPECIFIC DOMAINS)",
+      "label": "\ud83e\udded DOMAIN RULE ROUTER",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L79",
+      "source_location": "L78",
       "_origin": "ast",
-      "id": "agents_domain_rule_router_read_before_editing_specific_domains",
+      "id": "agents_domain_rule_router",
       "community": 165,
-      "norm_label": "\ud83e\udded domain rule router (read before editing specific domains)"
-    },
-    {
-      "label": "\ud83d\udc65 AGENT WORKFORCE SPECIALIZATIONS",
-      "file_type": "document",
-      "source_file": "AGENTS.md",
-      "source_location": "L91",
-      "_origin": "ast",
-      "id": "agents_agent_workforce_specializations",
-      "community": 165,
-      "norm_label": "\ud83d\udc65 agent workforce specializations"
-    },
-    {
-      "label": "\ud83d\udcbb MANDATORY EXECUTION COMMANDS & COMMUNICATION",
-      "file_type": "document",
-      "source_file": "AGENTS.md",
-      "source_location": "L100",
-      "_origin": "ast",
-      "id": "agents_mandatory_execution_commands_communication",
-      "community": 165,
-      "norm_label": "\ud83d\udcbb mandatory execution commands & communication"
+      "norm_label": "\ud83e\udded domain rule router"
     },
     {
       "label": "CLAUDE.md",
@@ -2140,130 +2750,130 @@
       "norm_label": "claude.md"
     },
     {
-      "label": "AI AGENT DIRECTIVES - SG FORGE (2026 CLEAN ARCHITECTURE)",
+      "label": "AI AGENT DIRECTIVES - SG FORGE (2026 CLEAN ARCHITECTURE & ENGINEERING STANDARDS)",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "claude_ai_agent_directives_sg_forge_2026_clean_architecture",
+      "id": "claude_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
       "community": 163,
-      "norm_label": "ai agent directives - sg forge (2026 clean architecture)"
+      "norm_label": "ai agent directives - sg forge (2026 clean architecture & engineering standards)"
     },
     {
-      "label": "\u26a1 SESSION PRE-FLIGHT & PER-TURN CHECKLIST",
+      "label": "\u26a1 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (10 CHECKS)",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "claude_session_pre_flight_per_turn_checklist",
+      "id": "claude_1_pre_flight_pre_commit_verification_gate_10_checks",
       "community": 163,
-      "norm_label": "\u26a1 session pre-flight & per-turn checklist"
+      "norm_label": "\u26a1 1. pre-flight & pre-commit verification gate (10 checks)"
     },
     {
-      "label": "\ud83d\uded1 THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS",
+      "label": "\ud83d\uded1 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L22",
+      "source_location": "L23",
       "_origin": "ast",
-      "id": "claude_the_10_non_negotiable_engineering_invariants",
+      "id": "claude_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
       "community": 163,
-      "norm_label": "\ud83d\uded1 the 10 non-negotiable engineering invariants"
+      "norm_label": "\ud83d\uded1 2. the 10 non-negotiable engineering invariants (google & meta standard)"
     },
     {
       "label": "1. Correctness, Grounding & \"No Guessing\"",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L24",
+      "source_location": "L25",
       "_origin": "ast",
       "id": "claude_1_correctness_grounding_no_guessing",
       "community": 163,
       "norm_label": "1. correctness, grounding & \"no guessing\""
     },
     {
-      "label": "2. Cybersecurity & Zero-Trust (OWASP ASVS 5.0)",
+      "label": "2. Strict File Size Governance & 500-Line Soft Cap",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L29",
       "_origin": "ast",
-      "id": "claude_2_cybersecurity_zero_trust_owasp_asvs_5_0",
+      "id": "claude_2_strict_file_size_governance_500_line_soft_cap",
       "community": 163,
-      "norm_label": "2. cybersecurity & zero-trust (owasp asvs 5.0)"
+      "norm_label": "2. strict file size governance & 500-line soft cap"
     },
     {
-      "label": "3. Multi-Tenant Data Isolation & Dedicated Turso DB per App",
+      "label": "3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`)",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L35",
+      "source_location": "L34",
       "_origin": "ast",
-      "id": "claude_3_multi_tenant_data_isolation_dedicated_turso_db_per_app",
+      "id": "claude_3_strict_ui_standard_meta_astryx_design_system_forge_ui",
       "community": 163,
-      "norm_label": "3. multi-tenant data isolation & dedicated turso db per app"
+      "norm_label": "3. strict ui standard: meta astryx design system (`@forge/ui`)"
     },
     {
-      "label": "4. Directional Architectural Boundaries",
+      "label": "4. Centralized Structured Logging & RFC 7807 Error Boundaries",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L39",
       "_origin": "ast",
-      "id": "claude_4_directional_architectural_boundaries",
+      "id": "claude_4_centralized_structured_logging_rfc_7807_error_boundaries",
       "community": 163,
-      "norm_label": "4. directional architectural boundaries"
+      "norm_label": "4. centralized structured logging & rfc 7807 error boundaries"
     },
     {
-      "label": "5. Clean Package Aliases (Zero Traversal Sprawl)",
+      "label": "5. Multi-Tenant Data Isolation & Dedicated Turso DB per App",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L43",
       "_origin": "ast",
-      "id": "claude_5_clean_package_aliases_zero_traversal_sprawl",
+      "id": "claude_5_multi_tenant_data_isolation_dedicated_turso_db_per_app",
       "community": 163,
-      "norm_label": "5. clean package aliases (zero traversal sprawl)"
+      "norm_label": "5. multi-tenant data isolation & dedicated turso db per app"
     },
     {
-      "label": "6. Risk-Tiered 5-Tier Testing Rigor (3A Pattern)",
+      "label": "6. Directional Architectural Boundaries & Clean Modularity",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L46",
+      "source_location": "L47",
       "_origin": "ast",
-      "id": "claude_6_risk_tiered_5_tier_testing_rigor_3a_pattern",
+      "id": "claude_6_directional_architectural_boundaries_clean_modularity",
       "community": 163,
-      "norm_label": "6. risk-tiered 5-tier testing rigor (3a pattern)"
+      "norm_label": "6. directional architectural boundaries & clean modularity"
     },
     {
-      "label": "7. Zero Host Install & Portable FOSS Tooling",
+      "label": "7. Clean Package Aliases (Zero Traversal Sprawl)",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L51",
       "_origin": "ast",
-      "id": "claude_7_zero_host_install_portable_foss_tooling",
+      "id": "claude_7_clean_package_aliases_zero_traversal_sprawl",
       "community": 163,
-      "norm_label": "7. zero host install & portable foss tooling"
+      "norm_label": "7. clean package aliases (zero traversal sprawl)"
     },
     {
-      "label": "8. Feature Colocation & Clean Maintainability",
+      "label": "8. Risk-Tiered 5-Tier Testing Rigor (3A Pattern)",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L55",
+      "source_location": "L54",
       "_origin": "ast",
-      "id": "claude_8_feature_colocation_clean_maintainability",
+      "id": "claude_8_risk_tiered_5_tier_testing_rigor_3a_pattern",
       "community": 163,
-      "norm_label": "8. feature colocation & clean maintainability"
+      "norm_label": "8. risk-tiered 5-tier testing rigor (3a pattern)"
     },
     {
-      "label": "9. Minimal Change Principle & Diff Budget",
+      "label": "9. Environment-Driven Configuration & Hot-Reloading",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L59",
+      "source_location": "L58",
       "_origin": "ast",
-      "id": "claude_9_minimal_change_principle_diff_budget",
+      "id": "claude_9_environment_driven_configuration_hot_reloading",
       "community": 163,
-      "norm_label": "9. minimal change principle & diff budget"
+      "norm_label": "9. environment-driven configuration & hot-reloading"
     },
     {
       "label": "10. Code Preservation, Observability & Single-Line Worklog",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L63",
+      "source_location": "L62",
       "_origin": "ast",
       "id": "claude_10_code_preservation_observability_single_line_worklog",
       "community": 163,
@@ -2273,41 +2883,21 @@
       "label": "\ud83d\udee0\ufe0f TECH STACK BASELINE (2026 LTS)",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L69",
+      "source_location": "L68",
       "_origin": "ast",
       "id": "claude_tech_stack_baseline_2026_lts",
       "community": 163,
       "norm_label": "\ud83d\udee0\ufe0f tech stack baseline (2026 lts)"
     },
     {
-      "label": "\ud83e\udded DOMAIN RULE ROUTER (READ BEFORE EDITING SPECIFIC DOMAINS)",
+      "label": "\ud83e\udded DOMAIN RULE ROUTER",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L79",
+      "source_location": "L78",
       "_origin": "ast",
-      "id": "claude_domain_rule_router_read_before_editing_specific_domains",
+      "id": "claude_domain_rule_router",
       "community": 163,
-      "norm_label": "\ud83e\udded domain rule router (read before editing specific domains)"
-    },
-    {
-      "label": "\ud83d\udc65 AGENT WORKFORCE SPECIALIZATIONS",
-      "file_type": "document",
-      "source_file": "CLAUDE.md",
-      "source_location": "L91",
-      "_origin": "ast",
-      "id": "claude_agent_workforce_specializations",
-      "community": 163,
-      "norm_label": "\ud83d\udc65 agent workforce specializations"
-    },
-    {
-      "label": "\ud83d\udcbb MANDATORY EXECUTION COMMANDS & COMMUNICATION",
-      "file_type": "document",
-      "source_file": "CLAUDE.md",
-      "source_location": "L100",
-      "_origin": "ast",
-      "id": "claude_mandatory_execution_commands_communication",
-      "community": 163,
-      "norm_label": "\ud83d\udcbb mandatory execution commands & communication"
+      "norm_label": "\ud83e\udded domain rule router"
     },
     {
       "label": "GEMINI.md",
@@ -2320,130 +2910,130 @@
       "norm_label": "gemini.md"
     },
     {
-      "label": "AI AGENT DIRECTIVES - SG FORGE (2026 CLEAN ARCHITECTURE)",
+      "label": "AI AGENT DIRECTIVES - SG FORGE (2026 CLEAN ARCHITECTURE & ENGINEERING STANDARDS)",
       "file_type": "document",
       "source_file": "GEMINI.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "gemini_ai_agent_directives_sg_forge_2026_clean_architecture",
+      "id": "gemini_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
       "community": 65,
-      "norm_label": "ai agent directives - sg forge (2026 clean architecture)"
+      "norm_label": "ai agent directives - sg forge (2026 clean architecture & engineering standards)"
     },
     {
-      "label": "\u26a1 SESSION PRE-FLIGHT & PER-TURN CHECKLIST",
+      "label": "\u26a1 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (10 CHECKS)",
       "file_type": "document",
       "source_file": "GEMINI.md",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "gemini_session_pre_flight_per_turn_checklist",
+      "id": "gemini_1_pre_flight_pre_commit_verification_gate_10_checks",
       "community": 65,
-      "norm_label": "\u26a1 session pre-flight & per-turn checklist"
+      "norm_label": "\u26a1 1. pre-flight & pre-commit verification gate (10 checks)"
     },
     {
-      "label": "\ud83d\uded1 THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS",
+      "label": "\ud83d\uded1 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L22",
+      "source_location": "L23",
       "_origin": "ast",
-      "id": "gemini_the_10_non_negotiable_engineering_invariants",
+      "id": "gemini_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
       "community": 65,
-      "norm_label": "\ud83d\uded1 the 10 non-negotiable engineering invariants"
+      "norm_label": "\ud83d\uded1 2. the 10 non-negotiable engineering invariants (google & meta standard)"
     },
     {
       "label": "1. Correctness, Grounding & \"No Guessing\"",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L24",
+      "source_location": "L25",
       "_origin": "ast",
       "id": "gemini_1_correctness_grounding_no_guessing",
       "community": 65,
       "norm_label": "1. correctness, grounding & \"no guessing\""
     },
     {
-      "label": "2. Cybersecurity & Zero-Trust (OWASP ASVS 5.0)",
+      "label": "2. Strict File Size Governance & 500-Line Soft Cap",
       "file_type": "document",
       "source_file": "GEMINI.md",
       "source_location": "L29",
       "_origin": "ast",
-      "id": "gemini_2_cybersecurity_zero_trust_owasp_asvs_5_0",
+      "id": "gemini_2_strict_file_size_governance_500_line_soft_cap",
       "community": 65,
-      "norm_label": "2. cybersecurity & zero-trust (owasp asvs 5.0)"
+      "norm_label": "2. strict file size governance & 500-line soft cap"
     },
     {
-      "label": "3. Multi-Tenant Data Isolation & Dedicated Turso DB per App",
+      "label": "3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`)",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L35",
+      "source_location": "L34",
       "_origin": "ast",
-      "id": "gemini_3_multi_tenant_data_isolation_dedicated_turso_db_per_app",
+      "id": "gemini_3_strict_ui_standard_meta_astryx_design_system_forge_ui",
       "community": 65,
-      "norm_label": "3. multi-tenant data isolation & dedicated turso db per app"
+      "norm_label": "3. strict ui standard: meta astryx design system (`@forge/ui`)"
     },
     {
-      "label": "4. Directional Architectural Boundaries",
+      "label": "4. Centralized Structured Logging & RFC 7807 Error Boundaries",
       "file_type": "document",
       "source_file": "GEMINI.md",
       "source_location": "L39",
       "_origin": "ast",
-      "id": "gemini_4_directional_architectural_boundaries",
+      "id": "gemini_4_centralized_structured_logging_rfc_7807_error_boundaries",
       "community": 65,
-      "norm_label": "4. directional architectural boundaries"
+      "norm_label": "4. centralized structured logging & rfc 7807 error boundaries"
     },
     {
-      "label": "5. Clean Package Aliases (Zero Traversal Sprawl)",
+      "label": "5. Multi-Tenant Data Isolation & Dedicated Turso DB per App",
       "file_type": "document",
       "source_file": "GEMINI.md",
       "source_location": "L43",
       "_origin": "ast",
-      "id": "gemini_5_clean_package_aliases_zero_traversal_sprawl",
+      "id": "gemini_5_multi_tenant_data_isolation_dedicated_turso_db_per_app",
       "community": 65,
-      "norm_label": "5. clean package aliases (zero traversal sprawl)"
+      "norm_label": "5. multi-tenant data isolation & dedicated turso db per app"
     },
     {
-      "label": "6. Risk-Tiered 5-Tier Testing Rigor (3A Pattern)",
+      "label": "6. Directional Architectural Boundaries & Clean Modularity",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L46",
+      "source_location": "L47",
       "_origin": "ast",
-      "id": "gemini_6_risk_tiered_5_tier_testing_rigor_3a_pattern",
+      "id": "gemini_6_directional_architectural_boundaries_clean_modularity",
       "community": 65,
-      "norm_label": "6. risk-tiered 5-tier testing rigor (3a pattern)"
+      "norm_label": "6. directional architectural boundaries & clean modularity"
     },
     {
-      "label": "7. Zero Host Install & Portable FOSS Tooling",
+      "label": "7. Clean Package Aliases (Zero Traversal Sprawl)",
       "file_type": "document",
       "source_file": "GEMINI.md",
       "source_location": "L51",
       "_origin": "ast",
-      "id": "gemini_7_zero_host_install_portable_foss_tooling",
+      "id": "gemini_7_clean_package_aliases_zero_traversal_sprawl",
       "community": 65,
-      "norm_label": "7. zero host install & portable foss tooling"
+      "norm_label": "7. clean package aliases (zero traversal sprawl)"
     },
     {
-      "label": "8. Feature Colocation & Clean Maintainability",
+      "label": "8. Risk-Tiered 5-Tier Testing Rigor (3A Pattern)",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L55",
+      "source_location": "L54",
       "_origin": "ast",
-      "id": "gemini_8_feature_colocation_clean_maintainability",
+      "id": "gemini_8_risk_tiered_5_tier_testing_rigor_3a_pattern",
       "community": 65,
-      "norm_label": "8. feature colocation & clean maintainability"
+      "norm_label": "8. risk-tiered 5-tier testing rigor (3a pattern)"
     },
     {
-      "label": "9. Minimal Change Principle & Diff Budget",
+      "label": "9. Environment-Driven Configuration & Hot-Reloading",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L59",
+      "source_location": "L58",
       "_origin": "ast",
-      "id": "gemini_9_minimal_change_principle_diff_budget",
+      "id": "gemini_9_environment_driven_configuration_hot_reloading",
       "community": 65,
-      "norm_label": "9. minimal change principle & diff budget"
+      "norm_label": "9. environment-driven configuration & hot-reloading"
     },
     {
       "label": "10. Code Preservation, Observability & Single-Line Worklog",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L63",
+      "source_location": "L62",
       "_origin": "ast",
       "id": "gemini_10_code_preservation_observability_single_line_worklog",
       "community": 65,
@@ -2453,41 +3043,21 @@
       "label": "\ud83d\udee0\ufe0f TECH STACK BASELINE (2026 LTS)",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L69",
+      "source_location": "L68",
       "_origin": "ast",
       "id": "gemini_tech_stack_baseline_2026_lts",
       "community": 65,
       "norm_label": "\ud83d\udee0\ufe0f tech stack baseline (2026 lts)"
     },
     {
-      "label": "\ud83e\udded DOMAIN RULE ROUTER (READ BEFORE EDITING SPECIFIC DOMAINS)",
+      "label": "\ud83e\udded DOMAIN RULE ROUTER",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L79",
+      "source_location": "L78",
       "_origin": "ast",
-      "id": "gemini_domain_rule_router_read_before_editing_specific_domains",
+      "id": "gemini_domain_rule_router",
       "community": 65,
-      "norm_label": "\ud83e\udded domain rule router (read before editing specific domains)"
-    },
-    {
-      "label": "\ud83d\udc65 AGENT WORKFORCE SPECIALIZATIONS",
-      "file_type": "document",
-      "source_file": "GEMINI.md",
-      "source_location": "L91",
-      "_origin": "ast",
-      "id": "gemini_agent_workforce_specializations",
-      "community": 65,
-      "norm_label": "\ud83d\udc65 agent workforce specializations"
-    },
-    {
-      "label": "\ud83d\udcbb MANDATORY EXECUTION COMMANDS & COMMUNICATION",
-      "file_type": "document",
-      "source_file": "GEMINI.md",
-      "source_location": "L100",
-      "_origin": "ast",
-      "id": "gemini_mandatory_execution_commands_communication",
-      "community": 65,
-      "norm_label": "\ud83d\udcbb mandatory execution commands & communication"
+      "norm_label": "\ud83e\udded domain rule router"
     },
     {
       "label": "README.md",
@@ -2553,21 +3123,21 @@
       "label": "\ud83d\udcc1 Repository Layout",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L36",
+      "source_location": "L37",
       "_origin": "ast",
       "id": "readme_repository_layout",
       "community": 7,
       "norm_label": "\ud83d\udcc1 repository layout"
     },
     {
-      "label": "\ud83e\ude7a System Diagnostics & Health Check",
+      "label": "\ud83d\udee1\ufe0f Pre-Commit Quality Gate & Diagnostics",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L75",
+      "source_location": "L76",
       "_origin": "ast",
-      "id": "readme_system_diagnostics_health_check",
+      "id": "readme_pre_commit_quality_gate_diagnostics",
       "community": 7,
-      "norm_label": "\ud83e\ude7a system diagnostics & health check"
+      "norm_label": "\ud83d\udee1\ufe0f pre-commit quality gate & diagnostics"
     },
     {
       "label": "README.md",
@@ -2620,84 +3190,74 @@
       "norm_label": "portable_setup.md"
     },
     {
-      "label": "Zero-Host-Install Portable Developer & Agent Ecosystem",
+      "label": "\ud83e\uddf0 SG Forge 2.0 - Portable Developer Setup Guide",
       "file_type": "document",
       "source_file": "docs/setup/PORTABLE_SETUP.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "setup_portable_setup_zero_host_install_portable_developer_agent_ecosystem",
+      "id": "setup_portable_setup_sg_forge_2_0_portable_developer_setup_guide",
       "community": 57,
-      "norm_label": "zero-host-install portable developer & agent ecosystem"
+      "norm_label": "\ud83e\uddf0 sg forge 2.0 - portable developer setup guide"
     },
     {
-      "label": "1. Operating System Compatibility Matrix",
+      "label": "\u26a1 Prerequisites",
       "file_type": "document",
       "source_file": "docs/setup/PORTABLE_SETUP.md",
       "source_location": "L7",
       "_origin": "ast",
-      "id": "setup_portable_setup_1_operating_system_compatibility_matrix",
+      "id": "setup_portable_setup_prerequisites",
       "community": 57,
-      "norm_label": "1. operating system compatibility matrix"
+      "norm_label": "\u26a1 prerequisites"
     },
     {
-      "label": "2. 1-Command Developer Onboarding",
+      "label": "\ud83d\udce6 Bundled Portable Tool Matrix (Latest Stable 2026 LTS Releases)",
       "file_type": "document",
       "source_file": "docs/setup/PORTABLE_SETUP.md",
-      "source_location": "L19",
+      "source_location": "L15",
       "_origin": "ast",
-      "id": "setup_portable_setup_2_1_command_developer_onboarding",
+      "id": "setup_portable_setup_bundled_portable_tool_matrix_latest_stable_2026_lts_releases",
       "community": 57,
-      "norm_label": "2. 1-command developer onboarding"
+      "norm_label": "\ud83d\udce6 bundled portable tool matrix (latest stable 2026 lts releases)"
     },
     {
-      "label": "Linux, macOS & WSL2",
+      "label": "\ud83d\ude80 1-Command Bootstrap",
       "file_type": "document",
       "source_file": "docs/setup/PORTABLE_SETUP.md",
-      "source_location": "L21",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "setup_portable_setup_1_command_bootstrap",
+      "community": 57,
+      "norm_label": "\ud83d\ude80 1-command bootstrap"
+    },
+    {
+      "label": "Linux, macOS & WSL2:",
+      "file_type": "document",
+      "source_file": "docs/setup/PORTABLE_SETUP.md",
+      "source_location": "L37",
       "_origin": "ast",
       "id": "setup_portable_setup_linux_macos_wsl2",
       "community": 57,
-      "norm_label": "linux, macos & wsl2"
+      "norm_label": "linux, macos & wsl2:"
     },
     {
-      "label": "Windows Native (CMD / PowerShell)",
+      "label": "Windows Native:",
       "file_type": "document",
       "source_file": "docs/setup/PORTABLE_SETUP.md",
-      "source_location": "L34",
+      "source_location": "L43",
       "_origin": "ast",
-      "id": "setup_portable_setup_windows_native_cmd_powershell",
+      "id": "setup_portable_setup_windows_native",
       "community": 57,
-      "norm_label": "windows native (cmd / powershell)"
+      "norm_label": "windows native:"
     },
     {
-      "label": "3. Bundled Portable Tooling & Binaries",
+      "label": "\ud83e\ude7a System Diagnostics & Health Check",
       "file_type": "document",
       "source_file": "docs/setup/PORTABLE_SETUP.md",
-      "source_location": "L49",
+      "source_location": "L51",
       "_origin": "ast",
-      "id": "setup_portable_setup_3_bundled_portable_tooling_binaries",
+      "id": "setup_portable_setup_system_diagnostics_health_check",
       "community": 57,
-      "norm_label": "3. bundled portable tooling & binaries"
-    },
-    {
-      "label": "Tool Command Quick Reference",
-      "file_type": "document",
-      "source_file": "docs/setup/PORTABLE_SETUP.md",
-      "source_location": "L62",
-      "_origin": "ast",
-      "id": "setup_portable_setup_tool_command_quick_reference",
-      "community": 57,
-      "norm_label": "tool command quick reference"
-    },
-    {
-      "label": "4. System Diagnostics",
-      "file_type": "document",
-      "source_file": "docs/setup/PORTABLE_SETUP.md",
-      "source_location": "L73",
-      "_origin": "ast",
-      "id": "setup_portable_setup_4_system_diagnostics",
-      "community": 57,
-      "norm_label": "4. system diagnostics"
+      "norm_label": "\ud83e\ude7a system diagnostics & health check"
     },
     {
       "label": "WORKFLOW_SETUP.md",
@@ -2828,6 +3388,116 @@
       "id": "setup_workflow_setup_7_development_commands_summary",
       "community": 87,
       "norm_label": "7. development commands summary"
+    },
+    {
+      "label": "PORTABLE_TOOLCHAIN.md",
+      "file_type": "document",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tools_portable_toolchain",
+      "community": 6,
+      "norm_label": "portable_toolchain.md"
+    },
+    {
+      "label": "\ud83e\uddf0 SG Forge 2.0 - Portable Open-Source Toolchain Manual",
+      "file_type": "document",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tools_portable_toolchain_sg_forge_2_0_portable_open_source_toolchain_manual",
+      "community": 6,
+      "norm_label": "\ud83e\uddf0 sg forge 2.0 - portable open-source toolchain manual"
+    },
+    {
+      "label": "\ud83e\udded Master Toolchain & Latest Stable Version Catalog (2026 LTS)",
+      "file_type": "document",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "tools_portable_toolchain_master_toolchain_latest_stable_version_catalog_2026_lts",
+      "community": 6,
+      "norm_label": "\ud83e\udded master toolchain & latest stable version catalog (2026 lts)"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Detailed Usage & Command Reference",
+      "file_type": "document",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "tools_portable_toolchain_detailed_usage_command_reference",
+      "community": 6,
+      "norm_label": "\ud83d\udee0\ufe0f detailed usage & command reference"
+    },
+    {
+      "label": "1. \ud83d\udd12 Gitleaks (`v8.30.1`)",
+      "file_type": "document",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "tools_portable_toolchain_1_gitleaks_v8_30_1",
+      "community": 6,
+      "norm_label": "1. \ud83d\udd12 gitleaks (`v8.30.1`)"
+    },
+    {
+      "label": "2. \u26a1 Biome (`v2.2.0`)",
+      "file_type": "document",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L37",
+      "_origin": "ast",
+      "id": "tools_portable_toolchain_2_biome_v2_2_0",
+      "community": 6,
+      "norm_label": "2. \u26a1 biome (`v2.2.0`)"
+    },
+    {
+      "label": "3. \ud83e\uddf9 Knip (`v6.32.2`)",
+      "file_type": "document",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L44",
+      "_origin": "ast",
+      "id": "tools_portable_toolchain_3_knip_v6_32_2",
+      "community": 6,
+      "norm_label": "3. \ud83e\uddf9 knip (`v6.32.2`)"
+    },
+    {
+      "label": "4. \ud83d\ude80 Autocannon (`v7.15.0`)",
+      "file_type": "document",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L51",
+      "_origin": "ast",
+      "id": "tools_portable_toolchain_4_autocannon_v7_15_0",
+      "community": 6,
+      "norm_label": "4. \ud83d\ude80 autocannon (`v7.15.0`)"
+    },
+    {
+      "label": "5. \ud83d\udce6 Repomix (`v1.10.2`)",
+      "file_type": "document",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L59",
+      "_origin": "ast",
+      "id": "tools_portable_toolchain_5_repomix_v1_10_2",
+      "community": 6,
+      "norm_label": "5. \ud83d\udce6 repomix (`v1.10.2`)"
+    },
+    {
+      "label": "6. \ud83d\udccf SCC (`v3.4.0`)",
+      "file_type": "document",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L66",
+      "_origin": "ast",
+      "id": "tools_portable_toolchain_6_scc_v3_4_0",
+      "community": 6,
+      "norm_label": "6. \ud83d\udccf scc (`v3.4.0`)"
+    },
+    {
+      "label": "\ud83d\udee1\ufe0f 2-Tier Automated Pre-Commit Quality Gate",
+      "file_type": "document",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L75",
+      "_origin": "ast",
+      "id": "tools_portable_toolchain_2_tier_automated_pre_commit_quality_gate",
+      "community": 6,
+      "norm_label": "\ud83d\udee1\ufe0f 2-tier automated pre-commit quality gate"
     },
     {
       "label": "01_ARCHITECTURE.md",
@@ -3457,9 +4127,94 @@
       "source_file": "apps/src/auth/src/index.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_auth_src_index_ts_src_index",
-      "target": "src_index_authservice",
+      "target": "src_index_authservice"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "apps_src_auth_src_server_ts_src_server",
+      "target": "apps_src_auth_src_server_ts_src_server_logger",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "apps_src_auth_src_server_ts_src_server",
+      "target": "apps_src_auth_src_server_ts_src_server_port",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_src_auth_src_server_ts_src_server",
+      "target": "src_index_createlogger",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_src_auth_src_server_ts_src_server",
+      "target": "src_index_createsafehandler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "apps_src_auth_src_server_ts_src_server",
+      "target": "src_index_getastryxheaderhtml",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "apps_src_auth_src_server_ts_src_server",
+      "target": "src_index_getastryxstyles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "apps_src_auth_src_server_ts_src_server",
+      "target": "src_server_startauthserver",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "apps/src/auth/src/server.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "src_server_startauthserver",
+      "target": "src_index_createsafehandler"
     },
     {
       "relation": "contains",
@@ -3567,9 +4322,126 @@
       "source_file": "apps/src/dev-dashboard/src/index.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_dev_dashboard_src_index_ts_src_index",
-      "target": "src_index_devdashboardservice",
-      "confidence_score": 1.0
+      "target": "src_index_devdashboardservice"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-dashboard/src/server.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_dev_dashboard_src_server_ts_src_server",
+      "target": "apps_src_dev_dashboard_src_server_ts_src_server_logger"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-dashboard/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_dev_dashboard_src_server_ts_src_server",
+      "target": "apps_src_dev_dashboard_src_server_ts_src_server_port"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-dashboard/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_dev_dashboard_src_server_ts_src_server",
+      "target": "src_index_createlogger"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-dashboard/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_dev_dashboard_src_server_ts_src_server",
+      "target": "src_index_createsafehandler"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-dashboard/src/server.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_dev_dashboard_src_server_ts_src_server",
+      "target": "src_index_getastryxheaderhtml"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-dashboard/src/server.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_dev_dashboard_src_server_ts_src_server",
+      "target": "src_index_getastryxstyles"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-dashboard/src/server.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_dev_dashboard_src_server_ts_src_server",
+      "target": "src_server_renderdashboardhtml"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-dashboard/src/server.ts",
+      "source_location": "L58",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_dev_dashboard_src_server_ts_src_server",
+      "target": "src_server_startdevdashboardserver"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-dashboard/src/server.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_server_renderdashboardhtml",
+      "target": "src_index_getastryxheaderhtml"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-dashboard/src/server.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_server_renderdashboardhtml",
+      "target": "src_index_getastryxstyles"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "apps/src/dev-dashboard/src/server.ts",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "src_server_startdevdashboardserver",
+      "target": "src_index_createsafehandler"
     },
     {
       "relation": "contains",
@@ -3687,9 +4559,126 @@
       "source_file": "apps/src/dev-hub/src/index.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_dev_hub_src_index_ts_src_index",
-      "target": "src_index_devhubservice",
-      "confidence_score": 1.0
+      "target": "src_index_devhubservice"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-hub/src/server.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_dev_hub_src_server_ts_src_server",
+      "target": "apps_src_dev_hub_src_server_ts_src_server_logger"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-hub/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_dev_hub_src_server_ts_src_server",
+      "target": "apps_src_dev_hub_src_server_ts_src_server_port"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-hub/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_dev_hub_src_server_ts_src_server",
+      "target": "src_index_createlogger"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-hub/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_dev_hub_src_server_ts_src_server",
+      "target": "src_index_createsafehandler"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-hub/src/server.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_dev_hub_src_server_ts_src_server",
+      "target": "src_index_getastryxheaderhtml"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-hub/src/server.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_dev_hub_src_server_ts_src_server",
+      "target": "src_index_getastryxstyles"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-hub/src/server.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_dev_hub_src_server_ts_src_server",
+      "target": "src_server_renderdevhubhtml"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-hub/src/server.ts",
+      "source_location": "L58",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_dev_hub_src_server_ts_src_server",
+      "target": "src_server_startdevhubserver"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-hub/src/server.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_server_renderdevhubhtml",
+      "target": "src_index_getastryxheaderhtml"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-hub/src/server.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_server_renderdevhubhtml",
+      "target": "src_index_getastryxstyles"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "apps/src/dev-hub/src/server.ts",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "src_server_startdevhubserver",
+      "target": "src_index_createsafehandler"
     },
     {
       "relation": "contains",
@@ -3797,9 +4786,156 @@
       "source_file": "apps/src/landing/src/index.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_landing_src_index_ts_src_index",
-      "target": "src_index_landingservice",
-      "confidence_score": 1.0
+      "target": "src_index_landingservice"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_landing_src_server_ts_src_server",
+      "target": "apps_src_landing_src_server_ts_src_server_logger"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_landing_src_server_ts_src_server",
+      "target": "apps_src_landing_src_server_ts_src_server_port"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_landing_src_server_ts_src_server",
+      "target": "src_index_createlogger"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_landing_src_server_ts_src_server",
+      "target": "src_index_createsafehandler"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_landing_src_server_ts_src_server",
+      "target": "src_index_getastryxheaderhtml"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_landing_src_server_ts_src_server",
+      "target": "src_index_getastryxstyles"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L87",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_landing_src_server_ts_src_server",
+      "target": "src_server_renderhtml"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_landing_src_server_ts_src_server",
+      "target": "src_server_routegroup"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_landing_src_server_ts_src_server",
+      "target": "src_server_routeitem"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_landing_src_server_ts_src_server",
+      "target": "src_server_routes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L165",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_landing_src_server_ts_src_server",
+      "target": "src_server_startlandingserver"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L100",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_server_renderhtml",
+      "target": "src_index_getastryxheaderhtml"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L95",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_server_renderhtml",
+      "target": "src_index_getastryxstyles"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L170",
+      "weight": 1.0,
+      "source": "src_server_startlandingserver",
+      "target": "src_index_createsafehandler"
     },
     {
       "relation": "contains",
@@ -3917,9 +5053,126 @@
       "source_file": "apps/src/portal/src/index.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_portal_src_index_ts_src_index",
-      "target": "src_index_portalservice",
-      "confidence_score": 1.0
+      "target": "src_index_portalservice"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/portal/src/server.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_portal_src_server_ts_src_server",
+      "target": "apps_src_portal_src_server_ts_src_server_logger"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/portal/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_portal_src_server_ts_src_server",
+      "target": "apps_src_portal_src_server_ts_src_server_port"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/portal/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_portal_src_server_ts_src_server",
+      "target": "src_index_createlogger"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/portal/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_portal_src_server_ts_src_server",
+      "target": "src_index_createsafehandler"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/portal/src/server.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_portal_src_server_ts_src_server",
+      "target": "src_index_getastryxheaderhtml"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/portal/src/server.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_portal_src_server_ts_src_server",
+      "target": "src_index_getastryxstyles"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/portal/src/server.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_portal_src_server_ts_src_server",
+      "target": "src_server_renderportalhtml"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/portal/src/server.ts",
+      "source_location": "L58",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_portal_src_server_ts_src_server",
+      "target": "src_server_startportalserver"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/portal/src/server.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_server_renderportalhtml",
+      "target": "src_index_getastryxheaderhtml"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/portal/src/server.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_server_renderportalhtml",
+      "target": "src_index_getastryxstyles"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "apps/src/portal/src/server.ts",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "src_server_startportalserver",
+      "target": "src_index_createsafehandler"
     },
     {
       "relation": "contains",
@@ -4006,11 +5259,31 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L57",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_sdk_src_index_ts_src_index",
+      "target": "src_index_createlogger"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L64",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_sdk_src_index_ts_src_index",
+      "target": "src_index_createsafehandler"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_sdk_src_index_ts_src_index",
-      "target": "src_index_forgeclient",
-      "confidence_score": 1.0
+      "target": "src_index_forgeclient"
     },
     {
       "relation": "contains",
@@ -4018,9 +5291,39 @@
       "source_file": "apps/src/sdk/src/index.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_sdk_src_index_ts_src_index",
-      "target": "src_index_forgeclientoptions",
-      "confidence_score": 1.0
+      "target": "src_index_forgeclientoptions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_sdk_src_index_ts_src_index",
+      "target": "src_index_forgelogger"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_sdk_src_index_ts_src_index",
+      "target": "src_index_logentry"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_sdk_src_index_ts_src_index",
+      "target": "src_index_loglevel"
     },
     {
       "relation": "imports",
@@ -4029,9 +5332,9 @@
       "source_file": "apps/src/sdk/src/index.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_sdk_src_index_ts_src_index",
-      "target": "src_index_postmessageevent",
-      "confidence_score": 1.0
+      "target": "src_index_postmessageevent"
     },
     {
       "relation": "imports",
@@ -4040,9 +5343,167 @@
       "source_file": "apps/src/sdk/src/index.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_sdk_src_index_ts_src_index",
-      "target": "src_index_usercontext",
-      "confidence_score": 1.0
+      "target": "src_index_usercontext"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L28",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index_forgelogger",
+      "target": "src_index_forgelogger_constructor"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L50",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index_forgelogger",
+      "target": "src_index_forgelogger_debug"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L53",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index_forgelogger",
+      "target": "src_index_forgelogger_error"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index_forgelogger",
+      "target": "src_index_forgelogger_fatal"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L51",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index_forgelogger",
+      "target": "src_index_forgelogger_info"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index_forgelogger",
+      "target": "src_index_forgelogger_log"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L52",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index_forgelogger",
+      "target": "src_index_forgelogger_warn"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L50",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index_forgelogger_debug",
+      "target": "src_index_forgelogger_log"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L53",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index_forgelogger_error",
+      "target": "src_index_forgelogger_log"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index_forgelogger_fatal",
+      "target": "src_index_forgelogger_log"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L51",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index_forgelogger_info",
+      "target": "src_index_forgelogger_log"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L52",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index_forgelogger_warn",
+      "target": "src_index_forgelogger_log"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L68",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_index_createsafehandler",
+      "target": "src_index_createlogger"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/test/unit/sdk.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "unit_sdk_test",
+      "target": "src_index_createlogger"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/test/unit/sdk.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "unit_sdk_test",
+      "target": "src_index_createsafehandler"
     },
     {
       "relation": "method",
@@ -4141,9 +5602,9 @@
       "source_file": "apps/src/types/src/index.ts",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_types_src_index_ts_src_index",
-      "target": "src_index_forgeappmanifest",
-      "confidence_score": 1.0
+      "target": "src_index_forgeappmanifest"
     },
     {
       "relation": "contains",
@@ -4151,9 +5612,9 @@
       "source_file": "apps/src/types/src/index.ts",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_types_src_index_ts_src_index",
-      "target": "src_index_postmessageevent",
-      "confidence_score": 1.0
+      "target": "src_index_postmessageevent"
     },
     {
       "relation": "contains",
@@ -4161,9 +5622,9 @@
       "source_file": "apps/src/types/src/index.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_types_src_index_ts_src_index",
-      "target": "src_index_usercontext",
-      "confidence_score": 1.0
+      "target": "src_index_usercontext"
     },
     {
       "relation": "contains",
@@ -4171,9 +5632,9 @@
       "source_file": "apps/src/types/src/index.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_types_src_index_ts_src_index",
-      "target": "src_index_userrole",
-      "confidence_score": 1.0
+      "target": "src_index_userrole"
     },
     {
       "relation": "contains",
@@ -4229,11 +5690,31 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/src/ui/src/index.ts",
+      "source_location": "L347",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_ui_src_index_ts_src_index",
+      "target": "src_index_getastryxheaderhtml"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/ui/src/index.ts",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_ui_src_index_ts_src_index",
+      "target": "src_index_getastryxstyles"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/ui/src/index.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_ui_src_index_ts_src_index",
-      "target": "src_index_themetokens",
-      "confidence_score": 1.0
+      "target": "src_index_themetokens"
     },
     {
       "relation": "imports",
@@ -4245,6 +5726,138 @@
       "confidence_score": 1.0,
       "source": "unit_sdk_test",
       "target": "src_index_themetokens"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/billing/src/server.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_billing_src_server_ts_src_server",
+      "target": "src_index_getastryxstyles"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/billing/src/server.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_billing_src_server_ts_src_server_renderapphtml",
+      "target": "src_index_getastryxstyles"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/expenses/src/server.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_expenses_src_server_ts_src_server",
+      "target": "src_index_getastryxstyles"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "forge-apps/expenses/src/server.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "forge_apps_expenses_src_server_ts_src_server_renderapphtml",
+      "target": "src_index_getastryxstyles"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/telemetry/src/server.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_telemetry_src_server_ts_src_server",
+      "target": "src_index_getastryxstyles"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "forge-apps/telemetry/src/server.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "forge_apps_telemetry_src_server_ts_src_server_renderapphtml",
+      "target": "src_index_getastryxstyles"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/billing/src/server.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_billing_src_server_ts_src_server",
+      "target": "src_index_getastryxheaderhtml"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/billing/src/server.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_billing_src_server_ts_src_server_renderapphtml",
+      "target": "src_index_getastryxheaderhtml"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/expenses/src/server.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_expenses_src_server_ts_src_server",
+      "target": "src_index_getastryxheaderhtml"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "forge-apps/expenses/src/server.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "forge_apps_expenses_src_server_ts_src_server_renderapphtml",
+      "target": "src_index_getastryxheaderhtml"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/telemetry/src/server.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_telemetry_src_server_ts_src_server",
+      "target": "src_index_getastryxheaderhtml"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "forge-apps/telemetry/src/server.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "forge_apps_telemetry_src_server_ts_src_server_renderapphtml",
+      "target": "src_index_getastryxheaderhtml"
     },
     {
       "relation": "contains",
@@ -4355,6 +5968,96 @@
       "confidence_score": 1.0,
       "source": "app_template_package_dependencies",
       "target": "app_template_package_dependencies_forge_ui"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/billing/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_billing_src_server_ts_src_server",
+      "target": "forge_apps_billing_src_server_ts_src_server_port"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/billing/src/server.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_billing_src_server_ts_src_server",
+      "target": "forge_apps_billing_src_server_ts_src_server_renderapphtml"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/billing/src/server.ts",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_billing_src_server_ts_src_server",
+      "target": "src_server_startbillingserver"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/expenses/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_expenses_src_server_ts_src_server",
+      "target": "forge_apps_expenses_src_server_ts_src_server_port"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/expenses/src/server.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_expenses_src_server_ts_src_server",
+      "target": "forge_apps_expenses_src_server_ts_src_server_renderapphtml"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/expenses/src/server.ts",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_expenses_src_server_ts_src_server",
+      "target": "src_server_startexpensesserver"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/telemetry/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_telemetry_src_server_ts_src_server",
+      "target": "forge_apps_telemetry_src_server_ts_src_server_port"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/telemetry/src/server.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_telemetry_src_server_ts_src_server",
+      "target": "forge_apps_telemetry_src_server_ts_src_server_renderapphtml"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/telemetry/src/server.ts",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "forge_apps_telemetry_src_server_ts_src_server",
+      "target": "src_server_starttelemetryserver"
     },
     {
       "relation": "contains",
@@ -4557,6 +6260,96 @@
       "confidence_score": 1.0,
       "source": "home_sanket_desktop_sanket_org_website_clone_run_sh__entry",
       "target": "run_show_help"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L65",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_verify_gate",
+      "target": "scripts_verify_gate_getallfiles"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_verify_gate",
+      "target": "scripts_verify_gate_repo_root"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L345",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_verify_gate",
+      "target": "scripts_verify_gate_reportpath"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_verify_gate",
+      "target": "scripts_verify_gate_reports_dir"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_verify_gate",
+      "target": "scripts_verify_gate_runtier1check"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_verify_gate",
+      "target": "scripts_verify_gate_tier1check"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L35",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_verify_gate",
+      "target": "scripts_verify_gate_tier1results"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_verify_gate",
+      "target": "scripts_verify_gate_tier2check"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/verify-gate.ts",
+      "source_location": "L221",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_verify_gate",
+      "target": "scripts_verify_gate_tier2checks"
     },
     {
       "relation": "contains",
@@ -5154,37 +6947,7 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "agents",
-      "target": "agents_ai_agent_directives_sg_forge_2026_clean_architecture"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
-      "source_location": "L91",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "agents_ai_agent_directives_sg_forge_2026_clean_architecture",
-      "target": "agents_agent_workforce_specializations"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
-      "source_location": "L79",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "agents_ai_agent_directives_sg_forge_2026_clean_architecture",
-      "target": "agents_domain_rule_router_read_before_editing_specific_domains"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
-      "source_location": "L68",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "agents_ai_agent_directives_sg_forge_2026_clean_architecture",
-      "target": "agents_mandatory_execution_commands_communication"
+      "target": "agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards"
     },
     {
       "relation": "contains",
@@ -5193,37 +6956,47 @@
       "source_location": "L8",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "agents_ai_agent_directives_sg_forge_2026_clean_architecture",
-      "target": "agents_session_pre_flight_per_turn_checklist"
+      "source": "agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
+      "target": "agents_1_pre_flight_pre_commit_verification_gate_10_checks"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AGENTS.md",
-      "source_location": "L69",
+      "source_location": "L23",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "agents_ai_agent_directives_sg_forge_2026_clean_architecture",
+      "source": "agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
+      "target": "agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L78",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
+      "target": "agents_domain_rule_router"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AGENTS.md",
+      "source_location": "L68",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
       "target": "agents_tech_stack_baseline_2026_lts"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AGENTS.md",
-      "source_location": "L22",
+      "source_location": "L62",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "agents_ai_agent_directives_sg_forge_2026_clean_architecture",
-      "target": "agents_the_10_non_negotiable_engineering_invariants"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "AGENTS.md",
-      "source_location": "L63",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "agents_the_10_non_negotiable_engineering_invariants",
+      "source": "agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
       "target": "agents_10_code_preservation_observability_single_line_worklog"
     },
     {
@@ -5233,38 +7006,38 @@
       "source_location": "L25",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "agents_the_10_non_negotiable_engineering_invariants",
+      "source": "agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
       "target": "agents_1_correctness_grounding_no_guessing"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AGENTS.md",
-      "source_location": "L30",
+      "source_location": "L29",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "agents_the_10_non_negotiable_engineering_invariants",
-      "target": "agents_2_cybersecurity_zero_trust_owasp_asvs_5_0"
+      "source": "agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "agents_2_strict_file_size_governance_500_line_soft_cap"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AGENTS.md",
-      "source_location": "L35",
+      "source_location": "L34",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "agents_the_10_non_negotiable_engineering_invariants",
-      "target": "agents_3_multi_tenant_data_isolation_dedicated_turso_db_per_app"
+      "source": "agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "agents_3_strict_ui_standard_meta_astryx_design_system_forge_ui"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AGENTS.md",
-      "source_location": "L40",
+      "source_location": "L39",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "agents_the_10_non_negotiable_engineering_invariants",
-      "target": "agents_4_directional_architectural_boundaries"
+      "source": "agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "agents_4_centralized_structured_logging_rfc_7807_error_boundaries"
     },
     {
       "relation": "contains",
@@ -5273,48 +7046,48 @@
       "source_location": "L43",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "agents_the_10_non_negotiable_engineering_invariants",
-      "target": "agents_5_clean_package_aliases_zero_traversal_sprawl"
+      "source": "agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "agents_5_multi_tenant_data_isolation_dedicated_turso_db_per_app"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AGENTS.md",
-      "source_location": "L46",
+      "source_location": "L47",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "agents_the_10_non_negotiable_engineering_invariants",
-      "target": "agents_6_risk_tiered_5_tier_testing_rigor_3a_pattern"
+      "source": "agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "agents_6_directional_architectural_boundaries_clean_modularity"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AGENTS.md",
-      "source_location": "L56",
+      "source_location": "L51",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "agents_the_10_non_negotiable_engineering_invariants",
-      "target": "agents_7_zero_host_install_portable_foss_tooling"
+      "source": "agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "agents_7_clean_package_aliases_zero_traversal_sprawl"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AGENTS.md",
-      "source_location": "L55",
+      "source_location": "L54",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "agents_the_10_non_negotiable_engineering_invariants",
-      "target": "agents_8_feature_colocation_clean_maintainability"
+      "source": "agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "agents_8_risk_tiered_5_tier_testing_rigor_3a_pattern"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AGENTS.md",
-      "source_location": "L67",
+      "source_location": "L58",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "agents_the_10_non_negotiable_engineering_invariants",
-      "target": "agents_9_minimal_change_principle_diff_budget"
+      "source": "agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "agents_9_environment_driven_configuration_hot_reloading"
     },
     {
       "relation": "contains",
@@ -5324,37 +7097,7 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "claude",
-      "target": "claude_ai_agent_directives_sg_forge_2026_clean_architecture"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
-      "source_location": "L91",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "claude_ai_agent_directives_sg_forge_2026_clean_architecture",
-      "target": "claude_agent_workforce_specializations"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
-      "source_location": "L79",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "claude_ai_agent_directives_sg_forge_2026_clean_architecture",
-      "target": "claude_domain_rule_router_read_before_editing_specific_domains"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
-      "source_location": "L68",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "claude_ai_agent_directives_sg_forge_2026_clean_architecture",
-      "target": "claude_mandatory_execution_commands_communication"
+      "target": "claude_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards"
     },
     {
       "relation": "contains",
@@ -5363,37 +7106,47 @@
       "source_location": "L8",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "claude_ai_agent_directives_sg_forge_2026_clean_architecture",
-      "target": "claude_session_pre_flight_per_turn_checklist"
+      "source": "claude_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
+      "target": "claude_1_pre_flight_pre_commit_verification_gate_10_checks"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L69",
+      "source_location": "L23",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "claude_ai_agent_directives_sg_forge_2026_clean_architecture",
+      "source": "claude_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
+      "target": "claude_2_the_10_non_negotiable_engineering_invariants_google_meta_standard"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L78",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "claude_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
+      "target": "claude_domain_rule_router"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L68",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "claude_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
       "target": "claude_tech_stack_baseline_2026_lts"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L22",
+      "source_location": "L62",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "claude_ai_agent_directives_sg_forge_2026_clean_architecture",
-      "target": "claude_the_10_non_negotiable_engineering_invariants"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "CLAUDE.md",
-      "source_location": "L63",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "claude_the_10_non_negotiable_engineering_invariants",
+      "source": "claude_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
       "target": "claude_10_code_preservation_observability_single_line_worklog"
     },
     {
@@ -5403,38 +7156,38 @@
       "source_location": "L25",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "claude_the_10_non_negotiable_engineering_invariants",
+      "source": "claude_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
       "target": "claude_1_correctness_grounding_no_guessing"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L30",
+      "source_location": "L29",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "claude_the_10_non_negotiable_engineering_invariants",
-      "target": "claude_2_cybersecurity_zero_trust_owasp_asvs_5_0"
+      "source": "claude_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "claude_2_strict_file_size_governance_500_line_soft_cap"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L35",
+      "source_location": "L34",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "claude_the_10_non_negotiable_engineering_invariants",
-      "target": "claude_3_multi_tenant_data_isolation_dedicated_turso_db_per_app"
+      "source": "claude_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "claude_3_strict_ui_standard_meta_astryx_design_system_forge_ui"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L40",
+      "source_location": "L39",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "claude_the_10_non_negotiable_engineering_invariants",
-      "target": "claude_4_directional_architectural_boundaries"
+      "source": "claude_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "claude_4_centralized_structured_logging_rfc_7807_error_boundaries"
     },
     {
       "relation": "contains",
@@ -5443,48 +7196,48 @@
       "source_location": "L43",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "claude_the_10_non_negotiable_engineering_invariants",
-      "target": "claude_5_clean_package_aliases_zero_traversal_sprawl"
+      "source": "claude_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "claude_5_multi_tenant_data_isolation_dedicated_turso_db_per_app"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L46",
+      "source_location": "L47",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "claude_the_10_non_negotiable_engineering_invariants",
-      "target": "claude_6_risk_tiered_5_tier_testing_rigor_3a_pattern"
+      "source": "claude_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "claude_6_directional_architectural_boundaries_clean_modularity"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L56",
+      "source_location": "L51",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "claude_the_10_non_negotiable_engineering_invariants",
-      "target": "claude_7_zero_host_install_portable_foss_tooling"
+      "source": "claude_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "claude_7_clean_package_aliases_zero_traversal_sprawl"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L55",
+      "source_location": "L54",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "claude_the_10_non_negotiable_engineering_invariants",
-      "target": "claude_8_feature_colocation_clean_maintainability"
+      "source": "claude_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "claude_8_risk_tiered_5_tier_testing_rigor_3a_pattern"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L67",
+      "source_location": "L58",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "claude_the_10_non_negotiable_engineering_invariants",
-      "target": "claude_9_minimal_change_principle_diff_budget"
+      "source": "claude_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "claude_9_environment_driven_configuration_hot_reloading"
     },
     {
       "relation": "contains",
@@ -5494,37 +7247,7 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "gemini",
-      "target": "gemini_ai_agent_directives_sg_forge_2026_clean_architecture"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "GEMINI.md",
-      "source_location": "L91",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "gemini_ai_agent_directives_sg_forge_2026_clean_architecture",
-      "target": "gemini_agent_workforce_specializations"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "GEMINI.md",
-      "source_location": "L79",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "gemini_ai_agent_directives_sg_forge_2026_clean_architecture",
-      "target": "gemini_domain_rule_router_read_before_editing_specific_domains"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "GEMINI.md",
-      "source_location": "L68",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "gemini_ai_agent_directives_sg_forge_2026_clean_architecture",
-      "target": "gemini_mandatory_execution_commands_communication"
+      "target": "gemini_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards"
     },
     {
       "relation": "contains",
@@ -5533,37 +7256,47 @@
       "source_location": "L8",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "gemini_ai_agent_directives_sg_forge_2026_clean_architecture",
-      "target": "gemini_session_pre_flight_per_turn_checklist"
+      "source": "gemini_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
+      "target": "gemini_1_pre_flight_pre_commit_verification_gate_10_checks"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "GEMINI.md",
-      "source_location": "L69",
+      "source_location": "L23",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "gemini_ai_agent_directives_sg_forge_2026_clean_architecture",
+      "source": "gemini_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
+      "target": "gemini_2_the_10_non_negotiable_engineering_invariants_google_meta_standard"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "GEMINI.md",
+      "source_location": "L78",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "gemini_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
+      "target": "gemini_domain_rule_router"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "GEMINI.md",
+      "source_location": "L68",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "gemini_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
       "target": "gemini_tech_stack_baseline_2026_lts"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "GEMINI.md",
-      "source_location": "L22",
+      "source_location": "L62",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "gemini_ai_agent_directives_sg_forge_2026_clean_architecture",
-      "target": "gemini_the_10_non_negotiable_engineering_invariants"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "GEMINI.md",
-      "source_location": "L63",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "gemini_the_10_non_negotiable_engineering_invariants",
+      "source": "gemini_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
       "target": "gemini_10_code_preservation_observability_single_line_worklog"
     },
     {
@@ -5573,38 +7306,38 @@
       "source_location": "L25",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "gemini_the_10_non_negotiable_engineering_invariants",
+      "source": "gemini_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
       "target": "gemini_1_correctness_grounding_no_guessing"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "GEMINI.md",
-      "source_location": "L30",
+      "source_location": "L29",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "gemini_the_10_non_negotiable_engineering_invariants",
-      "target": "gemini_2_cybersecurity_zero_trust_owasp_asvs_5_0"
+      "source": "gemini_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "gemini_2_strict_file_size_governance_500_line_soft_cap"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "GEMINI.md",
-      "source_location": "L35",
+      "source_location": "L34",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "gemini_the_10_non_negotiable_engineering_invariants",
-      "target": "gemini_3_multi_tenant_data_isolation_dedicated_turso_db_per_app"
+      "source": "gemini_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "gemini_3_strict_ui_standard_meta_astryx_design_system_forge_ui"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "GEMINI.md",
-      "source_location": "L40",
+      "source_location": "L39",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "gemini_the_10_non_negotiable_engineering_invariants",
-      "target": "gemini_4_directional_architectural_boundaries"
+      "source": "gemini_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "gemini_4_centralized_structured_logging_rfc_7807_error_boundaries"
     },
     {
       "relation": "contains",
@@ -5613,48 +7346,48 @@
       "source_location": "L43",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "gemini_the_10_non_negotiable_engineering_invariants",
-      "target": "gemini_5_clean_package_aliases_zero_traversal_sprawl"
+      "source": "gemini_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "gemini_5_multi_tenant_data_isolation_dedicated_turso_db_per_app"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "GEMINI.md",
-      "source_location": "L46",
+      "source_location": "L47",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "gemini_the_10_non_negotiable_engineering_invariants",
-      "target": "gemini_6_risk_tiered_5_tier_testing_rigor_3a_pattern"
+      "source": "gemini_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "gemini_6_directional_architectural_boundaries_clean_modularity"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "GEMINI.md",
-      "source_location": "L56",
+      "source_location": "L51",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "gemini_the_10_non_negotiable_engineering_invariants",
-      "target": "gemini_7_zero_host_install_portable_foss_tooling"
+      "source": "gemini_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "gemini_7_clean_package_aliases_zero_traversal_sprawl"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "GEMINI.md",
-      "source_location": "L55",
+      "source_location": "L54",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "gemini_the_10_non_negotiable_engineering_invariants",
-      "target": "gemini_8_feature_colocation_clean_maintainability"
+      "source": "gemini_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "gemini_8_risk_tiered_5_tier_testing_rigor_3a_pattern"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "GEMINI.md",
-      "source_location": "L67",
+      "source_location": "L58",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "gemini_the_10_non_negotiable_engineering_invariants",
-      "target": "gemini_9_minimal_change_principle_diff_budget"
+      "source": "gemini_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
+      "target": "gemini_9_environment_driven_configuration_hot_reloading"
     },
     {
       "relation": "contains",
@@ -5690,21 +7423,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L36",
+      "source_location": "L76",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "readme_sg_forge_modular_corporate_portal_micro_app_sandbox_engine_v2_0_0",
-      "target": "readme_repository_layout"
+      "target": "readme_pre_commit_quality_gate_diagnostics"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L71",
+      "source_location": "L36",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "readme_sg_forge_modular_corporate_portal_micro_app_sandbox_engine_v2_0_0",
-      "target": "readme_system_diagnostics_health_check"
+      "target": "readme_repository_layout"
     },
     {
       "relation": "contains",
@@ -5764,7 +7497,27 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "setup_portable_setup",
-      "target": "setup_portable_setup_zero_host_install_portable_developer_agent_ecosystem"
+      "target": "setup_portable_setup_sg_forge_2_0_portable_developer_setup_guide"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/setup/PORTABLE_SETUP.md",
+      "source_location": "L35",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "setup_portable_setup_sg_forge_2_0_portable_developer_setup_guide",
+      "target": "setup_portable_setup_1_command_bootstrap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/setup/PORTABLE_SETUP.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "setup_portable_setup_sg_forge_2_0_portable_developer_setup_guide",
+      "target": "setup_portable_setup_bundled_portable_tool_matrix_latest_stable_2026_lts_releases"
     },
     {
       "relation": "contains",
@@ -5773,68 +7526,38 @@
       "source_location": "L7",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "setup_portable_setup_zero_host_install_portable_developer_agent_ecosystem",
-      "target": "setup_portable_setup_1_operating_system_compatibility_matrix"
+      "source": "setup_portable_setup_sg_forge_2_0_portable_developer_setup_guide",
+      "target": "setup_portable_setup_prerequisites"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/setup/PORTABLE_SETUP.md",
-      "source_location": "L19",
+      "source_location": "L51",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "setup_portable_setup_zero_host_install_portable_developer_agent_ecosystem",
-      "target": "setup_portable_setup_2_1_command_developer_onboarding"
+      "source": "setup_portable_setup_sg_forge_2_0_portable_developer_setup_guide",
+      "target": "setup_portable_setup_system_diagnostics_health_check"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/setup/PORTABLE_SETUP.md",
-      "source_location": "L49",
+      "source_location": "L37",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "setup_portable_setup_zero_host_install_portable_developer_agent_ecosystem",
-      "target": "setup_portable_setup_3_bundled_portable_tooling_binaries"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/setup/PORTABLE_SETUP.md",
-      "source_location": "L73",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "setup_portable_setup_zero_host_install_portable_developer_agent_ecosystem",
-      "target": "setup_portable_setup_4_system_diagnostics"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/setup/PORTABLE_SETUP.md",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "setup_portable_setup_2_1_command_developer_onboarding",
+      "source": "setup_portable_setup_1_command_bootstrap",
       "target": "setup_portable_setup_linux_macos_wsl2"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/setup/PORTABLE_SETUP.md",
-      "source_location": "L34",
+      "source_location": "L43",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "setup_portable_setup_2_1_command_developer_onboarding",
-      "target": "setup_portable_setup_windows_native_cmd_powershell"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/setup/PORTABLE_SETUP.md",
-      "source_location": "L62",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "setup_portable_setup_3_bundled_portable_tooling_binaries",
-      "target": "setup_portable_setup_tool_command_quick_reference"
+      "source": "setup_portable_setup_1_command_bootstrap",
+      "target": "setup_portable_setup_windows_native"
     },
     {
       "relation": "contains",
@@ -5955,6 +7678,106 @@
       "confidence_score": 1.0,
       "source": "setup_workflow_setup_4_standalone_code_analysis_benchmarking_tooling_setup",
       "target": "setup_workflow_setup_tooling_execution_examples"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_portable_toolchain",
+      "target": "tools_portable_toolchain_sg_forge_2_0_portable_open_source_toolchain_manual"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L64",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_portable_toolchain_sg_forge_2_0_portable_open_source_toolchain_manual",
+      "target": "tools_portable_toolchain_2_tier_automated_pre_commit_quality_gate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_portable_toolchain_sg_forge_2_0_portable_open_source_toolchain_manual",
+      "target": "tools_portable_toolchain_detailed_usage_command_reference"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_portable_toolchain_sg_forge_2_0_portable_open_source_toolchain_manual",
+      "target": "tools_portable_toolchain_master_toolchain_latest_stable_version_catalog_2026_lts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_portable_toolchain_detailed_usage_command_reference",
+      "target": "tools_portable_toolchain_1_gitleaks_v8_30_1"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_portable_toolchain_detailed_usage_command_reference",
+      "target": "tools_portable_toolchain_2_biome_v2_2_0"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L44",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_portable_toolchain_detailed_usage_command_reference",
+      "target": "tools_portable_toolchain_3_knip_v6_32_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L51",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_portable_toolchain_detailed_usage_command_reference",
+      "target": "tools_portable_toolchain_4_autocannon_v7_15_0"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L59",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_portable_toolchain_detailed_usage_command_reference",
+      "target": "tools_portable_toolchain_5_repomix_v1_10_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L66",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_portable_toolchain_detailed_usage_command_reference",
+      "target": "tools_portable_toolchain_6_scc_v3_4_0"
     },
     {
       "relation": "contains",
@@ -6418,5 +8241,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "d73dd237ce58abafac793048ba867bf532c7ec25"
+  "built_at_commit": "20217312decc2e26c3812218685bf3fba787792c"
 }

@@ -1,24 +1,51 @@
-# Frontend UI & Design Rules
+# Meta Astryx Frontend UI & Anti-Vibecoding Directives
 
-1. **UI Framework**: React 19 + Next.js 16. Use Server Components where possible; mark interactive client controls with `'use client'`. Max component line count: **300 lines**. Max function length: **40 lines**.
-2. **Centralized UI Theme Directive**: All frontend UI components and HTML documents across packages, apps, and edge landing pages MUST strictly use centralized CSS theme variables (`var(--app-bg-root)`, `var(--app-bg-surface)`, `var(--app-bg-card)`, `var(--app-border)`, `var(--app-text-main)`, `var(--app-text-muted)`, `var(--app-primary)`, etc.). Hardcoded hex color strings, isolated stylesheet themes, or un-synchronized theme toggles are strictly forbidden. All entrypoints must respect `[data-theme="dark"]` and `[data-theme="light"]` attributes and synchronize state using the standardized `'sg-forge-theme'` localStorage key.
-3. **Multi-Port Unified UI Governance Directive**: All web interfaces served across port 80/443 (Edge Reverse Proxy Landing Hub), port 3001 (Main Application Portal), port 3002 (Developer Dashboard), and port 3003 (Developer Proxy Gateway fallback/error/status pages) MUST strictly adhere to centralized CSS theme variables, responsive SPA card containment rules, viewport-bounded floating top-layer dropdowns/selects (`z-index: 9999`), interactive theme toggle accessibility, and modern glassmorphic notification/modal popups. Zero horizontal page scrolling (`scrollWidth <= innerWidth`) down to 320px must be maintained across all ports.
-4. **Design Naming & Attribution Guard**: When designing UI components inspired by third-party design systems (e.g. Supabase, Google, Vercel), mention design inspiration strictly in code comments. NEVER name any file, function, variable, CSS class, component, interface, or property after third-party brand names directly.
-5. **Standardized Window Layout & Margin Directive**: Every main page, container, and layout panel frame in the application MUST use a unified page margin/padding of `16px` on desktop viewports and `12px` on compact/narrow viewports.
-6. **Standardized Element Containment & Responsive Parent Boundary Directive**: All UI elements, buttons, form controls, code blocks, text areas, SVGs, canvas, media, and inner child components MUST strictly remain contained within their parent structural boundaries (`max-width: 100%`, `box-sizing: border-box`, `min-width: 0`, `min-height: 0`). Grid column tracks MUST use `minmax(0, 1fr)`. Wrapped text containers MUST specify `overflow-wrap: anywhere` or `word-break: break-word`; single-line elements MUST enforce `white-space: nowrap; overflow: hidden; text-overflow: ellipsis`. Zero horizontal page scroll (`document.documentElement.scrollWidth <= window.innerWidth`) MUST be maintained across all viewports down to 320px.
-7. **Single Page Application (SPA) & Responsive UI Directive**: All application UI modules MUST strictly operate as Single Page Applications (SPA) with responsive layouts across all viewports. Input fields, text, media, buttons, and inner components MUST NEVER leave or overflow parent cards/elements.
-8. **Modern Top-Layer Viewport-Bounded Dropdowns Directive**: All dropdown menus, selects, popovers, and pickers MUST feature modern-age aesthetics matching the theme, be positioned strictly within visible window viewport boundaries (no clipping or off-screen bleeding), and render at the topmost z-index layer (`z-index: 9999` or React Portal overlay).
-9. **Modern Age Notifications & Popups Directive**: All popups, modals, dialogs, toasts, and floating notifications MUST match the modern-age UI aesthetic (centralized theme variables, glassmorphism, subtle drop shadows, smooth entry/exit transitions, and responsive viewport positioning).
-10. **Conductor & Sub-View Modular Architecture**: Large UI modules must strictly follow the conductor pattern:
-    - The top-level component (`<Domain>Panel.tsx` or `<Domain>Launchpad.tsx`) must serve exclusively as a state conductor ($\le 250$ lines), managing routing, top-level state, and modal open states.
-    - All sub-views and tab screens must be extracted into focused sub-components under `components/<domain>/<SubView>.tsx` ($\le 250$ lines each).
-    - Modal dialogs must be extracted into `components/<domain>/modals/<ModalName>.tsx` ($\le 180$ lines each).
-11. **Non-Technical User POV & Empathetic UX Directive**: All UI components, forms, action buttons, status indicators, and feedback mechanisms MUST be designed strictly from the perspective of a non-technical end user:
-    - **Empathetic, Plain-Language Feedback**: NEVER expose raw technical stack traces, cryptic HTTP status codes (e.g. "502 Bad Gateway"), or unhandled promise exceptions. Always translate system states into clear, friendly, human-readable explanations (e.g., *"The email or password you entered is incorrect. Please check your spelling and try again."* or *"Our servers are temporarily unreachable. Please check your internet connection or try again shortly."*).
-    - **Dynamic Multi-State Action Buttons**: Primary interactive buttons (Login, Submit, Save, Deploy, Delete) MUST visually communicate progress through distinct contextual states:
-      1. *Idle / Default*: Clear, actionable verb (e.g., `Sign In to Portal`, `Save Changes`).
-      2. *In-Flight / Loading*: Animated spinner + explicit progress label (e.g., `Verifying credentials...`, `Saving changes...`), preventing accidental double-submits.
-      3. *Error / Failure State*: Dynamic error label with contextual retry cue (e.g., `Sign In Failed — Try Again`, `Server Offline — Retry`), accompanied by high-visibility border highlighting and empathetic alert cards.
-      4. *Success State*: Instant positive confirmation (e.g., `Success! Taking you in...`).
-    - **Empathetic Input Controls & Password Visibility**: Form fields must provide intuitive controls (such as show/hide password eye toggles) to prevent user frustration. Input errors must highlight field borders in real-time and clear as soon as the user starts typing.
-    - **SPA Submission Integrity**: All forms MUST prevent default browser page flushes (`action="javascript:void(0);"`, `e.preventDefault()`, `e.stopPropagation()`), preserving seamless Single Page Application state across all network conditions.
+> ⚠️ **MANDATORY UI DIRECTIVE FOR ALL AGENTS**
+> Every frontend interface across the SG Forge platform MUST look polished, enterprise-grade, and strictly adhere to the **Meta Astryx Design System (`@forge/ui`)**. Zero amateur / "vibecoded" ad-hoc styling.
+
+---
+
+## 🛑 THE 7 META ASTRYX UI INVARIANTS
+
+### 1. Zero Ad-Hoc Styling (Mandatory Token Consumption)
+- **NEVER** use random hex colors, arbitrary inline styles, or ad-hoc gradients.
+- **ALWAYS** consume centralized `--forge-*` CSS custom properties:
+  - Backgrounds: `var(--forge-bg-root)`, `var(--forge-bg-surface)`, `var(--forge-bg-card)`, `var(--forge-bg-card-hover)`, `var(--forge-bg-elevated)`
+  - Borders: `var(--forge-border)`, `var(--forge-border-medium)`
+  - Primary & Accents: `var(--forge-primary)`, `var(--forge-primary-gradient)`, `var(--forge-accent)`
+  - Text: `var(--forge-text-main)` (`#f8fafc`), `var(--forge-text-muted)` (`#94a3b8`), `var(--forge-text-subtle)` (`#64748b`)
+  - Status: `var(--forge-success)`, `var(--forge-warning)`, `var(--forge-error)`
+
+### 2. 8-Point Mathematical Spacing Scale
+- All paddings, margins, gaps, and card dimensions must strictly align with the 8-point modular scale:
+  - `4px` (xs), `8px` (sm), `16px` (md), `24px` (lg), `32px` (xl), `48px` (xxl).
+- Avoid arbitrary values like `13px`, `19px`, or `27px`.
+
+### 3. High-End Typography & Contrast (WCAG 2.1 AAA)
+- Font stack: `-apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Display', 'Segoe UI', Roboto, sans-serif`.
+- Headings: Bold (`700` / `800`), calibrated negative letter-spacing (`letter-spacing: -0.02em` to `-0.03em`), line-height `1.15` to `1.25`.
+- Body: Normal (`400` / `500`), line-height `1.6`, clean readability.
+
+### 4. Interactive State Machine on All Elements
+- Every interactive element (Buttons, Cards, Inputs, Tabs) must have complete, smooth CSS transitions:
+  - **Idle**: Clean hairline border with subtle background.
+  - **Hover**: Subtle lift (`transform: translateY(-2px)`), border glow, and elevated shadow.
+  - **Active / Click**: `transform: translateY(0)` with slight brightness reduction.
+  - **Focus-Visible**: High-visibility focus ring (`box-shadow: 0 0 0 2px var(--forge-primary)`).
+  - **Disabled**: `opacity: 0.5; cursor: not-allowed; pointer-events: none;`.
+
+### 5. Glassmorphism & Elevation with Discipline
+- Use subtle, calibrated backdrop blurs (`backdrop-filter: blur(16px)` to `blur(20px)`).
+- Never stack heavy blur layers that degrade GPU performance.
+- Hairline border overlay (`1px solid rgba(255, 255, 255, 0.08)`) on all elevated cards.
+
+### 6. Zero Horizontal Scrolling (320px Responsive Guarantee)
+- All containers must enforce `max-width: 100%`, `box-sizing: border-box`, `min-width: 0`.
+- Text containers must use `overflow-wrap: anywhere` or `word-break: break-word`.
+- Grid column tracks must use `minmax(0, 1fr)`.
+- Zero horizontal page scroll (`document.documentElement.scrollWidth <= window.innerWidth`) down to 320px viewport.
+
+### 7. Non-Technical End-User POV & Empathetic Feedback
+- NEVER expose raw technical stack traces or cryptic HTTP errors (502, 500) to the user.
+- Always provide clear, actionable, friendly messages with retry cues.
+- Multi-state buttons: *Idle* &rarr; *In-Flight (Spinner)* &rarr; *Success/Error confirmation*.

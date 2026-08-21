@@ -1,92 +1,67 @@
-# System Architecture, Database & Code Standards Rules (Google & Meta Standard)
+# System Architecture, Modularity & Code Standards (Google & Meta Standard 2026)
 
-## 1. File Size Governance & Domain Cohesion
-- **Ceiling Thresholds**:
-  - `≤ 300 lines`: Healthy standard.
-  - `301 – 500 lines`: Cohesion smell warning. Allowed only for unified state machines, route dispatchers, or complex domain aggregators with explicit justification.
-  - `> 500 lines`: Hard gate blocked by automated pre-commit and CI without explicit architectural exemption.
-- **Exemptions**: Declarative multi-table Drizzle schema definitions (`schema.ts`), static mock seed fixtures (`test/dummy-data/`), and database migration scripts.
-- **Domain Cohesion over Fragmentation**: Avoid artificial file splitting ("modularity theatre"). Group related operations within domain folders (`domain/<entity>/{service, repository, schema, policy}.ts`).
+> ⚠️ **MANDATORY ARCHITECTURAL DIRECTIVES FOR ALL AI SESSIONS & DEVELOPERS**
+> The codebase must be maintained at the level of a flagship Google/Meta infrastructure product. Code must be highly modular, maintainable, rigorously documented, and strictly isolated.
 
 ---
 
-## 2. Directional Layered Architecture & Boundaries
-All modules across all application ports (3001, 3002, 3003) must strictly conform to directional layer boundaries:
-$$\text{UI Layer} \longrightarrow \text{Application Layer} \longrightarrow \text{Domain Layer} \longleftarrow \text{Infrastructure Layer}$$
+## 🏛️ 1. Directional Layer Boundaries & Clean Architecture
 
-1. **UI Layer (`apps/*`, `packages/ui`, `core/src/frontend`):**
-   - Renders state and triggers use-case handlers.
-   - **Forbidden**: Direct database queries, direct filesystem operations, direct subprocess execution, raw SQL.
-2. **Application Layer (`core/src/application`):**
-   - Orchestrates use cases, input validation (Zod/TypeBox), cross-domain workflows, and transactions.
-3. **Domain Layer (`core/src/domain`):**
-   - Pure domain entities, business policies, and domain events.
-   - **Forbidden**: Zero framework dependencies (no Next.js APIs, no browser APIs, no ORM instances).
-4. **Infrastructure Layer (`core/src/backend`, `core/src/database`):**
-   - Implements repositories, database adapters (Drizzle), message queues (Redis), and external gateways.
+All modules across `apps/src/` and `forge-apps/` must strictly adhere to directional layer boundaries:
+$$\text{UI Layer (@forge/ui)} \longleftrightarrow \text{Application Services (apps/src/*)} \longleftrightarrow \text{Forge Micro-Apps (forge-apps/*)} \longleftrightarrow \text{Turso SQLite Storage}$$
 
----
-
-## 3. Dependency Graph & Zero Circular Dependencies
-- **Zero Circular Dependencies**: Cyclic imports are strictly prohibited across packages and modules.
-- **Boundary Auditing**: Verified via AST scanners and dependency cruise gates before merging.
-- **Dependency Injection**: Inject dependencies via constructors or factory functions rather than global mutable singletons.
+1. **UI Layer (`@forge/ui`)**:
+   - Consumes Meta Astryx tokens and component wrappers.
+   - **Strictly Forbidden**: Direct database queries, raw SQL execution, filesystem writes, or subprocess spawning.
+2. **Platform Services (`apps/src/{landing, auth, portal, dev-dashboard, dev-hub}`)**:
+   - Orchestrates authentication, routing, and developer dashboards.
+   - Must use `@forge/sdk` for structured JSON logging and RFC 7807 safe error boundaries.
+3. **Independent Micro-Apps (`forge-apps/*`)**:
+   - Each app is completely self-contained in its own directory with dedicated schemas, routes, and tests.
+   - **Dedicated Turso DB Isolation**: Each app queries strictly its own isolated Turso libSQL SQLite database instance. Querying another app's DB is **strictly prohibited**.
 
 ---
 
-## 4. Canonical API Contracts First
-- **Contract-First Workflow**: Requirement ➔ Canonical API Contract (OpenAPI / Zod Schema) ➔ Domain Model ➔ Implementation ➔ Contract Tests.
-- Prohibit ad-hoc endpoint sprawl. All request, response, and error schemas must be typed and validated against canonical contracts.
+## 📦 2. Clean Aliases & Zero Traversal Sprawl
+
+All TypeScript imports across services and micro-apps MUST use clean, configured package aliases:
+- `@forge/sdk` &rarr; `apps/src/sdk/src/index.ts` (Logging, Error handling, Client bridge)
+- `@forge/ui` &rarr; `apps/src/ui/src/index.ts` (Meta Astryx tokens, accessible components, Theme engine)
+- `@forge/types` &rarr; `apps/src/types/src/index.ts` (Domain models, RBAC interfaces, Event types)
+
+Messy relative traversal imports (`../../..`) are strictly prohibited.
 
 ---
 
-## 5. Drizzle Schema Migration Discipline
-- **Migration Invariant**: Every database schema change MUST follow the sequence:
-  1. Modify Drizzle schema definitions.
-  2. Generate versioned migration script (`drizzle-kit generate`).
-  3. Execute automated migration tests verifying forward and backward compatibility.
-- Never modify production schema ad-hoc without a corresponding migration artifact.
+## 📊 3. Centralized Structured Logging & Error Handling Standard
+
+Every service and route handler MUST implement centralized, structured observability:
+1. **Structured Logging**: Use `createLogger(serviceName)` from `@forge/sdk` instead of raw `console.log`.
+   * Formats JSON in production for automated SRE telemetry ingestion.
+   * Colorized for local terminal readability.
+2. **Safe Error Boundaries (RFC 7807)**:
+   * Use `createSafeHandler(serviceName, handler)` from `@forge/sdk`.
+   * Catches unhandled promise exceptions and formats standardized HTTP problem responses (`application/problem+json`) without exposing raw stack traces to end users.
 
 ---
 
-## 6. Graphify & Codebase Intelligence
-- Use `graphify` skill for codebase analysis & graph queries.
-- Graph update: `rtk graphify update .`.
-- Query command: `rtk graphify query "<question>"`.
-- Inspect graphify knowledge base before undertaking refactoring.
+## 📝 4. Mandatory Header Comment Blocks & Understandable Documentation
+
+Every source file (`.ts`, `.tsx`, `.py`, `.go`, `.sh`, `.css`) MUST begin with a standardized header comment:
+```typescript
+/**
+ * @forge/<service-or-app> - <Description>
+ * Role: <Brief architectural responsibility>
+ * Compliance: Meta Astryx UI / ASVS 5.0 Zero-Trust / Google SRE Logging
+ */
+```
+- **TSDoc / JSDoc**: All exported functions, classes, interfaces, and options must include descriptive comments with `@param` and `@returns`.
+- **Inline Logic Commentary**: Explain non-obvious engineering decisions and rationale, not just what the syntax does.
 
 ---
 
-## 7. Mandatory Header Comment Blocks & Understandable Documentation
-- Every source file (`.ts`, `.tsx`, `.py`, `.go`, `.sh`, `.css`) MUST begin with a standardized top-of-file header comment specifying:
-  - File path / name
-  - Domain / Subsystem
-  - Architectural role / Responsibility
-  - Compliance standards (Zero Host, Layer Boundary, Zero Relative Imports, Zero Trust)
-- **JSDoc / TSDoc**: All exported functions, hooks, interfaces, and types MUST feature detailed JSDoc comments with `@param` and `@returns`.
-- **Inline Logic Commentary**: Explain *why* non-obvious logic exists.
+## 🔄 5. Hot Reloading & Environment Configuration Invariant
 
----
-
-## 8. Build Script Guards & Process Locking
-- Build, dev, test, docker, and audit scripts MUST implement single-instance process lock guards (`flock` / lockfile) to prevent collision.
-
----
-
-## 9. Absolute Path Aliasing & Zero Relative Imports
-- Relative imports (`../`, `./`) are strictly prohibited across all TypeScript/JavaScript source files.
-- Path aliases:
-  - `@/*` / `@frontend/*` -> `core/src/frontend/*`
-  - `@backend/*` -> `core/src/backend/*`
-  - `@database/*` -> `core/src/database/*`
-  - `@ui/*` / `@sg-forge/ui` -> `packages/ui/src/*`
-  - `@sdk/*` -> `packages/sdk/*`
-  - `@apps/*` -> `sandbox/apps/*`
-  - `@scripts/*` -> `scripts/*`
-  - `@test/*` -> `test/*`
-
----
-
-## 10. Zero Host Install & Portable FOSS Tooling
-- All third-party tools, linters, analyzers, and runtimes MUST be bundled strictly in portable format under `portables/` or `.venv/` or run via Docker. Host package managers (`apt`, `brew`, `pip --user`, `npm -g`) are strictly prohibited.
-
+- **Zero Hardcoded Ports**: All ingress ports, service ports, and database credentials must be driven dynamically by `.env` (`${LANDING_PORT:-3000}`, `${PORTAL_PORT:-3001}`, etc.).
+- **Hot-Reloading in Development**: All Docker containers and native runners execute via `bun --watch` so modifications to source files hot-reload immediately without rebuilding images.
+- **Persistent Named Volumes**: Database files and package caches must reside in persistent named volumes (`sg_forge_db_data`, `sg_forge_bun_cache`) ensuring zero data loss on container recreation.

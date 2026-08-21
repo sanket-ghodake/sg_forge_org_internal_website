@@ -1,78 +1,54 @@
-# Zero-Host-Install Portable Developer & Agent Ecosystem
+# 🧰 SG Forge 2.0 - Portable Developer Setup Guide
 
-The SG Forge platform implements a strict **Zero-Host-Install** architecture. Developers and AI agents can clone the repository on any operating system and immediately develop, test, run AI agents, and build micro-apps without running package managers against the host operating system (`no apt-get`, `no brew`, `no pip install`, `no npm -g`).
-
----
-
-## 1. Operating System Compatibility Matrix
-
-| Operating System | Architecture | Primary Shell | Bootstrap Command | Execution Engine |
-| :--- | :--- | :--- | :--- | :--- |
-| **Linux (Ubuntu, Debian, Fedora, Arch, Alpine)** | x86_64 / aarch64 | `bash` / `zsh` | `./run.sh setup` | Native Portable Bun / Local `.venv` / Docker |
-| **macOS (Apple Silicon M1-M4)** | arm64 | `zsh` / `bash` | `./run.sh setup` | Native Darwin Bun / Local `.venv` / Docker |
-| **macOS (Intel)** | x86_64 | `zsh` / `bash` | `./run.sh setup` | Native Darwin Bun / Local `.venv` / Docker |
-| **Windows 10 / 11 (WSL 2)** | x86_64 / arm64 | `bash` | `./run.sh setup` | WSL Linux Portable Subsystem |
-| **Windows 10 / 11 (Native)** | x86_64 | PowerShell / `cmd` | `run.bat setup` | Win64 Portable Bun / `run.bat` |
+This repository is engineered with a **Zero-Host-Modification Policy**. All development runtimes, testing frameworks, linters, analyzers, and benchmarking tools run from pre-bundled portable repo binaries or isolated Docker containers.
 
 ---
 
-## 2. 1-Command Developer Onboarding
+## ⚡ Prerequisites
 
-### Linux, macOS & WSL2
+* **Linux (x86_64 / ARM64), macOS (Apple Silicon / Intel), or Windows (WSL2 / Native CMD)**.
+* **Git** installed on host.
+* **Docker** (Optional, for running full containerized stack).
+
+---
+
+## 📦 Bundled Portable Tool Matrix (Latest Stable 2026 LTS Releases)
+
+| Component | Active Version | Upstream Latest | Path / Binary | Host Install Needed? |
+| :--- | :---: | :---: | :--- | :---: |
+| **Bun Runtime** | `v1.3.14` | `v1.3.14` | `portables/bun/bin/bun` | ❌ No |
+| **RTK Token Optimizer** | `v0.42.3` | `v0.42.3` | `portables/bin/rtk` | ❌ No |
+| **Meta Astryx CLI** | `v2.0.0` | `v2.0.0` | `portables/bin/astryx` | ❌ No |
+| **Gitleaks Secret Scanner** | `v8.30.1` | `v8.30.1` | `portables/bin/gitleaks` | ❌ No |
+| **Biome Fast Linter** | `v2.2.0` | `v2.2.0` | `portables/bin/biome` | ❌ No |
+| **Knip Dead Code Auditor** | `v6.32.2` | `v6.32.2` | `portables/bin/knip` | ❌ No |
+| **Hadolint Docker Linter** | `v2.12.0` | `v2.12.0` | `portables/bin/hadolint` | ❌ No |
+| **Autocannon Benchmark** | `v7.15.0` | `v7.15.0` | `portables/bin/autocannon` | ❌ No |
+| **Repomix Context Packager** | `v1.10.2` | `v1.10.2` | `portables/bin/repomix` | ❌ No |
+| **SCC Complexity Counter** | `v3.4.0` | `v3.4.0` | `portables/bin/scc` | ❌ No |
+| **Hyperfine Benchmarker** | `v1.18.0` | `v1.18.0` | `portables/bin/hyperfine` | ❌ No |
+| **Caveman CLI** | `v1.0.0` | `v1.0.0` | `portables/bin/caveman` | ❌ No |
+| **Graphify Knowledge Graph** | `v0.5.0` | `v0.5.0` | `portables/bin/graphify` | ❌ No |
+
+---
+
+## 🚀 1-Command Bootstrap
+
+### Linux, macOS & WSL2:
 ```bash
-# 1. Clone the repository
-git clone https://github.com/sanket-ghodake/sg-forge.git
-cd sg-forge
-
-# 2. Run automated bootstrap
 ./run.sh setup
-
-# 3. Launch development environment
 ./run.sh dev
 ```
 
-### Windows Native (CMD / PowerShell)
+### Windows Native:
 ```cmd
-:: 1. Clone repository
-git clone https://github.com/sanket-ghodake/sg-forge.git
-cd sg-forge
-
-:: 2. Run Windows automated portable setup
 run.bat setup
-
-:: 3. Launch stack
 run.bat dev
 ```
 
 ---
 
-## 3. Bundled Portable Tooling & Binaries
-
-All dependencies and runtimes reside strictly inside `portables/`:
-
-```text
-portables/
-├── bun/bin/bun                # Standalone Bun runtime binary (v1.3.14 LTS)
-├── rtk/bin/rtk                # RTK token optimizer binary (v0.42.3)
-├── astryx/                    # Meta Astryx Design System CLI
-├── caveman/                   # Caveman Ultra token compression CLI
-└── bin/                       # Executable path wrappers (astryx, caveman, rtk, scc, tree)
-```
-
-### Tool Command Quick Reference
-
-| Tool | CLI Command | Purpose |
-| :--- | :--- | :--- |
-| **Bun** | `bun` or `./portables/bun/bin/bun` | Fast JS/TS runtime, package manager, and test runner. |
-| **RTK** | `rtk <cmd>` or `./portables/bin/rtk` | Token optimizer and output compressor for AI agents. |
-| **Meta Astryx** | `astryx` or `./portables/bin/astryx` | Scaffold & validate accessible Meta Astryx UI components. |
-| **Caveman** | `caveman` or `./portables/bin/caveman` | Token compression controller for AI agent turns. |
-
----
-
-## 4. System Diagnostics
-
-Verify all portable runtimes and environment readiness:
+## 🩺 System Diagnostics & Health Check
 
 ```bash
 ./run.sh doctor
