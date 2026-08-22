@@ -14,9 +14,9 @@ Before writing code, running commands, or staging/committing changes, verify:
 5. [ ] **Centralized Logging & Error Handling**: Services MUST use `createLogger` and `createSafeHandler` from `@forge/sdk` (Google SRE standard structured JSON logs & RFC 7807 problem responses).
 6. [ ] **Dedicated Turso DB Isolation**: Dedicated Turso (libSQL) database per Forge App. Micro-apps MUST NEVER query another app's database.
 7. [ ] **Clean Package Aliases**: Imports must use `@forge/sdk`, `@forge/ui`, `@forge/types`. ZERO relative traversal sprawl (`../../..`).
-8. [ ] **Zero-Trust Security (OWASP ASVS 5.0)**: Zero SQL injection, parameterized queries only, safe subprocess args, no hardcoded secrets or credentials.
-9. [ ] **Conventional Commits & Audit Reports**: Commits MUST follow Conventional Commits 1.0 (`<type>(<scope>): <summary>`). Every commit auto-includes its audit report in `logs/reports/YYYY-MM/`.
-10. [ ] **Single-Line Worklog**: Task completion appends strictly ONE single line to `logs/WORKLOGS.md` (`YYYY-MM-DD HH:mm | <brief>`).
+8. [ ] **Folder Documentation (README per folder)**: Every single folder across the codebase MUST maintain its own descriptive `README.md`.
+9. [ ] **STRICT: Zero Auto-Commits**: AI agents MUST NEVER run `git commit` unless the user explicitly requests `"commit changes"`.
+10. [ ] **Automated Commit Ledger & Pre-Commit Gate**: Git pre-commit hook strictly blocks failed quality gates; post-commit hook automatically records ground-truth commit logs to `logs/commits.jsonl` & `logs/WORKLOGS.md`.
 
 ---
 
@@ -55,13 +55,13 @@ Before writing code, running commands, or staging/committing changes, verify:
 - **100% Branch Coverage** required on Auth, RBAC, and Iframe Sandbox boundaries.
 - Mandatory **3A Pattern** (Arrange, Act, Assert) across all unit and integration tests.
 
-### 9. Conventional Commits 1.0 & Bidirectional Audit Linking
-- All commits follow `<type>(<scope>): <short imperative description>` (types: `feat`, `fix`, `refactor`, `perf`, `test`, `tool`, `docs`, `chore`).
-- Pre-commit quality reports are automatically staged into `logs/reports/YYYY-MM/` and referenced in commit history.
+### 9. Single-Location Dynamic Ingress & Explicit User Commits
+- Ingress paths and ports are driven exclusively from `.env` via `@forge/sdk/registry` and `scripts/generate-proxy.ts`.
+- **Zero Auto-Commits**: Agents MUST NEVER commit code on their own initiative; all commits must be explicitly instructed by the user and follow Conventional Commits 1.0.
 
-### 10. Code Preservation, Observability & Single-Line Worklog
+### 10. Code Preservation, Observability & Automated Commit Ledger
 - **Comprehensive Header Comments & TSDoc**: Every file begins with standard header comment block; all exports have TSDoc descriptions.
-- **Single-Line Worklog**: Append strictly ONE single line at the very end of `logs/WORKLOGS.md`: `YYYY-MM-DD HH:mm | <brief>`. Never insert blank lines or multi-line blocks.
+- **Automated Commit Logging**: Ground truth is maintained via Git hooks (`.agents/hooks/post-commit.sh` and `scripts/log-commit.ts`), automatically logging every commit to `logs/commits.jsonl` (structured JSON) and `logs/WORKLOGS.md` with commit hashes and diff statistics. AI agents must NEVER manually hallucinate worklog lines.
 
 ---
 

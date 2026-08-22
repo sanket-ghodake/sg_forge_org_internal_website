@@ -257,8 +257,8 @@ runTier1Check(11, '5-Tier Automated Test Suites', 'Bun Test Runner', () => {
   return { status: 'PASSED', details: `${totalPass} unit/integration tests passed with 0 failures.` };
 });
 
-// 12. Worklog Format Integrity
-runTier1Check(12, 'Worklog Single-Line Format', 'Regex Validator', () => {
+// 12. Worklog & Structured Ledger Integrity
+runTier1Check(12, 'Worklog & Ledger Integrity', 'Schema & Regex Validator', () => {
   const worklogPath = join(REPO_ROOT, 'logs', 'WORKLOGS.md');
   if (!existsSync(worklogPath)) return { status: 'FAILED', details: 'logs/WORKLOGS.md not found.' };
 
@@ -269,7 +269,21 @@ runTier1Check(12, 'Worklog Single-Line Format', 'Regex Validator', () => {
   if (!dateRegex.test(lastLine)) {
     return { status: 'WARNING', details: `Last line format mismatch: '${lastLine.slice(0, 40)}...'` };
   }
-  return { status: 'PASSED', details: 'Worklog ends with atomic single-line timestamp format.' };
+
+  // Validate commits.jsonl if present
+  const jsonlPath = join(REPO_ROOT, 'logs', 'commits.jsonl');
+  if (existsSync(jsonlPath)) {
+    const jsonLines = readFileSync(jsonlPath, 'utf8').trim().split('\n');
+    for (let i = 0; i < jsonLines.length; i++) {
+      try {
+        JSON.parse(jsonLines[i]);
+      } catch (err) {
+        return { status: 'FAILED', details: `Invalid JSON on line ${i + 1} of commits.jsonl` };
+      }
+    }
+  }
+
+  return { status: 'PASSED', details: 'Worklog and structured JSONL ledger format validated.' };
 });
 
 // ==============================================================================

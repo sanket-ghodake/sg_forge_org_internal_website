@@ -677,67 +677,27 @@
       "label": "logger",
       "file_type": "code",
       "source_file": "apps/src/landing/src/server.ts",
-      "source_location": "L14",
+      "source_location": "L11",
       "_origin": "ast",
       "id": "apps_src_landing_src_server_ts_src_server_logger",
       "community": 16,
       "norm_label": "logger"
     },
     {
-      "label": "REPO_ROOT",
-      "file_type": "code",
-      "source_file": "apps/src/landing/src/server.ts",
-      "source_location": "L15",
-      "_origin": "ast",
-      "id": "src_server_repo_root",
-      "community": 16,
-      "norm_label": "repo_root"
-    },
-    {
       "label": "PORT",
       "file_type": "code",
       "source_file": "apps/src/landing/src/server.ts",
-      "source_location": "L16",
+      "source_location": "L12",
       "_origin": "ast",
       "id": "apps_src_landing_src_server_ts_src_server_port",
       "community": 16,
       "norm_label": "port"
     },
     {
-      "label": "RouteItem",
-      "file_type": "code",
-      "source_file": "apps/src/landing/src/server.ts",
-      "source_location": "L18",
-      "_origin": "ast",
-      "id": "src_server_routeitem",
-      "community": 16,
-      "norm_label": "routeitem"
-    },
-    {
-      "label": "RouteGroup",
-      "file_type": "code",
-      "source_file": "apps/src/landing/src/server.ts",
-      "source_location": "L28",
-      "_origin": "ast",
-      "id": "src_server_routegroup",
-      "community": 16,
-      "norm_label": "routegroup"
-    },
-    {
-      "label": "getDynamicRoutes()",
-      "file_type": "code",
-      "source_file": "apps/src/landing/src/server.ts",
-      "source_location": "L37",
-      "_origin": "ast",
-      "id": "src_server_getdynamicroutes",
-      "community": 16,
-      "norm_label": "getdynamicroutes()"
-    },
-    {
       "label": "renderHtml()",
       "file_type": "code",
       "source_file": "apps/src/landing/src/server.ts",
-      "source_location": "L133",
+      "source_location": "L14",
       "_origin": "ast",
       "id": "src_server_renderhtml",
       "community": 16,
@@ -747,7 +707,7 @@
       "label": "startLandingServer()",
       "file_type": "code",
       "source_file": "apps/src/landing/src/server.ts",
-      "source_location": "L206",
+      "source_location": "L98",
       "_origin": "ast",
       "id": "src_server_startlandingserver",
       "community": 16,
@@ -1037,7 +997,7 @@
       "label": "LogLevel",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L11",
+      "source_location": "L12",
       "_origin": "ast",
       "id": "src_index_loglevel",
       "community": 24,
@@ -1047,7 +1007,7 @@
       "label": "LogEntry",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L13",
+      "source_location": "L14",
       "_origin": "ast",
       "id": "src_index_logentry",
       "community": 24,
@@ -1057,7 +1017,7 @@
       "label": "ForgeLogger",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L27",
+      "source_location": "L28",
       "_origin": "ast",
       "id": "src_index_forgelogger",
       "community": 24,
@@ -1067,7 +1027,7 @@
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L28",
+      "source_location": "L29",
       "_origin": "ast",
       "id": "src_index_forgelogger_constructor",
       "community": 24,
@@ -1077,7 +1037,7 @@
       "label": ".log()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L30",
+      "source_location": "L31",
       "_origin": "ast",
       "id": "src_index_forgelogger_log",
       "community": 24,
@@ -1087,7 +1047,7 @@
       "label": ".debug()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L50",
+      "source_location": "L51",
       "_origin": "ast",
       "id": "src_index_forgelogger_debug",
       "community": 24,
@@ -1097,7 +1057,7 @@
       "label": ".info()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L51",
+      "source_location": "L52",
       "_origin": "ast",
       "id": "src_index_forgelogger_info",
       "community": 24,
@@ -1107,7 +1067,7 @@
       "label": ".warn()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L52",
+      "source_location": "L53",
       "_origin": "ast",
       "id": "src_index_forgelogger_warn",
       "community": 24,
@@ -1117,7 +1077,7 @@
       "label": ".error()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L53",
+      "source_location": "L54",
       "_origin": "ast",
       "id": "src_index_forgelogger_error",
       "community": 24,
@@ -1127,7 +1087,7 @@
       "label": ".fatal()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L54",
+      "source_location": "L55",
       "_origin": "ast",
       "id": "src_index_forgelogger_fatal",
       "community": 24,
@@ -1137,7 +1097,7 @@
       "label": "createLogger()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L57",
+      "source_location": "L58",
       "_origin": "ast",
       "id": "src_index_createlogger",
       "community": 16,
@@ -1147,7 +1107,7 @@
       "label": "createSafeHandler()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L64",
+      "source_location": "L65",
       "_origin": "ast",
       "id": "src_index_createsafehandler",
       "community": 16,
@@ -1157,7 +1117,7 @@
       "label": "ForgeClientOptions",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L105",
+      "source_location": "L106",
       "_origin": "ast",
       "id": "src_index_forgeclientoptions",
       "community": 24,
@@ -1167,7 +1127,7 @@
       "label": "ForgeClient",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L110",
+      "source_location": "L111",
       "_origin": "ast",
       "id": "src_index_forgeclient",
       "community": 24,
@@ -1177,7 +1137,7 @@
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L115",
+      "source_location": "L116",
       "_origin": "ast",
       "id": "src_index_forgeclient_constructor",
       "community": 24,
@@ -1187,7 +1147,7 @@
       "label": ".init()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L117",
+      "source_location": "L118",
       "_origin": "ast",
       "id": "src_index_forgeclient_init",
       "community": 24,
@@ -1197,11 +1157,41 @@
       "label": ".fetch()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/index.ts",
-      "source_location": "L156",
+      "source_location": "L157",
       "_origin": "ast",
       "id": "src_index_forgeclient_fetch",
       "community": 24,
       "norm_label": ".fetch()"
+    },
+    {
+      "label": "registry.ts",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/registry.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_registry",
+      "community": 16,
+      "norm_label": "registry.ts"
+    },
+    {
+      "label": "ServiceEntry",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/registry.ts",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "src_registry_serviceentry",
+      "community": 16,
+      "norm_label": "serviceentry"
+    },
+    {
+      "label": "loadServiceRegistry()",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/registry.ts",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "src_registry_loadserviceregistry",
+      "community": 16,
+      "norm_label": "loadserviceregistry()"
     },
     {
       "label": "package.json",
@@ -1424,86 +1414,6 @@
       "norm_label": "sdk.test.ts"
     },
     {
-      "label": "manifest.json",
-      "file_type": "code",
-      "source_file": "forge-apps/app-template/manifest.json",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "app_template_manifest",
-      "community": 29,
-      "norm_label": "manifest.json"
-    },
-    {
-      "label": "id",
-      "file_type": "code",
-      "source_file": "forge-apps/app-template/manifest.json",
-      "source_location": "L2",
-      "_origin": "ast",
-      "id": "app_template_manifest_id",
-      "community": 29,
-      "norm_label": "id"
-    },
-    {
-      "label": "name",
-      "file_type": "code",
-      "source_file": "forge-apps/app-template/manifest.json",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "app_template_manifest_name",
-      "community": 29,
-      "norm_label": "name"
-    },
-    {
-      "label": "port",
-      "file_type": "code",
-      "source_file": "forge-apps/app-template/manifest.json",
-      "source_location": "L4",
-      "_origin": "ast",
-      "id": "app_template_manifest_port",
-      "community": 29,
-      "norm_label": "port"
-    },
-    {
-      "label": "defaultPath",
-      "file_type": "code",
-      "source_file": "forge-apps/app-template/manifest.json",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "app_template_manifest_defaultpath",
-      "community": 29,
-      "norm_label": "defaultpath"
-    },
-    {
-      "label": "description",
-      "file_type": "code",
-      "source_file": "forge-apps/app-template/manifest.json",
-      "source_location": "L6",
-      "_origin": "ast",
-      "id": "app_template_manifest_description",
-      "community": 29,
-      "norm_label": "description"
-    },
-    {
-      "label": "role",
-      "file_type": "code",
-      "source_file": "forge-apps/app-template/manifest.json",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "app_template_manifest_role",
-      "community": 29,
-      "norm_label": "role"
-    },
-    {
-      "label": "isExternal",
-      "file_type": "code",
-      "source_file": "forge-apps/app-template/manifest.json",
-      "source_location": "L8",
-      "_origin": "ast",
-      "id": "app_template_manifest_isexternal",
-      "community": 29,
-      "norm_label": "isexternal"
-    },
-    {
       "label": "package.json",
       "file_type": "code",
       "source_file": "forge-apps/app-template/package.json",
@@ -1624,86 +1534,6 @@
       "norm_label": "@forge/types"
     },
     {
-      "label": "manifest.json",
-      "file_type": "code",
-      "source_file": "forge-apps/billing/manifest.json",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "billing_manifest",
-      "community": 30,
-      "norm_label": "manifest.json"
-    },
-    {
-      "label": "id",
-      "file_type": "code",
-      "source_file": "forge-apps/billing/manifest.json",
-      "source_location": "L2",
-      "_origin": "ast",
-      "id": "billing_manifest_id",
-      "community": 30,
-      "norm_label": "id"
-    },
-    {
-      "label": "name",
-      "file_type": "code",
-      "source_file": "forge-apps/billing/manifest.json",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "billing_manifest_name",
-      "community": 30,
-      "norm_label": "name"
-    },
-    {
-      "label": "port",
-      "file_type": "code",
-      "source_file": "forge-apps/billing/manifest.json",
-      "source_location": "L4",
-      "_origin": "ast",
-      "id": "billing_manifest_port",
-      "community": 30,
-      "norm_label": "port"
-    },
-    {
-      "label": "defaultPath",
-      "file_type": "code",
-      "source_file": "forge-apps/billing/manifest.json",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "billing_manifest_defaultpath",
-      "community": 30,
-      "norm_label": "defaultpath"
-    },
-    {
-      "label": "description",
-      "file_type": "code",
-      "source_file": "forge-apps/billing/manifest.json",
-      "source_location": "L6",
-      "_origin": "ast",
-      "id": "billing_manifest_description",
-      "community": 30,
-      "norm_label": "description"
-    },
-    {
-      "label": "role",
-      "file_type": "code",
-      "source_file": "forge-apps/billing/manifest.json",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "billing_manifest_role",
-      "community": 30,
-      "norm_label": "role"
-    },
-    {
-      "label": "isExternal",
-      "file_type": "code",
-      "source_file": "forge-apps/billing/manifest.json",
-      "source_location": "L8",
-      "_origin": "ast",
-      "id": "billing_manifest_isexternal",
-      "community": 30,
-      "norm_label": "isexternal"
-    },
-    {
       "label": "server.ts",
       "file_type": "code",
       "source_file": "forge-apps/billing/src/server.ts",
@@ -1744,86 +1574,6 @@
       "norm_label": "startbillingserver()"
     },
     {
-      "label": "manifest.json",
-      "file_type": "code",
-      "source_file": "forge-apps/expenses/manifest.json",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "expenses_manifest",
-      "community": 31,
-      "norm_label": "manifest.json"
-    },
-    {
-      "label": "id",
-      "file_type": "code",
-      "source_file": "forge-apps/expenses/manifest.json",
-      "source_location": "L2",
-      "_origin": "ast",
-      "id": "expenses_manifest_id",
-      "community": 31,
-      "norm_label": "id"
-    },
-    {
-      "label": "name",
-      "file_type": "code",
-      "source_file": "forge-apps/expenses/manifest.json",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "expenses_manifest_name",
-      "community": 31,
-      "norm_label": "name"
-    },
-    {
-      "label": "port",
-      "file_type": "code",
-      "source_file": "forge-apps/expenses/manifest.json",
-      "source_location": "L4",
-      "_origin": "ast",
-      "id": "expenses_manifest_port",
-      "community": 31,
-      "norm_label": "port"
-    },
-    {
-      "label": "defaultPath",
-      "file_type": "code",
-      "source_file": "forge-apps/expenses/manifest.json",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "expenses_manifest_defaultpath",
-      "community": 31,
-      "norm_label": "defaultpath"
-    },
-    {
-      "label": "description",
-      "file_type": "code",
-      "source_file": "forge-apps/expenses/manifest.json",
-      "source_location": "L6",
-      "_origin": "ast",
-      "id": "expenses_manifest_description",
-      "community": 31,
-      "norm_label": "description"
-    },
-    {
-      "label": "role",
-      "file_type": "code",
-      "source_file": "forge-apps/expenses/manifest.json",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "expenses_manifest_role",
-      "community": 31,
-      "norm_label": "role"
-    },
-    {
-      "label": "isExternal",
-      "file_type": "code",
-      "source_file": "forge-apps/expenses/manifest.json",
-      "source_location": "L8",
-      "_origin": "ast",
-      "id": "expenses_manifest_isexternal",
-      "community": 31,
-      "norm_label": "isexternal"
-    },
-    {
       "label": "server.ts",
       "file_type": "code",
       "source_file": "forge-apps/expenses/src/server.ts",
@@ -1862,86 +1612,6 @@
       "id": "src_server_startexpensesserver",
       "community": 16,
       "norm_label": "startexpensesserver()"
-    },
-    {
-      "label": "manifest.json",
-      "file_type": "code",
-      "source_file": "forge-apps/telemetry/manifest.json",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "telemetry_manifest",
-      "community": 32,
-      "norm_label": "manifest.json"
-    },
-    {
-      "label": "id",
-      "file_type": "code",
-      "source_file": "forge-apps/telemetry/manifest.json",
-      "source_location": "L2",
-      "_origin": "ast",
-      "id": "telemetry_manifest_id",
-      "community": 32,
-      "norm_label": "id"
-    },
-    {
-      "label": "name",
-      "file_type": "code",
-      "source_file": "forge-apps/telemetry/manifest.json",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "telemetry_manifest_name",
-      "community": 32,
-      "norm_label": "name"
-    },
-    {
-      "label": "port",
-      "file_type": "code",
-      "source_file": "forge-apps/telemetry/manifest.json",
-      "source_location": "L4",
-      "_origin": "ast",
-      "id": "telemetry_manifest_port",
-      "community": 32,
-      "norm_label": "port"
-    },
-    {
-      "label": "defaultPath",
-      "file_type": "code",
-      "source_file": "forge-apps/telemetry/manifest.json",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "telemetry_manifest_defaultpath",
-      "community": 32,
-      "norm_label": "defaultpath"
-    },
-    {
-      "label": "description",
-      "file_type": "code",
-      "source_file": "forge-apps/telemetry/manifest.json",
-      "source_location": "L6",
-      "_origin": "ast",
-      "id": "telemetry_manifest_description",
-      "community": 32,
-      "norm_label": "description"
-    },
-    {
-      "label": "role",
-      "file_type": "code",
-      "source_file": "forge-apps/telemetry/manifest.json",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "telemetry_manifest_role",
-      "community": 32,
-      "norm_label": "role"
-    },
-    {
-      "label": "isExternal",
-      "file_type": "code",
-      "source_file": "forge-apps/telemetry/manifest.json",
-      "source_location": "L8",
-      "_origin": "ast",
-      "id": "telemetry_manifest_isexternal",
-      "community": 32,
-      "norm_label": "isexternal"
     },
     {
       "label": "server.ts",
@@ -2198,6 +1868,46 @@
       "id": "run_show_help",
       "community": 41,
       "norm_label": "show_help()"
+    },
+    {
+      "label": "generate-proxy.ts",
+      "file_type": "code",
+      "source_file": "scripts/generate-proxy.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "scripts_generate_proxy",
+      "community": 16,
+      "norm_label": "generate-proxy.ts"
+    },
+    {
+      "label": "REPO_ROOT",
+      "file_type": "code",
+      "source_file": "scripts/generate-proxy.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "scripts_generate_proxy_repo_root",
+      "community": 16,
+      "norm_label": "repo_root"
+    },
+    {
+      "label": "CADDYFILE_PATH",
+      "file_type": "code",
+      "source_file": "scripts/generate-proxy.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "scripts_generate_proxy_caddyfile_path",
+      "community": 16,
+      "norm_label": "caddyfile_path"
+    },
+    {
+      "label": "generateCaddyfile()",
+      "file_type": "code",
+      "source_file": "scripts/generate-proxy.ts",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "scripts_generate_proxy_generatecaddyfile",
+      "community": 16,
+      "norm_label": "generatecaddyfile()"
     },
     {
       "label": "verify-gate.ts",
@@ -3080,14 +2790,14 @@
       "norm_label": "8. risk-tiered 5-tier testing rigor (3a pattern)"
     },
     {
-      "label": "9. Conventional Commits 1.0 & Bidirectional Audit Linking",
+      "label": "9. Single-Location Dynamic Ingress & Explicit User Commits",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L58",
       "_origin": "ast",
-      "id": "agents_9_conventional_commits_1_0_bidirectional_audit_linking",
+      "id": "agents_9_single_location_dynamic_ingress_explicit_user_commits",
       "community": 165,
-      "norm_label": "9. conventional commits 1.0 & bidirectional audit linking"
+      "norm_label": "9. single-location dynamic ingress & explicit user commits"
     },
     {
       "label": "10. Code Preservation, Observability & Single-Line Worklog",
@@ -3240,14 +2950,14 @@
       "norm_label": "8. risk-tiered 5-tier testing rigor (3a pattern)"
     },
     {
-      "label": "9. Conventional Commits 1.0 & Bidirectional Audit Linking",
+      "label": "9. Single-Location Dynamic Ingress & Explicit User Commits",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L58",
       "_origin": "ast",
-      "id": "claude_9_conventional_commits_1_0_bidirectional_audit_linking",
+      "id": "claude_9_single_location_dynamic_ingress_explicit_user_commits",
       "community": 163,
-      "norm_label": "9. conventional commits 1.0 & bidirectional audit linking"
+      "norm_label": "9. single-location dynamic ingress & explicit user commits"
     },
     {
       "label": "10. Code Preservation, Observability & Single-Line Worklog",
@@ -3400,14 +3110,14 @@
       "norm_label": "8. risk-tiered 5-tier testing rigor (3a pattern)"
     },
     {
-      "label": "9. Conventional Commits 1.0 & Bidirectional Audit Linking",
+      "label": "9. Single-Location Dynamic Ingress & Explicit User Commits",
       "file_type": "document",
       "source_file": "GEMINI.md",
       "source_location": "L58",
       "_origin": "ast",
-      "id": "gemini_9_conventional_commits_1_0_bidirectional_audit_linking",
+      "id": "gemini_9_single_location_dynamic_ingress_explicit_user_commits",
       "community": 65,
-      "norm_label": "9. conventional commits 1.0 & bidirectional audit linking"
+      "norm_label": "9. single-location dynamic ingress & explicit user commits"
     },
     {
       "label": "10. Code Preservation, Observability & Single-Line Worklog",
@@ -3522,6 +3232,356 @@
     {
       "label": "README.md",
       "file_type": "document",
+      "source_file": "apps/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_readme",
+      "community": 37,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83c\udfe2 Apps Directory (`apps/`)",
+      "file_type": "document",
+      "source_file": "apps/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_readme_apps_directory_apps",
+      "community": 37,
+      "norm_label": "\ud83c\udfe2 apps directory (`apps/`)"
+    },
+    {
+      "label": "\ud83d\udcc1 Subdirectory Layout",
+      "file_type": "document",
+      "source_file": "apps/README.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "apps_readme_subdirectory_layout",
+      "community": 37,
+      "norm_label": "\ud83d\udcc1 subdirectory layout"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "apps/src/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_readme",
+      "community": 43,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83d\udce6 Platform Services & Shared Libraries (`apps/src/`)",
+      "file_type": "document",
+      "source_file": "apps/src/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_readme_platform_services_shared_libraries_apps_src",
+      "community": 43,
+      "norm_label": "\ud83d\udce6 platform services & shared libraries (`apps/src/`)"
+    },
+    {
+      "label": "\ud83d\uddc2\ufe0f Services & Packages Matrix",
+      "file_type": "document",
+      "source_file": "apps/src/README.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "src_readme_services_packages_matrix",
+      "community": 43,
+      "norm_label": "\ud83d\uddc2\ufe0f services & packages matrix"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "apps/src/auth/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "auth_readme",
+      "community": 31,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83d\udd12 Central Identity & Auth Service (`@forge/auth`)",
+      "file_type": "document",
+      "source_file": "apps/src/auth/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "auth_readme_central_identity_auth_service_forge_auth",
+      "community": 31,
+      "norm_label": "\ud83d\udd12 central identity & auth service (`@forge/auth`)"
+    },
+    {
+      "label": "\ud83d\ude80 Features",
+      "file_type": "document",
+      "source_file": "apps/src/auth/README.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "auth_readme_features",
+      "community": 31,
+      "norm_label": "\ud83d\ude80 features"
+    },
+    {
+      "label": "\ud83c\udfc3 Local Execution",
+      "file_type": "document",
+      "source_file": "apps/src/auth/README.md",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "auth_readme_local_execution",
+      "community": 31,
+      "norm_label": "\ud83c\udfc3 local execution"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "apps/src/dev-dashboard/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "dev_dashboard_readme",
+      "community": 32,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83d\udcca Developer Monitoring Dashboard (`@forge/dev-dashboard`)",
+      "file_type": "document",
+      "source_file": "apps/src/dev-dashboard/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "dev_dashboard_readme_developer_monitoring_dashboard_forge_dev_dashboard",
+      "community": 32,
+      "norm_label": "\ud83d\udcca developer monitoring dashboard (`@forge/dev-dashboard`)"
+    },
+    {
+      "label": "\ud83d\ude80 Features",
+      "file_type": "document",
+      "source_file": "apps/src/dev-dashboard/README.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "dev_dashboard_readme_features",
+      "community": 32,
+      "norm_label": "\ud83d\ude80 features"
+    },
+    {
+      "label": "\ud83c\udfc3 Local Execution",
+      "file_type": "document",
+      "source_file": "apps/src/dev-dashboard/README.md",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "dev_dashboard_readme_local_execution",
+      "community": 32,
+      "norm_label": "\ud83c\udfc3 local execution"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "apps/src/dev-hub/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "dev_hub_readme",
+      "community": 34,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Developer Hub & SDK Playground (`@forge/dev-hub`)",
+      "file_type": "document",
+      "source_file": "apps/src/dev-hub/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "dev_hub_readme_developer_hub_sdk_playground_forge_dev_hub",
+      "community": 34,
+      "norm_label": "\ud83d\udee0\ufe0f developer hub & sdk playground (`@forge/dev-hub`)"
+    },
+    {
+      "label": "\ud83d\ude80 Features",
+      "file_type": "document",
+      "source_file": "apps/src/dev-hub/README.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "dev_hub_readme_features",
+      "community": 34,
+      "norm_label": "\ud83d\ude80 features"
+    },
+    {
+      "label": "\ud83c\udfc3 Local Execution",
+      "file_type": "document",
+      "source_file": "apps/src/dev-hub/README.md",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "dev_hub_readme_local_execution",
+      "community": 34,
+      "norm_label": "\ud83c\udfc3 local execution"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "apps/src/landing/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "landing_readme",
+      "community": 35,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83c\udf10 Landing Discovery Hub (`@forge/landing`)",
+      "file_type": "document",
+      "source_file": "apps/src/landing/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "landing_readme_landing_discovery_hub_forge_landing",
+      "community": 35,
+      "norm_label": "\ud83c\udf10 landing discovery hub (`@forge/landing`)"
+    },
+    {
+      "label": "\ud83d\ude80 Features",
+      "file_type": "document",
+      "source_file": "apps/src/landing/README.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "landing_readme_features",
+      "community": 35,
+      "norm_label": "\ud83d\ude80 features"
+    },
+    {
+      "label": "\ud83c\udfc3 Local Execution",
+      "file_type": "document",
+      "source_file": "apps/src/landing/README.md",
+      "source_location": "L15",
+      "_origin": "ast",
+      "id": "landing_readme_local_execution",
+      "community": 35,
+      "norm_label": "\ud83c\udfc3 local execution"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "apps/src/portal/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "portal_readme",
+      "community": 36,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83e\udded Main Workspace & 2D Org Canvas (`@forge/portal`)",
+      "file_type": "document",
+      "source_file": "apps/src/portal/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "portal_readme_main_workspace_2d_org_canvas_forge_portal",
+      "community": 36,
+      "norm_label": "\ud83e\udded main workspace & 2d org canvas (`@forge/portal`)"
+    },
+    {
+      "label": "\ud83d\ude80 Features",
+      "file_type": "document",
+      "source_file": "apps/src/portal/README.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "portal_readme_features",
+      "community": 36,
+      "norm_label": "\ud83d\ude80 features"
+    },
+    {
+      "label": "\ud83c\udfc3 Local Execution",
+      "file_type": "document",
+      "source_file": "apps/src/portal/README.md",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "portal_readme_local_execution",
+      "community": 36,
+      "norm_label": "\ud83c\udfc3 local execution"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "apps/src/sdk/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "sdk_readme",
+      "community": 42,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83d\udce6 Forge Foundation SDK (`@forge/sdk`)",
+      "file_type": "document",
+      "source_file": "apps/src/sdk/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "sdk_readme_forge_foundation_sdk_forge_sdk",
+      "community": 42,
+      "norm_label": "\ud83d\udce6 forge foundation sdk (`@forge/sdk`)"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Exports",
+      "file_type": "document",
+      "source_file": "apps/src/sdk/README.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "sdk_readme_exports",
+      "community": 42,
+      "norm_label": "\ud83d\udee0\ufe0f exports"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "apps/src/types/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "types_readme",
+      "community": 44,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83d\udcd0 Forge Domain Types (`@forge/types`)",
+      "file_type": "document",
+      "source_file": "apps/src/types/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "types_readme_forge_domain_types_forge_types",
+      "community": 44,
+      "norm_label": "\ud83d\udcd0 forge domain types (`@forge/types`)"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Key Interfaces",
+      "file_type": "document",
+      "source_file": "apps/src/types/README.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "types_readme_key_interfaces",
+      "community": 44,
+      "norm_label": "\ud83d\udee0\ufe0f key interfaces"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "apps/src/ui/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "ui_readme",
+      "community": 45,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83c\udfa8 Meta Astryx UI System (`@forge/ui`)",
+      "file_type": "document",
+      "source_file": "apps/src/ui/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "ui_readme_meta_astryx_ui_system_forge_ui",
+      "community": 45,
+      "norm_label": "\ud83c\udfa8 meta astryx ui system (`@forge/ui`)"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Exports",
+      "file_type": "document",
+      "source_file": "apps/src/ui/README.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "ui_readme_exports",
+      "community": 45,
+      "norm_label": "\ud83d\udee0\ufe0f exports"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
       "source_file": "apps/test/README.md",
       "source_location": "L1",
       "_origin": "ast",
@@ -3530,34 +3590,94 @@
       "norm_label": "readme.md"
     },
     {
-      "label": "\ud83e\uddea SG Forge 5-Tier Testing Suite",
+      "label": "\ud83e\uddea 5-Tier Platform Test Suite (`apps/test/`)",
       "file_type": "document",
       "source_file": "apps/test/README.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "test_readme_sg_forge_5_tier_testing_suite",
+      "id": "test_readme_5_tier_platform_test_suite_apps_test",
       "community": 17,
-      "norm_label": "\ud83e\uddea sg forge 5-tier testing suite"
+      "norm_label": "\ud83e\uddea 5-tier platform test suite (`apps/test/`)"
     },
     {
-      "label": "\ud83d\udcc1 Testing Directory Structure",
+      "label": "\ud83d\udcc1 Test Tier Structure",
       "file_type": "document",
       "source_file": "apps/test/README.md",
       "source_location": "L7",
       "_origin": "ast",
-      "id": "test_readme_testing_directory_structure",
+      "id": "test_readme_test_tier_structure",
       "community": 17,
-      "norm_label": "\ud83d\udcc1 testing directory structure"
+      "norm_label": "\ud83d\udcc1 test tier structure"
     },
     {
-      "label": "\u26a1 Running Test Suites",
+      "label": "README.md",
       "file_type": "document",
-      "source_file": "apps/test/README.md",
-      "source_location": "L20",
+      "source_file": "docker/README.md",
+      "source_location": "L1",
       "_origin": "ast",
-      "id": "test_readme_running_test_suites",
-      "community": 17,
-      "norm_label": "\u26a1 running test suites"
+      "id": "docker_readme",
+      "community": 47,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83d\udc33 Docker Environments (`docker/`)",
+      "file_type": "document",
+      "source_file": "docker/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docker_readme_docker_environments_docker",
+      "community": 47,
+      "norm_label": "\ud83d\udc33 docker environments (`docker/`)"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "docker/dev/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "dev_readme",
+      "community": 38,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83d\udc33 Development Docker Stack (`docker/dev`)",
+      "file_type": "document",
+      "source_file": "docker/dev/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "dev_readme_development_docker_stack_docker_dev",
+      "community": 38,
+      "norm_label": "\ud83d\udc33 development docker stack (`docker/dev`)"
+    },
+    {
+      "label": "\ud83d\ude80 Execution",
+      "file_type": "document",
+      "source_file": "docker/dev/README.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "dev_readme_execution",
+      "community": 38,
+      "norm_label": "\ud83d\ude80 execution"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "docker/prod/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "prod_readme",
+      "community": 50,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83d\udea2 Production Docker Stack (`docker/prod`)",
+      "file_type": "document",
+      "source_file": "docker/prod/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "prod_readme_production_docker_stack_docker_prod",
+      "community": 50,
+      "norm_label": "\ud83d\udea2 production docker stack (`docker/prod`)"
     },
     {
       "label": "PORTABLE_SETUP.md",
@@ -3800,30 +3920,30 @@
       "norm_label": "\ud83e\udded master toolchain & latest stable version catalog (2026 lts)"
     },
     {
-      "label": "\ud83d\udee0\ufe0f Detailed Usage & Command Reference",
+      "label": "1. \ud83d\udd00 Dynamic Ingress Sync (`scripts/generate-proxy.ts`)",
       "file_type": "document",
       "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
       "source_location": "L28",
       "_origin": "ast",
-      "id": "tools_portable_toolchain_detailed_usage_command_reference",
+      "id": "tools_portable_toolchain_1_dynamic_ingress_sync_scripts_generate_proxy_ts",
       "community": 6,
-      "norm_label": "\ud83d\udee0\ufe0f detailed usage & command reference"
+      "norm_label": "1. \ud83d\udd00 dynamic ingress sync (`scripts/generate-proxy.ts`)"
     },
     {
-      "label": "1. \ud83d\udd12 Gitleaks (`v8.30.1`)",
+      "label": "2. \ud83d\udd12 Gitleaks (`v8.30.1`)",
       "file_type": "document",
       "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
-      "source_location": "L30",
+      "source_location": "L35",
       "_origin": "ast",
-      "id": "tools_portable_toolchain_1_gitleaks_v8_30_1",
+      "id": "tools_portable_toolchain_2_gitleaks_v8_30_1",
       "community": 6,
-      "norm_label": "1. \ud83d\udd12 gitleaks (`v8.30.1`)"
+      "norm_label": "2. \ud83d\udd12 gitleaks (`v8.30.1`)"
     },
     {
       "label": "2. \u26a1 Biome (`v2.2.0`)",
       "file_type": "document",
       "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
-      "source_location": "L37",
+      "source_location": "L42",
       "_origin": "ast",
       "id": "tools_portable_toolchain_2_biome_v2_2_0",
       "community": 6,
@@ -3833,7 +3953,7 @@
       "label": "3. \ud83e\uddf9 Knip (`v6.32.2`)",
       "file_type": "document",
       "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
-      "source_location": "L44",
+      "source_location": "L49",
       "_origin": "ast",
       "id": "tools_portable_toolchain_3_knip_v6_32_2",
       "community": 6,
@@ -3843,7 +3963,7 @@
       "label": "4. \ud83d\ude80 Autocannon (`v7.15.0`)",
       "file_type": "document",
       "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
-      "source_location": "L51",
+      "source_location": "L56",
       "_origin": "ast",
       "id": "tools_portable_toolchain_4_autocannon_v7_15_0",
       "community": 6,
@@ -3853,7 +3973,7 @@
       "label": "5. \ud83d\udce6 Repomix (`v1.10.2`)",
       "file_type": "document",
       "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
-      "source_location": "L59",
+      "source_location": "L64",
       "_origin": "ast",
       "id": "tools_portable_toolchain_5_repomix_v1_10_2",
       "community": 6,
@@ -3863,7 +3983,7 @@
       "label": "6. \ud83d\udccf SCC (`v3.4.0`)",
       "file_type": "document",
       "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
-      "source_location": "L66",
+      "source_location": "L71",
       "_origin": "ast",
       "id": "tools_portable_toolchain_6_scc_v3_4_0",
       "community": 6,
@@ -3873,11 +3993,101 @@
       "label": "\ud83d\udee1\ufe0f 2-Tier Automated Pre-Commit Quality Gate",
       "file_type": "document",
       "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
-      "source_location": "L75",
+      "source_location": "L80",
       "_origin": "ast",
       "id": "tools_portable_toolchain_2_tier_automated_pre_commit_quality_gate",
       "community": 6,
       "norm_label": "\ud83d\udee1\ufe0f 2-tier automated pre-commit quality gate"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "forge-apps/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "forge_apps_readme",
+      "community": 40,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83e\udde9 Forge Micro-Apps (`forge-apps/`)",
+      "file_type": "document",
+      "source_file": "forge-apps/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "forge_apps_readme_forge_micro_apps_forge_apps",
+      "community": 40,
+      "norm_label": "\ud83e\udde9 forge micro-apps (`forge-apps/`)"
+    },
+    {
+      "label": "\ud83d\uddc2\ufe0f Micro-Apps Catalog",
+      "file_type": "document",
+      "source_file": "forge-apps/README.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "forge_apps_readme_micro_apps_catalog",
+      "community": 40,
+      "norm_label": "\ud83d\uddc2\ufe0f micro-apps catalog"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "forge-apps/billing/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "billing_readme",
+      "community": 46,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83e\uddfe Invoicing & Billing Service (`forge-apps/billing`)",
+      "file_type": "document",
+      "source_file": "forge-apps/billing/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "billing_readme_invoicing_billing_service_forge_apps_billing",
+      "community": 46,
+      "norm_label": "\ud83e\uddfe invoicing & billing service (`forge-apps/billing`)"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "forge-apps/expenses/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "expenses_readme",
+      "community": 48,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83d\udcb3 Expense Approval Engine (`forge-apps/expenses`)",
+      "file_type": "document",
+      "source_file": "forge-apps/expenses/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "expenses_readme_expense_approval_engine_forge_apps_expenses",
+      "community": 48,
+      "norm_label": "\ud83d\udcb3 expense approval engine (`forge-apps/expenses`)"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "forge-apps/telemetry/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "telemetry_readme",
+      "community": 53,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83d\udcc8 Live Telemetry Service (`forge-apps/telemetry`)",
+      "file_type": "document",
+      "source_file": "forge-apps/telemetry/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "telemetry_readme_live_telemetry_service_forge_apps_telemetry",
+      "community": 53,
+      "norm_label": "\ud83d\udcc8 live telemetry service (`forge-apps/telemetry`)"
     },
     {
       "label": "01_ARCHITECTURE.md",
@@ -4390,6 +4600,26 @@
       "norm_label": "\u26a1 high-level traffic & interaction flow"
     },
     {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "logs/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "logs_readme",
+      "community": 49,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83d\udcdc Audit Logs & Worklogs (`logs/`)",
+      "file_type": "document",
+      "source_file": "logs/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "logs_readme_audit_logs_worklogs_logs",
+      "community": 49,
+      "norm_label": "\ud83d\udcdc audit logs & worklogs (`logs/`)"
+    },
+    {
       "label": "WORKLOGS.md",
       "file_type": "document",
       "source_file": "logs/WORKLOGS.md",
@@ -4530,6 +4760,86 @@
       "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
     },
     {
+      "label": "REPORT_20260821_232628.md",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260821_232628.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_08_report_20260821_232628",
+      "community": 30,
+      "norm_label": "report_20260821_232628.md"
+    },
+    {
+      "label": "\ud83d\udee1\ufe0f SG Forge Pre-Commit Verification Gate Report",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260821_232628.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_08_report_20260821_232628_sg_forge_pre_commit_verification_gate_report",
+      "community": 30,
+      "norm_label": "\ud83d\udee1\ufe0f sg forge pre-commit verification gate report"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260821_232628.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "2026_08_report_20260821_232628_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "community": 30,
+      "norm_label": "\ud83d\udee0\ufe0f tier 1: deterministic engine checks (checked by logic & open source tools)"
+    },
+    {
+      "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260821_232628.md",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "2026_08_report_20260821_232628_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "community": 30,
+      "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
+    },
+    {
+      "label": "REPORT_20260821_234119.md",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260821_234119.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_08_report_20260821_234119",
+      "community": 29,
+      "norm_label": "report_20260821_234119.md"
+    },
+    {
+      "label": "\ud83d\udee1\ufe0f SG Forge Pre-Commit Verification Gate Report",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260821_234119.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_08_report_20260821_234119_sg_forge_pre_commit_verification_gate_report",
+      "community": 29,
+      "norm_label": "\ud83d\udee1\ufe0f sg forge pre-commit verification gate report"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260821_234119.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "2026_08_report_20260821_234119_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "community": 29,
+      "norm_label": "\ud83d\udee0\ufe0f tier 1: deterministic engine checks (checked by logic & open source tools)"
+    },
+    {
+      "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260821_234119.md",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "2026_08_report_20260821_234119_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "community": 29,
+      "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
+    },
+    {
       "label": "LATEST_COMMIT_REPORT.md",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
@@ -4568,6 +4878,46 @@
       "id": "reports_latest_commit_report_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
       "community": 27,
       "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "proxy/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "proxy_readme",
+      "community": 51,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83d\udd00 Unified Reverse Proxy Gateway (`proxy/`)",
+      "file_type": "document",
+      "source_file": "proxy/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "proxy_readme_unified_reverse_proxy_gateway_proxy",
+      "community": 51,
+      "norm_label": "\ud83d\udd00 unified reverse proxy gateway (`proxy/`)"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "scripts/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "scripts_readme",
+      "community": 52,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Platform Automation Scripts (`scripts/`)",
+      "file_type": "document",
+      "source_file": "scripts/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "scripts_readme_platform_automation_scripts_scripts",
+      "community": 52,
+      "norm_label": "\ud83d\udee0\ufe0f platform automation scripts (`scripts/`)"
     }
   ],
   "links": [
@@ -5395,14 +5745,26 @@
       "target": "src_index_getastryxstyles"
     },
     {
-      "relation": "contains",
+      "relation": "imports",
+      "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/src/landing/src/server.ts",
-      "source_location": "L37",
+      "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_landing_src_server_ts_src_server",
-      "target": "src_server_getdynamicroutes",
-      "confidence_score": 1.0
+      "target": "src_registry_loadserviceregistry"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_landing_src_server_ts_src_server",
+      "target": "src_registry_serviceentry"
     },
     {
       "relation": "contains",
@@ -5418,52 +5780,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/src/landing/src/server.ts",
-      "source_location": "L15",
-      "weight": 1.0,
-      "source": "apps_src_landing_src_server_ts_src_server",
-      "target": "src_server_repo_root",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/src/landing/src/server.ts",
-      "source_location": "L23",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_src_landing_src_server_ts_src_server",
-      "target": "src_server_routegroup"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/src/landing/src/server.ts",
-      "source_location": "L13",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_src_landing_src_server_ts_src_server",
-      "target": "src_server_routeitem"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/src/landing/src/server.ts",
       "source_location": "L165",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "apps_src_landing_src_server_ts_src_server",
       "target": "src_server_startlandingserver"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/src/landing/src/server.ts",
-      "source_location": "L134",
-      "weight": 1.0,
-      "source": "src_server_renderhtml",
-      "target": "src_server_getdynamicroutes",
-      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5486,6 +5807,17 @@
       "confidence_score": 1.0,
       "source": "src_server_renderhtml",
       "target": "src_index_getastryxstyles"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/src/server.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_server_renderhtml",
+      "target": "src_registry_loadserviceregistry"
     },
     {
       "relation": "calls",
@@ -5909,6 +6241,17 @@
       "target": "src_index_usercontext"
     },
     {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_src_sdk_src_index_ts_src_index",
+      "target": "src_registry"
+    },
+    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "apps/src/sdk/src/index.ts",
@@ -6106,6 +6449,70 @@
       "confidence_score": 1.0,
       "source": "src_index_forgeclient",
       "target": "src_index_usercontext"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate-proxy.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_generate_proxy",
+      "target": "src_registry"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/registry.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_registry",
+      "target": "src_registry_loadserviceregistry"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/registry.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_registry",
+      "target": "src_registry_serviceentry"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate-proxy.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_generate_proxy",
+      "target": "src_registry_loadserviceregistry"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/generate-proxy.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "scripts_generate_proxy_generatecaddyfile",
+      "target": "src_registry_loadserviceregistry"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/test/unit/sdk.test.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "unit_sdk_test",
+      "target": "src_registry_loadserviceregistry"
     },
     {
       "relation": "contains",
@@ -6423,76 +6830,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "forge-apps/app-template/manifest.json",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "app_template_manifest",
-      "target": "app_template_manifest_defaultpath",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/app-template/manifest.json",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "app_template_manifest",
-      "target": "app_template_manifest_description",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/app-template/manifest.json",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "app_template_manifest",
-      "target": "app_template_manifest_id",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/app-template/manifest.json",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "app_template_manifest",
-      "target": "app_template_manifest_isexternal",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/app-template/manifest.json",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "app_template_manifest",
-      "target": "app_template_manifest_name",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/app-template/manifest.json",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "app_template_manifest",
-      "target": "app_template_manifest_port",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/app-template/manifest.json",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "app_template_manifest",
-      "target": "app_template_manifest_role",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "forge-apps/app-template/package.json",
       "source_location": "L10",
       "weight": 1.0,
@@ -6603,76 +6940,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "forge-apps/billing/manifest.json",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "billing_manifest",
-      "target": "billing_manifest_defaultpath",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/billing/manifest.json",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "billing_manifest",
-      "target": "billing_manifest_description",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/billing/manifest.json",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "billing_manifest",
-      "target": "billing_manifest_id",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/billing/manifest.json",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "billing_manifest",
-      "target": "billing_manifest_isexternal",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/billing/manifest.json",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "billing_manifest",
-      "target": "billing_manifest_name",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/billing/manifest.json",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "billing_manifest",
-      "target": "billing_manifest_port",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/billing/manifest.json",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "billing_manifest",
-      "target": "billing_manifest_role",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "forge-apps/billing/src/server.ts",
       "source_location": "L8",
       "weight": 1.0,
@@ -6703,76 +6970,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "forge-apps/expenses/manifest.json",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "expenses_manifest",
-      "target": "expenses_manifest_defaultpath",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/expenses/manifest.json",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "expenses_manifest",
-      "target": "expenses_manifest_description",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/expenses/manifest.json",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "expenses_manifest",
-      "target": "expenses_manifest_id",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/expenses/manifest.json",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "expenses_manifest",
-      "target": "expenses_manifest_isexternal",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/expenses/manifest.json",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "expenses_manifest",
-      "target": "expenses_manifest_name",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/expenses/manifest.json",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "expenses_manifest",
-      "target": "expenses_manifest_port",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/expenses/manifest.json",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "expenses_manifest",
-      "target": "expenses_manifest_role",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "forge-apps/expenses/src/server.ts",
       "source_location": "L8",
       "weight": 1.0,
@@ -6799,76 +6996,6 @@
       "confidence_score": 1.0,
       "source": "forge_apps_expenses_src_server_ts_src_server",
       "target": "src_server_startexpensesserver"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/telemetry/manifest.json",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "telemetry_manifest",
-      "target": "telemetry_manifest_defaultpath",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/telemetry/manifest.json",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "telemetry_manifest",
-      "target": "telemetry_manifest_description",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/telemetry/manifest.json",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "telemetry_manifest",
-      "target": "telemetry_manifest_id",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/telemetry/manifest.json",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "telemetry_manifest",
-      "target": "telemetry_manifest_isexternal",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/telemetry/manifest.json",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "telemetry_manifest",
-      "target": "telemetry_manifest_name",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/telemetry/manifest.json",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "telemetry_manifest",
-      "target": "telemetry_manifest_port",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/telemetry/manifest.json",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "telemetry_manifest",
-      "target": "telemetry_manifest_role",
-      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7101,6 +7228,36 @@
       "confidence_score": 1.0,
       "source": "home_sanket_desktop_sanket_org_website_clone_run_sh__entry",
       "target": "run_show_help"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate-proxy.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_generate_proxy",
+      "target": "scripts_generate_proxy_caddyfile_path"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate-proxy.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_generate_proxy",
+      "target": "scripts_generate_proxy_generatecaddyfile"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/generate-proxy.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_generate_proxy",
+      "target": "scripts_generate_proxy_repo_root"
     },
     {
       "relation": "contains",
@@ -7987,9 +8144,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L58",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "agents_9_conventional_commits_1_0_bidirectional_audit_linking"
+      "target": "agents_9_single_location_dynamic_ingress_explicit_user_commits",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8137,9 +8294,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L58",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "claude_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "claude_9_conventional_commits_1_0_bidirectional_audit_linking"
+      "target": "claude_9_single_location_dynamic_ingress_explicit_user_commits",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8287,9 +8444,9 @@
       "source_file": "GEMINI.md",
       "source_location": "L58",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "gemini_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "gemini_9_conventional_commits_1_0_bidirectional_audit_linking"
+      "target": "gemini_9_single_location_dynamic_ingress_explicit_user_commits",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8364,32 +8521,312 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "test/README.md",
+      "source_file": "apps/README.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_readme",
-      "target": "test_readme_sg_forge_5_tier_testing_suite"
+      "source": "apps_readme",
+      "target": "apps_readme_apps_directory_apps",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "test/README.md",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_readme_sg_forge_5_tier_testing_suite",
-      "target": "test_readme_running_test_suites"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "test/README.md",
+      "source_file": "apps/README.md",
       "source_location": "L7",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "test_readme_sg_forge_5_tier_testing_suite",
-      "target": "test_readme_testing_directory_structure"
+      "source": "apps_readme_apps_directory_apps",
+      "target": "apps_readme_subdirectory_layout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "src_readme",
+      "target": "src_readme_platform_services_shared_libraries_apps_src",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/README.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "src_readme_platform_services_shared_libraries_apps_src",
+      "target": "src_readme_services_packages_matrix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "auth_readme",
+      "target": "auth_readme_central_identity_auth_service_forge_auth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/README.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "auth_readme_central_identity_auth_service_forge_auth",
+      "target": "auth_readme_features",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/auth/README.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "auth_readme_central_identity_auth_service_forge_auth",
+      "target": "auth_readme_local_execution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-dashboard/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "dev_dashboard_readme",
+      "target": "dev_dashboard_readme_developer_monitoring_dashboard_forge_dev_dashboard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-dashboard/README.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "dev_dashboard_readme_developer_monitoring_dashboard_forge_dev_dashboard",
+      "target": "dev_dashboard_readme_features",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-dashboard/README.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "dev_dashboard_readme_developer_monitoring_dashboard_forge_dev_dashboard",
+      "target": "dev_dashboard_readme_local_execution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-hub/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "dev_hub_readme",
+      "target": "dev_hub_readme_developer_hub_sdk_playground_forge_dev_hub",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-hub/README.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "dev_hub_readme_developer_hub_sdk_playground_forge_dev_hub",
+      "target": "dev_hub_readme_features",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-hub/README.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "dev_hub_readme_developer_hub_sdk_playground_forge_dev_hub",
+      "target": "dev_hub_readme_local_execution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "landing_readme",
+      "target": "landing_readme_landing_discovery_hub_forge_landing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/README.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "landing_readme_landing_discovery_hub_forge_landing",
+      "target": "landing_readme_features",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/landing/README.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "landing_readme_landing_discovery_hub_forge_landing",
+      "target": "landing_readme_local_execution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/portal/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "portal_readme",
+      "target": "portal_readme_main_workspace_2d_org_canvas_forge_portal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/portal/README.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "portal_readme_main_workspace_2d_org_canvas_forge_portal",
+      "target": "portal_readme_features",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/portal/README.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "portal_readme_main_workspace_2d_org_canvas_forge_portal",
+      "target": "portal_readme_local_execution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "sdk_readme",
+      "target": "sdk_readme_forge_foundation_sdk_forge_sdk",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/README.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "sdk_readme_forge_foundation_sdk_forge_sdk",
+      "target": "sdk_readme_exports",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/types/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "types_readme",
+      "target": "types_readme_forge_domain_types_forge_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/types/README.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "types_readme_forge_domain_types_forge_types",
+      "target": "types_readme_key_interfaces",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/ui/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "ui_readme",
+      "target": "ui_readme_meta_astryx_ui_system_forge_ui",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/ui/README.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "ui_readme_meta_astryx_ui_system_forge_ui",
+      "target": "ui_readme_exports",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/test/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "test_readme",
+      "target": "test_readme_5_tier_platform_test_suite_apps_test",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/test/README.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "test_readme_5_tier_platform_test_suite_apps_test",
+      "target": "test_readme_test_tier_structure",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docker/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docker_readme",
+      "target": "docker_readme_docker_environments_docker",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docker/dev/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "dev_readme",
+      "target": "dev_readme_development_docker_stack_docker_dev",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docker/dev/README.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "dev_readme_development_docker_stack_docker_dev",
+      "target": "dev_readme_execution",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docker/prod/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "prod_readme",
+      "target": "prod_readme_production_docker_stack_docker_prod",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8605,16 +9042,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
-      "source_location": "L24",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "tools_portable_toolchain_sg_forge_2_0_portable_open_source_toolchain_manual",
-      "target": "tools_portable_toolchain_detailed_usage_command_reference"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
       "source_location": "L7",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -8625,61 +9052,121 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
-      "source_location": "L30",
+      "source_location": "L28",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "tools_portable_toolchain_detailed_usage_command_reference",
-      "target": "tools_portable_toolchain_1_gitleaks_v8_30_1"
+      "source": "tools_portable_toolchain_master_toolchain_latest_stable_version_catalog_2026_lts",
+      "target": "tools_portable_toolchain_1_dynamic_ingress_sync_scripts_generate_proxy_ts"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
-      "source_location": "L37",
+      "source_location": "L42",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "tools_portable_toolchain_detailed_usage_command_reference",
+      "source": "tools_portable_toolchain_master_toolchain_latest_stable_version_catalog_2026_lts",
       "target": "tools_portable_toolchain_2_biome_v2_2_0"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
-      "source_location": "L44",
+      "source_location": "L35",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "tools_portable_toolchain_detailed_usage_command_reference",
+      "source": "tools_portable_toolchain_master_toolchain_latest_stable_version_catalog_2026_lts",
+      "target": "tools_portable_toolchain_2_gitleaks_v8_30_1"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
+      "source_location": "L49",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tools_portable_toolchain_master_toolchain_latest_stable_version_catalog_2026_lts",
       "target": "tools_portable_toolchain_3_knip_v6_32_2"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
-      "source_location": "L51",
+      "source_location": "L56",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "tools_portable_toolchain_detailed_usage_command_reference",
+      "source": "tools_portable_toolchain_master_toolchain_latest_stable_version_catalog_2026_lts",
       "target": "tools_portable_toolchain_4_autocannon_v7_15_0"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
-      "source_location": "L59",
+      "source_location": "L64",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "tools_portable_toolchain_detailed_usage_command_reference",
+      "source": "tools_portable_toolchain_master_toolchain_latest_stable_version_catalog_2026_lts",
       "target": "tools_portable_toolchain_5_repomix_v1_10_2"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/tools/PORTABLE_TOOLCHAIN.md",
-      "source_location": "L66",
+      "source_location": "L71",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "tools_portable_toolchain_detailed_usage_command_reference",
+      "source": "tools_portable_toolchain_master_toolchain_latest_stable_version_catalog_2026_lts",
       "target": "tools_portable_toolchain_6_scc_v3_4_0"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "forge_apps_readme",
+      "target": "forge_apps_readme_forge_micro_apps_forge_apps",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/README.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "forge_apps_readme_forge_micro_apps_forge_apps",
+      "target": "forge_apps_readme_micro_apps_catalog",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/billing/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "billing_readme",
+      "target": "billing_readme_invoicing_billing_service_forge_apps_billing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/expenses/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "expenses_readme",
+      "target": "expenses_readme_expense_approval_engine_forge_apps_expenses",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/telemetry/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "telemetry_readme",
+      "target": "telemetry_readme_live_telemetry_service_forge_apps_telemetry",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -9134,6 +9621,16 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "logs/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "logs_readme",
+      "target": "logs_readme_audit_logs_worklogs_logs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "logs/WORKLOGS.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -9207,9 +9704,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260821_231739.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260821_231739",
-      "target": "2026_08_report_20260821_231739_sg_forge_pre_commit_verification_gate_report",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260821_231739_sg_forge_pre_commit_verification_gate_report"
     },
     {
       "relation": "contains",
@@ -9217,9 +9714,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260821_231739.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260821_231739_sg_forge_pre_commit_verification_gate_report",
-      "target": "2026_08_report_20260821_231739_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260821_231739_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -9227,8 +9724,68 @@
       "source_file": "logs/reports/2026-08/REPORT_20260821_231739.md",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260821_231739_sg_forge_pre_commit_verification_gate_report",
-      "target": "2026_08_report_20260821_231739_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "target": "2026_08_report_20260821_231739_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260821_232628.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "2026_08_report_20260821_232628",
+      "target": "2026_08_report_20260821_232628_sg_forge_pre_commit_verification_gate_report"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260821_232628.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "2026_08_report_20260821_232628_sg_forge_pre_commit_verification_gate_report",
+      "target": "2026_08_report_20260821_232628_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260821_232628.md",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "2026_08_report_20260821_232628_sg_forge_pre_commit_verification_gate_report",
+      "target": "2026_08_report_20260821_232628_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260821_234119.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "2026_08_report_20260821_234119",
+      "target": "2026_08_report_20260821_234119_sg_forge_pre_commit_verification_gate_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260821_234119.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "2026_08_report_20260821_234119_sg_forge_pre_commit_verification_gate_report",
+      "target": "2026_08_report_20260821_234119_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260821_234119.md",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "2026_08_report_20260821_234119_sg_forge_pre_commit_verification_gate_report",
+      "target": "2026_08_report_20260821_234119_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
       "confidence_score": 1.0
     },
     {
@@ -9260,8 +9817,28 @@
       "confidence_score": 1.0,
       "source": "reports_latest_commit_report_sg_forge_pre_commit_verification_gate_report",
       "target": "reports_latest_commit_report_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "proxy/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "proxy_readme",
+      "target": "proxy_readme_unified_reverse_proxy_gateway_proxy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "scripts_readme",
+      "target": "scripts_readme_platform_automation_scripts_scripts",
+      "confidence_score": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "1d9cc7a7864dc9584424f7a7bec5e961091da32f"
+  "built_at_commit": "9ac10476e03a801aaf7ba7160b62e510e7160c9c"
 }

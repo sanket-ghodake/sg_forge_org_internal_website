@@ -5,12 +5,8 @@
 # File:        .agents/hooks/validate-worklog.sh
 # Domain:      Core
 # Layer:       Source Module
-# Description: SG Forge platform component.
+# Description: Worklog formatting and integrity validator (Google & Meta Standard).
 # Standards:   POSIX Shell Strict Mode | Zero Host Modification
-# ==============================================================================
-
-# ==============================================================================
-# Worklog Formatting & Integrity Validator (Google-Grade Single-Line Standard)
 # ==============================================================================
 set -euo pipefail
 
@@ -43,7 +39,7 @@ while IFS= read -r line || [ -n "$line" ]; do
     continue
   fi
 
-  # Validate single-line regex: YYYY-MM-DD HH:mm | <brief>
+  # Validate single-line regex: YYYY-MM-DD HH:mm | ...
   if ! [[ "$line" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}\ [0-9]{2}:[0-9]{2}\ \|\ .+$ ]]; then
     echo "❌ Line $LINE_NUMBER: Malformed entry in $LOG_FILE. Expected 'YYYY-MM-DD HH:mm | <brief>', got:"
     echo "   '$line'"

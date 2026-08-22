@@ -1,122 +1,85 @@
-# AI AGENT DIRECTIVES - ORG_WEBSITE (2026 TECH STACK)
+# AI AGENT DIRECTIVES - SG FORGE (2026 CLEAN ARCHITECTURE & ENGINEERING STANDARDS)
 
 > ⚠️ **CRITICAL ENFORCEMENT NOTICE FOR ALL AI SESSIONS & LLMs**
 > These directives are STRICT, NON-NEGOTIABLE, and IMMUTABLE across all sessions, agent personas, and IDE integrations (Antigravity, Claude, Cursor, Copilot, Windsurf). Every session agent MUST adhere to these rules without exception. Deviations constitute an immediate task failure.
 
 ---
 
-## ⚡ SESSION PRE-FLIGHT & PER-TURN CHECKLIST
-Before taking any action or outputting any response in ANY session turn, verify:
-1. [ ] **RTK Command Prefix**: Is every bash command prefixed with `rtk` (e.g. `rtk git status`, `rtk bun test`, `rtk git add .`)?
-2. [ ] **Zero Host Modification**: Are all tools/runtimes strictly using portable repo binaries (`portables/bun`, `./.venv/bin/python3`, `.node_env/bin/node`, `portables/bin/*`) or Docker? ZERO host modifications (`apt`, `brew`, `npm -g`, `pip install`).
-3. [ ] **No Heavy Commands**: Am I avoiding running heavy/slow commands (docker builds, full test suites) directly? (Provide command for user).
-4. [ ] **No Auto-Commit**: Am I avoiding automatic `git commit`? (Only stage/commit on explicit user request).
-5. [ ] **No Auto-Browser**: Am I avoiding opening or automating the browser unless explicitly requested?
-6. [ ] **Caveman ULTRA Communication**: Is the output maximally compressed, stating only cold technical facts with zero filler/chitchat?
-7. [ ] **File Size & Cohesion**: Are modified files $\le 300$ lines (hard ceiling 500 lines)? No unnecessary microscopic fragmentation ("modularity theatre").
-8. [ ] **Zero Relative Imports**: Are all imports using absolute aliases (`@/`, `@ui/*`, `@database/*`, `@backend/*`, `@apps/*`, `@sdk/*`, `@scripts/*`, `@test/*`)? ZERO `../` or `./`.
-9. [ ] **Mandatory Header Comment**: Does every new or edited source file have the standardized top-of-file header block?
-10. [ ] **Single-Line Worklog**: Will task completion append strictly ONE line to `logs/WORKLOGS.md` (`YYYY-MM-DD HH:mm | <brief>`)?
+## ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (10 CHECKS)
+Before writing code, running commands, or staging/committing changes, verify:
+1. [ ] **RTK Command Prefix**: Every bash command MUST be prefixed with `rtk` (e.g. `rtk git status`, `rtk bun test`, `rtk git add .`).
+2. [ ] **Zero Host Modification**: All runtimes/tools strictly use portable repo binaries (`portables/bun/bin/bun`, `portables/bin/*`) or Docker. ZERO host modifications (`apt`, `brew`, `npm -g`, `pip install`).
+3. [ ] **500-Line Soft File Cap**: Source files must remain cohesive and **$\le 500$ lines** ($\le 300$ lines ideal). Block files exceeding 500 lines without explicit domain aggregation exemption.
+4. [ ] **Strict Meta Astryx UI**: Frontend UI code MUST strictly use Meta Astryx design tokens and components (`@forge/ui`). ZERO bespoke unapproved CSS or random component libraries.
+5. [ ] **Centralized Logging & Error Handling**: Services MUST use `createLogger` and `createSafeHandler` from `@forge/sdk` (Google SRE standard structured JSON logs & RFC 7807 problem responses).
+6. [ ] **Dedicated Turso DB Isolation**: Dedicated Turso (libSQL) database per Forge App. Micro-apps MUST NEVER query another app's database.
+7. [ ] **Clean Package Aliases**: Imports must use `@forge/sdk`, `@forge/ui`, `@forge/types`. ZERO relative traversal sprawl (`../../..`).
+8. [ ] **Folder Documentation (README per folder)**: Every single folder across the codebase MUST maintain its own descriptive `README.md`.
+9. [ ] **STRICT: Zero Auto-Commits**: AI agents MUST NEVER run `git commit` unless the user explicitly requests `"commit changes"`.
+10. [ ] **Automated Commit Ledger & Pre-Commit Gate**: Git pre-commit hook strictly blocks failed quality gates; post-commit hook automatically records ground-truth commit logs to `logs/commits.jsonl` & `logs/WORKLOGS.md`.
 
 ---
 
-## 🛑 THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS
+## 🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)
 
 ### 1. Correctness, Grounding & "No Guessing"
 - **NEVER** hallucinate, assume, or invent APIs, database columns, schemas, or behaviors.
-- **ALWAYS** inspect callers, schemas, types, and existing tests using Graphify and ripgrep before editing.
-- If assumptions are unavoidable, **EXPLICITLY** surface them in the response.
+- **ALWAYS** inspect callers, schemas, types, and existing tests using Graphify (`.agents/rules/graphify.md`) and ripgrep before editing.
 
-### 2. Cybersecurity & Zero-Trust (OWASP ASVS 5.0)
-- **Zero SQLi**: NEVER concatenate raw SQL strings. Use Drizzle ORM builders (`eq()`, `and()`) or parameterized tagged templates (`sql\`...\``).
-- **Safe Subprocesses**: Prohibit shell interpolation (`child_process.exec`). ALWAYS use safe executable argument arrays (`execFile` / `spawn([arg1, arg2])`).
-- **Path Traversal Containment**: Validate and resolve all file paths against safe roots (`path.resolve(BASE_DIR, input)`).
-- **Zero Hardcoded Secrets**: NEVER hardcode API keys, passwords, JWT tokens, or credentials in code, tests, or seed fixtures.
+### 2. Strict File Size Governance & 500-Line Soft Cap
+- **$\le 300$ lines**: Healthy modular standard.
+- **$301 - 500$ lines**: Cohesion boundary. Allowed for state conductors and route dispatchers.
+- **$> 500$ lines**: **HARD GATE BLOCKED** by pre-commit checks. Refactor into feature-colocated sub-modules unless exempt (e.g. multi-table Drizzle schema or test fixtures).
 
-### 3. Multi-Tenant Data Isolation
-- Non-negotiable `org_id` / `tenant_id` scoping across **ALL** database queries, mutations, cache lookups, and audit records.
-- Cross-tenant access is strictly prohibited. Organization A admin must NEVER access Organization B data.
+### 3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`)
+- **MANDATORY**: All UI views, cards, modals, tables, headers, and buttons across the platform MUST strictly use Meta Astryx design system tokens and component wrappers (`@forge/ui`).
+- Strictly adhere to `--forge-*` CSS variables (`--forge-bg-root`, `--forge-bg-surface`, `--forge-bg-card`, `--forge-border`, `--forge-primary`, `--forge-accent`, `--forge-text-main`, `--forge-text-muted`).
+- Zero horizontal scrolling down to 320px viewport. Modals, dropdowns, and overlays render with proper top-layer z-index and accessibility.
 
-### 4. Directional Architectural Boundaries
-- Strict layer flow: $\text{UI} \longrightarrow \text{Application} \longrightarrow \text{Domain} \longleftarrow \text{Infrastructure}$.
-- **UI Layer**: Never directly touches database, filesystem, or subprocesses.
-- **Domain Layer**: Zero framework/ORM dependencies (no Next.js, no browser APIs, no ORM instances).
-- **Zero Circular Dependencies**: Cyclic imports across packages/modules are strictly prohibited and automatically audited.
+### 4. Centralized Structured Logging & RFC 7807 Error Boundaries
+- **Google SRE Observability**: All platform services and micro-apps MUST use `@forge/sdk` (`createLogger` and `createSafeHandler`).
+- Standardized JSON telemetry output with timestamp, severity, service tag, and trace IDs. Never leak raw stack traces to end users.
 
-### 5. Strict Absolute Path Aliases (Zero Relative Imports)
-- Relative imports (`../`, `./`) are **STRICTLY FORBIDDEN** in all TypeScript/JavaScript files.
-- All imports MUST use configured path aliases (`@/`, `@ui/*`, `@database/*`, `@backend/*`, `@apps/*`, `@sdk/*`, `@scripts/*`, `@test/*`).
+### 5. Multi-Tenant Data Isolation & Dedicated Turso DB per App
+- Dedicated Turso (libSQL) database instance per Forge App. Apps MUST NEVER access or query another app's database.
+- Non-negotiable `org_id` / `user_id` scoping across all portal queries and mutations.
 
-### 6. Risk-Tiered Testing Rigor (3A Pattern)
-- **100% Branch & Line Coverage** required on Auth, RBAC, and Tenant Isolation guards.
-- **>90% Coverage** on Domain logic and business policies.
+### 6. Directional Architectural Boundaries & Clean Modularity
+- Clean monorepo structure: `apps/src/` (Core Platform Services & Shared Libraries) $\longleftrightarrow$ `forge-apps/` (Independent Micro-Apps).
+- **UI Layer**: Built with Meta Astryx components, never directly touches raw filesystem or database.
+
+### 7. Clean Package Aliases (Zero Traversal Sprawl)
+- All imports across the monorepo MUST use configured path aliases (`@forge/sdk`, `@forge/ui`, `@forge/types`).
+
+### 8. Risk-Tiered 5-Tier Testing Rigor (3A Pattern)
+- **100% Branch Coverage** required on Auth, RBAC, and Iframe Sandbox boundaries.
 - Mandatory **3A Pattern** (Arrange, Act, Assert) across all unit and integration tests.
-- Mutation resilience: Security assertion tests must fail if conditional logic is inverted (`!==`, `|| false`).
 
-### 7. Zero Host Install & Portable FOSS Tooling
-- **ZERO** installation on host OS (`apt-get`, `npm -g`, `pip install`, `brew`, global binaries).
-- Standalone repo runtimes and portable binaries ONLY (`portables/bun`, `./.venv/bin/python3`, `.node_env/bin/node`, `portables/bin/*`).
-- All tools, linters, scanners, and libraries MUST be 100% Free and Open Source (FOSS).
+### 9. Single-Location Dynamic Ingress & Explicit User Commits
+- Ingress paths and ports are driven exclusively from `.env` via `@forge/sdk/registry` and `scripts/generate-proxy.ts`.
+- **Zero Auto-Commits**: Agents MUST NEVER commit code on their own initiative; all commits must be explicitly instructed by the user and follow Conventional Commits 1.0.
 
-### 8. File Size Governance & Domain Cohesion
-- `≤ 300 lines`: Healthy standard.
-- `301 – 500 lines`: Cohesion warning (allowed only for unified state machines / dispatchers with explicit justification).
-- `> 500 lines`: Hard gate blocked by CI.
-- **Avoid Modularity Theatre**: Prefer cohesive domain folders (`domain/<entity>/{service, repository, schema, policy}.ts`) over extreme file fragmentation.
-
-### 9. Minimal Change Principle & Diff Budget
-- Make the smallest coherent diff that completely satisfies the requirements.
-- **Zero Opportunistic Refactoring**: Do NOT rewrite working code, reformat untouched files, or rename unrelated utilities.
-- Target-scoped blast radius: modify only closely related files (typically 1–5 files).
-
-### 10. Observability, Worklogs & Documentation Integrity
-- **Single-Line Worklog**: Append strictly ONE single line at the very end of `logs/WORKLOGS.md`: `YYYY-MM-DD HH:mm | <brief>`. Never insert blank lines or multi-line blocks.
-- **Mandatory Header Comment Blocks**: Every source file (`.ts`, `.tsx`, `.py`, `.go`, `.sh`, `.css`) must begin with a standardized header specifying path, layer, role, and compliance tags.
-- **README Maintenance**: Every domain folder, package module, and service directory MUST maintain an up-to-date `README.md`.
-- **Code & Doc Preservation**: NEVER delete code or documentation without detailed technical justification.
+### 10. Code Preservation, Observability & Automated Commit Ledger
+- **Comprehensive Header Comments & TSDoc**: Every file begins with standard header comment block; all exports have TSDoc descriptions.
+- **Automated Commit Logging**: Ground truth is maintained via Git hooks (`.agents/hooks/post-commit.sh` and `scripts/log-commit.ts`), automatically logging every commit to `logs/commits.jsonl` (structured JSON) and `logs/WORKLOGS.md` with commit hashes and diff statistics. AI agents must NEVER manually hallucinate worklog lines.
 
 ---
 
-## 🛠️ MANDATORY EXECUTION COMMANDS & COMMUNICATION
-
-1. **Bash Command Execution**:
-   - Prefix ALL shell commands with `rtk` (e.g. `rtk git status`, `rtk git add .`, `rtk bun test`, `rtk next build`).
-   - Chains use `rtk` on each step: `rtk git add . && rtk git commit`.
-
-2. **Communication Style**:
-   - **Caveman ULTRA mode**: Maximum token compression. State cold technical facts once. Zero conversational filler, zero politeness padding, zero redundant summaries.
-
-3. **Cross-Agent Instruction Sync Guard**:
-   - Whenever modifying any agent instruction or rule file (`AGENTS.md`, `.agents/AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`, `.cursorrules`, `.agents/rules/*.md`, `.agents/workforce/*.md`), you MUST run `./.agents/scripts/sync-agent-instructions.sh`.
-
-4. **UI Standards**:
-   - Responsive Single Page Application (SPA) across all 3 application ports (3001 Main Portal, 3002 Dev Dashboard, 3003 Developer Proxy Gateway).
-   - Non-Technical User POV: All feedback, action buttons, and form states must be designed for non-technical users (plain-language explanations, dynamic multi-state buttons [Idle, In-Flight, Error/Retry, Success], show/hide password visibility, zero page flushes).
-   - Elements must NEVER overflow parent containers (`max-width: 100%`, `box-sizing: border-box`, `min-width: 0`). Zero horizontal page scrolling down to 320px viewport.
-   - Dropdown menus and selects render strictly on top layer (`z-index: 9999` / portal) within visible viewport boundaries.
-   - Strictly consume `@ui/primitives`, `@ui/molecules`, `@ui/layout`, and `--app-*` CSS variables (`var(--app-bg-root)`, `var(--app-bg-surface)`, `var(--app-bg-card)`, `var(--app-border)`, `var(--app-text-main)`, `var(--app-text-muted)`).
+## 🛠️ TECH STACK BASELINE (2026 LTS)
+- **Runtime**: Bun v1.3.14 (Standalone portable inside `portables/bun/`) / Node 24 LTS.
+- **Frontend / Framework**: Next.js 16 (App Router), React 19, TypeScript 5.
+- **UI System**: Meta Astryx Design System (`@forge/ui`), CSS Variables (`--forge-*`).
+- **Database & ORM**: Dedicated Turso (libSQL) per app, Drizzle ORM (`drizzle-orm/libsql`).
+- **Reverse Proxy**: Caddy / Nginx gateway on Ports `80` & `443`.
+- **Testing**: Vitest, Bun Test, Playwright E2E.
 
 ---
 
-## 🧭 DOMAIN RULE ROUTER (READ SPECIFIC FILE WHEN WORKING IN DOMAIN)
-Before modifying code in a domain, agents MUST read the corresponding rule file:
-- **Core System, Tooling & Workflows**: `.agents/rules/core.md`
-- **Architecture, Layering, Database & Code Standards**: `.agents/rules/architecture.md`
-- **Cybersecurity, ASVS 5.0, Secrets & Zero-Trust**: `.agents/rules/security-practices.md`
-- **Frontend UI, Theme, Margins, Headers, Dropdowns & Containment**: `.agents/rules/frontend-ui.md`
-- **Docker, Containers & Security**: `.agents/rules/docker-containers.md`
-- **Testing Standards & QA Pyramid**: `.agents/rules/testing.md`
-- **Graphify Knowledge Graph**: `.agents/rules/graphify.md`
-- **RTK Token Optimization**: `.agents/rules/rtk.md`
-- **Browser Automation Policy**: `.agents/rules/no-browser.md`
-
----
-
-## 👥 AGENT WORKFORCE SPECIALIZATIONS
-- **Investigator (Google-Grade)**: `.agents/workforce/INVESTIGATOR.md` (Code location, caller tracing, dependency mapping - Zero edit)
-- **Architect (Enterprise Systems)**: `.agents/workforce/ARCHITECT.md` (Layer boundaries, canonical API contracts, schema migrations)
-- **Builder (Meta-Grade)**: `.agents/workforce/BUILDER.md` (Next.js 16 / React 19 UI & minimal-change implementation)
-- **Tester (Precision Verification)**: `.agents/workforce/TESTER.md` (3A tests, negative security tests, mutation verification)
-- **Reviewer (Apple/Microsoft-Grade)**: `.agents/workforce/REVIEWER.md` (ASVS 5.0, diff budget audit, DoD certification)
-
-
+## 🧭 DOMAIN RULE ROUTER
+- **Core System & Tooling**: [`.agents/rules/core.md`](file:///.agents/rules/core.md)
+- **Architecture, Monorepo & DB**: [`.agents/rules/architecture.md`](file:///.agents/rules/architecture.md)
+- **Frontend UI & Astryx Tokens**: [`.agents/rules/frontend-ui.md`](file:///.agents/rules/frontend-ui.md)
+- **Security & Zero-Trust**: [`.agents/rules/security-practices.md`](file:///.agents/rules/security-practices.md)
+- **Testing Standards (5-Tier)**: [`.agents/rules/testing.md`](file:///.agents/rules/testing.md)
+- **Graphify Knowledge Graph**: [`.agents/rules/graphify.md`](file:///.agents/rules/graphify.md)
+- **RTK Token Optimization**: [`.agents/rules/rtk.md`](file:///.agents/rules/rtk.md)

@@ -1,31 +1,13 @@
-# 🧪 SG Forge 5-Tier Testing Suite
+# 🧪 5-Tier Platform Test Suite (`apps/test/`)
 
-This directory houses the root integration, contract, E2E, and security test suites for the SG Forge platform.
-
----
-
-## 📁 Testing Directory Structure
-
-```text
-test/
-├── unit/              # Fast, isolated unit & helper tests (< 50ms)
-├── integration/       # API routes, auth flows, and Turso DB integration tests
-├── contract/          # Forge SDK postMessage contract & polyglot bridge tests
-├── e2e/               # Headless Playwright end-to-end browser journeys
-└── security/          # Zero-Trust sandbox containment & JWT validation tests
-```
+Comprehensive 5-Tier test suites conforming to Google & Meta QA engineering standards.
 
 ---
 
-## ⚡ Running Test Suites
+## 📁 Test Tier Structure
 
-```bash
-# Run all tests via platform orchestrator
-./run.sh test all
-
-# Run specific suite
-./run.sh test unit
-./run.sh test integration
-./run.sh test e2e
-./run.sh test security
-```
+* **`unit/`**: Fast unit tests for SDK, UI tokens, and business logic (`bun test`).
+* **`integration/`**: Reverse proxy routing, container health probes, and Turso DB queries.
+* **`contract/`**: OpenAPI and postMessage interface contract tests.
+* **`security/`**: OWASP ASVS 5.0 injection, secret leakage, and sandbox boundary tests.
+* **`e2e/`**: Playwright headless browser workflows.

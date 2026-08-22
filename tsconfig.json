@@ -28,7 +28,8 @@
     "apps/**/*.ts",
     "apps/**/*.tsx",
     "forge-apps/**/*.ts",
-    "forge-apps/**/*.tsx"
+    "forge-apps/**/*.tsx",
+    "scripts/**/*.ts"
   ],
   "exclude": ["node_modules", "dist", ".next"]
 }

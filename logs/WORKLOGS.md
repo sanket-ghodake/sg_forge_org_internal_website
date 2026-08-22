@@ -145,3 +145,6 @@
 2026-08-21 23:14 | Parameterized Caddyfile reverse proxy routes and ingress paths to be 100% dynamically driven from .env
 2026-08-21 23:17 | Implemented dynamic app auto-discovery from forge-apps manifests and 100% environment-driven path overrides via .env
 2026-08-21 23:26 | Implemented dynamic declarative service registry in .env, generate-proxy.ts Caddy generator, and automated Landing Hub cards
+2026-08-21 23:41 | Created dedicated READMEs for every monorepo directory and hardened directives against unrequested git commits
+2026-08-21 23:26 | [9ac1047] feat(routing): implement single-source .env dynamic service registry and Caddy generator (+2241, -476)
+2026-08-22 08:57 | [8022e98] feat(infra): implement smart ground-truth commit ledger and harden quality gates (+16204, -2035)
