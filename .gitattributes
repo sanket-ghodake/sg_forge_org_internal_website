@@ -63,8 +63,9 @@ Makefile text eol=lf
 CLAUDE.md text eol=lf
 AGENTS.md text eol=lf
 
-# 5. Append-Only Worklog Union Merge Driver
+# 5. Append-Only Worklog & Structured Ledger Union Merge Driver
 logs/WORKLOGS.md merge=union
+logs/commits.jsonl merge=union
 
 # 6. Binary Media, Fonts & Documents (Preserve raw bytes)
 *.png binary
@@ -138,13 +139,13 @@ yarn.lock linguist-generated=true
 *.d.ts.map linguist-generated=true
 *.min.js linguist-generated=true
 *.min.css linguist-generated=true
-core/src/backend/dev-dashboard/dashboard.js linguist-generated=true
-core/src/frontend/public/sdk/forge-sdk.js linguist-generated=true
-core/src/database/migrations/meta/* linguist-generated=true
+graphify-out/graph.json linguist-generated=true
+graphify-out/graph.html linguist-generated=true
+graphify-out/manifest.json linguist-generated=true
+logs/reports/* linguist-generated=true
+logs/commits.jsonl linguist-generated=true
 test/dummy-data/* linguist-generated=true
 docs/security/sbom/* linguist-generated=true
-site/security/sbom/* linguist-generated=true
-site/search/* linguist-generated=true
 
 # 10. Archive Export Controls
 .github export-ignore
