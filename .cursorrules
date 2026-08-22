@@ -15,8 +15,8 @@ Before writing code, running commands, or staging/committing changes, verify:
 6. [ ] **Dedicated Turso DB Isolation**: Dedicated Turso (libSQL) database per Forge App. Micro-apps MUST NEVER query another app's database.
 7. [ ] **Clean Package Aliases**: Imports must use `@forge/sdk`, `@forge/ui`, `@forge/types`. ZERO relative traversal sprawl (`../../..`).
 8. [ ] **Folder Documentation (README per folder)**: Every single folder across the codebase MUST maintain its own descriptive `README.md`.
-9. [ ] **STRICT: Zero Auto-Commits**: AI agents MUST NEVER run `git commit` unless the user explicitly requests `"commit changes"`.
-10. [ ] **Automated Commit Ledger & Pre-Commit Gate**: Git pre-commit hook strictly blocks failed quality gates; post-commit hook automatically records ground-truth commit logs to `logs/commits.jsonl` & `logs/WORKLOGS.md`.
+9. [ ] **ABSOLUTE ZERO AUTO-COMMITS (HARD BLOCKED)**: AI agents are STRICTLY FORBIDDEN from running `git commit` unless the user explicitly types `"commit changes"` or `"git commit"` in the CURRENT message. Past permissions do NOT carry over. Cleaning, refactoring, fixing, or auditing NEVER justifies committing.
+10. [ ] **Per-Conversation Worklog Auto-Update**: Every conversation task completion MUST append strictly ONE single line to `logs/WORKLOGS.md` (`YYYY-MM-DD HH:mm | <brief summary>`) via `rtk bun scripts/append-worklog.ts "<summary>"`. When a git commit occurs, post-commit hook records ground truth to `logs/commits.jsonl`.
 
 ---
 
@@ -55,13 +55,13 @@ Before writing code, running commands, or staging/committing changes, verify:
 - **100% Branch Coverage** required on Auth, RBAC, and Iframe Sandbox boundaries.
 - Mandatory **3A Pattern** (Arrange, Act, Assert) across all unit and integration tests.
 
-### 9. Single-Location Dynamic Ingress & Explicit User Commits
+### 9. Single-Location Dynamic Ingress & Absolute Zero Auto-Commits
 - Ingress paths and ports are driven exclusively from `.env` via `@forge/sdk/registry` and `scripts/generate-proxy.ts`.
-- **Zero Auto-Commits**: Agents MUST NEVER commit code on their own initiative; all commits must be explicitly instructed by the user and follow Conventional Commits 1.0.
+- **ABSOLUTE ZERO AUTO-COMMITS**: AI agents MUST NEVER run `git commit` under any circumstances (including cleanup, audit, refactoring, or testing tasks) unless the user explicitly requests `"commit changes"` in the active prompt. Treat unprompted `git commit` as a critical protocol violation.
 
-### 10. Code Preservation, Observability & Automated Commit Ledger
+### 10. Code Preservation, Observability & Per-Conversation Worklog Auto-Update
 - **Comprehensive Header Comments & TSDoc**: Every file begins with standard header comment block; all exports have TSDoc descriptions.
-- **Automated Commit Logging**: Ground truth is maintained via Git hooks (`.agents/hooks/post-commit.sh` and `scripts/log-commit.ts`), automatically logging every commit to `logs/commits.jsonl` (structured JSON) and `logs/WORKLOGS.md` with commit hashes and diff statistics. AI agents must NEVER manually hallucinate worklog lines.
+- **Per-Conversation Worklog Auto-Update**: At the end of every conversation task, the AI agent MUST append strictly ONE single line to `logs/WORKLOGS.md` (`YYYY-MM-DD HH:mm | <brief summary>`) using `rtk bun scripts/append-worklog.ts "<summary>"`. When a git commit occurs, post-commit hook automatically logs commit metadata to `logs/commits.jsonl`.
 
 ---
 

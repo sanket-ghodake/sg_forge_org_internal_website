@@ -148,3 +148,5 @@
 2026-08-21 23:41 | Created dedicated READMEs for every monorepo directory and hardened directives against unrequested git commits
 2026-08-21 23:26 | [9ac1047] feat(routing): implement single-source .env dynamic service registry and Caddy generator (+2241, -476)
 2026-08-22 08:57 | [8022e98] feat(infra): implement smart ground-truth commit ledger and harden quality gates (+16204, -2035)
+2026-08-22 09:11 | implemented per-conversation auto-worklog appending script and updated agent directives
+2026-08-22 09:15 | [6a2419f] feat(worklogs): add automated worklog appender and harden zero-commit agent directives (+959, -177)

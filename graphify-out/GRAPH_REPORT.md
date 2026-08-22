@@ -1,16 +1,16 @@
 # Graph Report - org_website_clone  (2026-08-22)
 
 ## Corpus Check
-- 79 files · ~66,447 words
+- 86 files · ~70,769 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 509 nodes · 501 edges · 67 communities (46 shown, 21 thin omitted)
+- 538 nodes · 523 edges · 74 communities (53 shown, 21 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `9ac10476`
+- Built from commit: `4f9cfb07`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -73,6 +73,13 @@
 - [[_COMMUNITY_Community 55|Community 55]]
 - [[_COMMUNITY_Community 56|Community 56]]
 - [[_COMMUNITY_reference-expensespackage.json|reference-expenses/package.json]]
+- [[_COMMUNITY_Community 58|Community 58]]
+- [[_COMMUNITY_Community 59|Community 59]]
+- [[_COMMUNITY_Community 60|Community 60]]
+- [[_COMMUNITY_Community 61|Community 61]]
+- [[_COMMUNITY_Community 62|Community 62]]
+- [[_COMMUNITY_Community 63|Community 63]]
+- [[_COMMUNITY_Community 64|Community 64]]
 - [[_COMMUNITY_manager-operationsapp.json|manager-operations/app.json]]
 - [[_COMMUNITY_compilerOptions|compilerOptions]]
 - [[_COMMUNITY_exclude|exclude]]
@@ -110,7 +117,7 @@
 ## Import Cycles
 - 1-file cycle: `apps/src/sdk/src/index.ts -> apps/src/sdk/src/index.ts`
 
-## Communities (67 total, 21 thin omitted)
+## Communities (74 total, 21 thin omitted)
 
 ### Community 0 - "devDependencies"
 Cohesion: 0.12
@@ -264,9 +271,37 @@ Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1:
 Cohesion: 0.25
 Nodes (7): 🚀 1-Command Bootstrap, 📦 Bundled Portable Tool Matrix (Latest Stable 2026 LTS Releases), Linux, macOS & WSL2:, ⚡ Prerequisites, 🧰 SG Forge 2.0 - Portable Developer Setup Guide, 🩺 System Diagnostics & Health Check, Windows Native:
 
+### Community 58 - "Community 58"
+Cohesion: 0.40
+Nodes (3): LOGS_DIR, REPO_ROOT, WORKLOGS_PATH
+
+### Community 59 - "Community 59"
+Cohesion: 0.50
+Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
+
+### Community 60 - "Community 60"
+Cohesion: 0.50
+Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
+
+### Community 61 - "Community 61"
+Cohesion: 0.50
+Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
+
+### Community 62 - "Community 62"
+Cohesion: 0.50
+Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
+
+### Community 63 - "Community 63"
+Cohesion: 0.50
+Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
+
+### Community 64 - "Community 64"
+Cohesion: 0.50
+Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
+
 ### Community 65 - "manager-operations/app.json"
 Cohesion: 0.12
-Nodes (15): 10. Code Preservation, Observability & Automated Commit Ledger, 1. Correctness, Grounding & "No Guessing", ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (10 CHECKS), 2. Strict File Size Governance & 500-Line Soft Cap, 🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD), 3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`), 4. Centralized Structured Logging & RFC 7807 Error Boundaries, 5. Multi-Tenant Data Isolation & Dedicated Turso DB per App (+7 more)
+Nodes (15): 10. Code Preservation, Observability & Per-Conversation Worklog Auto-Update, 1. Correctness, Grounding & "No Guessing", ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (10 CHECKS), 2. Strict File Size Governance & 500-Line Soft Cap, 🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD), 3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`), 4. Centralized Structured Logging & RFC 7807 Error Boundaries, 5. Multi-Tenant Data Isolation & Dedicated Turso DB per App (+7 more)
 
 ### Community 72 - "compilerOptions"
 Cohesion: 0.09
@@ -278,7 +313,7 @@ Nodes (12): 1. 2026 Technology Stack Overview, 2. Portable Runtimes & Zero-Host-
 
 ### Community 110 - "🛠 Core Components"
 Cohesion: 0.12
-Nodes (15): 10. Code Preservation, Observability & Automated Commit Ledger, 1. Correctness, Grounding & "No Guessing", ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (10 CHECKS), 2. Strict File Size Governance & 500-Line Soft Cap, 🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD), 3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`), 4. Centralized Structured Logging & RFC 7807 Error Boundaries, 5. Multi-Tenant Data Isolation & Dedicated Turso DB per App (+7 more)
+Nodes (15): 10. Code Preservation, Observability & Per-Conversation Worklog Auto-Update, 1. Correctness, Grounding & "No Guessing", ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (10 CHECKS), 2. Strict File Size Governance & 500-Line Soft Cap, 🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD), 3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`), 4. Centralized Structured Logging & RFC 7807 Error Boundaries, 5. Multi-Tenant Data Isolation & Dedicated Turso DB per App (+7 more)
 
 ### Community 114 - "pull_request_template.md"
 Cohesion: 0.50
@@ -286,18 +321,18 @@ Nodes (3): Architectural Layer, Description, Quality & Compliance Checklist
 
 ### Community 163 - "AI AGENT DIRECTIVES - ORG_WEBSITE (2026 TECH STACK)"
 Cohesion: 0.12
-Nodes (15): 10. Code Preservation, Observability & Automated Commit Ledger, 1. Correctness, Grounding & "No Guessing", ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (10 CHECKS), 2. Strict File Size Governance & 500-Line Soft Cap, 🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD), 3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`), 4. Centralized Structured Logging & RFC 7807 Error Boundaries, 5. Multi-Tenant Data Isolation & Dedicated Turso DB per App (+7 more)
+Nodes (15): 10. Code Preservation, Observability & Per-Conversation Worklog Auto-Update, 1. Correctness, Grounding & "No Guessing", ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (10 CHECKS), 2. Strict File Size Governance & 500-Line Soft Cap, 🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD), 3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`), 4. Centralized Structured Logging & RFC 7807 Error Boundaries, 5. Multi-Tenant Data Isolation & Dedicated Turso DB per App (+7 more)
 
 ### Community 165 - "AI AGENT DIRECTIVES - ORG_WEBSITE (2026 TECH STACK)"
 Cohesion: 0.12
-Nodes (15): 10. Code Preservation, Observability & Automated Commit Ledger, 1. Correctness, Grounding & "No Guessing", ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (10 CHECKS), 2. Strict File Size Governance & 500-Line Soft Cap, 🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD), 3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`), 4. Centralized Structured Logging & RFC 7807 Error Boundaries, 5. Multi-Tenant Data Isolation & Dedicated Turso DB per App (+7 more)
+Nodes (15): 10. Code Preservation, Observability & Per-Conversation Worklog Auto-Update, 1. Correctness, Grounding & "No Guessing", ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (10 CHECKS), 2. Strict File Size Governance & 500-Line Soft Cap, 🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD), 3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`), 4. Centralized Structured Logging & RFC 7807 Error Boundaries, 5. Multi-Tenant Data Isolation & Dedicated Turso DB per App (+7 more)
 
 ### Community 174 - "AI AGENT DIRECTIVES - ORG_WEBSITE (2026 TECH STACK)"
 Cohesion: 0.12
-Nodes (15): 10. Code Preservation, Observability & Automated Commit Ledger, 1. Correctness, Grounding & "No Guessing", ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (10 CHECKS), 2. Strict File Size Governance & 500-Line Soft Cap, 🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD), 3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`), 4. Centralized Structured Logging & RFC 7807 Error Boundaries, 5. Multi-Tenant Data Isolation & Dedicated Turso DB per App (+7 more)
+Nodes (15): 10. Code Preservation, Observability & Per-Conversation Worklog Auto-Update, 1. Correctness, Grounding & "No Guessing", ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (10 CHECKS), 2. Strict File Size Governance & 500-Line Soft Cap, 🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD), 3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`), 4. Centralized Structured Logging & RFC 7807 Error Boundaries, 5. Multi-Tenant Data Isolation & Dedicated Turso DB per App (+7 more)
 
 ## Knowledge Gaps
-- **309 isolated node(s):** `name`, `version`, `private`, `type`, `dev` (+304 more)
+- **324 isolated node(s):** `name`, `version`, `private`, `type`, `dev` (+319 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **21 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -313,7 +348,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **Are the 5 inferred relationships involving `createSafeHandler()` (e.g. with `startAuthServer()` and `startDevDashboardServer()`) actually correct?**
   _`createSafeHandler()` has 5 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `name`, `version`, `private` to the rest of the system?**
-  _309 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _324 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `devDependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
 - **Should `suites/index.ts` be split into smaller, more focused modules?**

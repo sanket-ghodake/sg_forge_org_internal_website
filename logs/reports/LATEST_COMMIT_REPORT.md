@@ -1,7 +1,7 @@
 # 🛡️ SG Forge Pre-Commit Verification Gate Report
 
-- **Generated**: `2026-08-22T03:36:01.232Z`
-- **Audit ID**: `20260822_090601`
+- **Generated**: `2026-08-22T03:45:06.360Z`
+- **Audit ID**: `20260822_091506`
 - **Tier 1 (Automated Logic / Open-Source Tools)**: **12 / 12 Passed** (0 Warnings, 0 Failures)
 - **Tier 2 (AI Agent Semantic Review)**: **4 / 4 Verified**
 - **Overall Quality Result**: **PASSED ✅**
@@ -12,18 +12,18 @@
 
 | # | Check Name | Tool Used | Status | Details | Duration |
 | :-: | :--- | :--- | :-: | :--- | :-: |
-| **1** | Ignore Files Uniformity | `FS Pattern Matcher` | ✅ **PASS** | All 6 ignore files synchronized with mandatory exclusion patterns. | `0.32ms` |
-| **2** | 500-Line Soft File Cap | `SCC / Line Counter` | ✅ **PASS** | All files ≤ 500 lines (1 files in 300-500 line zone). | `1.55ms` |
-| **3** | Zero Hardcoded Secrets & Keys | `Gitleaks Portable` | ✅ **PASS** | Zero hardcoded secrets, API keys, or private credentials detected across all files. | `36.12ms` |
-| **4** | Code Quality & Formatting | `Biome Portable` | ✅ **PASS** | Fast AST style checks passed with zero errors. | `31.33ms` |
-| **5** | Dead Code & Unused Exports | `Knip Portable` | ✅ **PASS** | Monorepo workspaces analyzed. Zero dead code or unexported blocking issues. | `30.67ms` |
-| **6** | Container & Dockerfile Standards | `Hadolint Portable` | ✅ **PASS** | Docker Compose and container configurations verified against OCI best practices. | `29.94ms` |
-| **7** | WCAG 2.1 & HTML5 Structure | `DOM / Contract Guard` | ✅ **PASS** | All HTML entrypoints contain <!DOCTYPE html>, lang="en", and responsive viewport tags. | `0.76ms` |
-| **8** | Package Aliases & Zero Traversal | `AST Import Scanner` | ✅ **PASS** | Zero relative traversal. Clean imports via @forge/sdk, @forge/ui, @forge/types. | `0.63ms` |
-| **9** | Structured Logging & RFC 7807 Handlers | `AST Code Scanner` | ✅ **PASS** | All platform servers use @forge/sdk structured logging and error boundaries. | `0.37ms` |
-| **10** | Multi-Agent Directives Sync | `SHA-256 Hash Guard` | ✅ **PASS** | Agent directives identical across all 5 platform configuration files. | `0.26ms` |
-| **11** | 5-Tier Automated Test Suites | `Bun Test Runner` | ✅ **PASS** | All unit/integration tests passed with 0 failures. | `36.13ms` |
-| **12** | Worklog & Ledger Integrity | `Schema & Regex Validator` | ✅ **PASS** | Worklog and structured JSONL ledger format validated. | `0.35ms` |
+| **1** | Ignore Files Uniformity | `FS Pattern Matcher` | ✅ **PASS** | All 6 ignore files synchronized with mandatory exclusion patterns. | `0.37ms` |
+| **2** | 500-Line Soft File Cap | `SCC / Line Counter` | ✅ **PASS** | All files ≤ 500 lines (1 files in 300-500 line zone). | `2.41ms` |
+| **3** | Zero Hardcoded Secrets & Keys | `Gitleaks Portable` | ✅ **PASS** | Zero hardcoded secrets, API keys, or private credentials detected across all files. | `36ms` |
+| **4** | Code Quality & Formatting | `Biome Portable` | ✅ **PASS** | Fast AST style checks passed with zero errors. | `29.71ms` |
+| **5** | Dead Code & Unused Exports | `Knip Portable` | ✅ **PASS** | Monorepo workspaces analyzed. Zero dead code or unexported blocking issues. | `31.68ms` |
+| **6** | Container & Dockerfile Standards | `Hadolint Portable` | ✅ **PASS** | Docker Compose and container configurations verified against OCI best practices. | `29.18ms` |
+| **7** | WCAG 2.1 & HTML5 Structure | `DOM / Contract Guard` | ✅ **PASS** | All HTML entrypoints contain <!DOCTYPE html>, lang="en", and responsive viewport tags. | `0.69ms` |
+| **8** | Package Aliases & Zero Traversal | `AST Import Scanner` | ✅ **PASS** | Zero relative traversal. Clean imports via @forge/sdk, @forge/ui, @forge/types. | `0.61ms` |
+| **9** | Structured Logging & RFC 7807 Handlers | `AST Code Scanner` | ✅ **PASS** | All platform servers use @forge/sdk structured logging and error boundaries. | `0.22ms` |
+| **10** | Multi-Agent Directives Sync | `SHA-256 Hash Guard` | ✅ **PASS** | Agent directives identical across all 5 platform configuration files. | `0.28ms` |
+| **11** | 5-Tier Automated Test Suites | `Bun Test Runner` | ✅ **PASS** | All unit/integration tests passed with 0 failures. | `34.29ms` |
+| **12** | Worklog & Ledger Integrity | `Schema & Regex Validator` | ✅ **PASS** | Worklog and structured JSONL ledger format validated. | `0.28ms` |
 
 ---
 
