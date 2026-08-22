@@ -73,3 +73,8 @@ Thumbs.db
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
+
+# 8. Graphify Cache & Daily Backup Snapshots
+graphify-out/cache/
+graphify-out/202*/
+graphify-out/.*
