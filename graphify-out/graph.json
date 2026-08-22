@@ -990,7 +990,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_sdk_src_index_ts_src_index",
-      "community": 24,
+      "community": 16,
       "norm_label": "index.ts"
     },
     {
@@ -1000,7 +1000,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "src_index_loglevel",
-      "community": 24,
+      "community": 16,
       "norm_label": "loglevel"
     },
     {
@@ -1010,7 +1010,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "src_index_logentry",
-      "community": 24,
+      "community": 16,
       "norm_label": "logentry"
     },
     {
@@ -1120,7 +1120,7 @@
       "source_location": "L106",
       "_origin": "ast",
       "id": "src_index_forgeclientoptions",
-      "community": 24,
+      "community": 16,
       "norm_label": "forgeclientoptions"
     },
     {
@@ -1130,7 +1130,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "src_index_forgeclient",
-      "community": 24,
+      "community": 16,
       "norm_label": "forgeclient"
     },
     {
@@ -1140,7 +1140,7 @@
       "source_location": "L116",
       "_origin": "ast",
       "id": "src_index_forgeclient_constructor",
-      "community": 24,
+      "community": 16,
       "norm_label": ".constructor()"
     },
     {
@@ -1150,7 +1150,7 @@
       "source_location": "L118",
       "_origin": "ast",
       "id": "src_index_forgeclient_init",
-      "community": 24,
+      "community": 16,
       "norm_label": ".init()"
     },
     {
@@ -1160,7 +1160,7 @@
       "source_location": "L157",
       "_origin": "ast",
       "id": "src_index_forgeclient_fetch",
-      "community": 24,
+      "community": 16,
       "norm_label": ".fetch()"
     },
     {
@@ -1260,7 +1260,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_types_src_index_ts_src_index",
-      "community": 24,
+      "community": 16,
       "norm_label": "index.ts"
     },
     {
@@ -1270,7 +1270,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_index_userrole",
-      "community": 24,
+      "community": 16,
       "norm_label": "userrole"
     },
     {
@@ -1280,7 +1280,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "src_index_usercontext",
-      "community": 24,
+      "community": 16,
       "norm_label": "usercontext"
     },
     {
@@ -1290,7 +1290,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "src_index_forgeappmanifest",
-      "community": 24,
+      "community": 16,
       "norm_label": "forgeappmanifest"
     },
     {
@@ -1300,7 +1300,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "src_index_postmessageevent",
-      "community": 24,
+      "community": 16,
       "norm_label": "postmessageevent"
     },
     {
@@ -2163,7 +2163,7 @@
       "label": "tier2Checks",
       "file_type": "code",
       "source_file": "scripts/verify-gate.ts",
-      "source_location": "L292",
+      "source_location": "L287",
       "_origin": "ast",
       "id": "scripts_verify_gate_tier2checks",
       "community": 25,
@@ -2173,7 +2173,7 @@
       "label": "now",
       "file_type": "code",
       "source_file": "scripts/verify-gate.ts",
-      "source_location": "L355",
+      "source_location": "L350",
       "_origin": "ast",
       "id": "scripts_verify_gate_now",
       "community": 25,
@@ -2183,7 +2183,7 @@
       "label": "monthlyDir",
       "file_type": "code",
       "source_file": "scripts/verify-gate.ts",
-      "source_location": "L359",
+      "source_location": "L354",
       "_origin": "ast",
       "id": "scripts_verify_gate_monthlydir",
       "community": 25,
@@ -2193,7 +2193,7 @@
       "label": "monthlyReportPath",
       "file_type": "code",
       "source_file": "scripts/verify-gate.ts",
-      "source_location": "L364",
+      "source_location": "L359",
       "_origin": "ast",
       "id": "scripts_verify_gate_monthlyreportpath",
       "community": 25,
@@ -2203,7 +2203,7 @@
       "label": "latestCommitReportPath",
       "file_type": "code",
       "source_file": "scripts/verify-gate.ts",
-      "source_location": "L365",
+      "source_location": "L360",
       "_origin": "ast",
       "id": "scripts_verify_gate_latestcommitreportpath",
       "community": 25,
@@ -2213,7 +2213,7 @@
       "label": "agentsReportPath",
       "file_type": "code",
       "source_file": "scripts/verify-gate.ts",
-      "source_location": "L366",
+      "source_location": "L361",
       "_origin": "ast",
       "id": "scripts_verify_gate_agentsreportpath",
       "community": 25,
@@ -5320,6 +5320,126 @@
       "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
     },
     {
+      "label": "REPORT_20260822_091757.md",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_091757.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_08_report_20260822_091757",
+      "community": 66,
+      "norm_label": "report_20260822_091757.md"
+    },
+    {
+      "label": "\ud83d\udee1\ufe0f SG Forge Pre-Commit Verification Gate Report",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_091757.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_08_report_20260822_091757_sg_forge_pre_commit_verification_gate_report",
+      "community": 66,
+      "norm_label": "\ud83d\udee1\ufe0f sg forge pre-commit verification gate report"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_091757.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "2026_08_report_20260822_091757_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "community": 66,
+      "norm_label": "\ud83d\udee0\ufe0f tier 1: deterministic engine checks (checked by logic & open source tools)"
+    },
+    {
+      "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_091757.md",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "2026_08_report_20260822_091757_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "community": 66,
+      "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
+    },
+    {
+      "label": "REPORT_20260822_092045.md",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_092045.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_08_report_20260822_092045",
+      "community": 67,
+      "norm_label": "report_20260822_092045.md"
+    },
+    {
+      "label": "\ud83d\udee1\ufe0f SG Forge Pre-Commit Verification Gate Report",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_092045.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_08_report_20260822_092045_sg_forge_pre_commit_verification_gate_report",
+      "community": 67,
+      "norm_label": "\ud83d\udee1\ufe0f sg forge pre-commit verification gate report"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_092045.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "2026_08_report_20260822_092045_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "community": 67,
+      "norm_label": "\ud83d\udee0\ufe0f tier 1: deterministic engine checks (checked by logic & open source tools)"
+    },
+    {
+      "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_092045.md",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "2026_08_report_20260822_092045_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "community": 67,
+      "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
+    },
+    {
+      "label": "REPORT_20260822_092254.md",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_092254.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_08_report_20260822_092254",
+      "community": 68,
+      "norm_label": "report_20260822_092254.md"
+    },
+    {
+      "label": "\ud83d\udee1\ufe0f SG Forge Pre-Commit Verification Gate Report",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_092254.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_08_report_20260822_092254_sg_forge_pre_commit_verification_gate_report",
+      "community": 68,
+      "norm_label": "\ud83d\udee1\ufe0f sg forge pre-commit verification gate report"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_092254.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "2026_08_report_20260822_092254_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "community": 68,
+      "norm_label": "\ud83d\udee0\ufe0f tier 1: deterministic engine checks (checked by logic & open source tools)"
+    },
+    {
+      "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_092254.md",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "2026_08_report_20260822_092254_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "community": 68,
+      "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
+    },
+    {
       "label": "LATEST_COMMIT_REPORT.md",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
@@ -7715,9 +7835,9 @@
       "source_file": "scripts/append-worklog.ts",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_append_worklog",
-      "target": "scripts_append_worklog_appendworklog",
-      "confidence_score": 1.0
+      "target": "scripts_append_worklog_appendworklog"
     },
     {
       "relation": "contains",
@@ -7725,9 +7845,9 @@
       "source_file": "scripts/append-worklog.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_append_worklog",
-      "target": "scripts_append_worklog_logs_dir",
-      "confidence_score": 1.0
+      "target": "scripts_append_worklog_logs_dir"
     },
     {
       "relation": "contains",
@@ -7735,9 +7855,9 @@
       "source_file": "scripts/append-worklog.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_append_worklog",
-      "target": "scripts_append_worklog_repo_root",
-      "confidence_score": 1.0
+      "target": "scripts_append_worklog_repo_root"
     },
     {
       "relation": "contains",
@@ -7745,9 +7865,9 @@
       "source_file": "scripts/append-worklog.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_append_worklog",
-      "target": "scripts_append_worklog_worklogs_path",
-      "confidence_score": 1.0
+      "target": "scripts_append_worklog_worklogs_path"
     },
     {
       "relation": "contains",
@@ -8355,9 +8475,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L62",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "rules_agents_10_code_preservation_observability_per_conversation_worklog_auto_update",
-      "confidence_score": 1.0
+      "target": "rules_agents_10_code_preservation_observability_per_conversation_worklog_auto_update"
     },
     {
       "relation": "contains",
@@ -8445,9 +8565,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L58",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "rules_agents_9_single_location_dynamic_ingress_absolute_zero_auto_commits",
-      "confidence_score": 1.0
+      "target": "rules_agents_9_single_location_dynamic_ingress_absolute_zero_auto_commits"
     },
     {
       "relation": "contains",
@@ -8505,9 +8625,9 @@
       "source_file": ".github/copilot-instructions.md",
       "source_location": "L62",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "github_copilot_instructions_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "github_copilot_instructions_10_code_preservation_observability_per_conversation_worklog_auto_update",
-      "confidence_score": 1.0
+      "target": "github_copilot_instructions_10_code_preservation_observability_per_conversation_worklog_auto_update"
     },
     {
       "relation": "contains",
@@ -8595,9 +8715,9 @@
       "source_file": ".github/copilot-instructions.md",
       "source_location": "L58",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "github_copilot_instructions_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "github_copilot_instructions_9_single_location_dynamic_ingress_absolute_zero_auto_commits",
-      "confidence_score": 1.0
+      "target": "github_copilot_instructions_9_single_location_dynamic_ingress_absolute_zero_auto_commits"
     },
     {
       "relation": "contains",
@@ -8605,9 +8725,9 @@
       "source_file": ".github/pull_request_template.md",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "github_pull_request_template",
-      "target": "github_pull_request_template_architectural_layer",
-      "confidence_score": 1.0
+      "target": "github_pull_request_template_architectural_layer"
     },
     {
       "relation": "contains",
@@ -8615,9 +8735,9 @@
       "source_file": ".github/pull_request_template.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "github_pull_request_template",
-      "target": "github_pull_request_template_description",
-      "confidence_score": 1.0
+      "target": "github_pull_request_template_description"
     },
     {
       "relation": "contains",
@@ -8625,9 +8745,9 @@
       "source_file": ".github/pull_request_template.md",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "github_pull_request_template",
-      "target": "github_pull_request_template_quality_compliance_checklist",
-      "confidence_score": 1.0
+      "target": "github_pull_request_template_quality_compliance_checklist"
     },
     {
       "relation": "contains",
@@ -8685,9 +8805,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L62",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "agents_10_code_preservation_observability_per_conversation_worklog_auto_update",
-      "confidence_score": 1.0
+      "target": "agents_10_code_preservation_observability_per_conversation_worklog_auto_update"
     },
     {
       "relation": "contains",
@@ -8775,9 +8895,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L58",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "agents_9_single_location_dynamic_ingress_absolute_zero_auto_commits",
-      "confidence_score": 1.0
+      "target": "agents_9_single_location_dynamic_ingress_absolute_zero_auto_commits"
     },
     {
       "relation": "contains",
@@ -8835,9 +8955,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L62",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "claude_10_code_preservation_observability_per_conversation_worklog_auto_update",
-      "confidence_score": 1.0
+      "target": "claude_10_code_preservation_observability_per_conversation_worklog_auto_update"
     },
     {
       "relation": "contains",
@@ -8925,9 +9045,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L58",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "claude_9_single_location_dynamic_ingress_absolute_zero_auto_commits",
-      "confidence_score": 1.0
+      "target": "claude_9_single_location_dynamic_ingress_absolute_zero_auto_commits"
     },
     {
       "relation": "contains",
@@ -8985,9 +9105,9 @@
       "source_file": "GEMINI.md",
       "source_location": "L62",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "gemini_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "gemini_10_code_preservation_observability_per_conversation_worklog_auto_update",
-      "confidence_score": 1.0
+      "target": "gemini_10_code_preservation_observability_per_conversation_worklog_auto_update"
     },
     {
       "relation": "contains",
@@ -9075,9 +9195,9 @@
       "source_file": "GEMINI.md",
       "source_location": "L58",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "gemini_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "gemini_9_single_location_dynamic_ingress_absolute_zero_auto_commits",
-      "confidence_score": 1.0
+      "target": "gemini_9_single_location_dynamic_ingress_absolute_zero_auto_commits"
     },
     {
       "relation": "contains",
@@ -9535,9 +9655,9 @@
       "source_file": "docs/setup/WORKFLOW_SETUP.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "setup_workflow_setup",
-      "target": "setup_workflow_setup_developer_setup_guide_org_website_2026_standalone_stack",
-      "confidence_score": 1.0
+      "target": "setup_workflow_setup_developer_setup_guide_org_website_2026_standalone_stack"
     },
     {
       "relation": "contains",
@@ -10505,9 +10625,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_085716.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_085716",
-      "target": "2026_08_report_20260822_085716_sg_forge_pre_commit_verification_gate_report",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_085716_sg_forge_pre_commit_verification_gate_report"
     },
     {
       "relation": "contains",
@@ -10515,9 +10635,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_085716.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_085716_sg_forge_pre_commit_verification_gate_report",
-      "target": "2026_08_report_20260822_085716_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_085716_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -10525,9 +10645,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_085716.md",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_085716_sg_forge_pre_commit_verification_gate_report",
-      "target": "2026_08_report_20260822_085716_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_085716_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
     },
     {
       "relation": "contains",
@@ -10535,9 +10655,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_090149.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_090149",
-      "target": "2026_08_report_20260822_090149_sg_forge_pre_commit_verification_gate_report",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_090149_sg_forge_pre_commit_verification_gate_report"
     },
     {
       "relation": "contains",
@@ -10545,9 +10665,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_090149.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_090149_sg_forge_pre_commit_verification_gate_report",
-      "target": "2026_08_report_20260822_090149_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_090149_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -10555,9 +10675,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_090149.md",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_090149_sg_forge_pre_commit_verification_gate_report",
-      "target": "2026_08_report_20260822_090149_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_090149_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
     },
     {
       "relation": "contains",
@@ -10565,9 +10685,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_090601.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_090601",
-      "target": "2026_08_report_20260822_090601_sg_forge_pre_commit_verification_gate_report",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_090601_sg_forge_pre_commit_verification_gate_report"
     },
     {
       "relation": "contains",
@@ -10575,9 +10695,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_090601.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_090601_sg_forge_pre_commit_verification_gate_report",
-      "target": "2026_08_report_20260822_090601_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_090601_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -10585,9 +10705,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_090601.md",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_090601_sg_forge_pre_commit_verification_gate_report",
-      "target": "2026_08_report_20260822_090601_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_090601_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
     },
     {
       "relation": "contains",
@@ -10595,9 +10715,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_090930.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_090930",
-      "target": "2026_08_report_20260822_090930_sg_forge_pre_commit_verification_gate_report",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_090930_sg_forge_pre_commit_verification_gate_report"
     },
     {
       "relation": "contains",
@@ -10605,9 +10725,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_090930.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_090930_sg_forge_pre_commit_verification_gate_report",
-      "target": "2026_08_report_20260822_090930_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_090930_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -10615,9 +10735,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_090930.md",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_090930_sg_forge_pre_commit_verification_gate_report",
-      "target": "2026_08_report_20260822_090930_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_090930_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
     },
     {
       "relation": "contains",
@@ -10625,9 +10745,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_091147.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_091147",
-      "target": "2026_08_report_20260822_091147_sg_forge_pre_commit_verification_gate_report",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_091147_sg_forge_pre_commit_verification_gate_report"
     },
     {
       "relation": "contains",
@@ -10635,9 +10755,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_091147.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_091147_sg_forge_pre_commit_verification_gate_report",
-      "target": "2026_08_report_20260822_091147_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_091147_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -10645,9 +10765,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_091147.md",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_091147_sg_forge_pre_commit_verification_gate_report",
-      "target": "2026_08_report_20260822_091147_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_091147_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
     },
     {
       "relation": "contains",
@@ -10655,9 +10775,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_091506.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_091506",
-      "target": "2026_08_report_20260822_091506_sg_forge_pre_commit_verification_gate_report",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_091506_sg_forge_pre_commit_verification_gate_report"
     },
     {
       "relation": "contains",
@@ -10665,9 +10785,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_091506.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_091506_sg_forge_pre_commit_verification_gate_report",
-      "target": "2026_08_report_20260822_091506_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260822_091506_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -10675,8 +10795,98 @@
       "source_file": "logs/reports/2026-08/REPORT_20260822_091506.md",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260822_091506_sg_forge_pre_commit_verification_gate_report",
-      "target": "2026_08_report_20260822_091506_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "target": "2026_08_report_20260822_091506_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_091757.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "2026_08_report_20260822_091757",
+      "target": "2026_08_report_20260822_091757_sg_forge_pre_commit_verification_gate_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_091757.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "2026_08_report_20260822_091757_sg_forge_pre_commit_verification_gate_report",
+      "target": "2026_08_report_20260822_091757_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_091757.md",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "2026_08_report_20260822_091757_sg_forge_pre_commit_verification_gate_report",
+      "target": "2026_08_report_20260822_091757_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_092045.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "2026_08_report_20260822_092045",
+      "target": "2026_08_report_20260822_092045_sg_forge_pre_commit_verification_gate_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_092045.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "2026_08_report_20260822_092045_sg_forge_pre_commit_verification_gate_report",
+      "target": "2026_08_report_20260822_092045_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_092045.md",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "2026_08_report_20260822_092045_sg_forge_pre_commit_verification_gate_report",
+      "target": "2026_08_report_20260822_092045_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_092254.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "2026_08_report_20260822_092254",
+      "target": "2026_08_report_20260822_092254_sg_forge_pre_commit_verification_gate_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_092254.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "2026_08_report_20260822_092254_sg_forge_pre_commit_verification_gate_report",
+      "target": "2026_08_report_20260822_092254_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260822_092254.md",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "2026_08_report_20260822_092254_sg_forge_pre_commit_verification_gate_report",
+      "target": "2026_08_report_20260822_092254_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
       "confidence_score": 1.0
     },
     {
@@ -10731,5 +10941,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "4f9cfb07bcde80133be77fdaa08f046bdda9227d"
+  "built_at_commit": "ad061f721ab0c4298274632606e3cdf8cb26c517"
 }

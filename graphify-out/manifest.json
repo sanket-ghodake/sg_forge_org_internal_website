@@ -25,7 +25,7 @@
     "semantic_hash": ""
   },
   ".github/copilot-instructions.md": {
-    "mtime": 1787370091.747928,
+    "mtime": 1787370627.1088693,
     "ast_hash": "edd9325020d6bd8aaa16e879a4c77841",
     "semantic_hash": ""
   },
@@ -35,7 +35,7 @@
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1787370091.745928,
+    "mtime": 1787370627.1058693,
     "ast_hash": "edd9325020d6bd8aaa16e879a4c77841",
     "semantic_hash": ""
   },
@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "logs/WORKLOGS.md": {
-    "mtime": 1787370095.8378985,
-    "ast_hash": "ede971adea54b08ab717cf0a2d3d66dd",
+    "mtime": 1787370780.1731904,
+    "ast_hash": "a47a5e3ec4ce23b80435053120333136",
     "semantic_hash": ""
   },
   "docs/setup/PORTABLE_SETUP.md": {
@@ -90,12 +90,12 @@
     "semantic_hash": ""
   },
   ".cursor/rules/AGENTS.md": {
-    "mtime": 1787370091.7519279,
+    "mtime": 1787370627.1138692,
     "ast_hash": "edd9325020d6bd8aaa16e879a4c77841",
     "semantic_hash": ""
   },
   "GEMINI.md": {
-    "mtime": 1787370091.753928,
+    "mtime": 1787370627.1148694,
     "ast_hash": "edd9325020d6bd8aaa16e879a4c77841",
     "semantic_hash": ""
   },
@@ -280,8 +280,8 @@
     "semantic_hash": ""
   },
   "scripts/verify-gate.ts": {
-    "mtime": 1787336446.693461,
-    "ast_hash": "e783105eec3bd35ded95ebf45549b1af",
+    "mtime": 1787370768.55824,
+    "ast_hash": "4c7d2343b4bdfa5d7feba6a38c5fca35",
     "semantic_hash": ""
   },
   "docs/tools/PORTABLE_TOOLCHAIN.md": {
@@ -300,8 +300,8 @@
     "semantic_hash": ""
   },
   "logs/reports/LATEST_COMMIT_REPORT.md": {
-    "mtime": 1787370306.3605313,
-    "ast_hash": "1178d50f5357ba594d29603a2c81ddd7",
+    "mtime": 1787370774.2292159,
+    "ast_hash": "5dc5411ea792b24bbdd1d30b55609b96",
     "semantic_hash": ""
   },
   "logs/reports/2026-08/REPORT_20260821_231437.md": {
@@ -315,8 +315,8 @@
     "semantic_hash": ""
   },
   "apps/src/sdk/src/registry.ts": {
-    "mtime": 1787334909.896933,
-    "ast_hash": "ceb1c555c99f6e984d5a716401c669c3",
+    "mtime": 1787370754.4453008,
+    "ast_hash": "329c3f660843c774e8491b089092adca",
     "semantic_hash": ""
   },
   "scripts/generate-proxy.ts": {
@@ -482,6 +482,21 @@
   "logs/reports/2026-08/REPORT_20260822_091506.md": {
     "mtime": 1787370306.3605313,
     "ast_hash": "1178d50f5357ba594d29603a2c81ddd7",
+    "semantic_hash": ""
+  },
+  "logs/reports/2026-08/REPORT_20260822_091757.md": {
+    "mtime": 1787370477.9295938,
+    "ast_hash": "291684a1217da84cb2bf2bebd0915c19",
+    "semantic_hash": ""
+  },
+  "logs/reports/2026-08/REPORT_20260822_092045.md": {
+    "mtime": 1787370645.5637844,
+    "ast_hash": "fee295edfebf15096d517ffbfe093dde",
+    "semantic_hash": ""
+  },
+  "logs/reports/2026-08/REPORT_20260822_092254.md": {
+    "mtime": 1787370774.2292159,
+    "ast_hash": "5dc5411ea792b24bbdd1d30b55609b96",
     "semantic_hash": ""
   }
 }

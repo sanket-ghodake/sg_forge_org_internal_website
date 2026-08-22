@@ -201,17 +201,10 @@ runTier1Check(8, 'Package Aliases & Zero Traversal', 'AST Import Scanner', () =>
 
 // 9. Centralized Logging & Error Handlers
 runTier1Check(9, 'Structured Logging & RFC 7807 Handlers', 'AST Code Scanner', () => {
-  const servers = [
-    join(REPO_ROOT, 'apps', 'src', 'landing', 'src', 'server.ts'),
-    join(REPO_ROOT, 'apps', 'src', 'auth', 'src', 'server.ts'),
-    join(REPO_ROOT, 'apps', 'src', 'portal', 'src', 'server.ts'),
-    join(REPO_ROOT, 'apps', 'src', 'dev-dashboard', 'src', 'server.ts'),
-    join(REPO_ROOT, 'apps', 'src', 'dev-hub', 'src', 'server.ts'),
-  ];
+  const servers = getAllFiles(join(REPO_ROOT, 'apps', 'src')).filter((f) => f.endsWith('server.ts'));
 
   const missing: string[] = [];
   for (const s of servers) {
-    if (!existsSync(s)) continue;
     const content = readFileSync(s, 'utf8');
     if (!content.includes('createLogger') || !content.includes('createSafeHandler')) {
       missing.push(relative(REPO_ROOT, s));
@@ -219,7 +212,7 @@ runTier1Check(9, 'Structured Logging & RFC 7807 Handlers', 'AST Code Scanner', (
   }
 
   if (missing.length > 0) return { status: 'WARNING', details: `Missing logging in: ${missing.join(', ')}` };
-  return { status: 'PASSED', details: 'All platform servers use @forge/sdk structured logging and error boundaries.' };
+  return { status: 'PASSED', details: `All ${servers.length} platform servers use @forge/sdk structured logging and error boundaries.` };
 });
 
 // 10. Multi-Agent Directive Synchronization
@@ -230,6 +223,8 @@ runTier1Check(10, 'Multi-Agent Directives Sync', 'SHA-256 Hash Guard', () => {
     join(REPO_ROOT, 'GEMINI.md'),
     join(REPO_ROOT, '.cursorrules'),
     join(REPO_ROOT, '.agents', 'AGENTS.md'),
+    join(REPO_ROOT, '.github', 'copilot-instructions.md'),
+    join(REPO_ROOT, '.cursor', 'rules', 'AGENTS.md'),
   ];
 
   if (!existsSync(master)) return { status: 'FAILED', details: 'Master AGENTS.md missing.' };
@@ -243,7 +238,7 @@ runTier1Check(10, 'Multi-Agent Directives Sync', 'SHA-256 Hash Guard', () => {
   }
 
   if (outOfSync.length > 0) return { status: 'FAILED', details: `Directives out of sync: ${outOfSync.join(', ')}` };
-  return { status: 'PASSED', details: 'Agent directives identical across all 5 platform configuration files.' };
+  return { status: 'PASSED', details: `Agent directives identical across all ${copies.length + 1} platform configuration files.` };
 });
 
 // 11. 5-Tier Test Suite Execution

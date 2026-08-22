@@ -72,16 +72,16 @@ export function loadServiceRegistry(envPath?: string): ServiceEntry[] {
         const category = parts[3] || 'Micro-Apps';
         const role = parts[4] || 'General';
 
-        // Infer container hostname
-        let containerName = appId;
-        if (['expenses', 'billing', 'telemetry'].includes(appId)) {
-          containerName = `app-${appId}`;
-        } else if (appId === 'devcenter' || appId === 'dev-dashboard') {
-          containerName = 'dev-dashboard';
-        } else if (appId === 'gateway' || appId === 'dev-hub') {
-          containerName = 'dev-hub';
-        } else if (appId === 'auth') {
-          containerName = 'auth';
+        // Dynamically derive container name: optional 6th field, or check filesystem for forge-apps vs core
+        let containerName = parts[5] || appId;
+        if (!parts[5]) {
+          if (existsSync(join(process.cwd(), 'forge-apps', appId))) {
+            containerName = `app-${appId}`;
+          } else if (appId === 'devcenter') {
+            containerName = 'dev-dashboard';
+          } else if (appId === 'gateway') {
+            containerName = 'dev-hub';
+          }
         }
 
         services.push({
