@@ -46,6 +46,24 @@ export class ForgeLogger {
     } else {
       console.log(JSON.stringify(entry));
     }
+
+    // Ship to DevCenter real-time log stream
+    if (this.serviceName !== 'dev-dashboard' && this.serviceName !== 'telemetry-engine') {
+      const devPort = process.env.DEV_DASHBOARD_PORT || 3002;
+      const ingestUrls = [
+        `http://localhost:${devPort}/api/logs/ingest`,
+        `http://dev-dashboard:${devPort}/api/logs/ingest`,
+      ];
+      const payload = JSON.stringify(entry);
+      for (const u of ingestUrls) {
+        fetch(u, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: payload,
+          signal: AbortSignal.timeout(250),
+        }).catch(() => {});
+      }
+    }
   }
 
   public debug(msg: string, meta?: Record<string, unknown>) { this.log('DEBUG', msg, meta); }

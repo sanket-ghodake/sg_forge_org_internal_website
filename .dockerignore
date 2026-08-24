@@ -1,14 +1,25 @@
 # ==============================================================================
 # Docker Ignore Configuration - SG Forge Monorepo (2026 LTS)
+# Container Build Optimization: Minimal Image Context & Layer Cache Protection
 # ==============================================================================
 
+# VCS & IDE Metadata
 .git/
 .github/
 .agents/
 .cursor/
+.gemini/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Isolated Runtimes & Host Binaries
+portables/
 .venv/
 .node_env/
-portables/
+
+# Dependencies & Build Outputs
 node_modules/
 **/node_modules/
 .next/
@@ -25,21 +36,34 @@ out/
 *.tsbuildinfo
 **/*.tsbuildinfo
 *.d.ts.map
+repomix-output.xml
+
+# Environment Secrets
 .env
 .env.*
 !.env.example
 *.pem
 *.key
 *.crt
+*.p12
+*.pfx
+
+# Database Transients & Backups
+data/*.db
+data/*.db-wal
+data/*.db-shm
+data/*.db-journal
+data/backups/
 *.sqlite
 *.sqlite3
 *.sqlite-wal
 *.db
 *.dump
+
+# Logs & Documentation
 logs/
 graphify-out/
 idea/
 docs/
 *.md
-.DS_Store
-Thumbs.db
+!**/README.md

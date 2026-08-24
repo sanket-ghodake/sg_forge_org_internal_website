@@ -1,5 +1,6 @@
 # ==============================================================================
-# Antigravity Ignore Configuration - SG Forge Monorepo (2026 LTS)
+# AI Agent Ignore Configuration - SG Forge Monorepo (2026 LTS)
+# Token Optimization: Exclude High-Density Binaries, Caches & Transients
 # ==============================================================================
 
 # Dependencies & Isolated Runtimes
@@ -29,6 +30,7 @@ out/
 *.tsbuildinfo
 **/*.tsbuildinfo
 *.d.ts.map
+repomix-output.xml
 
 # Sensitive Credentials, Keys & Certificates
 .env
@@ -41,6 +43,11 @@ out/
 *.pfx
 
 # Database Files & Dumps
+data/*.db
+data/*.db-wal
+data/*.db-shm
+data/*.db-journal
+data/backups/
 *.sqlite
 *.sqlite3
 *.sqlite3-journal
@@ -51,15 +58,12 @@ out/
 *.db-journal
 *.db-wal
 *.db-shm
-backups/
 
 # Logs
 logs/*.log
 *.log
 **/*.log
 
-# Knowledge Graph Outputs & System
-graphify-out/
-.git/
+# OS Cruft
 .DS_Store
 Thumbs.db

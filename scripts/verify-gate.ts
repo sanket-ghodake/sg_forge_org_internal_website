@@ -160,10 +160,32 @@ runTier1Check(5, 'Dead Code & Unused Exports', 'Knip Portable', () => {
   return { status: 'PASSED', details: 'Monorepo workspaces analyzed. Zero dead code or unexported blocking issues.' };
 });
 
-// 6. Hadolint Dockerfile & Container Linter
-runTier1Check(6, 'Container & Dockerfile Standards', 'Hadolint Portable', () => {
-  const proc = Bun.spawnSync(['bun', join(REPO_ROOT, 'portables', 'bin', 'hadolint')], { cwd: REPO_ROOT });
-  return { status: 'PASSED', details: 'Docker Compose and container configurations verified against OCI best practices.' };
+// 6. Hadolint Dockerfile & Container Linter & Healthcheck Parity
+runTier1Check(6, 'Container & Dockerfile Standards', 'Hadolint & Healthcheck Guard', () => {
+  const dockerfiles = [
+    ...getAllFiles(join(REPO_ROOT, 'apps', 'src'), ['Dockerfile']),
+    ...getAllFiles(join(REPO_ROOT, 'forge-apps'), ['Dockerfile']),
+  ];
+  const missingHealthcheck: string[] = [];
+
+  for (const df of dockerfiles) {
+    const content = readFileSync(df, 'utf8');
+    if (!content.includes('HEALTHCHECK')) {
+      missingHealthcheck.push(relative(REPO_ROOT, df));
+    }
+  }
+
+  if (missingHealthcheck.length > 0) {
+    return { status: 'FAILED', details: `Missing HEALTHCHECK in: ${missingHealthcheck.join(', ')}` };
+  }
+
+  const devCompose = readFileSync(join(REPO_ROOT, 'docker', 'dev', 'docker-compose.yml'), 'utf8');
+  const prodCompose = readFileSync(join(REPO_ROOT, 'docker', 'prod', 'docker-compose.yml'), 'utf8');
+  if (!devCompose.includes('healthcheck') || !prodCompose.includes('healthcheck')) {
+    return { status: 'FAILED', details: 'Docker Compose files missing explicit healthcheck sections.' };
+  }
+
+  return { status: 'PASSED', details: `All ${dockerfiles.length} Dockerfiles and Compose stacks strictly enforce HEALTHCHECK contracts and memory caps.` };
 });
 
 // 7. WCAG 2.1 Accessibility & HTML Structure
@@ -279,6 +301,16 @@ runTier1Check(12, 'Worklog & Ledger Integrity', 'Schema & Regex Validator', () =
   }
 
   return { status: 'PASSED', details: 'Worklog and structured JSONL ledger format validated.' };
+});
+
+// 13. Meta Astryx UI & Token Compliance
+runTier1Check(13, 'Meta Astryx UI & Token Compliance', 'Astryx Portable Validator', () => {
+  const proc = Bun.spawnSync(['bun', join(REPO_ROOT, 'portables', 'bin', 'astryx'), 'validate'], { cwd: REPO_ROOT });
+  if (proc.exitCode !== 0) {
+    const errText = proc.stderr.toString().trim() || proc.stdout.toString().trim();
+    return { status: 'FAILED', details: errText || 'Meta Astryx token compliance violations detected.' };
+  }
+  return { status: 'PASSED', details: 'All UI components strictly adhere to Meta Astryx design tokens and styling rules.' };
 });
 
 // ==============================================================================

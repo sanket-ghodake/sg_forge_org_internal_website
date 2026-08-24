@@ -1,11 +1,33 @@
-# Docker & Container Security Rules
+# 🐳 Docker & Container Governance Standards (2026 LTS)
 
-1. **Docker Setup & Zero Host Installation**: All dev/build/test operations MUST run inside Docker containers (`docker compose`), `bun` (`portables/bun/bin/bun`), or Python virtualenv (`./.venv/`). STRICTLY ZERO host system package installs.
-2. **Container Security Standards**: All Dockerfiles MUST use multi-stage builds (`development`, `builder`, `production`), implement explicit health check contracts (`HEALTHCHECK`), run production stages under non-root system users (`USER nextjs`/`appuser`), and enforce zero silent failure tolerance.
-3. **Storage & Volume Protection**: Never use un-named anonymous volume mounts. Always use explicit named volumes (`sgforge-root-node-modules`, `sgforge-frontend-node-modules`, `sgforge-next-cache`) to prevent dangling disk storage exhaustion.
-4. **RAM Resource Quotas & Log Limits**: All `docker-compose.yaml` services MUST enforce `deploy.resources.limits.memory` caps (e.g. 1024M app, 256M DB) and log rotation limits (`driver: json-file`, `max-size: 10m`, `max-file: 3`).
-5. **Dev Build Speed & Cache Preservation**: Never wipe `.next` or build artifact caches inside container entrypoint scripts. Always use BuildKit package cache mounts (`--mount=type=cache,target=/root/.bun/install/cache`) and set `WATCHPACK_POLLING=false`.
-6. **Docker vs Portable Execution Boundaries**:
-   - **STRICTLY DOCKER**: Multi-service full dev stack (`./run.sh docker dev`), production sandbox simulation (`./run.sh docker sandbox`), polyglot linting/security toolchain (`./run.sh toolchain [all|lint|security|test]`).
-   - **PORTABLE PERMITTED**: Single-service TS/JS debugging (`bun` / `./run.sh portable dev`), local MkDocs serve (`./.venv/bin/mkdocs serve`), codebase metrics (`./scripts/code-matrix.sh`, `portables/bin/scc`), pre-commit validation (`./toolchain/run-precommit.sh`).
+> **Google SRE & Meta Infrastructure Standard for SG Forge Monorepo**
 
+---
+
+## 🛑 The 8 Immutable Container Invariants
+
+1. **Mandatory HTTP Health Contract (`/health` & `/livez`)**:
+   - Every platform service and micro-app MUST expose a lightweight `/health` (and `/livez`) endpoint returning HTTP 200 `{ status: 'ok', uptime: number, timestamp: number }`.
+2. **Colocated Dockerfile Pattern (Option A)**:
+   - Every micro-app maintains its own container definition inside `<app-folder>/docker/Dockerfile` and `<app-folder>/docker/README.md`.
+3. **Explicit Container Healthchecks**:
+   - Every service in Docker Compose (`docker/dev/` and `docker/prod/`) MUST define an explicit `healthcheck` block (`wget` or `curl` probe, interval $\le 15\text{s}$, timeout $3\text{s}$, 3 retries, start period $5\text{s}$).
+4. **Named Volumes Only (Zero Anonymous Mounts)**:
+   - All shared caches and DB persistence MUST use explicit named volumes (e.g. `sg_forge_bun_cache`, `sg_forge_db_data`, `sg_forge_caddy_data`) to prevent dangling disk storage exhaustion.
+5. **Memory and CPU Resource Caps**:
+   - Every compose service MUST enforce `deploy.resources.limits.memory` (e.g. `128M` dev, `256M` prod) and `cpus` limits to prevent runaway resource contention.
+6. **Log Rotation Safeguards**:
+   - All services MUST configure Docker logging drivers (`driver: json-file`, `options: { max-size: "10m", max-file: "3" }`) to prevent container log disk bloat.
+7. **Non-Root Production Security**:
+   - Production Dockerfile stages must execute under non-root system users (`USER nextjs`/`appuser`) with Alpine minimal footprints (<90MB).
+8. **Dev vs Prod Multi-Stack Separation**:
+   - **Dev Stack (`docker/dev/docker-compose.yml`)**: Uses volume-mounted source code with `bun --watch` for sub-millisecond hot reloading.
+   - **Prod Stack (`docker/prod/docker-compose.yml`)**: Builds immutable, multi-stage production images referencing each app's colocated `Dockerfile`.
+
+---
+
+## 🛠️ Docker CLI Commands via `run.sh`
+- `./run.sh docker dev` / `./run.sh docker up` $\to$ Start Dev stack with hot-reload.
+- `./run.sh docker prod` $\to$ Start Prod stack with full image builds.
+- `./run.sh docker build [app]` $\to$ Build a specific app's colocated Dockerfile.
+- `./run.sh docker monitor` $\to$ Live terminal stats (CPU, RAM, Net I/O).

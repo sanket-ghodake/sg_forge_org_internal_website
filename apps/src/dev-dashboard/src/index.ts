@@ -1,8 +1,9 @@
 /**
- * @forge/dev-dashboard
- * Developer telemetry, container metrics, and live log stream.
+ * @forge/dev-dashboard (2026 LTS)
+ * Real-time monitoring, Turso DB explorer, and live log stream dashboard.
  */
-export const devDashboardService = {
-  name: 'dev-dashboard',
-  status: 'ready',
-};
+
+export * from './db';
+export * from './backend';
+export * from './frontend';
+export * from './server';

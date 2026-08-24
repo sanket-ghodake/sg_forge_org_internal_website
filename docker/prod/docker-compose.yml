@@ -17,6 +17,12 @@ volumes:
   forge_caddy_config:
     name: sg_forge_caddy_config_prod
 
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
 services:
   # 🔀 Reverse Proxy Gateway
   proxy:
@@ -34,6 +40,13 @@ services:
     networks:
       - forge-net
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:80/ || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -42,22 +55,26 @@ services:
 
   # 🌐 1. Platform Landing & Discovery Hub (Port 3000)
   landing:
-    image: oven/bun:1.3-alpine
+    build:
+      context: ../../
+      dockerfile: apps/src/landing/docker/Dockerfile
     container_name: forge-landing-prod
-    working_dir: /app
     environment:
       - PORT=${LANDING_PORT:-3000}
       - LANDING_PORT=${LANDING_PORT:-3000}
       - NODE_ENV=production
     ports:
       - "${LANDING_PORT:-3000}:${LANDING_PORT:-3000}"
-    volumes:
-      - ../../:/app
-      - forge_bun_cache:/root/.bun/install/cache
-    command: ["bun", "run", "apps/src/landing/src/server.ts"]
     networks:
       - forge-net
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -66,9 +83,10 @@ services:
 
   # 🏢 2. Main Portal & Org Canvas (Port 3001)
   portal:
-    image: oven/bun:1.3-alpine
+    build:
+      context: ../../
+      dockerfile: apps/src/portal/docker/Dockerfile
     container_name: forge-portal-prod
-    working_dir: /app
     environment:
       - PORT=${PORTAL_PORT:-3001}
       - PORTAL_PORT=${PORTAL_PORT:-3001}
@@ -76,13 +94,17 @@ services:
     ports:
       - "${PORTAL_PORT:-3001}:${PORTAL_PORT:-3001}"
     volumes:
-      - ../../:/app
-      - forge_bun_cache:/root/.bun/install/cache
       - forge_db_data:/app/data
-    command: ["bun", "run", "apps/src/portal/src/server.ts"]
     networks:
       - forge-net
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3001/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -91,9 +113,10 @@ services:
 
   # 📊 3. Developer Monitoring Dashboard (Port 3002)
   dev-dashboard:
-    image: oven/bun:1.3-alpine
+    build:
+      context: ../../
+      dockerfile: apps/src/dev-dashboard/docker/Dockerfile
     container_name: forge-dev-dashboard-prod
-    working_dir: /app
     environment:
       - PORT=${DEV_DASHBOARD_PORT:-3002}
       - DEV_DASHBOARD_PORT=${DEV_DASHBOARD_PORT:-3002}
@@ -101,12 +124,17 @@ services:
     ports:
       - "${DEV_DASHBOARD_PORT:-3002}:${DEV_DASHBOARD_PORT:-3002}"
     volumes:
-      - ../../:/app
-      - forge_bun_cache:/root/.bun/install/cache
-    command: ["bun", "run", "apps/src/dev-dashboard/src/server.ts"]
+      - forge_db_data:/app/data
     networks:
       - forge-net
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3002/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -115,22 +143,26 @@ services:
 
   # 📚 4. Developer Hub & SDK Playground (Port 3003)
   dev-hub:
-    image: oven/bun:1.3-alpine
+    build:
+      context: ../../
+      dockerfile: apps/src/dev-hub/docker/Dockerfile
     container_name: forge-dev-hub-prod
-    working_dir: /app
     environment:
       - PORT=${DEV_HUB_PORT:-3003}
       - DEV_HUB_PORT=${DEV_HUB_PORT:-3003}
       - NODE_ENV=production
     ports:
       - "${DEV_HUB_PORT:-3003}:${DEV_HUB_PORT:-3003}"
-    volumes:
-      - ../../:/app
-      - forge_bun_cache:/root/.bun/install/cache
-    command: ["bun", "run", "apps/src/dev-hub/src/server.ts"]
     networks:
       - forge-net
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3003/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -139,9 +171,10 @@ services:
 
   # 🔐 5. Central Identity & Auth Service (Port 3004)
   auth:
-    image: oven/bun:1.3-alpine
+    build:
+      context: ../../
+      dockerfile: apps/src/auth/docker/Dockerfile
     container_name: forge-auth-prod
-    working_dir: /app
     environment:
       - PORT=${AUTH_PORT:-3004}
       - AUTH_PORT=${AUTH_PORT:-3004}
@@ -150,13 +183,17 @@ services:
     ports:
       - "${AUTH_PORT:-3004}:${AUTH_PORT:-3004}"
     volumes:
-      - ../../:/app
-      - forge_bun_cache:/root/.bun/install/cache
       - forge_db_data:/app/data
-    command: ["bun", "run", "apps/src/auth/src/server.ts"]
     networks:
       - forge-net
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3004/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -165,22 +202,27 @@ services:
 
   # 🧩 6. Forge App: Expenses (Port 8085)
   app-expenses:
-    image: oven/bun:1.3-alpine
+    build:
+      context: ../../
+      dockerfile: forge-apps/expenses/docker/Dockerfile
     container_name: forge-app-expenses-prod
-    working_dir: /app
     environment:
       - PORT=8085
       - NODE_ENV=production
     ports:
       - "8085:8085"
     volumes:
-      - ../../:/app
-      - forge_bun_cache:/root/.bun/install/cache
       - forge_db_data:/app/data
-    command: ["bun", "run", "forge-apps/expenses/src/server.ts"]
     networks:
       - forge-net
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8085/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -189,22 +231,27 @@ services:
 
   # 🧩 7. Forge App: Billing (Port 8086)
   app-billing:
-    image: oven/bun:1.3-alpine
+    build:
+      context: ../../
+      dockerfile: forge-apps/billing/docker/Dockerfile
     container_name: forge-app-billing-prod
-    working_dir: /app
     environment:
       - PORT=8086
       - NODE_ENV=production
     ports:
       - "8086:8086"
     volumes:
-      - ../../:/app
-      - forge_bun_cache:/root/.bun/install/cache
       - forge_db_data:/app/data
-    command: ["bun", "run", "forge-apps/billing/src/server.ts"]
     networks:
       - forge-net
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8086/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -213,22 +260,27 @@ services:
 
   # 🧩 8. Forge App: Telemetry (Port 8087)
   app-telemetry:
-    image: oven/bun:1.3-alpine
+    build:
+      context: ../../
+      dockerfile: forge-apps/telemetry/docker/Dockerfile
     container_name: forge-app-telemetry-prod
-    working_dir: /app
     environment:
       - PORT=8087
       - NODE_ENV=production
     ports:
       - "8087:8087"
     volumes:
-      - ../../:/app
-      - forge_bun_cache:/root/.bun/install/cache
       - forge_db_data:/app/data
-    command: ["bun", "run", "forge-apps/telemetry/src/server.ts"]
     networks:
       - forge-net
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8087/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    logging: *default-logging
     deploy:
       resources:
         limits:

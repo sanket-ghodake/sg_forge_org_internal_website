@@ -34,9 +34,11 @@ function show_help() {
     echo "  benchmark [url]       Run Autocannon HTTP latency benchmark (<2ms target)"
     echo "  pack                  Run Repomix token-compressed AI context packager"
     echo ""
-    echo "Docker Lifecycle & Monitoring Commands:"
-    echo "  docker up             Start all services in Docker (Dev stack)"
-    echo "  docker down           Gracefully stop all Docker containers"
+    echo "Docker Lifecycle & Multi-Stack Commands (Option A Architecture):"
+    echo "  docker up             Start all services in Docker (Dev stack + Hot reload)"
+    echo "  docker prod           Start all services in Production Docker stack"
+    echo "  docker build [app]    Build colocated Dockerfile for a specific app or all"
+    echo "  docker down           Gracefully stop active Docker containers"
     echo "  docker restart [svc]  Restart specific container without downtime"
     echo "  docker status         Show ASCII summary table of active containers"
     echo "  docker monitor        Live 24/7 terminal dashboard (CPU, RAM, Net I/O)"
@@ -104,6 +106,10 @@ case "$CMD" in
         $PORTABLE_BUN run "$REPO_ROOT/portables/bin/autocannon" "$TARGET"
         ;;
 
+    monitor)
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/terminal-monitor.ts"
+        ;;
+
     pack)
         $PORTABLE_BUN run "$REPO_ROOT/portables/bin/repomix"
         ;;
@@ -143,7 +149,7 @@ case "$CMD" in
         fi
         echo "🧩 Scaffolding Forge App '$APP_NAME' at forge-apps/$APP_SLUG..."
         cp -r "$REPO_ROOT/forge-apps/app-template" "$TARGET_DIR"
-        echo "✅ Created forge-apps/$APP_SLUG successfully!"
+        echo "✅ Created forge-apps/$APP_SLUG with colocated docker/Dockerfile successfully!"
         ;;
 
     test)
@@ -155,16 +161,41 @@ case "$CMD" in
     docker)
         ACTION="${2:-up}"
         case "$ACTION" in
-            up)
+            up|dev)
                 echo "🔀 [SG Forge] Synchronizing dynamic reverse proxy routes from .env..."
                 $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
-                echo "🐳 [SG Forge] Starting Docker Dev Stack (Named Volumes & Resource Limits)..."
+                echo "🐳 [SG Forge] Starting Docker Dev Stack (Hot Reload with bun --watch)..."
                 docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" up -d
                 echo "✨ Stack running! Access Platform Hub at http://localhost/"
                 ;;
+            prod)
+                echo "🔀 [SG Forge] Synchronizing dynamic reverse proxy routes from .env..."
+                $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
+                echo "🚀 [SG Forge] Starting Production Docker Stack..."
+                docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" up -d --build
+                echo "✨ Production stack active at http://localhost/"
+                ;;
+            build)
+                TARGET_APP="$3"
+                if [ -n "$TARGET_APP" ]; then
+                    if [ -f "$REPO_ROOT/apps/src/$TARGET_APP/docker/Dockerfile" ]; then
+                        echo "🔨 Building image for apps/src/$TARGET_APP..."
+                        docker build -f "$REPO_ROOT/apps/src/$TARGET_APP/docker/Dockerfile" -t "sg-$TARGET_APP" "$REPO_ROOT"
+                    elif [ -f "$REPO_ROOT/forge-apps/$TARGET_APP/docker/Dockerfile" ]; then
+                        echo "🔨 Building image for forge-apps/$TARGET_APP..."
+                        docker build -f "$REPO_ROOT/forge-apps/$TARGET_APP/docker/Dockerfile" -t "sg-app-$TARGET_APP" "$REPO_ROOT"
+                    else
+                        echo "❌ Could not find colocated Dockerfile for $TARGET_APP"
+                    fi
+                else
+                    echo "🔨 Building all production images via docker/prod/docker-compose.yml..."
+                    docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" build
+                fi
+                ;;
             down)
                 echo "🛑 [SG Forge] Gracefully stopping Docker containers..."
-                docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" down
+                docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" down 2>/dev/null || true
+                docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" down 2>/dev/null || true
                 echo "✨ Containers stopped."
                 ;;
             restart)
@@ -173,7 +204,7 @@ case "$CMD" in
                     echo "🔄 [SG Forge] Restarting service: $SVC..."
                     docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" restart "$SVC"
                 else
-                    echo "🔄 [SG Forge] Restarting full stack..."
+                    echo "🔄 [SG Forge] Restarting full dev stack..."
                     docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" restart
                 fi
                 ;;
@@ -182,8 +213,7 @@ case "$CMD" in
                 docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" ps
                 ;;
             monitor)
-                echo "📈 [SG Forge] Live 24/7 Terminal Performance HUD (Press Ctrl+C to exit):"
-                docker stats --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.MemPerc}}\t{{.NetIO}}\t{{.PIDs}}"
+                $PORTABLE_BUN run "$REPO_ROOT/scripts/terminal-monitor.ts"
                 ;;
             logs)
                 SVC="$3"
@@ -200,7 +230,7 @@ case "$CMD" in
                 echo "✨ Cleaned."
                 ;;
             *)
-                echo "Usage: ./run.sh docker [up|down|restart|status|monitor|logs|purge]"
+                echo "Usage: ./run.sh docker [up|prod|build|down|restart|status|monitor|logs|purge]"
                 ;;
         esac
         ;;

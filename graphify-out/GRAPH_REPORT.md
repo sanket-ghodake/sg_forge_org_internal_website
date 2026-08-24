@@ -1,16 +1,16 @@
-# Graph Report - org_website_clone  (2026-08-22)
+# Graph Report - org_website_clone  (2026-08-23)
 
 ## Corpus Check
-- 89 files · ~72,733 words
+- 105 files · ~83,518 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 550 nodes · 532 edges · 77 communities (55 shown, 22 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.8)
+- 636 nodes · 651 edges · 85 communities (64 shown, 21 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `ad061f72`
+- Built from commit: `257d5c00`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -84,7 +84,15 @@
 - [[_COMMUNITY_Community 66|Community 66]]
 - [[_COMMUNITY_Community 67|Community 67]]
 - [[_COMMUNITY_Community 68|Community 68]]
+- [[_COMMUNITY_Community 69|Community 69]]
+- [[_COMMUNITY_Community 70|Community 70]]
+- [[_COMMUNITY_Community 71|Community 71]]
 - [[_COMMUNITY_compilerOptions|compilerOptions]]
+- [[_COMMUNITY_Community 73|Community 73]]
+- [[_COMMUNITY_Community 74|Community 74]]
+- [[_COMMUNITY_Community 75|Community 75]]
+- [[_COMMUNITY_Community 76|Community 76]]
+- [[_COMMUNITY_Community 77|Community 77]]
 - [[_COMMUNITY_exclude|exclude]]
 - [[_COMMUNITY_🛠 Core Components|🛠 Core Components]]
 - [[_COMMUNITY_pull_request_template|pull_request_template.md]]
@@ -94,16 +102,16 @@
 - [[_COMMUNITY_WORKLOGS|WORKLOGS.md]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `compilerOptions` - 17 edges
-2. `getAstryxStyles()` - 16 edges
-3. `getAstryxHeaderHtml()` - 16 edges
-4. `createSafeHandler()` - 13 edges
-5. `🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)` - 11 edges
-6. `🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)` - 11 edges
-7. `🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)` - 11 edges
+1. `getAstryxStyles()` - 18 edges
+2. `compilerOptions` - 17 edges
+3. `PlatformDatabaseManager` - 15 edges
+4. `getAstryxHeaderHtml()` - 15 edges
+5. `createSafeHandler()` - 13 edges
+6. `TelemetryEngine` - 11 edges
+7. `createLogger()` - 11 edges
 8. `🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)` - 11 edges
 9. `🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)` - 11 edges
-10. `ForgeLogger` - 8 edges
+10. `🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `generateCaddyfile()` --calls--> `loadServiceRegistry()`  [EXTRACTED]
@@ -120,7 +128,7 @@
 ## Import Cycles
 - 1-file cycle: `apps/src/sdk/src/index.ts -> apps/src/sdk/src/index.ts`
 
-## Communities (77 total, 22 thin omitted)
+## Communities (85 total, 21 thin omitted)
 
 ### Community 0 - "devDependencies"
 Cohesion: 0.12
@@ -188,11 +196,19 @@ Nodes (5): main, name, type, types, version
 
 ### Community 16 - "suites/index.ts"
 Cohesion: 0.06
-Nodes (43): logger, PORT, logger, PORT, logger, PORT, logger, PORT (+35 more)
+Nodes (38): logger, PORT, logger, PORT, logger, PORT, logger, PORT (+30 more)
 
 ### Community 19 - "ui-organisms.test.ts"
 Cohesion: 0.33
 Nodes (5): main, name, type, types, version
+
+### Community 20 - "Community 20"
+Cohesion: 0.09
+Nodes (16): AppRegistryRecord, AuditLogRecord, CORE_DB_PATH, DATA_DIR, IssueReportRecord, logger, platformDb, resolveDataDir() (+8 more)
+
+### Community 24 - "Community 24"
+Cohesion: 0.14
+Nodes (9): ForgeAppManifest, ForgeClient, ForgeClientOptions, ForgeLogger, LogEntry, LogLevel, PostMessageEvent, UserContext (+1 more)
 
 ### Community 25 - "Community 25"
 Cohesion: 0.14
@@ -223,8 +239,8 @@ Cohesion: 0.50
 Nodes (3): 🔒 Central Identity & Auth Service (`@forge/auth`), 🚀 Features, 🏃 Local Execution
 
 ### Community 32 - "Community 32"
-Cohesion: 0.50
-Nodes (3): 📊 Developer Monitoring Dashboard (`@forge/dev-dashboard`), 🚀 Features, 🏃 Local Execution
+Cohesion: 0.40
+Nodes (4): 📊 Developer Monitoring Dashboard (`@forge/dev-dashboard`), 🛠️ Internal Architecture, 🚀 Key Capabilities, 🏃 Local Execution & Verification
 
 ### Community 33 - "Community 33"
 Cohesion: 0.50
@@ -314,9 +330,37 @@ Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1:
 Cohesion: 0.50
 Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
 
+### Community 70 - "Community 70"
+Cohesion: 0.50
+Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
+
+### Community 71 - "Community 71"
+Cohesion: 0.50
+Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
+
 ### Community 72 - "compilerOptions"
 Cohesion: 0.09
 Nodes (22): compilerOptions, allowJs, baseUrl, esModuleInterop, forceConsistentCasingInFileNames, incremental, isolatedModules, jsx (+14 more)
+
+### Community 73 - "Community 73"
+Cohesion: 0.50
+Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
+
+### Community 74 - "Community 74"
+Cohesion: 0.50
+Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
+
+### Community 75 - "Community 75"
+Cohesion: 0.50
+Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
+
+### Community 76 - "Community 76"
+Cohesion: 0.50
+Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
+
+### Community 77 - "Community 77"
+Cohesion: 0.50
+Nodes (3): 🛡️ SG Forge Pre-Commit Verification Gate Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
 
 ### Community 87 - "exclude"
 Cohesion: 0.15
@@ -343,13 +387,17 @@ Cohesion: 0.12
 Nodes (15): 10. Code Preservation, Observability & Per-Conversation Worklog Auto-Update, 1. Correctness, Grounding & "No Guessing", ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (10 CHECKS), 2. Strict File Size Governance & 500-Line Soft Cap, 🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD), 3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`), 4. Centralized Structured Logging & RFC 7807 Error Boundaries, 5. Multi-Tenant Data Isolation & Dedicated Turso DB per App (+7 more)
 
 ## Knowledge Gaps
-- **330 isolated node(s):** `name`, `version`, `private`, `type`, `dev` (+325 more)
+- **355 isolated node(s):** `name`, `version`, `private`, `type`, `dev` (+350 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **22 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **21 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
+- **Why does `createLogger()` connect `suites/index.ts` to `Community 24`, `Community 20`?**
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
+- **Why does `PlatformDatabaseManager` connect `Community 69` to `Community 20`?**
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `getAstryxStyles()` (e.g. with `renderAppHtml()` and `renderAppHtml()`) actually correct?**
   _`getAstryxStyles()` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 2 inferred relationships involving `getAstryxHeaderHtml()` (e.g. with `renderAppHtml()` and `renderAppHtml()`) actually correct?**
@@ -357,10 +405,6 @@ _Questions this graph is uniquely positioned to answer:_
 - **Are the 5 inferred relationships involving `createSafeHandler()` (e.g. with `startAuthServer()` and `startDevDashboardServer()`) actually correct?**
   _`createSafeHandler()` has 5 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `name`, `version`, `private` to the rest of the system?**
-  _330 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _355 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `devDependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
-- **Should `suites/index.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.05632360471070148 - nodes in this community are weakly interconnected._
-- **Should `Community 25` be split into smaller, more focused modules?**
-  _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._
