@@ -36,7 +36,6 @@ export const MANDATORY_EXCLUSIONS = [
   '.coverage',
   'graphify-out/cache/',
   'graphify-out/.graphify_*',
-  'graphify-out/2026-*/',
 ];
 
 /** Canonical list of root ignore files that must exist and stay in sync */
@@ -241,7 +240,6 @@ Thumbs.db
 # 7. Graphify Transient Backups & Analysis Caches
 graphify-out/cache/
 graphify-out/.graphify_*
-graphify-out/2026-*/
 `;
 
   // 2. Write to each root ignore file

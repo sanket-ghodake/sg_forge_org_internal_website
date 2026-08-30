@@ -4031,7 +4031,7 @@
       "label": "ROOT_IGNORE_FILES",
       "file_type": "code",
       "source_file": "scripts/sync-ignores.ts",
-      "source_location": "L40",
+      "source_location": "L42",
       "_origin": "ast",
       "id": "scripts_sync_ignores_root_ignore_files",
       "community": 25,
@@ -4041,7 +4041,7 @@
       "label": "MANDATORY_ATTRIBUTES",
       "file_type": "code",
       "source_file": "scripts/sync-ignores.ts",
-      "source_location": "L51",
+      "source_location": "L53",
       "_origin": "ast",
       "id": "scripts_sync_ignores_mandatory_attributes",
       "community": 25,
@@ -4051,7 +4051,7 @@
       "label": "ValidationResult",
       "file_type": "code",
       "source_file": "scripts/sync-ignores.ts",
-      "source_location": "L70",
+      "source_location": "L72",
       "_origin": "ast",
       "id": "scripts_sync_ignores_validationresult",
       "community": 25,
@@ -4061,7 +4061,7 @@
       "label": "validateIgnores()",
       "file_type": "code",
       "source_file": "scripts/sync-ignores.ts",
-      "source_location": "L81",
+      "source_location": "L83",
       "_origin": "ast",
       "id": "scripts_sync_ignores_validateignores",
       "community": 25,
@@ -4071,7 +4071,7 @@
       "label": "syncAllIgnores()",
       "file_type": "code",
       "source_file": "scripts/sync-ignores.ts",
-      "source_location": "L157",
+      "source_location": "L159",
       "_origin": "ast",
       "id": "scripts_sync_ignores_syncallignores",
       "community": 25,
@@ -4231,7 +4231,7 @@
       "label": "now",
       "file_type": "code",
       "source_file": "scripts/verify-gate.ts",
-      "source_location": "L423",
+      "source_location": "L389",
       "_origin": "ast",
       "id": "scripts_verify_gate_now",
       "community": 25,
@@ -4241,7 +4241,7 @@
       "label": "agentsReportPath",
       "file_type": "code",
       "source_file": "scripts/verify-gate.ts",
-      "source_location": "L427",
+      "source_location": "L393",
       "_origin": "ast",
       "id": "scripts_verify_gate_agentsreportpath",
       "community": 25,
@@ -4498,20 +4498,20 @@
       "norm_label": "ai agent directives - sg forge (2026 clean architecture & engineering standards)"
     },
     {
-      "label": "\u26a1 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (11 CHECKS)",
+      "label": "\u26a1 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (12 CHECKS)",
       "file_type": "document",
       "source_file": ".agents/AGENTS.md",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "agents_agents_1_pre_flight_pre_commit_verification_gate_11_checks",
+      "id": "agents_agents_1_pre_flight_pre_commit_verification_gate_12_checks",
       "community": 86,
-      "norm_label": "\u26a1 1. pre-flight & pre-commit verification gate (11 checks)"
+      "norm_label": "\u26a1 1. pre-flight & pre-commit verification gate (12 checks)"
     },
     {
       "label": "\ud83d\uded1 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)",
       "file_type": "document",
       "source_file": ".agents/AGENTS.md",
-      "source_location": "L24",
+      "source_location": "L25",
       "_origin": "ast",
       "id": "agents_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
       "community": 86,
@@ -4521,7 +4521,7 @@
       "label": "1. Correctness, Grounding & \"No Guessing\"",
       "file_type": "document",
       "source_file": ".agents/AGENTS.md",
-      "source_location": "L26",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "agents_agents_1_correctness_grounding_no_guessing",
       "community": 86,
@@ -4531,7 +4531,7 @@
       "label": "2. Strict File Size Governance & 500-Line Soft Cap",
       "file_type": "document",
       "source_file": ".agents/AGENTS.md",
-      "source_location": "L30",
+      "source_location": "L31",
       "_origin": "ast",
       "id": "agents_agents_2_strict_file_size_governance_500_line_soft_cap",
       "community": 86,
@@ -4541,7 +4541,7 @@
       "label": "3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`)",
       "file_type": "document",
       "source_file": ".agents/AGENTS.md",
-      "source_location": "L35",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "agents_agents_3_strict_ui_standard_meta_astryx_design_system_forge_ui",
       "community": 86,
@@ -4551,7 +4551,7 @@
       "label": "4. Centralized Structured Logging & RFC 7807 Error Boundaries",
       "file_type": "document",
       "source_file": ".agents/AGENTS.md",
-      "source_location": "L40",
+      "source_location": "L41",
       "_origin": "ast",
       "id": "agents_agents_4_centralized_structured_logging_rfc_7807_error_boundaries",
       "community": 86,
@@ -4561,7 +4561,7 @@
       "label": "5. Multi-Tenant Data Isolation & Dedicated Turso DB per App",
       "file_type": "document",
       "source_file": ".agents/AGENTS.md",
-      "source_location": "L44",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "agents_agents_5_multi_tenant_data_isolation_dedicated_turso_db_per_app",
       "community": 86,
@@ -4571,7 +4571,7 @@
       "label": "6. Directional Architectural Boundaries & Clean Modularity",
       "file_type": "document",
       "source_file": ".agents/AGENTS.md",
-      "source_location": "L48",
+      "source_location": "L49",
       "_origin": "ast",
       "id": "agents_agents_6_directional_architectural_boundaries_clean_modularity",
       "community": 86,
@@ -4581,7 +4581,7 @@
       "label": "7. Clean Package Aliases (Zero Traversal Sprawl)",
       "file_type": "document",
       "source_file": ".agents/AGENTS.md",
-      "source_location": "L52",
+      "source_location": "L53",
       "_origin": "ast",
       "id": "agents_agents_7_clean_package_aliases_zero_traversal_sprawl",
       "community": 86,
@@ -4591,7 +4591,7 @@
       "label": "8. Risk-Tiered 5-Tier Testing Rigor (3A Pattern)",
       "file_type": "document",
       "source_file": ".agents/AGENTS.md",
-      "source_location": "L55",
+      "source_location": "L56",
       "_origin": "ast",
       "id": "agents_agents_8_risk_tiered_5_tier_testing_rigor_3a_pattern",
       "community": 86,
@@ -4601,7 +4601,7 @@
       "label": "9. Single-Location Dynamic Ingress & Absolute Zero Auto-Commits",
       "file_type": "document",
       "source_file": ".agents/AGENTS.md",
-      "source_location": "L59",
+      "source_location": "L60",
       "_origin": "ast",
       "id": "agents_agents_9_single_location_dynamic_ingress_absolute_zero_auto_commits",
       "community": 86,
@@ -4611,7 +4611,7 @@
       "label": "10. Code Preservation, Observability & Per-Conversation Worklog Auto-Update",
       "file_type": "document",
       "source_file": ".agents/AGENTS.md",
-      "source_location": "L63",
+      "source_location": "L64",
       "_origin": "ast",
       "id": "agents_agents_10_code_preservation_observability_per_conversation_worklog_auto_update",
       "community": 86,
@@ -4621,7 +4621,7 @@
       "label": "\ud83d\udee0\ufe0f TECH STACK BASELINE (2026 LTS)",
       "file_type": "document",
       "source_file": ".agents/AGENTS.md",
-      "source_location": "L69",
+      "source_location": "L70",
       "_origin": "ast",
       "id": "agents_agents_tech_stack_baseline_2026_lts",
       "community": 86,
@@ -4631,7 +4631,7 @@
       "label": "\ud83e\udded DOMAIN RULE ROUTER",
       "file_type": "document",
       "source_file": ".agents/AGENTS.md",
-      "source_location": "L79",
+      "source_location": "L80",
       "_origin": "ast",
       "id": "agents_agents_domain_rule_router",
       "community": 86,
@@ -5858,20 +5858,20 @@
       "norm_label": "ai agent directives - sg forge (2026 clean architecture & engineering standards)"
     },
     {
-      "label": "\u26a1 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (11 CHECKS)",
+      "label": "\u26a1 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (12 CHECKS)",
       "file_type": "document",
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "rules_agents_1_pre_flight_pre_commit_verification_gate_11_checks",
+      "id": "rules_agents_1_pre_flight_pre_commit_verification_gate_12_checks",
       "community": 88,
-      "norm_label": "\u26a1 1. pre-flight & pre-commit verification gate (11 checks)"
+      "norm_label": "\u26a1 1. pre-flight & pre-commit verification gate (12 checks)"
     },
     {
       "label": "\ud83d\uded1 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)",
       "file_type": "document",
       "source_file": ".cursor/rules/AGENTS.md",
-      "source_location": "L24",
+      "source_location": "L25",
       "_origin": "ast",
       "id": "rules_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
       "community": 88,
@@ -5881,7 +5881,7 @@
       "label": "1. Correctness, Grounding & \"No Guessing\"",
       "file_type": "document",
       "source_file": ".cursor/rules/AGENTS.md",
-      "source_location": "L26",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "rules_agents_1_correctness_grounding_no_guessing",
       "community": 88,
@@ -5891,7 +5891,7 @@
       "label": "2. Strict File Size Governance & 500-Line Soft Cap",
       "file_type": "document",
       "source_file": ".cursor/rules/AGENTS.md",
-      "source_location": "L30",
+      "source_location": "L31",
       "_origin": "ast",
       "id": "rules_agents_2_strict_file_size_governance_500_line_soft_cap",
       "community": 88,
@@ -5901,7 +5901,7 @@
       "label": "3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`)",
       "file_type": "document",
       "source_file": ".cursor/rules/AGENTS.md",
-      "source_location": "L35",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "rules_agents_3_strict_ui_standard_meta_astryx_design_system_forge_ui",
       "community": 88,
@@ -5911,7 +5911,7 @@
       "label": "4. Centralized Structured Logging & RFC 7807 Error Boundaries",
       "file_type": "document",
       "source_file": ".cursor/rules/AGENTS.md",
-      "source_location": "L40",
+      "source_location": "L41",
       "_origin": "ast",
       "id": "rules_agents_4_centralized_structured_logging_rfc_7807_error_boundaries",
       "community": 88,
@@ -5921,7 +5921,7 @@
       "label": "5. Multi-Tenant Data Isolation & Dedicated Turso DB per App",
       "file_type": "document",
       "source_file": ".cursor/rules/AGENTS.md",
-      "source_location": "L44",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "rules_agents_5_multi_tenant_data_isolation_dedicated_turso_db_per_app",
       "community": 88,
@@ -5931,7 +5931,7 @@
       "label": "6. Directional Architectural Boundaries & Clean Modularity",
       "file_type": "document",
       "source_file": ".cursor/rules/AGENTS.md",
-      "source_location": "L48",
+      "source_location": "L49",
       "_origin": "ast",
       "id": "rules_agents_6_directional_architectural_boundaries_clean_modularity",
       "community": 88,
@@ -5941,7 +5941,7 @@
       "label": "7. Clean Package Aliases (Zero Traversal Sprawl)",
       "file_type": "document",
       "source_file": ".cursor/rules/AGENTS.md",
-      "source_location": "L52",
+      "source_location": "L53",
       "_origin": "ast",
       "id": "rules_agents_7_clean_package_aliases_zero_traversal_sprawl",
       "community": 88,
@@ -5951,7 +5951,7 @@
       "label": "8. Risk-Tiered 5-Tier Testing Rigor (3A Pattern)",
       "file_type": "document",
       "source_file": ".cursor/rules/AGENTS.md",
-      "source_location": "L55",
+      "source_location": "L56",
       "_origin": "ast",
       "id": "rules_agents_8_risk_tiered_5_tier_testing_rigor_3a_pattern",
       "community": 88,
@@ -5961,7 +5961,7 @@
       "label": "9. Single-Location Dynamic Ingress & Absolute Zero Auto-Commits",
       "file_type": "document",
       "source_file": ".cursor/rules/AGENTS.md",
-      "source_location": "L59",
+      "source_location": "L60",
       "_origin": "ast",
       "id": "rules_agents_9_single_location_dynamic_ingress_absolute_zero_auto_commits",
       "community": 88,
@@ -5971,7 +5971,7 @@
       "label": "10. Code Preservation, Observability & Per-Conversation Worklog Auto-Update",
       "file_type": "document",
       "source_file": ".cursor/rules/AGENTS.md",
-      "source_location": "L63",
+      "source_location": "L64",
       "_origin": "ast",
       "id": "rules_agents_10_code_preservation_observability_per_conversation_worklog_auto_update",
       "community": 88,
@@ -5981,7 +5981,7 @@
       "label": "\ud83d\udee0\ufe0f TECH STACK BASELINE (2026 LTS)",
       "file_type": "document",
       "source_file": ".cursor/rules/AGENTS.md",
-      "source_location": "L69",
+      "source_location": "L70",
       "_origin": "ast",
       "id": "rules_agents_tech_stack_baseline_2026_lts",
       "community": 88,
@@ -5991,7 +5991,7 @@
       "label": "\ud83e\udded DOMAIN RULE ROUTER",
       "file_type": "document",
       "source_file": ".cursor/rules/AGENTS.md",
-      "source_location": "L79",
+      "source_location": "L80",
       "_origin": "ast",
       "id": "rules_agents_domain_rule_router",
       "community": 88,
@@ -6018,20 +6018,20 @@
       "norm_label": "ai agent directives - sg forge (2026 clean architecture & engineering standards)"
     },
     {
-      "label": "\u26a1 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (11 CHECKS)",
+      "label": "\u26a1 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (12 CHECKS)",
       "file_type": "document",
       "source_file": ".github/copilot-instructions.md",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "github_copilot_instructions_1_pre_flight_pre_commit_verification_gate_11_checks",
+      "id": "github_copilot_instructions_1_pre_flight_pre_commit_verification_gate_12_checks",
       "community": 174,
-      "norm_label": "\u26a1 1. pre-flight & pre-commit verification gate (11 checks)"
+      "norm_label": "\u26a1 1. pre-flight & pre-commit verification gate (12 checks)"
     },
     {
       "label": "\ud83d\uded1 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)",
       "file_type": "document",
       "source_file": ".github/copilot-instructions.md",
-      "source_location": "L24",
+      "source_location": "L25",
       "_origin": "ast",
       "id": "github_copilot_instructions_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
       "community": 174,
@@ -6041,7 +6041,7 @@
       "label": "1. Correctness, Grounding & \"No Guessing\"",
       "file_type": "document",
       "source_file": ".github/copilot-instructions.md",
-      "source_location": "L26",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "github_copilot_instructions_1_correctness_grounding_no_guessing",
       "community": 174,
@@ -6051,7 +6051,7 @@
       "label": "2. Strict File Size Governance & 500-Line Soft Cap",
       "file_type": "document",
       "source_file": ".github/copilot-instructions.md",
-      "source_location": "L30",
+      "source_location": "L31",
       "_origin": "ast",
       "id": "github_copilot_instructions_2_strict_file_size_governance_500_line_soft_cap",
       "community": 174,
@@ -6061,7 +6061,7 @@
       "label": "3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`)",
       "file_type": "document",
       "source_file": ".github/copilot-instructions.md",
-      "source_location": "L35",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "github_copilot_instructions_3_strict_ui_standard_meta_astryx_design_system_forge_ui",
       "community": 174,
@@ -6071,7 +6071,7 @@
       "label": "4. Centralized Structured Logging & RFC 7807 Error Boundaries",
       "file_type": "document",
       "source_file": ".github/copilot-instructions.md",
-      "source_location": "L40",
+      "source_location": "L41",
       "_origin": "ast",
       "id": "github_copilot_instructions_4_centralized_structured_logging_rfc_7807_error_boundaries",
       "community": 174,
@@ -6081,7 +6081,7 @@
       "label": "5. Multi-Tenant Data Isolation & Dedicated Turso DB per App",
       "file_type": "document",
       "source_file": ".github/copilot-instructions.md",
-      "source_location": "L44",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "github_copilot_instructions_5_multi_tenant_data_isolation_dedicated_turso_db_per_app",
       "community": 174,
@@ -6091,7 +6091,7 @@
       "label": "6. Directional Architectural Boundaries & Clean Modularity",
       "file_type": "document",
       "source_file": ".github/copilot-instructions.md",
-      "source_location": "L48",
+      "source_location": "L49",
       "_origin": "ast",
       "id": "github_copilot_instructions_6_directional_architectural_boundaries_clean_modularity",
       "community": 174,
@@ -6101,7 +6101,7 @@
       "label": "7. Clean Package Aliases (Zero Traversal Sprawl)",
       "file_type": "document",
       "source_file": ".github/copilot-instructions.md",
-      "source_location": "L52",
+      "source_location": "L53",
       "_origin": "ast",
       "id": "github_copilot_instructions_7_clean_package_aliases_zero_traversal_sprawl",
       "community": 174,
@@ -6111,7 +6111,7 @@
       "label": "8. Risk-Tiered 5-Tier Testing Rigor (3A Pattern)",
       "file_type": "document",
       "source_file": ".github/copilot-instructions.md",
-      "source_location": "L55",
+      "source_location": "L56",
       "_origin": "ast",
       "id": "github_copilot_instructions_8_risk_tiered_5_tier_testing_rigor_3a_pattern",
       "community": 174,
@@ -6121,7 +6121,7 @@
       "label": "9. Single-Location Dynamic Ingress & Absolute Zero Auto-Commits",
       "file_type": "document",
       "source_file": ".github/copilot-instructions.md",
-      "source_location": "L59",
+      "source_location": "L60",
       "_origin": "ast",
       "id": "github_copilot_instructions_9_single_location_dynamic_ingress_absolute_zero_auto_commits",
       "community": 174,
@@ -6131,7 +6131,7 @@
       "label": "10. Code Preservation, Observability & Per-Conversation Worklog Auto-Update",
       "file_type": "document",
       "source_file": ".github/copilot-instructions.md",
-      "source_location": "L63",
+      "source_location": "L64",
       "_origin": "ast",
       "id": "github_copilot_instructions_10_code_preservation_observability_per_conversation_worklog_auto_update",
       "community": 174,
@@ -6141,7 +6141,7 @@
       "label": "\ud83d\udee0\ufe0f TECH STACK BASELINE (2026 LTS)",
       "file_type": "document",
       "source_file": ".github/copilot-instructions.md",
-      "source_location": "L69",
+      "source_location": "L70",
       "_origin": "ast",
       "id": "github_copilot_instructions_tech_stack_baseline_2026_lts",
       "community": 174,
@@ -6151,7 +6151,7 @@
       "label": "\ud83e\udded DOMAIN RULE ROUTER",
       "file_type": "document",
       "source_file": ".github/copilot-instructions.md",
-      "source_location": "L79",
+      "source_location": "L80",
       "_origin": "ast",
       "id": "github_copilot_instructions_domain_rule_router",
       "community": 174,
@@ -6218,20 +6218,20 @@
       "norm_label": "ai agent directives - sg forge (2026 clean architecture & engineering standards)"
     },
     {
-      "label": "\u26a1 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (11 CHECKS)",
+      "label": "\u26a1 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (12 CHECKS)",
       "file_type": "document",
       "source_file": "AGENTS.md",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "agents_1_pre_flight_pre_commit_verification_gate_11_checks",
+      "id": "agents_1_pre_flight_pre_commit_verification_gate_12_checks",
       "community": 165,
-      "norm_label": "\u26a1 1. pre-flight & pre-commit verification gate (11 checks)"
+      "norm_label": "\u26a1 1. pre-flight & pre-commit verification gate (12 checks)"
     },
     {
       "label": "\ud83d\uded1 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L24",
+      "source_location": "L25",
       "_origin": "ast",
       "id": "agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
       "community": 165,
@@ -6241,7 +6241,7 @@
       "label": "1. Correctness, Grounding & \"No Guessing\"",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L26",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "agents_1_correctness_grounding_no_guessing",
       "community": 165,
@@ -6251,7 +6251,7 @@
       "label": "2. Strict File Size Governance & 500-Line Soft Cap",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L30",
+      "source_location": "L31",
       "_origin": "ast",
       "id": "agents_2_strict_file_size_governance_500_line_soft_cap",
       "community": 165,
@@ -6261,7 +6261,7 @@
       "label": "3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`)",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L35",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "agents_3_strict_ui_standard_meta_astryx_design_system_forge_ui",
       "community": 165,
@@ -6271,7 +6271,7 @@
       "label": "4. Centralized Structured Logging & RFC 7807 Error Boundaries",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L40",
+      "source_location": "L41",
       "_origin": "ast",
       "id": "agents_4_centralized_structured_logging_rfc_7807_error_boundaries",
       "community": 165,
@@ -6281,7 +6281,7 @@
       "label": "5. Multi-Tenant Data Isolation & Dedicated Turso DB per App",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L44",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "agents_5_multi_tenant_data_isolation_dedicated_turso_db_per_app",
       "community": 165,
@@ -6291,7 +6291,7 @@
       "label": "6. Directional Architectural Boundaries & Clean Modularity",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L48",
+      "source_location": "L49",
       "_origin": "ast",
       "id": "agents_6_directional_architectural_boundaries_clean_modularity",
       "community": 165,
@@ -6301,7 +6301,7 @@
       "label": "7. Clean Package Aliases (Zero Traversal Sprawl)",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L52",
+      "source_location": "L53",
       "_origin": "ast",
       "id": "agents_7_clean_package_aliases_zero_traversal_sprawl",
       "community": 165,
@@ -6311,7 +6311,7 @@
       "label": "8. Risk-Tiered 5-Tier Testing Rigor (3A Pattern)",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L55",
+      "source_location": "L56",
       "_origin": "ast",
       "id": "agents_8_risk_tiered_5_tier_testing_rigor_3a_pattern",
       "community": 165,
@@ -6321,7 +6321,7 @@
       "label": "9. Single-Location Dynamic Ingress & Absolute Zero Auto-Commits",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L59",
+      "source_location": "L60",
       "_origin": "ast",
       "id": "agents_9_single_location_dynamic_ingress_absolute_zero_auto_commits",
       "community": 165,
@@ -6331,7 +6331,7 @@
       "label": "10. Code Preservation, Observability & Per-Conversation Worklog Auto-Update",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L63",
+      "source_location": "L64",
       "_origin": "ast",
       "id": "agents_10_code_preservation_observability_per_conversation_worklog_auto_update",
       "community": 165,
@@ -6341,7 +6341,7 @@
       "label": "\ud83d\udee0\ufe0f TECH STACK BASELINE (2026 LTS)",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L69",
+      "source_location": "L70",
       "_origin": "ast",
       "id": "agents_tech_stack_baseline_2026_lts",
       "community": 165,
@@ -6351,7 +6351,7 @@
       "label": "\ud83e\udded DOMAIN RULE ROUTER",
       "file_type": "document",
       "source_file": "AGENTS.md",
-      "source_location": "L79",
+      "source_location": "L80",
       "_origin": "ast",
       "id": "agents_domain_rule_router",
       "community": 165,
@@ -6378,20 +6378,20 @@
       "norm_label": "ai agent directives - sg forge (2026 clean architecture & engineering standards)"
     },
     {
-      "label": "\u26a1 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (11 CHECKS)",
+      "label": "\u26a1 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (12 CHECKS)",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "claude_1_pre_flight_pre_commit_verification_gate_11_checks",
+      "id": "claude_1_pre_flight_pre_commit_verification_gate_12_checks",
       "community": 163,
-      "norm_label": "\u26a1 1. pre-flight & pre-commit verification gate (11 checks)"
+      "norm_label": "\u26a1 1. pre-flight & pre-commit verification gate (12 checks)"
     },
     {
       "label": "\ud83d\uded1 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L24",
+      "source_location": "L25",
       "_origin": "ast",
       "id": "claude_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
       "community": 163,
@@ -6401,7 +6401,7 @@
       "label": "1. Correctness, Grounding & \"No Guessing\"",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L26",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "claude_1_correctness_grounding_no_guessing",
       "community": 163,
@@ -6411,7 +6411,7 @@
       "label": "2. Strict File Size Governance & 500-Line Soft Cap",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L30",
+      "source_location": "L31",
       "_origin": "ast",
       "id": "claude_2_strict_file_size_governance_500_line_soft_cap",
       "community": 163,
@@ -6421,7 +6421,7 @@
       "label": "3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`)",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L35",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "claude_3_strict_ui_standard_meta_astryx_design_system_forge_ui",
       "community": 163,
@@ -6431,7 +6431,7 @@
       "label": "4. Centralized Structured Logging & RFC 7807 Error Boundaries",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L40",
+      "source_location": "L41",
       "_origin": "ast",
       "id": "claude_4_centralized_structured_logging_rfc_7807_error_boundaries",
       "community": 163,
@@ -6441,7 +6441,7 @@
       "label": "5. Multi-Tenant Data Isolation & Dedicated Turso DB per App",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L44",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "claude_5_multi_tenant_data_isolation_dedicated_turso_db_per_app",
       "community": 163,
@@ -6451,7 +6451,7 @@
       "label": "6. Directional Architectural Boundaries & Clean Modularity",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L48",
+      "source_location": "L49",
       "_origin": "ast",
       "id": "claude_6_directional_architectural_boundaries_clean_modularity",
       "community": 163,
@@ -6461,7 +6461,7 @@
       "label": "7. Clean Package Aliases (Zero Traversal Sprawl)",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L52",
+      "source_location": "L53",
       "_origin": "ast",
       "id": "claude_7_clean_package_aliases_zero_traversal_sprawl",
       "community": 163,
@@ -6471,7 +6471,7 @@
       "label": "8. Risk-Tiered 5-Tier Testing Rigor (3A Pattern)",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L55",
+      "source_location": "L56",
       "_origin": "ast",
       "id": "claude_8_risk_tiered_5_tier_testing_rigor_3a_pattern",
       "community": 163,
@@ -6481,7 +6481,7 @@
       "label": "9. Single-Location Dynamic Ingress & Absolute Zero Auto-Commits",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L59",
+      "source_location": "L60",
       "_origin": "ast",
       "id": "claude_9_single_location_dynamic_ingress_absolute_zero_auto_commits",
       "community": 163,
@@ -6491,7 +6491,7 @@
       "label": "10. Code Preservation, Observability & Per-Conversation Worklog Auto-Update",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L63",
+      "source_location": "L64",
       "_origin": "ast",
       "id": "claude_10_code_preservation_observability_per_conversation_worklog_auto_update",
       "community": 163,
@@ -6501,7 +6501,7 @@
       "label": "\ud83d\udee0\ufe0f TECH STACK BASELINE (2026 LTS)",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L69",
+      "source_location": "L70",
       "_origin": "ast",
       "id": "claude_tech_stack_baseline_2026_lts",
       "community": 163,
@@ -6511,7 +6511,7 @@
       "label": "\ud83e\udded DOMAIN RULE ROUTER",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L79",
+      "source_location": "L80",
       "_origin": "ast",
       "id": "claude_domain_rule_router",
       "community": 163,
@@ -6538,20 +6538,20 @@
       "norm_label": "ai agent directives - sg forge (2026 clean architecture & engineering standards)"
     },
     {
-      "label": "\u26a1 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (11 CHECKS)",
+      "label": "\u26a1 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (12 CHECKS)",
       "file_type": "document",
       "source_file": "GEMINI.md",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "gemini_1_pre_flight_pre_commit_verification_gate_11_checks",
+      "id": "gemini_1_pre_flight_pre_commit_verification_gate_12_checks",
       "community": 65,
-      "norm_label": "\u26a1 1. pre-flight & pre-commit verification gate (11 checks)"
+      "norm_label": "\u26a1 1. pre-flight & pre-commit verification gate (12 checks)"
     },
     {
       "label": "\ud83d\uded1 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L24",
+      "source_location": "L25",
       "_origin": "ast",
       "id": "gemini_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
       "community": 65,
@@ -6561,7 +6561,7 @@
       "label": "1. Correctness, Grounding & \"No Guessing\"",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L26",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "gemini_1_correctness_grounding_no_guessing",
       "community": 65,
@@ -6571,7 +6571,7 @@
       "label": "2. Strict File Size Governance & 500-Line Soft Cap",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L30",
+      "source_location": "L31",
       "_origin": "ast",
       "id": "gemini_2_strict_file_size_governance_500_line_soft_cap",
       "community": 65,
@@ -6581,7 +6581,7 @@
       "label": "3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`)",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L35",
+      "source_location": "L36",
       "_origin": "ast",
       "id": "gemini_3_strict_ui_standard_meta_astryx_design_system_forge_ui",
       "community": 65,
@@ -6591,7 +6591,7 @@
       "label": "4. Centralized Structured Logging & RFC 7807 Error Boundaries",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L40",
+      "source_location": "L41",
       "_origin": "ast",
       "id": "gemini_4_centralized_structured_logging_rfc_7807_error_boundaries",
       "community": 65,
@@ -6601,7 +6601,7 @@
       "label": "5. Multi-Tenant Data Isolation & Dedicated Turso DB per App",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L44",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "gemini_5_multi_tenant_data_isolation_dedicated_turso_db_per_app",
       "community": 65,
@@ -6611,7 +6611,7 @@
       "label": "6. Directional Architectural Boundaries & Clean Modularity",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L48",
+      "source_location": "L49",
       "_origin": "ast",
       "id": "gemini_6_directional_architectural_boundaries_clean_modularity",
       "community": 65,
@@ -6621,7 +6621,7 @@
       "label": "7. Clean Package Aliases (Zero Traversal Sprawl)",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L52",
+      "source_location": "L53",
       "_origin": "ast",
       "id": "gemini_7_clean_package_aliases_zero_traversal_sprawl",
       "community": 65,
@@ -6631,7 +6631,7 @@
       "label": "8. Risk-Tiered 5-Tier Testing Rigor (3A Pattern)",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L55",
+      "source_location": "L56",
       "_origin": "ast",
       "id": "gemini_8_risk_tiered_5_tier_testing_rigor_3a_pattern",
       "community": 65,
@@ -6641,7 +6641,7 @@
       "label": "9. Single-Location Dynamic Ingress & Absolute Zero Auto-Commits",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L59",
+      "source_location": "L60",
       "_origin": "ast",
       "id": "gemini_9_single_location_dynamic_ingress_absolute_zero_auto_commits",
       "community": 65,
@@ -6651,7 +6651,7 @@
       "label": "10. Code Preservation, Observability & Per-Conversation Worklog Auto-Update",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L63",
+      "source_location": "L64",
       "_origin": "ast",
       "id": "gemini_10_code_preservation_observability_per_conversation_worklog_auto_update",
       "community": 65,
@@ -6661,7 +6661,7 @@
       "label": "\ud83d\udee0\ufe0f TECH STACK BASELINE (2026 LTS)",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L69",
+      "source_location": "L70",
       "_origin": "ast",
       "id": "gemini_tech_stack_baseline_2026_lts",
       "community": 65,
@@ -6671,7 +6671,7 @@
       "label": "\ud83e\udded DOMAIN RULE ROUTER",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L79",
+      "source_location": "L80",
       "_origin": "ast",
       "id": "gemini_domain_rule_router",
       "community": 65,
@@ -8978,6 +8978,76 @@
       "norm_label": "worklogs"
     },
     {
+      "label": "REPORT_20260830_12966a8.md",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_12966a8.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_08_report_20260830_12966a8",
+      "community": 152,
+      "norm_label": "report_20260830_12966a8.md"
+    },
+    {
+      "label": "\ud83d\udee1\ufe0f SG Forge Atomic Commit Audit Report",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_12966a8.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_08_report_20260830_12966a8_sg_forge_atomic_commit_audit_report",
+      "community": 152,
+      "norm_label": "\ud83d\udee1\ufe0f sg forge atomic commit audit report"
+    },
+    {
+      "label": "\ud83d\udcdd Commit Overview & Context",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_12966a8.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "2026_08_report_20260830_12966a8_commit_overview_context",
+      "community": 152,
+      "norm_label": "\ud83d\udcdd commit overview & context"
+    },
+    {
+      "label": "\ud83d\udcca Changes & Diff Statistics",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_12966a8.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "2026_08_report_20260830_12966a8_changes_diff_statistics",
+      "community": 152,
+      "norm_label": "\ud83d\udcca changes & diff statistics"
+    },
+    {
+      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (58 Files)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_12966a8.md",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "2026_08_report_20260830_12966a8_detailed_file_changes_58_files",
+      "community": 152,
+      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (58 files)"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_12966a8.md",
+      "source_location": "L93",
+      "_origin": "ast",
+      "id": "2026_08_report_20260830_12966a8_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "community": 152,
+      "norm_label": "\ud83d\udee0\ufe0f tier 1: deterministic engine checks (checked by logic & open source tools)"
+    },
+    {
+      "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_12966a8.md",
+      "source_location": "L114",
+      "_origin": "ast",
+      "id": "2026_08_report_20260830_12966a8_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "community": 152,
+      "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
+    },
+    {
       "label": "REPORT_20260830_17e9cbd.md",
       "file_type": "document",
       "source_file": "logs/reports/2026-08/REPORT_20260830_17e9cbd.md",
@@ -9298,20 +9368,20 @@
       "norm_label": "\ud83d\udcca changes & diff statistics"
     },
     {
-      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (2 Files)",
+      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (58 Files)",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
       "source_location": "L28",
       "_origin": "ast",
-      "id": "reports_latest_commit_report_detailed_file_changes_2_files",
+      "id": "reports_latest_commit_report_detailed_file_changes_58_files",
       "community": 27,
-      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (2 files)"
+      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (58 files)"
     },
     {
       "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
-      "source_location": "L37",
+      "source_location": "L93",
       "_origin": "ast",
       "id": "reports_latest_commit_report_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
       "community": 27,
@@ -9321,7 +9391,7 @@
       "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
-      "source_location": "L57",
+      "source_location": "L114",
       "_origin": "ast",
       "id": "reports_latest_commit_report_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
       "community": 27,
@@ -11015,9 +11085,9 @@
       "source_file": ".agents/hooks/commit-msg.sh",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hooks_commit_msg",
-      "target": "home_sanket_desktop_sanket_org_website_clone_agents_hooks_commit_msg_sh__entry",
-      "confidence_score": 1.0
+      "target": "home_sanket_desktop_sanket_org_website_clone_agents_hooks_commit_msg_sh__entry"
     },
     {
       "relation": "contains",
@@ -11025,9 +11095,9 @@
       "source_file": ".agents/hooks/post-commit.sh",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hooks_post_commit",
-      "target": "home_sanket_desktop_sanket_org_website_clone_agents_hooks_post_commit_sh__entry",
-      "confidence_score": 1.0
+      "target": "home_sanket_desktop_sanket_org_website_clone_agents_hooks_post_commit_sh__entry"
     },
     {
       "relation": "contains",
@@ -11035,9 +11105,9 @@
       "source_file": ".agents/hooks/pre-commit.sh",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hooks_pre_commit",
-      "target": "home_sanket_desktop_sanket_org_website_clone_agents_hooks_pre_commit_sh__entry",
-      "confidence_score": 1.0
+      "target": "home_sanket_desktop_sanket_org_website_clone_agents_hooks_pre_commit_sh__entry"
     },
     {
       "relation": "contains",
@@ -11045,9 +11115,9 @@
       "source_file": ".agents/hooks/validate-worklog.sh",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hooks_validate_worklog",
-      "target": "home_sanket_desktop_sanket_org_website_clone_agents_hooks_validate_worklog_sh__entry",
-      "confidence_score": 1.0
+      "target": "home_sanket_desktop_sanket_org_website_clone_agents_hooks_validate_worklog_sh__entry"
     },
     {
       "relation": "contains",
@@ -11055,9 +11125,9 @@
       "source_file": ".agents/scripts/append-worklog.sh",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_scripts_append_worklog_sh_scripts_append_worklog",
-      "target": "home_sanket_desktop_sanket_org_website_clone_agents_scripts_append_worklog_sh__entry",
-      "confidence_score": 1.0
+      "target": "home_sanket_desktop_sanket_org_website_clone_agents_scripts_append_worklog_sh__entry"
     },
     {
       "relation": "contains",
@@ -11065,9 +11135,9 @@
       "source_file": ".agents/scripts/finish-task.sh",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_finish_task",
-      "target": "home_sanket_desktop_sanket_org_website_clone_agents_scripts_finish_task_sh__entry",
-      "confidence_score": 1.0
+      "target": "home_sanket_desktop_sanket_org_website_clone_agents_scripts_finish_task_sh__entry"
     },
     {
       "relation": "contains",
@@ -11075,9 +11145,9 @@
       "source_file": ".agents/scripts/sync-agent-instructions.sh",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_sync_agent_instructions",
-      "target": "home_sanket_desktop_sanket_org_website_clone_agents_scripts_sync_agent_instructions_sh__entry",
-      "confidence_score": 1.0
+      "target": "home_sanket_desktop_sanket_org_website_clone_agents_scripts_sync_agent_instructions_sh__entry"
     },
     {
       "relation": "contains",
@@ -15167,9 +15237,9 @@
       "source_file": "apps/test/unit/astryx-validator.test.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_astryx_validator_test",
-      "target": "bin_astryx",
-      "confidence_score": 1.0
+      "target": "bin_astryx"
     },
     {
       "relation": "imports",
@@ -15178,9 +15248,9 @@
       "source_file": "apps/test/unit/astryx-validator.test.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_astryx_validator_test",
-      "target": "bin_astryx_validateastryx",
-      "confidence_score": 1.0
+      "target": "bin_astryx_validateastryx"
     },
     {
       "relation": "imports_from",
@@ -15189,9 +15259,9 @@
       "source_file": "apps/test/unit/ignores.test.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_ignores_test",
-      "target": "scripts_sync_ignores",
-      "confidence_score": 1.0
+      "target": "scripts_sync_ignores"
     },
     {
       "relation": "imports",
@@ -15200,9 +15270,9 @@
       "source_file": "apps/test/unit/ignores.test.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_ignores_test",
-      "target": "scripts_sync_ignores_mandatory_attributes",
-      "confidence_score": 1.0
+      "target": "scripts_sync_ignores_mandatory_attributes"
     },
     {
       "relation": "imports",
@@ -15211,9 +15281,9 @@
       "source_file": "apps/test/unit/ignores.test.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_ignores_test",
-      "target": "scripts_sync_ignores_mandatory_exclusions",
-      "confidence_score": 1.0
+      "target": "scripts_sync_ignores_mandatory_exclusions"
     },
     {
       "relation": "imports",
@@ -15222,9 +15292,9 @@
       "source_file": "apps/test/unit/ignores.test.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_ignores_test",
-      "target": "scripts_sync_ignores_root_ignore_files",
-      "confidence_score": 1.0
+      "target": "scripts_sync_ignores_root_ignore_files"
     },
     {
       "relation": "imports",
@@ -15233,9 +15303,9 @@
       "source_file": "apps/test/unit/ignores.test.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_ignores_test",
-      "target": "scripts_sync_ignores_syncallignores",
-      "confidence_score": 1.0
+      "target": "scripts_sync_ignores_syncallignores"
     },
     {
       "relation": "imports",
@@ -15244,9 +15314,9 @@
       "source_file": "apps/test/unit/ignores.test.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_ignores_test",
-      "target": "scripts_sync_ignores_validateignores",
-      "confidence_score": 1.0
+      "target": "scripts_sync_ignores_validateignores"
     },
     {
       "relation": "contains",
@@ -15254,9 +15324,9 @@
       "source_file": "apps/test/unit/ignores.test.ts",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_ignores_test",
-      "target": "unit_ignores_test_repo_root",
-      "confidence_score": 1.0
+      "target": "unit_ignores_test_repo_root"
     },
     {
       "relation": "contains",
@@ -15685,9 +15755,9 @@
       "source_file": "portables/astryx/bin/astryx.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_astryx",
-      "target": "bin_astryx_args",
-      "confidence_score": 1.0
+      "target": "bin_astryx_args"
     },
     {
       "relation": "contains",
@@ -15695,9 +15765,9 @@
       "source_file": "portables/astryx/bin/astryx.ts",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_astryx",
-      "target": "bin_astryx_astryx_config_path",
-      "confidence_score": 1.0
+      "target": "bin_astryx_astryx_config_path"
     },
     {
       "relation": "contains",
@@ -15705,9 +15775,9 @@
       "source_file": "portables/astryx/bin/astryx.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_astryx",
-      "target": "bin_astryx_cwd",
-      "confidence_score": 1.0
+      "target": "bin_astryx_cwd"
     },
     {
       "relation": "contains",
@@ -15715,9 +15785,9 @@
       "source_file": "portables/astryx/bin/astryx.ts",
       "source_location": "L68",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_astryx",
-      "target": "bin_astryx_getscanfiles",
-      "confidence_score": 1.0
+      "target": "bin_astryx_getscanfiles"
     },
     {
       "relation": "contains",
@@ -15725,9 +15795,9 @@
       "source_file": "portables/astryx/bin/astryx.ts",
       "source_location": "L29",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_astryx",
-      "target": "bin_astryx_initastryx",
-      "confidence_score": 1.0
+      "target": "bin_astryx_initastryx"
     },
     {
       "relation": "contains",
@@ -15735,9 +15805,9 @@
       "source_file": "portables/astryx/bin/astryx.ts",
       "source_location": "L172",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_astryx",
-      "target": "bin_astryx_main",
-      "confidence_score": 1.0
+      "target": "bin_astryx_main"
     },
     {
       "relation": "contains",
@@ -15745,9 +15815,9 @@
       "source_file": "portables/astryx/bin/astryx.ts",
       "source_location": "L155",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_astryx",
-      "target": "bin_astryx_runclivalidation",
-      "confidence_score": 1.0
+      "target": "bin_astryx_runclivalidation"
     },
     {
       "relation": "contains",
@@ -15755,9 +15825,9 @@
       "source_file": "portables/astryx/bin/astryx.ts",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_astryx",
-      "target": "bin_astryx_showhelp",
-      "confidence_score": 1.0
+      "target": "bin_astryx_showhelp"
     },
     {
       "relation": "contains",
@@ -15765,9 +15835,9 @@
       "source_file": "portables/astryx/bin/astryx.ts",
       "source_location": "L54",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_astryx",
-      "target": "bin_astryx_statusastryx",
-      "confidence_score": 1.0
+      "target": "bin_astryx_statusastryx"
     },
     {
       "relation": "contains",
@@ -15775,9 +15845,9 @@
       "source_file": "portables/astryx/bin/astryx.ts",
       "source_location": "L86",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_astryx",
-      "target": "bin_astryx_validateastryx",
-      "confidence_score": 1.0
+      "target": "bin_astryx_validateastryx"
     },
     {
       "relation": "calls",
@@ -15786,9 +15856,9 @@
       "source_file": "portables/astryx/bin/astryx.ts",
       "source_location": "L184",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_astryx_main",
-      "target": "bin_astryx_showhelp",
-      "confidence_score": 1.0
+      "target": "bin_astryx_showhelp"
     },
     {
       "relation": "calls",
@@ -15797,9 +15867,9 @@
       "source_file": "portables/astryx/bin/astryx.ts",
       "source_location": "L175",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_astryx_main",
-      "target": "bin_astryx_initastryx",
-      "confidence_score": 1.0
+      "target": "bin_astryx_initastryx"
     },
     {
       "relation": "calls",
@@ -15808,9 +15878,9 @@
       "source_file": "portables/astryx/bin/astryx.ts",
       "source_location": "L178",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_astryx_main",
-      "target": "bin_astryx_statusastryx",
-      "confidence_score": 1.0
+      "target": "bin_astryx_statusastryx"
     },
     {
       "relation": "calls",
@@ -15819,9 +15889,9 @@
       "source_file": "portables/astryx/bin/astryx.ts",
       "source_location": "L90",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_astryx_validateastryx",
-      "target": "bin_astryx_getscanfiles",
-      "confidence_score": 1.0
+      "target": "bin_astryx_getscanfiles"
     },
     {
       "relation": "calls",
@@ -15830,9 +15900,9 @@
       "source_file": "portables/astryx/bin/astryx.ts",
       "source_location": "L157",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_astryx_runclivalidation",
-      "target": "bin_astryx_validateastryx",
-      "confidence_score": 1.0
+      "target": "bin_astryx_validateastryx"
     },
     {
       "relation": "calls",
@@ -15841,9 +15911,9 @@
       "source_file": "portables/astryx/bin/astryx.ts",
       "source_location": "L181",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_astryx_main",
-      "target": "bin_astryx_runclivalidation",
-      "confidence_score": 1.0
+      "target": "bin_astryx_runclivalidation"
     },
     {
       "relation": "contains",
@@ -15851,9 +15921,9 @@
       "source_file": "portables/astryx/package.json",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "astryx_package",
-      "target": "astryx_package_dependencies",
-      "confidence_score": 1.0
+      "target": "astryx_package_dependencies"
     },
     {
       "relation": "contains",
@@ -15861,9 +15931,9 @@
       "source_file": "portables/astryx/package.json",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "astryx_package",
-      "target": "astryx_package_description",
-      "confidence_score": 1.0
+      "target": "astryx_package_description"
     },
     {
       "relation": "contains",
@@ -15871,9 +15941,9 @@
       "source_file": "portables/astryx/package.json",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "astryx_package",
-      "target": "astryx_package_name",
-      "confidence_score": 1.0
+      "target": "astryx_package_name"
     },
     {
       "relation": "contains",
@@ -15881,9 +15951,9 @@
       "source_file": "portables/astryx/package.json",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "astryx_package",
-      "target": "astryx_package_private",
-      "confidence_score": 1.0
+      "target": "astryx_package_private"
     },
     {
       "relation": "contains",
@@ -15891,9 +15961,9 @@
       "source_file": "portables/astryx/package.json",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "astryx_package",
-      "target": "astryx_package_type",
-      "confidence_score": 1.0
+      "target": "astryx_package_type"
     },
     {
       "relation": "contains",
@@ -15901,9 +15971,9 @@
       "source_file": "portables/astryx/package.json",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "astryx_package",
-      "target": "astryx_package_version",
-      "confidence_score": 1.0
+      "target": "astryx_package_version"
     },
     {
       "relation": "contains",
@@ -15911,9 +15981,9 @@
       "source_file": "portables/astryx/package.json",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "astryx_package_dependencies",
-      "target": "astryx_package_dependencies_astryx",
-      "confidence_score": 1.0
+      "target": "astryx_package_dependencies_astryx"
     },
     {
       "relation": "contains",
@@ -15921,9 +15991,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman",
-      "target": "bin_caveman_args",
-      "confidence_score": 1.0
+      "target": "bin_caveman_args"
     },
     {
       "relation": "contains",
@@ -15931,9 +16001,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L86",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman",
-      "target": "bin_caveman_compresstext",
-      "confidence_score": 1.0
+      "target": "bin_caveman_compresstext"
     },
     {
       "relation": "contains",
@@ -15941,9 +16011,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman",
-      "target": "bin_caveman_cwd",
-      "confidence_score": 1.0
+      "target": "bin_caveman_cwd"
     },
     {
       "relation": "contains",
@@ -15951,9 +16021,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L29",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman",
-      "target": "bin_caveman_getstate",
-      "confidence_score": 1.0
+      "target": "bin_caveman_getstate"
     },
     {
       "relation": "contains",
@@ -15961,9 +16031,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L53",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman",
-      "target": "bin_caveman_initcaveman",
-      "confidence_score": 1.0
+      "target": "bin_caveman_initcaveman"
     },
     {
       "relation": "contains",
@@ -15971,9 +16041,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L100",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman",
-      "target": "bin_caveman_main",
-      "confidence_score": 1.0
+      "target": "bin_caveman_main"
     },
     {
       "relation": "contains",
@@ -15981,9 +16051,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L74",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman",
-      "target": "bin_caveman_setlevel",
-      "confidence_score": 1.0
+      "target": "bin_caveman_setlevel"
     },
     {
       "relation": "contains",
@@ -15991,9 +16061,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L43",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman",
-      "target": "bin_caveman_setstate",
-      "confidence_score": 1.0
+      "target": "bin_caveman_setstate"
     },
     {
       "relation": "contains",
@@ -16001,9 +16071,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman",
-      "target": "bin_caveman_showhelp",
-      "confidence_score": 1.0
+      "target": "bin_caveman_showhelp"
     },
     {
       "relation": "contains",
@@ -16011,9 +16081,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman",
-      "target": "bin_caveman_state_file",
-      "confidence_score": 1.0
+      "target": "bin_caveman_state_file"
     },
     {
       "relation": "contains",
@@ -16021,9 +16091,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L65",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman",
-      "target": "bin_caveman_statuscaveman",
-      "confidence_score": 1.0
+      "target": "bin_caveman_statuscaveman"
     },
     {
       "relation": "calls",
@@ -16032,9 +16102,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L115",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman_main",
-      "target": "bin_caveman_showhelp",
-      "confidence_score": 1.0
+      "target": "bin_caveman_showhelp"
     },
     {
       "relation": "calls",
@@ -16043,9 +16113,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L55",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman_initcaveman",
-      "target": "bin_caveman_getstate",
-      "confidence_score": 1.0
+      "target": "bin_caveman_getstate"
     },
     {
       "relation": "calls",
@@ -16054,9 +16124,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L80",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman_setlevel",
-      "target": "bin_caveman_getstate",
-      "confidence_score": 1.0
+      "target": "bin_caveman_getstate"
     },
     {
       "relation": "calls",
@@ -16065,9 +16135,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L66",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman_statuscaveman",
-      "target": "bin_caveman_getstate",
-      "confidence_score": 1.0
+      "target": "bin_caveman_getstate"
     },
     {
       "relation": "calls",
@@ -16076,9 +16146,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L58",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman_initcaveman",
-      "target": "bin_caveman_setstate",
-      "confidence_score": 1.0
+      "target": "bin_caveman_setstate"
     },
     {
       "relation": "calls",
@@ -16087,9 +16157,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L82",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman_setlevel",
-      "target": "bin_caveman_setstate",
-      "confidence_score": 1.0
+      "target": "bin_caveman_setstate"
     },
     {
       "relation": "calls",
@@ -16098,9 +16168,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L103",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman_main",
-      "target": "bin_caveman_initcaveman",
-      "confidence_score": 1.0
+      "target": "bin_caveman_initcaveman"
     },
     {
       "relation": "calls",
@@ -16109,9 +16179,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L106",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman_main",
-      "target": "bin_caveman_statuscaveman",
-      "confidence_score": 1.0
+      "target": "bin_caveman_statuscaveman"
     },
     {
       "relation": "calls",
@@ -16120,9 +16190,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L109",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman_main",
-      "target": "bin_caveman_setlevel",
-      "confidence_score": 1.0
+      "target": "bin_caveman_setlevel"
     },
     {
       "relation": "calls",
@@ -16131,9 +16201,9 @@
       "source_file": "portables/caveman/bin/caveman.ts",
       "source_location": "L112",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_caveman_main",
-      "target": "bin_caveman_compresstext",
-      "confidence_score": 1.0
+      "target": "bin_caveman_compresstext"
     },
     {
       "relation": "contains",
@@ -16141,9 +16211,9 @@
       "source_file": "portables/caveman/package.json",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "caveman_package",
-      "target": "caveman_package_dependencies",
-      "confidence_score": 1.0
+      "target": "caveman_package_dependencies"
     },
     {
       "relation": "contains",
@@ -16151,9 +16221,9 @@
       "source_file": "portables/caveman/package.json",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "caveman_package",
-      "target": "caveman_package_description",
-      "confidence_score": 1.0
+      "target": "caveman_package_description"
     },
     {
       "relation": "contains",
@@ -16161,9 +16231,9 @@
       "source_file": "portables/caveman/package.json",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "caveman_package",
-      "target": "caveman_package_name",
-      "confidence_score": 1.0
+      "target": "caveman_package_name"
     },
     {
       "relation": "contains",
@@ -16171,9 +16241,9 @@
       "source_file": "portables/caveman/package.json",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "caveman_package",
-      "target": "caveman_package_private",
-      "confidence_score": 1.0
+      "target": "caveman_package_private"
     },
     {
       "relation": "contains",
@@ -16181,9 +16251,9 @@
       "source_file": "portables/caveman/package.json",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "caveman_package",
-      "target": "caveman_package_type",
-      "confidence_score": 1.0
+      "target": "caveman_package_type"
     },
     {
       "relation": "contains",
@@ -16191,9 +16261,9 @@
       "source_file": "portables/caveman/package.json",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "caveman_package",
-      "target": "caveman_package_version",
-      "confidence_score": 1.0
+      "target": "caveman_package_version"
     },
     {
       "relation": "defines",
@@ -16201,9 +16271,9 @@
       "source_file": "portables/hyperfine/autocomplete/hyperfine.bash",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "portables_hyperfine_autocomplete_hyperfine_bash_autocomplete_hyperfine",
-      "target": "autocomplete_hyperfine_hyperfine",
-      "confidence_score": 1.0
+      "target": "autocomplete_hyperfine_hyperfine"
     },
     {
       "relation": "contains",
@@ -16211,9 +16281,9 @@
       "source_file": "portables/hyperfine/autocomplete/hyperfine.bash",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "portables_hyperfine_autocomplete_hyperfine_bash_autocomplete_hyperfine",
-      "target": "home_sanket_desktop_sanket_org_website_clone_portables_hyperfine_autocomplete_hyperfine_bash__entry",
-      "confidence_score": 1.0
+      "target": "home_sanket_desktop_sanket_org_website_clone_portables_hyperfine_autocomplete_hyperfine_bash__entry"
     },
     {
       "relation": "contains",
@@ -16221,9 +16291,9 @@
       "source_file": "portables/tree/bin/tree.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_tree",
-      "target": "bin_tree_args",
-      "confidence_score": 1.0
+      "target": "bin_tree_args"
     },
     {
       "relation": "contains",
@@ -16231,9 +16301,9 @@
       "source_file": "portables/tree/bin/tree.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_tree",
-      "target": "bin_tree_ignore",
-      "confidence_score": 1.0
+      "target": "bin_tree_ignore"
     },
     {
       "relation": "contains",
@@ -16241,9 +16311,9 @@
       "source_file": "portables/tree/bin/tree.ts",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_tree",
-      "target": "bin_tree_printtree",
-      "confidence_score": 1.0
+      "target": "bin_tree_printtree"
     },
     {
       "relation": "contains",
@@ -16251,9 +16321,9 @@
       "source_file": "portables/tree/bin/tree.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bin_tree",
-      "target": "bin_tree_targetdir",
-      "confidence_score": 1.0
+      "target": "bin_tree_targetdir"
     },
     {
       "relation": "contains",
@@ -16302,9 +16372,9 @@
       "source_file": "scripts/append-worklog.ts",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_append_worklog_ts_scripts_append_worklog",
-      "target": "scripts_append_worklog_appendworklog",
-      "confidence_score": 1.0
+      "target": "scripts_append_worklog_appendworklog"
     },
     {
       "relation": "contains",
@@ -16312,9 +16382,9 @@
       "source_file": "scripts/append-worklog.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_append_worklog_ts_scripts_append_worklog",
-      "target": "scripts_append_worklog_logs_dir",
-      "confidence_score": 1.0
+      "target": "scripts_append_worklog_logs_dir"
     },
     {
       "relation": "contains",
@@ -16322,9 +16392,9 @@
       "source_file": "scripts/append-worklog.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_append_worklog_ts_scripts_append_worklog",
-      "target": "scripts_append_worklog_repo_root",
-      "confidence_score": 1.0
+      "target": "scripts_append_worklog_repo_root"
     },
     {
       "relation": "contains",
@@ -16332,9 +16402,9 @@
       "source_file": "scripts/append-worklog.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_append_worklog_ts_scripts_append_worklog",
-      "target": "scripts_append_worklog_worklogs_path",
-      "confidence_score": 1.0
+      "target": "scripts_append_worklog_worklogs_path"
     },
     {
       "relation": "contains",
@@ -16577,9 +16647,9 @@
       "source_file": "scripts/sync-ignores.ts",
       "source_location": "L51",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_sync_ignores",
-      "target": "scripts_sync_ignores_mandatory_attributes",
-      "confidence_score": 1.0
+      "target": "scripts_sync_ignores_mandatory_attributes"
     },
     {
       "relation": "contains",
@@ -16587,9 +16657,9 @@
       "source_file": "scripts/sync-ignores.ts",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_sync_ignores",
-      "target": "scripts_sync_ignores_mandatory_exclusions",
-      "confidence_score": 1.0
+      "target": "scripts_sync_ignores_mandatory_exclusions"
     },
     {
       "relation": "contains",
@@ -16597,9 +16667,9 @@
       "source_file": "scripts/sync-ignores.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_sync_ignores",
-      "target": "scripts_sync_ignores_repo_root",
-      "confidence_score": 1.0
+      "target": "scripts_sync_ignores_repo_root"
     },
     {
       "relation": "contains",
@@ -16607,9 +16677,9 @@
       "source_file": "scripts/sync-ignores.ts",
       "source_location": "L40",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_sync_ignores",
-      "target": "scripts_sync_ignores_root_ignore_files",
-      "confidence_score": 1.0
+      "target": "scripts_sync_ignores_root_ignore_files"
     },
     {
       "relation": "contains",
@@ -16617,9 +16687,9 @@
       "source_file": "scripts/sync-ignores.ts",
       "source_location": "L157",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_sync_ignores",
-      "target": "scripts_sync_ignores_syncallignores",
-      "confidence_score": 1.0
+      "target": "scripts_sync_ignores_syncallignores"
     },
     {
       "relation": "contains",
@@ -16627,9 +16697,9 @@
       "source_file": "scripts/sync-ignores.ts",
       "source_location": "L81",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_sync_ignores",
-      "target": "scripts_sync_ignores_validateignores",
-      "confidence_score": 1.0
+      "target": "scripts_sync_ignores_validateignores"
     },
     {
       "relation": "contains",
@@ -16637,9 +16707,9 @@
       "source_file": "scripts/sync-ignores.ts",
       "source_location": "L70",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_sync_ignores",
-      "target": "scripts_sync_ignores_validationresult",
-      "confidence_score": 1.0
+      "target": "scripts_sync_ignores_validationresult"
     },
     {
       "relation": "imports_from",
@@ -16648,9 +16718,9 @@
       "source_file": "scripts/verify-gate.ts",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_gate",
-      "target": "scripts_sync_ignores",
-      "confidence_score": 1.0
+      "target": "scripts_sync_ignores"
     },
     {
       "relation": "imports",
@@ -16659,9 +16729,9 @@
       "source_file": "scripts/verify-gate.ts",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_gate",
-      "target": "scripts_sync_ignores_validateignores",
-      "confidence_score": 1.0
+      "target": "scripts_sync_ignores_validateignores"
     },
     {
       "relation": "contains",
@@ -17099,9 +17169,9 @@
       "source_file": ".agents/AGENTS.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents",
-      "target": "agents_agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
-      "confidence_score": 1.0
+      "target": "agents_agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards"
     },
     {
       "relation": "contains",
@@ -17109,9 +17179,9 @@
       "source_file": ".agents/AGENTS.md",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
-      "target": "agents_agents_1_pre_flight_pre_commit_verification_gate_11_checks",
-      "confidence_score": 1.0
+      "target": "agents_agents_1_pre_flight_pre_commit_verification_gate_12_checks"
     },
     {
       "relation": "contains",
@@ -17119,9 +17189,9 @@
       "source_file": ".agents/AGENTS.md",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
-      "target": "agents_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "confidence_score": 1.0
+      "target": "agents_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard"
     },
     {
       "relation": "contains",
@@ -17129,9 +17199,9 @@
       "source_file": ".agents/AGENTS.md",
       "source_location": "L79",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
-      "target": "agents_agents_domain_rule_router",
-      "confidence_score": 1.0
+      "target": "agents_agents_domain_rule_router"
     },
     {
       "relation": "contains",
@@ -17139,9 +17209,9 @@
       "source_file": ".agents/AGENTS.md",
       "source_location": "L69",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
-      "target": "agents_agents_tech_stack_baseline_2026_lts",
-      "confidence_score": 1.0
+      "target": "agents_agents_tech_stack_baseline_2026_lts"
     },
     {
       "relation": "contains",
@@ -17149,9 +17219,9 @@
       "source_file": ".agents/AGENTS.md",
       "source_location": "L63",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "agents_agents_10_code_preservation_observability_per_conversation_worklog_auto_update",
-      "confidence_score": 1.0
+      "target": "agents_agents_10_code_preservation_observability_per_conversation_worklog_auto_update"
     },
     {
       "relation": "contains",
@@ -17159,9 +17229,9 @@
       "source_file": ".agents/AGENTS.md",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "agents_agents_1_correctness_grounding_no_guessing",
-      "confidence_score": 1.0
+      "target": "agents_agents_1_correctness_grounding_no_guessing"
     },
     {
       "relation": "contains",
@@ -17169,9 +17239,9 @@
       "source_file": ".agents/AGENTS.md",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "agents_agents_2_strict_file_size_governance_500_line_soft_cap",
-      "confidence_score": 1.0
+      "target": "agents_agents_2_strict_file_size_governance_500_line_soft_cap"
     },
     {
       "relation": "contains",
@@ -17179,9 +17249,9 @@
       "source_file": ".agents/AGENTS.md",
       "source_location": "L35",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "agents_agents_3_strict_ui_standard_meta_astryx_design_system_forge_ui",
-      "confidence_score": 1.0
+      "target": "agents_agents_3_strict_ui_standard_meta_astryx_design_system_forge_ui"
     },
     {
       "relation": "contains",
@@ -17189,9 +17259,9 @@
       "source_file": ".agents/AGENTS.md",
       "source_location": "L40",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "agents_agents_4_centralized_structured_logging_rfc_7807_error_boundaries",
-      "confidence_score": 1.0
+      "target": "agents_agents_4_centralized_structured_logging_rfc_7807_error_boundaries"
     },
     {
       "relation": "contains",
@@ -17199,9 +17269,9 @@
       "source_file": ".agents/AGENTS.md",
       "source_location": "L44",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "agents_agents_5_multi_tenant_data_isolation_dedicated_turso_db_per_app",
-      "confidence_score": 1.0
+      "target": "agents_agents_5_multi_tenant_data_isolation_dedicated_turso_db_per_app"
     },
     {
       "relation": "contains",
@@ -17209,9 +17279,9 @@
       "source_file": ".agents/AGENTS.md",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "agents_agents_6_directional_architectural_boundaries_clean_modularity",
-      "confidence_score": 1.0
+      "target": "agents_agents_6_directional_architectural_boundaries_clean_modularity"
     },
     {
       "relation": "contains",
@@ -17219,9 +17289,9 @@
       "source_file": ".agents/AGENTS.md",
       "source_location": "L52",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "agents_agents_7_clean_package_aliases_zero_traversal_sprawl",
-      "confidence_score": 1.0
+      "target": "agents_agents_7_clean_package_aliases_zero_traversal_sprawl"
     },
     {
       "relation": "contains",
@@ -17229,9 +17299,9 @@
       "source_file": ".agents/AGENTS.md",
       "source_location": "L55",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "agents_agents_8_risk_tiered_5_tier_testing_rigor_3a_pattern",
-      "confidence_score": 1.0
+      "target": "agents_agents_8_risk_tiered_5_tier_testing_rigor_3a_pattern"
     },
     {
       "relation": "contains",
@@ -17239,9 +17309,9 @@
       "source_file": ".agents/AGENTS.md",
       "source_location": "L59",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "agents_agents_9_single_location_dynamic_ingress_absolute_zero_auto_commits",
-      "confidence_score": 1.0
+      "target": "agents_agents_9_single_location_dynamic_ingress_absolute_zero_auto_commits"
     },
     {
       "relation": "contains",
@@ -17249,9 +17319,9 @@
       "source_file": ".agents/reports/VERIFICATION_REPORT.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "reports_verification_report",
-      "target": "reports_verification_report_sg_forge_verification_gate_report",
-      "confidence_score": 1.0
+      "target": "reports_verification_report_sg_forge_verification_gate_report"
     },
     {
       "relation": "contains",
@@ -17259,9 +17329,9 @@
       "source_file": ".agents/reports/VERIFICATION_REPORT.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "reports_verification_report_sg_forge_verification_gate_report",
-      "target": "reports_verification_report_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "reports_verification_report_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -17269,9 +17339,9 @@
       "source_file": ".agents/reports/VERIFICATION_REPORT.md",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "reports_verification_report_sg_forge_verification_gate_report",
-      "target": "reports_verification_report_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
-      "confidence_score": 1.0
+      "target": "reports_verification_report_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
     },
     {
       "relation": "contains",
@@ -17279,9 +17349,9 @@
       "source_file": ".agents/rules/README.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_readme",
-      "target": "rules_readme_domain_specific_engineering_rules",
-      "confidence_score": 1.0
+      "target": "rules_readme_domain_specific_engineering_rules"
     },
     {
       "relation": "contains",
@@ -17289,9 +17359,9 @@
       "source_file": ".agents/rules/README.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_readme_domain_specific_engineering_rules",
-      "target": "rules_readme_overview",
-      "confidence_score": 1.0
+      "target": "rules_readme_overview"
     },
     {
       "relation": "contains",
@@ -17299,9 +17369,9 @@
       "source_file": ".agents/rules/README.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_readme_domain_specific_engineering_rules",
-      "target": "rules_readme_rule_index",
-      "confidence_score": 1.0
+      "target": "rules_readme_rule_index"
     },
     {
       "relation": "contains",
@@ -17309,9 +17379,9 @@
       "source_file": ".agents/rules/architecture.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_architecture",
-      "target": "rules_architecture_system_architecture_modularity_code_standards_google_meta_standard_2026",
-      "confidence_score": 1.0
+      "target": "rules_architecture_system_architecture_modularity_code_standards_google_meta_standard_2026"
     },
     {
       "relation": "contains",
@@ -17319,9 +17389,9 @@
       "source_file": ".agents/rules/architecture.md",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_architecture_system_architecture_modularity_code_standards_google_meta_standard_2026",
-      "target": "rules_architecture_1_directional_layer_boundaries_clean_architecture",
-      "confidence_score": 1.0
+      "target": "rules_architecture_1_directional_layer_boundaries_clean_architecture"
     },
     {
       "relation": "contains",
@@ -17329,9 +17399,9 @@
       "source_file": ".agents/rules/architecture.md",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_architecture_system_architecture_modularity_code_standards_google_meta_standard_2026",
-      "target": "rules_architecture_2_clean_aliases_zero_traversal_sprawl",
-      "confidence_score": 1.0
+      "target": "rules_architecture_2_clean_aliases_zero_traversal_sprawl"
     },
     {
       "relation": "contains",
@@ -17339,9 +17409,9 @@
       "source_file": ".agents/rules/architecture.md",
       "source_location": "L36",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_architecture_system_architecture_modularity_code_standards_google_meta_standard_2026",
-      "target": "rules_architecture_3_centralized_structured_logging_error_handling_standard",
-      "confidence_score": 1.0
+      "target": "rules_architecture_3_centralized_structured_logging_error_handling_standard"
     },
     {
       "relation": "contains",
@@ -17349,9 +17419,9 @@
       "source_file": ".agents/rules/architecture.md",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_architecture_system_architecture_modularity_code_standards_google_meta_standard_2026",
-      "target": "rules_architecture_4_mandatory_header_comment_blocks_understandable_documentation",
-      "confidence_score": 1.0
+      "target": "rules_architecture_4_mandatory_header_comment_blocks_understandable_documentation"
     },
     {
       "relation": "contains",
@@ -17359,9 +17429,9 @@
       "source_file": ".agents/rules/architecture.md",
       "source_location": "L63",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_architecture_system_architecture_modularity_code_standards_google_meta_standard_2026",
-      "target": "rules_architecture_5_hot_reloading_environment_configuration_invariant",
-      "confidence_score": 1.0
+      "target": "rules_architecture_5_hot_reloading_environment_configuration_invariant"
     },
     {
       "relation": "contains",
@@ -17369,9 +17439,9 @@
       "source_file": ".agents/rules/core.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_core",
-      "target": "rules_core_core_system_workflows_rules",
-      "confidence_score": 1.0
+      "target": "rules_core_core_system_workflows_rules"
     },
     {
       "relation": "contains",
@@ -17379,9 +17449,9 @@
       "source_file": ".agents/rules/core.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_core_core_system_workflows_rules",
-      "target": "rules_core_1_core_invariants_safe_execution",
-      "confidence_score": 1.0
+      "target": "rules_core_1_core_invariants_safe_execution"
     },
     {
       "relation": "contains",
@@ -17389,9 +17459,9 @@
       "source_file": ".agents/rules/core.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_core_core_system_workflows_rules",
-      "target": "rules_core_2_agent_grounding_no_guessing_invariant",
-      "confidence_score": 1.0
+      "target": "rules_core_2_agent_grounding_no_guessing_invariant"
     },
     {
       "relation": "contains",
@@ -17399,9 +17469,9 @@
       "source_file": ".agents/rules/core.md",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_core_core_system_workflows_rules",
-      "target": "rules_core_3_minimal_change_principle_diff_budget",
-      "confidence_score": 1.0
+      "target": "rules_core_3_minimal_change_principle_diff_budget"
     },
     {
       "relation": "contains",
@@ -17409,9 +17479,9 @@
       "source_file": ".agents/rules/core.md",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_core_core_system_workflows_rules",
-      "target": "rules_core_4_formal_definition_of_done_dod",
-      "confidence_score": 1.0
+      "target": "rules_core_4_formal_definition_of_done_dod"
     },
     {
       "relation": "contains",
@@ -17419,9 +17489,9 @@
       "source_file": ".agents/rules/docker-containers.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_docker_containers",
-      "target": "rules_docker_containers_docker_container_governance_standards_2026_lts",
-      "confidence_score": 1.0
+      "target": "rules_docker_containers_docker_container_governance_standards_2026_lts"
     },
     {
       "relation": "contains",
@@ -17429,9 +17499,9 @@
       "source_file": ".agents/rules/docker-containers.md",
       "source_location": "L29",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_docker_containers_docker_container_governance_standards_2026_lts",
-      "target": "rules_docker_containers_docker_cli_commands_via_run_sh",
-      "confidence_score": 1.0
+      "target": "rules_docker_containers_docker_cli_commands_via_run_sh"
     },
     {
       "relation": "contains",
@@ -17439,9 +17509,9 @@
       "source_file": ".agents/rules/docker-containers.md",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_docker_containers_docker_container_governance_standards_2026_lts",
-      "target": "rules_docker_containers_the_8_immutable_container_invariants",
-      "confidence_score": 1.0
+      "target": "rules_docker_containers_the_8_immutable_container_invariants"
     },
     {
       "relation": "contains",
@@ -17449,9 +17519,9 @@
       "source_file": ".agents/rules/frontend-state.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_state",
-      "target": "rules_frontend_state_google_grade_client_state_browser_storage_directives",
-      "confidence_score": 1.0
+      "target": "rules_frontend_state_google_grade_client_state_browser_storage_directives"
     },
     {
       "relation": "contains",
@@ -17459,9 +17529,9 @@
       "source_file": ".agents/rules/frontend-state.md",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_state_google_grade_client_state_browser_storage_directives",
-      "target": "rules_frontend_state_the_6_browser_state_invariants",
-      "confidence_score": 1.0
+      "target": "rules_frontend_state_the_6_browser_state_invariants"
     },
     {
       "relation": "contains",
@@ -17469,9 +17539,9 @@
       "source_file": ".agents/rules/frontend-state.md",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_state_the_6_browser_state_invariants",
-      "target": "rules_frontend_state_1_the_4_tier_state_classification_strict_partitioning",
-      "confidence_score": 1.0
+      "target": "rules_frontend_state_1_the_4_tier_state_classification_strict_partitioning"
     },
     {
       "relation": "contains",
@@ -17479,9 +17549,9 @@
       "source_file": ".agents/rules/frontend-state.md",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_state_the_6_browser_state_invariants",
-      "target": "rules_frontend_state_2_standardized_key_namespacing_versioning",
-      "confidence_score": 1.0
+      "target": "rules_frontend_state_2_standardized_key_namespacing_versioning"
     },
     {
       "relation": "contains",
@@ -17489,9 +17559,9 @@
       "source_file": ".agents/rules/frontend-state.md",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_state_the_6_browser_state_invariants",
-      "target": "rules_frontend_state_3_zero_layout_shift_fouc_prevention",
-      "confidence_score": 1.0
+      "target": "rules_frontend_state_3_zero_layout_shift_fouc_prevention"
     },
     {
       "relation": "contains",
@@ -17499,9 +17569,9 @@
       "source_file": ".agents/rules/frontend-state.md",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_state_the_6_browser_state_invariants",
-      "target": "rules_frontend_state_4_zero_throw_defensive_json_parsing",
-      "confidence_score": 1.0
+      "target": "rules_frontend_state_4_zero_throw_defensive_json_parsing"
     },
     {
       "relation": "contains",
@@ -17509,9 +17579,9 @@
       "source_file": ".agents/rules/frontend-state.md",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_state_the_6_browser_state_invariants",
-      "target": "rules_frontend_state_5_real_time_cross_tab_synchronization",
-      "confidence_score": 1.0
+      "target": "rules_frontend_state_5_real_time_cross_tab_synchronization"
     },
     {
       "relation": "contains",
@@ -17519,9 +17589,9 @@
       "source_file": ".agents/rules/frontend-state.md",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_state_the_6_browser_state_invariants",
-      "target": "rules_frontend_state_6_zero_sensitive_data_in_client_storage",
-      "confidence_score": 1.0
+      "target": "rules_frontend_state_6_zero_sensitive_data_in_client_storage"
     },
     {
       "relation": "contains",
@@ -17529,9 +17599,9 @@
       "source_file": ".agents/rules/frontend-ui.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_ui",
-      "target": "rules_frontend_ui_meta_astryx_frontend_ui_anti_vibecoding_directives",
-      "confidence_score": 1.0
+      "target": "rules_frontend_ui_meta_astryx_frontend_ui_anti_vibecoding_directives"
     },
     {
       "relation": "contains",
@@ -17539,9 +17609,9 @@
       "source_file": ".agents/rules/frontend-ui.md",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_ui_meta_astryx_frontend_ui_anti_vibecoding_directives",
-      "target": "rules_frontend_ui_the_7_meta_astryx_ui_invariants",
-      "confidence_score": 1.0
+      "target": "rules_frontend_ui_the_7_meta_astryx_ui_invariants"
     },
     {
       "relation": "contains",
@@ -17549,9 +17619,9 @@
       "source_file": ".agents/rules/frontend-ui.md",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_ui_the_7_meta_astryx_ui_invariants",
-      "target": "rules_frontend_ui_1_zero_ad_hoc_styling_mandatory_token_consumption",
-      "confidence_score": 1.0
+      "target": "rules_frontend_ui_1_zero_ad_hoc_styling_mandatory_token_consumption"
     },
     {
       "relation": "contains",
@@ -17559,9 +17629,9 @@
       "source_file": ".agents/rules/frontend-ui.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_ui_the_7_meta_astryx_ui_invariants",
-      "target": "rules_frontend_ui_2_8_point_mathematical_spacing_scale",
-      "confidence_score": 1.0
+      "target": "rules_frontend_ui_2_8_point_mathematical_spacing_scale"
     },
     {
       "relation": "contains",
@@ -17569,9 +17639,9 @@
       "source_file": ".agents/rules/frontend-ui.md",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_ui_the_7_meta_astryx_ui_invariants",
-      "target": "rules_frontend_ui_3_high_end_typography_contrast_wcag_2_1_aaa",
-      "confidence_score": 1.0
+      "target": "rules_frontend_ui_3_high_end_typography_contrast_wcag_2_1_aaa"
     },
     {
       "relation": "contains",
@@ -17579,9 +17649,9 @@
       "source_file": ".agents/rules/frontend-ui.md",
       "source_location": "L29",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_ui_the_7_meta_astryx_ui_invariants",
-      "target": "rules_frontend_ui_4_interactive_state_machine_on_all_elements",
-      "confidence_score": 1.0
+      "target": "rules_frontend_ui_4_interactive_state_machine_on_all_elements"
     },
     {
       "relation": "contains",
@@ -17589,9 +17659,9 @@
       "source_file": ".agents/rules/frontend-ui.md",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_ui_the_7_meta_astryx_ui_invariants",
-      "target": "rules_frontend_ui_5_glassmorphism_elevation_with_discipline",
-      "confidence_score": 1.0
+      "target": "rules_frontend_ui_5_glassmorphism_elevation_with_discipline"
     },
     {
       "relation": "contains",
@@ -17599,9 +17669,9 @@
       "source_file": ".agents/rules/frontend-ui.md",
       "source_location": "L42",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_ui_the_7_meta_astryx_ui_invariants",
-      "target": "rules_frontend_ui_6_zero_horizontal_scrolling_320px_responsive_guarantee",
-      "confidence_score": 1.0
+      "target": "rules_frontend_ui_6_zero_horizontal_scrolling_320px_responsive_guarantee"
     },
     {
       "relation": "contains",
@@ -17609,9 +17679,9 @@
       "source_file": ".agents/rules/frontend-ui.md",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_frontend_ui_the_7_meta_astryx_ui_invariants",
-      "target": "rules_frontend_ui_7_non_technical_end_user_pov_empathetic_feedback",
-      "confidence_score": 1.0
+      "target": "rules_frontend_ui_7_non_technical_end_user_pov_empathetic_feedback"
     },
     {
       "relation": "contains",
@@ -17619,9 +17689,9 @@
       "source_file": ".agents/rules/graphify.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_graphify",
-      "target": "rules_graphify_graphify",
-      "confidence_score": 1.0
+      "target": "rules_graphify_graphify"
     },
     {
       "relation": "contains",
@@ -17629,9 +17699,9 @@
       "source_file": ".agents/rules/no-browser.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_no_browser",
-      "target": "rules_no_browser_no_browser",
-      "confidence_score": 1.0
+      "target": "rules_no_browser_no_browser"
     },
     {
       "relation": "contains",
@@ -17639,9 +17709,9 @@
       "source_file": ".agents/rules/observability.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_observability",
-      "target": "rules_observability_microservice_observability_isolated_logging_rules_2026_lts",
-      "confidence_score": 1.0
+      "target": "rules_observability_microservice_observability_isolated_logging_rules_2026_lts"
     },
     {
       "relation": "contains",
@@ -17649,9 +17719,9 @@
       "source_file": ".agents/rules/observability.md",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_observability_microservice_observability_isolated_logging_rules_2026_lts",
-      "target": "rules_observability_non_negotiable_directives",
-      "confidence_score": 1.0
+      "target": "rules_observability_non_negotiable_directives"
     },
     {
       "relation": "contains",
@@ -17659,9 +17729,9 @@
       "source_file": ".agents/rules/rtk.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_rtk",
-      "target": "rules_rtk_rtk",
-      "confidence_score": 1.0
+      "target": "rules_rtk_rtk"
     },
     {
       "relation": "contains",
@@ -17669,9 +17739,9 @@
       "source_file": ".agents/rules/security-practices.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_security_practices",
-      "target": "rules_security_practices_cybersecurity_zero_trust_architecture_specification_owasp_asvs_5_0",
-      "confidence_score": 1.0
+      "target": "rules_security_practices_cybersecurity_zero_trust_architecture_specification_owasp_asvs_5_0"
     },
     {
       "relation": "contains",
@@ -17679,9 +17749,9 @@
       "source_file": ".agents/rules/security-practices.md",
       "source_location": "L79",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_security_practices_cybersecurity_zero_trust_architecture_specification_owasp_asvs_5_0",
-      "target": "rules_security_practices_10_sast_static_security_gate_enforcement",
-      "confidence_score": 1.0
+      "target": "rules_security_practices_10_sast_static_security_gate_enforcement"
     },
     {
       "relation": "contains",
@@ -17689,9 +17759,9 @@
       "source_file": ".agents/rules/security-practices.md",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_security_practices_cybersecurity_zero_trust_architecture_specification_owasp_asvs_5_0",
-      "target": "rules_security_practices_1_multi_tenant_isolation_access_control_asvs_v3",
-      "confidence_score": 1.0
+      "target": "rules_security_practices_1_multi_tenant_isolation_access_control_asvs_v3"
     },
     {
       "relation": "contains",
@@ -17699,9 +17769,9 @@
       "source_file": ".agents/rules/security-practices.md",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_security_practices_cybersecurity_zero_trust_architecture_specification_owasp_asvs_5_0",
-      "target": "rules_security_practices_2_first_class_auditability_auditevent_domain_asvs_v7",
-      "confidence_score": 1.0
+      "target": "rules_security_practices_2_first_class_auditability_auditevent_domain_asvs_v7"
     },
     {
       "relation": "contains",
@@ -17709,9 +17779,9 @@
       "source_file": ".agents/rules/security-practices.md",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_security_practices_cybersecurity_zero_trust_architecture_specification_owasp_asvs_5_0",
-      "target": "rules_security_practices_3_database_access_parameterized_queries_anti_sqli_asvs_v5",
-      "confidence_score": 1.0
+      "target": "rules_security_practices_3_database_access_parameterized_queries_anti_sqli_asvs_v5"
     },
     {
       "relation": "contains",
@@ -17719,9 +17789,9 @@
       "source_file": ".agents/rules/security-practices.md",
       "source_location": "L35",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_security_practices_cybersecurity_zero_trust_architecture_specification_owasp_asvs_5_0",
-      "target": "rules_security_practices_4_command_injection_subprocess_spawning_asvs_v5",
-      "confidence_score": 1.0
+      "target": "rules_security_practices_4_command_injection_subprocess_spawning_asvs_v5"
     },
     {
       "relation": "contains",
@@ -17729,9 +17799,9 @@
       "source_file": ".agents/rules/security-practices.md",
       "source_location": "L42",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_security_practices_cybersecurity_zero_trust_architecture_specification_owasp_asvs_5_0",
-      "target": "rules_security_practices_5_path_traversal_file_system_boundaries_asvs_v5",
-      "confidence_score": 1.0
+      "target": "rules_security_practices_5_path_traversal_file_system_boundaries_asvs_v5"
     },
     {
       "relation": "contains",
@@ -17739,9 +17809,9 @@
       "source_file": ".agents/rules/security-practices.md",
       "source_location": "L54",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_security_practices_cybersecurity_zero_trust_architecture_specification_owasp_asvs_5_0",
-      "target": "rules_security_practices_6_cross_site_scripting_xss_content_security_asvs_v5",
-      "confidence_score": 1.0
+      "target": "rules_security_practices_6_cross_site_scripting_xss_content_security_asvs_v5"
     },
     {
       "relation": "contains",
@@ -17749,9 +17819,9 @@
       "source_file": ".agents/rules/security-practices.md",
       "source_location": "L60",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_security_practices_cybersecurity_zero_trust_architecture_specification_owasp_asvs_5_0",
-      "target": "rules_security_practices_7_server_side_request_forgery_ssrf_proxy_boundaries_asvs_v5",
-      "confidence_score": 1.0
+      "target": "rules_security_practices_7_server_side_request_forgery_ssrf_proxy_boundaries_asvs_v5"
     },
     {
       "relation": "contains",
@@ -17759,9 +17829,9 @@
       "source_file": ".agents/rules/security-practices.md",
       "source_location": "L66",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_security_practices_cybersecurity_zero_trust_architecture_specification_owasp_asvs_5_0",
-      "target": "rules_security_practices_8_secret_hygiene_zero_hardcoded_credential_policy_asvs_v6",
-      "confidence_score": 1.0
+      "target": "rules_security_practices_8_secret_hygiene_zero_hardcoded_credential_policy_asvs_v6"
     },
     {
       "relation": "contains",
@@ -17769,9 +17839,9 @@
       "source_file": ".agents/rules/security-practices.md",
       "source_location": "L73",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_security_practices_cybersecurity_zero_trust_architecture_specification_owasp_asvs_5_0",
-      "target": "rules_security_practices_9_cryptographic_randomness_token_generation_asvs_v6",
-      "confidence_score": 1.0
+      "target": "rules_security_practices_9_cryptographic_randomness_token_generation_asvs_v6"
     },
     {
       "relation": "contains",
@@ -17779,9 +17849,9 @@
       "source_file": ".agents/rules/testing.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_testing",
-      "target": "rules_testing_testing_enforcement_quality_assurance_standards_google_meta_standard",
-      "confidence_score": 1.0
+      "target": "rules_testing_testing_enforcement_quality_assurance_standards_google_meta_standard"
     },
     {
       "relation": "contains",
@@ -17789,9 +17859,9 @@
       "source_file": ".agents/rules/testing.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_testing_testing_enforcement_quality_assurance_standards_google_meta_standard",
-      "target": "rules_testing_1_testing_pyramid_test_categorization",
-      "confidence_score": 1.0
+      "target": "rules_testing_1_testing_pyramid_test_categorization"
     },
     {
       "relation": "contains",
@@ -17799,9 +17869,9 @@
       "source_file": ".agents/rules/testing.md",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_testing_testing_enforcement_quality_assurance_standards_google_meta_standard",
-      "target": "rules_testing_2_test_case_structure_mandatory_3a_pattern_arrange_act_assert",
-      "confidence_score": 1.0
+      "target": "rules_testing_2_test_case_structure_mandatory_3a_pattern_arrange_act_assert"
     },
     {
       "relation": "contains",
@@ -17809,9 +17879,9 @@
       "source_file": ".agents/rules/testing.md",
       "source_location": "L41",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_testing_testing_enforcement_quality_assurance_standards_google_meta_standard",
-      "target": "rules_testing_3_risk_tiered_coverage_mutation_testing",
-      "confidence_score": 1.0
+      "target": "rules_testing_3_risk_tiered_coverage_mutation_testing"
     },
     {
       "relation": "contains",
@@ -17819,9 +17889,9 @@
       "source_file": ".agents/rules/testing.md",
       "source_location": "L52",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_testing_testing_enforcement_quality_assurance_standards_google_meta_standard",
-      "target": "rules_testing_4_hermeticity_determinism_mocking_rules",
-      "confidence_score": 1.0
+      "target": "rules_testing_4_hermeticity_determinism_mocking_rules"
     },
     {
       "relation": "contains",
@@ -17829,9 +17899,9 @@
       "source_file": ".agents/rules/testing.md",
       "source_location": "L60",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_testing_testing_enforcement_quality_assurance_standards_google_meta_standard",
-      "target": "rules_testing_5_execution_command",
-      "confidence_score": 1.0
+      "target": "rules_testing_5_execution_command"
     },
     {
       "relation": "contains",
@@ -17839,9 +17909,9 @@
       "source_file": ".agents/rules/theme-system.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_theme_system",
-      "target": "rules_theme_system_theme_system",
-      "confidence_score": 1.0
+      "target": "rules_theme_system_theme_system"
     },
     {
       "relation": "contains",
@@ -17849,9 +17919,9 @@
       "source_file": ".agents/skills/cavecrew/SKILL.md",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "cavecrew_skill",
-      "target": "cavecrew_skill_output_contracts",
-      "confidence_score": 1.0
+      "target": "cavecrew_skill_output_contracts"
     },
     {
       "relation": "contains",
@@ -17859,9 +17929,9 @@
       "source_file": ".agents/skills/caveman/SKILL.md",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "caveman_skill",
-      "target": "caveman_skill_auto_clarity",
-      "confidence_score": 1.0
+      "target": "caveman_skill_auto_clarity"
     },
     {
       "relation": "contains",
@@ -17869,9 +17939,9 @@
       "source_file": ".agents/skills/caveman/SKILL.md",
       "source_location": "L59",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "caveman_skill",
-      "target": "caveman_skill_boundaries",
-      "confidence_score": 1.0
+      "target": "caveman_skill_boundaries"
     },
     {
       "relation": "contains",
@@ -17879,9 +17949,9 @@
       "source_file": ".agents/skills/caveman/SKILL.md",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "caveman_skill",
-      "target": "caveman_skill_intensity",
-      "confidence_score": 1.0
+      "target": "caveman_skill_intensity"
     },
     {
       "relation": "contains",
@@ -17889,9 +17959,9 @@
       "source_file": ".agents/skills/caveman/SKILL.md",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "caveman_skill",
-      "target": "caveman_skill_persistence",
-      "confidence_score": 1.0
+      "target": "caveman_skill_persistence"
     },
     {
       "relation": "contains",
@@ -17899,9 +17969,9 @@
       "source_file": ".agents/skills/caveman/SKILL.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "caveman_skill",
-      "target": "caveman_skill_rules",
-      "confidence_score": 1.0
+      "target": "caveman_skill_rules"
     },
     {
       "relation": "contains",
@@ -17909,9 +17979,9 @@
       "source_file": ".agents/workflows/graphify.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workflows_graphify",
-      "target": "workflows_graphify_workflow_graphify",
-      "confidence_score": 1.0
+      "target": "workflows_graphify_workflow_graphify"
     },
     {
       "relation": "contains",
@@ -17919,9 +17989,9 @@
       "source_file": ".agents/workflows/verify.md",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workflows_verify",
-      "target": "workflows_verify_unified_verification_quality_gate",
-      "confidence_score": 1.0
+      "target": "workflows_verify_unified_verification_quality_gate"
     },
     {
       "relation": "contains",
@@ -17929,9 +17999,9 @@
       "source_file": ".agents/workflows/verify.md",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workflows_verify_unified_verification_quality_gate",
-      "target": "workflows_verify_step_1_run_2_tier_automated_pre_commit_gate",
-      "confidence_score": 1.0
+      "target": "workflows_verify_step_1_run_2_tier_automated_pre_commit_gate"
     },
     {
       "relation": "contains",
@@ -17939,9 +18009,9 @@
       "source_file": ".agents/workflows/verify.md",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workflows_verify_unified_verification_quality_gate",
-      "target": "workflows_verify_step_2_synchronize_multi_agent_instructions_rule_9",
-      "confidence_score": 1.0
+      "target": "workflows_verify_step_2_synchronize_multi_agent_instructions_rule_9"
     },
     {
       "relation": "contains",
@@ -17949,9 +18019,9 @@
       "source_file": ".agents/workflows/verify.md",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workflows_verify_unified_verification_quality_gate",
-      "target": "workflows_verify_step_3_validate_worklog_ledger_integrity_rule_10",
-      "confidence_score": 1.0
+      "target": "workflows_verify_step_3_validate_worklog_ledger_integrity_rule_10"
     },
     {
       "relation": "contains",
@@ -17959,9 +18029,9 @@
       "source_file": ".agents/workflows/verify.md",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workflows_verify_unified_verification_quality_gate",
-      "target": "workflows_verify_step_4_git_commit_with_conventional_format",
-      "confidence_score": 1.0
+      "target": "workflows_verify_step_4_git_commit_with_conventional_format"
     },
     {
       "relation": "contains",
@@ -17969,9 +18039,9 @@
       "source_file": ".agents/workforce/ARCHITECT.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_architect",
-      "target": "workforce_architect_agent_workforce_architect_enterprise_systems_boundary_guardian",
-      "confidence_score": 1.0
+      "target": "workforce_architect_agent_workforce_architect_enterprise_systems_boundary_guardian"
     },
     {
       "relation": "contains",
@@ -17979,9 +18049,9 @@
       "source_file": ".agents/workforce/ARCHITECT.md",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_architect_agent_workforce_architect_enterprise_systems_boundary_guardian",
-      "target": "workforce_architect_core_directives",
-      "confidence_score": 1.0
+      "target": "workforce_architect_core_directives"
     },
     {
       "relation": "contains",
@@ -17989,9 +18059,9 @@
       "source_file": ".agents/workforce/ARCHITECT.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_architect_agent_workforce_architect_enterprise_systems_boundary_guardian",
-      "target": "workforce_architect_domain_rule_references",
-      "confidence_score": 1.0
+      "target": "workforce_architect_domain_rule_references"
     },
     {
       "relation": "contains",
@@ -17999,9 +18069,9 @@
       "source_file": ".agents/workforce/ARCHITECT.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_architect_agent_workforce_architect_enterprise_systems_boundary_guardian",
-      "target": "workforce_architect_role_definition",
-      "confidence_score": 1.0
+      "target": "workforce_architect_role_definition"
     },
     {
       "relation": "contains",
@@ -18009,9 +18079,9 @@
       "source_file": ".agents/workforce/BUILDER.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_builder",
-      "target": "workforce_builder_agent_workforce_builder_meta_grade_ui_system_architecture",
-      "confidence_score": 1.0
+      "target": "workforce_builder_agent_workforce_builder_meta_grade_ui_system_architecture"
     },
     {
       "relation": "contains",
@@ -18019,9 +18089,9 @@
       "source_file": ".agents/workforce/BUILDER.md",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_builder_agent_workforce_builder_meta_grade_ui_system_architecture",
-      "target": "workforce_builder_core_directives",
-      "confidence_score": 1.0
+      "target": "workforce_builder_core_directives"
     },
     {
       "relation": "contains",
@@ -18029,9 +18099,9 @@
       "source_file": ".agents/workforce/BUILDER.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_builder_agent_workforce_builder_meta_grade_ui_system_architecture",
-      "target": "workforce_builder_domain_rule_references",
-      "confidence_score": 1.0
+      "target": "workforce_builder_domain_rule_references"
     },
     {
       "relation": "contains",
@@ -18039,9 +18109,9 @@
       "source_file": ".agents/workforce/BUILDER.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_builder_agent_workforce_builder_meta_grade_ui_system_architecture",
-      "target": "workforce_builder_role_definition",
-      "confidence_score": 1.0
+      "target": "workforce_builder_role_definition"
     },
     {
       "relation": "contains",
@@ -18049,9 +18119,9 @@
       "source_file": ".agents/workforce/INVESTIGATOR.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_investigator",
-      "target": "workforce_investigator_agent_workforce_investigator_google_grade_search_graph_analysis",
-      "confidence_score": 1.0
+      "target": "workforce_investigator_agent_workforce_investigator_google_grade_search_graph_analysis"
     },
     {
       "relation": "contains",
@@ -18059,9 +18129,9 @@
       "source_file": ".agents/workforce/INVESTIGATOR.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_investigator_agent_workforce_investigator_google_grade_search_graph_analysis",
-      "target": "workforce_investigator_core_directives",
-      "confidence_score": 1.0
+      "target": "workforce_investigator_core_directives"
     },
     {
       "relation": "contains",
@@ -18069,9 +18139,9 @@
       "source_file": ".agents/workforce/INVESTIGATOR.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_investigator_agent_workforce_investigator_google_grade_search_graph_analysis",
-      "target": "workforce_investigator_domain_rule_references",
-      "confidence_score": 1.0
+      "target": "workforce_investigator_domain_rule_references"
     },
     {
       "relation": "contains",
@@ -18079,9 +18149,9 @@
       "source_file": ".agents/workforce/INVESTIGATOR.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_investigator_agent_workforce_investigator_google_grade_search_graph_analysis",
-      "target": "workforce_investigator_role_definition",
-      "confidence_score": 1.0
+      "target": "workforce_investigator_role_definition"
     },
     {
       "relation": "contains",
@@ -18089,9 +18159,9 @@
       "source_file": ".agents/workforce/README.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_readme",
-      "target": "workforce_readme_agent_workforce_specializations",
-      "confidence_score": 1.0
+      "target": "workforce_readme_agent_workforce_specializations"
     },
     {
       "relation": "contains",
@@ -18099,9 +18169,9 @@
       "source_file": ".agents/workforce/README.md",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_readme_agent_workforce_specializations",
-      "target": "workforce_readme_governance_compliance",
-      "confidence_score": 1.0
+      "target": "workforce_readme_governance_compliance"
     },
     {
       "relation": "contains",
@@ -18109,9 +18179,9 @@
       "source_file": ".agents/workforce/README.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_readme_agent_workforce_specializations",
-      "target": "workforce_readme_overview",
-      "confidence_score": 1.0
+      "target": "workforce_readme_overview"
     },
     {
       "relation": "contains",
@@ -18119,9 +18189,9 @@
       "source_file": ".agents/workforce/README.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_readme_agent_workforce_specializations",
-      "target": "workforce_readme_workforce_roles",
-      "confidence_score": 1.0
+      "target": "workforce_readme_workforce_roles"
     },
     {
       "relation": "contains",
@@ -18129,9 +18199,9 @@
       "source_file": ".agents/workforce/REVIEWER.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_reviewer",
-      "target": "workforce_reviewer_agent_workforce_reviewer_apple_microsoft_grade_quality_audit",
-      "confidence_score": 1.0
+      "target": "workforce_reviewer_agent_workforce_reviewer_apple_microsoft_grade_quality_audit"
     },
     {
       "relation": "contains",
@@ -18139,9 +18209,9 @@
       "source_file": ".agents/workforce/REVIEWER.md",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_reviewer_agent_workforce_reviewer_apple_microsoft_grade_quality_audit",
-      "target": "workforce_reviewer_core_directives",
-      "confidence_score": 1.0
+      "target": "workforce_reviewer_core_directives"
     },
     {
       "relation": "contains",
@@ -18149,9 +18219,9 @@
       "source_file": ".agents/workforce/REVIEWER.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_reviewer_agent_workforce_reviewer_apple_microsoft_grade_quality_audit",
-      "target": "workforce_reviewer_domain_rule_references",
-      "confidence_score": 1.0
+      "target": "workforce_reviewer_domain_rule_references"
     },
     {
       "relation": "contains",
@@ -18159,9 +18229,9 @@
       "source_file": ".agents/workforce/REVIEWER.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_reviewer_agent_workforce_reviewer_apple_microsoft_grade_quality_audit",
-      "target": "workforce_reviewer_role_definition",
-      "confidence_score": 1.0
+      "target": "workforce_reviewer_role_definition"
     },
     {
       "relation": "contains",
@@ -18169,9 +18239,9 @@
       "source_file": ".agents/workforce/TESTER.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_tester",
-      "target": "workforce_tester_agent_workforce_tester_precision_verification_mutation_quality",
-      "confidence_score": 1.0
+      "target": "workforce_tester_agent_workforce_tester_precision_verification_mutation_quality"
     },
     {
       "relation": "contains",
@@ -18179,9 +18249,9 @@
       "source_file": ".agents/workforce/TESTER.md",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_tester_agent_workforce_tester_precision_verification_mutation_quality",
-      "target": "workforce_tester_core_directives",
-      "confidence_score": 1.0
+      "target": "workforce_tester_core_directives"
     },
     {
       "relation": "contains",
@@ -18189,9 +18259,9 @@
       "source_file": ".agents/workforce/TESTER.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_tester_agent_workforce_tester_precision_verification_mutation_quality",
-      "target": "workforce_tester_domain_rule_references",
-      "confidence_score": 1.0
+      "target": "workforce_tester_domain_rule_references"
     },
     {
       "relation": "contains",
@@ -18199,9 +18269,9 @@
       "source_file": ".agents/workforce/TESTER.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workforce_tester_agent_workforce_tester_precision_verification_mutation_quality",
-      "target": "workforce_tester_role_definition",
-      "confidence_score": 1.0
+      "target": "workforce_tester_role_definition"
     },
     {
       "relation": "contains",
@@ -18209,9 +18279,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents",
-      "target": "rules_agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
-      "confidence_score": 1.0
+      "target": "rules_agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards"
     },
     {
       "relation": "contains",
@@ -18219,9 +18289,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
-      "target": "rules_agents_1_pre_flight_pre_commit_verification_gate_11_checks",
-      "confidence_score": 1.0
+      "target": "rules_agents_1_pre_flight_pre_commit_verification_gate_12_checks"
     },
     {
       "relation": "contains",
@@ -18229,9 +18299,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
-      "target": "rules_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "confidence_score": 1.0
+      "target": "rules_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard"
     },
     {
       "relation": "contains",
@@ -18239,9 +18309,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L79",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
-      "target": "rules_agents_domain_rule_router",
-      "confidence_score": 1.0
+      "target": "rules_agents_domain_rule_router"
     },
     {
       "relation": "contains",
@@ -18249,9 +18319,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L69",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
-      "target": "rules_agents_tech_stack_baseline_2026_lts",
-      "confidence_score": 1.0
+      "target": "rules_agents_tech_stack_baseline_2026_lts"
     },
     {
       "relation": "contains",
@@ -18259,9 +18329,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L63",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "rules_agents_10_code_preservation_observability_per_conversation_worklog_auto_update",
-      "confidence_score": 1.0
+      "target": "rules_agents_10_code_preservation_observability_per_conversation_worklog_auto_update"
     },
     {
       "relation": "contains",
@@ -18269,9 +18339,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "rules_agents_1_correctness_grounding_no_guessing",
-      "confidence_score": 1.0
+      "target": "rules_agents_1_correctness_grounding_no_guessing"
     },
     {
       "relation": "contains",
@@ -18279,9 +18349,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "rules_agents_2_strict_file_size_governance_500_line_soft_cap",
-      "confidence_score": 1.0
+      "target": "rules_agents_2_strict_file_size_governance_500_line_soft_cap"
     },
     {
       "relation": "contains",
@@ -18289,9 +18359,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L35",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "rules_agents_3_strict_ui_standard_meta_astryx_design_system_forge_ui",
-      "confidence_score": 1.0
+      "target": "rules_agents_3_strict_ui_standard_meta_astryx_design_system_forge_ui"
     },
     {
       "relation": "contains",
@@ -18299,9 +18369,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L40",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "rules_agents_4_centralized_structured_logging_rfc_7807_error_boundaries",
-      "confidence_score": 1.0
+      "target": "rules_agents_4_centralized_structured_logging_rfc_7807_error_boundaries"
     },
     {
       "relation": "contains",
@@ -18309,9 +18379,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L44",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "rules_agents_5_multi_tenant_data_isolation_dedicated_turso_db_per_app",
-      "confidence_score": 1.0
+      "target": "rules_agents_5_multi_tenant_data_isolation_dedicated_turso_db_per_app"
     },
     {
       "relation": "contains",
@@ -18319,9 +18389,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "rules_agents_6_directional_architectural_boundaries_clean_modularity",
-      "confidence_score": 1.0
+      "target": "rules_agents_6_directional_architectural_boundaries_clean_modularity"
     },
     {
       "relation": "contains",
@@ -18329,9 +18399,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L52",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "rules_agents_7_clean_package_aliases_zero_traversal_sprawl",
-      "confidence_score": 1.0
+      "target": "rules_agents_7_clean_package_aliases_zero_traversal_sprawl"
     },
     {
       "relation": "contains",
@@ -18339,9 +18409,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L55",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "rules_agents_8_risk_tiered_5_tier_testing_rigor_3a_pattern",
-      "confidence_score": 1.0
+      "target": "rules_agents_8_risk_tiered_5_tier_testing_rigor_3a_pattern"
     },
     {
       "relation": "contains",
@@ -18349,9 +18419,9 @@
       "source_file": ".cursor/rules/AGENTS.md",
       "source_location": "L59",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_agents_2_the_10_non_negotiable_engineering_invariants_google_meta_standard",
-      "target": "rules_agents_9_single_location_dynamic_ingress_absolute_zero_auto_commits",
-      "confidence_score": 1.0
+      "target": "rules_agents_9_single_location_dynamic_ingress_absolute_zero_auto_commits"
     },
     {
       "relation": "contains",
@@ -18371,7 +18441,7 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "github_copilot_instructions_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
-      "target": "github_copilot_instructions_1_pre_flight_pre_commit_verification_gate_11_checks"
+      "target": "github_copilot_instructions_1_pre_flight_pre_commit_verification_gate_12_checks"
     },
     {
       "relation": "contains",
@@ -18551,7 +18621,7 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "agents_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
-      "target": "agents_1_pre_flight_pre_commit_verification_gate_11_checks"
+      "target": "agents_1_pre_flight_pre_commit_verification_gate_12_checks"
     },
     {
       "relation": "contains",
@@ -18701,7 +18771,7 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "claude_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
-      "target": "claude_1_pre_flight_pre_commit_verification_gate_11_checks"
+      "target": "claude_1_pre_flight_pre_commit_verification_gate_12_checks"
     },
     {
       "relation": "contains",
@@ -18851,7 +18921,7 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "gemini_ai_agent_directives_sg_forge_2026_clean_architecture_engineering_standards",
-      "target": "gemini_1_pre_flight_pre_commit_verification_gate_11_checks"
+      "target": "gemini_1_pre_flight_pre_commit_verification_gate_12_checks"
     },
     {
       "relation": "contains",
@@ -20746,6 +20816,66 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_12966a8.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "2026_08_report_20260830_12966a8",
+      "target": "2026_08_report_20260830_12966a8_sg_forge_atomic_commit_audit_report"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_12966a8.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "2026_08_report_20260830_12966a8_sg_forge_atomic_commit_audit_report",
+      "target": "2026_08_report_20260830_12966a8_changes_diff_statistics"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_12966a8.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "2026_08_report_20260830_12966a8_sg_forge_atomic_commit_audit_report",
+      "target": "2026_08_report_20260830_12966a8_commit_overview_context"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_12966a8.md",
+      "source_location": "L28",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "2026_08_report_20260830_12966a8_sg_forge_atomic_commit_audit_report",
+      "target": "2026_08_report_20260830_12966a8_detailed_file_changes_58_files"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_12966a8.md",
+      "source_location": "L93",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "2026_08_report_20260830_12966a8_sg_forge_atomic_commit_audit_report",
+      "target": "2026_08_report_20260830_12966a8_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_12966a8.md",
+      "source_location": "L114",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "2026_08_report_20260830_12966a8_sg_forge_atomic_commit_audit_report",
+      "target": "2026_08_report_20260830_12966a8_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "logs/reports/2026-08/REPORT_20260830_17e9cbd.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -21021,7 +21151,7 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "reports_latest_commit_report_sg_forge_atomic_commit_audit_report",
-      "target": "reports_latest_commit_report_detailed_file_changes_2_files"
+      "target": "reports_latest_commit_report_detailed_file_changes_58_files"
     },
     {
       "relation": "contains",
@@ -21049,9 +21179,9 @@
       "source_file": "portables/README.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "portables_readme",
-      "target": "portables_readme_standalone_portable_runtimes_toolchain_portables",
-      "confidence_score": 1.0
+      "target": "portables_readme_standalone_portable_runtimes_toolchain_portables"
     },
     {
       "relation": "contains",
@@ -21059,9 +21189,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_unreleased",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_unreleased"
     },
     {
       "relation": "contains",
@@ -21069,9 +21199,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L395",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v0_2_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v0_2_0"
     },
     {
       "relation": "contains",
@@ -21079,9 +21209,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L383",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v0_3_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v0_3_0"
     },
     {
       "relation": "contains",
@@ -21089,9 +21219,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L378",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v0_4_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v0_4_0"
     },
     {
       "relation": "contains",
@@ -21099,9 +21229,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L371",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v0_5_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v0_5_0"
     },
     {
       "relation": "contains",
@@ -21109,9 +21239,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L358",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_0_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_0_0"
     },
     {
       "relation": "contains",
@@ -21119,9 +21249,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L191",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_10_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_10_0"
     },
     {
       "relation": "contains",
@@ -21129,9 +21259,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L155",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_11_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_11_0"
     },
     {
       "relation": "contains",
@@ -21139,9 +21269,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L135",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_12_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_12_0"
     },
     {
       "relation": "contains",
@@ -21149,9 +21279,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L106",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_13_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_13_0"
     },
     {
       "relation": "contains",
@@ -21159,9 +21289,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L96",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_14_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_14_0"
     },
     {
       "relation": "contains",
@@ -21169,9 +21299,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L80",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_15_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_15_0"
     },
     {
       "relation": "contains",
@@ -21179,9 +21309,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L55",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_16_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_16_0"
     },
     {
       "relation": "contains",
@@ -21189,9 +21319,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_16_1",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_16_1"
     },
     {
       "relation": "contains",
@@ -21199,9 +21329,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_17_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_17_0"
     },
     {
       "relation": "contains",
@@ -21209,9 +21339,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_18_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_18_0"
     },
     {
       "relation": "contains",
@@ -21219,9 +21349,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L353",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_1_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_1_0"
     },
     {
       "relation": "contains",
@@ -21229,9 +21359,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L348",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_2_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_2_0"
     },
     {
       "relation": "contains",
@@ -21239,9 +21369,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L331",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_3_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_3_0"
     },
     {
       "relation": "contains",
@@ -21249,9 +21379,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L323",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_4_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_4_0"
     },
     {
       "relation": "contains",
@@ -21259,9 +21389,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L310",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_5_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_5_0"
     },
     {
       "relation": "contains",
@@ -21269,9 +21399,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L296",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_6_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_6_0"
     },
     {
       "relation": "contains",
@@ -21279,9 +21409,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L274",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_7_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_7_0"
     },
     {
       "relation": "contains",
@@ -21289,9 +21419,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L249",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_8_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_8_0"
     },
     {
       "relation": "contains",
@@ -21299,9 +21429,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L215",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog",
-      "target": "hyperfine_changelog_v1_9_0",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_v1_9_0"
     },
     {
       "relation": "contains",
@@ -21309,9 +21439,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_unreleased",
-      "target": "hyperfine_changelog_bugfixes",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_bugfixes"
     },
     {
       "relation": "contains",
@@ -21319,9 +21449,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_unreleased",
-      "target": "hyperfine_changelog_changes",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_changes"
     },
     {
       "relation": "contains",
@@ -21329,9 +21459,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_unreleased",
-      "target": "hyperfine_changelog_features",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features"
     },
     {
       "relation": "contains",
@@ -21339,9 +21469,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_unreleased",
-      "target": "hyperfine_changelog_other",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_other"
     },
     {
       "relation": "contains",
@@ -21349,9 +21479,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_18_0",
-      "target": "hyperfine_changelog_bugfixes_22",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_bugfixes_22"
     },
     {
       "relation": "contains",
@@ -21359,9 +21489,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_18_0",
-      "target": "hyperfine_changelog_features_18",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_18"
     },
     {
       "relation": "contains",
@@ -21369,9 +21499,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L41",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_17_0",
-      "target": "hyperfine_changelog_bugfixes_41",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_bugfixes_41"
     },
     {
       "relation": "contains",
@@ -21379,9 +21509,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L35",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_17_0",
-      "target": "hyperfine_changelog_changes_35",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_changes_35"
     },
     {
       "relation": "contains",
@@ -21389,9 +21519,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L29",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_17_0",
-      "target": "hyperfine_changelog_features_29",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_29"
     },
     {
       "relation": "contains",
@@ -21399,9 +21529,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L49",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_16_1",
-      "target": "hyperfine_changelog_bugfixes_49",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_bugfixes_49"
     },
     {
       "relation": "contains",
@@ -21409,9 +21539,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L68",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_16_0",
-      "target": "hyperfine_changelog_bugfixes_68",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_bugfixes_68"
     },
     {
       "relation": "contains",
@@ -21419,9 +21549,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L63",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_16_0",
-      "target": "hyperfine_changelog_changes_63",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_changes_63"
     },
     {
       "relation": "contains",
@@ -21429,9 +21559,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L57",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_16_0",
-      "target": "hyperfine_changelog_features_57",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_57"
     },
     {
       "relation": "contains",
@@ -21439,9 +21569,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L74",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_16_0",
-      "target": "hyperfine_changelog_other_74",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_other_74"
     },
     {
       "relation": "contains",
@@ -21449,9 +21579,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L87",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_15_0",
-      "target": "hyperfine_changelog_bugfixes_87",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_bugfixes_87"
     },
     {
       "relation": "contains",
@@ -21459,9 +21589,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L82",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_15_0",
-      "target": "hyperfine_changelog_features_82",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_82"
     },
     {
       "relation": "contains",
@@ -21469,9 +21599,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L91",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_15_0",
-      "target": "hyperfine_changelog_other_91",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_other_91"
     },
     {
       "relation": "contains",
@@ -21479,9 +21609,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L98",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_14_0",
-      "target": "hyperfine_changelog_features_98",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_98"
     },
     {
       "relation": "contains",
@@ -21489,9 +21619,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L122",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_13_0",
-      "target": "hyperfine_changelog_changes_122",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_changes_122"
     },
     {
       "relation": "contains",
@@ -21499,9 +21629,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L108",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_13_0",
-      "target": "hyperfine_changelog_features_108",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_108"
     },
     {
       "relation": "contains",
@@ -21509,9 +21639,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L129",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_13_0",
-      "target": "hyperfine_changelog_other_129",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_other_129"
     },
     {
       "relation": "contains",
@@ -21519,9 +21649,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L144",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_12_0",
-      "target": "hyperfine_changelog_changes_144",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_changes_144"
     },
     {
       "relation": "contains",
@@ -21529,9 +21659,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L137",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_12_0",
-      "target": "hyperfine_changelog_features_137",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_137"
     },
     {
       "relation": "contains",
@@ -21539,9 +21669,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L181",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_11_0",
-      "target": "hyperfine_changelog_bugfixes_181",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_bugfixes_181"
     },
     {
       "relation": "contains",
@@ -21549,9 +21679,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L174",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_11_0",
-      "target": "hyperfine_changelog_changes_174",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_changes_174"
     },
     {
       "relation": "contains",
@@ -21559,9 +21689,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L157",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_11_0",
-      "target": "hyperfine_changelog_features_157",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_157"
     },
     {
       "relation": "contains",
@@ -21569,9 +21699,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L203",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_10_0",
-      "target": "hyperfine_changelog_bugfixes_203",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_bugfixes_203"
     },
     {
       "relation": "contains",
@@ -21579,9 +21709,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L193",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_10_0",
-      "target": "hyperfine_changelog_features_193",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_193"
     },
     {
       "relation": "contains",
@@ -21589,9 +21719,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L208",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_10_0",
-      "target": "hyperfine_changelog_packaging",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_packaging"
     },
     {
       "relation": "contains",
@@ -21599,9 +21729,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L237",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_9_0",
-      "target": "hyperfine_changelog_changes_237",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_changes_237"
     },
     {
       "relation": "contains",
@@ -21609,9 +21739,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L217",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_9_0",
-      "target": "hyperfine_changelog_features_217",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_217"
     },
     {
       "relation": "contains",
@@ -21619,9 +21749,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L245",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_9_0",
-      "target": "hyperfine_changelog_other_245",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_other_245"
     },
     {
       "relation": "contains",
@@ -21629,9 +21759,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L251",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_8_0",
-      "target": "hyperfine_changelog_features_251",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_251"
     },
     {
       "relation": "contains",
@@ -21639,9 +21769,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L270",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_8_0",
-      "target": "hyperfine_changelog_other_270",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_other_270"
     },
     {
       "relation": "contains",
@@ -21649,9 +21779,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L276",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_7_0",
-      "target": "hyperfine_changelog_features_276",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_276"
     },
     {
       "relation": "contains",
@@ -21659,9 +21789,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L287",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_7_0",
-      "target": "hyperfine_changelog_other_287",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_other_287"
     },
     {
       "relation": "contains",
@@ -21669,9 +21799,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L298",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_6_0",
-      "target": "hyperfine_changelog_features_298",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_298"
     },
     {
       "relation": "contains",
@@ -21679,9 +21809,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L306",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_6_0",
-      "target": "hyperfine_changelog_other_306",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_other_306"
     },
     {
       "relation": "contains",
@@ -21689,9 +21819,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L312",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_5_0",
-      "target": "hyperfine_changelog_features_312",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_312"
     },
     {
       "relation": "contains",
@@ -21699,9 +21829,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L317",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_5_0",
-      "target": "hyperfine_changelog_other_317",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_other_317"
     },
     {
       "relation": "contains",
@@ -21709,9 +21839,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L325",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_4_0",
-      "target": "hyperfine_changelog_features_325",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_325"
     },
     {
       "relation": "contains",
@@ -21719,9 +21849,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L340",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_3_0",
-      "target": "hyperfine_changelog_bugfixes_340",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_bugfixes_340"
     },
     {
       "relation": "contains",
@@ -21729,9 +21859,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L333",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_3_0",
-      "target": "hyperfine_changelog_feature",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_feature"
     },
     {
       "relation": "contains",
@@ -21739,9 +21869,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L344",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_3_0",
-      "target": "hyperfine_changelog_other_344",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_other_344"
     },
     {
       "relation": "contains",
@@ -21749,9 +21879,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L360",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_0_0",
-      "target": "hyperfine_changelog_features_360",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_360"
     },
     {
       "relation": "contains",
@@ -21759,9 +21889,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L366",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v1_0_0",
-      "target": "hyperfine_changelog_thanks",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_thanks"
     },
     {
       "relation": "contains",
@@ -21769,9 +21899,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L385",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v0_3_0",
-      "target": "hyperfine_changelog_features_385",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_features_385"
     },
     {
       "relation": "contains",
@@ -21779,9 +21909,9 @@
       "source_file": "portables/hyperfine/CHANGELOG.md",
       "source_location": "L390",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_changelog_v0_3_0",
-      "target": "hyperfine_changelog_other_390",
-      "confidence_score": 1.0
+      "target": "hyperfine_changelog_other_390"
     },
     {
       "relation": "contains",
@@ -21789,9 +21919,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme",
-      "target": "hyperfine_readme_hyperfine",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_hyperfine"
     },
     {
       "relation": "contains",
@@ -21799,9 +21929,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L287",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_hyperfine",
-      "target": "hyperfine_readme_alternative_tools",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_alternative_tools"
     },
     {
       "relation": "contains",
@@ -21809,9 +21939,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L305",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_hyperfine",
-      "target": "hyperfine_readme_citing_hyperfine",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_citing_hyperfine"
     },
     {
       "relation": "contains",
@@ -21819,9 +21949,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_hyperfine",
-      "target": "hyperfine_readme_features",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_features"
     },
     {
       "relation": "contains",
@@ -21829,9 +21959,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L164",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_hyperfine",
-      "target": "hyperfine_readme_installation",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_installation"
     },
     {
       "relation": "contains",
@@ -21839,9 +21969,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L291",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_hyperfine",
-      "target": "hyperfine_readme_integration_with_other_tools",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_integration_with_other_tools"
     },
     {
       "relation": "contains",
@@ -21849,9 +21979,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L310",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_hyperfine",
-      "target": "hyperfine_readme_license",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_license"
     },
     {
       "relation": "contains",
@@ -21859,9 +21989,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L299",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_hyperfine",
-      "target": "hyperfine_readme_origin_of_the_name",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_origin_of_the_name"
     },
     {
       "relation": "contains",
@@ -21869,9 +21999,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_hyperfine",
-      "target": "hyperfine_readme_usage",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_usage"
     },
     {
       "relation": "contains",
@@ -21879,9 +22009,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_usage",
-      "target": "hyperfine_readme_basic_benchmarks",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_basic_benchmarks"
     },
     {
       "relation": "contains",
@@ -21889,9 +22019,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L157",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_usage",
-      "target": "hyperfine_readme_detailed_benchmark_flowchart",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_detailed_benchmark_flowchart"
     },
     {
       "relation": "contains",
@@ -21899,9 +22029,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L130",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_usage",
-      "target": "hyperfine_readme_exporting_results",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_exporting_results"
     },
     {
       "relation": "contains",
@@ -21909,9 +22039,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L90",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_usage",
-      "target": "hyperfine_readme_intermediate_shell",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_intermediate_shell"
     },
     {
       "relation": "contains",
@@ -21919,9 +22049,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L70",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_usage",
-      "target": "hyperfine_readme_parameterized_benchmarks",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_parameterized_benchmarks"
     },
     {
       "relation": "contains",
@@ -21929,9 +22059,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L111",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_usage",
-      "target": "hyperfine_readme_shell_functions_and_aliases",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_shell_functions_and_aliases"
     },
     {
       "relation": "contains",
@@ -21939,9 +22069,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_usage",
-      "target": "hyperfine_readme_warmup_runs_and_preparation_commands",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_warmup_runs_and_preparation_commands"
     },
     {
       "relation": "contains",
@@ -21949,9 +22079,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L145",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_exporting_results",
-      "target": "hyperfine_readme_json",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_json"
     },
     {
       "relation": "contains",
@@ -21959,9 +22089,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L135",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_exporting_results",
-      "target": "hyperfine_readme_markdown",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_markdown"
     },
     {
       "relation": "contains",
@@ -21969,9 +22099,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L283",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_installation",
-      "target": "hyperfine_readme_from_binaries_linux_macos_windows",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_from_binaries_linux_macos_windows"
     },
     {
       "relation": "contains",
@@ -21979,9 +22109,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L185",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_installation",
-      "target": "hyperfine_readme_on_alpine_linux",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_on_alpine_linux"
     },
     {
       "relation": "contains",
@@ -21989,9 +22119,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L192",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_installation",
-      "target": "hyperfine_readme_on_arch_linux",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_on_arch_linux"
     },
     {
       "relation": "contains",
@@ -21999,9 +22129,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L199",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_installation",
-      "target": "hyperfine_readme_on_debian_linux",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_on_debian_linux"
     },
     {
       "relation": "contains",
@@ -22009,9 +22139,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L177",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_installation",
-      "target": "hyperfine_readme_on_fedora",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_on_fedora"
     },
     {
       "relation": "contains",
@@ -22019,9 +22149,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L241",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_installation",
-      "target": "hyperfine_readme_on_freebsd",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_on_freebsd"
     },
     {
       "relation": "contains",
@@ -22029,9 +22159,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L206",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_installation",
-      "target": "hyperfine_readme_on_funtoo_linux",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_on_funtoo_linux"
     },
     {
       "relation": "contains",
@@ -22039,9 +22169,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L228",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_installation",
-      "target": "hyperfine_readme_on_macos",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_on_macos"
     },
     {
       "relation": "contains",
@@ -22049,9 +22179,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L213",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_installation",
-      "target": "hyperfine_readme_on_nixos",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_on_nixos"
     },
     {
       "relation": "contains",
@@ -22059,9 +22189,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L248",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_installation",
-      "target": "hyperfine_readme_on_openbsd",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_on_openbsd"
     },
     {
       "relation": "contains",
@@ -22069,9 +22199,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L168",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_installation",
-      "target": "hyperfine_readme_on_ubuntu",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_on_ubuntu"
     },
     {
       "relation": "contains",
@@ -22079,9 +22209,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L220",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_installation",
-      "target": "hyperfine_readme_on_void_linux",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_on_void_linux"
     },
     {
       "relation": "contains",
@@ -22089,9 +22219,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L254",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_installation",
-      "target": "hyperfine_readme_on_windows",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_on_windows"
     },
     {
       "relation": "contains",
@@ -22099,9 +22229,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L274",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_installation",
-      "target": "hyperfine_readme_with_cargo_linux_macos_windows",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_with_cargo_linux_macos_windows"
     },
     {
       "relation": "contains",
@@ -22109,9 +22239,9 @@
       "source_file": "portables/hyperfine/README.md",
       "source_location": "L267",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "hyperfine_readme_installation",
-      "target": "hyperfine_readme_with_conda",
-      "confidence_score": 1.0
+      "target": "hyperfine_readme_with_conda"
     },
     {
       "relation": "contains",
@@ -22119,9 +22249,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L950",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_adding_modifying_languages",
-      "confidence_score": 1.0
+      "target": "scc_readme_adding_modifying_languages"
     },
     {
       "relation": "contains",
@@ -22129,9 +22259,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L898",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_api_support",
-      "confidence_score": 1.0
+      "target": "scc_readme_api_support"
     },
     {
       "relation": "contains",
@@ -22139,9 +22269,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L108",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_background",
-      "confidence_score": 1.0
+      "target": "scc_readme_background"
     },
     {
       "relation": "contains",
@@ -22149,9 +22279,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L1003",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_badges_beta",
-      "confidence_score": 1.0
+      "target": "scc_readme_badges_beta"
     },
     {
       "relation": "contains",
@@ -22159,9 +22289,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L869",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_ci_cd_support",
-      "confidence_score": 1.0
+      "target": "scc_readme_ci_cd_support"
     },
     {
       "relation": "contains",
@@ -22169,9 +22299,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L439",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_cocomo",
-      "confidence_score": 1.0
+      "target": "scc_readme_cocomo"
     },
     {
       "relation": "contains",
@@ -22179,9 +22309,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L374",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_complexity_estimates",
-      "confidence_score": 1.0
+      "target": "scc_readme_complexity_estimates"
     },
     {
       "relation": "contains",
@@ -22189,9 +22319,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L980",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_containers",
-      "confidence_score": 1.0
+      "target": "scc_readme_containers"
     },
     {
       "relation": "contains",
@@ -22199,9 +22329,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L892",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_development",
-      "confidence_score": 1.0
+      "target": "scc_readme_development"
     },
     {
       "relation": "contains",
@@ -22209,9 +22339,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L181",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_differences",
-      "confidence_score": 1.0
+      "target": "scc_readme_differences"
     },
     {
       "relation": "contains",
@@ -22219,9 +22349,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L360",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_features",
-      "confidence_score": 1.0
+      "target": "scc_readme_features"
     },
     {
       "relation": "contains",
@@ -22229,9 +22359,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L342",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_ignore_files",
-      "confidence_score": 1.0
+      "target": "scc_readme_ignore_files"
     },
     {
       "relation": "contains",
@@ -22239,9 +22369,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_install",
-      "confidence_score": 1.0
+      "target": "scc_readme_install"
     },
     {
       "relation": "contains",
@@ -22249,9 +22379,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L346",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_interesting_use_cases",
-      "confidence_score": 1.0
+      "target": "scc_readme_interesting_use_cases"
     },
     {
       "relation": "contains",
@@ -22259,9 +22389,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L954",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_issues",
-      "confidence_score": 1.0
+      "target": "scc_readme_issues"
     },
     {
       "relation": "contains",
@@ -22269,9 +22399,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L1045",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_languages",
-      "confidence_score": 1.0
+      "target": "scc_readme_languages"
     },
     {
       "relation": "contains",
@@ -22279,9 +22409,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L485",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_large_file_detection",
-      "confidence_score": 1.0
+      "target": "scc_readme_large_file_detection"
     },
     {
       "relation": "contains",
@@ -22289,9 +22419,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L966",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_low_memory",
-      "confidence_score": 1.0
+      "target": "scc_readme_low_memory"
     },
     {
       "relation": "contains",
@@ -22299,9 +22429,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L497",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_minified_generated_file_detection",
-      "confidence_score": 1.0
+      "target": "scc_readme_minified_generated_file_detection"
     },
     {
       "relation": "contains",
@@ -22309,9 +22439,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L548",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_output_formats",
-      "confidence_score": 1.0
+      "target": "scc_readme_output_formats"
     },
     {
       "relation": "contains",
@@ -22319,9 +22449,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L976",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_package",
-      "confidence_score": 1.0
+      "target": "scc_readme_package"
     },
     {
       "relation": "contains",
@@ -22329,9 +22459,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L750",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_performance",
-      "confidence_score": 1.0
+      "target": "scc_readme_performance"
     },
     {
       "relation": "contains",
@@ -22339,9 +22469,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L158",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_pitch",
-      "confidence_score": 1.0
+      "target": "scc_readme_pitch"
     },
     {
       "relation": "contains",
@@ -22349,9 +22479,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L526",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_remapping",
-      "confidence_score": 1.0
+      "target": "scc_readme_remapping"
     },
     {
       "relation": "contains",
@@ -22359,9 +22489,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L86",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_run_in_docker",
-      "confidence_score": 1.0
+      "target": "scc_readme_run_in_docker"
     },
     {
       "relation": "contains",
@@ -22369,9 +22499,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_support",
-      "confidence_score": 1.0
+      "target": "scc_readme_support"
     },
     {
       "relation": "contains",
@@ -22379,9 +22509,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L972",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_tests",
-      "confidence_score": 1.0
+      "target": "scc_readme_tests"
     },
     {
       "relation": "contains",
@@ -22389,9 +22519,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L396",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_unique_lines_of_code_uloc",
-      "confidence_score": 1.0
+      "target": "scc_readme_unique_lines_of_code_uloc"
     },
     {
       "relation": "contains",
@@ -22399,9 +22529,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L214",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme",
-      "target": "scc_readme_usage",
-      "confidence_score": 1.0
+      "target": "scc_readme_usage"
     },
     {
       "relation": "contains",
@@ -22409,9 +22539,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L64",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_install",
-      "target": "scc_readme_chocolatey",
-      "confidence_score": 1.0
+      "target": "scc_readme_chocolatey"
     },
     {
       "relation": "contains",
@@ -22419,9 +22549,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L76",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_install",
-      "target": "scc_readme_freebsd",
-      "confidence_score": 1.0
+      "target": "scc_readme_freebsd"
     },
     {
       "relation": "contains",
@@ -22429,9 +22559,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_install",
-      "target": "scc_readme_go_get",
-      "confidence_score": 1.0
+      "target": "scc_readme_go_get"
     },
     {
       "relation": "contains",
@@ -22439,9 +22569,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L46",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_install",
-      "target": "scc_readme_homebrew",
-      "confidence_score": 1.0
+      "target": "scc_readme_homebrew"
     },
     {
       "relation": "contains",
@@ -22449,9 +22579,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L52",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_install",
-      "target": "scc_readme_macports",
-      "confidence_score": 1.0
+      "target": "scc_readme_macports"
     },
     {
       "relation": "contains",
@@ -22459,9 +22589,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L58",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_install",
-      "target": "scc_readme_scoop",
-      "confidence_score": 1.0
+      "target": "scc_readme_scoop"
     },
     {
       "relation": "contains",
@@ -22469,9 +22599,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_install",
-      "target": "scc_readme_snap",
-      "confidence_score": 1.0
+      "target": "scc_readme_snap"
     },
     {
       "relation": "contains",
@@ -22479,9 +22609,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L70",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_install",
-      "target": "scc_readme_winget",
-      "confidence_score": 1.0
+      "target": "scc_readme_winget"
     },
     {
       "relation": "contains",
@@ -22489,9 +22619,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L100",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_run_in_docker",
-      "target": "scc_readme_gitlab",
-      "confidence_score": 1.0
+      "target": "scc_readme_gitlab"
     },
     {
       "relation": "contains",
@@ -22499,9 +22629,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L96",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_run_in_docker",
-      "target": "scc_readme_manual",
-      "confidence_score": 1.0
+      "target": "scc_readme_manual"
     },
     {
       "relation": "contains",
@@ -22509,9 +22639,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L104",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_run_in_docker",
-      "target": "scc_readme_other",
-      "confidence_score": 1.0
+      "target": "scc_readme_other"
     },
     {
       "relation": "contains",
@@ -22519,9 +22649,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L598",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_output_formats",
-      "target": "scc_readme_cloc_yaml",
-      "confidence_score": 1.0
+      "target": "scc_readme_cloc_yaml"
     },
     {
       "relation": "contains",
@@ -22529,9 +22659,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L584",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_output_formats",
-      "target": "scc_readme_csv",
-      "confidence_score": 1.0
+      "target": "scc_readme_csv"
     },
     {
       "relation": "contains",
@@ -22539,9 +22669,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L591",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_output_formats",
-      "target": "scc_readme_csv_stream",
-      "confidence_score": 1.0
+      "target": "scc_readme_csv_stream"
     },
     {
       "relation": "contains",
@@ -22549,9 +22679,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L653",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_output_formats",
-      "target": "scc_readme_html_and_html_table",
-      "confidence_score": 1.0
+      "target": "scc_readme_html_and_html_table"
     },
     {
       "relation": "contains",
@@ -22559,9 +22689,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L577",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_output_formats",
-      "target": "scc_readme_json",
-      "confidence_score": 1.0
+      "target": "scc_readme_json"
     },
     {
       "relation": "contains",
@@ -22569,9 +22699,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L701",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_output_formats",
-      "target": "scc_readme_openmetrics",
-      "confidence_score": 1.0
+      "target": "scc_readme_openmetrics"
     },
     {
       "relation": "contains",
@@ -22579,9 +22709,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L668",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_output_formats",
-      "target": "scc_readme_sql_and_sql_insert",
-      "confidence_score": 1.0
+      "target": "scc_readme_sql_and_sql_insert"
     },
     {
       "relation": "contains",
@@ -22589,9 +22719,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L568",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_output_formats",
-      "target": "scc_readme_tabular",
-      "confidence_score": 1.0
+      "target": "scc_readme_tabular"
     },
     {
       "relation": "contains",
@@ -22599,9 +22729,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L572",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_output_formats",
-      "target": "scc_readme_wide",
-      "confidence_score": 1.0
+      "target": "scc_readme_wide"
     },
     {
       "relation": "contains",
@@ -22609,9 +22739,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L799",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_performance",
-      "target": "scc_readme_cpython_https_github_com_python_cpython",
-      "confidence_score": 1.0
+      "target": "scc_readme_cpython_https_github_com_python_cpython"
     },
     {
       "relation": "contains",
@@ -22619,9 +22749,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L830",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_performance",
-      "target": "scc_readme_linux_kernel_https_github_com_torvalds_linux",
-      "confidence_score": 1.0
+      "target": "scc_readme_linux_kernel_https_github_com_torvalds_linux"
     },
     {
       "relation": "contains",
@@ -22629,9 +22759,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L768",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_performance",
-      "target": "scc_readme_redis_https_github_com_antirez_redis",
-      "confidence_score": 1.0
+      "target": "scc_readme_redis_https_github_com_antirez_redis"
     },
     {
       "relation": "contains",
@@ -22639,9 +22769,9 @@
       "source_file": "portables/scc/README.md",
       "source_location": "L1038",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scc_readme_badges_beta",
-      "target": "scc_readme_a_example_for_each_supported_provider",
-      "confidence_score": 1.0
+      "target": "scc_readme_a_example_for_each_supported_provider"
     },
     {
       "relation": "contains",
@@ -22665,5 +22795,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "4a580986013ef63da6da9e167c0f7d76e08b7acf"
+  "built_at_commit": "b7a14d22eefe73e94f1fd7a2804ec21ec900ffec"
 }

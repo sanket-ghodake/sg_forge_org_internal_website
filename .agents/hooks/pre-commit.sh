@@ -20,3 +20,8 @@ if ! "$BUN_BIN" run "$REPO_ROOT/scripts/verify-gate.ts"; then
     exit 1
 fi
 
+# Automatically stage updated Graphify outputs if git staging is active
+if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    git add "$REPO_ROOT/graphify-out/graph.json" "$REPO_ROOT/graphify-out/graph.html" "$REPO_ROOT/graphify-out/GRAPH_REPORT.md" "$REPO_ROOT/graphify-out/manifest.json" 2>/dev/null || true
+fi
+

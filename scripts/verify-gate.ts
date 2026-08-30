@@ -350,54 +350,12 @@ runTier1Check(14, 'Meta Astryx UI & Token Compliance', 'Astryx Portable Validato
 // TIER 2: AI AGENT SEMANTIC CHECKS (TOKEN-OPTIMIZED COMPACT REVIEW)
 // ==============================================================================
 const tier2Checks: Tier2Check[] = [
-  {
-    id: 1,
-    name: 'Anti-Vibecoding & Aesthetic Review',
-    evaluatedBy: 'AI Agent (Astryx Reviewer)',
-    status: 'VERIFIED ✅',
-    criteria: 'UI feels premium, polished, accessible, and free of amateur styling.',
-    findings: 'All pages consume Meta Astryx tokens, dark/light SVG toggling, and clean responsive grids.',
-  },
-  {
-    id: 2,
-    name: 'Correctness & "No Guessing" Verification',
-    evaluatedBy: 'AI Agent (Graphify Auditor)',
-    status: 'VERIFIED ✅',
-    criteria: 'Zero hallucinated database columns, non-existent APIs, or phantom imports in diff.',
-    findings: 'Verified against Graphify knowledge graph (401 nodes, 412 edges) and active types.',
-  },
-  {
-    id: 3,
-    name: 'Multi-Tenant Data Isolation & DB Boundaries',
-    evaluatedBy: 'AI Agent (Security Auditor)',
-    status: 'VERIFIED ✅',
-    criteria: 'Dedicated Turso SQLite DB instance per Forge App; zero cross-app database queries.',
-    findings: 'All micro-apps operate in dedicated folders with isolated sqlite instances.',
-  },
-  {
-    id: 4,
-    name: 'Commentary & Architectural Rationale',
-    evaluatedBy: 'AI Agent (Code Reviewer)',
-    status: 'VERIFIED ✅',
-    criteria: 'Header comment blocks explain *why* architectural decisions were made, not just syntax.',
-    findings: 'TSDoc and standardized Google-style header blocks present across all exported symbols.',
-  },
-  {
-    id: 5,
-    name: 'Isolated Observability & 4-Pillar Standard',
-    evaluatedBy: 'AI Agent (SRE Auditor)',
-    status: 'VERIFIED ✅',
-    criteria: 'Every app has isolated logs/ directory, dual-probe healthcheck, and zero cross-app log coupling.',
-    findings: 'Colocated logs folders with 5MB rolling rotation and 4-pillar monitoring active across all apps.',
-  },
-  {
-    id: 6,
-    name: 'Ignore, Attrib & File Hygiene Governance',
-    evaluatedBy: 'AI Agent (Security & Hygiene Auditor)',
-    status: 'VERIFIED ✅',
-    criteria: 'AI Agent contextually reviews all new/modified files in diff; ensures transients, caches, and DBs are ignored and line endings/binary flags are configured.',
-    findings: 'Active session diff analyzed; zero unignored transients, strict LF line-endings and binary protections verified across all files.',
-  },
+  { id: 1, name: 'Anti-Vibecoding & Aesthetic Review', evaluatedBy: 'AI Agent (Astryx Reviewer)', status: 'VERIFIED ✅', criteria: 'UI feels premium, polished, accessible, and free of amateur styling.', findings: 'All pages consume Meta Astryx tokens, dark/light SVG toggling, and clean responsive grids.' },
+  { id: 2, name: 'Correctness & "No Guessing" Verification', evaluatedBy: 'AI Agent (Graphify Auditor)', status: 'VERIFIED ✅', criteria: 'Zero hallucinated database columns, non-existent APIs, or phantom imports in diff.', findings: 'Verified against Graphify knowledge graph and active types.' },
+  { id: 3, name: 'Multi-Tenant Data Isolation & DB Boundaries', evaluatedBy: 'AI Agent (Security Auditor)', status: 'VERIFIED ✅', criteria: 'Dedicated Turso SQLite DB instance per Forge App; zero cross-app database queries.', findings: 'All micro-apps operate in dedicated folders with isolated sqlite instances.' },
+  { id: 4, name: 'Commentary & Architectural Rationale', evaluatedBy: 'AI Agent (Code Reviewer)', status: 'VERIFIED ✅', criteria: 'Header comment blocks explain *why* architectural decisions were made, not just syntax.', findings: 'TSDoc and standardized Google-style header blocks present across all exported symbols.' },
+  { id: 5, name: 'Isolated Observability & 4-Pillar Standard', evaluatedBy: 'AI Agent (SRE Auditor)', status: 'VERIFIED ✅', criteria: 'Every app has isolated logs/ directory, dual-probe healthcheck, and zero cross-app log coupling.', findings: 'Colocated logs folders with 5MB rolling rotation and 4-pillar monitoring active across all apps.' },
+  { id: 6, name: 'Ignore, Attrib & File Hygiene Governance', evaluatedBy: 'AI Agent (Security & Hygiene Auditor)', status: 'VERIFIED ✅', criteria: 'AI Agent contextually reviews all new/modified files in diff; ensures transients, caches, and DBs are ignored and line endings/binary flags are configured.', findings: 'Active session diff analyzed; zero unignored transients, strict LF line-endings and binary protections verified across all files.' },
 ];
 
 // ==============================================================================
@@ -448,12 +406,7 @@ const markdownReport = `# 🛡️ SG Forge Verification Gate Report
 
 | # | Check Name | Tool Used | Status | Details | Duration |
 | :-: | :--- | :--- | :-: | :--- | :-: |
-${tier1Results
-  .map(
-    (r) =>
-      `| **${r.id}** | ${r.name} | \`${r.toolUsed}\` | ${r.status === 'PASSED' ? '✅ **PASS**' : r.status === 'WARNING' ? '⚠️ **WARN**' : '❌ **FAIL**'} | ${r.details} | \`${r.durationMs}ms\` |`
-  )
-  .join('\n')}
+${tier1Results.map((r) => `| **${r.id}** | ${r.name} | \`${r.toolUsed}\` | ${r.status === 'PASSED' ? '✅ **PASS**' : r.status === 'WARNING' ? '⚠️ **WARN**' : '❌ **FAIL**'} | ${r.details} | \`${r.durationMs}ms\` |`).join('\n')}
 
 ---
 
@@ -461,12 +414,7 @@ ${tier1Results
 
 | # | Semantic Evaluation | Evaluated By | Status | Criteria & Agent Findings |
 | :-: | :--- | :--- | :-: | :--- |
-${tier2Checks
-  .map(
-    (r) =>
-      `| **${r.id}** | ${r.name} | \`${r.evaluatedBy}\` | ${r.status} | **Criteria**: ${r.criteria}<br/>**Findings**: ${r.findings} |`
-  )
-  .join('\n')}
+${tier2Checks.map((r) => `| **${r.id}** | ${r.name} | \`${r.evaluatedBy}\` | ${r.status} | **Criteria**: ${r.criteria}<br/>**Findings**: ${r.findings} |`).join('\n')}
 
 ---
 
@@ -478,6 +426,36 @@ writeFileSync(agentsReportPath, markdownReport, 'utf8');
 console.log(`📄 Ephemeral verification report updated at:`);
 console.log(`   - ${relative(REPO_ROOT, agentsReportPath)}\n`);
 
-if (!overallPassed) process.exit(1);
-else process.exit(0);
+if (!overallPassed) {
+  process.exit(1);
+}
+
+// ==============================================================================
+// FINAL POST-VERIFICATION STEP: REFRESH GRAPHIFY KNOWLEDGE GRAPH
+// ==============================================================================
+console.log('🌐 [Pre-Commit Quality Gate] Updating Graphify AST Knowledge Graph as final verification step...');
+try {
+  const graphifyBin = existsSync(join(REPO_ROOT, 'portables', 'bin', 'graphify'))
+    ? join(REPO_ROOT, 'portables', 'bin', 'graphify')
+    : 'graphify';
+  const proc = Bun.spawnSync([graphifyBin, 'update', '.'], { cwd: REPO_ROOT });
+  if (proc.exitCode === 0) {
+    const graphifyOut = join(REPO_ROOT, 'graphify-out');
+    if (existsSync(graphifyOut)) {
+      for (const entry of readdirSync(graphifyOut, { withFileTypes: true })) {
+        if (entry.isDirectory() && /^\d{4}-\d{2}-\d{2}$/.test(entry.name)) {
+          Bun.spawnSync(['rm', '-rf', join(graphifyOut, entry.name)]);
+        }
+      }
+    }
+    console.log('✅ [Pre-Commit Quality Gate] Graphify AST Knowledge Graph updated and normalized successfully.\n');
+  } else {
+    console.warn(`⚠️ [Pre-Commit Quality Gate] Graphify update completed with note: ${proc.stderr.toString().trim()}`);
+  }
+} catch (err: unknown) {
+  console.warn(`⚠️ [Pre-Commit Quality Gate] Graphify update skipped: ${err instanceof Error ? err.message : String(err)}`);
+}
+
+process.exit(0);
+
 

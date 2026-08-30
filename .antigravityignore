@@ -78,4 +78,3 @@ Thumbs.db
 # 7. Graphify Transient Backups & Analysis Caches
 graphify-out/cache/
 graphify-out/.graphify_*
-graphify-out/2026-*/

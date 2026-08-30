@@ -25,18 +25,18 @@
     "semantic_hash": ""
   },
   ".github/copilot-instructions.md": {
-    "mtime": 1788070770.3156514,
-    "ast_hash": "1c6653ae14916e21489d1b6ba4f17688",
+    "mtime": 1788072351.9631295,
+    "ast_hash": "c554e4f14a9e4f5122f322edec09b2b1",
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1788070695.5645027,
-    "ast_hash": "1c6653ae14916e21489d1b6ba4f17688",
+    "mtime": 1788072312.4318388,
+    "ast_hash": "c554e4f14a9e4f5122f322edec09b2b1",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1788070719.632889,
-    "ast_hash": "1c6653ae14916e21489d1b6ba4f17688",
+    "mtime": 1788072322.615915,
+    "ast_hash": "c554e4f14a9e4f5122f322edec09b2b1",
     "semantic_hash": ""
   },
   "docs/setup/WORKFLOW_SETUP.md": {
@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "logs/WORKLOGS.md": {
-    "mtime": 1788071557.9300845,
-    "ast_hash": "dddc352909daffc44b568799da0dadd1",
+    "mtime": 1788076499.0081391,
+    "ast_hash": "3ff5e2054a3da2e6134a6121c64f1fed",
     "semantic_hash": ""
   },
   "docs/setup/PORTABLE_SETUP.md": {
@@ -90,13 +90,13 @@
     "semantic_hash": ""
   },
   ".cursor/rules/AGENTS.md": {
-    "mtime": 1788070783.8188434,
-    "ast_hash": "1c6653ae14916e21489d1b6ba4f17688",
+    "mtime": 1788072358.1261735,
+    "ast_hash": "c554e4f14a9e4f5122f322edec09b2b1",
     "semantic_hash": ""
   },
   "GEMINI.md": {
-    "mtime": 1788070708.4887123,
-    "ast_hash": "1c6653ae14916e21489d1b6ba4f17688",
+    "mtime": 1788072329.8619688,
+    "ast_hash": "c554e4f14a9e4f5122f322edec09b2b1",
     "semantic_hash": ""
   },
   "forge-apps/app-template/package.json": {
@@ -280,8 +280,8 @@
     "semantic_hash": ""
   },
   "scripts/verify-gate.ts": {
-    "mtime": 1788072176.8691058,
-    "ast_hash": "eeef153309a4e467100d8dbc5cbcc9e7",
+    "mtime": 1788076466.0300543,
+    "ast_hash": "3bd04eb65620e7ea70e6531b2e316cbc",
     "semantic_hash": ""
   },
   "docs/tools/PORTABLE_TOOLCHAIN.md": {
@@ -295,8 +295,8 @@
     "semantic_hash": ""
   },
   "logs/reports/LATEST_COMMIT_REPORT.md": {
-    "mtime": 1788065215.4424589,
-    "ast_hash": "2a4dee2474c1e43a393fbc829b8d8f93",
+    "mtime": 1788072518.9942186,
+    "ast_hash": "d6f6b7ef991f764b73acfb5bf0556b39",
     "semantic_hash": ""
   },
   "apps/src/sdk/src/registry.ts": {
@@ -680,8 +680,8 @@
     "semantic_hash": ""
   },
   ".agents/hooks/pre-commit.sh": {
-    "mtime": 1788061193.192689,
-    "ast_hash": "66b24a80f0ad84fecaf023335ee6b9f6",
+    "mtime": 1788076475.850297,
+    "ast_hash": "87d2e7c59a16af5280d56955e683fbac",
     "semantic_hash": ""
   },
   ".agents/hooks/validate-worklog.sh": {
@@ -725,8 +725,8 @@
     "semantic_hash": ""
   },
   "portables/bin/graphify": {
-    "mtime": 1787108757.4536355,
-    "ast_hash": "f4609f66dfef88c506a0c0c45e3278b7",
+    "mtime": 1788076425.1676338,
+    "ast_hash": "ef2282d1e6350360586c4b667809e647",
     "semantic_hash": ""
   },
   "portables/bin/hyperfine": {
@@ -780,18 +780,18 @@
     "semantic_hash": ""
   },
   "scripts/sync-ignores.ts": {
-    "mtime": 1788072152.7550452,
-    "ast_hash": "7ffe8babd5de2ef2c40530b25f02e69c",
+    "mtime": 1788076435.756078,
+    "ast_hash": "6e8fed0364aea9ca69cef173ab641d19",
     "semantic_hash": ""
   },
   ".agents/AGENTS.md": {
-    "mtime": 1788070744.065265,
-    "ast_hash": "1c6653ae14916e21489d1b6ba4f17688",
+    "mtime": 1788072344.6030765,
+    "ast_hash": "c554e4f14a9e4f5122f322edec09b2b1",
     "semantic_hash": ""
   },
   ".agents/reports/VERIFICATION_REPORT.md": {
-    "mtime": 1788072224.3532228,
-    "ast_hash": "fa40c4f618e401049d755774c1b6a725",
+    "mtime": 1788077756.0965326,
+    "ast_hash": "81e24ea1b913db4513672220cfe2d88b",
     "semantic_hash": ""
   },
   ".agents/rules/README.md": {
@@ -927,6 +927,11 @@
   "portables/scc/README.md": {
     "mtime": 1727650993.0,
     "ast_hash": "d86c7aff4563ba281a413322e970f2fb",
+    "semantic_hash": ""
+  },
+  "logs/reports/2026-08/REPORT_20260830_12966a8.md": {
+    "mtime": 1788072518.9932187,
+    "ast_hash": "d6f6b7ef991f764b73acfb5bf0556b39",
     "semantic_hash": ""
   }
 }

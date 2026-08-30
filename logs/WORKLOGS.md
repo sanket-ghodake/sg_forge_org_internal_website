@@ -197,3 +197,5 @@
 2026-08-30 12:14 | implement Ignore & Attrib Files Uniformity Engine, pre-commit check 1 upgrade, and unit/tamper tests
 2026-08-30 12:16 | establish Tier 2 AI Agent Semantic Check 6 and Pre-Flight Check 12 for Ignore & Attrib Governance
 2026-08-30 12:18 | [12966a8] feat(observability): implement isolated per-app 4-pillar logging, dev-dashboard anti-hang engine, and ignore uniformity checks (+18067, -5807)
+2026-08-30 13:24 | Normalize graphify output directory and integrate post-verification graph update in pre-commit quality gate
+2026-08-30 13:45 | [8914ce8] feat(graphify): normalize output directory and integrate post-verification graph update in pre-commit gate (+1119, -991)
