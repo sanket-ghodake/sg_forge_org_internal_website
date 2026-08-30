@@ -190,3 +190,5 @@
 2026-08-30 09:22 | [17e9cbd] feat(audit): generate commit audit reports strictly per commit with comprehensive changes overview (+4994, -7078)
 2026-08-30 09:39 | implement Google-grade 4-tier client state management and repository governance rules
 2026-08-30 09:58 | [c4c37b0] feat(ui): implement Google-grade 4-tier client state management and repository governance rules (+1252, -49)
+2026-08-30 10:15 | include VERIFICATION_REPORT.md in post-commit auto-amend list
+2026-08-30 10:16 | [f0817c6] chore(hooks): auto-amend verification report in post-commit hook (+16, -15)
