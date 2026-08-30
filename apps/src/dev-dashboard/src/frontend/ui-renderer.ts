@@ -58,17 +58,47 @@ export function renderDashboardHtml(): string {
   <div class="sb-body-container">
     <div class="sb-sidebar-backdrop" id="sidebar-backdrop" onclick="toggleMobileSidebar(false)"></div>
 
-    <aside class="sb-sidebar" id="main-sidebar">
-      <div class="sb-nav-item active" data-tab="overview" onclick="switchTab('overview')">📊 Overview</div>
-      <div class="sb-nav-item" data-tab="services" onclick="switchTab('services')">⚡ Services & Processes</div>
-      <div class="sb-nav-item" data-tab="apps" onclick="switchTab('apps')">🧩 Forge Apps</div>
-      <div class="sb-nav-item" data-tab="database" onclick="switchTab('database')">🗄️ Turso DB Explorer</div>
-      <div class="sb-nav-item" data-tab="sql" onclick="switchTab('sql')">💻 SQL Playground</div>
-      <div class="sb-nav-item" data-tab="logs" onclick="switchTab('logs')">📜 Isolated App Logs</div>
-      <div class="sb-nav-item" data-tab="traffic" onclick="switchTab('traffic')">📈 Traffic Analytics</div>
-      <div class="sb-nav-item" data-tab="issues" onclick="switchTab('issues')">⚠️ Issue Center</div>
-      <div class="sb-nav-item" data-tab="host" onclick="switchTab('host')">☁️ Host & Cloud</div>
-      <div class="sb-nav-item" data-tab="settings" onclick="switchTab('settings')">⚙️ Settings & Audit</div>
+    <aside class="sb-sidebar" id="main-sidebar" aria-label="Main Navigation">
+      <div class="sb-nav-item active" data-tab="overview" onclick="switchTab('overview')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('overview')" title="Overview" tabindex="0" role="button">
+        <span class="sb-nav-icon">📊</span>
+        <span class="sb-nav-label">Overview</span>
+      </div>
+      <div class="sb-nav-item" data-tab="services" onclick="switchTab('services')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('services')" title="Services & Processes" tabindex="0" role="button">
+        <span class="sb-nav-icon">⚡</span>
+        <span class="sb-nav-label">Services & Processes</span>
+      </div>
+      <div class="sb-nav-item" data-tab="apps" onclick="switchTab('apps')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('apps')" title="Forge Apps" tabindex="0" role="button">
+        <span class="sb-nav-icon">🧩</span>
+        <span class="sb-nav-label">Forge Apps</span>
+      </div>
+      <div class="sb-nav-item" data-tab="database" onclick="switchTab('database')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('database')" title="Turso DB Explorer" tabindex="0" role="button">
+        <span class="sb-nav-icon">🗄️</span>
+        <span class="sb-nav-label">Turso DB Explorer</span>
+      </div>
+      <div class="sb-nav-item" data-tab="sql" onclick="switchTab('sql')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('sql')" title="SQL Playground" tabindex="0" role="button">
+        <span class="sb-nav-icon">💻</span>
+        <span class="sb-nav-label">SQL Playground</span>
+      </div>
+      <div class="sb-nav-item" data-tab="logs" onclick="switchTab('logs')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('logs')" title="Isolated App Logs" tabindex="0" role="button">
+        <span class="sb-nav-icon">📜</span>
+        <span class="sb-nav-label">Isolated App Logs</span>
+      </div>
+      <div class="sb-nav-item" data-tab="traffic" onclick="switchTab('traffic')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('traffic')" title="Traffic Analytics" tabindex="0" role="button">
+        <span class="sb-nav-icon">📈</span>
+        <span class="sb-nav-label">Traffic Analytics</span>
+      </div>
+      <div class="sb-nav-item" data-tab="issues" onclick="switchTab('issues')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('issues')" title="Issue Center" tabindex="0" role="button">
+        <span class="sb-nav-icon">⚠️</span>
+        <span class="sb-nav-label">Issue Center</span>
+      </div>
+      <div class="sb-nav-item" data-tab="host" onclick="switchTab('host')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('host')" title="Host & Cloud" tabindex="0" role="button">
+        <span class="sb-nav-icon">☁️</span>
+        <span class="sb-nav-label">Host & Cloud</span>
+      </div>
+      <div class="sb-nav-item" data-tab="settings" onclick="switchTab('settings')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('settings')" title="Settings & Audit" tabindex="0" role="button">
+        <span class="sb-nav-icon">⚙️</span>
+        <span class="sb-nav-label">Settings & Audit</span>
+      </div>
     </aside>
 
     <main class="sb-content">

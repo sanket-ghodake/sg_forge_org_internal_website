@@ -67,7 +67,7 @@ export function getDashboardStyles(): string {
 
     .sb-body-container {
       display: grid;
-      grid-template-columns: 210px 1fr;
+      grid-template-columns: 56px minmax(0, 1fr);
       flex: 1;
       min-height: calc(100vh - 46px);
       background: var(--forge-bg-root);
@@ -91,30 +91,45 @@ export function getDashboardStyles(): string {
       border-right: 1px solid var(--forge-border);
       display: flex;
       flex-direction: column;
-      padding: 0.85rem 0.5rem;
+      padding: 8px 4px;
       position: sticky;
       top: 46px;
+      left: 0;
+      width: 56px;
       height: calc(100vh - 46px);
+      overflow-x: hidden;
       overflow-y: auto;
-      z-index: 48;
-      transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 50;
+      transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .sb-sidebar:hover,
+    .sb-sidebar:focus-within {
+      width: 224px;
+      box-shadow: var(--forge-shadow-hover);
+      border-color: var(--forge-border-medium);
+      background: var(--forge-bg-surface);
     }
 
     .sb-nav-item {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
-      padding: 0.45rem 0.65rem;
+      height: 40px;
+      padding: 0 8px;
       border-radius: var(--forge-radius-sm);
       color: var(--forge-text-muted);
       text-decoration: none;
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       font-weight: 500;
-      margin-bottom: 0.15rem;
+      margin-bottom: 4px;
       cursor: pointer;
       transition: var(--forge-transition);
       border: 1px solid transparent;
       user-select: none;
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+      outline: none;
     }
 
     .sb-nav-item:hover {
@@ -123,11 +138,53 @@ export function getDashboardStyles(): string {
       border-color: var(--forge-border);
     }
 
+    .sb-nav-item:focus-visible {
+      box-shadow: 0 0 0 2px var(--forge-primary);
+    }
+
     .sb-nav-item.active {
       background: var(--forge-bg-card-hover);
       color: var(--forge-primary);
       border-color: var(--forge-border-medium);
       font-weight: 600;
+    }
+
+    .sb-nav-item.active::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 8px;
+      bottom: 8px;
+      width: 3px;
+      border-radius: var(--forge-radius-full);
+      background: var(--forge-primary);
+    }
+
+    .sb-nav-icon {
+      min-width: 24px;
+      width: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      flex-shrink: 0;
+      margin-right: 12px;
+      text-align: center;
+    }
+
+    .sb-nav-label {
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sb-sidebar:hover .sb-nav-label,
+    .sb-sidebar:focus-within .sb-nav-label {
+      opacity: 1;
+      transform: translateX(0);
     }
 
     .sb-content {
@@ -387,10 +444,11 @@ export function getDashboardStyles(): string {
       .sb-mobile-menu-btn { display: inline-flex; }
       .sb-body-container { grid-template-columns: 1fr; }
       .sb-sidebar {
-        position: fixed; left: 0; top: 46px; width: 240px;
+        position: fixed; left: 0; top: 46px; width: 224px;
         height: calc(100vh - 46px); transform: translateX(-100%);
         box-shadow: var(--forge-shadow-hover);
       }
+      .sb-sidebar .sb-nav-label { opacity: 1; transform: none; }
       .sb-sidebar.open { transform: translateX(0); }
       .sb-sidebar-backdrop.open { display: block; }
       .sb-content { padding: 0.85rem; }
