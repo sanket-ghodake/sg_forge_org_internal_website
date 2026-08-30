@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "logs/WORKLOGS.md": {
-    "mtime": 1788078090.8981302,
-    "ast_hash": "caa30c70493eb6e5066812b222816bf9",
+    "mtime": 1788078499.4156756,
+    "ast_hash": "e37a256627b20e963c80f511be0903e8",
     "semantic_hash": ""
   },
   "docs/setup/PORTABLE_SETUP.md": {
@@ -295,8 +295,8 @@
     "semantic_hash": ""
   },
   "logs/reports/LATEST_COMMIT_REPORT.md": {
-    "mtime": 1788077763.871659,
-    "ast_hash": "ff77e266812132c065a0f58ffc4e27cf",
+    "mtime": 1788078499.4156756,
+    "ast_hash": "7fb762209c23c0f182175fba774f3627",
     "semantic_hash": ""
   },
   "apps/src/sdk/src/registry.ts": {
@@ -790,8 +790,8 @@
     "semantic_hash": ""
   },
   ".agents/reports/VERIFICATION_REPORT.md": {
-    "mtime": 1788078492.242985,
-    "ast_hash": "8aeae8efdb76066c1834e1f1b68708e0",
+    "mtime": 1788078512.2401328,
+    "ast_hash": "16fa99668f1d9398c9f0ddfd3866bd4d",
     "semantic_hash": ""
   },
   ".agents/rules/README.md": {
@@ -937,6 +937,11 @@
   "logs/reports/2026-08/REPORT_20260830_8914ce8.md": {
     "mtime": 1788077763.871659,
     "ast_hash": "ff77e266812132c065a0f58ffc4e27cf",
+    "semantic_hash": ""
+  },
+  "logs/reports/2026-08/REPORT_20260830_c5dceed.md": {
+    "mtime": 1788078499.4156756,
+    "ast_hash": "7fb762209c23c0f182175fba774f3627",
     "semantic_hash": ""
   }
 }

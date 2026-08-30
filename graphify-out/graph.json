@@ -9258,6 +9258,76 @@
       "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
     },
     {
+      "label": "REPORT_20260830_c5dceed.md",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_c5dceed.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_08_report_20260830_c5dceed",
+      "community": 154,
+      "norm_label": "report_20260830_c5dceed.md"
+    },
+    {
+      "label": "\ud83d\udee1\ufe0f SG Forge Atomic Commit Audit Report",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_c5dceed.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_08_report_20260830_c5dceed_sg_forge_atomic_commit_audit_report",
+      "community": 154,
+      "norm_label": "\ud83d\udee1\ufe0f sg forge atomic commit audit report"
+    },
+    {
+      "label": "\ud83d\udcdd Commit Overview & Context",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_c5dceed.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "2026_08_report_20260830_c5dceed_commit_overview_context",
+      "community": 154,
+      "norm_label": "\ud83d\udcdd commit overview & context"
+    },
+    {
+      "label": "\ud83d\udcca Changes & Diff Statistics",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_c5dceed.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "2026_08_report_20260830_c5dceed_changes_diff_statistics",
+      "community": 154,
+      "norm_label": "\ud83d\udcca changes & diff statistics"
+    },
+    {
+      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (12 Files)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_c5dceed.md",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "2026_08_report_20260830_c5dceed_detailed_file_changes_12_files",
+      "community": 154,
+      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (12 files)"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_c5dceed.md",
+      "source_location": "L47",
+      "_origin": "ast",
+      "id": "2026_08_report_20260830_c5dceed_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "community": 154,
+      "norm_label": "\ud83d\udee0\ufe0f tier 1: deterministic engine checks (checked by logic & open source tools)"
+    },
+    {
+      "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_c5dceed.md",
+      "source_location": "L68",
+      "_origin": "ast",
+      "id": "2026_08_report_20260830_c5dceed_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "community": 154,
+      "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
+    },
+    {
       "label": "REPORT_20260830_c9e8797.md",
       "file_type": "document",
       "source_file": "logs/reports/2026-08/REPORT_20260830_c9e8797.md",
@@ -9438,20 +9508,20 @@
       "norm_label": "\ud83d\udcca changes & diff statistics"
     },
     {
-      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (17 Files)",
+      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (12 Files)",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
       "source_location": "L28",
       "_origin": "ast",
-      "id": "reports_latest_commit_report_detailed_file_changes_17_files",
+      "id": "reports_latest_commit_report_detailed_file_changes_12_files",
       "community": 27,
-      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (17 files)"
+      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (12 files)"
     },
     {
       "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
-      "source_location": "L52",
+      "source_location": "L47",
       "_origin": "ast",
       "id": "reports_latest_commit_report_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
       "community": 27,
@@ -9461,7 +9531,7 @@
       "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
-      "source_location": "L73",
+      "source_location": "L68",
       "_origin": "ast",
       "id": "reports_latest_commit_report_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
       "community": 27,
@@ -21009,9 +21079,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260830_8914ce8.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260830_8914ce8",
-      "target": "2026_08_report_20260830_8914ce8_sg_forge_atomic_commit_audit_report",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260830_8914ce8_sg_forge_atomic_commit_audit_report"
     },
     {
       "relation": "contains",
@@ -21019,9 +21089,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260830_8914ce8.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260830_8914ce8_sg_forge_atomic_commit_audit_report",
-      "target": "2026_08_report_20260830_8914ce8_changes_diff_statistics",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260830_8914ce8_changes_diff_statistics"
     },
     {
       "relation": "contains",
@@ -21029,9 +21099,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260830_8914ce8.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260830_8914ce8_sg_forge_atomic_commit_audit_report",
-      "target": "2026_08_report_20260830_8914ce8_commit_overview_context",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260830_8914ce8_commit_overview_context"
     },
     {
       "relation": "contains",
@@ -21039,9 +21109,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260830_8914ce8.md",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260830_8914ce8_sg_forge_atomic_commit_audit_report",
-      "target": "2026_08_report_20260830_8914ce8_detailed_file_changes_17_files",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260830_8914ce8_detailed_file_changes_17_files"
     },
     {
       "relation": "contains",
@@ -21049,9 +21119,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260830_8914ce8.md",
       "source_location": "L52",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260830_8914ce8_sg_forge_atomic_commit_audit_report",
-      "target": "2026_08_report_20260830_8914ce8_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260830_8914ce8_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -21059,9 +21129,9 @@
       "source_file": "logs/reports/2026-08/REPORT_20260830_8914ce8.md",
       "source_location": "L73",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_08_report_20260830_8914ce8_sg_forge_atomic_commit_audit_report",
-      "target": "2026_08_report_20260830_8914ce8_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
-      "confidence_score": 1.0
+      "target": "2026_08_report_20260830_8914ce8_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
     },
     {
       "relation": "contains",
@@ -21122,6 +21192,66 @@
       "confidence_score": 1.0,
       "source": "2026_08_report_20260830_c4c37b0_sg_forge_atomic_commit_audit_report",
       "target": "2026_08_report_20260830_c4c37b0_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_c5dceed.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "2026_08_report_20260830_c5dceed",
+      "target": "2026_08_report_20260830_c5dceed_sg_forge_atomic_commit_audit_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_c5dceed.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "2026_08_report_20260830_c5dceed_sg_forge_atomic_commit_audit_report",
+      "target": "2026_08_report_20260830_c5dceed_changes_diff_statistics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_c5dceed.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "2026_08_report_20260830_c5dceed_sg_forge_atomic_commit_audit_report",
+      "target": "2026_08_report_20260830_c5dceed_commit_overview_context",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_c5dceed.md",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "2026_08_report_20260830_c5dceed_sg_forge_atomic_commit_audit_report",
+      "target": "2026_08_report_20260830_c5dceed_detailed_file_changes_12_files",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_c5dceed.md",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "2026_08_report_20260830_c5dceed_sg_forge_atomic_commit_audit_report",
+      "target": "2026_08_report_20260830_c5dceed_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-08/REPORT_20260830_c5dceed.md",
+      "source_location": "L68",
+      "weight": 1.0,
+      "source": "2026_08_report_20260830_c5dceed_sg_forge_atomic_commit_audit_report",
+      "target": "2026_08_report_20260830_c5dceed_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -21280,7 +21410,7 @@
       "source_location": "L28",
       "weight": 1.0,
       "source": "reports_latest_commit_report_sg_forge_atomic_commit_audit_report",
-      "target": "reports_latest_commit_report_detailed_file_changes_17_files",
+      "target": "reports_latest_commit_report_detailed_file_changes_12_files",
       "confidence_score": 1.0
     },
     {
@@ -22925,5 +23055,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "67a5d349eacd77c7b2ea8a13a3eb6774c6749689"
+  "built_at_commit": "45dd8f4957a57d1107245ebeafa62e3fe4470149"
 }
