@@ -341,8 +341,11 @@ export function getAstryxStyles(): string {
   `;
 }
 
+export * from './state';
+
 /**
  * Renders standard Meta Astryx Navigation Header with interactive Sun/Moon theme toggler.
+ * Google Standard: Namespaced storage key, cross-tab BroadcastChannel sync, and resilient fallback.
  */
 export function getAstryxHeaderHtml(badgeLabel = 'SG', title = 'FORGE PLATFORM'): string {
   return `
@@ -377,35 +380,83 @@ export function getAstryxHeaderHtml(badgeLabel = 'SG', title = 'FORGE PLATFORM')
   </header>
   <script>
     (function() {
-      const savedTheme = localStorage.getItem('sg-forge-theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      updateThemeIcons(savedTheme);
+      var THEME_KEY = 'forge:v1:platform:theme';
+      var LEGACY_KEY = 'sg-forge-theme';
+      var CHANNEL_NAME = 'sg_forge_state_sync_bus';
 
-      const btn = document.getElementById('theme-toggle-btn');
+      function readTheme() {
+        try {
+          var raw = localStorage.getItem(THEME_KEY) || localStorage.getItem(LEGACY_KEY);
+          if (!raw) return 'dark';
+          try {
+            var env = JSON.parse(raw);
+            return (env && typeof env === 'object' && env.data) ? env.data : (env || 'dark');
+          } catch(e) {
+            return raw || 'dark';
+          }
+        } catch(e) {
+          return 'dark';
+        }
+      }
+
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        updateThemeIcons(theme);
+      }
+
+      function persistTheme(theme) {
+        try {
+          var env = { version: 1, updatedAt: new Date().toISOString(), data: theme };
+          localStorage.setItem(THEME_KEY, JSON.stringify(env));
+          localStorage.setItem(LEGACY_KEY, theme);
+          if (typeof BroadcastChannel !== 'undefined') {
+            var bc = new BroadcastChannel(CHANNEL_NAME);
+            bc.postMessage({ key: THEME_KEY, data: theme, timestamp: Date.now() });
+            bc.close();
+          }
+        } catch(e) {}
+      }
+
+      var current = readTheme();
+      applyTheme(current);
+
+      var btn = document.getElementById('theme-toggle-btn');
       if (btn) {
         btn.addEventListener('click', function() {
-          const current = document.documentElement.getAttribute('data-theme') || 'dark';
-          const next = current === 'dark' ? 'light' : 'dark';
-          document.documentElement.setAttribute('data-theme', next);
-          localStorage.setItem('sg-forge-theme', next);
-          updateThemeIcons(next);
+          var active = document.documentElement.getAttribute('data-theme') || 'dark';
+          var next = active === 'dark' ? 'light' : 'dark';
+          applyTheme(next);
+          persistTheme(next);
         });
       }
 
       function updateThemeIcons(theme) {
-        const sun = document.getElementById('sun-icon');
-        const moon = document.getElementById('moon-icon');
+        var sun = document.getElementById('sun-icon');
+        var moon = document.getElementById('moon-icon');
         if (sun && moon) {
-          if (theme === 'dark') {
-            sun.style.display = 'block';
-            moon.style.display = 'none';
-          } else {
-            sun.style.display = 'none';
-            moon.style.display = 'block';
-          }
+          sun.style.display = theme === 'dark' ? 'block' : 'none';
+          moon.style.display = theme === 'dark' ? 'none' : 'block';
         }
       }
+
+      // Cross-tab real-time listener
+      if (typeof BroadcastChannel !== 'undefined') {
+        try {
+          var receiver = new BroadcastChannel(CHANNEL_NAME);
+          receiver.onmessage = function(e) {
+            if (e.data && (e.data.key === THEME_KEY || e.data.key === LEGACY_KEY)) {
+              applyTheme(e.data.data);
+            }
+          };
+        } catch(e) {}
+      }
+      window.addEventListener('storage', function(e) {
+        if (e.key === THEME_KEY || e.key === LEGACY_KEY) {
+          applyTheme(readTheme());
+        }
+      });
     })();
   </script>
   `;
 }
+

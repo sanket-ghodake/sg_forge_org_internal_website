@@ -10,18 +10,49 @@ export function getDashboardScripts(): string {
     let appLogBuffer = [];
 
     (function initTheme() {
-      const savedTheme = localStorage.getItem('sg-forge-theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      updateThemeIcons(savedTheme);
+      const THEME_KEY = 'forge:v1:platform:theme';
+      const LEGACY_KEY = 'sg-forge-theme';
+      const CHANNEL_NAME = 'sg_forge_state_sync_bus';
+
+      function getSavedTheme() {
+        try {
+          const raw = localStorage.getItem(THEME_KEY) || localStorage.getItem(LEGACY_KEY);
+          if (!raw) return 'dark';
+          const env = JSON.parse(raw);
+          return (env && typeof env === 'object' && env.data) ? env.data : (env || 'dark');
+        } catch {
+          return 'dark';
+        }
+      }
+
+      function applyTheme(t) {
+        document.documentElement.setAttribute('data-theme', t);
+        updateThemeIcons(t);
+      }
+
+      function saveTheme(t) {
+        try {
+          const env = { version: 1, updatedAt: new Date().toISOString(), data: t };
+          localStorage.setItem(THEME_KEY, JSON.stringify(env));
+          localStorage.setItem(LEGACY_KEY, t);
+          if (typeof BroadcastChannel !== 'undefined') {
+            const bc = new BroadcastChannel(CHANNEL_NAME);
+            bc.postMessage({ key: THEME_KEY, data: t, timestamp: Date.now() });
+            bc.close();
+          }
+        } catch {}
+      }
+
+      const activeTheme = getSavedTheme();
+      applyTheme(activeTheme);
 
       const btn = document.getElementById('theme-toggle-btn');
       if (btn) {
         btn.addEventListener('click', () => {
           const cur = document.documentElement.getAttribute('data-theme') || 'dark';
           const next = cur === 'dark' ? 'light' : 'dark';
-          document.documentElement.setAttribute('data-theme', next);
-          localStorage.setItem('sg-forge-theme', next);
-          updateThemeIcons(next);
+          applyTheme(next);
+          saveTheme(next);
         });
       }
 
@@ -33,9 +64,22 @@ export function getDashboardScripts(): string {
           moon.style.display = theme === 'dark' ? 'none' : 'block';
         }
       }
+
+      // Cross-tab real-time listener
+      if (typeof BroadcastChannel !== 'undefined') {
+        try {
+          const receiver = new BroadcastChannel(CHANNEL_NAME);
+          receiver.onmessage = (e) => {
+            if (e.data && (e.data.key === THEME_KEY || e.data.key === LEGACY_KEY)) {
+              applyTheme(e.data.data);
+            }
+          };
+        } catch {}
+      }
     })();
 
     function switchSimulatedRole(role) {
+      sessionStorage.setItem('forge:v1:platform:simulated-role', role);
       sessionStorage.setItem('sg-forge-role', role);
       console.log('Active RBAC simulation role switched to: ' + role);
     }
@@ -53,7 +97,9 @@ export function getDashboardScripts(): string {
     const menuBtn = document.getElementById('mobile-menu-toggle');
     if (menuBtn) menuBtn.addEventListener('click', () => toggleMobileSidebar());
 
-    // ⚡ Strict SPA Navigation Router (Hash & History API)
+    // ⚡ Strict SPA Navigation Router (Hash & History API + Persistent LocalStorage)
+    const TAB_KEY = 'forge:v1:devcenter:active-tab';
+
     function switchTab(tabId, updateUrl = true) {
       document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.sb-nav-item').forEach(el => el.classList.remove('active'));
@@ -68,6 +114,9 @@ export function getDashboardScripts(): string {
       if (updateUrl && window.location.hash !== '#' + tabId) {
         history.pushState(null, '', '#' + tabId);
       }
+      try {
+        localStorage.setItem(TAB_KEY, JSON.stringify({ version: 1, updatedAt: new Date().toISOString(), data: tabId }));
+      } catch {}
       toggleMobileSidebar(false);
 
       if (tabId === 'overview') loadTopology();
@@ -81,8 +130,17 @@ export function getDashboardScripts(): string {
     }
 
     function syncTabFromHash() {
-      const tab = window.location.hash.replace('#', '') || 'overview';
-      switchTab(tab, false);
+      let tab = window.location.hash.replace('#', '');
+      if (!tab) {
+        try {
+          const raw = localStorage.getItem(TAB_KEY);
+          if (raw) {
+            const env = JSON.parse(raw);
+            tab = (env && typeof env === 'object' && env.data) ? env.data : env;
+          }
+        } catch {}
+      }
+      switchTab(tab || 'overview', false);
     }
 
     window.addEventListener('hashchange', syncTabFromHash);

@@ -79,6 +79,7 @@ Before writing code, running commands, or staging/committing changes, verify:
 - **Core System & Tooling**: [`.agents/rules/core.md`](file:///.agents/rules/core.md)
 - **Architecture, Monorepo & DB**: [`.agents/rules/architecture.md`](file:///.agents/rules/architecture.md)
 - **Frontend UI & Astryx Tokens**: [`.agents/rules/frontend-ui.md`](file:///.agents/rules/frontend-ui.md)
+- **Client State & Storage (Google Standard)**: [`.agents/rules/frontend-state.md`](file:///.agents/rules/frontend-state.md)
 - **Security & Zero-Trust**: [`.agents/rules/security-practices.md`](file:///.agents/rules/security-practices.md)
 - **Testing Standards (5-Tier)**: [`.agents/rules/testing.md`](file:///.agents/rules/testing.md)
 - **Graphify Knowledge Graph**: [`.agents/rules/graphify.md`](file:///.agents/rules/graphify.md)
