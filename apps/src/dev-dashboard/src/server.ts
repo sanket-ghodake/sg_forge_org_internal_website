@@ -39,10 +39,20 @@ export function startDevDashboardServer(port: number = PORT) {
     });
   });
 
-  return Bun.serve({
+  const server = Bun.serve({
     port,
     fetch: handler,
   });
+
+  const shutdown = () => {
+    logger.info('Received termination signal. Gracefully shutting down Developer Dashboard...');
+    server.stop(true);
+  };
+
+  process.on('SIGTERM', shutdown);
+  process.on('SIGINT', shutdown);
+
+  return server;
 }
 
 if (import.meta.main) {

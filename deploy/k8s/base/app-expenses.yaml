@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forge-app-expenses
+  labels:
+    app.kubernetes.io/name: forge-app-expenses
+    app.kubernetes.io/part-of: sg-forge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: forge-app-expenses
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: forge-app-expenses
+    spec:
+      containers:
+        - name: expenses
+          image: sg-forge/app-expenses:latest
+          env:
+            - name: PORT
+              value: "8085"
+            - name: NODE_ENV
+              value: "production"
+          ports:
+            - containerPort: 8085
+              name: http
+          resources:
+            limits:
+              memory: 256Mi
+              cpu: 500m
+            requests:
+              memory: 32Mi
+              cpu: 50m
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8085
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8085
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: expenses-db-storage
+              mountPath: /app/data
+      volumes:
+        - name: expenses-db-storage
+          persistentVolumeClaim:
+            claimName: forge-expenses-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: forge-app-expenses-service
+  labels:
+    app.kubernetes.io/name: forge-app-expenses-service
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8085
+      targetPort: 8085
+      name: http
+  selector:
+    app.kubernetes.io/name: forge-app-expenses
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: forge-expenses-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

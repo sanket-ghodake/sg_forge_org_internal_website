@@ -35,9 +35,9 @@ function show_help() {
     echo "  benchmark [url]       Run Autocannon HTTP latency benchmark (<2ms target)"
     echo "  pack                  Run Repomix token-compressed AI context packager"
     echo ""
-    echo "Docker Lifecycle & Multi-Stack Commands (Option A Architecture):"
-    echo "  docker up             Start all services in Docker (Dev stack + Hot reload)"
-    echo "  docker prod           Start all services in Production Docker stack"
+    echo "Docker Lifecycle & Modular Profiles (Big Tech Orchestration):"
+    echo "  docker up / dev [opt] Start Docker Dev Stack (Profiles: core, apps, monitoring, all)"
+    echo "  docker prod [opt]     Start Production Docker Stack"
     echo "  docker build [app]    Build colocated Dockerfile for a specific app or all"
     echo "  docker down           Gracefully stop active Docker containers"
     echo "  docker restart [svc]  Restart specific container without downtime"
@@ -45,6 +45,7 @@ function show_help() {
     echo "  docker monitor        Live 24/7 terminal dashboard (CPU, RAM, Net I/O)"
     echo "  docker logs [svc]     Tail container logs in real-time"
     echo "  docker purge          Clean dangling images without losing DB volumes"
+    echo "  docker reset-data     Purge all containers, images, and data volumes"
     echo "======================================================================"
 }
 
@@ -129,13 +130,16 @@ case "$CMD" in
         echo "• Host OS: $(uname -s) $(uname -m)"
         echo "• Portable Bun: $($PORTABLE_BUN --version 2>/dev/null || echo 'Missing')"
         echo "• Portable RTK: $($RTK --version 2>/dev/null || echo 'Missing')"
-        echo "• Astryx CLI: $($REPO_ROOT/portables/bin/astryx --help >/dev/null && echo 'Ready' || echo 'Missing')"
-        echo "• Caveman CLI: $($REPO_ROOT/portables/bin/caveman --help >/dev/null && echo 'Ready' || echo 'Missing')"
+        echo "• Astryx CLI: $($REPO_ROOT/portables/bin/astryx --help >/dev/null 2>&1 && echo 'Ready' || echo 'Missing')"
+        echo "• Caveman CLI: $($REPO_ROOT/portables/bin/caveman --help >/dev/null 2>&1 && echo 'Ready' || echo 'Missing')"
         echo "• Gitleaks CLI: Ready"
         echo "• Biome Linter: Ready"
         echo "• Knip Auditor: Ready"
         echo "• Autocannon: Ready"
         echo "• Docker Daemon: $(docker info >/dev/null 2>&1 && echo 'Running' || echo 'Not running / Optional')"
+        echo "• Docker Compose: $(docker compose version >/dev/null 2>&1 && echo 'Ready' || echo 'Missing')"
+        echo "• Kubectl Tooling: $(which kubectl >/dev/null 2>&1 && echo 'Ready' || echo 'Optional / Not installed')"
+        echo "• Kustomize CLI: $(which kustomize >/dev/null 2>&1 && echo 'Ready' || echo 'Optional (built into kubectl)')"
         echo "✅ Pre-flight checks passed."
         ;;
 
@@ -174,15 +178,39 @@ case "$CMD" in
             up|dev)
                 echo "🔀 [SG Forge] Synchronizing dynamic reverse proxy routes from .env..."
                 $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
-                echo "🐳 [SG Forge] Starting Docker Dev Stack (Hot Reload with bun --watch)..."
-                docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" up -d
+                PROFILE_ARG="--profile all"
+                TARGET_PARAM="${3:-}"
+                if [ "$TARGET_PARAM" = "--profile" ] && [ -n "${4:-}" ]; then
+                    PROFILE_ARG="--profile $4"
+                elif [ "$TARGET_PARAM" = "core" ] || [ "$TARGET_PARAM" = "apps" ] || [ "$TARGET_PARAM" = "monitoring" ] || [ "$TARGET_PARAM" = "all" ]; then
+                    PROFILE_ARG="--profile $TARGET_PARAM"
+                elif [ -n "$TARGET_PARAM" ]; then
+                    echo "🐳 [SG Forge] Starting targeted service '$TARGET_PARAM' in Docker Dev..."
+                    docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" up -d proxy "$TARGET_PARAM"
+                    echo "✨ Service '$TARGET_PARAM' running! Access Gateway at http://localhost/"
+                    exit 0
+                fi
+                echo "🐳 [SG Forge] Starting Docker Dev Stack ($PROFILE_ARG, Hot Reload with bun --watch)..."
+                docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" $PROFILE_ARG up -d
                 echo "✨ Stack running! Access Platform Hub at http://localhost/"
                 ;;
             prod)
                 echo "🔀 [SG Forge] Synchronizing dynamic reverse proxy routes from .env..."
                 $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
-                echo "🚀 [SG Forge] Starting Production Docker Stack..."
-                docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" up -d --build
+                PROFILE_ARG="--profile all"
+                TARGET_PARAM="${3:-}"
+                if [ "$TARGET_PARAM" = "--profile" ] && [ -n "${4:-}" ]; then
+                    PROFILE_ARG="--profile $4"
+                elif [ "$TARGET_PARAM" = "core" ] || [ "$TARGET_PARAM" = "apps" ] || [ "$TARGET_PARAM" = "monitoring" ] || [ "$TARGET_PARAM" = "all" ]; then
+                    PROFILE_ARG="--profile $TARGET_PARAM"
+                elif [ -n "$TARGET_PARAM" ]; then
+                    echo "🚀 [SG Forge] Starting targeted service '$TARGET_PARAM' in Docker Prod..."
+                    docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" up -d --build proxy "$TARGET_PARAM"
+                    echo "✨ Service '$TARGET_PARAM' active at http://localhost/"
+                    exit 0
+                fi
+                echo "🚀 [SG Forge] Starting Production Docker Stack ($PROFILE_ARG)..."
+                docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" $PROFILE_ARG up -d --build
                 echo "✨ Production stack active at http://localhost/"
                 ;;
             build)
@@ -199,48 +227,75 @@ case "$CMD" in
                     fi
                 else
                     echo "🔨 Building all production images via docker/prod/docker-compose.yml..."
-                    docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" build
+                    docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all build
                 fi
                 ;;
             down)
                 echo "🛑 [SG Forge] Gracefully stopping Docker containers..."
-                docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" down 2>/dev/null || true
-                docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" down 2>/dev/null || true
+                docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
+                docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
                 echo "✨ Containers stopped."
                 ;;
             restart)
                 SVC="$3"
+                FLAG="$4"
+                TARGET_COMPOSE="$REPO_ROOT/docker/dev/docker-compose.yml"
+                if [ "$FLAG" = "--prod" ] || [ "$SVC" = "--prod" ]; then
+                    TARGET_COMPOSE="$REPO_ROOT/docker/prod/docker-compose.yml"
+                    [ "$SVC" = "--prod" ] && SVC=""
+                fi
                 if [ -n "$SVC" ]; then
                     echo "🔄 [SG Forge] Restarting service: $SVC..."
-                    docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" restart "$SVC"
+                    docker compose -f "$TARGET_COMPOSE" --profile all restart "$SVC"
                 else
-                    echo "🔄 [SG Forge] Restarting full dev stack..."
-                    docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" restart
+                    echo "🔄 [SG Forge] Restarting stack ($TARGET_COMPOSE)..."
+                    docker compose -f "$TARGET_COMPOSE" --profile all restart
                 fi
                 ;;
             status)
                 echo "📊 [SG Forge] Live Container Status:"
-                docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" ps
+                FLAG="${3:-}"
+                if [ "$FLAG" = "--prod" ]; then
+                    docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all ps
+                else
+                    docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" --profile all ps
+                    docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all ps 2>/dev/null || true
+                fi
                 ;;
             monitor)
                 $PORTABLE_BUN run "$REPO_ROOT/scripts/terminal-monitor.ts"
                 ;;
             logs)
-                SVC="$3"
+                SVC="${3:-}"
+                FLAG="${4:-}"
+                TARGET_COMPOSE="$REPO_ROOT/docker/dev/docker-compose.yml"
+                if [ "$FLAG" = "--prod" ] || [ "$SVC" = "--prod" ]; then
+                    TARGET_COMPOSE="$REPO_ROOT/docker/prod/docker-compose.yml"
+                    [ "$SVC" = "--prod" ] && SVC=""
+                fi
                 if [ -n "$SVC" ]; then
-                    docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" logs -f --tail=100 "$SVC"
+                    docker compose -f "$TARGET_COMPOSE" --profile all logs --tail=100 "$SVC"
                 else
-                    docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" logs -f --tail=50
+                    docker compose -f "$TARGET_COMPOSE" --profile all logs --tail=50
                 fi
                 ;;
             purge)
                 echo "⚠️ [SG Forge] Purging dangling containers and build caches (preserving DB volumes)..."
-                docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" down --remove-orphans
+                docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
+                docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
                 docker image prune -f
                 echo "✨ Cleaned."
                 ;;
+            reset-data)
+                echo "⚠️ [SG Forge] FULL RESET: Stopping all containers, removing all images & persistent DB volumes..."
+                docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" --profile all down -v --remove-orphans 2>/dev/null || true
+                docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all down -v --remove-orphans 2>/dev/null || true
+                docker volume prune -f
+                docker image prune -a -f
+                echo "✨ All containers, images, and volumes purged."
+                ;;
             *)
-                echo "Usage: ./run.sh docker [up|prod|build|down|restart|status|monitor|logs|purge]"
+                echo "Usage: ./run.sh docker [up|dev|prod|build|down|restart|status|monitor|logs|purge|reset-data]"
                 ;;
         esac
         ;;

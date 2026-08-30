@@ -75,10 +75,20 @@ export function startExpensesServer(port: number = PORT) {
     });
   }, LOG_DIR);
 
-  return Bun.serve({
+  const server = Bun.serve({
     port,
     fetch: handler,
   });
+
+  const shutdown = () => {
+    logger.info('Received termination signal. Gracefully shutting down Expenses Service...');
+    server.stop(true);
+  };
+
+  process.on('SIGTERM', shutdown);
+  process.on('SIGINT', shutdown);
+
+  return server;
 }
 
 if (import.meta.main) {

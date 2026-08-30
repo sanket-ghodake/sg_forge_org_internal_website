@@ -11,13 +11,20 @@ ENV NODE_ENV=production
 ENV PORT=3003
 ENV DEV_HUB_PORT=3003
 
-COPY package.json bun.lock* ./
+# 1. Monorepo manifests & TypeScript path resolution
+COPY package.json bun.lock* tsconfig.json ./
+
+# 2. Shared Core Platform Libraries ONLY
+COPY apps/src/sdk/ apps/src/sdk/
+COPY apps/src/types/ apps/src/types/
+COPY apps/src/ui/ apps/src/ui/
+
+# 3. Dev Hub Service Source Code ONLY
 COPY apps/src/dev-hub/ apps/src/dev-hub/
-COPY packages/ packages/
 
 EXPOSE 3003
 
-HEALTHCHECK --interval=15s --timeout=3s --start-period=5s --retries=3 \
+HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:3003/health || exit 1
 
 CMD ["bun", "apps/src/dev-hub/src/server.ts"]

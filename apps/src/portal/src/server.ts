@@ -6,7 +6,7 @@
 
 import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript } from '@forge/ui';
 import { createLogger, createSafeHandler } from '@forge/sdk';
-import { verifyJwt } from '../../auth/src/backend/crypto';
+import { verifyJwt } from '@forge/auth';
 
 const PORT = Number(process.env.PORTAL_PORT || process.env.PORT || 3001);
 const logger = createLogger('portal-service');
@@ -282,10 +282,20 @@ export function startPortalServer(port: number = PORT) {
     });
   });
 
-  return Bun.serve({
+  const server = Bun.serve({
     port,
     fetch: handler,
   });
+
+  const shutdown = () => {
+    logger.info('Received termination signal. Gracefully shutting down Portal Service...');
+    server.stop(true);
+  };
+
+  process.on('SIGTERM', shutdown);
+  process.on('SIGINT', shutdown);
+
+  return server;
 }
 
 if (import.meta.main) {

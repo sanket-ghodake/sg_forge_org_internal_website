@@ -1,16 +1,16 @@
 # Graph Report - org_website_clone  (2026-08-30)
 
 ## Corpus Check
-- 266 files · ~135,405 words
+- 273 files · ~138,893 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1346 nodes · 1556 edges · 202 communities (141 shown, 61 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 39 edges (avg confidence: 0.8)
+- 1372 nodes · 1575 edges · 211 communities (143 shown, 68 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 39 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `335e6450`
+- Built from commit: `22a3a682`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -197,6 +197,15 @@
 - [[_COMMUNITY_Community 180|Community 180]]
 - [[_COMMUNITY_Community 181|Community 181]]
 - [[_COMMUNITY_Community 182|Community 182]]
+- [[_COMMUNITY_Community 201|Community 201]]
+- [[_COMMUNITY_Community 202|Community 202]]
+- [[_COMMUNITY_Community 203|Community 203]]
+- [[_COMMUNITY_Community 204|Community 204]]
+- [[_COMMUNITY_Community 205|Community 205]]
+- [[_COMMUNITY_Community 206|Community 206]]
+- [[_COMMUNITY_Community 207|Community 207]]
+- [[_COMMUNITY_Community 208|Community 208]]
+- [[_COMMUNITY_Community 209|Community 209]]
 - [[_COMMUNITY_WORKLOGS|WORKLOGS.md]]
 
 ## God Nodes (most connected - your core abstractions)
@@ -226,7 +235,7 @@
 ## Import Cycles
 - 1-file cycle: `apps/src/sdk/src/index.ts -> apps/src/sdk/src/index.ts`
 
-## Communities (202 total, 61 thin omitted)
+## Communities (211 total, 68 thin omitted)
 
 ### Community 0 - "devDependencies"
 Cohesion: 0.12
@@ -293,12 +302,12 @@ Cohesion: 0.33
 Nodes (5): main, name, type, types, version
 
 ### Community 16 - "suites/index.ts"
-Cohesion: 0.18
-Nodes (10): logger, PORT, logger, PORT, handleGetTelemetryLogs(), applySecurityHeaders(), SECURITY_HEADERS, createLogger() (+2 more)
+Cohesion: 0.29
+Nodes (6): 📊 Changes & Diff Statistics, 📝 Commit Overview & Context, 🗂️ Detailed File Changes (64 Files), 🛡️ SG Forge Atomic Commit Audit Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
 
 ### Community 18 - "Community 18"
-Cohesion: 0.07
-Nodes (57): logger, extractBearerOrCookieToken(), extractClientIp(), handleBrowserLog(), handleDirectory(), handleGetMySessions(), handleJwks(), handleLogin() (+49 more)
+Cohesion: 0.06
+Nodes (59): logger, extractBearerOrCookieToken(), extractClientIp(), handleBrowserLog(), handleDirectory(), handleGetMySessions(), handleGetTelemetryLogs(), handleJwks() (+51 more)
 
 ### Community 19 - "ui-organisms.test.ts"
 Cohesion: 0.33
@@ -313,12 +322,12 @@ Cohesion: 0.12
 Nodes (9): ForgeAppManifest, ForgeClient, ForgeClientOptions, ForgeLogger, LogEntry, LogLevel, PostMessageEvent, UserContext (+1 more)
 
 ### Community 25 - "Community 25"
-Cohesion: 0.08
-Nodes (20): CADDYFILE_PATH, generateCaddyfile(), REPO_ROOT, MANDATORY_ATTRIBUTES, MANDATORY_EXCLUSIONS, REPO_ROOT, ROOT_IGNORE_FILES, syncAllIgnores() (+12 more)
+Cohesion: 0.13
+Nodes (14): MANDATORY_ATTRIBUTES, MANDATORY_EXCLUSIONS, REPO_ROOT, ROOT_IGNORE_FILES, syncAllIgnores(), validateIgnores(), ValidationResult, AGENTS_REPORTS_DIR (+6 more)
 
 ### Community 27 - "Community 27"
 Cohesion: 0.29
-Nodes (6): 📊 Changes & Diff Statistics, 📝 Commit Overview & Context, 🗂️ Detailed File Changes (82 Files), 🛡️ SG Forge Atomic Commit Audit Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
+Nodes (6): 📊 Changes & Diff Statistics, 📝 Commit Overview & Context, 🗂️ Detailed File Changes (64 Files), 🛡️ SG Forge Atomic Commit Audit Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
 
 ### Community 28 - "Community 28"
 Cohesion: 0.09
@@ -641,12 +650,12 @@ Cohesion: 0.47
 Nodes (4): getLogDashboardScripts(), renderDashboardHtml(), getDashboardScripts(), getDashboardStyles()
 
 ### Community 160 - "Community 160"
-Cohesion: 0.22
-Nodes (4): logger, PORT, renderDevHubHtml(), startDevHubServer()
+Cohesion: 0.25
+Nodes (7): logger, PORT, logger, PORT, createLogger(), createSafeHandler(), startAuthServer()
 
 ### Community 161 - "Community 161"
-Cohesion: 0.22
-Nodes (4): logger, PORT, startPortalServer(), UserContext
+Cohesion: 0.50
+Nodes (3): logger, PORT, UserContext
 
 ### Community 162 - "Community 162"
 Cohesion: 0.22
@@ -677,8 +686,8 @@ Cohesion: 0.29
 Nodes (6): 📊 Changes & Diff Statistics, 📝 Commit Overview & Context, 🗂️ Detailed File Changes (82 Files), 🛡️ SG Forge Atomic Commit Audit Report, 🛠️ Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools), 🧠 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)
 
 ### Community 169 - "Community 169"
-Cohesion: 0.33
-Nodes (5): logger, PORT, getAstryxHeaderHtml(), themeTokens, renderHtml()
+Cohesion: 0.16
+Nodes (9): logger, PORT, CADDYFILE_PATH, generateCaddyfile(), REPO_ROOT, loadServiceRegistry(), ServiceEntry, renderHtml() (+1 more)
 
 ### Community 170 - "Community 170"
 Cohesion: 0.50
@@ -716,20 +725,28 @@ Nodes (3): 🚀 Running Tests, 🏛️ Test Tiers & Governance, Expenses Micro-A
 Cohesion: 0.50
 Nodes (3): 🚀 Running Tests, 🏛️ Test Tiers & Governance, Live Telemetry Micro-App Test Suite (`@forge/app-telemetry`)
 
+### Community 201 - "Community 201"
+Cohesion: 0.33
+Nodes (5): logger, PORT, getAstryxHeaderHtml(), themeTokens, renderDevHubHtml()
+
+### Community 204 - "Community 204"
+Cohesion: 0.50
+Nodes (3): Kubernetes Fleet Orchestration (Kustomize Architecture), Structure, Usage
+
 ## Knowledge Gaps
-- **711 isolated node(s):** `commit-msg.sh script`, `post-commit.sh script`, `pre-commit.sh script`, `validate-worklog.sh script`, `append-worklog.sh script` (+706 more)
+- **723 isolated node(s):** `commit-msg.sh script`, `post-commit.sh script`, `pre-commit.sh script`, `validate-worklog.sh script`, `append-worklog.sh script` (+718 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **61 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **68 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `createLogger()` connect `suites/index.ts` to `Community 160`, `Community 161`, `Community 162`, `Community 164`, `Community 166`, `Community 169`, `Community 18`, `Community 20`, `Community 24`, `Community 155`?**
-  _High betweenness centrality (0.042) - this node is a cross-community bridge._
-- **Why does `createSafeHandler()` connect `suites/index.ts` to `Community 160`, `Community 161`, `Community 162`, `Community 164`, `Community 166`, `Community 169`, `Community 20`, `Community 24`, `Community 25`?**
+- **Why does `createLogger()` connect `Community 160` to `Community 161`, `Community 162`, `Community 164`, `Community 166`, `Community 169`, `Community 201`, `Community 18`, `Community 20`, `Community 24`, `Community 155`?**
+  _High betweenness centrality (0.041) - this node is a cross-community bridge._
+- **Why does `createSafeHandler()` connect `Community 160` to `Community 161`, `Community 162`, `Community 164`, `Community 166`, `Community 201`, `Community 169`, `Community 202`, `Community 18`, `Community 20`, `Community 24`?**
   _High betweenness centrality (0.015) - this node is a cross-community bridge._
-- **Why does `loadServiceRegistry()` connect `Community 25` to `suites/index.ts`, `Community 169`, `Community 26`, `Community 20`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+- **Why does `loadServiceRegistry()` connect `Community 169` to `Community 160`, `Community 25`, `Community 26`, `Community 20`?**
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `getAstryxStyles()` (e.g. with `renderAppHtml()` and `renderAppHtml()`) actually correct?**
   _`getAstryxStyles()` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 4 inferred relationships involving `getAuthDb()` (e.g. with `handleDirectory()` and `handleLogin()`) actually correct?**

@@ -7,24 +7,24 @@ FROM oven/bun:1.3-alpine AS runner
 
 WORKDIR /app
 
-# Environment defaults
 ENV NODE_ENV=production
 ENV PORT=3002
 ENV DEV_DASHBOARD_PORT=3002
 
-# Copy package manifests
-COPY package.json bun.lock* ./
+# 1. Monorepo manifests & TypeScript path resolution
+COPY package.json bun.lock* tsconfig.json ./
 
-# Copy service source code
+# 2. Shared Core Platform Libraries ONLY
+COPY apps/src/sdk/ apps/src/sdk/
+COPY apps/src/types/ apps/src/types/
+COPY apps/src/ui/ apps/src/ui/
+
+# 3. Dev Dashboard Service Source Code ONLY
 COPY apps/src/dev-dashboard/ apps/src/dev-dashboard/
-COPY packages/ packages/
 
-# Expose internal listening port
 EXPOSE 3002
 
-# Healthcheck probe
-HEALTHCHECK --interval=15s --timeout=3s --start-period=5s --retries=3 \
+HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:3002/health || exit 1
 
-# Start service server
 CMD ["bun", "apps/src/dev-dashboard/src/server.ts"]

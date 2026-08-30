@@ -203,7 +203,11 @@ export function initAuthSchema(db: Database): void {
 
 export function closeAuthDb(): void {
   if (dbInstance) {
+    try {
+      dbInstance.exec('PRAGMA wal_checkpoint(TRUNCATE);');
+    } catch {}
     dbInstance.close();
     dbInstance = null;
+    logger.info('Auth DB connection closed cleanly with WAL checkpoint.');
   }
 }

@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forge-app-billing
+  labels:
+    app.kubernetes.io/name: forge-app-billing
+    app.kubernetes.io/part-of: sg-forge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: forge-app-billing
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: forge-app-billing
+    spec:
+      containers:
+        - name: billing
+          image: sg-forge/app-billing:latest
+          env:
+            - name: PORT
+              value: "8086"
+            - name: NODE_ENV
+              value: "production"
+          ports:
+            - containerPort: 8086
+              name: http
+          resources:
+            limits:
+              memory: 256Mi
+              cpu: 500m
+            requests:
+              memory: 32Mi
+              cpu: 50m
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8086
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8086
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: billing-db-storage
+              mountPath: /app/data
+      volumes:
+        - name: billing-db-storage
+          persistentVolumeClaim:
+            claimName: forge-billing-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: forge-app-billing-service
+  labels:
+    app.kubernetes.io/name: forge-app-billing-service
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8086
+      targetPort: 8086
+      name: http
+  selector:
+    app.kubernetes.io/name: forge-app-billing
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: forge-billing-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

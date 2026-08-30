@@ -10,13 +10,20 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=8087
 
-COPY package.json bun.lock* ./
+# 1. Monorepo manifests & TypeScript path resolution
+COPY package.json bun.lock* tsconfig.json ./
+
+# 2. Shared Core Platform Libraries ONLY
+COPY apps/src/sdk/ apps/src/sdk/
+COPY apps/src/types/ apps/src/types/
+COPY apps/src/ui/ apps/src/ui/
+
+# 3. Telemetry Micro-App Source Code ONLY
 COPY forge-apps/telemetry/ forge-apps/telemetry/
-COPY packages/ packages/
 
 EXPOSE 8087
 
-HEALTHCHECK --interval=15s --timeout=3s --start-period=5s --retries=3 \
+HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:8087/health || exit 1
 
 CMD ["bun", "forge-apps/telemetry/src/server.ts"]
