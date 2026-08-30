@@ -1,17 +1,24 @@
 # Testing Enforcement & Quality Assurance Standards (Google & Meta Standard)
 
-## 1. Testing Pyramid & Test Categorization
-All tests across the repository must conform to the risk-tiered testing pyramid:
-- **Unit Tests (`test/unit/`)**:
-  - Hermetic, deterministic, ultra-fast execution (<50ms per suite).
-  - ZERO external network calls, real filesystem mutations, or live process spawning.
-  - Covers pure business logic, utility functions, state reducers, and RBAC policy evaluators.
-- **Integration & Tenant Isolation Tests (`test/integration/`)**:
-  - Tests database transactions, Drizzle repositories, API route controllers, and multi-tenant scoping.
-  - Verifies that cross-tenant access returns 403/404.
-- **Contract & E2E Tests (`test/contracts/`, `test/e2e/`)**:
-  - Validates API request/response compliance against canonical OpenAPI/Zod contracts.
-  - Tests user flows across ports 3001, 3002, and 3003.
+## 1. The 5-Tier Testing Pyramid & Folder Layout
+Every microservice across `apps/src/*` and `forge-apps/*` (and any new app generated via `scripts/create-app.ts`) MUST maintain an isolated `test/` directory organized into the 5 standard testing tiers:
+
+```
+<microservice>/test/
+├── README.md                      # Test documentation & execution cheatsheet
+├── unit/                          # Tier 1: Hermetic Unit Tests (<5ms)
+│   └── *.test.ts                  # Pure algorithms, token parsing, math, reducers
+├── integration/                   # Tier 2: Component & Database Tests (<50ms)
+│   └── *.test.ts                  # SQLite transactions, route handlers, session managers
+├── security/                      # Tier 3: Attack Vectors & Security Invariants (<100ms)
+│   └── *.test.ts                  # Rate limiting, replay attacks, JWT tampering, headers
+├── contracts/                     # Tier 4: RFC & OpenAPI Schema Validation (<20ms)
+│   └── *.test.ts                  # RFC 7517 JWKS, RFC 7807 Problem JSON, schema drift
+└── e2e/                           # Tier 5: End-to-End User Journeys (<300ms)
+    ├── api-flow.test.ts           # Fast HTTP-level cross-service journey
+    └── playwright/                # Browser automation (Real DOM, forms, cookies, A11y)
+        └── *.spec.ts              # Playwright browser specs
+```
 
 ---
 
@@ -38,29 +45,39 @@ test("should reject cross-tenant resource access with 403 Forbidden", async () =
 
 ---
 
-## 3. Risk-Tiered Coverage & Mutation Testing
-- **Risk-Tiered Coverage Targets**:
-  - **Auth, RBAC, & Tenant Isolation**: **100% Branch & Line Coverage** (Mandatory).
-  - **Domain Entities & Business Rules**: **>90% Coverage**.
-  - **API Route Controllers & Contracts**: **>85% Coverage**.
-  - **UI Visual & Static Presentational Elements**: Functional smoke testing.
-- **Mutation Testing Verification**:
-  - For critical security policies (e.g. `role === "ADMIN"` or `tenantId === ctx.tenantId`), tests must fail if operators are inverted (`!==`, `|| false`). Never rely solely on high coverage percentages without validating negative assertion strength.
+## 3. Risk-Tiered Coverage Criteria (2026 LTS)
+
+| Domain Tier | Subsystems | Mandatory Coverage Target |
+| :--- | :--- | :--- |
+| **Tier 1: Security Critical** | Auth, RBAC, Token Signing, Rate Limiting, Iframe Sandboxing | **100% Branch & Line Coverage** |
+| **Tier 2: Business Logic** | Financial Calculations, Billing, Workflow State Reducers | **≥90% Line & Branch Coverage** |
+| **Tier 3: API & Route Handlers** | REST Controllers, Request Parsers, RFC 7807 Error Handlers | **≥85% Statement Coverage** |
+| **Tier 4: UI & Presentational** | HTML views, Meta Astryx components, layouts | **Smoke & Playwright E2E** |
 
 ---
 
-## 4. Hermeticity, Determinism & Mocking Rules
-- **No Test Order Coupling**: Every test must be completely independent and pass regardless of execution order (`bun test --shuffle`).
-- **Fixed Timers & Clocks**: Never rely on `Date.now()` without freezing or mocking time in tests dealing with expiration, rate limiting, or sliding sessions.
-- **Mock Cleanup**: All mocks (`spyOn`, `mockImplementation`) must be reset in `beforeEach()` or `afterEach()`.
-- **Zero Flaky Tests**: Intermittent failures are treated as blocking defects.
+## 4. AI Semantic Scenario Audit & Mutation Testing
+
+Every AI session must verify that tests include the following scenario invariants:
+1. **Negative & Malformed Payloads**: Empty passwords, invalid emails, null bytes, SQL payloads.
+2. **Security Invariants**:
+   - Anti-brute force: 5 failed attempts $\to$ HTTP 429 Too Many Requests with `Retry-After`.
+   - Token Replay Detection: Reusing a consumed refresh token immediately wipes the session family.
+   - Tamper Detection: Modified JWT signatures or payload claims trigger verification failures.
+3. **Multi-Tenant Data Isolation**: Cross-tenant queries return 403 Forbidden or 404 Not Found.
+4. **Mutation Testing**: Inverting conditional operators (`!==`, `|| false`) must cause tests to fail immediately.
 
 ---
 
-## 5. Execution Command
-All tests must be executed with the portable repo runner:
+## 5. Execution Commands
 ```bash
+# Execute all tests across the monorepo:
 rtk bun test
-# Fast unit-only execution:
-rtk bun test test/unit/
+
+# Execute a specific microservice test tier:
+rtk bun test apps/src/auth/test/unit/
+rtk bun test apps/src/auth/test/security/
+
+# Run Playwright browser tests:
+rtk bun playwright test
 ```

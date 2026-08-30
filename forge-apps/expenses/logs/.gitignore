@@ -1,5 +1,5 @@
-# Ignore raw log outputs while preserving directory structure
+# Isolated microservice logs retention
 *.log
 *.log.*
-!README.md
 !.gitignore
+!README.md

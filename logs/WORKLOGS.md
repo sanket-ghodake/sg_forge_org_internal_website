@@ -202,3 +202,10 @@
 2026-08-30 13:51 | DevCenter: Implemented Supabase-inspired collapsible overlay Astryx left sidebar with zero layout shift
 2026-08-30 13:58 | [c5dceed] feat(dev-dashboard): add Supabase-inspired collapsible overlay Astryx sidebar (+24911, -51)
 2026-08-30 13:58 | [18f81e4] chore(graphify): sync graphify backup artifacts (+176, -24667)
+2026-08-30 19:18 | Implemented Centralized Auth & Generic IAM Microservice with Ed25519 JWKS, first-login password enforcement, and portal auth redirect gate
+2026-08-30 19:24 | Cleaned up login view by removing developer persona buttons, identity badge, and default password hint
+2026-08-30 19:33 | Implemented 2026 Zero-Trust security hardening with sliding window rate limiting, HTTP security headers, RFC 6238 TOTP, audit logging, and multi-device session manager
+2026-08-30 19:50 | Integrated 4-pillar observability and dynamic proxy URL resolver in Auth microservice
+2026-08-30 19:57 | Fixed portal redirect loop by ensuring return_url accurately navigates to /portal across reverse proxy and direct ports
+2026-08-30 20:24 | Implemented monorepo 5-tier testing standard, dynamic pre-commit test scanner, coverage criteria, and Auth 5-tier test suites
+2026-08-30 20:30 | [df7197b] feat(auth): implement 2026 enterprise auth microservice, 5-tier testing architecture, and pre-commit dynamic scanner (+4086, -416)

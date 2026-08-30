@@ -1,65 +1,159 @@
 #!/usr/bin/env bun
 /**
- * SG Forge - Central Identity & Auth Service
- * Stateless session renewal, user directory & scoped JWT token issuer.
+ * @forge/auth - Central Identity & Auth Service (2026 LTS)
+ * Serves on Port 3004 (Ingress /auth via Reverse Proxy)
+ * Manages ASVS 5.0 Authentication, GCP-Style IAM, Org Trees & 4-Pillar Observability.
  */
 
 import { createLogger, createSafeHandler } from '@forge/sdk';
-import { getAstryxHeaderHtml, getAstryxStyles } from '@forge/ui';
+import { seedAuthDatabase } from './db/seed';
+import {
+  handleBrowserLog,
+  handleDirectory,
+  handleGetMySessions,
+  handleGetTelemetryLogs,
+  handleJwks,
+  handleLogin,
+  handleLogout,
+  handleRefresh,
+  handleRevokeOtherSessions,
+  handleSetPassword,
+} from './backend/api-handlers';
+import { authTelemetry } from './backend/telemetry';
+import { applySecurityHeaders } from './backend/security-headers';
+import { renderLoginHtml } from './frontend/login-view';
+import { renderSetPasswordHtml } from './frontend/set-password-view';
 
 const logger = createLogger('auth-service');
-const PORT = Number(process.env.AUTH_PORT || 3004);
+const PORT = Number(process.env.AUTH_PORT || process.env.PORT || 3004);
 
 export function startAuthServer(port: number = PORT) {
+  // Ensure database is initialized and seeded
+  seedAuthDatabase();
+
+  // Pillar 3: Emit Crash-Resilient [SYSTEM_BOOT] marker
+  authTelemetry.recordLog('docker', 'INFO', `[SYSTEM_BOOT] Central Auth Service initialized on port :${port}`);
+  authTelemetry.recordLog('app', 'INFO', `[SYSTEM_BOOT] Auth service router online with 4-pillar observability`);
+
   const handler = createSafeHandler('auth-service', async (req: Request) => {
     const url = new URL(req.url);
+    const path = url.pathname;
+    const method = req.method.toUpperCase();
 
-    if (url.pathname === '/health' || url.pathname === '/auth/health') {
-      return Response.json({
-        status: 'ok',
-        service: 'auth',
-        port,
-        uptime: process.uptime(),
-        timestamp: new Date().toISOString(),
+    let response: Response;
+
+    // 1. Pillar 1: Dual-Probe Health Checks (livez + readyz)
+    if (path === '/health' || path === '/auth/health') {
+      const healthData = authTelemetry.getHealthStatus(port);
+      response = Response.json(healthData, {
+        status: healthData.status === 'ok' ? 200 : 503,
       });
+      return applySecurityHeaders(response);
     }
 
-    return new Response(
-      `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Central Identity & Auth Service - SG Forge</title>
-  <style>
-    ${getAstryxStyles()}
-  </style>
-</head>
-<body>
-  ${getAstryxHeaderHtml('AUTH', 'CENTRAL IDENTITY')}
+    // 2. Public JWKS Endpoint (Decentralized Verification for other microservices)
+    if (
+      (path === '/.well-known/jwks.json' || path === '/auth/.well-known/jwks.json') &&
+      method === 'GET'
+    ) {
+      response = handleJwks();
+      return applySecurityHeaders(response);
+    }
 
-  <main class="astryx-container" style="max-width: 580px; margin-top: 3rem;">
-    <div class="astryx-card" style="text-align: center; padding: 2.5rem 2rem;">
-      <div style="display: inline-block; margin-bottom: 1rem;">
-        <span class="astryx-badge badge-online">
-          <span class="badge-dot"></span> Port :${port} &bull; Active
-        </span>
-      </div>
-      <h1 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--forge-text-main);">Central Identity & Auth Service</h1>
-      <p style="font-size: 0.9rem; color: var(--forge-text-muted); margin-bottom: 2rem;">
-        Manages scoped JWT issuance, role-based access control (RBAC), and session validation for all Forge Apps.
-      </p>
+    // 3. Pillar 2: Browser Telemetry Log Bridge
+    if (path === '/api/logs/browser' || path === '/auth/api/logs/browser') {
+      if (method === 'POST') response = await handleBrowserLog(req);
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
 
-      <div style="display: flex; gap: 1rem; justify-content: center;">
-        <a href="/" class="astryx-btn btn-outline">&larr; Return to Platform Hub</a>
-        <a href="/portal" class="astryx-btn btn-primary" target="_blank" rel="noopener noreferrer">Open Workspace &rarr;</a>
-      </div>
-    </div>
-  </main>
-</body>
-</html>`,
-      { headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+    // 4. REST API Endpoints
+    if (path === '/api/v1/auth/login' || path === '/auth/api/v1/auth/login') {
+      if (method === 'POST') response = await handleLogin(req);
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    if (path === '/api/v1/auth/set-password' || path === '/auth/api/v1/auth/set-password') {
+      if (method === 'POST') response = await handleSetPassword(req);
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    if (path === '/api/v1/auth/refresh' || path === '/auth/api/v1/auth/refresh') {
+      if (method === 'POST') response = await handleRefresh(req);
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    if (path === '/api/v1/auth/logout' || path === '/auth/api/v1/auth/logout') {
+      if (method === 'POST') response = await handleLogout(req);
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    if (path === '/api/v1/auth/directory' || path === '/auth/api/v1/auth/directory') {
+      if (method === 'GET') response = handleDirectory();
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    if (path === '/api/v1/auth/sessions/me' || path === '/auth/api/v1/auth/sessions/me') {
+      if (method === 'GET') response = await handleGetMySessions(req);
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    if (
+      path === '/api/v1/auth/sessions/revoke-others' ||
+      path === '/auth/api/v1/auth/sessions/revoke-others'
+    ) {
+      if (method === 'POST') response = await handleRevokeOtherSessions(req);
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    if (path === '/api/logs/telemetry' || path === '/auth/api/logs/telemetry') {
+      if (method === 'GET') response = handleGetTelemetryLogs(req);
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    // 5. HTML Frontend Views
+    if (path === '/auth/set-password' || path === '/set-password') {
+      const email = url.searchParams.get('email') || '';
+      response = new Response(renderSetPasswordHtml(email), {
+        headers: { 'Content-Type': 'text/html; charset=utf-8' },
+      });
+      return applySecurityHeaders(response);
+    }
+
+    if (
+      path === '/' ||
+      path === '/auth' ||
+      path === '/auth/' ||
+      path === '/login' ||
+      path === '/auth/login'
+    ) {
+      let returnUrl = url.searchParams.get('return_url') || url.searchParams.get('return_to') || '/portal';
+      if (returnUrl === '/' || returnUrl === '') returnUrl = '/portal';
+      response = new Response(renderLoginHtml(returnUrl), {
+        headers: { 'Content-Type': 'text/html; charset=utf-8' },
+      });
+      return applySecurityHeaders(response);
+    }
+
+    // 404 Fallback
+    response = new Response(
+      JSON.stringify({
+        type: 'https://tools.ietf.org/html/rfc7807',
+        title: 'Not Found',
+        status: 404,
+        detail: `The requested path ${path} does not exist on the auth service.`,
+      }),
+      { status: 404, headers: { 'Content-Type': 'application/problem+json' } }
     );
+    return applySecurityHeaders(response);
   });
 
   return Bun.serve({
@@ -70,5 +164,5 @@ export function startAuthServer(port: number = PORT) {
 
 if (import.meta.main) {
   startAuthServer();
-  logger.info(`🔒 Auth Service running on http://localhost:${PORT}`);
+  logger.info(`🔒 Central Auth Service running on http://localhost:${PORT}`);
 }

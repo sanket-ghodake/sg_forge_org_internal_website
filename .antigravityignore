@@ -57,6 +57,7 @@ data/*.db-wal
 data/*.db-shm
 data/*.db-journal
 data/backups/
+apps/data/
 *.sqlite
 *.sqlite3
 *.db
