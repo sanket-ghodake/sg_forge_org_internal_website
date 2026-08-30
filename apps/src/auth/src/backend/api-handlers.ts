@@ -28,9 +28,10 @@ const logger = createLogger('auth-api');
 // In-memory temp tokens for password reset verification
 const passwordResetTokens = new Map<string, { userId: string; expiresAt: number }>();
 
-function problem(title: string, detail: string, status: number = 400, headersObj: Record<string, string> = {}): Response {
+function problem(title: string, detail: string, status: number = 400, headersObj: Record<string, string> = {}, traceId?: string): Response {
   const headers = new Headers({
     'Content-Type': 'application/problem+json',
+    ...(traceId ? { 'x-trace-id': traceId } : {}),
     ...headersObj,
   });
 
@@ -40,6 +41,7 @@ function problem(title: string, detail: string, status: number = 400, headersObj
       title,
       status,
       detail,
+      ...(traceId ? { traceId } : {}),
     },
     { status, headers }
   );

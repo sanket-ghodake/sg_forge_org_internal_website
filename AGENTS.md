@@ -11,7 +11,7 @@ Before writing code, running commands, or staging/committing changes, verify:
 2. [ ] **Zero Host Modification**: All runtimes/tools strictly use portable repo binaries (`portables/bun/bin/bun`, `portables/bin/*`) or Docker. ZERO host modifications (`apt`, `brew`, `npm -g`, `pip install`).
 3. [ ] **500-Line Soft File Cap**: Source files must remain cohesive and **$\le 500$ lines** ($\le 300$ lines ideal). Block files exceeding 500 lines without explicit domain aggregation exemption.
 4. [ ] **Strict Meta Astryx UI**: Frontend UI code MUST strictly use Meta Astryx design tokens and components (`@forge/ui`). ZERO bespoke unapproved CSS or random component libraries.
-5. [ ] **Centralized Logging & Error Handling**: Services MUST use `createLogger` and `createSafeHandler` from `@forge/sdk` (Google SRE standard structured JSON logs & RFC 7807 problem responses).
+5. [ ] **Centralized Logging, PII Redaction & Error Handling**: Services MUST use `createLogger` and `createSafeHandler` from `@forge/sdk` (Google SRE standard structured JSON logs, RFC 7807 problem responses with trace IDs, and automated recursive PII/secret redaction). Frontend console must never leak credentials, tokens, or raw internal stack traces.
 6. [ ] **Dedicated Turso DB Isolation**: Dedicated Turso (libSQL) database per Forge App. Micro-apps MUST NEVER query another app's database.
 7. [ ] **Clean Package Aliases**: Imports must use `@forge/sdk`, `@forge/ui`, `@forge/types`. ZERO relative traversal sprawl (`../../..`).
 8. [ ] **Folder Documentation (README per folder)**: Every single folder across the codebase MUST maintain its own descriptive `README.md`.
@@ -40,9 +40,9 @@ Before writing code, running commands, or staging/committing changes, verify:
 - Strictly adhere to `--forge-*` CSS variables (`--forge-bg-root`, `--forge-bg-surface`, `--forge-bg-card`, `--forge-border`, `--forge-primary`, `--forge-accent`, `--forge-text-main`, `--forge-text-muted`).
 - Zero horizontal scrolling down to 320px viewport. Modals, dropdowns, and overlays render with proper top-layer z-index and accessibility.
 
-### 4. Centralized Structured Logging & RFC 7807 Error Boundaries
-- **Google SRE Observability**: All platform services and micro-apps MUST use `@forge/sdk` (`createLogger` and `createSafeHandler`).
-- Standardized JSON telemetry output with timestamp, severity, service tag, and trace IDs. Never leak raw stack traces to end users.
+### 4. Centralized Structured Logging, PII Redaction & RFC 7807 Error Boundaries
+- **Google SRE & Meta AppSec Observability**: All platform services and micro-apps MUST use `@forge/sdk` (`createLogger`, `createSafeHandler`, `initBrowserLogBridge`, and `redactSensitiveData`).
+- Standardized JSON telemetry output with timestamp, severity, service tag, and immutable `traceId` correlation across requests. Never leak raw stack traces, database errors, passwords, or tokens to end users or browser console.
 
 ### 5. Multi-Tenant Data Isolation & Dedicated Turso DB per App
 - Dedicated Turso (libSQL) database instance per Forge App. Apps MUST NEVER access or query another app's database.

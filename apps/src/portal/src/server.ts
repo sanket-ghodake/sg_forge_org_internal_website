@@ -232,6 +232,17 @@ export function startPortalServer(port: number = PORT) {
       return Response.json({ status: 'ok', service: 'portal', port, uptime: process.uptime() });
     }
 
+    // Pillar 2: Browser Telemetry Log Bridge
+    if (url.pathname === '/api/logs/browser' || url.pathname === '/portal/api/logs/browser') {
+      try {
+        const body = await req.json();
+        logger.logBrowserEvent(body.severity || 'INFO', body.message || 'Browser event', body.metadata, body.error ? new Error(body.error.message || body.message) : undefined);
+        return Response.json({ ok: true });
+      } catch {
+        return Response.json({ ok: false }, { status: 400 });
+      }
+    }
+
     // Determine target portal ingress path for return_url
     const ingressPrefix = req.headers.get('x-forwarded-prefix') || '/portal';
     const targetPath =

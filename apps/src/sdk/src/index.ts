@@ -11,6 +11,43 @@ export * from './registry';
 // ==============================================================================
 export type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'FATAL';
 
+const SENSITIVE_KEY_REGEX = /^(password|pass|secret|token|temptoken|accesstoken|refreshtoken|apikey|api_key|authorization|auth|cookie|set-cookie|creditcard|cvv|ssn|privatekey)$/i;
+const BEARER_REGEX = /Bearer\s+[a-zA-Z0-9_\-\.]+/gi;
+
+/**
+ * Enterprise PII & Secret Redaction Engine (Google & Meta AppSec Standard).
+ * Recursively sanitizes objects, arrays, and strings to prevent leaking credentials.
+ */
+export function redactSensitiveData(data: unknown, depth = 0): unknown {
+  if (depth > 6 || data === null || data === undefined) return data;
+
+  if (typeof data === 'string') {
+    return data.replace(BEARER_REGEX, 'Bearer [REDACTED]');
+  }
+
+  if (Array.isArray(data)) {
+    return data.map((item) => redactSensitiveData(item, depth + 1));
+  }
+
+  if (typeof data === 'object') {
+    const sanitized: Record<string, unknown> = {};
+    for (const [key, val] of Object.entries(data as Record<string, unknown>)) {
+      if (SENSITIVE_KEY_REGEX.test(key)) {
+        sanitized[key] = '[REDACTED]';
+      } else if (typeof val === 'object' && val !== null) {
+        sanitized[key] = redactSensitiveData(val, depth + 1);
+      } else if (typeof val === 'string') {
+        sanitized[key] = val.replace(BEARER_REGEX, 'Bearer [REDACTED]');
+      } else {
+        sanitized[key] = val;
+      }
+    }
+    return sanitized;
+  }
+
+  return data;
+}
+
 export interface LogEntry {
   severity: LogLevel;
   service: string;
@@ -104,22 +141,39 @@ export class ForgeLogger {
     } catch {}
   }
 
-  private log(severity: LogLevel, message: string, meta?: Record<string, unknown>, err?: Error, source: 'app' | 'browser' | 'docker' | 'db' = 'app') {
+  private log(
+    severity: LogLevel,
+    message: string,
+    meta?: Record<string, unknown>,
+    err?: Error,
+    source: 'app' | 'browser' | 'docker' | 'db' = 'app',
+    traceId?: string
+  ) {
+    const sanitizedMeta = meta ? (redactSensitiveData(meta) as Record<string, unknown>) : undefined;
+    const sanitizedMessage = typeof message === 'string' ? (redactSensitiveData(message) as string) : message;
+
     const entry: LogEntry = {
       severity,
       service: this.serviceName,
       source,
-      message,
+      traceId,
+      message: sanitizedMessage,
       timestamp: new Date().toISOString(),
-      metadata: meta,
-      error: err ? { name: err.name, message: err.message, stack: err.stack } : undefined,
+      metadata: sanitizedMeta,
+      error: err
+        ? {
+            name: err.name,
+            message: String(redactSensitiveData(err.message)),
+            stack: err.stack ? String(redactSensitiveData(err.stack)) : undefined,
+          }
+        : undefined,
     };
     entry.plainEnglishSummary = explainLog(entry);
 
     // 1. Output to local TTY console
     if (typeof process !== 'undefined' && process.stdout?.isTTY && process.env.NODE_ENV !== 'production') {
       const color = severity === 'ERROR' || severity === 'FATAL' ? '\x1b[31m' : severity === 'WARN' ? '\x1b[33m' : '\x1b[36m';
-      console.log(`${color}[${entry.timestamp}] [${entry.severity}] [${entry.service}]\x1b[0m ${entry.message}`, meta ? JSON.stringify(meta) : '');
+      console.log(`${color}[${entry.timestamp}] [${entry.severity}] [${entry.service}]\x1b[0m ${entry.message}`, sanitizedMeta ? JSON.stringify(sanitizedMeta) : '');
       if (err?.stack) console.error(err.stack);
     } else if (typeof console !== 'undefined') {
       console.log(JSON.stringify(entry));
@@ -148,21 +202,21 @@ export class ForgeLogger {
     }
   }
 
-  public debug(msg: string, meta?: Record<string, unknown>) { this.log('DEBUG', msg, meta); }
-  public info(msg: string, meta?: Record<string, unknown>) { this.log('INFO', msg, meta); }
-  public warn(msg: string, meta?: Record<string, unknown>) { this.log('WARN', msg, meta); }
-  public error(msg: string, err?: Error, meta?: Record<string, unknown>) { this.log('ERROR', msg, meta, err); }
-  public fatal(msg: string, err?: Error, meta?: Record<string, unknown>) { this.log('FATAL', msg, meta, err); }
+  public debug(msg: string, meta?: Record<string, unknown>, traceId?: string) { this.log('DEBUG', msg, meta, undefined, 'app', traceId); }
+  public info(msg: string, meta?: Record<string, unknown>, traceId?: string) { this.log('INFO', msg, meta, undefined, 'app', traceId); }
+  public warn(msg: string, meta?: Record<string, unknown>, traceId?: string) { this.log('WARN', msg, meta, undefined, 'app', traceId); }
+  public error(msg: string, err?: Error, meta?: Record<string, unknown>, traceId?: string) { this.log('ERROR', msg, meta, err, 'app', traceId); }
+  public fatal(msg: string, err?: Error, meta?: Record<string, unknown>, traceId?: string) { this.log('FATAL', msg, meta, err, 'app', traceId); }
 
-  public logDbQuery(sql: string, durationMs: number, err?: Error) {
+  public logDbQuery(sql: string, durationMs: number, err?: Error, traceId?: string) {
     const isSlow = durationMs > 10;
     const severity: LogLevel = err ? 'ERROR' : isSlow ? 'WARN' : 'DEBUG';
     const msg = `${isSlow ? '⚠️ SLOW SQL ' : 'SQL '}(${durationMs}ms): ${sql}`;
-    this.log(severity, msg, { sql, durationMs }, err, 'db');
+    this.log(severity, msg, { sql, durationMs }, err, 'db', traceId);
   }
 
-  public logBrowserEvent(severity: LogLevel, message: string, meta?: Record<string, unknown>, err?: Error) {
-    this.log(severity, message, meta, err, 'browser');
+  public logBrowserEvent(severity: LogLevel, message: string, meta?: Record<string, unknown>, err?: Error, traceId?: string) {
+    this.log(severity, message, meta, err, 'browser', traceId);
   }
 }
 
@@ -175,7 +229,7 @@ export function createLogger(serviceName: string, customLogDir?: string): ForgeL
 // ==============================================================================
 export function createSafeHandler(
   serviceName: string,
-  handler: (req: Request) => Promise<Response> | Response,
+  handler: (req: Request, context?: { traceId: string }) => Promise<Response> | Response,
   customLogDir?: string
 ): (req: Request) => Promise<Response> {
   const logger = createLogger(serviceName, customLogDir);
@@ -183,16 +237,27 @@ export function createSafeHandler(
   return async (req: Request): Promise<Response> => {
     const startTime = performance.now();
     const url = new URL(req.url);
+    const traceId = req.headers.get('x-trace-id') || req.headers.get('x-request-id') || crypto.randomUUID();
 
     try {
-      const response = await handler(req);
+      const response = await handler(req, { traceId });
       const durationMs = Number((performance.now() - startTime).toFixed(2));
-      logger.info(`${req.method} ${url.pathname} -> ${response.status} (${durationMs}ms)`, { durationMs });
-      return response;
+      logger.info(`${req.method} ${url.pathname} -> ${response.status} (${durationMs}ms)`, { durationMs, path: url.pathname }, traceId);
+
+      // Inject immutable trace ID into response headers
+      const headers = new Headers(response.headers);
+      if (!headers.has('x-trace-id')) {
+        headers.set('x-trace-id', traceId);
+      }
+      return new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers,
+      });
     } catch (err: unknown) {
       const error = err instanceof Error ? err : new Error(String(err));
       const durationMs = Number((performance.now() - startTime).toFixed(2));
-      logger.error(`Unhandled error during ${req.method} ${url.pathname} (${durationMs}ms)`, error, { durationMs });
+      logger.error(`Unhandled error during ${req.method} ${url.pathname} (${durationMs}ms)`, error, { durationMs, path: url.pathname }, traceId);
 
       return Response.json(
         {
@@ -201,11 +266,15 @@ export function createSafeHandler(
           status: 500,
           detail: 'An unexpected system error occurred. Please contact support.',
           service: serviceName,
+          traceId,
           timestamp: new Date().toISOString(),
         },
         {
           status: 500,
-          headers: { 'Content-Type': 'application/problem+json; charset=utf-8' },
+          headers: {
+            'Content-Type': 'application/problem+json; charset=utf-8',
+            'x-trace-id': traceId,
+          },
         }
       );
     }
@@ -276,9 +345,9 @@ export class ForgeClient {
 }
 
 /**
- * 4. Client-Side Browser Console Log Bridge
+ * 4. Client-Side Browser Console Log Bridge (Hardened Google/Meta Standard)
  * Intercepts uncaught runtime errors, unhandled rejections, and console errors,
- * sending them to the app's dedicated /api/logs/browser endpoint.
+ * sanitizes payloads of sensitive credentials, and sends them to the app's dedicated /api/logs/browser endpoint.
  */
 export function initBrowserLogBridge(serviceName: string, ingestEndpoint = '/api/logs/browser'): void {
   if (typeof window === 'undefined') return;
@@ -288,13 +357,16 @@ export function initBrowserLogBridge(serviceName: string, ingestEndpoint = '/api
 
   const sendBrowserLog = (severity: 'WARN' | 'ERROR', message: string, stack?: string) => {
     try {
+      const sanitizedMsg = typeof message === 'string' ? (redactSensitiveData(message) as string) : message;
+      const sanitizedStack = stack ? (redactSensitiveData(stack) as string) : undefined;
+
       const payload = JSON.stringify({
         service: serviceName,
         severity,
-        message,
+        message: sanitizedMsg,
         timestamp: new Date().toISOString(),
         source: 'browser',
-        error: stack ? { name: 'BrowserError', message, stack } : undefined,
+        error: sanitizedStack ? { name: 'BrowserError', message: sanitizedMsg, stack: sanitizedStack } : undefined,
       });
 
       if (navigator.sendBeacon) {

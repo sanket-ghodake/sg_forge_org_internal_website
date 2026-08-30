@@ -141,7 +141,7 @@ export function renderLoginHtml(returnUrl: string = '/portal'): string {
           }, 400);
         }
       } catch (err) {
-        reportBrowserLog('ERROR', 'Login network request failed', { error: String(err), email: emailVal });
+        reportBrowserLog('ERROR', 'Login network request failed', { error: String(err) });
         showAlert('Network or connection error. Please try again.');
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<span>Sign In to Workspace</span> &rarr;';

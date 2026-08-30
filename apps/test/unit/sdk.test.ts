@@ -30,6 +30,42 @@ describe('SG Forge Base Sanity', () => {
     const body = await response.json();
     expect(body.title).toBe('Internal Server Error');
     expect(body.service).toBe('test-service');
+    expect(body.traceId).toBeDefined();
+    expect(response.headers.get('x-trace-id')).toBeDefined();
+  });
+
+  it('redacts sensitive credentials and PII keys recursively', async () => {
+    const { redactSensitiveData } = await import('@forge/sdk');
+    const dirty = {
+      user: 'alice',
+      password: 'SuperSecretPassword123!',
+      token: 'jwt.token.here',
+      nested: {
+        apiKey: 'secret_api_key',
+        authorization: 'Bearer secret_token_xyz',
+      },
+    };
+    const cleaned = redactSensitiveData(dirty) as any;
+    expect(cleaned.user).toBe('alice');
+    expect(cleaned.password).toBe('[REDACTED]');
+    expect(cleaned.token).toBe('[REDACTED]');
+    expect(cleaned.nested.apiKey).toBe('[REDACTED]');
+    expect(cleaned.nested.authorization).toBe('[REDACTED]');
+  });
+
+  it('propagates caller trace ID through createSafeHandler', async () => {
+    const handler = createSafeHandler('test-service', async (req, ctx) => {
+      return Response.json({ ok: true, trace: ctx?.traceId });
+    });
+
+    const customTraceId = 'trace-custom-uuid-12345';
+    const req = new Request('http://localhost/test', {
+      headers: { 'x-trace-id': customTraceId },
+    });
+    const res = await handler(req);
+    expect(res.headers.get('x-trace-id')).toBe(customTraceId);
+    const data = await res.json();
+    expect(data.trace).toBe(customTraceId);
   });
 
   it('dynamically parses service registry from environment variables', () => {

@@ -236,8 +236,8 @@ runTier1Check(8, 'Package Aliases & Zero Traversal', 'AST Import Scanner', () =>
   return { status: 'PASSED', details: 'Zero relative traversal. Clean imports via @forge/sdk, @forge/ui, @forge/types.' };
 });
 
-// 9. Centralized Logging & Error Handlers
-runTier1Check(9, 'Structured Logging & RFC 7807 Handlers', 'AST Code Scanner', () => {
+// 9. Centralized Logging, PII Redaction & RFC 7807 Handlers
+runTier1Check(9, 'Structured Logging, PII Redaction & RFC 7807', 'AST Code Scanner', () => {
   const servers = getAllFiles(join(REPO_ROOT, 'apps', 'src')).filter((f) => f.endsWith('server.ts'));
 
   const missing: string[] = [];
@@ -248,8 +248,24 @@ runTier1Check(9, 'Structured Logging & RFC 7807 Handlers', 'AST Code Scanner', (
     }
   }
 
+  // Scan frontend files for unredacted credential logging
+  const frontendFiles = [
+    ...getAllFiles(join(REPO_ROOT, 'apps', 'src', 'auth', 'src', 'frontend')),
+    ...getAllFiles(join(REPO_ROOT, 'apps', 'src', 'portal')),
+  ];
+  const forbiddenLogPattern = /console\.(log|info|debug)\(.*(password|token|secret|apiKey).*\)/i;
+  const piiViolations: string[] = [];
+  for (const f of frontendFiles) {
+    const content = readFileSync(f, 'utf8');
+    if (forbiddenLogPattern.test(content)) {
+      piiViolations.push(relative(REPO_ROOT, f));
+    }
+  }
+
   if (missing.length > 0) return { status: 'WARNING', details: `Missing logging in: ${missing.join(', ')}` };
-  return { status: 'PASSED', details: `All ${servers.length} platform servers use @forge/sdk structured logging and error boundaries.` };
+  if (piiViolations.length > 0) return { status: 'FAILED', details: `Unredacted credential logging in: ${piiViolations.join(', ')}` };
+
+  return { status: 'PASSED', details: `All ${servers.length} platform servers enforce structured logging, PII redaction, and RFC 7807 boundaries.` };
 });
 
 // 10. Multi-Agent Directive Synchronization
