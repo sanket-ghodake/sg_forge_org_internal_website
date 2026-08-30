@@ -1,7 +1,6 @@
 # ==============================================================================
 # SG Forge - Unified Reverse Proxy Gateway (Auto-Generated from .env)
 # DO NOT EDIT DIRECTLY: Modify routes in .env and run './run.sh sync-proxy'
-# Generated at: 2026-08-24T02:52:52.271Z
 # ==============================================================================
 
 :80 {

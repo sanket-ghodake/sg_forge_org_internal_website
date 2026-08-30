@@ -20,7 +20,3 @@ if ! "$BUN_BIN" run "$REPO_ROOT/scripts/verify-gate.ts"; then
     exit 1
 fi
 
-# Automatically stage generated verification reports into the current atomic commit
-if [ -d "$REPO_ROOT/logs/reports" ]; then
-    git add "$REPO_ROOT/logs/reports"
-fi

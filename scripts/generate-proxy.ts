@@ -19,7 +19,6 @@ export function generateCaddyfile(): string {
   let caddyContent = `# ==============================================================================
 # SG Forge - Unified Reverse Proxy Gateway (Auto-Generated from .env)
 # DO NOT EDIT DIRECTLY: Modify routes in .env and run './run.sh sync-proxy'
-# Generated at: ${new Date().toISOString()}
 # ==============================================================================
 
 :${httpPort} {

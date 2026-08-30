@@ -20,11 +20,11 @@ fi
 
 "$BUN_BIN" run scripts/log-commit.ts
 
-# Option B: If log files are modified, amend them into the commit cleanly
-LOGS_DIRTY=$(git status --porcelain logs/commits.jsonl logs/WORKLOGS.md 2>/dev/null || true)
+# Option B: If log files or commit reports are modified, amend them into the commit cleanly
+LOGS_DIRTY=$(git status --porcelain logs/commits.jsonl logs/WORKLOGS.md logs/reports 2>/dev/null || true)
 
 if [ -n "$LOGS_DIRTY" ]; then
     export FORGE_AMENDING_LOG=1
-    git add logs/commits.jsonl logs/WORKLOGS.md
+    git add logs/commits.jsonl logs/WORKLOGS.md logs/reports
     git commit --amend --no-edit --no-verify
 fi
