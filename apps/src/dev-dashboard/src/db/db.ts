@@ -172,39 +172,44 @@ class PlatformDatabaseManager {
         CREATE INDEX IF NOT EXISTS idx_audit_timestamp ON audit_logs(timestamp);
       `);
 
-      this.seedInitialRegistry();
+      this.syncWithEnvRegistry();
       logger.info('🗄️ Platform Core Database initialized successfully in WAL mode');
     } catch (err) {
       logger.error('Failed to initialize Platform Core DB', { error: String(err) });
     }
   }
 
-  private seedInitialRegistry(): void {
-    const count = this.db.query('SELECT COUNT(*) as cnt FROM apps_registry').get() as { cnt: number };
-    if (count.cnt === 0) {
-      const initialServices = loadServiceRegistry();
-      const insert = this.db.prepare(`
-        INSERT OR IGNORE INTO apps_registry 
-        (id, name, port, ingress_path, category, access_role, container_name, db_file_path, runtime_type, status)
-        VALUES ($id, $name, $port, $path, $category, $role, $container, $dbPath, $runtime, 'active')
-      `);
+  public syncWithEnvRegistry(): void {
+    const services = loadServiceRegistry();
+    const upsert = this.db.prepare(`
+      INSERT INTO apps_registry 
+      (id, name, port, ingress_path, category, access_role, container_name, db_file_path, runtime_type, status, updated_at)
+      VALUES ($id, $name, $port, $path, $category, $role, $container, $dbPath, $runtime, 'active', strftime('%s', 'now'))
+      ON CONFLICT(id) DO UPDATE SET
+        name = excluded.name,
+        port = excluded.port,
+        ingress_path = excluded.ingress_path,
+        category = excluded.category,
+        access_role = excluded.access_role,
+        container_name = excluded.container_name,
+        updated_at = strftime('%s', 'now');
+    `);
 
-      for (const s of initialServices) {
-        const dbPath = join(DATA_DIR, `${s.id}.db`);
-        insert.run({
-          $id: s.id,
-          $name: s.name,
-          $port: s.port,
-          $path: s.path,
-          $category: s.category,
-          $role: s.role,
-          $container: s.containerName,
-          $dbPath: dbPath,
-          $runtime: 'bun-watch',
-        });
-      }
-      logger.info(`🌱 Seeded ${initialServices.length} baseline services into apps_registry`);
+    for (const s of services) {
+      const dbPath = join(DATA_DIR, `${s.id}.db`);
+      upsert.run({
+        $id: s.id,
+        $name: s.name,
+        $port: s.port,
+        $path: s.path,
+        $category: s.category,
+        $role: s.role,
+        $container: s.containerName,
+        $dbPath: dbPath,
+        $runtime: 'bun-watch',
+      });
     }
+    logger.info(`🌱 Synchronized ${services.length} services from .env registry into apps_registry`);
   }
 
   public getAppsRegistry(): AppRegistryRecord[] {

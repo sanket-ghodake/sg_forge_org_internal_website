@@ -21,7 +21,9 @@
       "@forge/ui": ["apps/src/ui/src/index.ts"],
       "@forge/ui/*": ["apps/src/ui/src/*"],
       "@forge/types": ["apps/src/types/src/index.ts"],
-      "@forge/types/*": ["apps/src/types/src/*"]
+      "@forge/types/*": ["apps/src/types/src/*"],
+      "@forge/auth": ["apps/src/auth/src/index.ts"],
+      "@forge/auth/*": ["apps/src/auth/src/*"]
     }
   },
   "include": [

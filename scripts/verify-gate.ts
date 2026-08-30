@@ -19,9 +19,26 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { validateIgnores } from './sync-ignores';
+import { loadServiceRegistry } from '../apps/src/sdk/src/registry';
 
 const REPO_ROOT = process.cwd();
 const AGENTS_REPORTS_DIR = join(REPO_ROOT, '.agents', 'reports');
+
+function resolveMicroserviceDir(serviceId: string): string | null {
+  const directApp = join(REPO_ROOT, 'apps', 'src', serviceId);
+  if (existsSync(directApp)) return directApp;
+  if (serviceId === 'devcenter') {
+    const devDash = join(REPO_ROOT, 'apps', 'src', 'dev-dashboard');
+    if (existsSync(devDash)) return devDash;
+  }
+  if (serviceId === 'gateway') {
+    const devHub = join(REPO_ROOT, 'apps', 'src', 'dev-hub');
+    if (existsSync(devHub)) return devHub;
+  }
+  const forgeApp = join(REPO_ROOT, 'forge-apps', serviceId);
+  if (existsSync(forgeApp)) return forgeApp;
+  return null;
+}
 
 interface Tier1Check {
   id: number;
@@ -263,20 +280,15 @@ runTier1Check(10, 'Multi-Agent Directives Sync', 'SHA-256 Hash Guard', () => {
 
 // 11. Microservice Observability & Isolated Logs
 runTier1Check(11, 'Microservice Observability & Isolated Logs', 'Folder & Contract Guard', () => {
-  const appDirs = [
-    join(REPO_ROOT, 'apps', 'src', 'landing'),
-    join(REPO_ROOT, 'apps', 'src', 'auth'),
-    join(REPO_ROOT, 'apps', 'src', 'portal'),
-    join(REPO_ROOT, 'apps', 'src', 'dev-dashboard'),
-    join(REPO_ROOT, 'apps', 'src', 'dev-hub'),
-    join(REPO_ROOT, 'forge-apps', 'expenses'),
-    join(REPO_ROOT, 'forge-apps', 'billing'),
-    join(REPO_ROOT, 'forge-apps', 'telemetry'),
-  ];
-
+  const registeredServices = loadServiceRegistry();
   const missingLogs: string[] = [];
-  for (const dir of appDirs) {
-    if (!existsSync(dir)) continue;
+
+  for (const s of registeredServices) {
+    const dir = resolveMicroserviceDir(s.id);
+    if (!dir) {
+      missingLogs.push(`${s.id} (directory not found on disk)`);
+      continue;
+    }
     const logsDir = join(dir, 'logs');
     const logsReadme = join(logsDir, 'README.md');
     const logsGitignore = join(logsDir, '.gitignore');
@@ -293,7 +305,7 @@ runTier1Check(11, 'Microservice Observability & Isolated Logs', 'Folder & Contra
   if (missingLogs.length > 0) {
     return { status: 'FAILED', details: `Observability violations: ${missingLogs.join('; ')}` };
   }
-  return { status: 'PASSED', details: `All ${appDirs.length} microservices maintain dedicated isolated logs/ directories with README & .gitignore.` };
+  return { status: 'PASSED', details: `All ${registeredServices.length} registered microservices maintain dedicated isolated logs/ directories with README & .gitignore.` };
 });
 
 // 12. 5-Tier Test Suite Execution
@@ -348,38 +360,46 @@ runTier1Check(14, 'Meta Astryx UI & Token Compliance', 'Astryx Portable Validato
 
 // 15. Dynamic Microservice 5-Tier Test Architecture Scanner
 runTier1Check(15, 'Dynamic 5-Tier Test Architecture Scanner', 'Microservice Discovery Engine', () => {
-  const appsDir = join(REPO_ROOT, 'apps', 'src');
-  const forgeAppsDir = join(REPO_ROOT, 'forge-apps');
-
-  const discoveredServices: string[] = [];
-  if (existsSync(appsDir)) {
-    for (const entry of readdirSync(appsDir, { withFileTypes: true })) {
-      if (entry.isDirectory()) discoveredServices.push(join(appsDir, entry.name));
-    }
-  }
-  if (existsSync(forgeAppsDir)) {
-    for (const entry of readdirSync(forgeAppsDir, { withFileTypes: true })) {
-      if (entry.isDirectory() && entry.name !== 'node_modules') discoveredServices.push(join(forgeAppsDir, entry.name));
-    }
-  }
-
+  const registeredServices = loadServiceRegistry();
+  const requiredTiers = ['unit', 'integration', 'security', 'contracts', 'e2e'];
   const violations: string[] = [];
-  for (const sPath of discoveredServices) {
+
+  for (const s of registeredServices) {
+    const sPath = resolveMicroserviceDir(s.id);
+    if (!sPath) {
+      violations.push(`${s.id} (directory not found)`);
+      continue;
+    }
     const rel = relative(REPO_ROOT, sPath);
     const testDir = join(sPath, 'test');
     if (!existsSync(testDir)) {
-      // If service is a standalone library or app, flag if no tests
-      violations.push(`${rel} is missing dedicated test/ folder`);
+      violations.push(`${rel} is missing test/ directory`);
+      continue;
+    }
+    if (!existsSync(join(testDir, 'README.md'))) {
+      violations.push(`${rel}/test/README.md is missing`);
+    }
+
+    for (const tier of requiredTiers) {
+      const tierDir = join(testDir, tier);
+      if (!existsSync(tierDir)) {
+        violations.push(`${rel}/test/${tier} (missing tier folder)`);
+      } else {
+        const testFiles = readdirSync(tierDir).filter((f) => f.endsWith('.test.ts') || f.endsWith('.pw.ts'));
+        if (testFiles.length === 0) {
+          violations.push(`${rel}/test/${tier} (no test files found)`);
+        }
+      }
     }
   }
 
   if (violations.length > 0) {
-    return { status: 'WARNING', details: `Discovered ${discoveredServices.length} services. Notices: ${violations.join('; ')}` };
+    return { status: 'FAILED', details: `5-Tier Test violations in ${violations.length} check(s): ${violations.join('; ')}` };
   }
 
   return {
     status: 'PASSED',
-    details: `All ${discoveredServices.length} discovered microservices and Forge Apps maintain dedicated 5-Tier test architectures.`,
+    details: `All ${registeredServices.length} registered microservices maintain complete, verified 5-Tier test architectures (unit, integration, security, contracts, e2e).`,
   };
 });
 

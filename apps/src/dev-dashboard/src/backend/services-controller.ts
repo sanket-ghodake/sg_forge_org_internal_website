@@ -60,17 +60,13 @@ class ServicesController {
     const port = app.port;
     const hosts = ['localhost', '127.0.0.1'];
 
-    if (app.id === 'devcenter') {
-      hosts.push('dev-dashboard', 'forge-dev-dashboard');
-    } else if (app.id === 'gateway') {
-      hosts.push('dev-hub', 'forge-dev-hub');
-    } else if (['expenses', 'billing', 'telemetry'].includes(app.id)) {
-      hosts.push(`app-${app.id}`, app.id, `forge-app-${app.id}`);
-    } else {
-      hosts.push(app.id, `forge-${app.id}-dev`, `forge-${app.id}`);
+    if (app.container_name) {
+      hosts.push(app.container_name);
     }
+    hosts.push(app.id, `app-${app.id}`, `forge-${app.id}`);
 
-    return hosts.map((h) => `http://${h}:${port}/health`);
+    const uniqueHosts = Array.from(new Set(hosts));
+    return uniqueHosts.map((h) => `http://${h}:${port}/health`);
   }
 
   public async pollServiceHealth(app: AppRegistryRecord): Promise<ServiceHealthStatus> {
