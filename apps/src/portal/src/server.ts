@@ -5,8 +5,8 @@
  */
 
 import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript } from '@forge/ui';
-import { createLogger, createSafeHandler } from '@forge/sdk';
-import { verifyJwt } from '@forge/auth';
+import { authGuard, createLogger, createSafeHandler } from '@forge/sdk';
+import type { AuthUser } from '@forge/types';
 
 const PORT = Number(process.env.PORTAL_PORT || process.env.PORT || 3001);
 const logger = createLogger('portal-service');
@@ -243,49 +243,22 @@ export function startPortalServer(port: number = PORT) {
       }
     }
 
-    // Determine target portal ingress path for return_url
-    const ingressPrefix = req.headers.get('x-forwarded-prefix') || '/portal';
-    const targetPath =
-      url.pathname === '/' || url.pathname === ''
-        ? ingressPrefix
-        : url.pathname.startsWith('/portal')
-        ? url.pathname
-        : `${ingressPrefix}${url.pathname}`;
-    const returnUrlParam = encodeURIComponent(targetPath + (url.search || ''));
+    // 🛡️ Zero-Trust SSO Auth Gate & RBAC Verification
+    const auth = authGuard(req, {
+      appName: 'Main Portal & Org Canvas',
+      requiredRoles: ['roles/employee', 'roles/super_admin'],
+    });
 
-    // Authentication Verification Gate
-    const cookieHeader = req.headers.get('cookie') || '';
-    const sessionMatch = cookieHeader.match(/forge_session=([^;]+)/);
-    const authHeader = req.headers.get('authorization') || '';
-    const bearerToken = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
-    const token = sessionMatch ? sessionMatch[1] : bearerToken;
-
-    if (!token) {
-      // Unauthenticated -> 302 Redirect to Auth Service Login with preserved /portal target
-      return new Response(null, {
-        status: 302,
-        headers: {
-          Location: `/auth/login?return_url=${returnUrlParam}`,
-        },
-      });
-    }
-
-    const { valid, payload } = verifyJwt(token);
-    if (!valid || !payload) {
-      return new Response(null, {
-        status: 302,
-        headers: {
-          Location: `/auth/login?return_url=${returnUrlParam}`,
-        },
-      });
+    if (!auth.authenticated) {
+      return auth.response!;
     }
 
     const user: UserContext = {
-      id: payload.sub,
-      email: payload.email,
-      displayName: payload.display_name,
-      principalType: payload.principal_type,
-      roles: payload.roles || [],
+      id: auth.user!.id,
+      email: auth.user!.email,
+      displayName: auth.user!.displayName,
+      principalType: auth.user!.principalType,
+      roles: auth.user!.roles,
     };
 
     return new Response(renderPortalHtml(user), {

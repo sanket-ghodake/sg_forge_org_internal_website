@@ -4,14 +4,19 @@
  */
 
 import { join } from 'node:path';
-import { createLogger, createSafeHandler } from '@forge/sdk';
+import { authGuard, createLogger, createSafeHandler } from '@forge/sdk';
 import { getAstryxHeaderHtml, getAstryxStyles } from '@forge/ui';
+import type { AuthUser } from '@forge/types';
 
 const LOG_DIR = join(import.meta.dir, '..', 'logs');
 const logger = createLogger('billing', LOG_DIR);
 const PORT = Number(process.env.PORT || 8086);
 
-function renderAppHtml(): string {
+function renderAppHtml(user?: AuthUser): string {
+  const userName = user?.displayName || 'Billing Administrator';
+  const userEmail = user?.email || 'billing.admin@forge.internal';
+  const userRole = user?.roles?.[0] || 'Billing Admin Clearance';
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,12 +29,20 @@ function renderAppHtml(): string {
   ${getAstryxHeaderHtml('BILLING', 'LEDGER APP')}
   <main class="astryx-container">
     <div class="astryx-card">
-      <h1 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--forge-text-main);">🧾 Invoicing & Billing Service</h1>
-      <p style="color: var(--forge-text-muted); margin-bottom: 1.25rem;">Isolated financial ledger micro-app running with its dedicated Turso SQLite database.</p>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h1 style="font-size: 1.5rem; color: var(--forge-text-main); margin: 0;">🧾 Invoicing & Billing Service</h1>
+        <span style="font-size: 0.8rem; background: rgba(62, 207, 142, 0.15); color: var(--forge-primary); border: 1px solid var(--forge-primary); border-radius: 9999px; padding: 0.25rem 0.6rem; font-weight: 600;">🛡️ ${userRole}</span>
+      </div>
+      <p style="color: var(--forge-text-muted); margin-bottom: 1.25rem;">
+        High-security financial ledger accessible only by billing administrators. Verified session for <strong>${userName}</strong> (<code>${userEmail}</code>).
+      </p>
       <div style="background: var(--forge-bg-elevated); padding: 1rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border); margin-bottom: 1.5rem;">
         <span style="font-size: 0.85rem; color: var(--forge-primary);">Database: <code>billing_turso.db</code> (Isolated libSQL)</span>
       </div>
-      <a href="/" class="astryx-btn btn-outline">&larr; Return to Platform Hub</a>
+      <div style="display: flex; gap: 0.75rem;">
+        <a href="/portal" class="astryx-btn btn-outline">&larr; Return to Workspace Portal</a>
+        <a href="/" class="astryx-btn btn-outline">Platform Hub &rarr;</a>
+      </div>
     </div>
   </main>
   <script>
@@ -70,7 +83,17 @@ export function startBillingServer(port: number = PORT) {
       return Response.json({ status: 'ok' });
     }
 
-    return new Response(renderAppHtml(), {
+    // 🛡️ Zero-Trust Auth & RBAC Guard (Strict Billing Admin Clearance)
+    const auth = authGuard(req, {
+      appName: 'Invoicing & Billing Service',
+      requiredRoles: ['roles/billing.admin', 'roles/super_admin'],
+    });
+
+    if (!auth.authenticated) {
+      return auth.response!;
+    }
+
+    return new Response(renderAppHtml(auth.user), {
       headers: { 'Content-Type': 'text/html; charset=utf-8' },
     });
   }, LOG_DIR);

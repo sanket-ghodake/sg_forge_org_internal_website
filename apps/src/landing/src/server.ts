@@ -6,7 +6,7 @@
  */
 
 import { createLogger, createSafeHandler, loadServiceRegistry, type ServiceEntry } from '@forge/sdk';
-import { getAstryxHeaderHtml, getAstryxStyles } from '@forge/ui';
+import { getAstryxHeaderHtml, getAstryxStyles, renderAstryxErrorHtml } from '@forge/ui';
 
 const logger = createLogger('landing-hub');
 const PORT = Number(process.env.LANDING_PORT || process.env.PORT || 3000);
@@ -107,6 +107,24 @@ export function startLandingServer(port: number = PORT) {
         uptime: process.uptime(),
         timestamp: new Date().toISOString(),
       });
+    }
+
+    if (url.pathname !== '/' && url.pathname !== '') {
+      return new Response(
+        renderAstryxErrorHtml({
+          statusCode: 404,
+          title: 'Page Not Found',
+          message: `The requested path "${url.pathname}" does not exist on SG Forge Platform.`,
+          primaryActionText: '&larr; Return to Platform Hub',
+          primaryActionHref: '/',
+          secondaryActionText: 'Workspace Portal &rarr;',
+          secondaryActionHref: '/portal',
+        }),
+        {
+          status: 404,
+          headers: { 'Content-Type': 'text/html; charset=utf-8' },
+        }
+      );
     }
 
     return new Response(renderHtml(), {

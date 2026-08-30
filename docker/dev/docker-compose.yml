@@ -9,23 +9,14 @@ networks:
 
 volumes:
   forge_bun_cache:
-    name: sg_forge_bun_cache_dev
   forge_caddy_data:
-    name: sg_forge_caddy_data_dev
   forge_caddy_config:
-    name: sg_forge_caddy_config_dev
   forge_dev_db_auth:
-    name: sg_forge_dev_db_auth
   forge_dev_db_portal:
-    name: sg_forge_dev_db_portal
   forge_dev_db_dev_dashboard:
-    name: sg_forge_dev_db_dev_dashboard
   forge_dev_db_expenses:
-    name: sg_forge_dev_db_expenses
   forge_dev_db_billing:
-    name: sg_forge_dev_db_billing
   forge_dev_db_telemetry:
-    name: sg_forge_dev_db_telemetry
 
 x-logging: &default-logging
   driver: json-file
@@ -46,8 +37,6 @@ services:
       - ../../proxy/Caddyfile:/etc/caddy/Caddyfile:ro
       - forge_caddy_data:/data
       - forge_caddy_config:/config
-    environment:
-      - JWT_SECRET=${JWT_SECRET:-sg_forge_dev_jwt_secret_2026_lts}
     networks:
       - forge-net
     restart: unless-stopped
@@ -70,6 +59,8 @@ services:
     container_name: forge-landing-dev
     profiles: ["core", "all"]
     working_dir: /app
+    env_file:
+      - ../../.env
     environment:
       - PORT=${LANDING_PORT:-3000}
       - LANDING_PORT=${LANDING_PORT:-3000}
@@ -79,6 +70,7 @@ services:
     volumes:
       - ../../package.json:/app/package.json:ro
       - ../../tsconfig.json:/app/tsconfig.json:ro
+      - ../../.env:/app/.env:ro
       - ../../apps/src/sdk:/app/apps/src/sdk:ro
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
@@ -107,6 +99,8 @@ services:
     container_name: forge-portal-dev
     profiles: ["core", "all"]
     working_dir: /app
+    env_file:
+      - ../../.env
     environment:
       - PORT=${PORTAL_PORT:-3001}
       - PORTAL_PORT=${PORTAL_PORT:-3001}
@@ -116,6 +110,7 @@ services:
     volumes:
       - ../../package.json:/app/package.json:ro
       - ../../tsconfig.json:/app/tsconfig.json:ro
+      - ../../.env:/app/.env:ro
       - ../../apps/src/sdk:/app/apps/src/sdk:ro
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
@@ -146,6 +141,8 @@ services:
     container_name: forge-dev-dashboard
     profiles: ["monitoring", "all"]
     working_dir: /app
+    env_file:
+      - ../../.env
     environment:
       - PORT=${DEV_DASHBOARD_PORT:-3002}
       - DEV_DASHBOARD_PORT=${DEV_DASHBOARD_PORT:-3002}
@@ -155,6 +152,7 @@ services:
     volumes:
       - ../../package.json:/app/package.json:ro
       - ../../tsconfig.json:/app/tsconfig.json:ro
+      - ../../.env:/app/.env:ro
       - ../../apps/src/sdk:/app/apps/src/sdk:ro
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
@@ -184,6 +182,8 @@ services:
     container_name: forge-dev-hub
     profiles: ["monitoring", "all"]
     working_dir: /app
+    env_file:
+      - ../../.env
     environment:
       - PORT=${DEV_HUB_PORT:-3003}
       - DEV_HUB_PORT=${DEV_HUB_PORT:-3003}
@@ -193,6 +193,7 @@ services:
     volumes:
       - ../../package.json:/app/package.json:ro
       - ../../tsconfig.json:/app/tsconfig.json:ro
+      - ../../.env:/app/.env:ro
       - ../../apps/src/sdk:/app/apps/src/sdk:ro
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
@@ -221,16 +222,18 @@ services:
     container_name: forge-auth-dev
     profiles: ["core", "all"]
     working_dir: /app
+    env_file:
+      - ../../.env
     environment:
       - PORT=${AUTH_PORT:-3004}
       - AUTH_PORT=${AUTH_PORT:-3004}
       - NODE_ENV=development
-      - JWT_SECRET=${JWT_SECRET:-sg_forge_dev_jwt_secret_2026_lts}
     ports:
       - "${AUTH_PORT:-3004}:${AUTH_PORT:-3004}"
     volumes:
       - ../../package.json:/app/package.json:ro
       - ../../tsconfig.json:/app/tsconfig.json:ro
+      - ../../.env:/app/.env:ro
       - ../../apps/src/sdk:/app/apps/src/sdk:ro
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
@@ -260,6 +263,8 @@ services:
     container_name: forge-app-expenses
     profiles: ["apps", "all"]
     working_dir: /app
+    env_file:
+      - ../../.env
     environment:
       - PORT=8085
       - NODE_ENV=development
@@ -268,6 +273,7 @@ services:
     volumes:
       - ../../package.json:/app/package.json:ro
       - ../../tsconfig.json:/app/tsconfig.json:ro
+      - ../../.env:/app/.env:ro
       - ../../apps/src/sdk:/app/apps/src/sdk:ro
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
@@ -297,6 +303,8 @@ services:
     container_name: forge-app-billing
     profiles: ["apps", "all"]
     working_dir: /app
+    env_file:
+      - ../../.env
     environment:
       - PORT=8086
       - NODE_ENV=development
@@ -305,6 +313,7 @@ services:
     volumes:
       - ../../package.json:/app/package.json:ro
       - ../../tsconfig.json:/app/tsconfig.json:ro
+      - ../../.env:/app/.env:ro
       - ../../apps/src/sdk:/app/apps/src/sdk:ro
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
@@ -334,6 +343,8 @@ services:
     container_name: forge-app-telemetry
     profiles: ["apps", "all"]
     working_dir: /app
+    env_file:
+      - ../../.env
     environment:
       - PORT=8087
       - NODE_ENV=development
@@ -342,6 +353,7 @@ services:
     volumes:
       - ../../package.json:/app/package.json:ro
       - ../../tsconfig.json:/app/tsconfig.json:ro
+      - ../../.env:/app/.env:ro
       - ../../apps/src/sdk:/app/apps/src/sdk:ro
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro

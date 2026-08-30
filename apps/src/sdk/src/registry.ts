@@ -16,18 +16,28 @@ export interface ServiceEntry {
   role: string;
   containerName: string;
   isExternal: boolean;
+  isPublic: boolean;
   healthUrl: string;
 }
 
-/**
- * Loads and parses all registered services from .env or active environment variables.
- * Format: APP_<ID>="Display Name|Internal Port|Public Ingress Path|Category|Access Role"
- */
+function findEnvPath(explicitPath?: string): string | null {
+  if (explicitPath && existsSync(explicitPath)) return explicitPath;
+  let curr = process.cwd();
+  for (let i = 0; i < 4; i++) {
+    const candidate = join(curr, '.env');
+    if (existsSync(candidate)) return candidate;
+    const parent = join(curr, '..');
+    if (parent === curr) break;
+    curr = parent;
+  }
+  return null;
+}
+
 export function loadServiceRegistry(envPath?: string): ServiceEntry[] {
-  const resolvedEnvPath = envPath || join(process.cwd(), '.env');
+  const resolvedEnvPath = findEnvPath(envPath);
   const envMap: Record<string, string> = { ...process.env as Record<string, string> };
 
-  if (existsSync(resolvedEnvPath)) {
+  if (resolvedEnvPath && existsSync(resolvedEnvPath)) {
     const rawContent = readFileSync(resolvedEnvPath, 'utf8');
     for (const line of rawContent.split('\n')) {
       const trimmed = line.trim();
@@ -57,6 +67,7 @@ export function loadServiceRegistry(envPath?: string): ServiceEntry[] {
     role: 'Public Ingress',
     containerName: 'landing',
     isExternal: false,
+    isPublic: true,
     healthUrl: '/health',
   });
 
@@ -71,6 +82,7 @@ export function loadServiceRegistry(envPath?: string): ServiceEntry[] {
         const path = parts[2];
         const category = parts[3] || 'Micro-Apps';
         const role = parts[4] || 'General';
+        const isPublic = role.toLowerCase().includes('public');
 
         // Dynamically derive container name: optional 6th field, or check filesystem for forge-apps vs core
         let containerName = parts[5] || appId;
@@ -93,6 +105,7 @@ export function loadServiceRegistry(envPath?: string): ServiceEntry[] {
           role,
           containerName,
           isExternal: path !== '/',
+          isPublic,
           healthUrl: `${path}/health`,
         });
       }

@@ -405,3 +405,5 @@ export function initBrowserLogBridge(serviceName: string, ingestEndpoint = '/api
   };
 }
 
+export * from './auth-guard';
+

@@ -15,8 +15,11 @@ describe('Tier 5 E2E: Portal Server Bootstrap & Astryx UI Lifecycle', () => {
       sub: 'usr_e2e_portal',
       email: 'alex@forge.internal',
       display_name: 'Alex Chen',
-      principal_type: 'human_user',
-      roles: ['Core Enterprise Services'],
+      principal_type: 'EMPLOYEE',
+      org_id: 'org-test',
+      roles: ['roles/employee'],
+      permissions: ['portal.workspace.access'],
+      token_version: 1,
     });
 
     try {

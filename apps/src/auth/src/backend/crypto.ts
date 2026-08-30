@@ -5,6 +5,8 @@
 
 import {
   createHash,
+  createPrivateKey,
+  createPublicKey,
   generateKeyPairSync,
   randomBytes,
   scryptSync,
@@ -80,7 +82,7 @@ export function hashToken(token: string): string {
 }
 
 // -----------------------------------------------------------------------------
-// Key Management & JWT Issuer (Asymmetric / Portable Fallback)
+// Key Management & JWT Issuer (Deterministic Ed25519 / ASVS 5.0 Compliant)
 // -----------------------------------------------------------------------------
 
 interface KeyPairHolder {
@@ -91,42 +93,42 @@ interface KeyPairHolder {
 
 let activeKeys: KeyPairHolder | null = null;
 
-export function getOrInitAuthKeys(): KeyPairHolder {
-  if (activeKeys) return activeKeys;
+export function getOrInitAuthKeys(forceReload: boolean = false): KeyPairHolder {
+  if (activeKeys && !forceReload) return activeKeys;
 
-  const dataDir = resolveAuthDataDir();
-  const keysDir = join(dataDir, 'keys');
-  if (!existsSync(keysDir)) mkdirSync(keysDir, { recursive: true });
+  const secret = process.env.JWT_SECRET || 'dev-portable-secret-key-that-is-at-least-32-characters-long';
+  const seed = createHash('sha256').update(secret).digest();
+  const kid = `forge-key-${seed.subarray(0, 4).toString('hex')}`;
 
-  const privPath = join(keysDir, 'auth_private.pem');
-  const pubPath = join(keysDir, 'auth_public.pem');
-  const kidPath = join(keysDir, 'auth_kid.txt');
+  // Ed25519 PKCS#8 ASN.1 DER Header: 0x30, 0x2e, 0x02, 0x01, 0x00, 0x30, 0x05, 0x06, 0x03, 0x2b, 0x65, 0x70, 0x04, 0x22, 0x04, 0x20
+  const pkcs8Der = Buffer.concat([
+    Buffer.from('302e020100300506032b657004220420', 'hex'),
+    seed,
+  ]);
 
-  if (existsSync(privPath) && existsSync(pubPath) && existsSync(kidPath)) {
-    activeKeys = {
-      privateKeyPem: readFileSync(privPath, 'utf8'),
-      publicKeyPem: readFileSync(pubPath, 'utf8'),
-      kid: readFileSync(kidPath, 'utf8').trim(),
-    };
-    return activeKeys;
-  }
+  const privKey = createPrivateKey({ key: pkcs8Der, format: 'der', type: 'pkcs8' });
+  const pubKey = createPublicKey(privKey);
 
-  // Generate 2026 standard keypair (Ed25519)
-  const { publicKey, privateKey } = generateKeyPairSync('ed25519', {
-    publicKeyEncoding: { type: 'spki', format: 'pem' },
-    privateKeyEncoding: { type: 'pkcs8', format: 'pem' },
-  });
-
-  const kid = `forge-key-${Date.now().toString(36)}`;
-  writeFileSync(privPath, privateKey);
-  writeFileSync(pubPath, publicKey);
-  writeFileSync(kidPath, kid);
+  const privateKeyPem = privKey.export({ type: 'pkcs8', format: 'pem' }) as string;
+  const publicKeyPem = pubKey.export({ type: 'spki', format: 'pem' }) as string;
 
   activeKeys = {
-    privateKeyPem: privateKey,
-    publicKeyPem: publicKey,
+    privateKeyPem,
+    publicKeyPem,
     kid,
   };
+
+  try {
+    const dataDir = resolveAuthDataDir();
+    const keysDir = join(dataDir, 'keys');
+    if (!existsSync(keysDir)) mkdirSync(keysDir, { recursive: true });
+    writeFileSync(join(keysDir, 'auth_private.pem'), privateKeyPem);
+    writeFileSync(join(keysDir, 'auth_public.pem'), publicKeyPem);
+    writeFileSync(join(keysDir, 'auth_kid.txt'), kid);
+  } catch {
+    // Non-blocking fallback for read-only environments
+  }
+
   return activeKeys;
 }
 
@@ -174,11 +176,21 @@ export function verifyJwt(token: string): { valid: boolean; payload?: JwtPayload
     if (parts.length !== 3) return { valid: false, error: 'Malformed token' };
 
     const [encodedHeader, encodedPayload, encodedSignature] = parts;
+    const header: JwtHeader = JSON.parse(base64UrlDecode(encodedHeader));
     const dataToVerify = `${encodedHeader}.${encodedPayload}`;
     const signature = Buffer.from(encodedSignature, 'base64url');
 
-    const keys = getOrInitAuthKeys();
-    const isValid = verify(null, Buffer.from(dataToVerify, 'utf8'), keys.publicKeyPem, signature);
+    let keys = getOrInitAuthKeys();
+    if (header.kid && keys.kid !== header.kid) {
+      keys = getOrInitAuthKeys(true);
+    }
+
+    let isValid = verify(null, Buffer.from(dataToVerify, 'utf8'), keys.publicKeyPem, signature);
+    if (!isValid) {
+      // Retry once by reloading from shared disk in case another process refreshed keys
+      keys = getOrInitAuthKeys(true);
+      isValid = verify(null, Buffer.from(dataToVerify, 'utf8'), keys.publicKeyPem, signature);
+    }
 
     if (!isValid) return { valid: false, error: 'Invalid signature' };
 

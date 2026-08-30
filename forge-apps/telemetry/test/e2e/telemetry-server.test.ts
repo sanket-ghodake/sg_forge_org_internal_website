@@ -20,7 +20,7 @@ describe('Tier 5 E2E: Telemetry Full Server Bootstrap', () => {
       expect(res.status).toBe(200);
       expect(html).toContain('Live Telemetry Dashboard');
       expect(html).toContain('telemetry_turso.db');
-      expect(html).toContain('OBSERVABILITY APP');
+      expect(html).toContain('PUBLIC DASHBOARD');
     } finally {
       server.stop();
     }

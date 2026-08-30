@@ -33,3 +33,30 @@ export type PostMessageEvent =
   | { type: 'FORGE_APP_INIT'; payload: { appId: string } }
   | { type: 'FORGE_APP_CONTEXT'; payload: { user: UserContext; token: string; theme: 'light' | 'dark' } }
   | { type: 'FORGE_APP_RESIZE'; payload: { height: number } };
+
+export interface AuthUser {
+  id: string;
+  email: string;
+  displayName: string;
+  principalType: 'EMPLOYEE' | 'ADMIN' | 'SERVICE_ACCOUNT';
+  orgId: string;
+  roles: string[];
+  permissions: string[];
+  tokenVersion?: number;
+}
+
+export type AppAccessPolicy = 'PUBLIC' | 'AUTHENTICATED' | 'ROLE_RESTRICTED';
+
+export interface AuthGuardOptions {
+  requiredRoles?: string[];
+  requiredPermissions?: string[];
+  publicPaths?: string[];
+  appName?: string;
+}
+
+export interface AuthGuardResult {
+  authenticated: boolean;
+  user?: AuthUser;
+  response?: Response;
+}
+

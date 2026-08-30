@@ -17,7 +17,7 @@ Every microservice across `apps/src/*` and `forge-apps/*` (and any new app gener
 └── e2e/                           # Tier 5: End-to-End User Journeys (<300ms)
     ├── api-flow.test.ts           # Fast HTTP-level cross-service journey
     └── playwright/                # Browser automation (Real DOM, forms, cookies, A11y)
-        └── *.spec.ts              # Playwright browser specs
+        └── *.pw.ts                # Playwright browser specs
 ```
 
 ---
@@ -69,7 +69,17 @@ Every AI session must verify that tests include the following scenario invariant
 
 ---
 
-## 5. Execution Commands
+## 5. Testing for Truth (Anti-Shallow Mocking & Tech Giant Standard)
+
+> ⚠️ **CRITICAL DIRECTIVE**: NEVER write shallow tests that "mock the real problem away".
+1. **Real Network & Socket Verification**: Tier 5 E2E tests must verify real HTTP loopbacks or Playwright browser sessions. Never mock out HTTP redirect status codes or cookie jars in memory if the bug lives in network transmission.
+2. **Destination Server Verification**: After a redirect (`Location: /portal`), the test MUST follow through and assert that the destination server accepts the session cookie and renders the authenticated state (200 OK), proving that no redirect loop back to `/auth/login` occurs.
+3. **Zero Hardcoded Fixtures**: Endpoints, ports, and personas must be loaded dynamically via `@forge/sdk/registry` (`loadServiceRegistry()`), `.env`, or dynamic database query helpers. Never hardcode static ports or credentials.
+4. **Shared Cryptographic Invariants**: Cross-service tokens (JWT/JWKS) must verify against the shared persisted keypair in `apps/data/keys/`, proving multi-process signature verification works without in-memory coupling.
+
+---
+
+## 6. Execution Commands
 ```bash
 # Execute all tests across the monorepo:
 rtk bun test
@@ -79,5 +89,5 @@ rtk bun test apps/src/auth/test/unit/
 rtk bun test apps/src/auth/test/security/
 
 # Run Playwright browser tests:
-rtk bun playwright test
+rtk bun x playwright test
 ```

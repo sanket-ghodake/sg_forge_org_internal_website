@@ -8,21 +8,28 @@ import { accessSync, constants, existsSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { createLogger } from '@forge/sdk';
 
-const logger = createLogger('auth-db');
+let logger: any = null;
+function getLogger() {
+  if (!logger) logger = createLogger('auth-db');
+  return logger;
+}
 
 export function resolveAuthDataDir(): string {
   if (process.env.FORGE_DATA_DIR && existsSync(process.env.FORGE_DATA_DIR)) {
     return process.env.FORGE_DATA_DIR;
   }
+  const appsData = join(process.cwd(), 'apps', 'data');
+  if (existsSync(appsData)) return appsData;
+
   const rootData = join(process.cwd(), 'data');
+  if (existsSync(rootData)) return rootData;
+
   try {
-    if (!existsSync(rootData)) mkdirSync(rootData, { recursive: true });
-    accessSync(rootData, constants.W_OK);
-    return rootData;
-  } catch {
-    const appsData = join(process.cwd(), 'apps', 'data');
     if (!existsSync(appsData)) mkdirSync(appsData, { recursive: true });
     return appsData;
+  } catch {
+    if (!existsSync(rootData)) mkdirSync(rootData, { recursive: true });
+    return rootData;
   }
 }
 
@@ -41,7 +48,7 @@ export function getAuthDb(): Database {
   dbInstance.exec('PRAGMA busy_timeout = 5000;');
 
   initAuthSchema(dbInstance);
-  logger.info(`Auth DB connection initialized at: ${dbPath}`);
+  getLogger().info(`Auth DB connection initialized at: ${dbPath}`);
 
   return dbInstance;
 }
@@ -208,6 +215,6 @@ export function closeAuthDb(): void {
     } catch {}
     dbInstance.close();
     dbInstance = null;
-    logger.info('Auth DB connection closed cleanly with WAL checkpoint.');
+    getLogger().info('Auth DB connection closed cleanly with WAL checkpoint.');
   }
 }

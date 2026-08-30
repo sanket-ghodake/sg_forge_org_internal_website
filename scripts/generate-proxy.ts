@@ -36,7 +36,12 @@ export function generateCaddyfile(): string {
     caddyContent += `
     # ${s.name} (${s.id})
     handle_path ${s.path}* {
-        reverse_proxy http://${s.containerName}:${s.port}
+        reverse_proxy http://${s.containerName}:${s.port} {
+            header_up Host {host}
+            header_up X-Forwarded-Host {host}
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Forwarded-Prefix ${s.path}
+        }
     }
 `;
   }

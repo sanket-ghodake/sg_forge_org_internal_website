@@ -19,7 +19,7 @@ Before writing code, running commands, or staging/committing changes, verify:
 10. [ ] **ABSOLUTE ZERO AUTO-COMMITS (HARD BLOCKED)**: AI agents are STRICTLY FORBIDDEN from running `git commit` unless the user explicitly types `"commit changes"` or `"git commit"` in the CURRENT message. Past permissions do NOT carry over. Cleaning, refactoring, fixing, or auditing NEVER justifies committing.
 11. [ ] **Per-Conversation Worklog Auto-Update**: Every conversation task completion MUST append strictly ONE single line to `logs/WORKLOGS.md` (`YYYY-MM-DD HH:mm | <brief summary>`) via `rtk bun scripts/append-worklog.ts "<summary>"`. When a git commit occurs, post-commit hook records ground truth to `logs/commits.jsonl`.
 12. [ ] **AI-Driven Ignore & Attrib Governance**: Before staging, AI Agent MUST contextually audit all newly created files in session diff. If any cache, transient, build output, SQLite DB, or secret was introduced, ensure it is added to the canonical ignore/attrib definitions via `rtk bun scripts/sync-ignores.ts`.
-13. [ ] **5-Tier Microservice Test Governance**: Every microservice across `apps/src/*` and `forge-apps/*` MUST maintain an isolated `test/` folder with required subtiers (`unit/`, `integration/`, `security/`, `contracts/`, `e2e/`). 100% Branch Coverage on Auth & RBAC; $\ge 90\%$ on business logic.
+13. [ ] **5-Tier Microservice Test Governance & Testing for Truth**: Every microservice across `apps/src/*` and `forge-apps/*` MUST maintain an isolated `test/` folder with required subtiers (`unit/`, `integration/`, `security/`, `contracts/`, `e2e/`). Zero shallow mocks that bypass real network/cookie boundaries; 100% Branch Coverage on Auth & RBAC; $\ge 90\%$ on business logic.
 14. [ ] **AI Semantic Scenario Audit**: All critical security invariants (anti-brute force, token replay defense, tamper detection, cross-tenant isolation) MUST have explicit negative assertion tests.
 
 ---
@@ -55,8 +55,9 @@ Before writing code, running commands, or staging/committing changes, verify:
 ### 7. Clean Package Aliases (Zero Traversal Sprawl)
 - All imports across the monorepo MUST use configured path aliases (`@forge/sdk`, `@forge/ui`, `@forge/types`).
 
-### 8. Risk-Tiered 5-Tier Testing Rigor (3A Pattern)
+### 8. Risk-Tiered 5-Tier Testing Rigor & Testing for Truth (Google & Meta Standard)
 - **Folder Structure**: Every service (`apps/src/*`, `forge-apps/*`) must house tests in `test/unit/`, `test/integration/`, `test/security/`, `test/contracts/`, `test/e2e/`.
+- **Testing for Truth (Zero Shallow Mocking)**: Tier 5 E2E tests must verify real network sockets, cookie jar persistence, and destination page rendering (200 OK) without hardcoded static ports or mock shortcuts that bypass real browser flows.
 - **100% Branch Coverage** required on Auth, RBAC, and Iframe Sandbox boundaries; $\ge 90\%$ on business logic.
 - Mandatory **3A Pattern** (Arrange, Act, Assert) across all unit and integration tests.
 

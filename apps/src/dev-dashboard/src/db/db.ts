@@ -15,15 +15,18 @@ export function resolveDataDir(): string {
   if (process.env.FORGE_DATA_DIR && existsSync(process.env.FORGE_DATA_DIR)) {
     return process.env.FORGE_DATA_DIR;
   }
+  const appsData = join(process.cwd(), 'apps', 'data');
+  if (existsSync(appsData)) return appsData;
+
   const rootData = join(process.cwd(), 'data');
+  if (existsSync(rootData)) return rootData;
+
   try {
-    if (!existsSync(rootData)) mkdirSync(rootData, { recursive: true });
-    accessSync(rootData, constants.W_OK);
-    return rootData;
-  } catch {
-    const appsData = join(process.cwd(), 'apps', 'data');
     if (!existsSync(appsData)) mkdirSync(appsData, { recursive: true });
     return appsData;
+  } catch {
+    if (!existsSync(rootData)) mkdirSync(rootData, { recursive: true });
+    return rootData;
   }
 }
 

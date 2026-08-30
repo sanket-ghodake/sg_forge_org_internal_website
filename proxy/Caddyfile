@@ -12,37 +12,72 @@
 
     # Main Workspace & Org Canvas (portal)
     handle_path /portal* {
-        reverse_proxy http://portal:3001
+        reverse_proxy http://portal:3001 {
+            header_up Host {host}
+            header_up X-Forwarded-Host {host}
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Forwarded-Prefix /portal
+        }
     }
 
     # Developer Dashboard (devcenter)
     handle_path /devcenter* {
-        reverse_proxy http://dev-dashboard:3002
+        reverse_proxy http://dev-dashboard:3002 {
+            header_up Host {host}
+            header_up X-Forwarded-Host {host}
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Forwarded-Prefix /devcenter
+        }
     }
 
     # Developer Hub & SDK Playground (gateway)
     handle_path /gateway* {
-        reverse_proxy http://dev-hub:3003
+        reverse_proxy http://dev-hub:3003 {
+            header_up Host {host}
+            header_up X-Forwarded-Host {host}
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Forwarded-Prefix /gateway
+        }
     }
 
     # Central Identity & Auth (auth)
     handle_path /auth* {
-        reverse_proxy http://auth:3004
+        reverse_proxy http://auth:3004 {
+            header_up Host {host}
+            header_up X-Forwarded-Host {host}
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Forwarded-Prefix /auth
+        }
     }
 
     # Expense Approval Engine (expenses)
     handle_path /apps/expenses* {
-        reverse_proxy http://app-expenses:8085
+        reverse_proxy http://app-expenses:8085 {
+            header_up Host {host}
+            header_up X-Forwarded-Host {host}
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Forwarded-Prefix /apps/expenses
+        }
     }
 
     # Invoicing & Billing Service (billing)
     handle_path /apps/billing* {
-        reverse_proxy http://app-billing:8086
+        reverse_proxy http://app-billing:8086 {
+            header_up Host {host}
+            header_up X-Forwarded-Host {host}
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Forwarded-Prefix /apps/billing
+        }
     }
 
     # Live Telemetry Dashboard (telemetry)
     handle_path /apps/telemetry* {
-        reverse_proxy http://app-telemetry:8087
+        reverse_proxy http://app-telemetry:8087 {
+            header_up Host {host}
+            header_up X-Forwarded-Host {host}
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Forwarded-Prefix /apps/telemetry
+        }
     }
 
     # Public Platform Hub (Root Ingress)

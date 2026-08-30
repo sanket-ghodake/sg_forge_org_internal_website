@@ -135,10 +135,13 @@ export function renderLoginHtml(returnUrl: string = '/portal'): string {
         }
 
         if (data.status === 'SUCCESS') {
+          if (data.accessToken) {
+            document.cookie = 'forge_session=' + encodeURIComponent(data.accessToken) + '; path=/; max-age=604800; SameSite=Lax';
+          }
           showAlert('Authentication successful. Redirecting...', false);
           setTimeout(function() {
             window.location.href = returnUrl;
-          }, 400);
+          }, 300);
         }
       } catch (err) {
         reportBrowserLog('ERROR', 'Login network request failed', { error: String(err) });

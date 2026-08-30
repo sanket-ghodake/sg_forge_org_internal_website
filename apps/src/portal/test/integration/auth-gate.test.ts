@@ -15,8 +15,11 @@ describe('Tier 2 Integration: Portal Auth Gate & JWT Session Validation', () => 
       sub: 'usr_portal_test',
       email: 'employee@forge.internal',
       display_name: 'Jane Doe',
-      principal_type: 'human_user',
-      roles: ['Core Enterprise Services'],
+      principal_type: 'EMPLOYEE',
+      org_id: 'org-test',
+      roles: ['roles/employee'],
+      permissions: ['portal.workspace.access'],
+      token_version: 1,
     });
 
     try {

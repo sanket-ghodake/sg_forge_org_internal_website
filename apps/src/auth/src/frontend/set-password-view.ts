@@ -198,10 +198,14 @@ export function renderSetPasswordHtml(emailParam: string = ''): string {
         sessionStorage.removeItem('forge_reset_email');
         sessionStorage.removeItem('forge_return_url');
 
+        if (data.accessToken) {
+          document.cookie = 'forge_session=' + encodeURIComponent(data.accessToken) + '; path=/; max-age=604800; SameSite=Lax';
+        }
+
         showAlert('Password successfully configured! Redirecting to workspace...', false);
         setTimeout(function() {
           window.location.href = returnUrl;
-        }, 500);
+        }, 300);
       } catch (err) {
         reportBrowserLog('ERROR', 'Set password request failed', { error: String(err) });
         showAlert('Network or connection error.');

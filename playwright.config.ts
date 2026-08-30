@@ -5,8 +5,7 @@ import { defineConfig, devices } from '@playwright/test';
  * Tests real browser user journeys, iframe sandboxing, and WCAG accessibility.
  */
 export default defineConfig({
-  testDir: './',
-  testMatch: /.*\.spec\.ts/,
+  testMatch: /.*(\.pw|\.spec)\.ts/,
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,

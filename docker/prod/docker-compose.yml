@@ -9,21 +9,13 @@ networks:
 
 volumes:
   forge_caddy_data:
-    name: sg_forge_caddy_data_prod
   forge_caddy_config:
-    name: sg_forge_caddy_config_prod
   forge_prod_db_auth:
-    name: sg_forge_prod_db_auth
   forge_prod_db_portal:
-    name: sg_forge_prod_db_portal
   forge_prod_db_dev_dashboard:
-    name: sg_forge_prod_db_dev_dashboard
   forge_prod_db_expenses:
-    name: sg_forge_prod_db_expenses
   forge_prod_db_billing:
-    name: sg_forge_prod_db_billing
   forge_prod_db_telemetry:
-    name: sg_forge_prod_db_telemetry
 
 x-logging: &default-logging
   driver: json-file
@@ -44,8 +36,6 @@ services:
       - ../../proxy/Caddyfile:/etc/caddy/Caddyfile:ro
       - forge_caddy_data:/data
       - forge_caddy_config:/config
-    environment:
-      - JWT_SECRET=${JWT_SECRET:-sg_forge_dev_jwt_secret_2026_lts}
     networks:
       - forge-net
     restart: always
@@ -69,6 +59,8 @@ services:
       dockerfile: apps/src/landing/docker/Dockerfile
     container_name: forge-landing-prod
     profiles: ["core", "all"]
+    env_file:
+      - ../../.env
     environment:
       - PORT=${LANDING_PORT:-3000}
       - LANDING_PORT=${LANDING_PORT:-3000}
@@ -96,6 +88,8 @@ services:
       dockerfile: apps/src/portal/docker/Dockerfile
     container_name: forge-portal-prod
     profiles: ["core", "all"]
+    env_file:
+      - ../../.env
     environment:
       - PORT=${PORTAL_PORT:-3001}
       - PORTAL_PORT=${PORTAL_PORT:-3001}
@@ -125,6 +119,8 @@ services:
       dockerfile: apps/src/dev-dashboard/docker/Dockerfile
     container_name: forge-dev-dashboard-prod
     profiles: ["monitoring", "all"]
+    env_file:
+      - ../../.env
     environment:
       - PORT=${DEV_DASHBOARD_PORT:-3002}
       - DEV_DASHBOARD_PORT=${DEV_DASHBOARD_PORT:-3002}
@@ -154,6 +150,8 @@ services:
       dockerfile: apps/src/dev-hub/docker/Dockerfile
     container_name: forge-dev-hub-prod
     profiles: ["monitoring", "all"]
+    env_file:
+      - ../../.env
     environment:
       - PORT=${DEV_HUB_PORT:-3003}
       - DEV_HUB_PORT=${DEV_HUB_PORT:-3003}
@@ -181,11 +179,12 @@ services:
       dockerfile: apps/src/auth/docker/Dockerfile
     container_name: forge-auth-prod
     profiles: ["core", "all"]
+    env_file:
+      - ../../.env
     environment:
       - PORT=${AUTH_PORT:-3004}
       - AUTH_PORT=${AUTH_PORT:-3004}
       - NODE_ENV=production
-      - JWT_SECRET=${JWT_SECRET:-sg_forge_dev_jwt_secret_2026_lts}
     volumes:
       - forge_prod_db_auth:/app/data
     networks:
@@ -211,6 +210,8 @@ services:
       dockerfile: forge-apps/expenses/docker/Dockerfile
     container_name: forge-app-expenses-prod
     profiles: ["apps", "all"]
+    env_file:
+      - ../../.env
     environment:
       - PORT=8085
       - NODE_ENV=production
@@ -239,6 +240,8 @@ services:
       dockerfile: forge-apps/billing/docker/Dockerfile
     container_name: forge-app-billing-prod
     profiles: ["apps", "all"]
+    env_file:
+      - ../../.env
     environment:
       - PORT=8086
       - NODE_ENV=production
@@ -267,6 +270,8 @@ services:
       dockerfile: forge-apps/telemetry/docker/Dockerfile
     container_name: forge-app-telemetry-prod
     profiles: ["apps", "all"]
+    env_file:
+      - ../../.env
     environment:
       - PORT=8087
       - NODE_ENV=production

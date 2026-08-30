@@ -17,19 +17,27 @@ function renderAppHtml(): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SG Forge - Telemetry Micro-App</title>
+  <title>SG Forge - Telemetry Micro-App (Public)</title>
   <style>${getAstryxStyles()}</style>
 </head>
 <body>
-  ${getAstryxHeaderHtml('TELEMETRY', 'OBSERVABILITY APP')}
+  ${getAstryxHeaderHtml('TELEMETRY', 'PUBLIC DASHBOARD')}
   <main class="astryx-container">
     <div class="astryx-card">
-      <h1 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--forge-text-main);">📡 Live Telemetry Dashboard</h1>
-      <p style="color: var(--forge-text-muted); margin-bottom: 1.25rem;">Isolated telemetry micro-app running with its dedicated Turso SQLite database.</p>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h1 style="font-size: 1.5rem; color: var(--forge-text-main); margin: 0;">📡 Live Telemetry Dashboard</h1>
+        <span style="font-size: 0.8rem; background: rgba(62, 207, 142, 0.15); color: var(--forge-primary); border: 1px solid var(--forge-primary); border-radius: 9999px; padding: 0.25rem 0.6rem; font-weight: 600;">🌐 PUBLIC ACCESS</span>
+      </div>
+      <p style="color: var(--forge-text-muted); margin-bottom: 1.25rem;">
+        Public observability micro-app. No authentication or login required. Displays real-time telemetry metrics to all visitors.
+      </p>
       <div style="background: var(--forge-bg-elevated); padding: 1rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border); margin-bottom: 1.5rem;">
         <span style="font-size: 0.85rem; color: var(--forge-primary);">Database: <code>telemetry_turso.db</code> (Isolated libSQL)</span>
       </div>
-      <a href="/" class="astryx-btn btn-outline">&larr; Return to Platform Hub</a>
+      <div style="display: flex; gap: 0.75rem;">
+        <a href="/" class="astryx-btn btn-outline">&larr; Return to Platform Hub</a>
+        <a href="/portal" class="astryx-btn btn-outline">Workspace Portal &rarr;</a>
+      </div>
     </div>
   </main>
   <script>

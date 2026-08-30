@@ -148,6 +148,8 @@ export function getAstryxStyles(): string {
       color: var(--forge-text-main);
       text-decoration: none;
       letter-spacing: -0.02em;
+      cursor: default;
+      user-select: none;
     }
 
     .astryx-logo-badge {
@@ -350,14 +352,11 @@ export * from './state';
 export function getAstryxHeaderHtml(badgeLabel = 'SG', title = 'FORGE PLATFORM'): string {
   return `
   <header class="astryx-header">
-    <a href="/" class="astryx-logo">
+    <div class="astryx-logo">
       <span class="astryx-logo-badge">${badgeLabel}</span>
       <span>${title}</span>
-    </a>
+    </div>
     <div style="display: flex; gap: 1rem; align-items: center;">
-      <span class="astryx-badge badge-online">
-        <span class="badge-dot"></span> Port 80/443 Gateway
-      </span>
       <button class="astryx-theme-toggle" id="theme-toggle-btn" title="Toggle Light / Dark Theme" aria-label="Toggle Theme">
         <!-- Sun Icon (shown in dark mode) -->
         <svg id="sun-icon" viewBox="0 0 24 24">
@@ -459,4 +458,6 @@ export function getAstryxHeaderHtml(badgeLabel = 'SG', title = 'FORGE PLATFORM')
   </script>
   `;
 }
+
+export * from './error-page';
 

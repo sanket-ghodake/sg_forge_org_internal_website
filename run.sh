@@ -280,9 +280,11 @@ case "$CMD" in
                 fi
                 ;;
             purge)
-                echo "⚠️ [SG Forge] Purging dangling containers and build caches (preserving DB volumes)..."
+                echo "⚠️ [SG Forge] Purging dangling containers, build caches, and stale volumes..."
                 docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
                 docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
+                docker volume rm sg_forge_bun_cache_dev sg_forge_caddy_config_dev sg_forge_caddy_data_dev sg_forge_dev_db_auth sg_forge_dev_db_billing sg_forge_dev_db_dev_dashboard sg_forge_dev_db_expenses sg_forge_dev_db_portal sg_forge_dev_db_telemetry 2>/dev/null || true
+                docker volume prune -f
                 docker image prune -f
                 echo "✨ Cleaned."
                 ;;

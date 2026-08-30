@@ -5,15 +5,28 @@
 
 import { describe, expect, it } from 'bun:test';
 import { startBillingServer } from '../../src/server';
+import { signJwt } from '@forge/auth';
 
 describe('Tier 5 E2E: Billing Full Server Bootstrap', () => {
   it('serves billing service UI with Astryx header and database badge', async () => {
     // Arrange
     const server = startBillingServer(3203);
+    const token = signJwt({
+      sub: 'usr-admin',
+      email: 'billing.admin@forge.internal',
+      display_name: 'Marcus Sterling',
+      principal_type: 'ADMIN',
+      org_id: 'org-test',
+      roles: ['roles/billing.admin'],
+      permissions: ['billing.invoices.view'],
+      token_version: 1,
+    });
 
     try {
       // Act
-      const res = await fetch('http://localhost:3203/');
+      const res = await fetch('http://localhost:3203/', {
+        headers: { Cookie: `forge_session=${token}` },
+      });
       const html = await res.text();
 
       // Assert
