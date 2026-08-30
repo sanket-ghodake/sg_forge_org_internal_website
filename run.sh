@@ -21,6 +21,7 @@ function show_help() {
     echo "  setup                 Bootstrap workspace dependencies & portable runtimes"
     echo "  dev                   Start all platform services natively in parallel"
     echo "  sync-proxy            Auto-generate proxy/Caddyfile dynamically from .env"
+    echo "  sync-ignores          Auto-sync all 7 ignore files & .gitattributes"
     echo "  test [unit|all]       Run 5-tier test suites"
     echo "  doctor                Run pre-flight diagnostics & environment check"
     echo "  clean                 Clean build caches and temporary logs"
@@ -66,6 +67,15 @@ case "$CMD" in
 
     sync-proxy)
         $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
+        ;;
+
+    sync-ignores)
+        FLAG="${2:-}"
+        if [ "$FLAG" = "--check" ]; then
+            $PORTABLE_BUN run "$REPO_ROOT/scripts/sync-ignores.ts" --check
+        else
+            $PORTABLE_BUN run "$REPO_ROOT/scripts/sync-ignores.ts"
+        fi
         ;;
 
     dev)

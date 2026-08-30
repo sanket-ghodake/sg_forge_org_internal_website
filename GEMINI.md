@@ -5,7 +5,7 @@
 
 ---
 
-## ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (10 CHECKS)
+## ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (12 CHECKS)
 Before writing code, running commands, or staging/committing changes, verify:
 1. [ ] **RTK Command Prefix**: Every bash command MUST be prefixed with `rtk` (e.g. `rtk git status`, `rtk bun test`, `rtk git add .`).
 2. [ ] **Zero Host Modification**: All runtimes/tools strictly use portable repo binaries (`portables/bun/bin/bun`, `portables/bin/*`) or Docker. ZERO host modifications (`apt`, `brew`, `npm -g`, `pip install`).
@@ -15,8 +15,10 @@ Before writing code, running commands, or staging/committing changes, verify:
 6. [ ] **Dedicated Turso DB Isolation**: Dedicated Turso (libSQL) database per Forge App. Micro-apps MUST NEVER query another app's database.
 7. [ ] **Clean Package Aliases**: Imports must use `@forge/sdk`, `@forge/ui`, `@forge/types`. ZERO relative traversal sprawl (`../../..`).
 8. [ ] **Folder Documentation (README per folder)**: Every single folder across the codebase MUST maintain its own descriptive `README.md`.
-9. [ ] **ABSOLUTE ZERO AUTO-COMMITS (HARD BLOCKED)**: AI agents are STRICTLY FORBIDDEN from running `git commit` unless the user explicitly types `"commit changes"` or `"git commit"` in the CURRENT message. Past permissions do NOT carry over. Cleaning, refactoring, fixing, or auditing NEVER justifies committing.
-10. [ ] **Per-Conversation Worklog Auto-Update**: Every conversation task completion MUST append strictly ONE single line to `logs/WORKLOGS.md` (`YYYY-MM-DD HH:mm | <brief summary>`) via `rtk bun scripts/append-worklog.ts "<summary>"`. When a git commit occurs, post-commit hook records ground truth to `logs/commits.jsonl`.
+9. [ ] **Isolated Per-App Logs & 4-Pillar Observability**: Every microservice MUST maintain its own colocated `logs/` directory with `README.md` and `.gitignore`. Must implement 4 pillars (Dual-Probe Health, Browser Console, Docker Logs, Backend/DB Logs).
+10. [ ] **ABSOLUTE ZERO AUTO-COMMITS (HARD BLOCKED)**: AI agents are STRICTLY FORBIDDEN from running `git commit` unless the user explicitly types `"commit changes"` or `"git commit"` in the CURRENT message. Past permissions do NOT carry over. Cleaning, refactoring, fixing, or auditing NEVER justifies committing.
+11. [ ] **Per-Conversation Worklog Auto-Update**: Every conversation task completion MUST append strictly ONE single line to `logs/WORKLOGS.md` (`YYYY-MM-DD HH:mm | <brief summary>`) via `rtk bun scripts/append-worklog.ts "<summary>"`. When a git commit occurs, post-commit hook records ground truth to `logs/commits.jsonl`.
+12. [ ] **AI-Driven Ignore & Attrib Governance**: Before staging, AI Agent MUST contextually audit all newly created files in session diff. If any cache, transient, build output, SQLite DB, or secret was introduced, ensure it is added to the canonical ignore/attrib definitions via `rtk bun scripts/sync-ignores.ts`.
 
 ---
 
@@ -84,3 +86,4 @@ Before writing code, running commands, or staging/committing changes, verify:
 - **Testing Standards (5-Tier)**: [`.agents/rules/testing.md`](file:///.agents/rules/testing.md)
 - **Graphify Knowledge Graph**: [`.agents/rules/graphify.md`](file:///.agents/rules/graphify.md)
 - **RTK Token Optimization**: [`.agents/rules/rtk.md`](file:///.agents/rules/rtk.md)
+- **Microservice Observability & Logs**: [`.agents/rules/observability.md`](file:///.agents/rules/observability.md)

@@ -1,0 +1,5 @@
+# Ignore raw log outputs while preserving directory structure
+*.log
+*.log.*
+!README.md
+!.gitignore

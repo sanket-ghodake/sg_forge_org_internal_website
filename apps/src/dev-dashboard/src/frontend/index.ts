@@ -5,4 +5,5 @@
 
 export * from './ui-styles';
 export * from './ui-scripts';
+export * from './ui-log-scripts';
 export * from './ui-renderer';

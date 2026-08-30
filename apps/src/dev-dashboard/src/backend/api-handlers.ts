@@ -35,19 +35,34 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
   if (path === '/api/logs/ingest' && req.method === 'POST') {
     const entry: any = await req.json().catch(() => null);
     if (entry && entry.service && entry.message) {
-      telemetryEngine.pushLog(entry.service, entry.severity || entry.level || 'INFO', entry.message, entry.traceId);
+      telemetryEngine.pushLog(
+        entry.service,
+        entry.severity || entry.level || 'INFO',
+        entry.message,
+        entry.source || 'app',
+        entry.traceId,
+        entry.metadata
+      );
       return Response.json({ status: 'ok' });
     }
     return Response.json({ error: 'Invalid log payload' }, { status: 400 });
   }
 
-  // 1c. Fetch Recent Logs Filtered by Service / Level
+  // 1c. Fetch Recent Logs Filtered by Service / Source / Level
   if (path === '/api/logs/recent' && req.method === 'GET') {
     const service = url.searchParams.get('service') || undefined;
+    const source = url.searchParams.get('source') || undefined;
     const level = url.searchParams.get('level') || undefined;
     const limit = Number(url.searchParams.get('limit') || 100);
-    const logs = telemetryEngine.getRecentLogs(limit, service, level);
+    const logs = telemetryEngine.getRecentLogs(limit, service, source, level);
     return Response.json({ status: 'ok', logs });
+  }
+
+  // 1d. Clear Log Buffer
+  if (path === '/api/logs/clear' && req.method === 'POST') {
+    const body: any = await req.json().catch(() => ({}));
+    telemetryEngine.clearLogs(body.service);
+    return Response.json({ status: 'ok', message: 'Logs cleared successfully' });
   }
 
   // 2. System Metrics & Telemetry

@@ -192,3 +192,8 @@
 2026-08-30 09:58 | [c4c37b0] feat(ui): implement Google-grade 4-tier client state management and repository governance rules (+1252, -49)
 2026-08-30 10:15 | include VERIFICATION_REPORT.md in post-commit auto-amend list
 2026-08-30 10:16 | [f0817c6] chore(hooks): auto-amend verification report in post-commit hook (+16, -15)
+2026-08-30 11:56 | implement isolated per-app 4-pillar observability, watchdog heartbeat, and pre-commit check 11
+2026-08-30 12:02 | restart and verify full docker dev stack and ingress routing across all 9 containers
+2026-08-30 12:14 | implement Ignore & Attrib Files Uniformity Engine, pre-commit check 1 upgrade, and unit/tamper tests
+2026-08-30 12:16 | establish Tier 2 AI Agent Semantic Check 6 and Pre-Flight Check 12 for Ignore & Attrib Governance
+2026-08-30 12:18 | [12966a8] feat(observability): implement isolated per-app 4-pillar logging, dev-dashboard anti-hang engine, and ignore uniformity checks (+18067, -5807)

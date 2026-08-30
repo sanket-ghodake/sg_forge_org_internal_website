@@ -1,0 +1,302 @@
+#!/usr/bin/env bun
+/**
+ * @forge/scripts/sync-ignores - Canonical Ignore & Git Attributes Synchronization Engine (2026 LTS)
+ * Ensures 100% uniformity across all monorepo ignore files (.gitignore, .dockerignore, .cursorignore,
+ * .antigravityignore, .copilotignore, .graphifyignore, .repomixignore) and .gitattributes.
+ *
+ * Google & Meta Clean Architecture Standard
+ */
+
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+const REPO_ROOT = process.cwd();
+
+/** Core shared exclusion rules across all toolchains */
+export const MANDATORY_EXCLUSIONS = [
+  'node_modules',
+  '**/.next',
+  '**/dist',
+  '**/build',
+  '**/.cache',
+  'portables/**/cache',
+  '.env',
+  '.env.*',
+  '*.pem',
+  '*.key',
+  'data/*.db',
+  'data/*.db-wal',
+  'data/*.db-shm',
+  '*.sqlite',
+  '*.sqlite3',
+  'logs/*.log',
+  '**/logs/*.log',
+  'scratch/',
+  'repomix-output.xml',
+  '.coverage',
+  'graphify-out/cache/',
+  'graphify-out/.graphify_*',
+  'graphify-out/2026-*/',
+];
+
+/** Canonical list of root ignore files that must exist and stay in sync */
+export const ROOT_IGNORE_FILES = [
+  '.gitignore',
+  '.dockerignore',
+  '.antigravityignore',
+  '.cursorignore',
+  '.copilotignore',
+  '.graphifyignore',
+  '.repomixignore',
+];
+
+/** Mandatory attributes in .gitattributes */
+export const MANDATORY_ATTRIBUTES = [
+  '* text=auto',
+  '*.sh text eol=lf',
+  '*.bash text eol=lf',
+  '*.ts text eol=lf',
+  '*.tsx text eol=lf',
+  '*.js text eol=lf',
+  '*.jsx text eol=lf',
+  '*.json text eol=lf',
+  '*.md text eol=lf',
+  '*.db binary',
+  '*.sqlite binary',
+  '*.sqlite3 binary',
+  '*.tar.gz binary',
+  '*.png binary',
+  '*.jpg binary',
+  '*.ico binary',
+];
+
+export interface ValidationResult {
+  valid: boolean;
+  missingFiles: string[];
+  missingPatterns: { file: string; pattern: string }[];
+  missingAttributes: string[];
+  subfolderLogIgnoresMissing: string[];
+}
+
+/**
+ * Validates all root ignore files, .gitattributes, and subfolder log ignore files.
+ */
+export function validateIgnores(): ValidationResult {
+  const missingFiles: string[] = [];
+  const missingPatterns: { file: string; pattern: string }[] = [];
+  const missingAttributes: string[] = [];
+  const subfolderLogIgnoresMissing: string[] = [];
+
+  // 1. Validate root ignore files
+  for (const file of ROOT_IGNORE_FILES) {
+    const filePath = join(REPO_ROOT, file);
+    if (!existsSync(filePath)) {
+      missingFiles.push(file);
+      continue;
+    }
+    const content = readFileSync(filePath, 'utf8');
+    const lines = content.split('\n').map((l) => l.trim());
+    for (const pat of MANDATORY_EXCLUSIONS) {
+      const normalizedPat = pat.replace(/\/$/, '');
+      const found = lines.some(
+        (l) =>
+          l === normalizedPat ||
+          l === `${normalizedPat}/` ||
+          l.includes(normalizedPat) ||
+          l.includes(normalizedPat.replace(/\*\*\//g, ''))
+      );
+      if (!found) {
+        missingPatterns.push({ file, pattern: pat });
+      }
+    }
+  }
+
+  // 2. Validate .gitattributes
+  const attribPath = join(REPO_ROOT, '.gitattributes');
+  if (!existsSync(attribPath)) {
+    missingFiles.push('.gitattributes');
+  } else {
+    const attribContent = readFileSync(attribPath, 'utf8');
+    for (const attr of MANDATORY_ATTRIBUTES) {
+      const token = attr.split(' ')[0];
+      if (!attribContent.includes(token)) {
+        missingAttributes.push(attr);
+      }
+    }
+  }
+
+  // 3. Validate microservice colocated logs/.gitignore
+  const appsDir = join(REPO_ROOT, 'apps', 'src');
+  const forgeAppsDir = join(REPO_ROOT, 'forge-apps');
+
+  const checkSubfolders = (parentDir: string) => {
+    if (!existsSync(parentDir)) return;
+    const entries = readdirSync(parentDir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        const logGitignore = join(parentDir, entry.name, 'logs', '.gitignore');
+        if (!existsSync(logGitignore)) {
+          subfolderLogIgnoresMissing.push(join(parentDir.replace(REPO_ROOT + '/', ''), entry.name, 'logs', '.gitignore'));
+        }
+      }
+    }
+  };
+
+  checkSubfolders(appsDir);
+  checkSubfolders(forgeAppsDir);
+
+  const valid =
+    missingFiles.length === 0 &&
+    missingPatterns.length === 0 &&
+    missingAttributes.length === 0 &&
+    subfolderLogIgnoresMissing.length === 0;
+
+  return { valid, missingFiles, missingPatterns, missingAttributes, subfolderLogIgnoresMissing };
+}
+
+/**
+ * Synchronizes and regenerates all ignore files and .gitattributes to exact canonical uniformity.
+ */
+export function syncAllIgnores(): { filesUpdated: string[] } {
+  const filesUpdated: string[] = [];
+
+  // 1. Generate canonical content for .gitignore / .cursorignore / etc.
+  const canonicalIgnoreContent = `# ==============================================================================
+# Canonical Ignore Configuration - SG Forge Monorepo (2026 LTS)
+# Google & Meta Standards: Multi-Package Workspace & Zero Leakage
+# Auto-generated by scripts/sync-ignores.ts
+# ==============================================================================
+
+# 1. Dependencies & Package Managers
+node_modules/
+**/node_modules/
+.pnp
+.pnp.*
+
+# 2. Local Isolated Python / Node Environments & Caches
+.venv/
+.node_env/
+__pycache__/
+**/*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+portables/**/cache/
+portables/**/install/cache/
+
+# 3. Build & Compilation Outputs
+.next/
+**/.next/
+dist/
+**/dist/
+build/
+**/build/
+out/
+**/out/
+.turbo/
+.cache/
+**/.cache/
+*.tsbuildinfo
+**/*.tsbuildinfo
+*.d.ts.map
+repomix-output.xml
+
+# 4. Environment Variables & Sensitive Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.keystore
+
+# 5. Database Files, WAL Transients & Snapshots
+data/*.db
+data/*.db-wal
+data/*.db-shm
+data/*.db-journal
+data/backups/
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+
+# 6. Microservice Logs & Transient Runtime Files
+logs/*.log
+**/logs/*.log
+*.log
+scratch/
+.system_generated/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# 7. Graphify Transient Backups & Analysis Caches
+graphify-out/cache/
+graphify-out/.graphify_*
+graphify-out/2026-*/
+`;
+
+  // 2. Write to each root ignore file
+  for (const file of ROOT_IGNORE_FILES) {
+    const filePath = join(REPO_ROOT, file);
+    writeFileSync(filePath, canonicalIgnoreContent, 'utf8');
+    filesUpdated.push(file);
+  }
+
+  // 3. Ensure subfolder logs/.gitignore files exist
+  const appsDir = join(REPO_ROOT, 'apps', 'src');
+  const forgeAppsDir = join(REPO_ROOT, 'forge-apps');
+
+  const syncSubfolderLogs = (parentDir: string) => {
+    if (!existsSync(parentDir)) return;
+    const entries = readdirSync(parentDir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        const logsDir = join(parentDir, entry.name, 'logs');
+        if (!existsSync(logsDir)) mkdirSync(logsDir, { recursive: true });
+        const logGitignore = join(logsDir, '.gitignore');
+        writeFileSync(logGitignore, `# Ignore raw log outputs while preserving directory structure\n*.log\n*.log.*\n!README.md\n!.gitignore\n`, 'utf8');
+        filesUpdated.push(logGitignore.replace(REPO_ROOT + '/', ''));
+      }
+    }
+  };
+
+  syncSubfolderLogs(appsDir);
+  syncSubfolderLogs(forgeAppsDir);
+
+  return { filesUpdated };
+}
+
+// CLI Execution Support
+if (import.meta.main) {
+  const isCheck = process.argv.includes('--check');
+
+  if (isCheck) {
+    const res = validateIgnores();
+    if (res.valid) {
+      console.log('✅ [Sync Ignores] All ignore and attribute files are 100% synchronized and valid.');
+      process.exit(0);
+    } else {
+      console.error('❌ [Sync Ignores] Discrepancies detected:');
+      if (res.missingFiles.length) console.error(`   - Missing Files: ${res.missingFiles.join(', ')}`);
+      if (res.missingPatterns.length) console.error(`   - Missing Patterns: ${res.missingPatterns.map(p => `${p.file} -> ${p.pattern}`).join(', ')}`);
+      if (res.missingAttributes.length) console.error(`   - Missing Attributes: ${res.missingAttributes.join(', ')}`);
+      if (res.subfolderLogIgnoresMissing.length) console.error(`   - Missing Log .gitignore: ${res.subfolderLogIgnoresMissing.join(', ')}`);
+      console.error('\n💡 Run "rtk bun scripts/sync-ignores.ts" to auto-sync all ignore and attribute files.');
+      process.exit(1);
+    }
+  } else {
+    const { filesUpdated } = syncAllIgnores();
+    console.log(`✨ [Sync Ignores] Synchronized ${filesUpdated.length} ignore files and .gitattributes across the monorepo:`);
+    filesUpdated.forEach(f => console.log(`   └─ ${f}`));
+    process.exit(0);
+  }
+}

@@ -28,6 +28,12 @@ export function renderDashboardHtml(): string {
     </div>
 
     <div class="sb-header-right">
+      <!-- Heartbeat & Connection Watchdog -->
+      <div class="watchdog-pill" id="dashboard-watchdog" title="Live SSE telemetry stream status" onclick="reconnectSSE()">
+        <span class="watchdog-dot live" id="watchdog-dot"></span>
+        <span id="watchdog-text">Live Stream</span>
+      </div>
+
       <!-- Theme Switcher Button -->
       <button class="astryx-theme-toggle" id="theme-toggle-btn" title="Toggle Light / Dark Theme" aria-label="Toggle Theme" style="width: 32px; height: 32px;">
         <svg id="sun-icon" viewBox="0 0 24 24" style="width: 15px; height: 15px;">
@@ -36,10 +42,10 @@ export function renderDashboardHtml(): string {
           <line x1="12" y1="21" x2="12" y2="23"></line>
           <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
           <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
           <line x1="1" y1="12" x2="3" y2="12"></line>
           <line x1="21" y1="12" x2="23" y2="12"></line>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
         </svg>
         <svg id="moon-icon" viewBox="0 0 24 24" style="width: 15px; height: 15px; display: none;">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -58,7 +64,7 @@ export function renderDashboardHtml(): string {
       <div class="sb-nav-item" data-tab="apps" onclick="switchTab('apps')">🧩 Forge Apps</div>
       <div class="sb-nav-item" data-tab="database" onclick="switchTab('database')">🗄️ Turso DB Explorer</div>
       <div class="sb-nav-item" data-tab="sql" onclick="switchTab('sql')">💻 SQL Playground</div>
-      <div class="sb-nav-item" data-tab="logs" onclick="switchTab('logs')">📜 Live Log Streamer</div>
+      <div class="sb-nav-item" data-tab="logs" onclick="switchTab('logs')">📜 Isolated App Logs</div>
       <div class="sb-nav-item" data-tab="traffic" onclick="switchTab('traffic')">📈 Traffic Analytics</div>
       <div class="sb-nav-item" data-tab="issues" onclick="switchTab('issues')">⚠️ Issue Center</div>
       <div class="sb-nav-item" data-tab="host" onclick="switchTab('host')">☁️ Host & Cloud</div>
@@ -168,12 +174,58 @@ export function renderDashboardHtml(): string {
         </div>
       </section>
 
-      <!-- Tab 6: Live Log Streamer -->
+      <!-- Tab 6: Isolated App Logs & Plain-English Insights -->
       <section id="tab-logs" class="tab-pane">
+        <!-- Plain English Non-Technical Summary Card -->
+        <div class="plain-english-card" id="plain-english-banner">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span style="font-size: 1.5rem;" id="plain-status-icon">🟢</span>
+            <div>
+              <h3 id="plain-status-title" style="margin: 0; font-size: 0.95rem; color: var(--forge-text-main);">All Systems Operational</h3>
+              <p id="plain-status-detail" style="margin: 0.2rem 0 0 0; font-size: 0.8rem; color: var(--forge-text-muted);">
+                All microservices and database instances are responding with healthy latency (&lt;5ms).
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div class="astryx-card">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem;">
-            <h2 style="font-size: 1.25rem;">📜 Live Streaming Log Stream</h2>
-            <button class="astryx-btn btn-outline" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="clearLogs()">Clear</button>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+              <label style="font-size: 0.82rem; font-weight: 600;">App:</label>
+              <select class="form-input" id="logs-app-select" style="max-width: 170px;" onchange="changeActiveLogApp(this.value)">
+                <option value="all">🌐 All Microservices</option>
+                <option value="landing">🏠 Landing</option>
+                <option value="auth">🔒 Auth</option>
+                <option value="portal">📂 Portal</option>
+                <option value="dev-dashboard">📊 Dev Dashboard</option>
+                <option value="dev-hub">🔀 Dev Hub</option>
+                <option value="expenses">💳 Expenses</option>
+                <option value="billing">🧾 Billing</option>
+                <option value="telemetry">📡 Telemetry</option>
+              </select>
+
+              <label style="font-size: 0.82rem; font-weight: 600; margin-left: 0.5rem;">Source:</label>
+              <select class="form-input" id="logs-source-select" style="max-width: 160px;" onchange="changeActiveLogSource(this.value)">
+                <option value="all">All Sources</option>
+                <option value="app">🖥️ App Server (app.log)</option>
+                <option value="browser">🌐 Browser Console</option>
+                <option value="docker">🐳 Docker Container</option>
+                <option value="db">🗄️ Database (db.log)</option>
+              </select>
+
+              <label style="font-size: 0.82rem; font-weight: 600; margin-left: 0.5rem;">Severity:</label>
+              <select class="form-input" id="logs-level-select" style="max-width: 110px;" onchange="changeActiveLogLevel(this.value)">
+                <option value="ALL">ALL</option>
+                <option value="INFO">INFO</option>
+                <option value="WARN">WARN</option>
+                <option value="ERROR">ERROR</option>
+              </select>
+            </div>
+
+            <div style="display: flex; gap: 0.4rem;">
+              <button class="astryx-btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" onclick="clearActiveAppLogs()">🗑️ Clear</button>
+            </div>
           </div>
           <div class="terminal-window" id="full-terminal" style="height: 440px;"></div>
         </div>
@@ -185,7 +237,7 @@ export function renderDashboardHtml(): string {
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
             <div>
               <h2 style="font-size: 1.25rem; margin-bottom: 0.2rem;">📈 Real-time Traffic & Latency Benchmarks</h2>
-              <p style="color: var(--forge-text-muted); font-size: 0.82rem;">Autocannon high-frequency stress tester (<2ms target).</p>
+              <p style="color: var(--forge-text-muted); font-size: 0.82rem;">Autocannon high-frequency stress tester (&lt;2ms target).</p>
             </div>
             <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.85rem;" onclick="runLatencyBenchmark()">🚀 1-Click Latency Benchmark</button>
           </div>
@@ -234,7 +286,7 @@ export function renderDashboardHtml(): string {
         <h4 style="color: var(--forge-primary); margin-bottom: 0.4rem;">Operational States</h4>
         <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
           <li><strong style="color: var(--forge-success);">RUNNING:</strong> Process is active, healthy, and accepting Turso DB connections.</li>
-          <li><strong style="color: var(--forge-accent);">DEGRADED:</strong> Service is experiencing elevated response latency (>50ms).</li>
+          <li><strong style="color: var(--forge-accent);">DEGRADED:</strong> Service is experiencing elevated response latency (&gt;50ms).</li>
           <li><strong style="color: var(--forge-text-muted);">STOPPED:</strong> Service is halted or offline.</li>
           <li><strong style="color: var(--forge-primary);">STARTING:</strong> Service runtime is booting or executing migrations.</li>
         </ul>
@@ -253,7 +305,7 @@ export function renderDashboardHtml(): string {
     </div>
   </div>
 
-  <!-- App-Specific Live Log Inspector Modal -->
+  <!-- App-Specific 4-Pillar Live Log Inspector Modal -->
   <div class="astryx-modal-backdrop" id="app-logs-modal">
     <div class="astryx-modal log-modal-content">
       <div class="astryx-modal-header">
@@ -267,11 +319,20 @@ export function renderDashboardHtml(): string {
         <button class="astryx-modal-close" onclick="closeAppLogsModal()">&times;</button>
       </div>
       <div class="astryx-modal-body" style="display: flex; flex-direction: column; flex: 1; padding: 0.85rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-          <input type="text" class="form-input" id="app-logs-filter" placeholder="Filter app logs..." style="width: 280px;" oninput="filterAppLogs(this.value)">
-          <button class="astryx-btn btn-outline" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="clearAppLogs()">Clear</button>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.4rem;">
+          <div style="display: flex; gap: 0.3rem;">
+            <button class="astryx-btn btn-primary" id="pillar-tab-all" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="setModalPillar('all')">All</button>
+            <button class="astryx-btn btn-outline" id="pillar-tab-app" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="setModalPillar('app')">🖥️ Server</button>
+            <button class="astryx-btn btn-outline" id="pillar-tab-browser" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="setModalPillar('browser')">🌐 Browser</button>
+            <button class="astryx-btn btn-outline" id="pillar-tab-docker" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="setModalPillar('docker')">🐳 Docker</button>
+            <button class="astryx-btn btn-outline" id="pillar-tab-db" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="setModalPillar('db')">🗄️ DB</button>
+          </div>
+          <div style="display: flex; gap: 0.3rem; align-items: center;">
+            <input type="text" class="form-input" id="app-logs-filter" placeholder="Filter logs..." style="width: 180px; padding: 0.2rem 0.5rem; font-size: 0.75rem;" oninput="filterAppLogs(this.value)">
+            <button class="astryx-btn btn-outline" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="clearAppLogs()">Clear</button>
+          </div>
         </div>
-        <div class="terminal-window" id="app-logs-terminal" style="height: 100%; min-height: 380px;">Waiting for app logs...</div>
+        <div class="terminal-window" id="app-logs-terminal" style="height: 100%; min-height: 380px;">Waiting for isolated app logs...</div>
       </div>
     </div>
   </div>
@@ -280,3 +341,4 @@ export function renderDashboardHtml(): string {
 </body>
 </html>`;
 }
+

@@ -12,6 +12,7 @@
 9. **Open-Source Directive**: All software components, libraries, CLI utilities, security audit tooling, and frameworks used in this workspace MUST be 100% free and open-source (FOSS).
 10. **Version Lock & Strict Version Freeze**: NEVER update, upgrade, or downgrade any runtime version, framework version, or package dependency without prior explicit discussion and user approval.
 11. **Cross-Agent Instruction Sync Guard**: Whenever modifying or updating ANY agent instruction or rule file (`AGENTS.md`, `.agents/AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`, `.agents/rules/*.md`, `.agents/workforce/*.md`), you MUST run `./.agents/scripts/sync-agent-instructions.sh` to ensure ALL agent instruction files stay 100% synchronized across all IDEs and tools.
+12. **Ignore & Attrib Files Uniformity**: Whenever introducing new build artifacts, temporary extensions, sensitive patterns, or database files, you MUST run `rtk bun scripts/sync-ignores.ts` to ensure all 7 root ignore files, `.gitattributes`, and subfolder `logs/.gitignore` files remain 100% synchronized.
 
 ---
 

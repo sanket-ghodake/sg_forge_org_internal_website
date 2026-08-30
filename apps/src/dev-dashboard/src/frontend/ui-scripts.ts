@@ -3,6 +3,8 @@
  * Strict Single Page Application (SPA) hash router, responsive drawer, SSE subscriber, and Vitals Cards.
  */
 
+import { getLogDashboardScripts } from './ui-log-scripts';
+
 export function getDashboardScripts(): string {
   return `
     const apiBase = window.location.pathname.startsWith('/devcenter') ? '/devcenter' : '';
@@ -65,7 +67,6 @@ export function getDashboardScripts(): string {
         }
       }
 
-      // Cross-tab real-time listener
       if (typeof BroadcastChannel !== 'undefined') {
         try {
           const receiver = new BroadcastChannel(CHANNEL_NAME);
@@ -78,13 +79,6 @@ export function getDashboardScripts(): string {
       }
     })();
 
-    function switchSimulatedRole(role) {
-      sessionStorage.setItem('forge:v1:platform:simulated-role', role);
-      sessionStorage.setItem('sg-forge-role', role);
-      console.log('Active RBAC simulation role switched to: ' + role);
-    }
-
-    // 📱 Mobile Off-Canvas Navigation Drawer
     function toggleMobileSidebar(force) {
       const sb = document.getElementById('main-sidebar');
       const backdrop = document.getElementById('sidebar-backdrop');
@@ -97,7 +91,6 @@ export function getDashboardScripts(): string {
     const menuBtn = document.getElementById('mobile-menu-toggle');
     if (menuBtn) menuBtn.addEventListener('click', () => toggleMobileSidebar());
 
-    // ⚡ Strict SPA Navigation Router (Hash & History API + Persistent LocalStorage)
     const TAB_KEY = 'forge:v1:devcenter:active-tab';
 
     function switchTab(tabId, updateUrl = true) {
@@ -123,6 +116,7 @@ export function getDashboardScripts(): string {
       if (tabId === 'services') loadServices();
       if (tabId === 'apps') loadApps();
       if (tabId === 'database' || tabId === 'sql') loadDatabases();
+      if (tabId === 'logs') loadActiveTabLogs();
       if (tabId === 'traffic') loadTraffic();
       if (tabId === 'issues') loadIssues();
       if (tabId === 'host') loadHostVitals();
@@ -146,76 +140,7 @@ export function getDashboardScripts(): string {
     window.addEventListener('hashchange', syncTabFromHash);
     window.addEventListener('popstate', syncTabFromHash);
 
-    const evtSource = new EventSource(apiBase + '/api/logs/stream');
-    evtSource.addEventListener('log', e => {
-      const log = JSON.parse(e.data);
-      appendLogLine(log);
-      appendAppLogModalLine(log);
-    });
-
-    function appendLogLine(l) {
-      const line = '[' + l.timestamp.slice(11, 19) + '] [' + l.level + '] (' + l.service + '): ' + l.message + '\\n';
-      const oTerm = document.getElementById('overview-terminal');
-      const fTerm = document.getElementById('full-terminal');
-      if (oTerm) { oTerm.textContent += line; oTerm.scrollTop = oTerm.scrollHeight; }
-      if (fTerm) { fTerm.textContent += line; fTerm.scrollTop = fTerm.scrollHeight; }
-    }
-
-    function appendAppLogModalLine(l) {
-      if (!currentAppLogService || (l.service !== currentAppLogService && currentAppLogService !== 'all')) return;
-      const line = '[' + l.timestamp.slice(11, 19) + '] [' + l.level + '] (' + l.service + '): ' + l.message;
-      appLogBuffer.push(line);
-      if (appLogBuffer.length > 500) appLogBuffer.shift();
-      const term = document.getElementById('app-logs-terminal');
-      if (term) { term.textContent += line + '\\n'; term.scrollTop = term.scrollHeight; }
-    }
-
-    function openHelpModal() { document.getElementById('help-modal')?.classList.add('open'); }
-    function closeHelpModal() { document.getElementById('help-modal')?.classList.remove('open'); }
-
-    async function openAppLogsModal(id, name, port, ingress) {
-      currentAppLogService = id;
-      appLogBuffer = [];
-      document.getElementById('app-logs-title').textContent = '📜 Live Logs: ' + name + ' (' + id + ')';
-      document.getElementById('app-logs-meta').textContent = 'Port: :' + port + ' | Ingress: ' + ingress;
-      const term = document.getElementById('app-logs-terminal');
-      if (term) term.textContent = 'Connecting to isolated stream for ' + id + '...\\n';
-      document.getElementById('app-logs-modal')?.classList.add('open');
-
-      try {
-        const res = await fetch(apiBase + '/api/logs/recent?service=' + id).then(r => r.json());
-        if (res.logs && res.logs.length && term) {
-          appLogBuffer = res.logs.map(l => '[' + l.timestamp.slice(11, 19) + '] [' + l.level + '] (' + l.service + '): ' + l.message);
-          term.textContent = appLogBuffer.join('\\n') + '\\n';
-          term.scrollTop = term.scrollHeight;
-        }
-      } catch (err) {}
-    }
-
-    function closeAppLogsModal() {
-      currentAppLogService = null;
-      document.getElementById('app-logs-modal')?.classList.remove('open');
-    }
-
-    function filterAppLogs(term) {
-      const el = document.getElementById('app-logs-terminal');
-      if (!el) return;
-      el.textContent = (!term ? appLogBuffer : appLogBuffer.filter(l => l.toLowerCase().includes(term.toLowerCase()))).join('\\n') + '\\n';
-      el.scrollTop = el.scrollHeight;
-    }
-
-    function clearAppLogs() {
-      appLogBuffer = [];
-      const term = document.getElementById('app-logs-terminal');
-      if (term) term.textContent = '';
-    }
-
-    function clearLogs() {
-      const o = document.getElementById('overview-terminal');
-      const f = document.getElementById('full-terminal');
-      if (o) o.textContent = '';
-      if (f) f.textContent = '';
-    }
+    ${getLogDashboardScripts()}
 
     function renderSparklineSvg(data, isArea) {
       if (!data || !data.length) return '';
@@ -473,16 +398,18 @@ export function getDashboardScripts(): string {
       } catch (err) { console.error('Audit load failed', err); }
     }
 
-    // 🚀 Mount Initial Tab from URL hash or default to overview
+    // 🚀 Mount Initial Tab & Start Resilient SSE Watchdog
+    initWatchdogAndSSE();
     syncTabFromHash();
 
-    // ⏱️ Real-Time 1-Second Continuous Live Polling Engine
+    // ⏱️ Real-Time 1.5-Second Throttled Live Polling Engine (Pauses when tab hidden)
     setInterval(() => {
+      if (document.hidden) return;
       const tab = window.location.hash.replace('#', '') || 'overview';
       if (tab === 'services') loadServices();
       else if (tab === 'overview') loadTopology();
       else if (tab === 'host') loadHostVitals();
       else if (tab === 'traffic') loadTraffic();
-    }, 1000);
+    }, 1500);
   `;
 }

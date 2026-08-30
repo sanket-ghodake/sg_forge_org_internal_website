@@ -331,6 +331,57 @@ export function getDashboardStyles(): string {
     }
     .form-input:focus { border-color: var(--forge-primary); }
 
+    /* Watchdog Heartbeat Pill */
+    .watchdog-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.65rem;
+      background: var(--forge-bg-card);
+      border: 1px solid var(--forge-border);
+      border-radius: var(--forge-radius-full);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: var(--forge-transition);
+    }
+    .watchdog-pill:hover { background: var(--forge-bg-card-hover); }
+    .watchdog-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+    .watchdog-dot.live { background: var(--forge-success); box-shadow: 0 0 6px var(--forge-success); animation: pulse 2s infinite; }
+    .watchdog-dot.reconnecting { background: var(--forge-accent); box-shadow: 0 0 6px var(--forge-accent); }
+    .watchdog-dot.frozen { background: var(--forge-accent); box-shadow: 0 0 6px var(--forge-accent); }
+
+    /* Plain English Insights Card */
+    .plain-english-card {
+      background: var(--forge-bg-surface);
+      border: 1px solid var(--forge-border-medium);
+      border-left: 4px solid var(--forge-primary);
+      border-radius: var(--forge-radius-sm);
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      box-shadow: var(--forge-shadow-card);
+    }
+
+    /* Structured High-Density Log Row */
+    .log-row {
+      padding: 0.15rem 0;
+      border-bottom: 1px solid var(--forge-border);
+      display: flex;
+      gap: 0.45rem;
+      word-break: break-all;
+      line-height: 1.4;
+    }
+    .log-ts { color: var(--forge-text-subtle); flex-shrink: 0; }
+    .log-lvl-info { color: var(--forge-primary); font-weight: 600; flex-shrink: 0; }
+    .log-lvl-warn { color: var(--forge-accent); font-weight: 600; flex-shrink: 0; }
+    .log-lvl-error { color: var(--forge-accent); font-weight: 700; flex-shrink: 0; }
+    .log-lvl-debug { color: var(--forge-text-muted); flex-shrink: 0; }
+    .log-svc { color: var(--forge-text-main); font-weight: 600; flex-shrink: 0; }
+    .log-source { font-size: 0.7rem; padding: 0.05rem 0.3rem; border-radius: 3px; background: var(--forge-bg-elevated); color: var(--forge-text-muted); flex-shrink: 0; }
+    .log-msg { color: var(--forge-text-muted); flex: 1; }
+    .log-msg.highlight { color: var(--forge-text-main); }
+
     /* Responsive Mobile Breakpoint */
     @media (max-width: 900px) {
       .sb-mobile-menu-btn { display: inline-flex; }
@@ -346,3 +397,4 @@ export function getDashboardStyles(): string {
     }
   `;
 }
+
