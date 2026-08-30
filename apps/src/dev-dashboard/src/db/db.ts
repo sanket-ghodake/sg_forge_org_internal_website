@@ -366,6 +366,79 @@ class PlatformDatabaseManager {
     }
   }
 
+  public getTableSchema(dbName: string, tableName: string): { columns: Array<{ cid: number; name: string; type: string; notnull: number; dflt_value: any; pk: number }>; error?: string } {
+    const targetPath = join(DATA_DIR, dbName);
+    if (!existsSync(targetPath)) return { columns: [], error: `Database ${dbName} not found` };
+    try {
+      const sanitizedTable = tableName.replace(/[^a-zA-Z0-9_]/g, '');
+      const dbInstance = new Database(targetPath, { readonly: true });
+      const columns = dbInstance.query(`PRAGMA table_info("${sanitizedTable}");`).all() as any[];
+      dbInstance.close();
+      return { columns };
+    } catch (err: any) {
+      return { columns: [], error: err.message || String(err) };
+    }
+  }
+
+  public getTableDdl(dbName: string, tableName: string): { ddl: string; indexes: string[]; error?: string } {
+    const targetPath = join(DATA_DIR, dbName);
+    if (!existsSync(targetPath)) return { ddl: '', indexes: [], error: `Database ${dbName} not found` };
+    try {
+      const dbInstance = new Database(targetPath, { readonly: true });
+      const tableRow = dbInstance.query(`SELECT sql FROM sqlite_master WHERE type = 'table' AND name = ?;`).get(tableName) as { sql: string } | null;
+      const indexRows = dbInstance.query(`SELECT sql FROM sqlite_master WHERE type = 'index' AND tbl_name = ? AND sql IS NOT NULL;`).all(tableName) as Array<{ sql: string }>;
+      dbInstance.close();
+      return {
+        ddl: tableRow?.sql || `-- Table ${tableName} schema not found in sqlite_master`,
+        indexes: indexRows.map((r) => r.sql),
+      };
+    } catch (err: any) {
+      return { ddl: '', indexes: [], error: err.message || String(err) };
+    }
+  }
+
+  public getTableRows(
+    dbName: string,
+    tableName: string,
+    page = 1,
+    limit = 25
+  ): { columns: string[]; rows: any[]; totalCount: number; page: number; limit: number; error?: string } {
+    const targetPath = join(DATA_DIR, dbName);
+    if (!existsSync(targetPath)) return { columns: [], rows: [], totalCount: 0, page, limit, error: `Database ${dbName} not found` };
+    try {
+      const sanitizedTable = tableName.replace(/[^a-zA-Z0-9_]/g, '');
+      const safeLimit = Math.max(1, Math.min(100, Number(limit) || 25));
+      const safePage = Math.max(1, Number(page) || 1);
+      const offset = (safePage - 1) * safeLimit;
+
+      const dbInstance = new Database(targetPath, { readonly: true });
+      const countRow = dbInstance.query(`SELECT COUNT(*) as count FROM "${sanitizedTable}";`).get() as { count: number } | null;
+      const totalCount = countRow?.count || 0;
+
+      const rows = dbInstance.query(`SELECT * FROM "${sanitizedTable}" LIMIT ? OFFSET ?;`).all(safeLimit, offset) as any[];
+      const columns = rows.length > 0 ? Object.keys(rows[0]) : [];
+      dbInstance.close();
+
+      return { columns, rows, totalCount, page: safePage, limit: safeLimit };
+    } catch (err: any) {
+      return { columns: [], rows: [], totalCount: 0, page, limit, error: err.message || String(err) };
+    }
+  }
+
+  public runIntegrityCheck(dbName: string): { integrity: string[]; foreignKeyErrors: any[]; success: boolean; error?: string } {
+    const targetPath = join(DATA_DIR, dbName);
+    if (!existsSync(targetPath)) return { integrity: [], foreignKeyErrors: [], success: false, error: `Database ${dbName} not found` };
+    try {
+      const dbInstance = new Database(targetPath, { readonly: true });
+      const integrity = (dbInstance.query('PRAGMA integrity_check;').all() as Array<{ integrity_check: string }>).map(r => r.integrity_check);
+      const foreignKeyErrors = dbInstance.query('PRAGMA foreign_key_check;').all() as any[];
+      dbInstance.close();
+      return { integrity, foreignKeyErrors, success: integrity.includes('ok') && foreignKeyErrors.length === 0 };
+    } catch (err: any) {
+      return { integrity: [], foreignKeyErrors: [], success: false, error: err.message || String(err) };
+    }
+  }
+
   public getTrafficSummary(limit = 100): TrafficEventRecord[] {
     return this.db.query('SELECT * FROM traffic_events ORDER BY timestamp DESC LIMIT ?').all(limit) as TrafficEventRecord[];
   }

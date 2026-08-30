@@ -28,6 +28,12 @@ export function renderDashboardHtml(): string {
     </div>
 
     <div class="sb-header-right">
+      <!-- Global Command Palette Trigger -->
+      <div class="watchdog-pill" id="cmd-palette-btn" title="Open Command Palette (Cmd+K)" onclick="openCommandPalette()">
+        <span style="color: var(--forge-text-muted);">Quick Find</span>
+        <kbd style="background: var(--forge-bg-elevated); padding: 1px 5px; border-radius: 3px; font-size: 0.68rem; border: 1px solid var(--forge-border);">⌘K</kbd>
+      </div>
+
       <!-- Heartbeat & Connection Watchdog -->
       <div class="watchdog-pill" id="dashboard-watchdog" title="Live SSE telemetry stream status" onclick="reconnectSSE()">
         <span class="watchdog-dot live" id="watchdog-dot"></span>
@@ -59,45 +65,45 @@ export function renderDashboardHtml(): string {
     <div class="sb-sidebar-backdrop" id="sidebar-backdrop" onclick="toggleMobileSidebar(false)"></div>
 
     <aside class="sb-sidebar" id="main-sidebar" aria-label="Main Navigation">
-      <div class="sb-nav-item active" data-tab="overview" onclick="switchTab('overview')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('overview')" title="Overview" tabindex="0" role="button">
+      <div class="sb-nav-item active" data-tab="overview" onclick="switchTab('overview')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('overview')" title="Overview (1)" tabindex="0" role="button">
         <span class="sb-nav-icon">📊</span>
         <span class="sb-nav-label">Overview</span>
       </div>
-      <div class="sb-nav-item" data-tab="services" onclick="switchTab('services')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('services')" title="Services & Processes" tabindex="0" role="button">
+      <div class="sb-nav-item" data-tab="services" onclick="switchTab('services')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('services')" title="Services & Processes (2)" tabindex="0" role="button">
         <span class="sb-nav-icon">⚡</span>
         <span class="sb-nav-label">Services & Processes</span>
       </div>
-      <div class="sb-nav-item" data-tab="apps" onclick="switchTab('apps')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('apps')" title="Forge Apps" tabindex="0" role="button">
+      <div class="sb-nav-item" data-tab="apps" onclick="switchTab('apps')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('apps')" title="Forge Apps (3)" tabindex="0" role="button">
         <span class="sb-nav-icon">🧩</span>
         <span class="sb-nav-label">Forge Apps</span>
       </div>
-      <div class="sb-nav-item" data-tab="database" onclick="switchTab('database')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('database')" title="Turso DB Explorer" tabindex="0" role="button">
+      <div class="sb-nav-item" data-tab="database" onclick="switchTab('database')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('database')" title="Turso DB Explorer (4)" tabindex="0" role="button">
         <span class="sb-nav-icon">🗄️</span>
         <span class="sb-nav-label">Turso DB Explorer</span>
       </div>
-      <div class="sb-nav-item" data-tab="sql" onclick="switchTab('sql')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('sql')" title="SQL Playground" tabindex="0" role="button">
+      <div class="sb-nav-item" data-tab="sql" onclick="switchTab('sql')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('sql')" title="SQL Playground (5)" tabindex="0" role="button">
         <span class="sb-nav-icon">💻</span>
         <span class="sb-nav-label">SQL Playground</span>
       </div>
-      <div class="sb-nav-item" data-tab="logs" onclick="switchTab('logs')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('logs')" title="Isolated App Logs" tabindex="0" role="button">
+      <div class="sb-nav-item" data-tab="logs" onclick="switchTab('logs')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('logs')" title="Isolated App Logs (6)" tabindex="0" role="button">
         <span class="sb-nav-icon">📜</span>
         <span class="sb-nav-label">Isolated App Logs</span>
       </div>
-      <div class="sb-nav-item" data-tab="traffic" onclick="switchTab('traffic')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('traffic')" title="Traffic Analytics" tabindex="0" role="button">
+      <div class="sb-nav-item" data-tab="traffic" onclick="switchTab('traffic')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('traffic')" title="Traffic Analytics (7)" tabindex="0" role="button">
         <span class="sb-nav-icon">📈</span>
         <span class="sb-nav-label">Traffic Analytics</span>
       </div>
-      <div class="sb-nav-item" data-tab="issues" onclick="switchTab('issues')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('issues')" title="Issue Center" tabindex="0" role="button">
+      <div class="sb-nav-item" data-tab="issues" onclick="switchTab('issues')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('issues')" title="Issue Center (8)" tabindex="0" role="button">
         <span class="sb-nav-icon">⚠️</span>
         <span class="sb-nav-label">Issue Center</span>
       </div>
-      <div class="sb-nav-item" data-tab="host" onclick="switchTab('host')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('host')" title="Host & Cloud" tabindex="0" role="button">
+      <div class="sb-nav-item" data-tab="host" onclick="switchTab('host')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('host')" title="Host & Cloud (9)" tabindex="0" role="button">
         <span class="sb-nav-icon">☁️</span>
         <span class="sb-nav-label">Host & Cloud</span>
       </div>
-      <div class="sb-nav-item" data-tab="settings" onclick="switchTab('settings')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('settings')" title="Settings & Audit" tabindex="0" role="button">
+      <div class="sb-nav-item" data-tab="settings" onclick="switchTab('settings')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('settings')" title="Settings & Tools (0)" tabindex="0" role="button">
         <span class="sb-nav-icon">⚙️</span>
-        <span class="sb-nav-label">Settings & Audit</span>
+        <span class="sb-nav-label">Settings & Tools</span>
       </div>
     </aside>
 
@@ -169,19 +175,34 @@ export function renderDashboardHtml(): string {
         <div class="astryx-grid" id="apps-grid"></div>
       </section>
 
-      <!-- Tab 4: Turso DB Explorer -->
+      <!-- Tab 4: Turso DB Explorer & Supabase-Grade Studio -->
       <section id="tab-database" class="tab-pane">
         <div class="astryx-card" style="margin-bottom: 1rem;">
           <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
             <label style="font-weight: 600; font-size: 0.85rem;">Target Database:</label>
             <select class="form-input" id="db-select" style="max-width: 240px;" onchange="inspectDatabase(this.value)"></select>
-            <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.75rem;" onclick="optimizeCurrentDb()">✨ 1-Click Optimize (VACUUM)</button>
-            <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.75rem;" onclick="backupCurrentDb()">📦 1-Click Snapshot</button>
+            <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem;" onclick="checkDatabaseIntegrity()">🩺 Integrity Check</button>
+            <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem;" onclick="optimizeCurrentDb()">✨ 1-Click Optimize</button>
+            <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.65rem;" onclick="backupCurrentDb()">📦 Snapshot</button>
           </div>
         </div>
-        <div class="astryx-card">
-          <h3 style="font-size: 0.95rem; margin-bottom: 0.65rem;">Tables & Schema</h3>
+        <div class="astryx-card" style="margin-bottom: 1rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
+            <h3 style="font-size: 0.95rem; margin: 0;">Tables in Database</h3>
+            <div id="db-action-buttons"></div>
+          </div>
           <div class="astryx-table-wrap" id="db-tables-view">Select a database above to inspect tables.</div>
+        </div>
+        <div class="astryx-card" id="db-table-data-card" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
+            <h3 style="font-size: 0.95rem; margin: 0;" id="db-table-data-title">Table Rows</h3>
+            <div style="display: flex; gap: 0.4rem;">
+              <button class="astryx-btn btn-outline" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;" onclick="exportCurrentTableCsv()">📥 Export CSV</button>
+              <button class="astryx-btn btn-outline" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;" onclick="viewSelectedTableDdl()">📜 View DDL</button>
+            </div>
+          </div>
+          <div class="astryx-table-wrap" id="db-table-data-view"></div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;" id="db-pagination-bar"></div>
         </div>
       </section>
 
@@ -197,6 +218,14 @@ export function renderDashboardHtml(): string {
               <input type="checkbox" id="sql-readonly-check" checked> Read-Only Sandbox Mode
             </label>
             <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.85rem;" onclick="runSqlQuery()">Run Query (Ctrl+Enter)</button>
+            <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem;" onclick="exportSqlResultCsv()">📥 Export CSV</button>
+          </div>
+
+          <div style="display: flex; gap: 0.3rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+            <button class="astryx-btn btn-outline" style="padding: 0.15rem 0.4rem; font-size: 0.72rem;" onclick="insertSqlSnippet('SELECT * FROM apps_registry LIMIT 20;')">apps_registry</button>
+            <button class="astryx-btn btn-outline" style="padding: 0.15rem 0.4rem; font-size: 0.72rem;" onclick="insertSqlSnippet('SELECT * FROM traffic_events ORDER BY timestamp DESC LIMIT 20;')">recent traffic</button>
+            <button class="astryx-btn btn-outline" style="padding: 0.15rem 0.4rem; font-size: 0.72rem;" onclick="insertSqlSnippet('SELECT * FROM audit_logs ORDER BY timestamp DESC LIMIT 20;')">audit logs</button>
+            <button class="astryx-btn btn-outline" style="padding: 0.15rem 0.4rem; font-size: 0.72rem;" onclick="insertSqlSnippet('SELECT * FROM sqlite_master;')">sqlite_master</button>
           </div>
 
           <textarea class="sql-input" id="sql-query-input" placeholder="SELECT * FROM apps_registry LIMIT 10;">SELECT * FROM apps_registry LIMIT 10;</textarea>
@@ -204,7 +233,7 @@ export function renderDashboardHtml(): string {
         </div>
       </section>
 
-      <!-- Tab 6: Isolated App Logs & Plain-English Insights -->
+      <!-- Tab 6: Isolated App Logs & Observability -->
       <section id="tab-logs" class="tab-pane">
         <!-- Plain English Non-Technical Summary Card -->
         <div class="plain-english-card" id="plain-english-banner">
@@ -221,9 +250,8 @@ export function renderDashboardHtml(): string {
 
         <div class="astryx-card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 0.5rem;">
-            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-              <label style="font-size: 0.82rem; font-weight: 600;">App:</label>
-              <select class="form-input" id="logs-app-select" style="max-width: 170px;" onchange="changeActiveLogApp(this.value)">
+            <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+              <select class="form-input" id="logs-app-select" style="max-width: 160px;" onchange="changeActiveLogApp(this.value)">
                 <option value="all">🌐 All Microservices</option>
                 <option value="landing">🏠 Landing</option>
                 <option value="auth">🔒 Auth</option>
@@ -235,26 +263,28 @@ export function renderDashboardHtml(): string {
                 <option value="telemetry">📡 Telemetry</option>
               </select>
 
-              <label style="font-size: 0.82rem; font-weight: 600; margin-left: 0.5rem;">Source:</label>
-              <select class="form-input" id="logs-source-select" style="max-width: 160px;" onchange="changeActiveLogSource(this.value)">
+              <select class="form-input" id="logs-source-select" style="max-width: 140px;" onchange="changeActiveLogSource(this.value)">
                 <option value="all">All Sources</option>
-                <option value="app">🖥️ App Server (app.log)</option>
-                <option value="browser">🌐 Browser Console</option>
-                <option value="docker">🐳 Docker Container</option>
-                <option value="db">🗄️ Database (db.log)</option>
+                <option value="app">🖥️ Server</option>
+                <option value="browser">🌐 Browser</option>
+                <option value="docker">🐳 Docker</option>
+                <option value="db">🗄️ Database</option>
               </select>
 
-              <label style="font-size: 0.82rem; font-weight: 600; margin-left: 0.5rem;">Severity:</label>
-              <select class="form-input" id="logs-level-select" style="max-width: 110px;" onchange="changeActiveLogLevel(this.value)">
+              <select class="form-input" id="logs-level-select" style="max-width: 90px;" onchange="changeActiveLogLevel(this.value)">
                 <option value="ALL">ALL</option>
                 <option value="INFO">INFO</option>
                 <option value="WARN">WARN</option>
                 <option value="ERROR">ERROR</option>
               </select>
+
+              <input type="text" class="form-input" id="logs-search-input" placeholder="🔍 Search text or traceId..." style="width: 170px;" oninput="onLogSearchChange(this.value)">
             </div>
 
-            <div style="display: flex; gap: 0.4rem;">
-              <button class="astryx-btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;" onclick="clearActiveAppLogs()">🗑️ Clear</button>
+            <div style="display: flex; gap: 0.3rem;">
+              <button class="astryx-btn btn-outline" id="logs-pause-scroll-btn" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;" onclick="toggleAutoScrollPause()">⏸️ Pause Scroll</button>
+              <button class="astryx-btn btn-outline" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;" onclick="downloadRawLogs()">💾 Download</button>
+              <button class="astryx-btn btn-outline" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;" onclick="clearActiveAppLogs()">🗑️ Clear</button>
             </div>
           </div>
           <div class="terminal-window" id="full-terminal" style="height: 440px;"></div>
@@ -269,7 +299,10 @@ export function renderDashboardHtml(): string {
               <h2 style="font-size: 1.25rem; margin-bottom: 0.2rem;">📈 Real-time Traffic & Latency Benchmarks</h2>
               <p style="color: var(--forge-text-muted); font-size: 0.82rem;">Autocannon high-frequency stress tester (&lt;2ms target).</p>
             </div>
-            <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.85rem;" onclick="runLatencyBenchmark()">🚀 1-Click Latency Benchmark</button>
+            <div style="display: flex; gap: 0.4rem;">
+              <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem;" onclick="exportTrafficCsv()">📥 Export CSV</button>
+              <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.85rem;" onclick="runLatencyBenchmark()">🚀 1-Click Latency Benchmark</button>
+            </div>
           </div>
           <div id="benchmark-scorecard" style="margin-top: 0.75rem;"></div>
         </div>
@@ -295,14 +328,74 @@ export function renderDashboardHtml(): string {
         </div>
       </section>
 
-      <!-- Tab 10: Settings & Audit -->
+      <!-- Tab 10: Settings & Tools -->
       <section id="tab-settings" class="tab-pane">
+        <div class="astryx-card" style="margin-bottom: 1rem;">
+          <h2 style="font-size: 1.25rem; margin-bottom: 0.35rem;">🛠️ Developer Diagnostics & Tools</h2>
+          <p style="color: var(--forge-text-muted); font-size: 0.82rem; margin-bottom: 0.85rem;">Platform configuration inspection and API exploration.</p>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.75rem;" onclick="openApiRegistryModal()">⚡ API Route Explorer & cURL</button>
+            <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.75rem;" onclick="openSafeEnvModal()">🔐 Masked Environment Inspector</button>
+            <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.75rem;" onclick="exportAuditCsv()">📥 Export Audit CSV</button>
+          </div>
+        </div>
         <div class="astryx-card">
           <h2 style="font-size: 1.25rem; margin-bottom: 0.85rem;">⚙️ Administrative Audit Logs</h2>
           <div class="astryx-table-wrap" id="audit-table-container">Loading audit logs...</div>
         </div>
       </section>
     </main>
+  </div>
+
+  <!-- Command Palette Modal (Cmd+K) -->
+  <div class="palette-modal-backdrop" id="cmd-palette-modal" onclick="if(event.target===this)closeCommandPalette()">
+    <div class="palette-box">
+      <div class="palette-input-wrap">
+        <span>🔍</span>
+        <input type="text" class="palette-input" id="palette-search-input" placeholder="Type a command or jump to tab... (↑↓ to select, Enter)" oninput="filterPaletteItems(this.value)">
+        <kbd style="font-size: 0.7rem; color: var(--forge-text-muted);">ESC</kbd>
+      </div>
+      <ul class="palette-list" id="palette-items-list"></ul>
+    </div>
+  </div>
+
+  <!-- DDL Schema Modal -->
+  <div class="astryx-modal-backdrop" id="ddl-schema-modal">
+    <div class="astryx-modal">
+      <div class="astryx-modal-header">
+        <h3 id="ddl-modal-title">Table DDL Schema</h3>
+        <button class="astryx-modal-close" onclick="closeDdlModal()">&times;</button>
+      </div>
+      <div class="astryx-modal-body">
+        <div class="schema-code-box" id="ddl-code-content">Loading schema DDL...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Safe Environment Modal -->
+  <div class="astryx-modal-backdrop" id="safe-env-modal">
+    <div class="astryx-modal">
+      <div class="astryx-modal-header">
+        <h3>🔐 Masked Environment Inspector</h3>
+        <button class="astryx-modal-close" onclick="closeSafeEnvModal()">&times;</button>
+      </div>
+      <div class="astryx-modal-body">
+        <div class="astryx-table-wrap" id="safe-env-table-container">Loading environment...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- API Registry Modal -->
+  <div class="astryx-modal-backdrop" id="api-registry-modal">
+    <div class="astryx-modal" style="max-width: 760px;">
+      <div class="astryx-modal-header">
+        <h3>⚡ API Route Explorer & cURL Generator</h3>
+        <button class="astryx-modal-close" onclick="closeApiRegistryModal()">&times;</button>
+      </div>
+      <div class="astryx-modal-body">
+        <div id="api-registry-container">Loading endpoints...</div>
+      </div>
+    </div>
   </div>
 
   <!-- Help & Architecture Explainer Modal -->
@@ -320,17 +413,6 @@ export function renderDashboardHtml(): string {
           <li><strong style="color: var(--forge-text-muted);">STOPPED:</strong> Service is halted or offline.</li>
           <li><strong style="color: var(--forge-primary);">STARTING:</strong> Service runtime is booting or executing migrations.</li>
         </ul>
-
-        <h4 style="color: var(--forge-primary); margin-bottom: 0.4rem;">Lifecycle Actions</h4>
-        <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
-          <li><strong>Restart:</strong> Gracefully recycles the Bun watch process or Docker container.</li>
-          <li><strong>Stop:</strong> Suspends the process/container to conserve compute resources.</li>
-          <li><strong>Start:</strong> Launches the container/process on its assigned port.</li>
-          <li><strong>Logs:</strong> Opens a dedicated live log inspector for that app only.</li>
-        </ul>
-
-        <h4 style="color: var(--forge-primary); margin-bottom: 0.4rem;">In-Table Sparklines</h4>
-        <p style="color: var(--forge-text-muted);">The rolling graphs show real-time 30-second CPU compute load (%) and active RAM allocation (MB) per micro-app.</p>
       </div>
     </div>
   </div>
@@ -371,4 +453,5 @@ export function renderDashboardHtml(): string {
 </body>
 </html>`;
 }
+
 

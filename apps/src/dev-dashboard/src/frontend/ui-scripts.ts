@@ -1,9 +1,5 @@
-/**
- * @forge/dev-dashboard - Client-Side Interactive SPA Engine (2026 LTS)
- * Strict Single Page Application (SPA) hash router, responsive drawer, SSE subscriber, and Vitals Cards.
- */
-
 import { getLogDashboardScripts } from './ui-log-scripts';
+import { getToolsDashboardScripts } from './ui-tools-scripts';
 
 export function getDashboardScripts(): string {
   return `
@@ -141,6 +137,7 @@ export function getDashboardScripts(): string {
     window.addEventListener('popstate', syncTabFromHash);
 
     ${getLogDashboardScripts()}
+    ${getToolsDashboardScripts()}
 
     function renderSparklineSvg(data, isArea) {
       if (!data || !data.length) return '';
@@ -262,47 +259,24 @@ export function getDashboardScripts(): string {
       } catch (err) { console.error('Apps load failed', err); }
     }
 
-    async function loadDatabases() {
-      try {
-        const res = await fetch(apiBase + '/api/db/list').then(r => r.json());
-        const s1 = document.getElementById('db-select'), s2 = document.getElementById('sql-db-select');
-        if (!res.databases) return;
-        const opts = res.databases.map(d => \`<option value="\${d.name}">\${d.name} (\${Math.round(d.sizeBytes/1024)} KB)</option>\`).join('');
-        if (s1) s1.innerHTML = opts;
-        if (s2) s2.innerHTML = opts;
-        if (res.databases[0]) inspectDatabase(res.databases[0].name);
-      } catch (err) { console.error('Databases load failed', err); }
-    }
-
-    async function inspectDatabase(dbName) {
-      try {
-        const res = await fetch(apiBase + '/api/db/query', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ dbName, sql: "SELECT name, type FROM sqlite_master WHERE type='table' ORDER BY name ASC;" })
-        }).then(r => r.json());
-        const c = document.getElementById('db-tables-view');
-        if (!c) return;
-        c.innerHTML = (res.rows && res.rows.length)
-          ? '<table class="data-table"><thead><tr><th>Table Name</th><th>Type</th></tr></thead><tbody>' +
-            res.rows.map(r => '<tr><td><strong>' + r.name + '</strong></td><td><code>' + r.type + '</code></td></tr>').join('') + '</tbody></table>'
-          : '<p style="color:var(--forge-text-muted);">No tables found in ' + dbName + '</p>';
-      } catch (err) { console.error('Inspect DB failed', err); }
-    }
-
-    async function optimizeCurrentDb() {
-      const dbName = document.getElementById('db-select').value;
-      const res = await fetch(apiBase + '/api/db/optimize', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ dbName })
+    async function runSqlQuery() {
+      const dbName = document.getElementById('sql-db-select').value;
+      const sql = document.getElementById('sql-query-input').value;
+      const readOnly = document.getElementById('sql-readonly-check').checked;
+      const res = await fetch(apiBase + '/api/db/query', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ dbName, sql, readOnly })
       }).then(r => r.json());
-      alert(res.message);
-    }
-
-    async function backupCurrentDb() {
-      const dbName = document.getElementById('db-select').value;
-      const res = await fetch(apiBase + '/api/db/backup', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ dbName })
-      }).then(r => r.json());
-      alert(res.message);
+      const c = document.getElementById('sql-result-container');
+      if (res.error) {
+        c.innerHTML = '<div style="color:var(--forge-accent); background:var(--forge-bg-elevated); border:1px solid var(--forge-border); padding:0.65rem; border-radius:var(--forge-radius-sm); margin-top:0.65rem;"><strong>Error:</strong> ' + res.error + '</div>';
+        return;
+      }
+      let html = '<div style="margin:0.65rem 0; font-size:0.78rem; color:var(--forge-success);">Query executed in ' + res.durationMs + 'ms (' + (res.rows ? res.rows.length : res.affectedRows || 0) + ' rows)</div>';
+      if (res.rows && res.rows.length) {
+        html += '<div class="astryx-table-wrap"><table class="data-table"><thead><tr>' + res.columns.map(c => '<th>' + c + '</th>').join('') + '</tr></thead><tbody>' +
+          res.rows.map(r => '<tr>' + res.columns.map(c => '<td>' + String(r[c] !== null ? r[c] : '') + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>';
+      }
+      c.innerHTML = html;
     }
 
     async function runLatencyBenchmark() {
@@ -328,26 +302,6 @@ export function getDashboardScripts(): string {
       } catch (err) {
         if (scorecard) scorecard.innerHTML = '<div style="color:var(--forge-accent);">Benchmark failed.</div>';
       }
-    }
-
-    async function runSqlQuery() {
-      const dbName = document.getElementById('sql-db-select').value;
-      const sql = document.getElementById('sql-query-input').value;
-      const readOnly = document.getElementById('sql-readonly-check').checked;
-      const res = await fetch(apiBase + '/api/db/query', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ dbName, sql, readOnly })
-      }).then(r => r.json());
-      const c = document.getElementById('sql-result-container');
-      if (res.error) {
-        c.innerHTML = '<div style="color:var(--forge-accent); background:var(--forge-bg-elevated); border:1px solid var(--forge-border); padding:0.65rem; border-radius:var(--forge-radius-sm); margin-top:0.65rem;"><strong>Error:</strong> ' + res.error + '</div>';
-        return;
-      }
-      let html = '<div style="margin:0.65rem 0; font-size:0.78rem; color:var(--forge-success);">Query executed in ' + res.durationMs + 'ms (' + (res.rows ? res.rows.length : res.affectedRows || 0) + ' rows)</div>';
-      if (res.rows && res.rows.length) {
-        html += '<div class="astryx-table-wrap"><table class="data-table"><thead><tr>' + res.columns.map(c => '<th>' + c + '</th>').join('') + '</tr></thead><tbody>' +
-          res.rows.map(r => '<tr>' + res.columns.map(c => '<td>' + String(r[c] !== null ? r[c] : '') + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>';
-      }
-      c.innerHTML = html;
     }
 
     async function loadTraffic() {
@@ -402,7 +356,7 @@ export function getDashboardScripts(): string {
     initWatchdogAndSSE();
     syncTabFromHash();
 
-    // ⏱️ Real-Time 1.5-Second Throttled Live Polling Engine (Pauses when tab hidden)
+    // ⏱️ Real-Time 1.5-Second Throttled Live Polling Engine
     setInterval(() => {
       if (document.hidden) return;
       const tab = window.location.hash.replace('#', '') || 'overview';
@@ -413,3 +367,5 @@ export function getDashboardScripts(): string {
     }, 1500);
   `;
 }
+
+

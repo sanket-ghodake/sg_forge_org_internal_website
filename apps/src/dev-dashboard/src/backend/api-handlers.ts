@@ -1,9 +1,4 @@
-/**
- * @forge/dev-dashboard - REST & SSE API Route Handlers (2026 LTS)
- * High-performance JSON endpoints & SSE event streams for Developer Dashboard.
- * Google SRE & Meta Astryx Enterprise Baseline
- */
-
+import { loadServiceRegistry, redactSensitiveData } from '@forge/sdk';
 import { platformDb } from '../db';
 import { servicesController } from './services-controller';
 import { telemetryEngine } from './telemetry';
@@ -48,7 +43,7 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
     return Response.json({ error: 'Invalid log payload' }, { status: 400 });
   }
 
-  // 1c. Fetch Recent Logs Filtered by Service / Source / Level
+  // 1c. Fetch Recent Logs Filtered by Service / Source / Level / Search
   if (path === '/api/logs/recent' && req.method === 'GET') {
     const service = url.searchParams.get('service') || undefined;
     const source = url.searchParams.get('source') || undefined;
@@ -117,6 +112,35 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
     return Response.json({ status: 'ok', databases: dbs });
   }
 
+  // 7b. Table Schema & DDL
+  if (path === '/api/db/schema' && req.method === 'GET') {
+    const dbName = url.searchParams.get('db');
+    const table = url.searchParams.get('table');
+    if (!dbName || !table) return Response.json({ error: 'Missing db or table query param' }, { status: 400 });
+    const schema = platformDb.getTableSchema(dbName, table);
+    const ddl = platformDb.getTableDdl(dbName, table);
+    return Response.json({ status: 'ok', schema: schema.columns, ddl: ddl.ddl, indexes: ddl.indexes });
+  }
+
+  // 7c. Table Paginated Rows Browser
+  if (path === '/api/db/rows' && req.method === 'GET') {
+    const dbName = url.searchParams.get('db');
+    const table = url.searchParams.get('table');
+    const page = Number(url.searchParams.get('page') || 1);
+    const limit = Number(url.searchParams.get('limit') || 25);
+    if (!dbName || !table) return Response.json({ error: 'Missing db or table query param' }, { status: 400 });
+    const result = platformDb.getTableRows(dbName, table, page, limit);
+    return Response.json({ status: 'ok', ...result });
+  }
+
+  // 7d. Database Integrity Diagnostic
+  if (path === '/api/db/integrity' && req.method === 'POST') {
+    const body: any = await req.json().catch(() => ({}));
+    if (!body.dbName) return Response.json({ error: 'Missing dbName' }, { status: 400 });
+    const result = platformDb.runIntegrityCheck(body.dbName);
+    return Response.json({ status: 'ok', ...result });
+  }
+
   // 8. Execute SQL Query
   if (path === '/api/db/query' && req.method === 'POST') {
     const body: any = await req.json().catch(() => ({}));
@@ -128,27 +152,23 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
     return Response.json(result);
   }
 
-  // 9. Optimize Database (Auto-Vacuum & WAL Checkpoint)
+  // 9. Optimize Database
   if (path === '/api/db/optimize' && req.method === 'POST') {
     const body: any = await req.json().catch(() => ({}));
-    if (!body.dbName) {
-      return Response.json({ error: 'Missing dbName' }, { status: 400 });
-    }
+    if (!body.dbName) return Response.json({ error: 'Missing dbName' }, { status: 400 });
     const result = platformDb.optimizeDatabase(body.dbName);
     return Response.json(result);
   }
 
-  // 10. Snapshot & Backup Database
+  // 10. Snapshot Database
   if (path === '/api/db/backup' && req.method === 'POST') {
     const body: any = await req.json().catch(() => ({}));
-    if (!body.dbName) {
-      return Response.json({ error: 'Missing dbName' }, { status: 400 });
-    }
+    if (!body.dbName) return Response.json({ error: 'Missing dbName' }, { status: 400 });
     const result = platformDb.backupDatabase(body.dbName);
     return Response.json(result);
   }
 
-  // 11. 1-Click HTTP Latency Benchmark
+  // 11. Latency Benchmark
   if (path === '/api/benchmark' && req.method === 'POST') {
     const start = performance.now();
     const latencies: number[] = [];
@@ -183,17 +203,91 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
     return Response.json({ status: 'ok', events });
   }
 
-  // 11. RFC 7807 Issues & Incident Reports
+  // 13. RFC 7807 Issues & Incident Reports
   if (path === '/api/issues' && req.method === 'GET') {
     const issues = platformDb.getIssues(50);
     return Response.json({ status: 'ok', issues });
   }
 
-  // 12. Administrative Audit Logs
+  // 14. Administrative Audit Logs
   if (path === '/api/audit' && req.method === 'GET') {
     const logs = platformDb.getAuditLogs(50);
     return Response.json({ status: 'ok', logs });
   }
 
+  // 15. Microservice Route & API Registry
+  if (path === '/api/routes/registry' && req.method === 'GET') {
+    const registry = loadServiceRegistry();
+    const endpoints = registry.map((s) => ({
+      serviceId: s.id,
+      name: s.name,
+      port: s.port,
+      path: s.path,
+      category: s.category,
+      healthUrl: `http://localhost:${s.port}/health`,
+      sampleRoutes: [
+        { method: 'GET', path: `${s.path}` },
+        { method: 'GET', path: `http://localhost:${s.port}/health` },
+        { method: 'GET', path: `http://localhost:${s.port}/livez` },
+        { method: 'GET', path: `http://localhost:${s.port}/readyz` },
+      ],
+    }));
+    return Response.json({ status: 'ok', endpoints });
+  }
+
+  // 16. Masked & Safe Environment Config Inspector
+  if (path === '/api/env/safe' && req.method === 'GET') {
+    const safeEnv: Record<string, string> = {};
+    for (const [k, v] of Object.entries(process.env)) {
+      if (!v) continue;
+      const lower = k.toLowerCase();
+      if (
+        lower.includes('secret') ||
+        lower.includes('key') ||
+        lower.includes('token') ||
+        lower.includes('pass') ||
+        lower.includes('auth') ||
+        lower.includes('cred')
+      ) {
+        safeEnv[k] = '••••••••••••••••';
+      } else {
+        safeEnv[k] = v;
+      }
+    }
+    return Response.json({ status: 'ok', env: safeEnv });
+  }
+
+  // 17. CSV Export Streamer
+  if (path === '/api/export/csv' && req.method === 'GET') {
+    const type = url.searchParams.get('type') || 'traffic';
+    const dbName = url.searchParams.get('db') || 'platform_core.db';
+    const table = url.searchParams.get('table') || 'traffic_events';
+
+    let csvContent = '';
+    if (type === 'table') {
+      const rowsRes = platformDb.getTableRows(dbName, table, 1, 1000);
+      if (rowsRes.columns.length) {
+        csvContent += rowsRes.columns.join(',') + '\n';
+        csvContent += rowsRes.rows.map(r => rowsRes.columns.map(c => JSON.stringify(r[c] ?? '')).join(',')).join('\n');
+      }
+    } else if (type === 'traffic') {
+      const events = platformDb.getTrafficSummary(500);
+      csvContent = 'Timestamp,App,Path,Method,StatusCode,DurationMs\n' +
+        events.map(e => `${new Date(e.timestamp*1000).toISOString()},${e.app_id},"${e.path}",${e.method},${e.status_code},${e.duration_ms}`).join('\n');
+    } else if (type === 'audit') {
+      const logs = platformDb.getAuditLogs(500);
+      csvContent = 'Timestamp,Actor,Action,Target,Status\n' +
+        logs.map(l => `${new Date(l.timestamp*1000).toISOString()},${l.actor_id},${l.action_type},${l.target_service},${l.result_status}`).join('\n');
+    }
+
+    return new Response(csvContent, {
+      headers: {
+        'Content-Type': 'text/csv; charset=utf-8',
+        'Content-Disposition': `attachment; filename="${type}_export_${Date.now()}.csv"`,
+      },
+    });
+  }
+
   return null;
 }
+

@@ -9,6 +9,9 @@ export function getLogDashboardScripts(): string {
     let activeLogSource = 'all';
     let activeLogLevel = 'ALL';
     let modalActivePillar = 'all';
+    let logSearchFilter = '';
+    let isAutoScrollPaused = false;
+    let rawLogHistory = [];
     let lastSseEventTime = Date.now();
     let sseClient = null;
     const MAX_DOM_LOG_LINES = 250;
@@ -39,6 +42,8 @@ export function getLogDashboardScripts(): string {
           updateWatchdogUI('live', 'Live Stream');
           try {
             const log = JSON.parse(e.data);
+            rawLogHistory.push(log);
+            if (rawLogHistory.length > 500) rawLogHistory.shift();
             appendLogToTerminal(log);
             appendAppLogModalLine(log);
             updatePlainEnglishBanner(log);
@@ -65,11 +70,19 @@ export function getLogDashboardScripts(): string {
       if (activeLogApp !== 'all' && l.service !== activeLogApp) return;
       if (activeLogSource !== 'all' && (l.source || 'app') !== activeLogSource) return;
       if (activeLogLevel !== 'ALL' && l.level !== activeLogLevel) return;
+      if (logSearchFilter && !matchesSearch(l, logSearchFilter)) return;
 
       const fTerm = document.getElementById('full-terminal');
       const oTerm = document.getElementById('overview-terminal');
       if (fTerm) renderSingleRowToDOM(fTerm, l);
       if (oTerm) renderSingleRowToDOM(oTerm, l);
+    }
+
+    function matchesSearch(l, term) {
+      const q = term.toLowerCase();
+      return (l.message || '').toLowerCase().includes(q) ||
+        (l.service || '').toLowerCase().includes(q) ||
+        (l.traceId || '').toLowerCase().includes(q);
     }
 
     function renderSingleRowToDOM(container, l) {
@@ -83,19 +96,56 @@ export function getLogDashboardScripts(): string {
       const timeStr = l.timestamp ? l.timestamp.slice(11, 19) : new Date().toTimeString().slice(0, 8);
       const lvlClass = 'log-lvl-' + (l.level || 'info').toLowerCase();
       const srcText = l.source ? l.source.toUpperCase() : 'APP';
+      const traceBadge = l.traceId ? ' <span class="log-trace-tag" onclick="filterByTraceId(\\'' + l.traceId + '\\')" title="Filter all pillars by this trace ID">#' + l.traceId.slice(0, 8) + '</span>' : '';
 
       row.innerHTML = '<span class="log-ts">[' + timeStr + ']</span> ' +
         '<span class="' + lvlClass + '">[' + (l.level || 'INFO') + ']</span> ' +
         '<span class="log-svc">(' + l.service + ')</span> ' +
-        '<span class="log-source">' + srcText + '</span> ' +
+        '<span class="log-source">' + srcText + '</span>' +
+        traceBadge + ' ' +
         '<span class="log-msg">' + escapeHtml(l.message || '') + '</span>';
 
       container.appendChild(row);
-      container.scrollTop = container.scrollHeight;
+      if (!isAutoScrollPaused) {
+        container.scrollTop = container.scrollHeight;
+      }
     }
 
     function escapeHtml(str) {
       return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function onLogSearchChange(val) {
+      logSearchFilter = (val || '').trim();
+      loadActiveTabLogs();
+    }
+
+    function filterByTraceId(traceId) {
+      const searchInput = document.getElementById('logs-search-input');
+      if (searchInput) {
+        searchInput.value = traceId;
+        logSearchFilter = traceId;
+        switchTab('logs');
+        loadActiveTabLogs();
+      }
+    }
+
+    function toggleAutoScrollPause() {
+      isAutoScrollPaused = !isAutoScrollPaused;
+      const btn = document.getElementById('logs-pause-scroll-btn');
+      if (btn) {
+        btn.textContent = isAutoScrollPaused ? '▶️ Resume Scroll' : '⏸️ Pause Scroll';
+        btn.className = isAutoScrollPaused ? 'astryx-btn btn-primary' : 'astryx-btn btn-outline';
+      }
+    }
+
+    function downloadRawLogs() {
+      const text = rawLogHistory.map(l => \`[\${l.timestamp}] [\${l.level}] (\${l.service}) [\${l.source}] \${l.message} \${l.traceId ? '#'+l.traceId : ''}\`).join('\\n');
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = \`logs_\${activeLogApp}_\${Date.now()}.log\`;
+      a.click();
     }
 
     function updatePlainEnglishBanner(l) {
@@ -133,7 +183,13 @@ export function getLogDashboardScripts(): string {
         const res = await fetch(url).then(r => r.json());
         term.innerHTML = '';
         if (res.logs && res.logs.length) {
-          res.logs.forEach(l => renderSingleRowToDOM(term, l));
+          rawLogHistory = res.logs;
+          const filtered = logSearchFilter ? res.logs.filter(l => matchesSearch(l, logSearchFilter)) : res.logs;
+          if (filtered.length) {
+            filtered.forEach(l => renderSingleRowToDOM(term, l));
+          } else {
+            term.innerHTML = '<div style="color:var(--forge-text-muted); padding:0.5rem;">Zero logs matching search filter: "' + escapeHtml(logSearchFilter) + '"</div>';
+          }
         } else {
           term.innerHTML = '<div style="color:var(--forge-text-muted); padding:0.5rem;">Zero matching log entries found.</div>';
         }
@@ -247,3 +303,4 @@ export function getLogDashboardScripts(): string {
     function closeHelpModal() { document.getElementById('help-modal')?.classList.remove('open'); }
   `;
 }
+
