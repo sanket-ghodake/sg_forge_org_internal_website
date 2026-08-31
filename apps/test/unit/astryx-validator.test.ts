@@ -45,4 +45,30 @@ describe('Meta Astryx UI Validator & Token Governance Engine', () => {
     expect(css).toContain('--forge-text-muted');
     expect(css).toContain('--forge-transition');
   });
+
+  it('guarantees custom Astryx scrollbars, dropdowns, modals, and toasts in UI styles', () => {
+    // Arrange & Act
+    const { getAstryxStyles, getAstryxToastScript } = require('../../src/ui/src/index');
+    const css = getAstryxStyles();
+    const toastScript = getAstryxToastScript();
+
+    // Assert - Custom Scrollbars
+    expect(css).toContain('scrollbar-width: thin');
+    expect(css).toContain('::-webkit-scrollbar');
+    expect(css).toContain('::-webkit-scrollbar-thumb');
+
+    // Assert - Custom Dropdowns / Selects
+    expect(css).toContain('appearance: none');
+    expect(css).toContain('astryx-select');
+
+    // Assert - Universal Modals & Popups
+    expect(css).toContain('astryx-modal-backdrop');
+    expect(css).toContain('astryx-modal');
+    expect(css).toContain('backdrop-filter: blur');
+
+    // Assert - Toast Notification System
+    expect(css).toContain('astryx-toast-container');
+    expect(css).toContain('astryx-toast');
+    expect(toastScript).toContain('window.astryxToast');
+  });
 });

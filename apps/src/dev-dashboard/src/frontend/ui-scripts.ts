@@ -1,8 +1,12 @@
 import { getLogDashboardScripts } from './ui-log-scripts';
 import { getToolsDashboardScripts } from './ui-tools-scripts';
+import { getServicesDashboardScripts } from './ui-services-scripts';
+import { getAstryxToastScript } from '@forge/ui';
 
 export function getDashboardScripts(): string {
   return `
+    ${getAstryxToastScript()}
+
     const apiBase = window.location.pathname.startsWith('/devcenter') ? '/devcenter' : '';
     let currentAppLogService = null;
     let appLogBuffer = [];
@@ -87,7 +91,28 @@ export function getDashboardScripts(): string {
     const menuBtn = document.getElementById('mobile-menu-toggle');
     if (menuBtn) menuBtn.addEventListener('click', () => toggleMobileSidebar());
 
+    const mainSidebar = document.getElementById('main-sidebar');
+    if (mainSidebar) {
+      mainSidebar.addEventListener('mouseleave', () => {
+        if (document.activeElement && mainSidebar.contains(document.activeElement) && typeof document.activeElement.blur === 'function') {
+          document.activeElement.blur();
+        }
+      });
+    }
+
     const TAB_KEY = 'forge:v1:devcenter:active-tab';
+    const TAB_TITLES = {
+      overview: 'Overview',
+      services: 'Services & Processes',
+      apps: 'Forge Apps',
+      database: 'Turso DB Explorer',
+      sql: 'SQL Playground',
+      logs: 'Isolated App Logs',
+      traffic: 'Traffic Analytics',
+      issues: 'Issue Center',
+      host: 'Host & Cloud',
+      settings: 'Settings & Tools'
+    };
 
     function switchTab(tabId, updateUrl = true) {
       document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
@@ -99,6 +124,15 @@ export function getDashboardScripts(): string {
       document.querySelectorAll('.sb-nav-item').forEach(n => {
         if (n.dataset.tab === tabId) n.classList.add('active');
       });
+
+      if (document.activeElement && mainSidebar && mainSidebar.contains(document.activeElement) && typeof document.activeElement.blur === 'function') {
+        document.activeElement.blur();
+      }
+
+      const breadcrumbEl = document.getElementById('breadcrumb-title');
+      if (breadcrumbEl && TAB_TITLES[tabId]) {
+        breadcrumbEl.textContent = TAB_TITLES[tabId];
+      }
 
       if (updateUrl && window.location.hash !== '#' + tabId) {
         history.pushState(null, '', '#' + tabId);
@@ -138,6 +172,7 @@ export function getDashboardScripts(): string {
 
     ${getLogDashboardScripts()}
     ${getToolsDashboardScripts()}
+    ${getServicesDashboardScripts()}
 
     function renderSparklineSvg(data, isArea) {
       if (!data || !data.length) return '';
@@ -167,76 +202,6 @@ export function getDashboardScripts(): string {
             </div>
           </div>\`).join('');
       } catch (err) { console.error('Topology load failed', err); }
-    }
-
-    async function loadServices() {
-      try {
-        const res = await fetch(apiBase + '/api/services').then(r => r.json());
-        if (!res) return;
-        const summary = res.summary, cards = document.getElementById('services-vitals-cards');
-        if (cards && summary) {
-          const storageMb = (summary.storageSizeBytes / (1024 * 1024)).toFixed(1);
-          cards.innerHTML = \`
-            <div class="vitals-card">
-              <div class="vitals-header"><span class="vitals-title">Service Fleet Health</span><span class="astryx-badge badge-running"><span class="badge-dot"></span> Active</span></div>
-              <div class="vitals-value">\${summary.onlineCount} / \${summary.totalServices} <span style="font-size:0.85rem; font-weight:500; color:var(--forge-primary);">Running</span></div>
-              <div class="vitals-subtext"><span>\${summary.sloAvailabilityPercent}% Availability</span><span style="color:var(--forge-primary); font-weight:600;">100% SLO</span></div>
-            </div>
-            <div class="vitals-card">
-              <div class="vitals-header"><span class="vitals-title">CPU Utilization</span><span class="astryx-badge badge-pill">\${summary.cpuCores} Cores</span></div>
-              <div class="vitals-value">\${summary.avgCpuPercent}% <span style="font-size:0.8rem; font-weight:500; color:var(--forge-text-muted);">Avg Load</span></div>
-              <div class="vitals-bar-container"><div class="vitals-bar-fill" style="width:\${Math.min(summary.avgCpuPercent, 100)}%;"></div></div>
-            </div>
-            <div class="vitals-card">
-              <div class="vitals-header"><span class="vitals-title">Memory Allocation</span><span class="astryx-badge badge-pill">RAM Pool</span></div>
-              <div class="vitals-value">\${summary.totalAllocatedRamMb} MB <span style="font-size:0.8rem; font-weight:500; color:var(--forge-text-muted);">/ \${summary.maxAllocatedRamMb} MB</span></div>
-              <div class="vitals-bar-container"><div class="vitals-bar-fill" style="width:\${Math.min((summary.totalAllocatedRamMb / summary.maxAllocatedRamMb) * 100, 100)}%;"></div></div>
-            </div>
-            <div class="vitals-card">
-              <div class="vitals-header"><span class="vitals-title">Storage & DB Quota</span><span class="astryx-badge badge-running">\${summary.autoVacuum}</span></div>
-              <div class="vitals-value">\${storageMb} MB <span style="font-size:0.8rem; font-weight:500; color:var(--forge-text-muted);">/ \${summary.storageQuotaMb} MB Cap</span></div>
-              <div class="vitals-subtext"><span>\${summary.tursoDbsCount} Turso Databases</span><span style="color:var(--forge-primary); font-weight:600;">WAL Enabled</span></div>
-            </div>\`;
-        }
-
-        const tbody = document.getElementById('services-tbody');
-        if (tbody && res.services) {
-          tbody.innerHTML = res.services.map(s => {
-            const latClass = s.latencyMs < 5 ? 'latency-fast' : s.latencyMs < 50 ? 'latency-medium' : 'latency-slow';
-            const sBadge = s.status === 'RUNNING' ? '<span class="astryx-badge badge-running"><span class="badge-dot"></span> RUNNING</span>' :
-              s.status === 'STOPPED' ? '<span class="astryx-badge badge-stopped">STOPPED</span>' :
-              s.status === 'DEGRADED' ? '<span class="astryx-badge badge-degraded">DEGRADED</span>' : '<span class="astryx-badge badge-starting">STARTING</span>';
-            const actions = s.status === 'RUNNING'
-              ? \`<button class="astryx-btn btn-outline" style="padding:0.2rem 0.45rem; font-size:0.72rem;" onclick="restartService('\${s.id}')">🔄 Restart</button>
-                 <button class="astryx-btn btn-outline" style="padding:0.2rem 0.45rem; font-size:0.72rem;" onclick="toggleServiceState('\${s.id}','stop')">🛑 Stop</button>\`
-              : \`<button class="astryx-btn btn-primary" style="padding:0.2rem 0.55rem; font-size:0.72rem;" onclick="toggleServiceState('\${s.id}','start')">▶️ Start</button>\`;
-
-            return \`
-              <tr>
-                <td>\${sBadge}</td>
-                <td><strong>\${s.name}</strong> <span style="color:var(--forge-text-subtle); font-size:0.75rem;">(\${s.id})</span></td>
-                <td><div class="sparkline-cell"><span style="min-width:32px; font-weight:600;">\${s.cpuPercent}%</span>\${renderSparklineSvg(s.cpuSparkline, false)}</div></td>
-                <td><div class="sparkline-cell"><span style="min-width:48px; font-weight:600;">\${s.memoryMb} MB</span>\${renderSparklineSvg(s.ramSparkline, true)}</div></td>
-                <td><span class="latency-pill \${latClass}">\${s.latencyMs}ms</span></td>
-                <td><code>\${s.port}</code></td>
-                <td><code>\${s.ingressPath}</code></td>
-                <td><div style="display:flex; gap:0.3rem;">\${actions}<button class="astryx-btn btn-outline" style="padding:0.2rem 0.45rem; font-size:0.72rem;" onclick="openAppLogsModal('\${s.id}','\${s.name}','\${s.port}','\${s.ingressPath}')">📜 Logs</button></div></td>
-              </tr>\`;
-          }).join('');
-        }
-      } catch (err) { console.error('Services load failed', err); }
-    }
-
-    async function restartService(id) {
-      await fetch(apiBase + '/api/services/restart', { method: 'POST', body: JSON.stringify({ serviceId: id }) });
-      loadServices();
-      loadTopology();
-    }
-
-    async function toggleServiceState(id, state) {
-      await fetch(apiBase + '/api/services/toggle', { method: 'POST', body: JSON.stringify({ serviceId: id, state }) });
-      loadServices();
-      loadTopology();
     }
 
     async function loadApps() {

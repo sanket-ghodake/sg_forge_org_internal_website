@@ -99,8 +99,8 @@ export function validateAstryx(): { valid: boolean; violations: string[]; fileCo
   for (const file of files) {
     const rel = relative(CWD, file);
 
-    // Skip the canonical token definition module itself
-    if (rel === 'apps/src/ui/src/index.ts') continue;
+    // Skip the canonical token and stylesheet definition modules inside @forge/ui
+    if (rel.startsWith('apps/src/ui/src/')) continue;
 
     const content = readFileSync(file, "utf8");
     const lines = content.split("\n");
@@ -112,12 +112,21 @@ export function validateAstryx(): { valid: boolean; violations: string[]; fileCo
       }
     }
 
-    // 2. Scan Lines for Unapproved Raw Colors or CSS Framework Drifts
+    // 2. Scan Lines for Unapproved Raw Colors, CSS Framework Drifts, and Forbidden Browser Popups
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
       // Skip comment lines
       const trimmed = line.trim();
       if (trimmed.startsWith("//") || trimmed.startsWith("*") || trimmed.startsWith("/*")) continue;
+
+      // Check for forbidden native alert(), confirm(), prompt() in frontend code (excluding tests)
+      if (!file.includes('/test/') && !file.includes('.test.')) {
+        if (/\b(alert|confirm|prompt)\s*\(/i.test(line) && !line.includes('window.astryxToast') && !line.includes('auth-alert')) {
+          violations.push(
+            `${rel}:${i + 1}: Forbidden native browser dialog '${line.trim()}' found. Use Meta Astryx Toasts ('window.astryxToast') or Astryx Modals.`
+          );
+        }
+      }
 
       // Check for raw unapproved hex colors in CSS/styling strings (ignoring SVG icon color fallbacks if explicitly styled)
       const matches = line.match(rawHexPattern);

@@ -25,17 +25,32 @@ export function renderDashboardHtml(): string {
         <span class="astryx-logo-badge">SG</span>
         <span>SG FORGE</span>
       </a>
+      <div class="sb-header-divider"></div>
+      <div class="sb-header-breadcrumb" id="header-active-view">
+        <span class="breadcrumb-dot"></span>
+        <span id="breadcrumb-title">Overview</span>
+      </div>
+    </div>
+
+    <div class="sb-header-center">
+      <div class="sb-quick-find-bar" id="cmd-palette-btn" title="Open Command Palette (Cmd+K)" onclick="openCommandPalette()">
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span>Quick Find & Navigate...</span>
+        </div>
+        <kbd class="sb-hotkey-badge" style="opacity: 1; transform: none;">⌘K</kbd>
+      </div>
     </div>
 
     <div class="sb-header-right">
-      <!-- Global Command Palette Trigger -->
-      <div class="watchdog-pill" id="cmd-palette-btn" title="Open Command Palette (Cmd+K)" onclick="openCommandPalette()">
-        <span style="color: var(--forge-text-muted);">Quick Find</span>
-        <kbd style="background: var(--forge-bg-elevated); padding: 1px 5px; border-radius: 3px; font-size: 0.68rem; border: 1px solid var(--forge-border);">⌘K</kbd>
-      </div>
+      <!-- 1-Click Latency Benchmark -->
+      <button class="astryx-btn btn-outline" style="padding: 0.22rem 0.55rem; font-size: 0.72rem; gap: 0.35rem;" onclick="runFleetBenchmark()" title="Run 1-Click Service Latency Benchmark">
+        <span>⚡</span>
+        <span style="display: inline-block;">Benchmark</span>
+      </button>
 
       <!-- Heartbeat & Connection Watchdog -->
-      <div class="watchdog-pill" id="dashboard-watchdog" title="Live SSE telemetry stream status" onclick="reconnectSSE()">
+      <div class="watchdog-pill" id="dashboard-watchdog" title="Live SSE telemetry stream status (click to reconnect)" onclick="reconnectSSE()">
         <span class="watchdog-dot live" id="watchdog-dot"></span>
         <span id="watchdog-text">Live Stream</span>
       </div>
@@ -65,45 +80,29 @@ export function renderDashboardHtml(): string {
     <div class="sb-sidebar-backdrop" id="sidebar-backdrop" onclick="toggleMobileSidebar(false)"></div>
 
     <aside class="sb-sidebar" id="main-sidebar" aria-label="Main Navigation">
-      <div class="sb-nav-item active" data-tab="overview" onclick="switchTab('overview')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('overview')" title="Overview (1)" tabindex="0" role="button">
-        <span class="sb-nav-icon">📊</span>
-        <span class="sb-nav-label">Overview</span>
-      </div>
-      <div class="sb-nav-item" data-tab="services" onclick="switchTab('services')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('services')" title="Services & Processes (2)" tabindex="0" role="button">
-        <span class="sb-nav-icon">⚡</span>
-        <span class="sb-nav-label">Services & Processes</span>
-      </div>
-      <div class="sb-nav-item" data-tab="apps" onclick="switchTab('apps')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('apps')" title="Forge Apps (3)" tabindex="0" role="button">
-        <span class="sb-nav-icon">🧩</span>
-        <span class="sb-nav-label">Forge Apps</span>
-      </div>
-      <div class="sb-nav-item" data-tab="database" onclick="switchTab('database')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('database')" title="Turso DB Explorer (4)" tabindex="0" role="button">
-        <span class="sb-nav-icon">🗄️</span>
-        <span class="sb-nav-label">Turso DB Explorer</span>
-      </div>
-      <div class="sb-nav-item" data-tab="sql" onclick="switchTab('sql')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('sql')" title="SQL Playground (5)" tabindex="0" role="button">
-        <span class="sb-nav-icon">💻</span>
-        <span class="sb-nav-label">SQL Playground</span>
-      </div>
-      <div class="sb-nav-item" data-tab="logs" onclick="switchTab('logs')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('logs')" title="Isolated App Logs (6)" tabindex="0" role="button">
-        <span class="sb-nav-icon">📜</span>
-        <span class="sb-nav-label">Isolated App Logs</span>
-      </div>
-      <div class="sb-nav-item" data-tab="traffic" onclick="switchTab('traffic')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('traffic')" title="Traffic Analytics (7)" tabindex="0" role="button">
-        <span class="sb-nav-icon">📈</span>
-        <span class="sb-nav-label">Traffic Analytics</span>
-      </div>
-      <div class="sb-nav-item" data-tab="issues" onclick="switchTab('issues')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('issues')" title="Issue Center (8)" tabindex="0" role="button">
-        <span class="sb-nav-icon">⚠️</span>
-        <span class="sb-nav-label">Issue Center</span>
-      </div>
-      <div class="sb-nav-item" data-tab="host" onclick="switchTab('host')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('host')" title="Host & Cloud (9)" tabindex="0" role="button">
-        <span class="sb-nav-icon">☁️</span>
-        <span class="sb-nav-label">Host & Cloud</span>
-      </div>
-      <div class="sb-nav-item" data-tab="settings" onclick="switchTab('settings')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('settings')" title="Settings & Tools (0)" tabindex="0" role="button">
-        <span class="sb-nav-icon">⚙️</span>
-        <span class="sb-nav-label">Settings & Tools</span>
+      <div class="sb-nav-section-label">Monitoring</div>
+      <div class="sb-nav-item active" data-tab="overview" onclick="switchTab('overview')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('overview')" title="Overview" tabindex="0" role="button"><span class="sb-nav-icon">📊</span><span class="sb-nav-label">Overview</span></div>
+      <div class="sb-nav-item" data-tab="services" onclick="switchTab('services')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('services')" title="Services & Processes" tabindex="0" role="button"><span class="sb-nav-icon">⚡</span><span class="sb-nav-label">Services & Processes</span></div>
+      <div class="sb-nav-item" data-tab="apps" onclick="switchTab('apps')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('apps')" title="Forge Apps" tabindex="0" role="button"><span class="sb-nav-icon">🧩</span><span class="sb-nav-label">Forge Apps</span></div>
+      <div class="sb-nav-item" data-tab="traffic" onclick="switchTab('traffic')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('traffic')" title="Traffic Analytics" tabindex="0" role="button"><span class="sb-nav-icon">📈</span><span class="sb-nav-label">Traffic Analytics</span></div>
+
+      <div class="sb-nav-section-label">Data & Storage</div>
+      <div class="sb-nav-item" data-tab="database" onclick="switchTab('database')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('database')" title="Turso DB Explorer" tabindex="0" role="button"><span class="sb-nav-icon">🗄️</span><span class="sb-nav-label">Turso DB Explorer</span></div>
+      <div class="sb-nav-item" data-tab="sql" onclick="switchTab('sql')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('sql')" title="SQL Playground" tabindex="0" role="button"><span class="sb-nav-icon">💻</span><span class="sb-nav-label">SQL Playground</span></div>
+
+      <div class="sb-nav-section-label">Observability</div>
+      <div class="sb-nav-item" data-tab="logs" onclick="switchTab('logs')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('logs')" title="Isolated App Logs" tabindex="0" role="button"><span class="sb-nav-icon">📜</span><span class="sb-nav-label">Isolated App Logs</span></div>
+      <div class="sb-nav-item" data-tab="issues" onclick="switchTab('issues')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('issues')" title="Issue Center" tabindex="0" role="button"><span class="sb-nav-icon">⚠️</span><span class="sb-nav-label">Issue Center</span></div>
+
+      <div class="sb-nav-section-label">Platform</div>
+      <div class="sb-nav-item" data-tab="host" onclick="switchTab('host')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('host')" title="Host & Cloud" tabindex="0" role="button"><span class="sb-nav-icon">☁️</span><span class="sb-nav-label">Host & Cloud</span></div>
+      <div class="sb-nav-item" data-tab="settings" onclick="switchTab('settings')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('settings')" title="Settings & Tools" tabindex="0" role="button"><span class="sb-nav-icon">⚙️</span><span class="sb-nav-label">Settings & Tools</span></div>
+
+      <div class="sb-sidebar-footer">
+        <div class="sb-footer-pill">
+          <span class="badge-dot" style="background: var(--forge-primary); width: 5px; height: 5px;"></span>
+          <span>Bun v1.3.14 • LTS</span>
+        </div>
       </div>
     </aside>
 
@@ -124,16 +123,20 @@ export function renderDashboardHtml(): string {
         </div>
       </section>
 
-      <!-- Tab 2: Services & Processes -->
+      <!-- Tab 2: Services & Processes Command Center (2026 GCP Standard) -->
       <section id="tab-services" class="tab-pane">
-        <div class="astryx-card" style="margin-bottom: 1.25rem;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="astryx-card" style="margin-bottom: 1rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
             <div>
-              <h2 style="font-size: 1.25rem; margin-bottom: 0.25rem; display: flex; align-items: center;">
+              <h2 style="font-size: 1.25rem; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.4rem;">
                 ⚡ Services & Processes Command Center
                 <button class="help-btn" onclick="openHelpModal()" title="Help & Architecture Explainer">?</button>
               </h2>
-              <p style="color: var(--forge-text-muted); font-size: 0.82rem;">Real-time operational status, CPU/RAM sparklines, and process lifecycle controls.</p>
+              <p style="color: var(--forge-text-muted); font-size: 0.82rem;">Real-time operational status, dual-probe latency, rolling sparklines, and flyout process inspector.</p>
+            </div>
+            <div style="display: flex; gap: 0.4rem; align-items: center;">
+              <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.7rem; font-size: 0.76rem;" onclick="runLatencyBenchmark()">🚀 Latency Benchmark</button>
+              <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.76rem;" onclick="rollingRestartFleet()">🔄 Restart Fleet</button>
             </div>
           </div>
         </div>
@@ -145,6 +148,19 @@ export function renderDashboardHtml(): string {
           <div class="vitals-card"><div class="vitals-title">Loading Storage & DB Quota...</div></div>
         </div>
 
+        <div class="services-toolbar">
+          <div class="services-search-box">
+            <span>🔍</span>
+            <input type="text" id="services-search-input" placeholder="Search services by name, port, route..." oninput="filterServicesTable()">
+          </div>
+          <div class="filter-chip-group" id="services-filter-chips">
+            <button class="filter-chip active" data-filter="all" onclick="setServiceFilter('all')">All (<span id="count-all">0</span>)</button>
+            <button class="filter-chip" data-filter="running" onclick="setServiceFilter('running')">🟢 Running (<span id="count-running">0</span>)</button>
+            <button class="filter-chip" data-filter="stopped" onclick="setServiceFilter('stopped')">🔴 Stopped (<span id="count-stopped">0</span>)</button>
+            <button class="filter-chip" data-filter="fast" onclick="setServiceFilter('fast')">⚡ Fast &lt;5ms (<span id="count-fast">0</span>)</button>
+          </div>
+        </div>
+
         <div class="astryx-card">
           <div class="astryx-table-wrap">
             <table class="data-table">
@@ -152,12 +168,12 @@ export function renderDashboardHtml(): string {
                 <tr>
                   <th style="width: 110px;">Status</th>
                   <th>Service Name</th>
-                  <th style="width: 140px;">CPU Load</th>
-                  <th style="width: 150px;">RAM Usage</th>
-                  <th style="width: 80px;">Latency</th>
+                  <th style="width: 130px;">CPU Load</th>
+                  <th style="width: 140px;">RAM Usage</th>
+                  <th style="width: 90px;">Dual-Probe</th>
                   <th style="width: 70px;">Port</th>
                   <th>Route Ingress</th>
-                  <th style="width: 180px;">Actions</th>
+                  <th style="width: 200px; text-align: right;">Actions</th>
                 </tr>
               </thead>
               <tbody id="services-tbody"></tbody>
@@ -449,9 +465,23 @@ export function renderDashboardHtml(): string {
     </div>
   </div>
 
+  <!-- Option C: Slide-Out Service Inspector Drawer -->
+  <div class="service-drawer-backdrop" id="service-drawer-backdrop" onclick="closeServiceDrawer()"></div>
+  <aside class="service-drawer" id="service-drawer" aria-label="Service Details Inspector">
+    <div class="drawer-header">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.3rem;" id="drawer-svc-icon">⚡</span>
+        <div>
+          <h3 id="drawer-svc-name" style="margin: 0; font-size: 1rem; color: var(--forge-text-main);">Service Name</h3>
+          <span id="drawer-svc-meta" style="font-size: 0.75rem; color: var(--forge-text-muted);">Port: :3000 | Ingress: /</span>
+        </div>
+      </div>
+      <button class="astryx-modal-close" onclick="closeServiceDrawer()">&times;</button>
+    </div>
+    <div class="drawer-body" id="drawer-body-content"></div>
+  </aside>
+
   <script>${getDashboardScripts()}</script>
 </body>
 </html>`;
 }
-
-

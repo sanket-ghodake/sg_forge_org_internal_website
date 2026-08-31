@@ -49,3 +49,29 @@
 - NEVER expose raw technical stack traces or cryptic HTTP errors (502, 500) to the user.
 - Always provide clear, actionable, friendly messages with retry cues.
 - Multi-state buttons: *Idle* &rarr; *In-Flight (Spinner)* &rarr; *Success/Error confirmation*.
+
+### 8. Custom Astryx Scrollbars (Zero Browser/OS Defaults)
+- **NEVER** let default browser/OS scrollbars render.
+- **ALWAYS** enforce custom slim Astryx scrollbars (`::-webkit-scrollbar`, `scrollbar-width: thin`, `scrollbar-color`):
+  - Track: `var(--forge-bg-root)` or `transparent`.
+  - Thumb: `var(--forge-border-medium)` with rounded radius (`var(--forge-radius-full)`).
+  - Hover: `var(--forge-primary)`.
+  - High-density scrolling containers (terminals, log viewers, drawers, code blocks, tables) must look sleek and integrated with the dark/light theme.
+
+### 9. Modern Astryx Popups, Modals & Dialogs (Zero Native Dialogs)
+- **NEVER** use browser `window.confirm()`, `window.prompt()`, or unstyled native `<dialog>` elements.
+- **ALWAYS** use Meta Astryx modal primitives (`.astryx-modal-backdrop`, `.astryx-modal`, `.astryx-modal-header`, `.astryx-modal-body`, `.astryx-modal-footer`):
+  - Backdrop blur (`backdrop-filter: blur(12px)`) with semi-transparent dark overlay (`rgba(0, 0, 0, 0.75)`).
+  - Smooth enter/exit transition animations (`scale(0.96) -> scale(1)`, `opacity 0 -> 1`).
+  - Strict keyboard accessibility (`Escape` to close, click-outside-to-dismiss, autofocus management).
+
+### 10. Astryx Toast & Notification Engine (Zero Native alert())
+- **NEVER** use `window.alert()` or default browser notification alerts.
+- **ALWAYS** use modern Astryx Toast notifications (`.astryx-toast`, `.astryx-toast-container`, `window.astryxToast(msg, type)`):
+  - 4 status variants: Success (`--forge-success`), Error (`--forge-error` / `--forge-accent`), Warning (`--forge-warning`), Info (`--forge-primary`).
+  - Glassmorphic card styling, auto-dismiss timers, action buttons, and slide-in animations.
+
+### 11. Modern Astryx Dropdowns & Select Controls (Zero Native OS Menus)
+- **NEVER** leave `<select>` elements with unstyled default OS appearance or bright white OS option menus in dark mode.
+- **ALWAYS** style with `appearance: none`, custom SVG chevron arrow, `var(--forge-bg-surface)` / `var(--forge-bg-card)` options, `--forge-border` borders, and high-visibility `--forge-primary` focus rings.
+- For complex multi-selects or comboboxes, use Astryx dropdown menu primitives (`.astryx-dropdown`, `.astryx-dropdown-menu`, `.astryx-dropdown-item`).

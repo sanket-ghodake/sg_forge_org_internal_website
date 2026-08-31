@@ -99,7 +99,9 @@ export function getToolsDashboardScripts(): string {
       const res = await fetch(apiBase + '/api/db/integrity', {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ dbName })
       }).then(r => r.json());
-      alert(res.success ? '✅ Database integrity verified (0 errors).' : '⚠️ Integrity warnings: ' + JSON.stringify(res));
+      if (window.astryxToast) {
+        window.astryxToast(res.success ? 'Database integrity verified (0 errors).' : 'Integrity warnings: ' + JSON.stringify(res), res.success ? 'success' : 'warning');
+      }
     }
 
     async function optimizeCurrentDb() {
@@ -107,7 +109,9 @@ export function getToolsDashboardScripts(): string {
       const res = await fetch(apiBase + '/api/db/optimize', {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ dbName })
       }).then(r => r.json());
-      alert(res.message);
+      if (window.astryxToast) {
+        window.astryxToast(res.message, res.success ? 'success' : 'info');
+      }
     }
 
     async function backupCurrentDb() {
@@ -115,7 +119,9 @@ export function getToolsDashboardScripts(): string {
       const res = await fetch(apiBase + '/api/db/backup', {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ dbName })
       }).then(r => r.json());
-      alert(res.message);
+      if (window.astryxToast) {
+        window.astryxToast(res.message, res.success ? 'success' : 'info');
+      }
     }
 
     function exportCurrentTableCsv() {
@@ -204,7 +210,9 @@ export function getToolsDashboardScripts(): string {
     function copyCurlSnippet(path, port) {
       const target = path.startsWith('http') ? path : 'http://localhost:' + port + path;
       navigator.clipboard.writeText('curl -i ' + target);
-      alert('cURL command copied to clipboard: curl -i ' + target);
+      if (window.astryxToast) {
+        window.astryxToast('cURL command copied to clipboard: curl -i ' + target, 'info');
+      }
     }
 
     async function openApiRegistryModal() {
@@ -248,6 +256,7 @@ export function getToolsDashboardScripts(): string {
         closeApiRegistryModal();
         closeHelpModal();
         closeAppLogsModal();
+        if (typeof closeServiceDrawer === 'function') closeServiceDrawer();
       } else if (document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
         const tabMap = { '1': 'overview', '2': 'services', '3': 'apps', '4': 'database', '5': 'sql', '6': 'logs', '7': 'traffic', '8': 'issues', '9': 'host', '0': 'settings' };
         if (tabMap[e.key]) switchTab(tabMap[e.key]);
