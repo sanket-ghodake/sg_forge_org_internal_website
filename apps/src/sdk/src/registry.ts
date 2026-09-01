@@ -24,14 +24,19 @@ export interface ServiceEntry {
 function findEnvPath(explicitPath?: string): string | null {
   if (explicitPath && existsSync(explicitPath)) return explicitPath;
   let curr = process.cwd();
+  let exampleFallback: string | null = null;
   for (let i = 0; i < 4; i++) {
     const candidate = join(curr, '.env');
     if (existsSync(candidate)) return candidate;
+    if (!exampleFallback) {
+      const example = join(curr, '.env.example');
+      if (existsSync(example)) exampleFallback = example;
+    }
     const parent = join(curr, '..');
     if (parent === curr) break;
     curr = parent;
   }
-  return null;
+  return exampleFallback;
 }
 
 export function loadServiceRegistry(envPath?: string): ServiceEntry[] {

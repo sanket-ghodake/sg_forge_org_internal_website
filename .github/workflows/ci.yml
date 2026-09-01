@@ -29,6 +29,9 @@ jobs:
       - name: Install Dependencies
         run: bun install
 
+      - name: Setup Environment File
+        run: cp .env.example .env
+
       - name: TypeScript Type Safety Check (tsc)
         run: bunx tsc --noEmit
 

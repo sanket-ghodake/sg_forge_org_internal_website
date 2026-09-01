@@ -366,3 +366,5 @@
 2026-09-01 19:47 | [94e4b37] feat(devcenter): redesign Forge Apps command center with zero-flicker state routing and 5-tier testing (+2366, -136)
 2026-09-01 19:53 | Hardened precommit quality gate with TypeScript static compilation check and resolved all 15 deterministic checks
 2026-09-01 19:57 | [099aebd] fix(dev-dashboard): align telemetry log source and harden precommit verification gate (+13, -6)
+2026-09-01 20:04 | Added CI environment setup step and .env.example auto-fallback to guarantee green CI across clean runners
+2026-09-01 20:07 | [21feb9c] chore(ci): add env initialization step and registry fallback for clean runners (+10, -1)
