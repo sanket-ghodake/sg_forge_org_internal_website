@@ -139,11 +139,18 @@ export function getDbDashboardScripts(): string {
           opts += '</optgroup>';
         }
         s1.innerHTML = opts || '<option value="platform_core.db">platform_core.db</option>';
-        if (res.databases?.[0] && !res.databases.some(d => d.name === currentSelectedDb)) {
-          inspectDatabase(res.databases[0].name);
-        } else {
-          inspectDatabase(currentSelectedDb);
+
+        let targetDb = currentSelectedDb;
+        if (window._initialSelectedDb) {
+          const match = (res.databases || []).find(d => d.name === window._initialSelectedDb || d.name.includes(window._initialSelectedDb))
+            || (res.remoteDatabases || []).find(d => d.name === window._initialSelectedDb || d.displayName?.includes(window._initialSelectedDb));
+          if (match) targetDb = match.name;
+        } else if (res.databases?.[0] && !res.databases.some(d => d.name === targetDb)) {
+          targetDb = res.databases[0].name;
         }
+
+        s1.value = targetDb;
+        inspectDatabase(targetDb);
       } catch (err) { console.error('Databases load failed', err); }
     }
 

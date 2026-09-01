@@ -7,6 +7,9 @@ export function getClientScripts(): string {
   return `
     // Tab Navigation
     function switchTab(tabId) {
+      if (!tabId) tabId = 'overview';
+      try { document.documentElement.setAttribute('data-active-hub-tab', tabId); } catch(e) {}
+
       document.querySelectorAll('.hub-tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.hub-section').forEach(s => s.classList.remove('active'));
 
@@ -16,7 +19,9 @@ export function getClientScripts(): string {
       if (targetTab) targetTab.classList.add('active');
       if (targetSection) targetSection.classList.add('active');
 
-      window.location.hash = tabId;
+      if (window.location.hash !== '#' + tabId) {
+        window.location.hash = tabId;
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 

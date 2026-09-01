@@ -6,6 +6,7 @@ import { telemetryEngine } from './telemetry';
 import { trafficController } from './traffic-controller';
 import { issuesController } from './issues-controller';
 import { hostController } from './host-controller';
+import { handleAppsApi } from './apps-controller';
 
 export async function handleApiRequest(req: Request, url: URL): Promise<Response | null> {
   const path = url.pathname.replace(/^\/devcenter/, '');
@@ -105,10 +106,10 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
     return Response.json(result);
   }
 
-  // 6. Forge Apps Dynamic Registry
-  if (path === '/api/apps' && req.method === 'GET') {
-    const apps = platformDb.getAppsRegistry();
-    return Response.json({ status: 'ok', apps });
+  // 6. Forge Apps Dynamic Registry & Developer Operations
+  if (path.startsWith('/api/apps')) {
+    const appRes = await handleAppsApi(path, req, url);
+    if (appRes) return appRes;
   }
 
   // 7. Database List (Local SQLite + Registered Remote DBs)
@@ -494,4 +495,3 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
 
   return null;
 }
-

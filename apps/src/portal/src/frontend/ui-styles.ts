@@ -185,13 +185,33 @@ export function getPortalCustomStyles(): string {
       grid-column: 2; height: calc(100vh - var(--portal-header-height));
       overflow-y: auto; background: var(--forge-bg-root); padding: 1.5rem 2rem; box-sizing: border-box;
     }
-    .portal-view-container { max-width: 1200px; margin: 0 auto; }
-    .portal-page-view { display: none; animation: portalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
+    .portal-page-view { display: none; }
     .portal-page-view.active { display: block; }
 
-    @keyframes portalFadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Pre-Hydration Zero-Flicker instant match (Before JS executes) */
+    html[data-active-view="canvas"] #view-canvas,
+    html[data-active-view="apps"] #view-apps,
+    html[data-active-view="directory"] #view-directory,
+    html[data-active-view="notifications"] #view-notifications,
+    html[data-active-view="admin-members"] #view-admin-members,
+    html[data-active-view="admin-apps"] #view-admin-apps,
+    html[data-active-view="admin-org"] #view-admin-org,
+    html[data-active-view="admin-audit"] #view-admin-audit,
+    html[data-active-view="admin-settings"] #view-admin-settings {
+      display: block !important;
+    }
+
+    html[data-active-view="canvas"] .portal-nav-item[data-view="canvas"],
+    html[data-active-view="apps"] .portal-nav-item[data-view="apps"],
+    html[data-active-view="directory"] .portal-nav-item[data-view="directory"],
+    html[data-active-view="notifications"] .portal-nav-item[data-view="notifications"],
+    html[data-active-view="admin-members"] .portal-nav-item[data-view="admin-members"],
+    html[data-active-view="admin-apps"] .portal-nav-item[data-view="admin-apps"],
+    html[data-active-view="admin-org"] .portal-nav-item[data-view="admin-org"],
+    html[data-active-view="admin-audit"] .portal-nav-item[data-view="admin-audit"],
+    html[data-active-view="admin-settings"] .portal-nav-item[data-view="admin-settings"] {
+      background: var(--forge-bg-hover);
+      color: var(--forge-text-main);
     }
 
     /* ── Overview Page Cards ── */

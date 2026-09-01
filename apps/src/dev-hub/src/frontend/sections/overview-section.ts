@@ -8,7 +8,7 @@ import { loadBrandConfig } from '@forge/sdk';
 export function renderOverviewSection(): string {
   const brand = loadBrandConfig();
   return `
-    <section id="section-overview" class="hub-section active">
+    <section id="section-overview" class="hub-section">
       <!-- Hero Banner -->
       <div class="astryx-card hero-card" style="margin-bottom: 2rem; position: relative; overflow: hidden;">
         <div class="hero-glow"></div>

@@ -12,6 +12,12 @@ export function getIssuesDashboardScripts(): string {
 
     async function loadIssues() {
       try {
+        if (window._initialAppFilter && !currentIssueSearchText) {
+          currentIssueSearchText = window._initialAppFilter;
+          const searchInput = document.getElementById('issues-search-input');
+          if (searchInput) searchInput.value = window._initialAppFilter;
+        }
+
         const queryParams = new URLSearchParams();
         if (currentIssueStatusFilter !== 'all') queryParams.set('status', currentIssueStatusFilter);
         if (currentIssueServiceFilter !== 'all') queryParams.set('appId', currentIssueServiceFilter);

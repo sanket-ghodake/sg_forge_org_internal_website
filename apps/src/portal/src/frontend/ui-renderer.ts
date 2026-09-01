@@ -28,6 +28,19 @@ export function renderPortalHtml(user?: HeaderUserContext): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${brand.name} Portal - Workspace & Admin Console</title>
   ${getHeadStateScript({ defaultTheme: 'dark' })}
+  <script>
+    (function() {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        var v = p.get('view') || (window.location.hash ? window.location.hash.slice(1) : '');
+        if (!v) {
+          try { v = sessionStorage.getItem('forge:v1:portal:active-view'); } catch(e) {}
+        }
+        if (!v) v = 'canvas';
+        document.documentElement.setAttribute('data-active-view', v);
+      } catch(e) {}
+    })();
+  </script>
   <style>
     ${getAstryxStyles()}
     ${getPortalCustomStyles()}

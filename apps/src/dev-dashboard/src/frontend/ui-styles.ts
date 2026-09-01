@@ -12,6 +12,7 @@ import { getOverviewStyles } from './ui-overview-styles';
 import { getTrafficStyles } from './ui-traffic-styles';
 import { getIssuesStyles } from './ui-issues-styles';
 import { getHostStyles } from './ui-host-styles';
+import { getAppsStyles } from './ui-apps-styles';
 
 export function getDashboardStyles(): string {
   return `
@@ -221,8 +222,32 @@ export function getDashboardStyles(): string {
       scrollbar-color: var(--forge-border-medium) transparent;
     }
     .tab-pane { display: none; }
-    .tab-pane.active { display: block; animation: fadeIn 0.15s ease-in-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(2px); } to { opacity: 1; transform: translateY(0); } }
+    .tab-pane.active { display: block; }
+    
+    /* Pre-Hydration Zero-Flicker instant match (Before JS executes) */
+    html[data-active-tab="overview"] #tab-overview,
+    html[data-active-tab="services"] #tab-services,
+    html[data-active-tab="apps"] #tab-apps,
+    html[data-active-tab="traffic"] #tab-traffic,
+    html[data-active-tab="database"] #tab-database,
+    html[data-active-tab="logs"] #tab-logs,
+    html[data-active-tab="issues"] #tab-issues,
+    html[data-active-tab="employees"] #tab-employees,
+    html[data-active-tab="host"] #tab-host,
+    html[data-active-tab="settings"] #tab-settings { display: block !important; }
+
+    html[data-active-tab="overview"] .sb-nav-item[data-tab="overview"],
+    html[data-active-tab="services"] .sb-nav-item[data-tab="services"],
+    html[data-active-tab="apps"] .sb-nav-item[data-tab="apps"],
+    html[data-active-tab="traffic"] .sb-nav-item[data-tab="traffic"],
+    html[data-active-tab="database"] .sb-nav-item[data-tab="database"],
+    html[data-active-tab="logs"] .sb-nav-item[data-tab="logs"],
+    html[data-active-tab="issues"] .sb-nav-item[data-tab="issues"],
+    html[data-active-tab="employees"] .sb-nav-item[data-tab="employees"],
+    html[data-active-tab="host"] .sb-nav-item[data-tab="host"],
+    html[data-active-tab="settings"] .sb-nav-item[data-tab="settings"] {
+      background: var(--forge-bg-hover); color: var(--forge-text-main); border-left-color: var(--forge-primary);
+    }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(2px); } to { opacity: 1; transform: translateY(0); } }
 
     /* 4 Golden Vitals Summary Cards */
@@ -382,50 +407,15 @@ export function getDashboardStyles(): string {
     }
 
     /* Modern Astryx Glassmorphic Toast Notifications */
-    .astryx-toast-container {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-      z-index: 9999;
-      pointer-events: none;
-      max-width: 420px;
-      width: calc(100vw - 3rem);
-    }
-    .astryx-toast {
-      pointer-events: auto;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.75rem 1rem;
-      background: var(--forge-bg-surface);
-      border: 1px solid var(--forge-border-medium);
-      border-radius: var(--forge-radius-sm);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(62, 207, 142, 0.1);
-      backdrop-filter: blur(12px);
-      color: var(--forge-text-main);
-      font-size: 0.84rem;
-      font-weight: 500;
-      animation: toastSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    @keyframes toastSlideIn {
-      from { opacity: 0; transform: translateY(16px) scale(0.95); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
+    .astryx-toast-container { position: fixed; bottom: 1.5rem; right: 1.5rem; display: flex; flex-direction: column; gap: 0.65rem; z-index: 9999; pointer-events: none; max-width: 420px; width: calc(100vw - 3rem); }
+    .astryx-toast { pointer-events: auto; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; background: var(--forge-bg-surface); border: 1px solid var(--forge-border-medium); border-radius: var(--forge-radius-sm); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(62, 207, 142, 0.1); backdrop-filter: blur(12px); color: var(--forge-text-main); font-size: 0.84rem; font-weight: 500; animation: toastSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes toastSlideIn { from { opacity: 0; transform: translateY(16px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
     .astryx-toast-success { border-left: 4px solid var(--forge-success); }
-    .astryx-toast-error { border-left: 4px solid var(--forge-accent); }
-    .astryx-toast-warning { border-left: 4px solid var(--forge-accent); }
+    .astryx-toast-error, .astryx-toast-warning { border-left: 4px solid var(--forge-accent); }
     .astryx-toast-info { border-left: 4px solid var(--forge-primary); }
     .astryx-toast-icon { font-size: 1.1rem; flex-shrink: 0; }
     .astryx-toast-content { flex: 1; line-height: 1.4; word-break: break-word; }
-    .astryx-toast-close {
-      background: none; border: none; color: var(--forge-text-muted);
-      cursor: pointer; font-size: 1.1rem; padding: 0 0.2rem;
-      transition: color 0.15s ease;
-    }
+    .astryx-toast-close { background: none; border: none; color: var(--forge-text-muted); cursor: pointer; font-size: 1.1rem; padding: 0 0.2rem; transition: color 0.15s ease; }
     .astryx-toast-close:hover { color: var(--forge-text-main); }
 
     /* Watchdog Heartbeat Pill */
@@ -478,6 +468,7 @@ export function getDashboardStyles(): string {
     ${getTrafficStyles()}
     ${getIssuesStyles()}
     ${getHostStyles()}
+    ${getAppsStyles()}
 
     /* Responsive Mobile Breakpoint */
     @media (max-width: 900px) {

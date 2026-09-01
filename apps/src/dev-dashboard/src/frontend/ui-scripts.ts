@@ -7,6 +7,7 @@ import { getOverviewDashboardScripts } from './ui-overview-scripts';
 import { getTrafficDashboardScripts } from './ui-traffic-scripts';
 import { getIssuesDashboardScripts } from './ui-issues-scripts';
 import { getHostDashboardScripts } from './ui-host-scripts';
+import { getAppsDashboardScripts } from './ui-apps-scripts';
 import { getDropdownScripts } from './ui-dropdown-scripts';
 import { getAstryxToastScript } from '@forge/ui';
 
@@ -128,7 +129,13 @@ export function getDashboardScripts(): string {
       settings: 'Settings & Tools'
     };
 
+    let currentActiveTab = 'overview';
+
     function switchTab(tabId, updateUrl = true) {
+      if (!tabId || !TAB_TITLES[tabId]) tabId = 'overview';
+      currentActiveTab = tabId;
+      try { document.documentElement.setAttribute('data-active-tab', tabId); } catch(e) {}
+
       document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.sb-nav-item').forEach(el => el.classList.remove('active'));
       
@@ -148,11 +155,17 @@ export function getDashboardScripts(): string {
         breadcrumbEl.textContent = TAB_TITLES[tabId];
       }
 
-      if (updateUrl && window.location.hash !== '#' + tabId) {
-        history.pushState(null, '', '#' + tabId);
+      // Tier 1 URL State: Synchronize URL search params and hash for refresh fidelity
+      if (updateUrl) {
+        try {
+          const url = new URL(window.location.href);
+          url.hash = '#' + tabId;
+          url.searchParams.set('tab', tabId);
+          window.history.replaceState({ tab: tabId }, '', url.toString());
+        } catch {}
       }
       try {
-        localStorage.setItem(TAB_KEY, JSON.stringify({ version: 1, updatedAt: new Date().toISOString(), data: tabId }));
+        sessionStorage.setItem(TAB_KEY, tabId);
       } catch {}
       toggleMobileSidebar(false);
 
@@ -169,17 +182,27 @@ export function getDashboardScripts(): string {
     }
 
     function syncTabFromHash() {
-      let tab = window.location.hash.replace('#', '');
-      if (!tab) {
-        try {
-          const raw = localStorage.getItem(TAB_KEY);
-          if (raw) {
-            const env = JSON.parse(raw);
-            tab = (env && typeof env === 'object' && env.data) ? env.data : env;
-          }
-        } catch {}
+      const params = new URLSearchParams(window.location.search);
+      let tabFromUrl = params.get('tab') || window.location.hash.replace('#', '');
+      const dbParam = params.get('db');
+      const appParam = params.get('app') || params.get('service') || params.get('filter');
+
+      if (dbParam) {
+        window._initialSelectedDb = dbParam;
       }
-      switchTab(tab || 'overview', false);
+      if (appParam) {
+        window._initialAppFilter = appParam;
+      }
+
+      let savedTab = null;
+      try { savedTab = sessionStorage.getItem(TAB_KEY); } catch {}
+
+      // Tier 1 Ground Truth: URL parameter/hash wins, then active session tab, else defaults to overview
+      const activeTab = (tabFromUrl && TAB_TITLES[tabFromUrl])
+        ? tabFromUrl
+        : (savedTab && TAB_TITLES[savedTab] ? savedTab : 'overview');
+      
+      switchTab(activeTab, false);
     }
 
     window.addEventListener('hashchange', syncTabFromHash);
@@ -189,6 +212,7 @@ export function getDashboardScripts(): string {
     ${getToolsDashboardScripts()}
     ${getDbDashboardScripts()}
     ${getServicesDashboardScripts()}
+    ${getAppsDashboardScripts()}
     ${getEmployeeDashboardScripts()}
     ${getOverviewDashboardScripts()}
     ${getTrafficDashboardScripts()}
@@ -199,38 +223,6 @@ export function getDashboardScripts(): string {
       if (typeof loadOverviewData === 'function') {
         loadOverviewData();
       }
-    }
-
-    async function loadApps() {
-      try {
-        const res = await fetch(apiBase + '/api/apps').then(r => r.json());
-        const grid = document.getElementById('apps-grid');
-        if (!grid || !res.apps) return;
-        grid.innerHTML = res.apps.map(a => \`
-          <div class="astryx-card" style="display:flex; flex-direction:column; justify-content:space-between; min-height:160px;">
-            <div>
-              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.35rem;">
-                <h3 style="font-size:0.95rem; font-weight:550; letter-spacing:-0.015em; color:var(--forge-text-main); margin:0;">\${a.name}</h3>
-                <span style="color:var(--forge-text-subtle); cursor:pointer;" title="Options">⋮</span>
-              </div>
-              <div style="font-size:0.72rem; color:var(--forge-text-subtle); font-family:'Geist Mono', monospace; margin-bottom:0.6rem; display:flex; align-items:center; gap:0.4rem;">
-                <span>SG-FORGE</span><span>•</span><span>PORT :\${a.port}</span>
-              </div>
-              <div style="display:flex; gap:0.35rem; flex-wrap:wrap; margin-bottom:0.75rem;">
-                <span class="astryx-micro-pill">\${a.category.toUpperCase()}</span>
-                <span class="astryx-micro-pill">ROLE: \${a.access_role}</span>
-                <span class="astryx-micro-pill">DB: \${(a.db_file_path ? a.db_file_path.split('/').pop() : 'platform_core.db')}</span>
-              </div>
-            </div>
-            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--forge-border); padding-top:0.6rem; margin-top:0.4rem;">
-              <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.75rem; color:var(--forge-text-muted);">
-                <span class="badge-dot" style="background:var(--forge-success); box-shadow:0 0 6px var(--forge-success);"></span>
-                <span>Active</span>
-              </div>
-              <a href="\${a.ingress_path}" class="astryx-btn btn-primary" style="padding:0.25rem 0.65rem; font-size:0.72rem; text-decoration:none;" target="_blank">Launch ↗</a>
-            </div>
-          </div>\`).join('');
-      } catch (err) { console.error('Apps load failed', err); }
     }
 
     async function runSqlQuery() {
@@ -287,7 +279,7 @@ export function getDashboardScripts(): string {
 
     // 🚀 Refresh Active Tab Data Helper
     function refreshActiveTab() {
-      const tab = window.location.hash.replace('#', '') || 'overview';
+      const tab = currentActiveTab || 'overview';
       if (tab === 'services') loadServices();
       else if (tab === 'overview') loadTopology();
       else if (tab === 'host') loadHostVitals();

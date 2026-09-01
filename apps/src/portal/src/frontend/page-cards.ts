@@ -174,8 +174,8 @@ export const PORTAL_PAGES: PageDefinition[] = [
 ];
 
 export function renderPageCards(): string {
-  return PORTAL_PAGES.map((page, idx) => `
-    <div id="view-${page.id}" class="portal-page-view ${idx === 0 ? 'active' : ''}">
+  return PORTAL_PAGES.map(page => `
+    <div id="view-${page.id}" class="portal-page-view">
       <!-- Page Hero Header -->
       <div class="page-hero-card">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem;">

@@ -8,7 +8,7 @@ import { astryxIcons } from '@forge/ui';
 export function renderOverviewTab(): string {
   return `
     <!-- Tab 1: Overview & Cluster Command Center -->
-    <section id="tab-overview" class="tab-pane active">
+    <section id="tab-overview" class="tab-pane">
       
       <!-- 1. Hero Health Banner & Quick Action Tools -->
       <div class="overview-hero-card">

@@ -14,6 +14,7 @@ import { renderOverviewTab } from './ui-renderer-overview';
 import { renderTrafficTab } from './ui-renderer-traffic';
 import { renderIssuesTab } from './ui-renderer-issues';
 import { renderHostTab } from './ui-renderer-host';
+import { getAppsTabHtml } from './ui-renderer-apps';
 
 export function renderDashboardHtml(): string {
   const brand = loadBrandConfig();
@@ -23,6 +24,20 @@ export function renderDashboardHtml(): string {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${brand.name} - Developer Dashboard & Diagnostics</title>
+  <script>
+    (function() {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        var t = p.get('tab') || (window.location.hash ? window.location.hash.slice(1) : '');
+        if (!t) {
+          try { t = sessionStorage.getItem('forge:v1:devcenter:active-tab'); } catch(e) {}
+        }
+        var validTabs = ['overview', 'services', 'apps', 'traffic', 'database', 'logs', 'issues', 'employees', 'host', 'settings'];
+        if (!t || validTabs.indexOf(t) === -1) t = 'overview';
+        document.documentElement.setAttribute('data-active-tab', t);
+      } catch(e) {}
+    })();
+  </script>
   <style>${getDashboardStyles()}</style>
 </head>
 <body>
@@ -91,7 +106,7 @@ export function renderDashboardHtml(): string {
 
     <aside class="sb-sidebar" id="main-sidebar" aria-label="Main Navigation">
       <div class="sb-nav-section-label">Monitoring</div>
-      <div class="sb-nav-item active" data-tab="overview" onclick="switchTab('overview')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('overview')" title="Overview" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.topology}</span><span class="sb-nav-label">Overview</span></div>
+      <div class="sb-nav-item" data-tab="overview" onclick="switchTab('overview')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('overview')" title="Overview" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.topology}</span><span class="sb-nav-label">Overview</span></div>
       <div class="sb-nav-item" data-tab="services" onclick="switchTab('services')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('services')" title="Services & Processes" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.services}</span><span class="sb-nav-label">Services & Processes</span></div>
       <div class="sb-nav-item" data-tab="apps" onclick="switchTab('apps')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('apps')" title="Forge Apps" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.apps}</span><span class="sb-nav-label">Forge Apps</span></div>
       <div class="sb-nav-item" data-tab="traffic" onclick="switchTab('traffic')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('traffic')" title="Traffic Analytics" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.traffic}</span><span class="sb-nav-label">Traffic Analytics</span></div>
@@ -182,16 +197,7 @@ export function renderDashboardHtml(): string {
         </div>
       </section>
 
-      <!-- Tab 3: Forge Apps -->
-      <section id="tab-apps" class="tab-pane">
-        <div class="astryx-card" style="margin-bottom: 1rem;">
-          <h2 style="font-size: 1.2rem; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
-            <span style="color: var(--forge-primary); display: flex; align-items: center;">${astryxIcons.apps}</span> Registered Forge Micro-Apps
-          </h2>
-          <p style="color: var(--forge-text-muted); font-size: 0.82rem;">Dedicated Turso libSQL DB per app with isolated sandboxing.</p>
-        </div>
-        <div class="astryx-grid" id="apps-grid"></div>
-      </section>
+      ${getAppsTabHtml()}
 
       <!-- Tab 4: Unified Database Studio (GCP Cloud SQL & Supabase Standard) -->
       <section id="tab-database" class="tab-pane">

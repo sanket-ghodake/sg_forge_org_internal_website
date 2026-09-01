@@ -144,6 +144,7 @@ export function getPortalClientScript(): string {
       // ── 3. View Navigation & Routing ──
       function switchView(viewId, updateHistory) {
         if (!viewId) return;
+        try { document.documentElement.setAttribute('data-active-view', viewId); } catch(e) {}
 
         // Update nav items active state
         document.querySelectorAll('.portal-nav-item[data-view]').forEach(function(btn) {
@@ -157,7 +158,7 @@ export function getPortalClientScript(): string {
             v.classList.remove('active');
           });
           targetView.classList.add('active');
-          localStorage.setItem(STORAGE_KEY_VIEW, viewId);
+          try { sessionStorage.setItem(STORAGE_KEY_VIEW, viewId); } catch(e) {}
         }
 
         if (updateHistory !== false) {
@@ -329,10 +330,9 @@ export function getPortalClientScript(): string {
         });
       }
 
-      // Initial route hydration
+      // Initial route hydration: Tier 1 URL query parameter ground truth
       var initialParamView = new URLSearchParams(window.location.search).get('view');
-      var initialSavedView = localStorage.getItem(STORAGE_KEY_VIEW);
-      switchView(initialParamView || initialSavedView || 'canvas', false);
+      switchView(initialParamView || 'canvas', false);
     })();
   `;
 }

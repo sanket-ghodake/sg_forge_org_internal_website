@@ -28,6 +28,14 @@ export function renderDevHubHtml(): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${brand.name} - Developer Gateway & SDK Documentation</title>
   ${getHeadStateScript({ defaultTheme: 'dark' })}
+  <script>
+    (function() {
+      try {
+        var h = window.location.hash ? window.location.hash.slice(1) : 'overview';
+        document.documentElement.setAttribute('data-active-hub-tab', h || 'overview');
+      } catch(e) {}
+    })();
+  </script>
   <style>
     ${getDevHubStyles()}
   </style>
@@ -50,7 +58,7 @@ export function renderDevHubHtml(): string {
 
     <!-- Navigation Tabs -->
     <div class="hub-tabs-bar">
-      <button class="hub-tab active" data-tab="overview" onclick="switchTab('overview')">🚀 Overview</button>
+      <button class="hub-tab" data-tab="overview" onclick="switchTab('overview')">🚀 Overview</button>
       <button class="hub-tab" data-tab="health" onclick="switchTab('health')">🟢 Health Mesh</button>
       <button class="hub-tab" data-tab="tokens" onclick="switchTab('tokens')">🔑 Token Mint</button>
       <button class="hub-tab" data-tab="routes" onclick="switchTab('routes')">🔀 Route Matrix</button>

@@ -191,6 +191,10 @@ class PlatformDatabaseManager {
     return this.db.query('SELECT * FROM apps_registry ORDER BY category, name ASC').all() as AppRegistryRecord[];
   }
 
+  public getAppById(id: string): AppRegistryRecord | null {
+    return this.db.query('SELECT * FROM apps_registry WHERE id = ?').get(id) as AppRegistryRecord | null;
+  }
+
   public registerApp(record: Partial<AppRegistryRecord>): boolean {
     const id = record.id || `app-${Date.now()}`;
     const now = Math.floor(Date.now() / 1000);
@@ -219,6 +223,44 @@ class PlatformDatabaseManager {
 
     this.logAudit('system', 'app_register', id, JSON.stringify(record), 'success');
     return true;
+  }
+
+  public updateApp(id: string, updates: Partial<AppRegistryRecord>): boolean {
+    const existing = this.getAppById(id);
+    if (!existing) return false;
+    const now = Math.floor(Date.now() / 1000);
+    const updated = { ...existing, ...updates, updated_at: now };
+    const query = this.db.prepare(`
+      UPDATE apps_registry SET
+        name = $name, port = $port, ingress_path = $ingress_path, category = $category,
+        access_role = $access_role, container_name = $container_name, db_file_path = $db_file_path,
+        runtime_type = $runtime_type, remote_url = $remote_url, status = $status,
+        storage_quota_mb = $storage_quota_mb, updated_at = $now
+      WHERE id = $id
+    `);
+    query.run({
+      $id: id,
+      $name: updated.name,
+      $port: updated.port,
+      $ingress_path: updated.ingress_path,
+      $category: updated.category,
+      $access_role: updated.access_role,
+      $container_name: updated.container_name,
+      $db_file_path: updated.db_file_path,
+      $runtime_type: updated.runtime_type,
+      $remote_url: updated.remote_url,
+      $status: updated.status,
+      $storage_quota_mb: updated.storage_quota_mb,
+      $now: now,
+    });
+    this.logAudit('developer', 'app_update', id, JSON.stringify(updates), 'success');
+    return true;
+  }
+
+  public deleteApp(id: string): boolean {
+    const res = this.db.run('DELETE FROM apps_registry WHERE id = ?', [id]);
+    this.logAudit('developer', 'app_delete', id, null, 'success');
+    return (res as any).changes > 0;
   }
 
   public logAudit(actorId: string, actionType: string, targetService: string, payload: string | null, status: string): void {

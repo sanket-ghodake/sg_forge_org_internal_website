@@ -25,9 +25,37 @@ export function getDevHubStyles(): string {
     .hub-tab.active { color: var(--forge-text-main); background: var(--forge-bg-card); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4); border: 1px solid var(--forge-border-medium); }
 
     /* Section Visibility */
-    .hub-section { display: none; animation: fadeIn 0.2s ease-in-out; }
+    .hub-section { display: none; }
     .hub-section.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Pre-Hydration Zero-Flicker instant match (Before JS executes) */
+    html[data-active-hub-tab="overview"] #section-overview,
+    html[data-active-hub-tab="health"] #section-health,
+    html[data-active-hub-tab="tokens"] #section-tokens,
+    html[data-active-hub-tab="routes"] #section-routes,
+    html[data-active-hub-tab="sdk"] #section-sdk,
+    html[data-active-hub-tab="ui"] #section-ui,
+    html[data-active-hub-tab="gateway"] #section-gateway,
+    html[data-active-hub-tab="sandbox"] #section-sandbox,
+    html[data-active-hub-tab="security"] #section-security,
+    html[data-active-hub-tab="scaffolding"] #section-scaffolding,
+    html[data-active-hub-tab="testing"] #section-testing {
+      display: block !important;
+    }
+
+    html[data-active-hub-tab="overview"] .hub-tab[data-tab="overview"],
+    html[data-active-hub-tab="health"] .hub-tab[data-tab="health"],
+    html[data-active-hub-tab="tokens"] .hub-tab[data-tab="tokens"],
+    html[data-active-hub-tab="routes"] .hub-tab[data-tab="routes"],
+    html[data-active-hub-tab="sdk"] .hub-tab[data-tab="sdk"],
+    html[data-active-hub-tab="ui"] .hub-tab[data-tab="ui"],
+    html[data-active-hub-tab="gateway"] .hub-tab[data-tab="gateway"],
+    html[data-active-hub-tab="sandbox"] .hub-tab[data-tab="sandbox"],
+    html[data-active-hub-tab="security"] .hub-tab[data-tab="security"],
+    html[data-active-hub-tab="scaffolding"] .hub-tab[data-tab="scaffolding"],
+    html[data-active-hub-tab="testing"] .hub-tab[data-tab="testing"] {
+      color: var(--forge-text-main); background: var(--forge-bg-card); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4); border: 1px solid var(--forge-border-medium);
+    }
 
     /* Hero Glow & Stats */
     .hero-glow { position: absolute; top: -50px; right: -50px; width: 250px; height: 250px; background: radial-gradient(circle, rgba(62, 207, 142, 0.15) 0%, rgba(62, 207, 142, 0) 70%); pointer-events: none; }

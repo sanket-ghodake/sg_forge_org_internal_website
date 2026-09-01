@@ -75,8 +75,8 @@ export function renderPortalSidebar(isAdmin: boolean): string {
       <div class="portal-sidebar-nav">
         <!-- Section: Workspace -->
         <div class="portal-nav-section-label">Workspace</div>
-        ${WORKSPACE_NAV_ITEMS.map((item, idx) => `
-          <button class="portal-nav-item ${idx === 0 ? 'active' : ''}" data-view="${item.id}" title="${item.label}">
+        ${WORKSPACE_NAV_ITEMS.map(item => `
+          <button class="portal-nav-item" data-view="${item.id}" title="${item.label}">
             <span class="portal-nav-icon">${item.iconSvg}</span>
             <span class="portal-nav-label">${item.label}</span>
             ${item.badge ? `<span class="portal-nav-badge">${item.badge}</span>` : ''}

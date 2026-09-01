@@ -194,6 +194,13 @@ export function getLogDashboardScripts(): string {
     async function loadActiveTabLogs() {
       const term = document.getElementById('full-terminal');
       if (!term) return;
+
+      if (window._initialAppFilter && !logSearchFilter) {
+        logSearchFilter = window._initialAppFilter;
+        const searchInput = document.getElementById('logs-search-input');
+        if (searchInput) searchInput.value = window._initialAppFilter;
+      }
+
       term.innerHTML = '<div style="color:var(--forge-text-muted);">Loading logs...</div>';
       try {
         let url = apiBase + '/api/logs/recent?limit=150';
