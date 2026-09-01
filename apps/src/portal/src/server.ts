@@ -5,7 +5,8 @@
  */
 
 import { authGuard, createLogger, createSafeHandler, handleBrandAssetRequest } from '@forge/sdk';
-import { renderPortalHtml, type HeaderUserContext } from './frontend';
+import { renderPortalHtml, type HeaderUserContext, REGISTERED_PORTAL_APPS, DIRECTORY_MEMBERS } from './frontend';
+import { getOrgTree } from './backend/org-tree-service';
 
 const PORT = Number(process.env.PORTAL_PORT || process.env.PORT || 3001);
 const logger = createLogger('portal-service');
@@ -46,6 +47,22 @@ export function startPortalServer(port: number = PORT) {
 
     if (!auth.authenticated) {
       return auth.response!;
+    }
+
+    // JSON API Endpoints for dynamic hydration
+    if (url.pathname === '/api/v1/portal/canvas/tree' || url.pathname === '/portal/api/v1/portal/canvas/tree') {
+      const maxDepth = url.searchParams.get('max_depth') ? Number(url.searchParams.get('max_depth')) : 5;
+      const rootId = url.searchParams.get('root_id') || undefined;
+      const tree = getOrgTree({ maxDepth, rootId });
+      return Response.json({ ok: true, data: tree });
+    }
+
+    if (url.pathname === '/api/v1/portal/apps' || url.pathname === '/portal/api/v1/portal/apps') {
+      return Response.json({ ok: true, data: REGISTERED_PORTAL_APPS });
+    }
+
+    if (url.pathname === '/api/v1/portal/members' || url.pathname === '/portal/api/v1/portal/members') {
+      return Response.json({ ok: true, data: DIRECTORY_MEMBERS });
     }
 
     const user: HeaderUserContext = {

@@ -50,11 +50,27 @@ export function initBrowserLogBridge(
   };
 
   window.addEventListener('error', (event) => {
+    // Suppress browser extension, Chrome DevTools, and third-party script errors
+    if (
+      event.filename &&
+      (event.filename.startsWith('chrome-extension:') ||
+        event.filename.startsWith('moz-extension:') ||
+        event.filename.includes('VM') ||
+        event.filename.includes('extensions::'))
+    ) {
+      return;
+    }
+    if (event.message && event.message.includes("reading 'startTime'")) {
+      return;
+    }
     sendBrowserLog('ERROR', event.message || 'Uncaught Script Error', event.error?.stack);
   });
 
   window.addEventListener('unhandledrejection', (event) => {
     const msg = event.reason instanceof Error ? event.reason.message : String(event.reason);
+    if (msg && msg.includes("reading 'startTime'")) {
+      return;
+    }
     const stack = event.reason instanceof Error ? event.reason.stack : undefined;
     sendBrowserLog('ERROR', `Unhandled Promise Rejection: ${msg}`, stack);
   });

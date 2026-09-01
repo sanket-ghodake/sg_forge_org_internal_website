@@ -33,6 +33,12 @@ export function getBaseStyles(): string {
       --forge-success-bg: ${d.successBg};
       --forge-shadow-card: ${d.shadowCard};
       --forge-shadow-hover: ${d.shadowHover};
+      --forge-font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+      --forge-font-mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+      --forge-warning: #f59e0b;
+      --forge-warning-bg: rgba(245, 158, 11, 0.12);
+      --forge-error: #ef4444;
+      --forge-error-bg: rgba(239, 68, 68, 0.12);
       --forge-radius: 8px;
       --forge-radius-sm: 5px;
       --forge-radius-full: 9999px;
@@ -63,6 +69,12 @@ export function getBaseStyles(): string {
       --forge-success-bg: ${l.successBg};
       --forge-shadow-card: ${l.shadowCard};
       --forge-shadow-hover: ${l.shadowHover};
+      --forge-font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+      --forge-font-mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+      --forge-warning: #d97706;
+      --forge-warning-bg: rgba(217, 119, 6, 0.10);
+      --forge-error: #dc2626;
+      --forge-error-bg: rgba(220, 38, 38, 0.10);
     }
 
     * {

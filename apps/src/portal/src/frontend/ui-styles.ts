@@ -1,6 +1,6 @@
 /**
  * @forge/portal - Meta Astryx Frontend Styles (2026 LTS)
- * 100% Astryx Token Compliant: Single Page Application, Minimal Avatar Trigger & Popover.
+ * 100% Astryx Token Compliant: SPA Layout, Canvas, Apps Hub, Directory, Admin Suite, Slim Scrollbars & Modals.
  */
 
 export function getPortalCustomStyles(): string {
@@ -20,6 +20,12 @@ export function getPortalCustomStyles(): string {
       font-family: var(--forge-font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
       transition: background-color 0.2s ease, color 0.2s ease;
     }
+
+    /* ── Custom Meta Astryx Slim Scrollbars ── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--forge-border-medium); border-radius: var(--forge-radius-full); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--forge-primary); }
 
     /* ── App Shell (SPA Container) ── */
     .portal-app-shell { display: flex; flex-direction: column; height: 100vh; width: 100vw; overflow: hidden; }
@@ -52,7 +58,7 @@ export function getPortalCustomStyles(): string {
       transition: var(--forge-transition); min-width: 210px; user-select: none; box-sizing: border-box;
     }
     .portal-search-trigger:hover { border-color: var(--forge-border-medium); color: var(--forge-text-main); background: var(--forge-bg-card-hover); }
-    .portal-kbd { font-size: 0.68rem; padding: 0.12rem 0.4rem; background: var(--forge-bg-surface); border: 1px solid var(--forge-border); border-radius: 4px; color: var(--forge-text-subtle); margin-left: auto; font-family: 'Geist Mono', monospace; }
+    .portal-kbd { font-size: 0.68rem; padding: 0.12rem 0.4rem; background: var(--forge-bg-surface); border: 1px solid var(--forge-border); border-radius: 4px; color: var(--forge-text-subtle); margin-left: auto; font-family: var(--forge-font-mono, monospace); }
     .portal-header-right { display: flex; align-items: center; }
 
     /* ── Right-Side Minimal Icon-Only Profile Trigger ── */
@@ -79,7 +85,6 @@ export function getPortalCustomStyles(): string {
       border: 1px solid var(--forge-border-medium);
       border-radius: var(--forge-radius); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
       padding: 0.5rem; box-sizing: border-box; z-index: 1200; backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
     }
     .user-dropdown-popover.active { display: block; animation: popoverFadeIn 0.15s cubic-bezier(0.16, 1, 0.3, 1); }
 
@@ -185,13 +190,19 @@ export function getPortalCustomStyles(): string {
       grid-column: 2; height: calc(100vh - var(--portal-header-height));
       overflow-y: auto; background: var(--forge-bg-root); padding: 1.5rem 2rem; box-sizing: border-box;
     }
-    .portal-page-view { display: none; }
+    .portal-page-view { display: none; animation: viewFadeIn 0.18s ease-in-out; }
     .portal-page-view.active { display: block; }
+
+    @keyframes viewFadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     /* Pre-Hydration Zero-Flicker instant match (Before JS executes) */
     html[data-active-view="canvas"] #view-canvas,
     html[data-active-view="apps"] #view-apps,
     html[data-active-view="directory"] #view-directory,
+    html[data-active-view="profile"] #view-profile,
     html[data-active-view="notifications"] #view-notifications,
     html[data-active-view="admin-members"] #view-admin-members,
     html[data-active-view="admin-apps"] #view-admin-apps,
@@ -201,77 +212,203 @@ export function getPortalCustomStyles(): string {
       display: block !important;
     }
 
-    html[data-active-view="canvas"] .portal-nav-item[data-view="canvas"],
-    html[data-active-view="apps"] .portal-nav-item[data-view="apps"],
-    html[data-active-view="directory"] .portal-nav-item[data-view="directory"],
-    html[data-active-view="notifications"] .portal-nav-item[data-view="notifications"],
-    html[data-active-view="admin-members"] .portal-nav-item[data-view="admin-members"],
-    html[data-active-view="admin-apps"] .portal-nav-item[data-view="admin-apps"],
-    html[data-active-view="admin-org"] .portal-nav-item[data-view="admin-org"],
-    html[data-active-view="admin-audit"] .portal-nav-item[data-view="admin-audit"],
-    html[data-active-view="admin-settings"] .portal-nav-item[data-view="admin-settings"] {
-      background: var(--forge-bg-hover);
-      color: var(--forge-text-main);
+    /* ── Common View Headers ── */
+    .portal-view-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;
+    }
+    .portal-view-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.72rem;
+      font-weight: 600; color: var(--forge-primary); background: var(--forge-success-bg);
+      padding: 0.15rem 0.55rem; border-radius: var(--forge-radius-full); margin-bottom: 0.35rem;
+    }
+    .portal-view-title { margin: 0; font-size: 1.35rem; font-weight: 700; color: var(--forge-text-main); letter-spacing: -0.02em; }
+    .portal-view-desc { margin: 0.25rem 0 0; font-size: 0.85rem; color: var(--forge-text-muted); max-width: 720px; line-height: 1.45; }
+    .portal-view-actions { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+
+    /* ── Status Indicators ── */
+    .status-indicator { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .status-online { background: var(--forge-primary); box-shadow: 0 0 6px var(--forge-primary); }
+    .status-busy { background: var(--forge-warning); }
+    .status-away { background: var(--forge-text-muted); }
+    .status-offline { background: var(--forge-border-medium); }
+
+    /* ── Canvas Frame & Progressive Map Styles ── */
+    .canvas-viewport-frame {
+      width: 100%; height: 600px; background: var(--forge-bg-surface);
+      border: 1px solid var(--forge-border); border-radius: var(--forge-radius);
+      position: relative; overflow: auto; margin-top: 1rem;
+      background-image: radial-gradient(var(--forge-border) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .canvas-pan-surface { min-width: 1800px; min-height: 1000px; position: relative; transform-origin: 0 0; transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1); }
+    .canvas-zoom-controls { display: flex; align-items: center; gap: 0.35rem; background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 2px 4px; }
+    .canvas-zoom-level { font-size: 0.76rem; font-family: var(--forge-font-mono, monospace); color: var(--forge-text-muted); min-width: 40px; text-align: center; }
+    .canvas-depth-selector .depth-btn { background: transparent; border: none; font-size: 0.72rem; color: var(--forge-text-muted); padding: 0.15rem 0.45rem; border-radius: 3px; cursor: pointer; transition: var(--forge-transition); }
+    .canvas-depth-selector .depth-btn:hover { color: var(--forge-text-main); }
+    .canvas-depth-selector .depth-btn.active { background: var(--forge-primary); color: var(--forge-bg-root); font-weight: 700; }
+    .canvas-search-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+    .canvas-search-input-wrap { display: flex; align-items: center; gap: 0.5rem; background: var(--forge-bg-surface); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0 0.65rem; height: 34px; min-width: 280px; }
+    .canvas-search-input-wrap input { background: transparent; border: none; outline: none; color: var(--forge-text-main); font-size: 0.82rem; width: 100%; }
+    .canvas-filter-pills { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+    .filter-pill { background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-full); padding: 0.2rem 0.65rem; font-size: 0.75rem; color: var(--forge-text-muted); cursor: pointer; transition: var(--forge-transition); }
+    .filter-pill:hover, .filter-pill.active { background: var(--forge-primary); color: var(--forge-bg-root); font-weight: 600; border-color: var(--forge-primary); }
+
+    .canvas-nodes-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .canvas-org-cluster { position: absolute; background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius); padding: 0.85rem; width: 270px; box-shadow: var(--forge-shadow-card); transition: opacity 0.2s ease, filter 0.2s ease, transform 0.2s ease; cursor: pointer; }
+    .canvas-org-cluster:hover { border-color: var(--forge-primary); box-shadow: var(--forge-shadow-hover); }
+    .canvas-org-cluster.selected-node { border-color: var(--forge-primary); box-shadow: 0 0 0 2px var(--forge-primary), var(--forge-shadow-hover); }
+    .cluster-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; border-bottom: 1px solid var(--forge-border); padding-bottom: 0.35rem; }
+    .cluster-badge { font-size: 0.74rem; font-weight: 700; color: var(--forge-text-main); }
+    .cluster-count { font-size: 0.68rem; color: var(--forge-text-subtle); }
+    .cluster-nodes { display: flex; flex-direction: column; gap: 0.4rem; }
+    .org-node-card { display: flex; align-items: center; gap: 0.6rem; background: var(--forge-bg-surface); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.45rem 0.6rem; transition: var(--forge-transition); }
+    .org-node-card:hover { border-color: var(--forge-primary); transform: translateX(2px); }
+    .node-lead { border-left: 3px solid var(--forge-primary); font-weight: 600; }
+    .node-avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--forge-primary); color: var(--forge-bg-root); display: flex; align-items: center; justify-content: center; font-size: 0.76rem; font-weight: 700; flex-shrink: 0; }
+    .node-info { flex: 1; overflow: hidden; }
+    .node-name { font-size: 0.8rem; color: var(--forge-text-main); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .node-role { font-size: 0.7rem; color: var(--forge-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .node-level-tag { font-size: 0.64rem; font-family: var(--forge-font-mono, monospace); color: var(--forge-text-subtle); margin-left: auto; }
+    .node-expand-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.3rem; margin-top: 0.5rem; width: 100%; background: var(--forge-success-bg); border: 1px dashed var(--forge-primary); border-radius: var(--forge-radius-sm); padding: 0.25rem; font-size: 0.72rem; color: var(--forge-primary); font-weight: 600; cursor: pointer; transition: var(--forge-transition); }
+    .node-expand-btn:hover { background: var(--forge-primary); color: var(--forge-bg-root); }
+    .canvas-connections-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .canvas-edge-line { fill: none; stroke: var(--forge-border-medium); stroke-width: 1.5; stroke-dasharray: 4 4; transition: stroke 0.2s ease; }
+    .canvas-edge-line.active { stroke: var(--forge-primary); stroke-width: 2; stroke-dasharray: none; }
+
+    /* ── Floating Node Inspector Card ── */
+    .canvas-inspector-card { position: absolute; top: 1rem; right: 1rem; width: 310px; background: var(--forge-bg-surface); border: 1px solid var(--forge-border-medium); border-radius: var(--forge-radius); box-shadow: var(--forge-shadow-hover); z-index: 20; padding: 1.25rem; animation: viewFadeIn 0.15s ease; backdrop-filter: blur(16px); }
+    .inspector-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; border-bottom: 1px solid var(--forge-border); padding-bottom: 0.5rem; }
+    .inspector-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--forge-text-muted); }
+    .inspector-close { background: transparent; border: none; color: var(--forge-text-muted); font-size: 1.1rem; cursor: pointer; line-height: 1; }
+    .inspector-avatar-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+    .inspector-emp-name { font-size: 0.95rem; font-weight: 700; color: var(--forge-text-main); }
+    .inspector-emp-role { font-size: 0.76rem; color: var(--forge-text-muted); }
+    .inspector-meta-list { display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.78rem; border-top: 1px solid var(--forge-border); padding-top: 0.75rem; }
+
+    /* ── Apps Hub Styles ── */
+    .section-sub-title { font-size: 0.86rem; font-weight: 700; color: var(--forge-text-main); margin-bottom: 0.65rem; display: flex; align-items: center; gap: 0.4rem; }
+    .pinned-apps-grid { display: flex; gap: 0.65rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .pinned-app-chip { display: inline-flex; align-items: center; gap: 0.55rem; background: var(--forge-bg-surface); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-full); padding: 0.35rem 0.85rem; text-decoration: none; color: var(--forge-text-main); font-size: 0.8rem; font-weight: 500; transition: var(--forge-transition); }
+    .pinned-app-chip:hover { border-color: var(--forge-primary); background: var(--forge-bg-card-hover); transform: translateY(-1px); }
+    .apps-catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
+    .app-card-item { background: var(--forge-bg-surface); border: 1px solid var(--forge-border); border-radius: var(--forge-radius); padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; transition: var(--forge-transition); box-shadow: var(--forge-shadow-card); }
+    .app-card-item:hover { border-color: var(--forge-primary); background: var(--forge-bg-card-hover); transform: translateY(-2px); box-shadow: var(--forge-shadow-hover); }
+    .app-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
+    .app-card-brand { display: flex; align-items: center; gap: 0.65rem; }
+    .app-card-icon-box { width: 40px; height: 40px; border-radius: var(--forge-radius-sm); background: var(--forge-bg-card); border: 1px solid var(--forge-border); display: flex; align-items: center; justify-content: center; color: var(--forge-primary); flex-shrink: 0; }
+    .app-card-title { margin: 0; font-size: 0.95rem; font-weight: 700; color: var(--forge-text-main); }
+    .app-card-cat { font-size: 0.72rem; color: var(--forge-text-muted); }
+    .app-card-desc { font-size: 0.82rem; color: var(--forge-text-muted); line-height: 1.45; margin: 0 0 1rem; flex: 1; }
+    .app-card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--forge-border); padding-top: 0.75rem; }
+    .app-port-tag { font-family: var(--forge-font-mono, monospace); font-size: 0.72rem; color: var(--forge-text-subtle); background: var(--forge-bg-card); padding: 0.15rem 0.45rem; border-radius: 4px; border: 1px solid var(--forge-border); }
+
+    /* ── People Directory Styles ── */
+    .directory-filter-bar { display: flex; align-items: center; gap: 1rem; background: var(--forge-bg-surface); border: 1px solid var(--forge-border); border-radius: var(--forge-radius); padding: 0.75rem 1rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .filter-group { display: flex; align-items: center; gap: 0.45rem; font-size: 0.8rem; color: var(--forge-text-muted); }
+    .directory-stats-label { margin-left: auto; font-size: 0.8rem; color: var(--forge-text-subtle); }
+    .directory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+    .colleague-card { background: var(--forge-bg-surface); border: 1px solid var(--forge-border); border-radius: var(--forge-radius); padding: 1.25rem; display: flex; flex-direction: column; transition: var(--forge-transition); box-shadow: var(--forge-shadow-card); }
+    .colleague-card:hover { border-color: var(--forge-border-medium); transform: translateY(-2px); box-shadow: var(--forge-shadow-hover); }
+    .colleague-card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+    .colleague-avatar-wrap { position: relative; }
+    .colleague-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--forge-primary); color: var(--forge-bg-root); display: flex; align-items: center; justify-content: center; font-size: 0.95rem; font-weight: 700; flex-shrink: 0; }
+    .colleague-avatar-wrap .status-indicator { position: absolute; bottom: 0; right: 0; border: 2px solid var(--forge-bg-surface); }
+    .colleague-meta { overflow: hidden; }
+    .colleague-name { margin: 0; font-size: 0.92rem; font-weight: 700; color: var(--forge-text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .colleague-role { font-size: 0.75rem; color: var(--forge-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .colleague-dept-badge { font-size: 0.72rem; font-weight: 600; color: var(--forge-primary); background: var(--forge-success-bg); padding: 0.15rem 0.5rem; border-radius: 4px; width: fit-content; margin-bottom: 0.85rem; }
+    .colleague-details-list { display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.78rem; border-top: 1px solid var(--forge-border); padding-top: 0.65rem; margin-bottom: 1rem; flex: 1; }
+    .detail-row { display: flex; justify-content: space-between; }
+    .detail-label { color: var(--forge-text-subtle); }
+    .detail-val { color: var(--forge-text-main); font-weight: 500; }
+    .tz-live-clock { font-family: var(--forge-font-mono, monospace); color: var(--forge-primary); font-weight: 600; }
+    .colleague-card-actions { display: flex; gap: 0.5rem; }
+
+    /* ── Profile & Admin Table Layouts ── */
+    .profile-grid-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+    .profile-card { padding: 1.5rem; }
+    .profile-hero-section { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--forge-border); padding-bottom: 1.25rem; }
+    .profile-hero-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--forge-primary); color: var(--forge-bg-root); display: flex; align-items: center; justify-content: center; font-size: 1.35rem; font-weight: 700; }
+    .profile-hero-name { margin: 0; font-size: 1.15rem; font-weight: 700; color: var(--forge-text-main); }
+    .profile-hero-email { font-size: 0.82rem; color: var(--forge-text-muted); margin-bottom: 0.35rem; }
+    .profile-hero-badge { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; color: var(--forge-primary); background: var(--forge-success-bg); padding: 0.15rem 0.55rem; border-radius: var(--forge-radius-full); font-weight: 600; }
+    .profile-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-field { display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-field label { font-size: 0.78rem; font-weight: 600; color: var(--forge-text-muted); }
+    .iam-role-pill { display: flex; align-items: center; gap: 0.5rem; background: var(--forge-bg-surface); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.45rem 0.65rem; margin-bottom: 0.5rem; font-size: 0.78rem; font-family: var(--forge-font-mono, monospace); color: var(--forge-text-main); }
+
+    .astryx-table-container { background: var(--forge-bg-surface); border: 1px solid var(--forge-border); border-radius: var(--forge-radius); overflow-x: auto; margin-top: 1rem; }
+    .astryx-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.82rem; }
+    .astryx-table th { background: var(--forge-bg-card); color: var(--forge-text-muted); font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.75rem 1rem; border-bottom: 1px solid var(--forge-border); }
+    .astryx-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--forge-border); color: var(--forge-text-main); vertical-align: middle; }
+    .astryx-table tr:hover td { background: var(--forge-bg-card-hover); }
+    .table-user-cell { display: flex; align-items: center; gap: 0.65rem; }
+    .table-user-avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--forge-primary); color: var(--forge-bg-root); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+    .table-user-name { font-weight: 600; color: var(--forge-text-main); }
+    .table-user-email { font-size: 0.72rem; color: var(--forge-text-muted); }
+    .table-dept-tag { font-weight: 600; font-size: 0.78rem; }
+    .table-div-sub { font-size: 0.7rem; color: var(--forge-text-subtle); }
+    .admin-table-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.75rem; }
+    .table-summary-pill { font-size: 0.8rem; color: var(--forge-text-muted); }
+
+    /* ── Modals & Backdrop Dialogs ── */
+    .astryx-modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(16px); z-index: 2500; align-items: center; justify-content: center; }
+    .astryx-modal-backdrop.active { display: flex; animation: viewFadeIn 0.15s ease; }
+    .astryx-modal-box { width: 90%; max-width: 480px; background: var(--forge-bg-surface); border: 1px solid var(--forge-border-medium); border-radius: var(--forge-radius); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8); overflow: hidden; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border-bottom: 1px solid var(--forge-border); }
+    .modal-title { margin: 0; font-size: 1rem; font-weight: 700; color: var(--forge-text-main); }
+    .modal-close-btn { background: transparent; border: none; color: var(--forge-text-muted); cursor: pointer; font-size: 1.1rem; }
+    .modal-body { padding: 1.25rem; }
+    .modal-footer { display: flex; justify-content: flex-end; gap: 0.6rem; padding: 0.85rem 1.25rem; border-top: 1px solid var(--forge-border); background: var(--forge-bg-card); }
+
+    /* ── Command Palette (⌘K) ── */
+    .portal-search-modal { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(16px); z-index: 3000; align-items: flex-start; justify-content: center; padding-top: 12vh; }
+    .portal-search-modal.active { display: flex; animation: viewFadeIn 0.15s ease; }
+    .portal-search-box { width: 90%; max-width: 580px; background: var(--forge-bg-surface); border: 1px solid var(--forge-border-medium); border-radius: var(--forge-radius); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8); overflow: hidden; }
+    .command-palette-header { display: flex; align-items: center; gap: 0.65rem; padding: 0.85rem 1.15rem; border-bottom: 1px solid var(--forge-border); }
+    .portal-search-input { flex: 1; background: transparent; border: none; outline: none; color: var(--forge-text-main); font-size: 0.95rem; }
+    .command-results-list { max-height: 360px; overflow-y: auto; padding: 0.5rem; }
+    .command-group-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; color: var(--forge-text-subtle); padding: 0.35rem 0.65rem 0.2rem; }
+    .command-item { display: flex; align-items: center; gap: 0.65rem; padding: 0.55rem 0.75rem; border-radius: var(--forge-radius-sm); cursor: pointer; color: var(--forge-text-main); font-size: 0.84rem; transition: var(--forge-transition); }
+    .command-item:hover, .command-item.selected { background: var(--forge-bg-card-hover); color: var(--forge-primary); }
+    .cmd-shortcut { margin-left: auto; font-size: 0.72rem; color: var(--forge-text-subtle); font-family: var(--forge-font-mono, monospace); }
+
+    /* ── Comprehensive Responsive Viewport Rules (Down to 320px) ── */
+    @media (max-width: 992px) {
+      .profile-grid-layout { grid-template-columns: 1fr; }
+      .portal-viewport { padding: 1.25rem 1.5rem; }
     }
 
-    /* ── Overview Page Cards ── */
-    .page-hero-card {
-      background: var(--forge-bg-surface); border: 1px solid var(--forge-border);
-      border-radius: var(--forge-radius); padding: 1.75rem; margin-bottom: 1.5rem;
-      position: relative; overflow: hidden; box-shadow: var(--forge-shadow-card);
-    }
-    .page-hero-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--forge-primary-gradient); }
-
-    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 1.25rem; }
-    .feature-card {
-      background: var(--forge-bg-card); border: 1px solid var(--forge-border);
-      border-radius: var(--forge-radius-sm); padding: 1.25rem; transition: var(--forge-transition); box-shadow: var(--forge-shadow-card);
-    }
-    .feature-card:hover { border-color: var(--forge-primary); background: var(--forge-bg-card-hover); transform: translateY(-2px); box-shadow: var(--forge-shadow-hover); }
-    .feature-card h4 { margin: 0 0 0.5rem 0; font-size: 0.95rem; color: var(--forge-text-main); display: flex; align-items: center; gap: 0.5rem; }
-    .feature-card p { margin: 0; font-size: 0.85rem; color: var(--forge-text-muted); line-height: 1.5; }
-
-    /* ── Search Modal ── */
-    .portal-search-modal {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-      z-index: 3000; align-items: flex-start; justify-content: center; padding-top: 12vh;
-      box-sizing: border-box;
-    }
-    .portal-search-modal.active { display: flex; animation: searchModalFadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1); }
-    .portal-search-box {
-      width: 90%; max-width: 580px; background: var(--forge-bg-surface);
-      border: 1px solid var(--forge-border-medium); border-radius: var(--forge-radius);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
-      overflow: hidden; transform: scale(0.98);
-      animation: searchBoxScale 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    @keyframes searchModalFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes searchBoxScale {
-      from { transform: scale(0.95) translateY(-8px); opacity: 0; }
-      to { transform: scale(1) translateY(0); opacity: 1; }
-    }
-    .portal-search-input {
-      width: 100%; padding: 1rem 1.25rem; background: transparent;
-      border: none; border-bottom: 1px solid var(--forge-border);
-      color: var(--forge-text-main); font-size: 0.95rem; outline: none; box-sizing: border-box;
-    }
-
-    /* ── Responsive Mobile & Tablet Rules (Down to 320px Viewport) ── */
     @media (max-width: 768px) {
+      .portal-viewport { padding: 1rem 0.85rem; }
+      .portal-view-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+      .portal-view-actions { width: 100%; justify-content: space-between; }
+      .portal-search-trigger { min-width: unset; width: 34px; padding: 0; justify-content: center; }
       .portal-search-trigger span, .portal-search-trigger .portal-kbd { display: none; }
-      .portal-search-trigger { min-width: unset; padding: 0.22rem 0.5rem; }
-      .portal-viewport { padding: 1rem 0.75rem; }
-      .feature-grid { grid-template-columns: 1fr; }
+      .canvas-viewport-frame { height: 460px; }
+      .canvas-search-input-wrap { min-width: unset; width: 100%; }
+      .canvas-search-bar { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+      .apps-catalog-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.85rem; }
+      .directory-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.85rem; }
+      .directory-filter-bar { flex-direction: column; align-items: stretch; gap: 0.65rem; }
+      .admin-table-controls { flex-direction: column; align-items: stretch; gap: 0.5rem; }
     }
+
     @media (max-width: 480px) {
+      :root { --portal-sidebar-width: 44px; --portal-header-height: 48px; }
       .portal-header { padding: 0 0.5rem; }
       .portal-brand span { display: none; }
+      .portal-viewport { padding: 0.75rem 0.5rem; }
+      .portal-view-title { font-size: 1.15rem; }
       .user-dropdown-popover { right: 0; width: calc(100vw - 1rem); }
+      .profile-form-grid { grid-template-columns: 1fr; }
+      .canvas-viewport-frame { height: 380px; }
+      .apps-catalog-grid { grid-template-columns: 1fr; }
+      .directory-grid { grid-template-columns: 1fr; }
+      .colleague-card-actions { flex-direction: column; }
+      .astryx-modal-box { width: calc(100vw - 1rem); margin: 0.5rem; }
+      .portal-search-box { width: calc(100vw - 1rem); margin: 0.5rem; }
     }
   `;
 }

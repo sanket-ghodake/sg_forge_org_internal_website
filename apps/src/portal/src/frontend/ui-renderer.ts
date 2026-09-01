@@ -1,14 +1,16 @@
 /**
  * @forge/portal - Master UI HTML Renderer (2026 LTS)
- * Combines Header, Expandable Sidebar, Viewport Containers, and Scripts into a cohesive Meta Astryx layout.
+ * Combines Header, Expandable Sidebar, Viewport Containers, Modals, and Scripts into a cohesive Meta Astryx layout.
  */
 
-import { getAstryxStyles, getHeadStateScript } from '@forge/ui';
+import { getAstryxStyles, getHeadStateScript, getAstryxToastScript, getAstryxDropdownScript } from '@forge/ui';
 import { loadBrandConfig } from '@forge/sdk';
 import { getPortalCustomStyles } from './ui-styles';
 import { renderPortalHeader, type HeaderUserContext } from './layout-header';
 import { renderPortalSidebar } from './layout-sidebar';
 import { renderPageCards } from './page-cards';
+import { renderPortalModals } from './ui-modals';
+import { renderCommandPalette } from './ui-command-palette';
 import { getPortalClientScript } from './ui-scripts';
 
 export function renderPortalHtml(user?: HeaderUserContext): string {
@@ -18,7 +20,7 @@ export function renderPortalHtml(user?: HeaderUserContext): string {
     email: user?.email || 'employee@forge.internal',
     displayName: user?.displayName || 'Authorized Member',
     roles: user?.roles || ['roles/employee'],
-    isAdmin: user?.isAdmin ?? ((user?.roles || []).some(r => r.includes('admin') || r.includes('manager'))),
+    isAdmin: user?.isAdmin ?? Boolean(user?.roles?.some(r => r.includes('admin') || r.includes('manager'))),
   };
 
   return `<!DOCTYPE html>
@@ -59,22 +61,22 @@ export function renderPortalHtml(user?: HeaderUserContext): string {
       <!-- Main Content Viewport -->
       <main class="portal-viewport">
         <div class="portal-view-container">
-          ${renderPageCards()}
+          ${renderPageCards(userContext)}
         </div>
       </main>
     </div>
   </div>
 
   <!-- Command Palette / Quick Search Modal (⌘K) -->
-  <div class="portal-search-modal" id="portal-search-modal">
-    <div class="portal-search-box">
-      <input type="text" class="portal-search-input" id="portal-search-input" placeholder="Type to search pages, members, or tools... (Esc to close)">
-      <div id="portal-search-results" style="max-height: 360px; overflow-y: auto;"></div>
-    </div>
-  </div>
+  ${renderCommandPalette()}
+
+  <!-- Viewport-Safe Modals & Action Drawers -->
+  ${renderPortalModals()}
 
   <!-- Interactive Scripts -->
   <script>
+    ${getAstryxToastScript()}
+    ${getAstryxDropdownScript()}
     ${getPortalClientScript()}
   </script>
 </body>

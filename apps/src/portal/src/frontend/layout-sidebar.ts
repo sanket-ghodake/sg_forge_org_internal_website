@@ -20,7 +20,7 @@ export const WORKSPACE_NAV_ITEMS: SidebarNavOption[] = [
   {
     id: 'apps',
     label: 'Apps & Tools',
-    badge: '3',
+    badge: '5',
     iconSvg: `<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>`,
   },
   {
@@ -31,7 +31,7 @@ export const WORKSPACE_NAV_ITEMS: SidebarNavOption[] = [
   {
     id: 'notifications',
     label: 'Announcements',
-    badge: 'New',
+    badge: '3',
     iconSvg: `<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>`,
   },
 ];
@@ -88,7 +88,7 @@ export function renderPortalSidebar(isAdmin: boolean): string {
           <div class="portal-nav-divider"></div>
           <div class="portal-nav-section-label" style="color: var(--forge-primary); display: flex; align-items: center; gap: 0.35rem;">
             <span style="width: 4px; height: 4px; border-radius: 50%; background: var(--forge-primary); display: inline-block;"></span>
-            <span>Admin Suite</span>
+            <span>Admin Console</span>
           </div>
           ${ADMIN_NAV_ITEMS.map(item => `
             <button class="portal-nav-item" data-view="${item.id}" title="${item.label}">

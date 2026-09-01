@@ -112,6 +112,22 @@ export function getAstryxToastScript(): string {
           console.error('[Astryx Toast Error]', e);
         }
       };
+
+      window.astryxToast.show = function(message, type, duration) {
+        return window.astryxToast(message, type, duration);
+      };
+      window.astryxToast.success = function(message, duration) {
+        return window.astryxToast(message, 'success', duration);
+      };
+      window.astryxToast.error = function(message, duration) {
+        return window.astryxToast(message, 'error', duration);
+      };
+      window.astryxToast.warning = function(message, duration) {
+        return window.astryxToast(message, 'warning', duration);
+      };
+      window.astryxToast.info = function(message, duration) {
+        return window.astryxToast(message, 'info', duration);
+      };
     })();
   `;
 }

@@ -1,15 +1,31 @@
-/**
- * @forge/portal - Frontend Interaction & Navigation Scripts (2026 LTS)
- * Handles client-side view routing, user profile popover, auto-collapsible sidebar, theme sync, and ⌘K search.
- */
-
-import { getAstryxToastScript } from '@forge/ui';
+import { getCanvasClientScript } from './ui-canvas-scripts';
+import { getDirectoryClientScript } from './ui-directory-scripts';
+import { getAdminClientScript } from './ui-admin-scripts';
 
 export function getPortalClientScript(): string {
   return `
-    ${getAstryxToastScript()}
-
     (function() {
+      // 0. Browser Telemetry & Log Bridge
+      try {
+        window.addEventListener('error', function(e) {
+          try {
+            if (e.filename && (e.filename.startsWith('chrome-extension:') || e.filename.startsWith('moz-extension:') || e.filename.includes('VM') || e.filename.includes('extensions::'))) {
+              return;
+            }
+            if (e.message && e.message.includes("reading 'startTime'")) {
+              return;
+            }
+            if (navigator.sendBeacon) {
+              navigator.sendBeacon('/portal/api/logs/browser', JSON.stringify({
+                service: 'portal-service',
+                severity: 'ERROR',
+                message: e.message || 'Client runtime error',
+                source: 'browser'
+              }));
+            }
+          } catch(err) {}
+        });
+      } catch(e) {}
       var STORAGE_KEY_VIEW = 'forge:v1:portal:view';
       var STORAGE_KEY_ROLE = 'forge:v1:portal:preview_role';
       var THEME_KEY = 'forge:v1:platform:theme';
@@ -29,7 +45,7 @@ export function getPortalClientScript(): string {
       var searchResults = document.getElementById('portal-search-results');
       var themeBadge = document.getElementById('theme-badge');
 
-      // ── 1. User Profile Popover Controller ──
+      // ── 1. User Profile Popover Controller with Viewport Containment ──
       function positionPopover() {
         if (!profilePopover || !profileBtn) return;
         var rect = profileBtn.getBoundingClientRect();
@@ -130,17 +146,6 @@ export function getPortalClientScript(): string {
         });
       }
 
-      if (typeof BroadcastChannel !== 'undefined') {
-        try {
-          var receiver = new BroadcastChannel(CHANNEL_NAME);
-          receiver.onmessage = function(e) {
-            if (e.data && (e.data.key === THEME_KEY || e.data.key === LEGACY_THEME_KEY)) {
-              applyTheme(e.data.data);
-            }
-          };
-        } catch(e) {}
-      }
-
       // ── 3. View Navigation & Routing ──
       function switchView(viewId, updateHistory) {
         if (!viewId) return;
@@ -167,6 +172,8 @@ export function getPortalClientScript(): string {
           window.history.replaceState({ view: viewId }, '', url.toString());
         }
       }
+
+      window.portalSPA = { navigate: switchView };
 
       document.querySelectorAll('.portal-nav-item[data-view]').forEach(function(btn) {
         btn.addEventListener('click', function() {
@@ -200,16 +207,10 @@ export function getPortalClientScript(): string {
       function setRole(role) {
         currentRole = role;
         localStorage.setItem(STORAGE_KEY_ROLE, role);
-        if (roleLabel) {
-          roleLabel.textContent = role;
-        }
-        if (popoverRoleText) {
-          popoverRoleText.textContent = role + ' Access';
-        }
-        if (adminSection) {
-          adminSection.style.display = (role === 'Admin') ? 'block' : 'none';
-        }
-        // If switching to Employee while on an admin page, bounce back to canvas
+        if (roleLabel) roleLabel.textContent = role;
+        if (popoverRoleText) popoverRoleText.textContent = role + ' Access';
+        if (adminSection) adminSection.style.display = (role === 'Admin') ? 'block' : 'none';
+
         var currentActiveNav = document.querySelector('.portal-nav-item.active');
         if (currentActiveNav && currentActiveNav.closest('.portal-admin-section') && role !== 'Admin') {
           switchView('canvas', true);
@@ -220,7 +221,7 @@ export function getPortalClientScript(): string {
         roleToggleBtn.addEventListener('click', function() {
           var nextRole = (currentRole === 'Admin') ? 'Employee' : 'Admin';
           setRole(nextRole);
-          if (typeof window.astryxToast === 'function') {
+          if (window.astryxToast) {
             window.astryxToast('Switched workspace mode to ' + nextRole, 'info');
           }
         });
@@ -264,17 +265,15 @@ export function getPortalClientScript(): string {
         });
 
         if (matches.length === 0) {
-          searchResults.innerHTML = '<div style="padding: 1.5rem; text-align: center; color: var(--forge-text-muted); font-size: 0.85rem;">No matching pages found</div>';
+          searchResults.innerHTML = '<div style="padding: 1.5rem; text-align: center; color: var(--forge-text-muted); font-size: 0.85rem;">No matching items found</div>';
           return;
         }
 
         searchResults.innerHTML = matches.map(function(item) {
-          return '<div class="portal-search-item" data-target="' + item.id + '" style="padding: 0.65rem 0.95rem; display: flex; align-items: center; justify-content: space-between; cursor: pointer; border-bottom: 1px solid var(--forge-border); transition: background 0.15s;">' +
-            '<div style="display: flex; align-items: center; gap: 0.5rem;">' +
-              '<span class="badge-dot" style="background: var(--forge-primary); width: 6px; height: 6px; border-radius: 50%;"></span>' +
-              '<span style="font-weight: 500; font-size: 0.85rem; color: var(--forge-text-main);">' + item.title + '</span>' +
-            '</div>' +
-            '<span style="font-size: 0.7rem; color: var(--forge-text-muted); background: var(--forge-bg-card); padding: 0.12rem 0.45rem; border-radius: 4px; border: 1px solid var(--forge-border);">' + item.category + '</span>' +
+          return '<div class="portal-search-item command-item" data-target="' + item.id + '">' +
+            '<span class="badge-dot" style="background: var(--forge-primary); width: 6px; height: 6px; border-radius: 50%;"></span>' +
+            '<span class="cmd-text" style="font-weight: 500;">' + item.title + '</span>' +
+            '<span class="cmd-shortcut">' + item.category + '</span>' +
           '</div>';
         }).join('');
 
@@ -285,12 +284,6 @@ export function getPortalClientScript(): string {
               switchView(target, true);
               closeSearch();
             }
-          });
-          row.addEventListener('mouseenter', function() {
-            row.style.background = 'var(--forge-bg-card-hover)';
-          });
-          row.addEventListener('mouseleave', function() {
-            row.style.background = 'transparent';
           });
         });
       }
@@ -330,9 +323,14 @@ export function getPortalClientScript(): string {
         });
       }
 
-      // Initial route hydration: Tier 1 URL query parameter ground truth
+      // Initial route hydration: Priority URL param -> Hash -> SessionStorage -> Default 'canvas'
       var initialParamView = new URLSearchParams(window.location.search).get('view');
-      switchView(initialParamView || 'canvas', false);
+      var hashView = window.location.hash ? window.location.hash.slice(1) : '';
+      switchView(initialParamView || hashView || 'canvas', false);
     })();
+
+    ${getCanvasClientScript()}
+    ${getDirectoryClientScript()}
+    ${getAdminClientScript()}
   `;
 }
