@@ -21,13 +21,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Run SBOM Generator
       run: bash scripts/generate-sbom.sh
 
     - name: Upload SBOM Artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: cyclonedx-sbom
         path: docs/security/sbom/cyclonedx-sbom.json
