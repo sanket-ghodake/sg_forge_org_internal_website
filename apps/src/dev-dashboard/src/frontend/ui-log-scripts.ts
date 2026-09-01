@@ -14,28 +14,38 @@ export function getLogDashboardScripts(): string {
     let rawLogHistory = [];
     let lastSseEventTime = Date.now();
     let sseClient = null;
+    let isReconnecting = false;
+    let watchdogTimer = null;
     const MAX_DOM_LOG_LINES = 250;
 
-    // ⚡ Watchdog Heartbeat Monitor & Resilient SSE Manager
-    function initWatchdogAndSSE() {
-      if (sseClient) { try { sseClient.close(); } catch(e){} }
-      
-      const updateWatchdogUI = (status, text) => {
-        const dot = document.getElementById('watchdog-dot');
-        const label = document.getElementById('watchdog-text');
-        if (!dot || !label) return;
-        dot.className = 'watchdog-dot ' + status;
-        label.textContent = text;
-      };
+    // ⚡ Watchdog Heartbeat Monitor & Resilient Self-Healing SSE Manager
+    function updateWatchdogUI(status, text) {
+      const dot = document.getElementById('watchdog-dot');
+      const label = document.getElementById('watchdog-text');
+      if (!dot || !label) return;
+      dot.className = 'watchdog-dot ' + status;
+      label.textContent = text;
+    }
 
+    function initWatchdogAndSSE() {
+      if (sseClient) {
+        try { sseClient.close(); } catch(e){}
+        sseClient = null;
+      }
+      
       try {
         sseClient = new EventSource(apiBase + '/api/logs/stream');
         sseClient.onopen = () => {
           lastSseEventTime = Date.now();
+          isReconnecting = false;
           updateWatchdogUI('live', 'Live Stream');
         };
         sseClient.onerror = () => {
           updateWatchdogUI('reconnecting', 'Reconnecting...');
+          // Auto-reconnect after brief backoff
+          if (!isReconnecting) {
+            setTimeout(() => reconnectSSE(), 1500);
+          }
         };
         sseClient.addEventListener('log', e => {
           lastSseEventTime = Date.now();
@@ -53,16 +63,24 @@ export function getLogDashboardScripts(): string {
         updateWatchdogUI('frozen', 'Disconnected');
       }
 
-      setInterval(() => {
-        if (Date.now() - lastSseEventTime > 12000) {
-          updateWatchdogUI('frozen', 'Stream Stalled (Click)');
-        }
-      }, 3000);
+      if (!watchdogTimer) {
+        watchdogTimer = setInterval(() => {
+          // If no message/ping received for > 7.5s, auto-heal connection (sleep/wake recovery)
+          if (Date.now() - lastSseEventTime > 7500) {
+            updateWatchdogUI('reconnecting', 'Auto-Healing Stream...');
+            reconnectSSE();
+          }
+        }, 2500);
+      }
     }
 
     function reconnectSSE() {
+      if (isReconnecting) return;
+      isReconnecting = true;
+      lastSseEventTime = Date.now();
       initWatchdogAndSSE();
       loadActiveTabLogs();
+      setTimeout(() => { isReconnecting = false; }, 800);
     }
 
     // 🚀 High-Performance Zero-Hang DOM Log Renderer

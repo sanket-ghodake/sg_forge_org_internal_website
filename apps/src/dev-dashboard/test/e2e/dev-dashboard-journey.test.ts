@@ -44,7 +44,8 @@ describe('Tier 5 E2E: Developer Dashboard Live Server & Endpoints', () => {
     expect(res.headers.get('Content-Type')).toContain('text/html');
     expect(html).toContain('SG Forge - Developer Dashboard');
     expect(html).toContain('cmd-palette-modal');
-    expect(html).toContain('db-table-data-card');
+    expect(html).toContain('tab-database');
+    expect(html).toContain('connect-db-modal');
     expect(html).toContain('api-registry-modal');
   });
 

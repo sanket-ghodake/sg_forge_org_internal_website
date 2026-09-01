@@ -104,8 +104,8 @@ export function getComponentStyles(): string {
     .astryx-card {
       background: var(--forge-bg-card);
       border: 1px solid var(--forge-border);
-      border-radius: var(--forge-radius);
-      padding: 1.5rem;
+      border-radius: var(--forge-radius-sm);
+      padding: 1.25rem;
       box-shadow: var(--forge-shadow-card);
       transition: var(--forge-transition);
       position: relative;
@@ -113,7 +113,6 @@ export function getComponentStyles(): string {
     }
 
     .astryx-card:hover {
-      transform: translateY(-2px);
       border-color: var(--forge-border-medium);
       background: var(--forge-bg-card-hover);
       box-shadow: var(--forge-shadow-hover);
@@ -122,18 +121,18 @@ export function getComponentStyles(): string {
     .astryx-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
+      gap: 0.35rem;
       font-size: 0.72rem;
-      font-weight: 600;
-      padding: 0.25rem 0.65rem;
-      border-radius: var(--forge-radius-full);
-      letter-spacing: 0.04em;
+      font-weight: 500;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      letter-spacing: 0.02em;
     }
 
     .badge-online {
       background: var(--forge-success-bg);
       color: var(--forge-success);
-      border: 1px solid var(--forge-success);
+      border: 1px solid rgba(62, 207, 142, 0.3);
     }
 
     .badge-pill {
@@ -147,18 +146,18 @@ export function getComponentStyles(): string {
       height: 6px;
       border-radius: 50%;
       background: currentColor;
-      box-shadow: 0 0 8px currentColor;
     }
 
     .astryx-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      padding: 0.55rem 1.2rem;
+      gap: 0.45rem;
+      padding: 0.45rem 0.95rem;
       border-radius: var(--forge-radius-sm);
-      font-size: 0.88rem;
-      font-weight: 600;
+      font-size: 0.82rem;
+      font-weight: 550;
+      letter-spacing: -0.01em;
       cursor: pointer;
       text-decoration: none;
       transition: var(--forge-transition);
@@ -167,41 +166,50 @@ export function getComponentStyles(): string {
     }
 
     .btn-primary {
-      background: var(--forge-primary-gradient);
-      color: #ffffff;
-      box-shadow: 0 2px 10px rgba(0, 242, 254, 0.2);
-    }
-
-    [data-theme="dark"] .btn-primary {
-      color: #040711;
+      background: var(--forge-primary);
+      color: #000000 !important;
+      font-weight: 600;
+      border-color: transparent;
     }
 
     .btn-primary:hover {
-      box-shadow: 0 4px 18px rgba(0, 242, 254, 0.4);
-      filter: brightness(1.05);
+      filter: brightness(1.08);
+      box-shadow: 0 2px 12px rgba(62, 207, 142, 0.25);
     }
 
     .btn-outline {
-      background: transparent;
+      background: rgba(255, 255, 255, 0.03);
       border-color: var(--forge-border);
       color: var(--forge-text-main);
     }
 
     .btn-outline:hover {
-      border-color: var(--forge-primary);
-      background: rgba(0, 242, 254, 0.05);
+      border-color: var(--forge-border-medium);
+      background: rgba(255, 255, 255, 0.06);
     }
 
     .astryx-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .astryx-micro-pill {
+      font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--forge-border);
+      color: var(--forge-text-muted);
+      letter-spacing: 0.02em;
     }
 
     .astryx-code-badge {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 0.8rem;
+      font-family: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.78rem;
       background: var(--forge-bg-elevated);
       color: var(--forge-primary);
       padding: 0.2rem 0.55rem;

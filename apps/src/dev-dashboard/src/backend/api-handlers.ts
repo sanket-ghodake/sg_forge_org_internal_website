@@ -1,5 +1,5 @@
 import { loadServiceRegistry, redactSensitiveData } from '@forge/sdk';
-import { platformDb } from '../db';
+import { platformDb, remoteDbManager } from '../db';
 import { servicesController } from './services-controller';
 import { telemetryEngine } from './telemetry';
 
@@ -106,10 +106,46 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
     return Response.json({ status: 'ok', apps });
   }
 
-  // 7. Database List
+  // 7. Database List (Local SQLite + Registered Remote DBs)
   if (path === '/api/db/list' && req.method === 'GET') {
     const dbs = platformDb.listDatabases();
-    return Response.json({ status: 'ok', databases: dbs });
+    const remotes = remoteDbManager.listRemoteConnections().map((r) => ({
+      name: r.id,
+      displayName: `${r.name} (${r.type})`,
+      sizeBytes: 0,
+      isRemote: true,
+      type: r.type,
+      readOnly: r.readOnly,
+    }));
+    return Response.json({ status: 'ok', databases: dbs, remoteDatabases: remotes });
+  }
+
+  // 7a. Register Remote Database Connection
+  if (path === '/api/db/connect' && req.method === 'POST') {
+    const body: any = await req.json().catch(() => ({}));
+    if (!body.name || !body.url) {
+      return Response.json({ error: 'Missing name or url in connection payload' }, { status: 400 });
+    }
+    const result = remoteDbManager.registerConnection({
+      name: String(body.name),
+      url: String(body.url),
+      type: body.type || 'turso',
+      authToken: body.authToken ? String(body.authToken) : undefined,
+      readOnly: body.readOnly !== false,
+    });
+    return Response.json(result, { status: result.success ? 200 : 400 });
+  }
+
+  // 7a2. Test Remote Database Connection Ping
+  if (path === '/api/db/test-connect' && req.method === 'POST') {
+    const body: any = await req.json().catch(() => ({}));
+    if (!body.url) return Response.json({ error: 'Missing url' }, { status: 400 });
+    const result = await remoteDbManager.testConnection({
+      url: String(body.url),
+      authToken: body.authToken ? String(body.authToken) : undefined,
+      type: body.type,
+    });
+    return Response.json(result);
   }
 
   // 7b. Table Schema & DDL
@@ -141,13 +177,17 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
     return Response.json({ status: 'ok', ...result });
   }
 
-  // 8. Execute SQL Query
+  // 8. Execute SQL Query (Routes to Local SQLite or Registered Remote DB)
   if (path === '/api/db/query' && req.method === 'POST') {
     const body: any = await req.json().catch(() => ({}));
     if (!body.dbName || !body.sql) {
       return Response.json({ error: 'Missing dbName or sql' }, { status: 400 });
     }
     const readOnly = body.readOnly !== false;
+    if (body.dbName.startsWith('remote_')) {
+      const result = await remoteDbManager.executeRemoteQuery(body.dbName, body.sql, readOnly);
+      return Response.json(result);
+    }
     const result = platformDb.executeQuery(body.dbName, body.sql, readOnly);
     return Response.json(result);
   }

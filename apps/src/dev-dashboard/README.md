@@ -9,7 +9,7 @@ Real-time platform telemetry, database diagnostics, and live log streaming dashb
 1. **System Topology & Vitals Overview**: Real-time micro-service node diagram with live latencies, RAM usage, and cluster health indicators.
 2. **Process Management & Controls**: Live process table with `Start`, `Stop`, and `Restart` lifecycle triggers.
 3. **Dynamic Forge Apps Registry**: Database-driven app discovery in `platform_core.db` (`apps_registry` table) with dedicated per-app Turso SQLite databases (`data/app_*.db`).
-4. **Turso DB Explorer & SQL Playground**: Multi-database schema inspector, table browser, and monospace SQL editor with `READ_ONLY` safety sandbox.
+4. **Unified Database Studio & Remote Gateway**: GCP Cloud SQL / Supabase standard studio merging schema inspector, fast paginated table data browser, monospace SQL editor with `READ_ONLY` safety sandbox, and dynamic remote microservice DB connections (`/api/db/connect`).
 5. **Live SSE Log Streamer**: Zero-disk-churn in-memory ring buffer streaming logs via Server-Sent Events (`/api/logs/stream`).
 6. **Traffic & SRE Golden Signals**: Real-time request telemetry, response durations, and status code distributions.
 7. **RFC 7807 Issue Center**: Deduplicated exception logs grouped by fingerprint with sanitized stack traces.
@@ -36,19 +36,17 @@ apps/src/dev-dashboard/
 │   ├── frontend/
 │   │   ├── README.md              # Frontend UI architecture documentation
 │   │   ├── ui-renderer.ts         # High-density SPA HTML document assembler
+│   │   ├── ui-modals.ts           # Astryx modal dialogs & Connect Remote DB modal
 │   │   ├── ui-styles.ts           # Meta Astryx CSS layout & token styles
 │   │   ├── ui-scripts.ts          # Client-side SPA navigation & SSE listeners
+│   │   ├── ui-tools-scripts.ts    # Command palette & Database Studio scripts
 │   │   └── index.ts               # Frontend exports
 │   └── db/
 │       ├── README.md              # Database layer documentation
 │       ├── db.ts                  # Turso/libSQL manager with WAL & query sandbox
+│       ├── remote-connectors.ts   # Dynamic remote DB connectors & validation
 │       └── index.ts               # Database exports
-├── test/
-│   ├── README.md                  # Test suite documentation
-│   └── dashboard.test.ts          # Colocated 3A pattern unit tests
-└── docker/
-    ├── README.md                  # Container documentation
-    └── Dockerfile                 # Lightweight Alpine Bun container
+├── test/                          # 5-Tier test suite (unit, integration, security, contracts, e2e)
 ```
 
 ---

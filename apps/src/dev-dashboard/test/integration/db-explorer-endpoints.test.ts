@@ -88,4 +88,58 @@ describe('Tier 2 Integration: Database Explorer & Diagnostics Endpoints', () => 
     const text = await res!.text();
     expect(text).toContain('Timestamp,App,Path,Method,StatusCode,DurationMs');
   });
+
+  it('Arrange, Act, Assert: POST /api/db/connect registers a new remote microservice DB', async () => {
+    // Arrange
+    const url = new URL('http://localhost:3002/api/db/connect');
+    const req = new Request(url.toString(), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: 'Auth Remote DB',
+        url: 'https://auth-prod.turso.io',
+        type: 'turso',
+        authToken: 'secret_jwt_token',
+        readOnly: true,
+      }),
+    });
+
+    // Act
+    const res = await handleApiRequest(req, url);
+
+    // Assert
+    expect(res).not.toBeNull();
+    const data: any = await res!.json();
+    expect(data.success).toBe(true);
+    expect(data.connectionId).toBeDefined();
+
+    // Verify /api/db/list includes the new remote DB
+    const listUrl = new URL('http://localhost:3002/api/db/list');
+    const listReq = new Request(listUrl.toString(), { method: 'GET' });
+    const listRes = await handleApiRequest(listReq, listUrl);
+    const listData: any = await listRes!.json();
+    expect(listData.remoteDatabases.some((r: any) => r.name === data.connectionId)).toBe(true);
+  });
+
+  it('Arrange, Act, Assert: POST /api/db/test-connect validates reachability format', async () => {
+    // Arrange
+    const url = new URL('http://localhost:3002/api/db/test-connect');
+    const req = new Request(url.toString(), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        url: 'postgres://user:pass@localhost:5432/testdb',
+        type: 'postgres',
+      }),
+    });
+
+    // Act
+    const res = await handleApiRequest(req, url);
+
+    // Assert
+    expect(res).not.toBeNull();
+    const data: any = await res!.json();
+    expect(data.success).toBe(true);
+    expect(data.latencyMs).toBeGreaterThanOrEqual(0);
+  });
 });

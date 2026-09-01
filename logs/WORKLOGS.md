@@ -271,3 +271,10 @@
 2026-08-31 22:47 | Removed center nav links from header and set header left branding to non-clickable option
 2026-08-31 22:49 | Full code audit and 2-tier quality gate verification passed (15/15 Tier 1 checks, 7/7 Tier 2 audits)
 2026-08-31 22:51 | [bb0ff6f] feat(ui): enforce Astryx scrollbars, popups, toasts, and dropdowns with clean header bar (+3652, -1486)
+2026-08-31 23:03 | Unified Database Studio, dynamic remote DB connectors, and GCP-style multi-service DB gateway
+2026-08-31 23:17 | Elevated design system to Supabase/Vercel standard: Geist typography with negative tracking, 14px monochrome SVG icons, 4-tier dark elevation, and project micro-cards
+2026-09-01 07:23 | Implemented zero-touch sleep/wake auto-recovery: visibilitychange listeners, self-healing watchdog, and 2.5s backend keepalive
+2026-09-01 07:27 | Fixed theme toggle disappearing services: added node-canvas styling and immediate active tab refresh on theme change
+2026-09-01 07:32 | Fixed services and logs search input autofill by enforcing type=search and autocomplete=off
+2026-09-01 07:35 | Completely decoupled Chrome password manager heuristics: added autofill trap, wrapped modal forms, and added startup input sanitizer
+2026-09-01 07:35 | [f700f8d] feat(dev-dashboard): unified Database Studio, Supabase-grade design tokens, sleep/wake auto-recovery, and autofill decoupling (+1049, -310)

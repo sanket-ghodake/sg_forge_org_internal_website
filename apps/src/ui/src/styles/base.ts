@@ -90,16 +90,26 @@ export function getBaseStyles(): string {
       background: transparent;
     }
 
+    @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap');
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
       background-color: var(--forge-bg-root);
       color: var(--forge-text-main);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      line-height: 1.6;
+      line-height: 1.45;
+      letter-spacing: -0.011em;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
       transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    code, kbd, pre, .astryx-mono, .astryx-badge, .astryx-stat-value {
+      font-family: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+      font-variant-numeric: tabular-nums;
     }
 
     .astryx-container {

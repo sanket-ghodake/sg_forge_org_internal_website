@@ -183,5 +183,5 @@ export const telemetryEngine = new TelemetryEngine();
 setInterval(() => {
   telemetryEngine.broadcastVitalsTick();
   telemetryEngine.broadcastPing();
-}, 4000);
+}, 2500);
 

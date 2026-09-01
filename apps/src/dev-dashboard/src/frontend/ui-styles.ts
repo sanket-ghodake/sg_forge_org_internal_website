@@ -205,12 +205,28 @@ export function getDashboardStyles(): string {
     .sb-nav-icon {
       min-width: 24px; width: 24px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; flex-shrink: 0; margin-right: 8px; text-align: center;
+      flex-shrink: 0; margin-right: 8px; text-align: center;
+      color: var(--forge-text-muted);
+      transition: color 0.15s ease;
+    }
+    .sb-nav-icon svg {
+      width: 15px; height: 15px;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .sb-nav-item:hover .sb-nav-icon {
+      color: var(--forge-text-main);
+    }
+    .sb-nav-item.active .sb-nav-icon {
+      color: var(--forge-primary);
     }
     .sb-nav-label {
       opacity: 0; transform: translateX(-4px);
       transition: opacity 0.15s ease, transform 0.15s ease;
       flex: 1; overflow: hidden; text-overflow: ellipsis;
+      letter-spacing: -0.01em;
     }
     .sb-hotkey-badge {
       opacity: 0; transform: translateX(-4px);
@@ -388,10 +404,25 @@ export function getDashboardStyles(): string {
     /* Table Browser & Schema Drawer */
     .schema-code-box { background: var(--forge-bg-elevated); padding: 0.75rem; border-radius: var(--forge-radius-sm); border: 1px solid var(--forge-border); font-family: monospace; font-size: 0.78rem; color: var(--forge-text-main); overflow-x: auto; white-space: pre-wrap; }
 
+    /* Unified Database Studio Layout (GCP / Supabase Style) */
+    .db-studio-layout { display: grid; grid-template-columns: 280px 1fr; gap: 1rem; align-items: start; }
+    @media (max-width: 1024px) { .db-studio-layout { grid-template-columns: 1fr; } }
+    .db-studio-sidebar { display: flex; flex-direction: column; gap: 0.75rem; }
+    .db-studio-main { display: flex; flex-direction: column; gap: 0.75rem; min-width: 0; }
+    .db-subtab-bar { display: flex; gap: 0.35rem; border-bottom: 1px solid var(--forge-border); padding-bottom: 0.5rem; margin-bottom: 0.75rem; }
+    .db-subtab-btn { padding: 0.3rem 0.75rem; border-radius: var(--forge-radius-sm); font-size: 0.8rem; font-weight: 600; border: 1px solid var(--forge-border); background: var(--forge-bg-card); color: var(--forge-text-muted); cursor: pointer; transition: var(--forge-transition); }
+    .db-subtab-btn:hover { color: var(--forge-text-main); border-color: var(--forge-border-medium); }
+    .db-subtab-btn.active { background: var(--forge-bg-card-hover); color: var(--forge-primary); border-color: var(--forge-primary); box-shadow: 0 0 8px rgba(62, 207, 142, 0.15); }
+    .db-table-item { display: flex; align-items: center; justify-content: space-between; padding: 0.45rem 0.65rem; border-radius: var(--forge-radius-sm); cursor: pointer; border: 1px solid transparent; transition: var(--forge-transition); font-size: 0.82rem; }
+    .db-table-item:hover { background: var(--forge-bg-card-hover); border-color: var(--forge-border); }
+    .db-table-item.active { background: rgba(62, 207, 142, 0.1); border-color: var(--forge-primary); color: var(--forge-primary); font-weight: 600; }
+
     /* 2026 Services & Processes Command Center (Option C) */
     .services-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1rem; }
     .services-search-box { display: flex; align-items: center; gap: 0.5rem; background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-full); padding: 0.35rem 0.85rem; flex: 1; max-width: 360px; min-width: 220px; }
-    .services-search-box input { background: transparent; border: none; outline: none; color: var(--forge-text-main); font-size: 0.82rem; width: 100%; }
+    .services-search-box input { background: transparent; border: none; outline: none; color: var(--forge-text-main); font-size: 0.82rem; width: 100%; -webkit-appearance: none; appearance: none; }
+    .services-search-box input::-webkit-search-cancel-button,
+    .services-search-box input::-webkit-search-decoration { -webkit-appearance: none; display: none; }
     .filter-chip-group { display: flex; gap: 0.35rem; align-items: center; flex-wrap: wrap; }
     .filter-chip { padding: 0.25rem 0.65rem; border-radius: var(--forge-radius-full); font-size: 0.72rem; font-weight: 600; border: 1px solid var(--forge-border); background: var(--forge-bg-card); color: var(--forge-text-muted); cursor: pointer; transition: var(--forge-transition); user-select: none; }
     .filter-chip:hover { color: var(--forge-text-main); border-color: var(--forge-border-medium); }

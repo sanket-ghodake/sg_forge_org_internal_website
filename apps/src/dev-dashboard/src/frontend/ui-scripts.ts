@@ -105,8 +105,7 @@ export function getDashboardScripts(): string {
       overview: 'Overview',
       services: 'Services & Processes',
       apps: 'Forge Apps',
-      database: 'Turso DB Explorer',
-      sql: 'SQL Playground',
+      database: 'Database Studio',
       logs: 'Isolated App Logs',
       traffic: 'Traffic Analytics',
       issues: 'Issue Center',
@@ -210,36 +209,55 @@ export function getDashboardScripts(): string {
         const grid = document.getElementById('apps-grid');
         if (!grid || !res.apps) return;
         grid.innerHTML = res.apps.map(a => \`
-          <div class="astryx-card">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
-              <h3 style="font-size:0.95rem;">\${a.name}</h3><span class="astryx-badge badge-running">\${a.status}</span>
+          <div class="astryx-card" style="display:flex; flex-direction:column; justify-content:space-between; min-height:160px;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.35rem;">
+                <h3 style="font-size:0.95rem; font-weight:550; letter-spacing:-0.015em; color:var(--forge-text-main); margin:0;">\${a.name}</h3>
+                <span style="color:var(--forge-text-subtle); cursor:pointer;" title="Options">⋮</span>
+              </div>
+              <div style="font-size:0.72rem; color:var(--forge-text-subtle); font-family:'Geist Mono', monospace; margin-bottom:0.6rem; display:flex; align-items:center; gap:0.4rem;">
+                <span>SG-FORGE</span><span>•</span><span>PORT :\${a.port}</span>
+              </div>
+              <div style="display:flex; gap:0.35rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+                <span class="astryx-micro-pill">\${a.category.toUpperCase()}</span>
+                <span class="astryx-micro-pill">ROLE: \${a.access_role}</span>
+                <span class="astryx-micro-pill">DB: \${(a.db_file_path ? a.db_file_path.split('/').pop() : 'platform_core.db')}</span>
+              </div>
             </div>
-            <p style="font-size:0.78rem; color:var(--forge-text-muted); margin-bottom:0.65rem;">Category: \${a.category} | Role: \${a.access_role}</p>
-            <div style="font-size:0.75rem; margin-bottom:0.75rem;">
-              <div>Path: <code>\${a.ingress_path}</code> (Port \${a.port})</div>
-              <div>DB: <code>\${a.db_file_path ? a.db_file_path.split('/').pop() : 'platform_core.db'}</code></div>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--forge-border); padding-top:0.6rem; margin-top:0.4rem;">
+              <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.75rem; color:var(--forge-text-muted);">
+                <span class="badge-dot" style="background:var(--forge-success); box-shadow:0 0 6px var(--forge-success);"></span>
+                <span>Active</span>
+              </div>
+              <a href="\${a.ingress_path}" class="astryx-btn btn-primary" style="padding:0.25rem 0.65rem; font-size:0.72rem; text-decoration:none;" target="_blank">Launch ↗</a>
             </div>
-            <a href="\${a.ingress_path}" class="astryx-btn btn-primary" style="padding:0.25rem 0.65rem; font-size:0.75rem;" target="_blank">Launch &rarr;</a>
           </div>\`).join('');
       } catch (err) { console.error('Apps load failed', err); }
     }
 
     async function runSqlQuery() {
-      const dbName = document.getElementById('sql-db-select').value;
-      const sql = document.getElementById('sql-query-input').value;
-      const readOnly = document.getElementById('sql-readonly-check').checked;
+      const dbName = document.getElementById('db-select')?.value || currentSelectedDb;
+      const sql = document.getElementById('sql-query-input')?.value;
+      const readOnly = document.getElementById('sql-readonly-check')?.checked !== false;
+      const c = document.getElementById('sql-result-container');
+      if (!sql || !sql.trim()) {
+        if (c) c.innerHTML = '<div style="color:var(--forge-accent); padding:0.5rem;">Please enter a SQL query.</div>';
+        return;
+      }
+      if (c) c.innerHTML = '<div style="color:var(--forge-text-muted); padding:0.5rem;">Executing query in safe sandbox...</div>';
       const res = await fetch(apiBase + '/api/db/query', {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ dbName, sql, readOnly })
       }).then(r => r.json());
-      const c = document.getElementById('sql-result-container');
       if (res.error) {
         c.innerHTML = '<div style="color:var(--forge-accent); background:var(--forge-bg-elevated); border:1px solid var(--forge-border); padding:0.65rem; border-radius:var(--forge-radius-sm); margin-top:0.65rem;"><strong>Error:</strong> ' + res.error + '</div>';
         return;
       }
-      let html = '<div style="margin:0.65rem 0; font-size:0.78rem; color:var(--forge-success);">Query executed in ' + res.durationMs + 'ms (' + (res.rows ? res.rows.length : res.affectedRows || 0) + ' rows)</div>';
+      let html = '<div style="margin:0.65rem 0; font-size:0.78rem; color:var(--forge-success);">⚡ Query executed in ' + res.durationMs + 'ms (' + (res.rows ? res.rows.length : res.affectedRows || 0) + ' rows)</div>';
       if (res.rows && res.rows.length) {
         html += '<div class="astryx-table-wrap"><table class="data-table"><thead><tr>' + res.columns.map(c => '<th>' + c + '</th>').join('') + '</tr></thead><tbody>' +
           res.rows.map(r => '<tr>' + res.columns.map(c => '<td>' + String(r[c] !== null ? r[c] : '') + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>';
+      } else if (res.affectedRows !== undefined) {
+        html += '<div style="color:var(--forge-text-muted); font-size:0.8rem;">Rows affected: ' + res.affectedRows + '</div>';
       }
       c.innerHTML = html;
     }
@@ -317,19 +335,59 @@ export function getDashboardScripts(): string {
       } catch (err) { console.error('Audit load failed', err); }
     }
 
-    // 🚀 Mount Initial Tab & Start Resilient SSE Watchdog
-    initWatchdogAndSSE();
-    syncTabFromHash();
-
-    // ⏱️ Real-Time 1.5-Second Throttled Live Polling Engine
-    setInterval(() => {
-      if (document.hidden) return;
+    // 🚀 Refresh Active Tab Data Helper
+    function refreshActiveTab() {
       const tab = window.location.hash.replace('#', '') || 'overview';
       if (tab === 'services') loadServices();
       else if (tab === 'overview') loadTopology();
       else if (tab === 'host') loadHostVitals();
       else if (tab === 'traffic') loadTraffic();
+      else if (tab === 'apps') loadApps();
+      else if (tab === 'issues') loadIssues();
+    }
+
+    // 🚀 Mount Initial Tab & Start Resilient SSE Watchdog
+    initWatchdogAndSSE();
+    syncTabFromHash();
+
+    // 🌙 Sleep / Wake & Network Resumption Lifecycle Engine (Auto-Heal on Unlock)
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        reconnectSSE();
+        refreshActiveTab();
+      }
+    });
+
+    window.addEventListener('online', () => {
+      reconnectSSE();
+      refreshActiveTab();
+    });
+
+    window.addEventListener('focus', () => {
+      refreshActiveTab();
+    });
+
+    // ⏱️ Real-Time 1.5-Second Throttled Live Polling Engine
+    setInterval(() => {
+      if (document.hidden) return;
+      refreshActiveTab();
     }, 1500);
+
+    // 🧹 Clean Any Errant Browser Autofill Credentials on Startup
+    function sanitizeSearchInputs() {
+      const s = document.getElementById('services-search-input');
+      if (s && s.value && (s.value.includes('@') || s.value === 'alice.eng@forge.internal')) {
+        s.value = '';
+        if (typeof filterServicesTable === 'function') filterServicesTable();
+      }
+      const l = document.getElementById('logs-search-input');
+      if (l && l.value && l.value.includes('@')) {
+        l.value = '';
+      }
+    }
+    setTimeout(sanitizeSearchInputs, 50);
+    setTimeout(sanitizeSearchInputs, 300);
+    setTimeout(sanitizeSearchInputs, 1000);
   `;
 }
 

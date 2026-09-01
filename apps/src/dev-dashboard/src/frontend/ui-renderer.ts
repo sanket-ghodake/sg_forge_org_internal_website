@@ -4,6 +4,8 @@
  * Meta Astryx Enterprise Baseline (v2.0.0 LTS)
  */
 
+import { astryxIcons } from '@forge/ui';
+import { getModalsHtml } from './ui-modals';
 import { getDashboardScripts } from './ui-scripts';
 import { getDashboardStyles } from './ui-styles';
 
@@ -17,6 +19,12 @@ export function renderDashboardHtml(): string {
   <style>${getDashboardStyles()}</style>
 </head>
 <body>
+  <!-- Chrome/Edge Credential Autofill De-Coupler Trap -->
+  <div style="position:absolute; top:-9999px; left:-9999px; width:1px; height:1px; opacity:0; pointer-events:none;" aria-hidden="true">
+    <input type="text" name="chrome_autofill_user_trap" tabindex="-1" autocomplete="username">
+    <input type="password" name="chrome_autofill_pwd_trap" tabindex="-1" autocomplete="current-password">
+  </div>
+
   <!-- 1. 100% Full-Width Global Top Header -->
   <header class="sb-global-header">
     <div class="sb-header-left">
@@ -55,7 +63,7 @@ export function renderDashboardHtml(): string {
         <span id="watchdog-text">Live Stream</span>
       </div>
 
-      <!-- Theme Switcher Button -->
+      <!-- Theme Switcher -->
       <button class="astryx-theme-toggle" id="theme-toggle-btn" title="Toggle Light / Dark Theme" aria-label="Toggle Theme" style="width: 32px; height: 32px;">
         <svg id="sun-icon" viewBox="0 0 24 24" style="width: 15px; height: 15px;">
           <circle cx="12" cy="12" r="5"></circle>
@@ -81,22 +89,21 @@ export function renderDashboardHtml(): string {
 
     <aside class="sb-sidebar" id="main-sidebar" aria-label="Main Navigation">
       <div class="sb-nav-section-label">Monitoring</div>
-      <div class="sb-nav-item active" data-tab="overview" onclick="switchTab('overview')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('overview')" title="Overview" tabindex="0" role="button"><span class="sb-nav-icon">📊</span><span class="sb-nav-label">Overview</span></div>
-      <div class="sb-nav-item" data-tab="services" onclick="switchTab('services')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('services')" title="Services & Processes" tabindex="0" role="button"><span class="sb-nav-icon">⚡</span><span class="sb-nav-label">Services & Processes</span></div>
-      <div class="sb-nav-item" data-tab="apps" onclick="switchTab('apps')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('apps')" title="Forge Apps" tabindex="0" role="button"><span class="sb-nav-icon">🧩</span><span class="sb-nav-label">Forge Apps</span></div>
-      <div class="sb-nav-item" data-tab="traffic" onclick="switchTab('traffic')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('traffic')" title="Traffic Analytics" tabindex="0" role="button"><span class="sb-nav-icon">📈</span><span class="sb-nav-label">Traffic Analytics</span></div>
+      <div class="sb-nav-item active" data-tab="overview" onclick="switchTab('overview')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('overview')" title="Overview" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.topology}</span><span class="sb-nav-label">Overview</span></div>
+      <div class="sb-nav-item" data-tab="services" onclick="switchTab('services')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('services')" title="Services & Processes" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.services}</span><span class="sb-nav-label">Services & Processes</span></div>
+      <div class="sb-nav-item" data-tab="apps" onclick="switchTab('apps')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('apps')" title="Forge Apps" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.apps}</span><span class="sb-nav-label">Forge Apps</span></div>
+      <div class="sb-nav-item" data-tab="traffic" onclick="switchTab('traffic')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('traffic')" title="Traffic Analytics" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.traffic}</span><span class="sb-nav-label">Traffic Analytics</span></div>
 
       <div class="sb-nav-section-label">Data & Storage</div>
-      <div class="sb-nav-item" data-tab="database" onclick="switchTab('database')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('database')" title="Turso DB Explorer" tabindex="0" role="button"><span class="sb-nav-icon">🗄️</span><span class="sb-nav-label">Turso DB Explorer</span></div>
-      <div class="sb-nav-item" data-tab="sql" onclick="switchTab('sql')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('sql')" title="SQL Playground" tabindex="0" role="button"><span class="sb-nav-icon">💻</span><span class="sb-nav-label">SQL Playground</span></div>
+      <div class="sb-nav-item" data-tab="database" onclick="switchTab('database')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('database')" title="Database Studio" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.database}</span><span class="sb-nav-label">Database Studio</span></div>
 
       <div class="sb-nav-section-label">Observability</div>
-      <div class="sb-nav-item" data-tab="logs" onclick="switchTab('logs')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('logs')" title="Isolated App Logs" tabindex="0" role="button"><span class="sb-nav-icon">📜</span><span class="sb-nav-label">Isolated App Logs</span></div>
-      <div class="sb-nav-item" data-tab="issues" onclick="switchTab('issues')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('issues')" title="Issue Center" tabindex="0" role="button"><span class="sb-nav-icon">⚠️</span><span class="sb-nav-label">Issue Center</span></div>
+      <div class="sb-nav-item" data-tab="logs" onclick="switchTab('logs')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('logs')" title="Isolated App Logs" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.logs}</span><span class="sb-nav-label">Isolated App Logs</span></div>
+      <div class="sb-nav-item" data-tab="issues" onclick="switchTab('issues')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('issues')" title="Issue Center" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.issues}</span><span class="sb-nav-label">Issue Center</span></div>
 
       <div class="sb-nav-section-label">Platform</div>
-      <div class="sb-nav-item" data-tab="host" onclick="switchTab('host')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('host')" title="Host & Cloud" tabindex="0" role="button"><span class="sb-nav-icon">☁️</span><span class="sb-nav-label">Host & Cloud</span></div>
-      <div class="sb-nav-item" data-tab="settings" onclick="switchTab('settings')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('settings')" title="Settings & Tools" tabindex="0" role="button"><span class="sb-nav-icon">⚙️</span><span class="sb-nav-label">Settings & Tools</span></div>
+      <div class="sb-nav-item" data-tab="host" onclick="switchTab('host')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('host')" title="Host & Cloud" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.host}</span><span class="sb-nav-label">Host & Cloud</span></div>
+      <div class="sb-nav-item" data-tab="settings" onclick="switchTab('settings')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('settings')" title="Settings & Tools" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.settings}</span><span class="sb-nav-label">Settings & Tools</span></div>
 
       <div class="sb-sidebar-footer">
         <div class="sb-footer-pill">
@@ -151,7 +158,7 @@ export function renderDashboardHtml(): string {
         <div class="services-toolbar">
           <div class="services-search-box">
             <span>🔍</span>
-            <input type="text" id="services-search-input" placeholder="Search services by name, port, route..." oninput="filterServicesTable()">
+            <input type="search" id="services-search-input" name="services-search-query" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search services by name, port, route..." oninput="filterServicesTable()">
           </div>
           <div class="filter-chip-group" id="services-filter-chips">
             <button class="filter-chip active" data-filter="all" onclick="setServiceFilter('all')">All (<span id="count-all">0</span>)</button>
@@ -191,61 +198,82 @@ export function renderDashboardHtml(): string {
         <div class="astryx-grid" id="apps-grid"></div>
       </section>
 
-      <!-- Tab 4: Turso DB Explorer & Supabase-Grade Studio -->
+      <!-- Tab 4: Unified Database Studio (GCP Cloud SQL & Supabase Standard) -->
       <section id="tab-database" class="tab-pane">
         <div class="astryx-card" style="margin-bottom: 1rem;">
-          <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
-            <label style="font-weight: 600; font-size: 0.85rem;">Target Database:</label>
-            <select class="form-input" id="db-select" style="max-width: 240px;" onchange="inspectDatabase(this.value)"></select>
-            <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem;" onclick="checkDatabaseIntegrity()">🩺 Integrity Check</button>
-            <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem;" onclick="optimizeCurrentDb()">✨ 1-Click Optimize</button>
-            <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.65rem;" onclick="backupCurrentDb()">📦 Snapshot</button>
-          </div>
-        </div>
-        <div class="astryx-card" style="margin-bottom: 1rem;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
-            <h3 style="font-size: 0.95rem; margin: 0;">Tables in Database</h3>
-            <div id="db-action-buttons"></div>
-          </div>
-          <div class="astryx-table-wrap" id="db-tables-view">Select a database above to inspect tables.</div>
-        </div>
-        <div class="astryx-card" id="db-table-data-card" style="display: none;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
-            <h3 style="font-size: 0.95rem; margin: 0;" id="db-table-data-title">Table Rows</h3>
-            <div style="display: flex; gap: 0.4rem;">
-              <button class="astryx-btn btn-outline" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;" onclick="exportCurrentTableCsv()">📥 Export CSV</button>
-              <button class="astryx-btn btn-outline" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;" onclick="viewSelectedTableDdl()">📜 View DDL</button>
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+            <div style="display: flex; gap: 0.65rem; align-items: center; flex-wrap: wrap;">
+              <label style="font-weight: 600; font-size: 0.85rem;">Active Database:</label>
+              <select class="form-input" id="db-select" style="max-width: 260px;" onchange="inspectDatabase(this.value)"></select>
+              <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem;" onclick="checkDatabaseIntegrity()">🩺 Integrity Check</button>
+              <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem;" onclick="optimizeCurrentDb()">✨ 1-Click Optimize</button>
+              <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.65rem;" onclick="backupCurrentDb()">📦 Snapshot</button>
+            </div>
+            <div>
+              <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.75rem; border-color: var(--forge-primary); color: var(--forge-primary);" onclick="openConnectModal()">+ Connect Remote DB</button>
             </div>
           </div>
-          <div class="astryx-table-wrap" id="db-table-data-view"></div>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;" id="db-pagination-bar"></div>
         </div>
-      </section>
 
-      <!-- Tab 5: SQL Playground -->
-      <section id="tab-sql" class="tab-pane">
-        <div class="astryx-card">
-          <h2 style="font-size: 1.25rem; margin-bottom: 0.35rem;">💻 Interactive SQL Playground</h2>
-          <p style="color: var(--forge-text-muted); font-size: 0.8rem; margin-bottom: 0.85rem;">Safe execution sandbox with stopwatch timing.</p>
-          
-          <div style="display: flex; gap: 0.75rem; margin-bottom: 0.65rem; align-items: center; flex-wrap: wrap;">
-            <select class="form-input" id="sql-db-select" style="max-width: 240px;"></select>
-            <label style="font-size: 0.8rem; display: flex; align-items: center; gap: 0.35rem;">
-              <input type="checkbox" id="sql-readonly-check" checked> Read-Only Sandbox Mode
-            </label>
-            <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.85rem;" onclick="runSqlQuery()">Run Query (Ctrl+Enter)</button>
-            <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem;" onclick="exportSqlResultCsv()">📥 Export CSV</button>
+        <div class="db-studio-layout">
+          <!-- Left Explorer: Tables & Hierarchy -->
+          <div class="db-studio-sidebar">
+            <div class="astryx-card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
+                <h3 style="font-size: 0.92rem; margin: 0;">📁 Schema Tables</h3>
+                <span id="db-tables-count-badge" class="astryx-badge" style="font-size: 0.7rem;">0 tables</span>
+              </div>
+              <div id="db-tables-view" style="display: flex; flex-direction: column; gap: 0.25rem;">Select database to inspect.</div>
+            </div>
           </div>
 
-          <div style="display: flex; gap: 0.3rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
-            <button class="astryx-btn btn-outline" style="padding: 0.15rem 0.4rem; font-size: 0.72rem;" onclick="insertSqlSnippet('SELECT * FROM apps_registry LIMIT 20;')">apps_registry</button>
-            <button class="astryx-btn btn-outline" style="padding: 0.15rem 0.4rem; font-size: 0.72rem;" onclick="insertSqlSnippet('SELECT * FROM traffic_events ORDER BY timestamp DESC LIMIT 20;')">recent traffic</button>
-            <button class="astryx-btn btn-outline" style="padding: 0.15rem 0.4rem; font-size: 0.72rem;" onclick="insertSqlSnippet('SELECT * FROM audit_logs ORDER BY timestamp DESC LIMIT 20;')">audit logs</button>
-            <button class="astryx-btn btn-outline" style="padding: 0.15rem 0.4rem; font-size: 0.72rem;" onclick="insertSqlSnippet('SELECT * FROM sqlite_master;')">sqlite_master</button>
-          </div>
+          <!-- Right Workspace: Table Data / SQL Scratchpad / DDL -->
+          <div class="db-studio-main">
+            <div class="astryx-card">
+              <div class="db-subtab-bar">
+                <button class="db-subtab-btn active" id="btn-subtab-rows" onclick="switchDbSubTab('rows')">📊 Table Data</button>
+                <button class="db-subtab-btn" id="btn-subtab-sql" onclick="switchDbSubTab('sql')">💻 SQL Scratchpad</button>
+                <button class="db-subtab-btn" id="btn-subtab-ddl" onclick="switchDbSubTab('ddl')">📜 Schema & DDL</button>
+              </div>
 
-          <textarea class="sql-input" id="sql-query-input" placeholder="SELECT * FROM apps_registry LIMIT 10;">SELECT * FROM apps_registry LIMIT 10;</textarea>
-          <div id="sql-result-container"></div>
+              <!-- Sub-pane 1: Table Data Browser -->
+              <div id="db-subpane-rows">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
+                  <h3 style="font-size: 0.95rem; margin: 0;" id="db-table-data-title">Table Rows</h3>
+                  <div style="display: flex; gap: 0.4rem;">
+                    <button class="astryx-btn btn-outline" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;" onclick="exportCurrentTableCsv()">📥 Export CSV</button>
+                  </div>
+                </div>
+                <div class="astryx-table-wrap" id="db-table-data-view">Select a table to browse records.</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;" id="db-pagination-bar"></div>
+              </div>
+
+              <!-- Sub-pane 2: Interactive SQL Scratchpad -->
+              <div id="db-subpane-sql" style="display: none;">
+                <div style="display: flex; gap: 0.75rem; margin-bottom: 0.65rem; align-items: center; flex-wrap: wrap;">
+                  <label style="font-size: 0.8rem; display: flex; align-items: center; gap: 0.35rem;">
+                    <input type="checkbox" id="sql-readonly-check" checked> Read-Only Sandbox Mode
+                  </label>
+                  <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.85rem;" onclick="runSqlQuery()">Run Query (Ctrl+Enter)</button>
+                  <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem;" onclick="exportSqlResultCsv()">📥 Export CSV</button>
+                </div>
+                <div style="display: flex; gap: 0.3rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+                  <button class="astryx-btn btn-outline" style="padding: 0.15rem 0.4rem; font-size: 0.72rem;" onclick="insertSqlSnippet('SELECT * FROM apps_registry LIMIT 20;')">apps_registry</button>
+                  <button class="astryx-btn btn-outline" style="padding: 0.15rem 0.4rem; font-size: 0.72rem;" onclick="insertSqlSnippet('SELECT * FROM traffic_events ORDER BY timestamp DESC LIMIT 20;')">traffic_events</button>
+                  <button class="astryx-btn btn-outline" style="padding: 0.15rem 0.4rem; font-size: 0.72rem;" onclick="insertSqlSnippet('SELECT * FROM audit_logs ORDER BY timestamp DESC LIMIT 20;')">audit_logs</button>
+                  <button class="astryx-btn btn-outline" style="padding: 0.15rem 0.4rem; font-size: 0.72rem;" onclick="insertSqlSnippet('SELECT name, type FROM sqlite_master WHERE type=\\'table\\';')">sqlite_master</button>
+                </div>
+                <textarea class="sql-input" id="sql-query-input" placeholder="SELECT * FROM apps_registry LIMIT 10;">SELECT * FROM apps_registry LIMIT 10;</textarea>
+                <div id="sql-result-container"></div>
+              </div>
+
+              <!-- Sub-pane 3: Schema DDL -->
+              <div id="db-subpane-ddl" style="display: none;">
+                <h3 style="font-size: 0.95rem; margin-bottom: 0.5rem;" id="db-ddl-title">Schema Definition</h3>
+                <div class="schema-code-box" id="db-ddl-view">Select a table to view its DDL schema.</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -294,7 +322,7 @@ export function renderDashboardHtml(): string {
                 <option value="ERROR">ERROR</option>
               </select>
 
-              <input type="text" class="form-input" id="logs-search-input" placeholder="🔍 Search text or traceId..." style="width: 170px;" oninput="onLogSearchChange(this.value)">
+              <input type="search" class="form-input" id="logs-search-input" name="logs-search-query" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="🔍 Search text or traceId..." style="width: 170px;" oninput="onLogSearchChange(this.value)">
             </div>
 
             <div style="display: flex; gap: 0.3rem;">
@@ -363,123 +391,7 @@ export function renderDashboardHtml(): string {
     </main>
   </div>
 
-  <!-- Command Palette Modal (Cmd+K) -->
-  <div class="palette-modal-backdrop" id="cmd-palette-modal" onclick="if(event.target===this)closeCommandPalette()">
-    <div class="palette-box">
-      <div class="palette-input-wrap">
-        <span>🔍</span>
-        <input type="text" class="palette-input" id="palette-search-input" placeholder="Type a command or jump to tab... (↑↓ to select, Enter)" oninput="filterPaletteItems(this.value)">
-        <kbd style="font-size: 0.7rem; color: var(--forge-text-muted);">ESC</kbd>
-      </div>
-      <ul class="palette-list" id="palette-items-list"></ul>
-    </div>
-  </div>
-
-  <!-- DDL Schema Modal -->
-  <div class="astryx-modal-backdrop" id="ddl-schema-modal">
-    <div class="astryx-modal">
-      <div class="astryx-modal-header">
-        <h3 id="ddl-modal-title">Table DDL Schema</h3>
-        <button class="astryx-modal-close" onclick="closeDdlModal()">&times;</button>
-      </div>
-      <div class="astryx-modal-body">
-        <div class="schema-code-box" id="ddl-code-content">Loading schema DDL...</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Safe Environment Modal -->
-  <div class="astryx-modal-backdrop" id="safe-env-modal">
-    <div class="astryx-modal">
-      <div class="astryx-modal-header">
-        <h3>🔐 Masked Environment Inspector</h3>
-        <button class="astryx-modal-close" onclick="closeSafeEnvModal()">&times;</button>
-      </div>
-      <div class="astryx-modal-body">
-        <div class="astryx-table-wrap" id="safe-env-table-container">Loading environment...</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- API Registry Modal -->
-  <div class="astryx-modal-backdrop" id="api-registry-modal">
-    <div class="astryx-modal" style="max-width: 760px;">
-      <div class="astryx-modal-header">
-        <h3>⚡ API Route Explorer & cURL Generator</h3>
-        <button class="astryx-modal-close" onclick="closeApiRegistryModal()">&times;</button>
-      </div>
-      <div class="astryx-modal-body">
-        <div id="api-registry-container">Loading endpoints...</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Help & Architecture Explainer Modal -->
-  <div class="astryx-modal-backdrop" id="help-modal">
-    <div class="astryx-modal">
-      <div class="astryx-modal-header">
-        <h3>❓ Services & Processes Architecture Guide</h3>
-        <button class="astryx-modal-close" onclick="closeHelpModal()">&times;</button>
-      </div>
-      <div class="astryx-modal-body">
-        <h4 style="color: var(--forge-primary); margin-bottom: 0.4rem;">Operational States</h4>
-        <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
-          <li><strong style="color: var(--forge-success);">RUNNING:</strong> Process is active, healthy, and accepting Turso DB connections.</li>
-          <li><strong style="color: var(--forge-accent);">DEGRADED:</strong> Service is experiencing elevated response latency (&gt;50ms).</li>
-          <li><strong style="color: var(--forge-text-muted);">STOPPED:</strong> Service is halted or offline.</li>
-          <li><strong style="color: var(--forge-primary);">STARTING:</strong> Service runtime is booting or executing migrations.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- App-Specific 4-Pillar Live Log Inspector Modal -->
-  <div class="astryx-modal-backdrop" id="app-logs-modal">
-    <div class="astryx-modal log-modal-content">
-      <div class="astryx-modal-header">
-        <div style="display: flex; align-items: center; gap: 0.75rem;">
-          <span style="font-size: 1.1rem;">📜</span>
-          <div>
-            <h3 id="app-logs-title" style="margin: 0; font-size: 1rem;">App Live Logs</h3>
-            <span id="app-logs-meta" style="font-size: 0.75rem; color: var(--forge-text-muted);">Port: :3000 | Route: /</span>
-          </div>
-        </div>
-        <button class="astryx-modal-close" onclick="closeAppLogsModal()">&times;</button>
-      </div>
-      <div class="astryx-modal-body" style="display: flex; flex-direction: column; flex: 1; padding: 0.85rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.4rem;">
-          <div style="display: flex; gap: 0.3rem;">
-            <button class="astryx-btn btn-primary" id="pillar-tab-all" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="setModalPillar('all')">All</button>
-            <button class="astryx-btn btn-outline" id="pillar-tab-app" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="setModalPillar('app')">🖥️ Server</button>
-            <button class="astryx-btn btn-outline" id="pillar-tab-browser" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="setModalPillar('browser')">🌐 Browser</button>
-            <button class="astryx-btn btn-outline" id="pillar-tab-docker" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="setModalPillar('docker')">🐳 Docker</button>
-            <button class="astryx-btn btn-outline" id="pillar-tab-db" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="setModalPillar('db')">🗄️ DB</button>
-          </div>
-          <div style="display: flex; gap: 0.3rem; align-items: center;">
-            <input type="text" class="form-input" id="app-logs-filter" placeholder="Filter logs..." style="width: 180px; padding: 0.2rem 0.5rem; font-size: 0.75rem;" oninput="filterAppLogs(this.value)">
-            <button class="astryx-btn btn-outline" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="clearAppLogs()">Clear</button>
-          </div>
-        </div>
-        <div class="terminal-window" id="app-logs-terminal" style="height: 100%; min-height: 380px;">Waiting for isolated app logs...</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Option C: Slide-Out Service Inspector Drawer -->
-  <div class="service-drawer-backdrop" id="service-drawer-backdrop" onclick="closeServiceDrawer()"></div>
-  <aside class="service-drawer" id="service-drawer" aria-label="Service Details Inspector">
-    <div class="drawer-header">
-      <div style="display: flex; align-items: center; gap: 0.75rem;">
-        <span style="font-size: 1.3rem;" id="drawer-svc-icon">⚡</span>
-        <div>
-          <h3 id="drawer-svc-name" style="margin: 0; font-size: 1rem; color: var(--forge-text-main);">Service Name</h3>
-          <span id="drawer-svc-meta" style="font-size: 0.75rem; color: var(--forge-text-muted);">Port: :3000 | Ingress: /</span>
-        </div>
-      </div>
-      <button class="astryx-modal-close" onclick="closeServiceDrawer()">&times;</button>
-    </div>
-    <div class="drawer-body" id="drawer-body-content"></div>
-  </aside>
+  ${getModalsHtml()}
 
   <script>${getDashboardScripts()}</script>
 </body>

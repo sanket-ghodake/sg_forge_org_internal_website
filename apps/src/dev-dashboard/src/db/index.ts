@@ -4,3 +4,4 @@
  */
 
 export * from './db';
+export * from './remote-connectors';

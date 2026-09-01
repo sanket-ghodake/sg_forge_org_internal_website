@@ -11,3 +11,4 @@ export * from './toast';
 export * from './header';
 export * from './state';
 export * from './error-page';
+export * from './icons';

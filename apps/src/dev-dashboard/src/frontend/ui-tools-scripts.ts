@@ -8,17 +8,42 @@ export function getToolsDashboardScripts(): string {
     let currentSelectedDb = 'platform_core.db';
     let currentSelectedTable = 'apps_registry';
     let currentTablePage = 1;
+    let currentDbSubTab = 'rows';
 
     async function loadDatabases() {
       try {
         const res = await fetch(apiBase + '/api/db/list').then(r => r.json());
-        const s1 = document.getElementById('db-select'), s2 = document.getElementById('sql-db-select');
-        if (!res.databases) return;
-        const opts = res.databases.map(d => '<option value="' + d.name + '">' + d.name + ' (' + Math.round(d.sizeBytes/1024) + ' KB)</option>').join('');
-        if (s1) s1.innerHTML = opts;
-        if (s2) s2.innerHTML = opts;
-        if (res.databases[0]) inspectDatabase(res.databases[0].name);
+        const s1 = document.getElementById('db-select');
+        if (!s1) return;
+        let opts = '';
+        if (res.databases && res.databases.length) {
+          opts += '<optgroup label="Local Microservice DBs">';
+          opts += res.databases.map(d => '<option value="' + d.name + '">🗄️ ' + d.name + ' (' + Math.round(d.sizeBytes/1024) + ' KB)</option>').join('');
+          opts += '</optgroup>';
+        }
+        if (res.remoteDatabases && res.remoteDatabases.length) {
+          opts += '<optgroup label="Remote Microservice DBs">';
+          opts += res.remoteDatabases.map(d => '<option value="' + d.name + '">🌐 ' + d.displayName + '</option>').join('');
+          opts += '</optgroup>';
+        }
+        s1.innerHTML = opts || '<option value="platform_core.db">platform_core.db</option>';
+        if (res.databases?.[0] && !res.databases.some(d => d.name === currentSelectedDb)) {
+          inspectDatabase(res.databases[0].name);
+        } else {
+          inspectDatabase(currentSelectedDb);
+        }
       } catch (err) { console.error('Databases load failed', err); }
+    }
+
+    function switchDbSubTab(tab) {
+      currentDbSubTab = tab;
+      ['rows', 'sql', 'ddl'].forEach(t => {
+        const btn = document.getElementById('btn-subtab-' + t);
+        const pane = document.getElementById('db-subpane-' + t);
+        if (btn) btn.classList.toggle('active', t === tab);
+        if (pane) pane.style.display = t === tab ? 'block' : 'none';
+      });
+      if (tab === 'ddl') viewTableDdl(currentSelectedDb, currentSelectedTable);
     }
 
     async function inspectDatabase(dbName) {
@@ -29,30 +54,43 @@ export function getToolsDashboardScripts(): string {
           body: JSON.stringify({ dbName, sql: "SELECT name, type FROM sqlite_master WHERE type='table' ORDER BY name ASC;" })
         }).then(r => r.json());
         const c = document.getElementById('db-tables-view');
+        const badge = document.getElementById('db-tables-count-badge');
         if (!c) return;
         if (res.rows && res.rows.length) {
-          c.innerHTML = '<table class="data-table"><thead><tr><th>Table Name</th><th>Type</th><th>Actions</th></tr></thead><tbody>' +
-            res.rows.map(r => '<tr><td><strong>' + r.name + '</strong></td><td><code>' + r.type + '</code></td><td><button class="astryx-btn btn-primary" style="padding:0.15rem 0.45rem; font-size:0.72rem;" onclick="browseTableRows(\\'' + dbName + '\\',\\'' + r.name + '\\', 1)">📊 Browse Rows</button> <button class="astryx-btn btn-outline" style="padding:0.15rem 0.45rem; font-size:0.72rem;" onclick="viewTableDdl(\\'' + dbName + '\\',\\'' + r.name + '\\')">📜 Schema</button></td></tr>').join('') + '</tbody></table>';
-          browseTableRows(dbName, res.rows[0].name, 1);
+          if (badge) badge.textContent = res.rows.length + ' tables';
+          c.innerHTML = res.rows.map(r =>
+            '<div class="db-table-item ' + (r.name === currentSelectedTable ? 'active' : '') + '" onclick="selectTable(\\'dbName\\', \\'' + r.name + '\\')">' +
+              '<span>📄 <strong>' + r.name + '</strong></span>' +
+              '<span style="font-size:0.7rem; color:var(--forge-text-muted);">' + r.type + '</span>' +
+            '</div>'
+          ).join('');
+          selectTable(dbName, res.rows[0].name);
         } else {
-          c.innerHTML = '<p style="color:var(--forge-text-muted);">No tables found in ' + dbName + '</p>';
-          const card = document.getElementById('db-table-data-card');
-          if (card) card.style.display = 'none';
+          if (badge) badge.textContent = '0 tables';
+          c.innerHTML = '<p style="color:var(--forge-text-muted); font-size:0.8rem; padding:0.5rem;">No tables found in ' + dbName + '</p>';
         }
       } catch (err) { console.error('Inspect DB failed', err); }
+    }
+
+    function selectTable(dbName, tableName) {
+      currentSelectedDb = document.getElementById('db-select')?.value || currentSelectedDb;
+      currentSelectedTable = tableName;
+      document.querySelectorAll('.db-table-item').forEach(el => {
+        el.classList.toggle('active', el.textContent.includes(tableName));
+      });
+      browseTableRows(currentSelectedDb, tableName, 1);
+      if (currentDbSubTab === 'ddl') viewTableDdl(currentSelectedDb, tableName);
     }
 
     async function browseTableRows(dbName, tableName, page = 1) {
       currentSelectedDb = dbName;
       currentSelectedTable = tableName;
       currentTablePage = page;
-      const card = document.getElementById('db-table-data-card');
       const title = document.getElementById('db-table-data-title');
       const view = document.getElementById('db-table-data-view');
       const pager = document.getElementById('db-pagination-bar');
-      if (card) card.style.display = 'block';
-      if (title) title.textContent = 'Table Rows: ' + tableName + ' (' + dbName + ')';
-      if (view) view.innerHTML = '<div style="color:var(--forge-text-muted);">Loading rows...</div>';
+      if (title) title.textContent = 'Table: ' + tableName + ' (' + dbName + ')';
+      if (view) view.innerHTML = '<div style="color:var(--forge-text-muted); padding:0.5rem;">Loading records...</div>';
 
       try {
         const res = await fetch(apiBase + '/api/db/rows?db=' + dbName + '&table=' + tableName + '&page=' + page + '&limit=15').then(r => r.json());
@@ -67,32 +105,27 @@ export function getToolsDashboardScripts(): string {
             '</div>';
         } else {
           view.innerHTML = '<p style="color:var(--forge-text-muted); padding:0.5rem;">Zero rows in table ' + tableName + '.</p>';
-          pager.innerHTML = '';
+          if (pager) pager.innerHTML = '';
         }
       } catch (err) {
-        if (view) view.innerHTML = '<div style="color:var(--forge-accent);">Failed to browse table rows.</div>';
+        if (view) view.innerHTML = '<div style="color:var(--forge-accent); padding:0.5rem;">Failed to browse table rows.</div>';
       }
     }
 
     async function viewTableDdl(dbName, tableName) {
-      const modal = document.getElementById('ddl-schema-modal');
-      const title = document.getElementById('ddl-modal-title');
-      const content = document.getElementById('ddl-code-content');
+      const title = document.getElementById('db-ddl-title');
+      const view = document.getElementById('db-ddl-view');
       if (title) title.textContent = '📜 Schema DDL: ' + tableName + ' (' + dbName + ')';
-      if (modal) modal.classList.add('open');
-      if (content) content.textContent = 'Loading schema definition...';
+      if (view) view.textContent = 'Loading schema definition...';
       try {
         const res = await fetch(apiBase + '/api/db/schema?db=' + dbName + '&table=' + tableName).then(r => r.json());
         let text = res.ddl || '';
         if (res.indexes && res.indexes.length) text += '\\n\\n-- Indexes\\n' + res.indexes.join(';\\n') + ';';
-        if (content) content.textContent = text;
+        if (view) view.textContent = text;
       } catch (err) {
-        if (content) content.textContent = 'Failed to load DDL schema.';
+        if (view) view.textContent = 'Failed to load DDL schema.';
       }
     }
-
-    function viewSelectedTableDdl() { viewTableDdl(currentSelectedDb, currentSelectedTable); }
-    function closeDdlModal() { document.getElementById('ddl-schema-modal')?.classList.remove('open'); }
 
     async function checkDatabaseIntegrity() {
       const dbName = document.getElementById('db-select').value;
@@ -100,7 +133,7 @@ export function getToolsDashboardScripts(): string {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ dbName })
       }).then(r => r.json());
       if (window.astryxToast) {
-        window.astryxToast(res.success ? 'Database integrity verified (0 errors).' : 'Integrity warnings: ' + JSON.stringify(res), res.success ? 'success' : 'warning');
+        window.astryxToast(res.success ? 'Database integrity verified (0 errors).' : 'Integrity check result: ' + JSON.stringify(res), res.success ? 'success' : 'warning');
       }
     }
 
@@ -136,8 +169,75 @@ export function getToolsDashboardScripts(): string {
     }
 
     function exportSqlResultCsv() {
-      const db = document.getElementById('sql-db-select').value;
+      const db = document.getElementById('db-select').value;
       window.open(apiBase + '/api/export/csv?type=table&db=' + db + '&table=' + currentSelectedTable, '_blank');
+    }
+
+    // 🔌 Connect Remote DB Modal Handlers
+    function openConnectModal() {
+      document.getElementById('connect-db-modal')?.classList.add('open');
+      const st = document.getElementById('remote-conn-status');
+      if (st) st.innerHTML = '';
+    }
+    function closeConnectModal() {
+      document.getElementById('connect-db-modal')?.classList.remove('open');
+    }
+
+    async function testRemoteConnection() {
+      const url = document.getElementById('remote-conn-url')?.value;
+      const token = document.getElementById('remote-conn-token')?.value;
+      const type = document.getElementById('remote-conn-type')?.value;
+      const st = document.getElementById('remote-conn-status');
+      if (!url) {
+        if (st) st.innerHTML = '<span style="color:var(--forge-accent);">Please enter a connection URL.</span>';
+        return;
+      }
+      if (st) st.innerHTML = '<span style="color:var(--forge-primary);">Pinging remote database endpoint...</span>';
+      try {
+        const res = await fetch(apiBase + '/api/db/test-connect', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url, authToken: token, type })
+        }).then(r => r.json());
+        if (res.success) {
+          if (st) st.innerHTML = '<span style="color:var(--forge-success);">🟢 Connection successful (' + res.latencyMs + 'ms latency)</span>';
+        } else {
+          if (st) st.innerHTML = '<span style="color:var(--forge-accent);">🔴 Connection failed: ' + (res.error || 'Check endpoint and credentials') + '</span>';
+        }
+      } catch (err) {
+        if (st) st.innerHTML = '<span style="color:var(--forge-accent);">Ping error: ' + err.message + '</span>';
+      }
+    }
+
+    async function saveRemoteConnection() {
+      const name = document.getElementById('remote-conn-name')?.value;
+      const url = document.getElementById('remote-conn-url')?.value;
+      const token = document.getElementById('remote-conn-token')?.value;
+      const type = document.getElementById('remote-conn-type')?.value;
+      const mode = document.getElementById('remote-conn-mode')?.value;
+      const st = document.getElementById('remote-conn-status');
+      if (!name || !url) {
+        if (st) st.innerHTML = '<span style="color:var(--forge-accent);">Name and URL are required.</span>';
+        return;
+      }
+      try {
+        const res = await fetch(apiBase + '/api/db/connect', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, url, authToken: token, type, readOnly: mode === 'readonly' })
+        }).then(r => r.json());
+        if (res.success) {
+          if (window.astryxToast) window.astryxToast('Connected to ' + name + ' successfully!', 'success');
+          closeConnectModal();
+          await loadDatabases();
+          if (res.connectionId) {
+            document.getElementById('db-select').value = res.connectionId;
+            inspectDatabase(res.connectionId);
+          }
+        } else {
+          if (st) st.innerHTML = '<span style="color:var(--forge-accent);">' + (res.message || 'Failed to save connection') + '</span>';
+        }
+      } catch (err) {
+        if (st) st.innerHTML = '<span style="color:var(--forge-accent);">Save failed: ' + err.message + '</span>';
+      }
     }
 
     // ⚡ Command Palette & Modal Handlers
@@ -145,16 +245,16 @@ export function getToolsDashboardScripts(): string {
       { label: '📊 Overview (Topology & Vitals)', action: () => switchTab('overview') },
       { label: '⚡ Services & Processes Command Center', action: () => switchTab('services') },
       { label: '🧩 Registered Forge Apps', action: () => switchTab('apps') },
-      { label: '🗄️ Turso DB Explorer & Schema Studio', action: () => switchTab('database') },
-      { label: '💻 Interactive SQL Playground', action: () => switchTab('sql') },
+      { label: '🗄️ Unified Database Studio', action: () => switchTab('database') },
       { label: '📜 Isolated App Logs & Observability', action: () => switchTab('logs') },
       { label: '📈 Real-time Traffic Analytics', action: () => switchTab('traffic') },
       { label: '⚠️ Issue Incident Center (RFC 7807)', action: () => switchTab('issues') },
       { label: '☁️ Host Infrastructure Metrics', action: () => switchTab('host') },
       { label: '⚙️ Settings & Tools', action: () => switchTab('settings') },
+      { label: '🔌 Connect Remote Database', action: () => openConnectModal() },
       { label: '⚡ Open API Route Explorer & cURL', action: () => openApiRegistryModal() },
       { label: '🔐 Open Masked Environment Inspector', action: () => openSafeEnvModal() },
-      { label: '🚀 Run Latency Benchmark', action: () => { switchTab('traffic'); runLatencyBenchmark(); } },
+      { label: '🚀 Run Latency Benchmark', action: () => { switchTab('services'); runLatencyBenchmark(); } },
       { label: '✨ 1-Click Database Optimize', action: () => optimizeCurrentDb() }
     ];
 
@@ -251,14 +351,14 @@ export function getToolsDashboardScripts(): string {
         openCommandPalette();
       } else if (e.key === 'Escape') {
         closeCommandPalette();
-        closeDdlModal();
+        closeConnectModal();
         closeSafeEnvModal();
         closeApiRegistryModal();
         closeHelpModal();
         closeAppLogsModal();
         if (typeof closeServiceDrawer === 'function') closeServiceDrawer();
       } else if (document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
-        const tabMap = { '1': 'overview', '2': 'services', '3': 'apps', '4': 'database', '5': 'sql', '6': 'logs', '7': 'traffic', '8': 'issues', '9': 'host', '0': 'settings' };
+        const tabMap = { '1': 'overview', '2': 'services', '3': 'apps', '4': 'database', '5': 'logs', '6': 'traffic', '7': 'issues', '8': 'host', '9': 'settings' };
         if (tabMap[e.key]) switchTab(tabMap[e.key]);
       }
     });
