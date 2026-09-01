@@ -58,23 +58,31 @@
   - Hover: `var(--forge-primary)`.
   - High-density scrolling containers (terminals, log viewers, drawers, code blocks, tables) must look sleek and integrated with the dark/light theme.
 
-### 9. Modern Astryx Popups, Modals & Dialogs (Zero Native Dialogs)
+### 9. Modern Astryx Popups, Modals, Dialogs & Drawers (Zero Native Dialogs)
 - **NEVER** use browser `window.confirm()`, `window.prompt()`, or unstyled native `<dialog>` elements.
-- **ALWAYS** use Meta Astryx modal primitives (`.astryx-modal-backdrop`, `.astryx-modal`, `.astryx-modal-header`, `.astryx-modal-body`, `.astryx-modal-footer`):
-  - Backdrop blur (`backdrop-filter: blur(12px)`) with semi-transparent dark overlay (`rgba(0, 0, 0, 0.75)`).
-  - Smooth enter/exit transition animations (`scale(0.96) -> scale(1)`, `opacity 0 -> 1`).
-  - Strict keyboard accessibility (`Escape` to close, click-outside-to-dismiss, autofocus management).
+- **ALWAYS** use Meta Astryx modal and drawer primitives (`.astryx-modal-backdrop`, `.astryx-modal`, `.astryx-modal-header`, `.astryx-modal-body`, `.astryx-modal-footer`, `.astryx-drawer-backdrop`, `.astryx-drawer`):
+  - Deep glassmorphic backdrop (`backdrop-filter: blur(16px)`, `background: rgba(0, 0, 0, 0.75)`).
+  - Smooth enter/exit transition physics (`scale(0.96) translateY(8px) -> scale(1) translateY(0)` with cubic-bezier `0.16, 1, 0.3, 1`).
+  - Viewport-safe bounds: `max-width: min(92vw, 680px)`, `max-height: 88vh`, internal scrollable body with custom slim Astryx scrollbars.
+  - Strict keyboard accessibility (`Escape` to close topmost layer, click-outside-to-dismiss, autofocus management).
 
 ### 10. Astryx Toast & Notification Engine (Zero Native alert())
 - **NEVER** use `window.alert()` or default browser notification alerts.
-- **ALWAYS** use modern Astryx Toast notifications (`.astryx-toast`, `.astryx-toast-container`, `window.astryxToast(msg, type)`):
-  - 4 status variants: Success (`--forge-success`), Error (`--forge-error` / `--forge-accent`), Warning (`--forge-warning`), Info (`--forge-primary`).
-  - Glassmorphic card styling, auto-dismiss timers, action buttons, and slide-in animations.
+- **ALWAYS** use modern Astryx Toast notifications (`.astryx-toast`, `.astryx-toast-container`, `window.astryxToast(msg, type, duration)`):
+  - 4 status variants: Success (`--forge-success`), Error (`--forge-accent` / `--forge-danger`), Warning (`--forge-warning`), Info (`--forge-primary`).
+  - Glassmorphic card styling (`backdrop-filter: blur(20px)`, hairline border `1px solid var(--forge-border-medium)`), auto-dismiss timer progress bar, action buttons, pause-on-hover, and smooth slide-in physics.
+  - Viewport placement: bottom-right on desktop (`bottom: 1.5rem; right: 1.5rem; max-width: 420px;`), full-width bottom-center on mobile (`bottom: 1rem; right: 1rem; left: 1rem; width: auto;`).
 
-### 11. Modern Astryx Dropdowns & Select Controls (Zero Native OS Menus)
+### 11. Modern Astryx Dropdowns, Popovers & Select Controls (Zero Native OS Menus)
 - **NEVER** leave `<select>` elements with unstyled default OS appearance or bright white OS option menus in dark mode.
-- **ALWAYS** style with `appearance: none`, custom SVG chevron arrow, `var(--forge-bg-surface)` / `var(--forge-bg-card)` options, `--forge-border` borders, and high-visibility `--forge-primary` focus rings.
-- For complex multi-selects or comboboxes, use Astryx dropdown menu primitives (`.astryx-dropdown`, `.astryx-dropdown-menu`, `.astryx-dropdown-item`).
+- **ALWAYS** enhance with custom Astryx glass dropdown primitives (`.astryx-custom-select-wrap`, `.astryx-custom-select-trigger`, `.astryx-custom-select-menu`, `.astryx-custom-select-item`):
+  - Styled trigger with custom SVG chevron arrow, `--forge-border` hairline border, and `--forge-primary` focus ring.
+  - Floating glassmorphic menu (`background: rgba(18, 20, 26, 0.96)`, `backdrop-filter: blur(20px) saturate(180%)`, deep elevation shadow).
+  - Selected item indicators (`✓`), highlight hover states (`rgba(62, 207, 142, 0.14)`), keyboard arrow/enter navigation.
+- **Smart Viewport Collision Detection**: All dropdown menus and popovers MUST dynamically calculate viewport bounds upon opening:
+  - **Auto-Flip Up**: If remaining space below the trigger is less than menu height, flip upwards (`.drop-up` / `bottom: calc(100% + 5px)`).
+  - **Auto-Shift Horizontal**: If menu overflows the right screen edge, align to the right edge (`.align-right` / `right: 0; left: auto`).
+  - **Max-Height Clamping**: Clamp `max-height: min(280px, window.innerHeight - 60px)` to guarantee menu stays 100% inside the visible window.
 
 ### 12. Strict Portal Single Page Application (SPA) & Responsiveness Invariant
 - **Single Page Application**: The portal workspace (`apps/src/portal`) MUST strictly operate as an SPA.
@@ -84,3 +92,13 @@
 - **Fluid Responsiveness**:
   - Fully responsive across desktop (>1024px), tablet (768px-1024px), and mobile (320px-768px).
   - Search trigger, organization pills, user triggers, and cards must seamlessly adapt to viewport width down to 320px with zero horizontal scrollbars.
+
+### 13. Z-Index Layering Hierarchy Standards
+- Always enforce standard z-index layers to prevent popovers or dropdowns from being hidden under headers, sidebars, or modals:
+  - Base Layout / Cards: `z-index: 1 - 10`
+  - Sticky Headers & Sidebars: `z-index: 30 - 50`
+  - In-Page Dropdown Menus & Popovers: `z-index: 1000 - 1200`
+  - Slideout Drawers: `z-index: 2000 - 2500`
+  - Modal Dialogs & Backdrops: `z-index: 3000 - 5000`
+  - Toast Notifications: `z-index: 9999+`
+

@@ -40,15 +40,14 @@ export function getDashboardStyles(): string {
     }
     .sb-header-breadcrumb .breadcrumb-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--forge-primary); box-shadow: 0 0 6px var(--forge-primary); }
     .sb-quick-find-bar {
-      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.3rem 0.75rem;
-      background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-full);
-      cursor: pointer; color: var(--forge-text-muted); font-size: 0.76rem; transition: var(--forge-transition); user-select: none;
+      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; height: 32px; padding: 0 0.75rem;
+      background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm);
+      cursor: pointer; color: var(--forge-text-muted); font-size: 0.78rem; transition: var(--forge-transition); user-select: none; box-sizing: border-box;
     }
     .sb-quick-find-bar:hover {
-      border-color: var(--forge-primary);
+      border-color: var(--forge-border-medium);
       background: var(--forge-bg-card-hover);
       color: var(--forge-text-main);
-      box-shadow: 0 0 10px -2px rgba(62, 207, 142, 0.25);
     }
 
     /* 2. Body Container & Left Sidebar */
@@ -233,28 +232,31 @@ export function getDashboardStyles(): string {
     /* Modal Dialog & Overlay */
     .astryx-modal-backdrop {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-      z-index: 1000; display: none; align-items: center; justify-content: center; padding: 1rem;
+      background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      z-index: 3000; display: none; align-items: center; justify-content: center; padding: 1rem;
+      box-sizing: border-box;
     }
     .astryx-modal-backdrop.open { display: flex; animation: fadeIn 0.15s ease-in-out; }
     .astryx-modal {
       background: var(--forge-bg-surface); border: 1px solid var(--forge-border-medium);
-      border-radius: var(--forge-radius); box-shadow: var(--forge-shadow-hover);
-      width: 100%; max-width: 680px; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden;
+      border-radius: var(--forge-radius); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      width: 100%; max-width: min(680px, 92vw); max-height: 88vh; display: flex; flex-direction: column; overflow: hidden;
+      box-sizing: border-box;
     }
-    .log-modal-content { max-width: 1050px; height: 80vh; }
+    .log-modal-content { max-width: min(1050px, 94vw); height: 82vh; }
     .astryx-modal-header {
       padding: 1rem 1.25rem; border-bottom: 1px solid var(--forge-border);
       display: flex; justify-content: space-between; align-items: center;
+      background: var(--forge-bg-card); flex-shrink: 0;
     }
     .astryx-modal-header h3 { font-size: 1.05rem; font-weight: 700; color: var(--forge-text-main); margin: 0; }
     .astryx-modal-close {
       background: transparent; border: none; color: var(--forge-text-muted);
-      font-size: 1.15rem; cursor: pointer; padding: 0.25rem 0.5rem;
+      font-size: 1.25rem; cursor: pointer; padding: 0.25rem 0.5rem;
       border-radius: var(--forge-radius-sm); transition: var(--forge-transition);
     }
     .astryx-modal-close:hover { background: var(--forge-bg-card-hover); color: var(--forge-text-main); }
-    .astryx-modal-body { padding: 1.25rem; overflow-y: auto; font-size: 0.85rem; color: var(--forge-text-main); line-height: 1.55; }
+    .astryx-modal-body { padding: 1.25rem; overflow-y: auto; font-size: 0.85rem; color: var(--forge-text-main); line-height: 1.55; flex: 1; scrollbar-width: thin; scrollbar-color: var(--forge-border-medium) transparent; }
 
     /* Sparkline SVG Graphs & Latency Pills */
     .sparkline-cell { display: flex; align-items: center; gap: 0.5rem; }
@@ -436,14 +438,14 @@ export function getDashboardStyles(): string {
     .log-msg.highlight { color: var(--forge-text-main); background: rgba(245, 158, 11, 0.2); }
 
     /* Command Palette (Cmd+K) */
-    .palette-modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px); z-index: 200; align-items: flex-start; justify-content: center; padding-top: 10vh; }
+    .palette-modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); z-index: 3000; align-items: flex-start; justify-content: center; padding-top: 10vh; box-sizing: border-box; }
     .palette-modal-backdrop.open { display: flex; }
-    .palette-box { width: 90%; max-width: 580px; background: var(--forge-bg-surface); border: 1px solid var(--forge-border-medium); border-radius: var(--forge-radius-md); box-shadow: var(--forge-shadow-hover); overflow: hidden; }
+    .palette-box { width: 90%; max-width: 580px; background: var(--forge-bg-surface); border: 1px solid var(--forge-border-medium); border-radius: var(--forge-radius-md); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08); overflow: hidden; }
     .palette-input-wrap { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; border-bottom: 1px solid var(--forge-border); }
     .palette-input { flex: 1; background: transparent; border: none; outline: none; color: var(--forge-text-main); font-size: 0.95rem; }
-    .palette-list { max-height: 320px; overflow-y: auto; padding: 0.4rem; margin: 0; list-style: none; }
+    .palette-list { max-height: 320px; overflow-y: auto; padding: 0.4rem; margin: 0; list-style: none; scrollbar-width: thin; scrollbar-color: var(--forge-border-medium) transparent; }
     .palette-item { display: flex; align-items: center; justify-content: space-between; padding: 0.55rem 0.75rem; border-radius: var(--forge-radius-sm); cursor: pointer; color: var(--forge-text-main); font-size: 0.84rem; }
-    .palette-item:hover, .palette-item.active { background: var(--forge-bg-card-hover); color: var(--forge-primary); }
+    .palette-item:hover, .palette-item.active { background: rgba(62, 207, 142, 0.12); color: var(--forge-primary); }
 
     ${getDbStudioStyles()}
     ${getServicesStyles()}

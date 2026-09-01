@@ -8,7 +8,9 @@ export const ASTRYX_VERSION = '2.0.0';
 
 export * from './styles';
 export * from './toast';
+export * from './dropdown';
 export * from './header';
 export * from './state';
 export * from './error-page';
 export * from './icons';
+

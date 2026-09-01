@@ -137,9 +137,9 @@ export function getEmployeeDrawerAndTreeScripts(): string {
               '</div>' +
             '</div>' +
             '<div class="teams-report-footer">' +
-              '<span style="color: var(--forge-text-muted);">🏛️ ' + (rep.department_name || 'General') + '</span>' +
+              '<span style="color: var(--forge-text-muted);">' + (rep.department_name || 'General') + '</span>' +
               (subReportsCount > 0
-                ? '<button class="astryx-btn btn-outline" style="font-size: 0.68rem; padding: 0.15rem 0.45rem; color: var(--forge-primary); border-color: var(--forge-primary);" onclick="event.stopPropagation(); setOrgFocus(\\\'' + rep.id + '\\\')">👥 ' + subReportsCount + ' Reports ↓</button>'
+                ? '<button class="astryx-btn btn-outline" style="font-size: 0.68rem; padding: 0.15rem 0.45rem; color: var(--forge-primary); border-color: var(--forge-primary);" onclick="event.stopPropagation(); setOrgFocus(\\\'' + rep.id + '\\\')">' + subReportsCount + ' Reports ↓</button>'
                 : '<span style="color: var(--forge-text-muted); font-size: 0.7rem;">Individual</span>') +
             '</div>' +
           '</div>';

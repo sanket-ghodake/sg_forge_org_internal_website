@@ -1,39 +1,43 @@
 /**
- * @forge/dev-dashboard - Meta Astryx Custom Select Dropdown Engine (2026 LTS)
- * Fully customizable glassmorphic popup dropdowns with smart collision detection and zero OS/browser defaults.
+ * @forge/ui - Astryx Dropdown & Select Engine (2026 LTS)
+ * Lightweight client script providing smart collision detection, auto-flip, and glassmorphic dropdowns.
  */
 
-export function getDropdownScripts(): string {
+export function getAstryxDropdownScript(): string {
   return `
-    /* Meta Astryx Custom Select Engine */
-    (function initAstryxDropdownEngine() {
-      const CHEVRON_SVG = '<svg class="astryx-custom-select-arrow" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+    (function() {
+      if (typeof window === 'undefined') return;
+
+      var CHEVRON_SVG = '<svg class="astryx-custom-select-arrow" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
 
       function positionDropdown(trigger, menu) {
         if (!trigger || !menu) return;
+
+        // Reset classes
         menu.classList.remove('drop-up', 'align-right');
 
-        const rect = trigger.getBoundingClientRect();
-        const menuHeight = menu.offsetHeight || 220;
-        const menuWidth = menu.offsetWidth || 220;
-        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-        const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+        var rect = trigger.getBoundingClientRect();
+        var menuHeight = menu.offsetHeight || 200;
+        var menuWidth = menu.offsetWidth || 220;
+        var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+        var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
 
-        // Vertical collision check: Flip upwards if opening down would clip bottom edge
-        const spaceBelow = viewportHeight - rect.bottom;
-        const spaceAbove = rect.top;
+        // 1. Vertical Collision (Flip Upwards if not enough space below and more space above)
+        var spaceBelow = viewportHeight - rect.bottom;
+        var spaceAbove = rect.top;
+
         if (spaceBelow < menuHeight + 10 && spaceAbove > spaceBelow) {
           menu.classList.add('drop-up');
         }
 
-        // Horizontal collision check: Align to right if overflowing right edge
+        // 2. Horizontal Collision (Align to right edge if overflowing viewport right)
         if (rect.left + menuWidth > viewportWidth - 16) {
           menu.classList.add('align-right');
         }
 
-        // Clamp max-height to guaranteed visible viewport space
-        const maxH = Math.min(280, Math.max(120, viewportHeight - 60));
-        menu.style.maxHeight = maxH + 'px';
+        // 3. Dynamic max-height clamping
+        var maxAllowedHeight = Math.min(280, Math.max(120, viewportHeight - 60));
+        menu.style.maxHeight = maxAllowedHeight + 'px';
       }
 
       function enhanceSelect(selectEl) {
@@ -45,27 +49,25 @@ export function getDropdownScripts(): string {
         selectEl.dataset.astryxEnhanced = 'true';
         selectEl.style.display = 'none';
 
-        const wrapper = document.createElement('div');
+        var wrapper = document.createElement('div');
         wrapper.className = 'astryx-custom-select-wrap';
         if (selectEl.id) wrapper.dataset.forSelect = selectEl.id;
-
-        // Copy style attributes if needed (e.g. max-width)
         if (selectEl.style.maxWidth) wrapper.style.maxWidth = selectEl.style.maxWidth;
         if (selectEl.style.width) wrapper.style.width = selectEl.style.width;
 
-        const trigger = document.createElement('button');
+        var trigger = document.createElement('button');
         trigger.type = 'button';
         trigger.className = 'astryx-custom-select-trigger';
         trigger.setAttribute('aria-haspopup', 'listbox');
         trigger.setAttribute('aria-expanded', 'false');
 
-        const labelSpan = document.createElement('span');
+        var labelSpan = document.createElement('span');
         labelSpan.className = 'astryx-custom-select-label';
 
         trigger.appendChild(labelSpan);
         trigger.insertAdjacentHTML('beforeend', CHEVRON_SVG);
 
-        const menu = document.createElement('div');
+        var menu = document.createElement('div');
         menu.className = 'astryx-custom-select-menu';
         menu.setAttribute('role', 'listbox');
 
@@ -76,34 +78,33 @@ export function getDropdownScripts(): string {
 
         function syncFromSelect() {
           menu.innerHTML = '';
-          const options = Array.from(selectEl.options);
-          const selectedOption = selectEl.options[selectEl.selectedIndex] || options[0];
+          var options = Array.from(selectEl.options);
+          var selectedOption = selectEl.options[selectEl.selectedIndex] || options[0];
           labelSpan.textContent = selectedOption ? selectedOption.text : 'Select...';
 
-          options.forEach(opt => {
-            const item = document.createElement('div');
+          options.forEach(function(opt) {
+            var item = document.createElement('div');
             item.className = 'astryx-custom-select-item' + (opt.selected ? ' selected' : '');
             item.dataset.value = opt.value;
             item.setAttribute('role', 'option');
             item.setAttribute('aria-selected', opt.selected ? 'true' : 'false');
 
-            const textSpan = document.createElement('span');
+            var textSpan = document.createElement('span');
             textSpan.textContent = opt.text;
             item.appendChild(textSpan);
 
-            const checkSpan = document.createElement('span');
+            var checkSpan = document.createElement('span');
             checkSpan.className = 'astryx-custom-select-check';
             checkSpan.textContent = '✓';
             item.appendChild(checkSpan);
 
-            item.addEventListener('click', (e) => {
+            item.addEventListener('click', function(e) {
               e.stopPropagation();
               selectEl.value = opt.value;
               labelSpan.textContent = opt.text;
               wrapper.classList.remove('open');
               trigger.setAttribute('aria-expanded', 'false');
 
-              // Dispatch change event to trigger existing app handlers
               selectEl.dispatchEvent(new Event('change', { bubbles: true }));
               if (typeof selectEl.onchange === 'function') {
                 selectEl.onchange();
@@ -118,9 +119,9 @@ export function getDropdownScripts(): string {
         selectEl._astryxSync = syncFromSelect;
         syncFromSelect();
 
-        trigger.addEventListener('click', (e) => {
+        trigger.addEventListener('click', function(e) {
           e.stopPropagation();
-          const wasOpen = wrapper.classList.contains('open');
+          var wasOpen = wrapper.classList.contains('open');
           closeAllAstryxDropdowns();
           if (!wasOpen) {
             syncFromSelect();
@@ -130,17 +131,16 @@ export function getDropdownScripts(): string {
           }
         });
 
-        // Observe option mutations dynamically
-        const observer = new MutationObserver(() => {
+        var observer = new MutationObserver(function() {
           syncFromSelect();
         });
         observer.observe(selectEl, { childList: true, subtree: true, attributes: true });
       }
 
       function closeAllAstryxDropdowns() {
-        document.querySelectorAll('.astryx-custom-select-wrap.open').forEach(el => {
+        document.querySelectorAll('.astryx-custom-select-wrap.open').forEach(function(el) {
           el.classList.remove('open');
-          const tr = el.querySelector('.astryx-custom-select-trigger');
+          var tr = el.querySelector('.astryx-custom-select-trigger');
           if (tr) tr.setAttribute('aria-expanded', 'false');
         });
       }
@@ -152,28 +152,27 @@ export function getDropdownScripts(): string {
         document.querySelectorAll('select').forEach(enhanceSelect);
       };
 
-      document.addEventListener('click', (e) => {
+      document.addEventListener('click', function(e) {
         if (!e.target.closest('.astryx-custom-select-wrap')) {
           closeAllAstryxDropdowns();
         }
       });
 
-      document.addEventListener('keydown', (e) => {
+      document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           closeAllAstryxDropdowns();
         }
       });
 
-      window.addEventListener('resize', () => {
-        const openWrap = document.querySelector('.astryx-custom-select-wrap.open');
-        if (openWrap) {
-          const tr = openWrap.querySelector('.astryx-custom-select-trigger');
-          const me = openWrap.querySelector('.astryx-custom-select-menu');
+      window.addEventListener('resize', function() {
+        var openMenu = document.querySelector('.astryx-custom-select-wrap.open');
+        if (openMenu) {
+          var tr = openMenu.querySelector('.astryx-custom-select-trigger');
+          var me = openMenu.querySelector('.astryx-custom-select-menu');
           positionDropdown(tr, me);
         }
       });
 
-      // Auto-enhance after DOM is ready
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', window.syncAstryxSelects);
       } else {
@@ -182,4 +181,3 @@ export function getDropdownScripts(): string {
     })();
   `;
 }
-

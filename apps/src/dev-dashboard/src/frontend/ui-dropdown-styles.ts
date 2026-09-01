@@ -12,6 +12,7 @@ export function getDropdownStyles(): string {
       align-items: center;
       user-select: none;
       font-family: inherit;
+      vertical-align: middle;
     }
     .astryx-custom-select-trigger {
       display: inline-flex;
@@ -31,6 +32,8 @@ export function getDropdownStyles(): string {
       white-space: nowrap;
       min-height: 32px;
       width: 100%;
+      box-sizing: border-box;
+      outline: none;
     }
     .astryx-custom-select-trigger:hover, .astryx-custom-select-wrap.open .astryx-custom-select-trigger {
       border-color: var(--forge-primary);
@@ -38,7 +41,6 @@ export function getDropdownStyles(): string {
       box-shadow: 0 0 10px -2px rgba(62, 207, 142, 0.25);
     }
     .astryx-custom-select-trigger:focus-visible {
-      outline: none;
       border-color: var(--forge-primary);
       box-shadow: 0 0 0 2px rgba(62, 207, 142, 0.3);
     }
@@ -61,10 +63,10 @@ export function getDropdownStyles(): string {
       left: 0;
       min-width: 100%;
       width: max-content;
-      max-width: 320px;
-      max-height: 260px;
+      max-width: min(340px, calc(100vw - 24px));
+      max-height: 280px;
       overflow-y: auto;
-      background: rgba(18, 20, 26, 0.96);
+      background: var(--forge-bg-surface);
       border: 1px solid var(--forge-border-medium);
       border-radius: var(--forge-radius-sm);
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.06);
@@ -76,9 +78,21 @@ export function getDropdownStyles(): string {
       flex-direction: column;
       gap: 0.15rem;
       animation: selectDropIn 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+      box-sizing: border-box;
+      scrollbar-width: thin;
+      scrollbar-color: var(--forge-border-medium) transparent;
     }
     .astryx-custom-select-wrap.open .astryx-custom-select-menu {
       display: flex;
+    }
+    .astryx-custom-select-menu.drop-up {
+      top: auto;
+      bottom: calc(100% + 5px);
+      animation: selectDropUp 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .astryx-custom-select-menu.align-right {
+      left: auto;
+      right: 0;
     }
     .astryx-custom-select-item {
       display: flex;
@@ -115,5 +129,10 @@ export function getDropdownStyles(): string {
       from { opacity: 0; transform: translateY(-4px) scale(0.98); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
+    @keyframes selectDropUp {
+      from { opacity: 0; transform: translateY(4px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
   `;
 }
+

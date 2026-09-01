@@ -10,7 +10,7 @@ Before writing code, running commands, or staging/committing changes, verify:
 1. [ ] **RTK Command Prefix**: Every bash command MUST be prefixed with `rtk` (e.g. `rtk git status`, `rtk bun test`, `rtk git add .`).
 2. [ ] **Zero Host Modification**: All runtimes/tools strictly use portable repo binaries (`portables/bun/bin/bun`, `portables/bin/*`) or Docker. ZERO host modifications (`apt`, `brew`, `npm -g`, `pip install`).
 3. [ ] **500-Line Soft File Cap**: Source files must remain cohesive and **$\le 500$ lines** ($\le 300$ lines ideal). Block files exceeding 500 lines without explicit domain aggregation exemption.
-4. [ ] **Strict Meta Astryx UI**: Frontend UI code MUST strictly use Meta Astryx design tokens and components (`@forge/ui`). ZERO bespoke unapproved CSS or random component libraries. All scrollbars, popups/modals, notifications/toasts, and dropdowns MUST strictly use Meta Astryx custom styling — ZERO OS/browser defaults.
+4. [ ] **Strict Meta Astryx UI & Viewport-Safe Containment**: Frontend UI code MUST strictly use modern Meta Astryx design tokens and components (`@forge/ui`). ZERO bespoke unapproved CSS or random component libraries. All scrollbars, popups/drawers, modals, notifications/toasts, and dropdowns MUST strictly use Meta Astryx custom styling — ZERO OS/browser defaults. All dropdown menus, popovers, and dialogs MUST implement smart collision detection (auto-flip/shift/clamp) to guarantee 100% visibility inside the active viewport window without clipping or overflowing.
 5. [ ] **Centralized Logging, PII Redaction & Error Handling**: Services MUST use `createLogger` and `createSafeHandler` from `@forge/sdk` (Google SRE standard structured JSON logs, RFC 7807 problem responses with trace IDs, and automated recursive PII/secret redaction). Frontend console must never leak credentials, tokens, or raw internal stack traces.
 6. [ ] **Dedicated Turso DB Isolation**: Dedicated Turso (libSQL) database per Forge App. Micro-apps MUST NEVER query another app's database.
 7. [ ] **Clean Package Aliases**: Imports must use `@forge/sdk`, `@forge/ui`, `@forge/types`. ZERO relative traversal sprawl (`../../..`).
@@ -36,9 +36,10 @@ Before writing code, running commands, or staging/committing changes, verify:
 - **$301 - 500$ lines**: Cohesion boundary. Allowed for state conductors and route dispatchers.
 - **$> 500$ lines**: **HARD GATE BLOCKED** by pre-commit checks. Refactor into feature-colocated sub-modules unless exempt (e.g. multi-table Drizzle schema or test fixtures).
 
-### 3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`)
+### 3. Strict UI Standard: Meta Astryx Design System (`@forge/ui`) & Viewport Containment
 - **MANDATORY**: All UI views, cards, modals, tables, headers, buttons, dropdowns, popups, and notifications across the platform MUST strictly use Meta Astryx design system tokens and component wrappers (`@forge/ui`).
 - **ZERO Browser Defaults**: OS-default scrollbars, native `alert()`/`confirm()`/`prompt()` dialogs, unstyled `<select>` dropdowns, and default popups are **STRICTLY FORBIDDEN**. Scrollbars must be slim, themed Astryx tracks. Notifications must use Astryx Toast overlays. Dropdowns must use styled custom selectors. Popups/modals must use Astryx glassmorphic backdrop dialogs.
+- **Smart Viewport Containment**: All dropdowns, flyouts, and popovers MUST dynamically calculate viewport bounds (auto-flip up when close to bottom edge, shift horizontally when close to right/left edge, clamp max-height) so that overlays are 100% visible inside the visible window without clipping or parent overflow.
 - Strictly adhere to `--forge-*` CSS variables (`--forge-bg-root`, `--forge-bg-surface`, `--forge-bg-card`, `--forge-border`, `--forge-primary`, `--forge-accent`, `--forge-text-main`, `--forge-text-muted`).
 - Zero horizontal scrolling down to 320px viewport. Modals, dropdowns, and overlays render with proper top-layer z-index and accessibility.
 

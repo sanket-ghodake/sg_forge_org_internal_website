@@ -39,13 +39,13 @@ export function getPortalCustomStyles(): string {
 
     .portal-search-trigger {
       display: inline-flex; align-items: center; gap: 0.6rem;
-      padding: 0.22rem 0.75rem; background: var(--forge-bg-card);
-      border: 1px solid var(--forge-border); border-radius: var(--forge-radius-full);
-      color: var(--forge-text-muted); font-size: 0.76rem; cursor: pointer;
-      transition: var(--forge-transition); min-width: 190px; user-select: none;
+      height: 32px; padding: 0 0.75rem; background: var(--forge-bg-card);
+      border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm);
+      color: var(--forge-text-muted); font-size: 0.78rem; cursor: pointer;
+      transition: var(--forge-transition); min-width: 210px; user-select: none; box-sizing: border-box;
     }
-    .portal-search-trigger:hover { border-color: var(--forge-primary); color: var(--forge-text-main); background: var(--forge-bg-card-hover); }
-    .portal-kbd { font-size: 0.66rem; padding: 0.1rem 0.35rem; background: var(--forge-bg-surface); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); color: var(--forge-text-muted); margin-left: auto; }
+    .portal-search-trigger:hover { border-color: var(--forge-border-medium); color: var(--forge-text-main); background: var(--forge-bg-card-hover); }
+    .portal-kbd { font-size: 0.68rem; padding: 0.12rem 0.4rem; background: var(--forge-bg-surface); border: 1px solid var(--forge-border); border-radius: 4px; color: var(--forge-text-subtle); margin-left: auto; font-family: 'Geist Mono', monospace; }
     .portal-header-right { display: flex; align-items: center; }
 
     /* ── Right-Side Minimal Icon-Only Profile Trigger ── */
@@ -68,9 +68,11 @@ export function getPortalCustomStyles(): string {
     /* ── Modern Top-Right Dropdown Popover ── */
     .user-dropdown-popover {
       display: none; position: absolute; right: 0; top: calc(100% + 8px);
-      width: 260px; background: var(--forge-bg-surface); border: 1px solid var(--forge-border);
-      border-radius: var(--forge-radius); box-shadow: var(--forge-shadow-hover);
-      padding: 0.5rem; box-sizing: border-box; z-index: 60; backdrop-filter: blur(16px);
+      width: min(270px, calc(100vw - 1.5rem)); background: var(--forge-bg-surface);
+      border: 1px solid var(--forge-border-medium);
+      border-radius: var(--forge-radius); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      padding: 0.5rem; box-sizing: border-box; z-index: 1200; backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
     }
     .user-dropdown-popover.active { display: block; animation: popoverFadeIn 0.15s cubic-bezier(0.16, 1, 0.3, 1); }
 
@@ -100,14 +102,14 @@ export function getPortalCustomStyles(): string {
 
     .popover-item {
       width: 100%; display: flex; align-items: center; justify-content: space-between;
-      padding: 0.42rem 0.55rem; border-radius: var(--forge-radius-sm); border: 1px solid transparent;
+      padding: 0.45rem 0.55rem; border-radius: var(--forge-radius-sm); border: 1px solid transparent;
       background: transparent; color: var(--forge-text-main); font-size: 0.8rem; font-weight: 500;
       cursor: pointer; transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
       box-sizing: border-box; outline: none; user-select: none;
     }
-    .popover-item:hover { background: var(--forge-bg-card-hover); color: var(--forge-primary); border-color: var(--forge-border); }
+    .popover-item:hover { background: rgba(62, 207, 142, 0.12); color: var(--forge-primary); border-color: var(--forge-border); }
     .popover-badge-pill { font-size: 0.65rem; font-weight: 600; padding: 0.1rem 0.45rem; border-radius: var(--forge-radius-full); background: var(--forge-bg-card); border: 1px solid var(--forge-border); color: var(--forge-text-muted); }
-    .popover-logout-btn:hover { color: var(--forge-primary); background: var(--forge-bg-card-hover); }
+    .popover-logout-btn:hover { color: var(--forge-primary); background: rgba(62, 207, 142, 0.12); }
 
     /* ── Clean Auto-Collapsible Sidebar ── */
     .portal-sidebar {
@@ -205,14 +207,26 @@ export function getPortalCustomStyles(): string {
     /* ── Search Modal ── */
     .portal-search-modal {
       display: none; position: fixed; inset: 0;
-      background: var(--forge-bg-surface); background-color: rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(4px); z-index: 100; align-items: flex-start; justify-content: center; padding-top: 15vh;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      z-index: 3000; align-items: flex-start; justify-content: center; padding-top: 12vh;
+      box-sizing: border-box;
     }
-    .portal-search-modal.active { display: flex; }
+    .portal-search-modal.active { display: flex; animation: searchModalFadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1); }
     .portal-search-box {
       width: 90%; max-width: 580px; background: var(--forge-bg-surface);
-      border: 1px solid var(--forge-border); border-radius: var(--forge-radius);
-      box-shadow: var(--forge-shadow-hover); overflow: hidden;
+      border: 1px solid var(--forge-border-medium); border-radius: var(--forge-radius);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      overflow: hidden; transform: scale(0.98);
+      animation: searchBoxScale 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes searchModalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes searchBoxScale {
+      from { transform: scale(0.95) translateY(-8px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
     }
     .portal-search-input {
       width: 100%; padding: 1rem 1.25rem; background: transparent;
@@ -230,7 +244,7 @@ export function getPortalCustomStyles(): string {
     @media (max-width: 480px) {
       .portal-header { padding: 0 0.5rem; }
       .portal-brand span { display: none; }
-      .user-dropdown-popover { right: -8px; width: 240px; }
+      .user-dropdown-popover { right: 0; width: calc(100vw - 1rem); }
     }
   `;
 }

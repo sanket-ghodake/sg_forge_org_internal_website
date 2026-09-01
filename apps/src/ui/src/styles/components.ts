@@ -104,7 +104,7 @@ export function getComponentStyles(): string {
     .astryx-card {
       background: var(--forge-bg-card);
       border: 1px solid var(--forge-border);
-      border-radius: var(--forge-radius-sm);
+      border-radius: var(--forge-radius);
       padding: 1.25rem;
       box-shadow: var(--forge-shadow-card);
       transition: var(--forge-transition);
@@ -118,21 +118,93 @@ export function getComponentStyles(): string {
       box-shadow: var(--forge-shadow-hover);
     }
 
+    /* Supabase 3-Tier Card Anatomy */
+    .sb-card {
+      background: var(--forge-bg-card);
+      border: 1px solid var(--forge-border);
+      border-radius: var(--forge-radius);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--forge-transition);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .sb-card:hover {
+      border-color: var(--forge-border-medium);
+      background: var(--forge-bg-card-hover);
+      box-shadow: var(--forge-shadow-hover);
+    }
+
+    .sb-card-header {
+      padding: 1rem 1.15rem 0.5rem 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .sb-card-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--forge-text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: -0.015em;
+    }
+
+    .sb-card-kebab {
+      color: var(--forge-text-muted);
+      cursor: pointer;
+      padding: 0.2rem;
+      border-radius: var(--forge-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s ease;
+    }
+
+    .sb-card-kebab:hover {
+      color: var(--forge-text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .sb-card-body {
+      padding: 0.25rem 1.15rem 0.85rem 1.15rem;
+      font-size: 0.8rem;
+      color: var(--forge-text-muted);
+      line-height: 1.45;
+    }
+
+    .sb-card-footer {
+      padding: 0.6rem 1.15rem;
+      border-top: 1px solid var(--forge-border);
+      background: rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.74rem;
+      color: var(--forge-text-muted);
+    }
+
     .astryx-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
       font-size: 0.72rem;
       font-weight: 500;
-      padding: 0.2rem 0.55rem;
-      border-radius: 4px;
+      padding: 0.18rem 0.5rem;
+      border-radius: var(--forge-radius-sm);
       letter-spacing: 0.02em;
     }
 
     .badge-online {
       background: var(--forge-success-bg);
       color: var(--forge-success);
-      border: 1px solid rgba(62, 207, 142, 0.3);
+      border: 1px solid rgba(62, 207, 142, 0.25);
     }
 
     .badge-pill {
@@ -153,39 +225,63 @@ export function getComponentStyles(): string {
       align-items: center;
       justify-content: center;
       gap: 0.45rem;
-      padding: 0.45rem 0.95rem;
+      height: 32px;
+      padding: 0 0.85rem;
       border-radius: var(--forge-radius-sm);
-      font-size: 0.82rem;
-      font-weight: 550;
+      font-size: 0.8rem;
+      font-weight: 500;
       letter-spacing: -0.01em;
       cursor: pointer;
       text-decoration: none;
       transition: var(--forge-transition);
       border: 1px solid transparent;
       outline: none;
+      user-select: none;
+      box-sizing: border-box;
     }
 
     .btn-primary {
       background: var(--forge-primary);
-      color: #000000 !important;
+      color: #121212 !important;
       font-weight: 600;
       border-color: transparent;
     }
 
     .btn-primary:hover {
-      filter: brightness(1.08);
-      box-shadow: 0 2px 12px rgba(62, 207, 142, 0.25);
+      background: var(--forge-primary-hover, #34b27b);
+      filter: brightness(1.05);
+      box-shadow: 0 1px 8px rgba(62, 207, 142, 0.25);
     }
 
     .btn-outline {
-      background: rgba(255, 255, 255, 0.03);
+      background: var(--forge-bg-card);
       border-color: var(--forge-border);
       color: var(--forge-text-main);
     }
 
     .btn-outline:hover {
       border-color: var(--forge-border-medium);
-      background: rgba(255, 255, 255, 0.06);
+      background: var(--forge-bg-card-hover);
+      color: var(--forge-text-main);
+    }
+
+    .astryx-input, .astryx-select {
+      height: 32px;
+      background: var(--forge-bg-card);
+      border: 1px solid var(--forge-border);
+      border-radius: var(--forge-radius-sm);
+      color: var(--forge-text-main);
+      padding: 0 0.75rem;
+      font-size: 0.82rem;
+      font-family: inherit;
+      outline: none;
+      transition: var(--forge-transition);
+      box-sizing: border-box;
+    }
+
+    .astryx-input:focus, .astryx-select:focus {
+      border-color: var(--forge-primary);
+      box-shadow: 0 0 0 1px var(--forge-primary);
     }
 
     .astryx-grid {
@@ -209,10 +305,10 @@ export function getComponentStyles(): string {
 
     .astryx-code-badge {
       font-family: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       background: var(--forge-bg-elevated);
       color: var(--forge-primary);
-      padding: 0.2rem 0.55rem;
+      padding: 0.15rem 0.45rem;
       border-radius: 4px;
       border: 1px solid var(--forge-border);
     }

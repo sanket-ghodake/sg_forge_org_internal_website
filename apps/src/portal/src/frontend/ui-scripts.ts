@@ -30,12 +30,28 @@ export function getPortalClientScript(): string {
       var themeBadge = document.getElementById('theme-badge');
 
       // ── 1. User Profile Popover Controller ──
+      function positionPopover() {
+        if (!profilePopover || !profileBtn) return;
+        var rect = profileBtn.getBoundingClientRect();
+        var popoverWidth = profilePopover.offsetWidth || 260;
+        var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+
+        if (rect.right < popoverWidth + 10) {
+          profilePopover.style.right = 'auto';
+          profilePopover.style.left = '0';
+        } else {
+          profilePopover.style.left = 'auto';
+          profilePopover.style.right = '0';
+        }
+      }
+
       function toggleProfilePopover(force) {
         if (!profilePopover || !profileBtn) return;
         var isOpen = force !== undefined ? force : !profilePopover.classList.contains('active');
         profilePopover.classList.toggle('active', isOpen);
         profileBtn.classList.toggle('active', isOpen);
         profileBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (isOpen) positionPopover();
       }
 
       function closeProfilePopover() {
@@ -203,8 +219,8 @@ export function getPortalClientScript(): string {
         roleToggleBtn.addEventListener('click', function() {
           var nextRole = (currentRole === 'Admin') ? 'Employee' : 'Admin';
           setRole(nextRole);
-          if (window.astryxToast) {
-            window.astryxToast.show('Switched workspace mode to ' + nextRole, 'info');
+          if (typeof window.astryxToast === 'function') {
+            window.astryxToast('Switched workspace mode to ' + nextRole, 'info');
           }
         });
       }
@@ -212,16 +228,16 @@ export function getPortalClientScript(): string {
 
       // ── 6. Quick Finder / Command Palette (⌘K) ──
       var searchPages = [
-        { id: 'canvas', title: 'Company Map & Org Canvas', category: 'Workspace', icon: '🗺️' },
-        { id: 'apps', title: 'My Apps & Tools Hub', category: 'Workspace', icon: '🚀' },
-        { id: 'directory', title: 'People Directory', category: 'Workspace', icon: '👥' },
-        { id: 'profile', title: 'My Profile & Account', category: 'Workspace', icon: '👤' },
-        { id: 'notifications', title: 'Notifications & Announcements', category: 'Workspace', icon: '🔔' },
-        { id: 'admin-members', title: 'Team & Member Management', category: 'Admin Console', icon: '👥' },
-        { id: 'admin-apps', title: 'App Store & Permissions', category: 'Admin Console', icon: '🗂️' },
-        { id: 'admin-org', title: 'Organization Chart Builder', category: 'Admin Console', icon: '🏗️' },
-        { id: 'admin-audit', title: 'Security & Audit Logs', category: 'Admin Console', icon: '📜' },
-        { id: 'admin-settings', title: 'Company Settings & Security', category: 'Admin Console', icon: '⚙️' }
+        { id: 'canvas', title: 'Company Map & Org Canvas', category: 'Workspace' },
+        { id: 'apps', title: 'My Apps & Tools Hub', category: 'Workspace' },
+        { id: 'directory', title: 'People Directory', category: 'Workspace' },
+        { id: 'profile', title: 'My Profile & Account', category: 'Workspace' },
+        { id: 'notifications', title: 'Notifications & Announcements', category: 'Workspace' },
+        { id: 'admin-members', title: 'Team & Member Management', category: 'Admin Console' },
+        { id: 'admin-apps', title: 'App Store & Permissions', category: 'Admin Console' },
+        { id: 'admin-org', title: 'Organization Chart Builder', category: 'Admin Console' },
+        { id: 'admin-audit', title: 'Security & Audit Logs', category: 'Admin Console' },
+        { id: 'admin-settings', title: 'Company Settings & Security', category: 'Admin Console' }
       ];
 
       function openSearch() {
@@ -252,12 +268,12 @@ export function getPortalClientScript(): string {
         }
 
         searchResults.innerHTML = matches.map(function(item) {
-          return '<div class="portal-search-item" data-target="' + item.id + '" style="padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between; cursor: pointer; border-bottom: 1px solid var(--forge-border); transition: background 0.15s;">' +
-            '<div style="display: flex; align-items: center; gap: 0.6rem;">' +
-              '<span>' + item.icon + '</span>' +
-              '<span style="font-weight: 500; font-size: 0.9rem; color: var(--forge-text-main);">' + item.title + '</span>' +
+          return '<div class="portal-search-item" data-target="' + item.id + '" style="padding: 0.65rem 0.95rem; display: flex; align-items: center; justify-content: space-between; cursor: pointer; border-bottom: 1px solid var(--forge-border); transition: background 0.15s;">' +
+            '<div style="display: flex; align-items: center; gap: 0.5rem;">' +
+              '<span class="badge-dot" style="background: var(--forge-primary); width: 6px; height: 6px; border-radius: 50%;"></span>' +
+              '<span style="font-weight: 500; font-size: 0.85rem; color: var(--forge-text-main);">' + item.title + '</span>' +
             '</div>' +
-            '<span style="font-size: 0.72rem; color: var(--forge-text-muted); background: var(--forge-bg-card); padding: 0.15rem 0.5rem; border-radius: 4px; border: 1px solid var(--forge-border);">' + item.category + '</span>' +
+            '<span style="font-size: 0.7rem; color: var(--forge-text-muted); background: var(--forge-bg-card); padding: 0.12rem 0.45rem; border-radius: 4px; border: 1px solid var(--forge-border);">' + item.category + '</span>' +
           '</div>';
         }).join('');
 

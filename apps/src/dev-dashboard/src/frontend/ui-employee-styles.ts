@@ -100,16 +100,16 @@ export function getEmployeeStyles(): string {
     .teams-report-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 0.5rem; border-top: 1px solid var(--forge-border); font-size: 0.72rem; }
 
     /* Slide-Over Employee Detail Drawer */
-    .emp-drawer-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(4px); z-index: 210; opacity: 0; pointer-events: none; transition: opacity 0.22s ease; }
+    .emp-drawer-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.22s ease; }
     .emp-drawer-backdrop.open { opacity: 1; pointer-events: auto; }
-    .emp-drawer { position: fixed; top: 0; right: 0; width: min(94vw, 560px); height: 100vh; background: var(--forge-bg-surface); border-left: 1px solid var(--forge-border-medium); box-shadow: -12px 0 40px rgba(0, 0, 0, 0.65); transform: translateX(100%); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); z-index: 220; display: flex; flex-direction: column; overflow: hidden; }
+    .emp-drawer { position: fixed; top: 0; right: 0; width: min(94vw, 560px); height: 100vh; background: var(--forge-bg-surface); border-left: 1px solid var(--forge-border-medium); box-shadow: -16px 0 40px rgba(0, 0, 0, 0.75); transform: translateX(100%); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); z-index: 2001; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; }
     .emp-drawer.open { transform: translateX(0); }
     .emp-drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem; border-bottom: 1px solid var(--forge-border); background: var(--forge-bg-card); flex-shrink: 0; }
-    .emp-drawer-tabs { display: flex; border-bottom: 1px solid var(--forge-border); background: var(--forge-bg-card); padding: 0 1.25rem; gap: 0.5rem; }
-    .emp-tab-btn { background: transparent; border: none; border-bottom: 2px solid transparent; color: var(--forge-text-muted); font-size: 0.78rem; font-weight: 600; padding: 0.6rem 0.5rem; cursor: pointer; transition: var(--forge-transition); }
+    .emp-drawer-tabs { display: flex; border-bottom: 1px solid var(--forge-border); background: var(--forge-bg-card); padding: 0 1.25rem; gap: 0.5rem; flex-shrink: 0; }
+    .emp-tab-btn { background: transparent; border: none; border-bottom: 2px solid transparent; color: var(--forge-text-muted); font-size: 0.78rem; font-weight: 600; padding: 0.6rem 0.5rem; cursor: pointer; transition: var(--forge-transition); outline: none; }
     .emp-tab-btn:hover { color: var(--forge-text-main); }
     .emp-tab-btn.active { color: var(--forge-primary); border-bottom-color: var(--forge-primary); }
-    .emp-drawer-body { flex: 1; overflow-y: auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; }
+    .emp-drawer-body { flex: 1; overflow-y: auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; scrollbar-width: thin; scrollbar-color: var(--forge-border-medium) transparent; }
 
     /* Avatar, Pills & Dropzone */
     .emp-avatar { width: 32px; height: 32px; border-radius: var(--forge-radius-full); background: linear-gradient(135deg, var(--forge-primary), var(--forge-accent)); color: var(--forge-text-main); font-weight: 700; font-size: 0.72rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }

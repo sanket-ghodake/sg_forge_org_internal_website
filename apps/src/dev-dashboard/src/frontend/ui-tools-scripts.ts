@@ -74,21 +74,21 @@ export function getToolsDashboardScripts(): string {
 
     // ⚡ Command Palette & Modal Handlers
     const paletteCommands = [
-      { label: '📊 Overview (Topology & Vitals)', action: () => switchTab('overview') },
-      { label: '⚡ Services & Processes Command Center', action: () => switchTab('services') },
-      { label: '🧩 Registered Forge Apps', action: () => switchTab('apps') },
-      { label: '🗄️ Unified Database Studio', action: () => switchTab('database') },
-      { label: '📜 Isolated App Logs & Observability', action: () => switchTab('logs') },
-      { label: '👥 Organization Command & Employee Studio', action: () => switchTab('employees') },
-      { label: '📈 Real-time Traffic Analytics', action: () => switchTab('traffic') },
-      { label: '⚠️ Issue Incident Center (RFC 7807)', action: () => switchTab('issues') },
-      { label: '☁️ Host Infrastructure Metrics', action: () => switchTab('host') },
-      { label: '⚙️ Settings & Tools', action: () => switchTab('settings') },
-      { label: '🔌 Connect Remote Database', action: () => openConnectModal() },
-      { label: '⚡ Open API Route Explorer & cURL', action: () => openApiRegistryModal() },
-      { label: '🔐 Open Masked Environment Inspector', action: () => openSafeEnvModal() },
-      { label: '🚀 Run Latency Benchmark', action: () => { switchTab('services'); runLatencyBenchmark(); } },
-      { label: '✨ 1-Click Database Optimize', action: () => optimizeCurrentDb() }
+      { label: 'Overview (Topology & Vitals)', action: () => switchTab('overview') },
+      { label: 'Services & Processes Command Center', action: () => switchTab('services') },
+      { label: 'Registered Forge Apps', action: () => switchTab('apps') },
+      { label: 'Unified Database Studio', action: () => switchTab('database') },
+      { label: 'Isolated App Logs & Observability', action: () => switchTab('logs') },
+      { label: 'Organization Command & Employee Studio', action: () => switchTab('employees') },
+      { label: 'Real-time Traffic Analytics', action: () => switchTab('traffic') },
+      { label: 'Issue Incident Center (RFC 7807)', action: () => switchTab('issues') },
+      { label: 'Host Infrastructure Metrics', action: () => switchTab('host') },
+      { label: 'Settings & Tools', action: () => switchTab('settings') },
+      { label: 'Connect Remote Database', action: () => openConnectModal() },
+      { label: 'Open API Route Explorer & cURL', action: () => openApiRegistryModal() },
+      { label: 'Open Masked Environment Inspector', action: () => openSafeEnvModal() },
+      { label: 'Run Latency Benchmark', action: () => { switchTab('services'); runLatencyBenchmark(); } },
+      { label: '1-Click Database Optimize', action: () => optimizeCurrentDb() }
     ];
 
     function openCommandPalette() {

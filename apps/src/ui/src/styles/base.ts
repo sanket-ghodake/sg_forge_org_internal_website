@@ -16,8 +16,11 @@ export function getBaseStyles(): string {
       --forge-bg-card-hover: ${d.bgCardHover};
       --forge-bg-elevated: ${d.bgElevated};
       --forge-border: ${d.borderSubtle};
+      --forge-border-subtle: ${d.borderSubtle};
       --forge-border-medium: ${d.borderMedium};
+      --forge-border-hover: ${d.borderMedium};
       --forge-primary: ${d.primary};
+      --forge-primary-hover: #34b27b;
       --forge-primary-gradient: ${d.primaryGradient};
       --forge-accent: ${d.accent};
       --forge-text-main: ${d.textMain};
@@ -27,10 +30,10 @@ export function getBaseStyles(): string {
       --forge-success-bg: ${d.successBg};
       --forge-shadow-card: ${d.shadowCard};
       --forge-shadow-hover: ${d.shadowHover};
-      --forge-radius: 10px;
-      --forge-radius-sm: 6px;
+      --forge-radius: 8px;
+      --forge-radius-sm: 5px;
       --forge-radius-full: 9999px;
-      --forge-transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      --forge-transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     [data-theme="light"] {
@@ -40,8 +43,11 @@ export function getBaseStyles(): string {
       --forge-bg-card-hover: ${l.bgCardHover};
       --forge-bg-elevated: ${l.bgElevated};
       --forge-border: ${l.borderSubtle};
+      --forge-border-subtle: ${l.borderSubtle};
       --forge-border-medium: ${l.borderMedium};
+      --forge-border-hover: ${l.borderMedium};
       --forge-primary: ${l.primary};
+      --forge-primary-hover: #0369a1;
       --forge-primary-gradient: ${l.primaryGradient};
       --forge-accent: ${l.accent};
       --forge-text-main: ${l.textMain};
@@ -66,8 +72,8 @@ export function getBaseStyles(): string {
     }
 
     *::-webkit-scrollbar {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
     }
 
     *::-webkit-scrollbar-track {
@@ -77,9 +83,9 @@ export function getBaseStyles(): string {
     *::-webkit-scrollbar-thumb {
       background: var(--forge-border-medium);
       border-radius: var(--forge-radius-full);
-      border: 2px solid transparent;
+      border: 1px solid transparent;
       background-clip: padding-box;
-      transition: background-color 0.2s ease;
+      transition: background-color 0.15s ease;
     }
 
     *::-webkit-scrollbar-thumb:hover {
@@ -100,11 +106,11 @@ export function getBaseStyles(): string {
       display: flex;
       flex-direction: column;
       line-height: 1.45;
-      letter-spacing: -0.011em;
+      letter-spacing: -0.015em;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
-      transition: background-color 0.25s ease, color 0.25s ease;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
 
     code, kbd, pre, .astryx-mono, .astryx-badge, .astryx-stat-value {

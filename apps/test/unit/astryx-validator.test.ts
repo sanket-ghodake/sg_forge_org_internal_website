@@ -48,22 +48,28 @@ describe('Meta Astryx UI Validator & Token Governance Engine', () => {
 
   it('guarantees custom Astryx scrollbars, dropdowns, modals, and toasts in UI styles', () => {
     // Arrange & Act
-    const { getAstryxStyles, getAstryxToastScript } = require('../../src/ui/src/index');
+    const { getAstryxStyles, getAstryxToastScript, getAstryxDropdownScript } = require('../../src/ui/src/index');
     const css = getAstryxStyles();
     const toastScript = getAstryxToastScript();
+    const dropdownScript = getAstryxDropdownScript();
 
     // Assert - Custom Scrollbars
     expect(css).toContain('scrollbar-width: thin');
     expect(css).toContain('::-webkit-scrollbar');
     expect(css).toContain('::-webkit-scrollbar-thumb');
 
-    // Assert - Custom Dropdowns / Selects
+    // Assert - Custom Dropdowns / Selects & Viewport Collision Classes
     expect(css).toContain('appearance: none');
     expect(css).toContain('astryx-select');
+    expect(css).toContain('astryx-custom-select-wrap');
+    expect(css).toContain('.drop-up');
+    expect(css).toContain('.align-right');
+    expect(dropdownScript).toContain('astryxPositionDropdown');
 
-    // Assert - Universal Modals & Popups
+    // Assert - Universal Modals, Drawers & Popups
     expect(css).toContain('astryx-modal-backdrop');
     expect(css).toContain('astryx-modal');
+    expect(css).toContain('astryx-drawer-backdrop');
     expect(css).toContain('backdrop-filter: blur');
 
     // Assert - Toast Notification System
@@ -72,3 +78,4 @@ describe('Meta Astryx UI Validator & Token Governance Engine', () => {
     expect(toastScript).toContain('window.astryxToast');
   });
 });
+

@@ -119,14 +119,18 @@ export function renderDashboardHtml(): string {
       <!-- Tab 1: Overview -->
       <section id="tab-overview" class="tab-pane active">
         <div class="astryx-card" style="margin-bottom: 1.25rem;">
-          <h2 style="font-size: 1.25rem; margin-bottom: 0.25rem;">📊 System Topology & Cluster Health</h2>
+          <h2 style="font-size: 1.2rem; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
+            <span style="color: var(--forge-primary); display: flex; align-items: center;">${astryxIcons.topology}</span> System Topology & Cluster Health
+          </h2>
           <p style="color: var(--forge-text-muted); font-size: 0.85rem;">Real-time service nodes, micro-app latencies, and dual-probe vitals.</p>
         </div>
         <div class="node-canvas" id="topology-nodes"></div>
         <div class="astryx-card" style="margin-top: 1.25rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
-            <h3 style="font-size: 0.95rem;">📜 Live Cluster Stream Preview</h3>
-            <button class="astryx-btn btn-outline" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="clearLogs()">Clear</button>
+            <h3 style="font-size: 0.92rem; display: flex; align-items: center; gap: 0.4rem; font-weight: 600;">
+              <span style="color: var(--forge-text-muted); display: flex; align-items: center;">${astryxIcons.terminal}</span> Live Cluster Stream Preview
+            </h3>
+            <button class="astryx-btn btn-outline" style="height: 26px; padding: 0 0.5rem; font-size: 0.72rem;" onclick="clearLogs()">Clear</button>
           </div>
           <div class="terminal-window" id="overview-terminal">Connecting to SSE live stream...</div>
         </div>
@@ -137,15 +141,19 @@ export function renderDashboardHtml(): string {
         <div class="astryx-card" style="margin-bottom: 1rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
             <div>
-              <h2 style="font-size: 1.25rem; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.4rem;">
-                ⚡ Services & Processes Command Center
+              <h2 style="font-size: 1.2rem; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
+                <span style="color: var(--forge-primary); display: flex; align-items: center;">${astryxIcons.services}</span> Services & Processes Command Center
                 <button class="help-btn" onclick="openHelpModal()" title="Help & Architecture Explainer">?</button>
               </h2>
               <p style="color: var(--forge-text-muted); font-size: 0.82rem;">Real-time operational status, dual-probe latency, rolling sparklines, and flyout process inspector.</p>
             </div>
             <div style="display: flex; gap: 0.4rem; align-items: center;">
-              <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.7rem; font-size: 0.76rem;" onclick="runLatencyBenchmark()">🚀 Latency Benchmark</button>
-              <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.76rem;" onclick="rollingRestartFleet()">🔄 Restart Fleet</button>
+              <button class="astryx-btn btn-outline" onclick="runLatencyBenchmark()">
+                ${astryxIcons.zap} Latency Benchmark
+              </button>
+              <button class="astryx-btn btn-primary" onclick="rollingRestartFleet()">
+                ${astryxIcons.refresh} Restart Fleet
+              </button>
             </div>
           </div>
         </div>
@@ -159,14 +167,14 @@ export function renderDashboardHtml(): string {
 
         <div class="services-toolbar">
           <div class="services-search-box">
-            <span>🔍</span>
+            <span style="display: flex; align-items: center; color: var(--forge-text-muted);">${astryxIcons.search}</span>
             <input type="search" id="services-search-input" name="services-search-query" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search services by name, port, route..." oninput="filterServicesTable()">
           </div>
           <div class="filter-chip-group" id="services-filter-chips">
             <button class="filter-chip active" data-filter="all" onclick="setServiceFilter('all')">All (<span id="count-all">0</span>)</button>
-            <button class="filter-chip" data-filter="running" onclick="setServiceFilter('running')">🟢 Running (<span id="count-running">0</span>)</button>
-            <button class="filter-chip" data-filter="stopped" onclick="setServiceFilter('stopped')">🔴 Stopped (<span id="count-stopped">0</span>)</button>
-            <button class="filter-chip" data-filter="fast" onclick="setServiceFilter('fast')">⚡ Fast &lt;5ms (<span id="count-fast">0</span>)</button>
+            <button class="filter-chip" data-filter="running" onclick="setServiceFilter('running')"><span class="status-pulse-dot active" style="margin-right: 3px;"></span> Running (<span id="count-running">0</span>)</button>
+            <button class="filter-chip" data-filter="stopped" onclick="setServiceFilter('stopped')"><span class="status-pulse-dot suspended" style="margin-right: 3px;"></span> Stopped (<span id="count-stopped">0</span>)</button>
+            <button class="filter-chip" data-filter="fast" onclick="setServiceFilter('fast')">${astryxIcons.zap} Fast &lt;5ms (<span id="count-fast">0</span>)</button>
           </div>
         </div>
 
@@ -194,7 +202,9 @@ export function renderDashboardHtml(): string {
       <!-- Tab 3: Forge Apps -->
       <section id="tab-apps" class="tab-pane">
         <div class="astryx-card" style="margin-bottom: 1rem;">
-          <h2 style="font-size: 1.25rem; margin-bottom: 0.25rem;">🧩 Registered Forge Micro-Apps</h2>
+          <h2 style="font-size: 1.2rem; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
+            <span style="color: var(--forge-primary); display: flex; align-items: center;">${astryxIcons.apps}</span> Registered Forge Micro-Apps
+          </h2>
           <p style="color: var(--forge-text-muted); font-size: 0.82rem;">Dedicated Turso libSQL DB per app with isolated sandboxing.</p>
         </div>
         <div class="astryx-grid" id="apps-grid"></div>
@@ -205,16 +215,16 @@ export function renderDashboardHtml(): string {
         <div class="astryx-card" style="margin-bottom: 1rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
             <div style="display: flex; gap: 0.65rem; align-items: center; flex-wrap: wrap;">
-              <label style="font-weight: 600; font-size: 0.85rem;">Active Database:</label>
+              <label style="font-weight: 600; font-size: 0.82rem;">Active Database:</label>
               <select class="form-input" id="db-select" style="max-width: 260px;" onchange="inspectDatabase(this.value)"></select>
-              <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem;" onclick="checkDatabaseIntegrity()">🩺 Integrity Check</button>
-              <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem;" onclick="optimizeCurrentDb()">✨ 1-Click Optimize</button>
-              <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.65rem;" onclick="backupCurrentDb()">📦 Snapshot</button>
+              <button class="astryx-btn btn-outline" onclick="checkDatabaseIntegrity()">Integrity Check</button>
+              <button class="astryx-btn btn-outline" onclick="optimizeCurrentDb()">${astryxIcons.sparkles} 1-Click Optimize</button>
+              <button class="astryx-btn btn-primary" onclick="backupCurrentDb()">${astryxIcons.database} Snapshot</button>
             </div>
             <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
-              <button class="astryx-btn btn-outline" id="btn-db-fullscreen" style="padding: 0.35rem 0.65rem;" onclick="toggleDbStudioFullscreen()">🗖 Fullscreen</button>
-              <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem; border-color: var(--forge-primary); color: var(--forge-primary);" onclick="launchDrizzleStudio()" title="Launch Drizzle Studio for selected microservice DB">⚡ Drizzle Studio</button>
-              <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.75rem; border-color: var(--forge-primary); color: var(--forge-primary);" onclick="openConnectModal()">+ Connect Remote DB</button>
+              <button class="astryx-btn btn-outline" id="btn-db-fullscreen" onclick="toggleDbStudioFullscreen()">Fullscreen</button>
+              <button class="astryx-btn btn-outline" style="border-color: var(--forge-primary); color: var(--forge-primary);" onclick="launchDrizzleStudio()" title="Launch Drizzle Studio for selected microservice DB">${astryxIcons.zap} Drizzle Studio</button>
+              <button class="astryx-btn btn-outline" style="border-color: var(--forge-primary); color: var(--forge-primary);" onclick="openConnectModal()">${astryxIcons.plus} Connect Remote DB</button>
             </div>
           </div>
           <!-- Live Real-Time DB Telemetry & Storage Bar -->
@@ -232,10 +242,12 @@ export function renderDashboardHtml(): string {
           <div class="db-studio-sidebar">
             <div class="astryx-card" style="height: 100%; display: flex; flex-direction: column;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <h3 style="font-size: 0.9rem; margin: 0;">📁 Schema Tables</h3>
-                <span id="db-tables-count-badge" class="astryx-badge" style="font-size: 0.7rem;">0 tables</span>
+                <h3 style="font-size: 0.9rem; margin: 0; display: flex; align-items: center; gap: 0.35rem;">
+                  <span style="color: var(--forge-text-muted);">${astryxIcons.layers}</span> Schema Tables
+                </h3>
+                <span id="db-tables-count-badge" class="astryx-badge badge-pill">0 tables</span>
               </div>
-              <input type="search" id="db-table-filter-input" placeholder="🔍 Filter tables..." class="form-input" style="padding: 0.2rem 0.5rem; font-size: 0.72rem; width: 100%; margin-bottom: 0.5rem;" oninput="filterTableList(this.value)">
+              <input type="search" id="db-table-filter-input" placeholder="Filter tables..." class="form-input" style="padding: 0.2rem 0.5rem; font-size: 0.72rem; width: 100%; margin-bottom: 0.5rem;" oninput="filterTableList(this.value)">
               <div id="db-tables-view" style="display: flex; flex-direction: column; gap: 0.2rem; overflow-y: auto; max-height: 480px; flex: 1;">Select database to inspect.</div>
             </div>
           </div>
@@ -244,10 +256,10 @@ export function renderDashboardHtml(): string {
           <div class="db-studio-main">
             <div class="astryx-card" style="height: 100%; display: flex; flex-direction: column;">
               <div class="db-subtab-bar">
-                <button class="db-subtab-btn active" id="btn-subtab-rows" onclick="switchDbSubTab('rows')">📊 Table Data</button>
-                <button class="db-subtab-btn" id="btn-subtab-graph" onclick="switchDbSubTab('graph')">🕸️ Visual ER Diagram</button>
-                <button class="db-subtab-btn" id="btn-subtab-sql" onclick="switchDbSubTab('sql')">💻 SQL Scratchpad</button>
-                <button class="db-subtab-btn" id="btn-subtab-ddl" onclick="switchDbSubTab('ddl')">📜 Schema & DDL</button>
+                <button class="db-subtab-btn active" id="btn-subtab-rows" onclick="switchDbSubTab('rows')">Table Data</button>
+                <button class="db-subtab-btn" id="btn-subtab-graph" onclick="switchDbSubTab('graph')">Schema Graph</button>
+                <button class="db-subtab-btn" id="btn-subtab-sql" onclick="switchDbSubTab('sql')">SQL Scratchpad</button>
+                <button class="db-subtab-btn" id="btn-subtab-ddl" onclick="switchDbSubTab('ddl')">Schema DDL</button>
               </div>
 
               <!-- Sub-pane 1: Table Data Browser with Real-time Search -->
@@ -255,14 +267,14 @@ export function renderDashboardHtml(): string {
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem; flex-wrap: wrap; gap: 0.5rem;">
                   <h3 style="font-size: 0.95rem; margin: 0;" id="db-table-data-title">Table Rows</h3>
                   <div style="display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap;">
-                    <input type="search" id="db-table-search-input" placeholder="🔍 Search in table..." class="form-input" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; width: 180px;" oninput="onDbTableSearch(this.value)">
+                    <input type="search" id="db-table-search-input" placeholder="Search in table..." class="form-input" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; width: 180px;" oninput="onDbTableSearch(this.value)">
                     <select id="db-table-limit-select" class="form-input" onchange="changeTableLimit(this.value)">
                       <option value="15">15 rows</option>
                       <option value="25" selected>25 rows</option>
                       <option value="50">50 rows</option>
                       <option value="100">100 rows</option>
                     </select>
-                    <button class="astryx-btn btn-outline" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;" onclick="exportCurrentTableCsv()">📥 Export CSV</button>
+                    <button class="astryx-btn btn-outline" style="height: 26px; padding: 0 0.55rem; font-size: 0.75rem;" onclick="exportCurrentTableCsv()">${astryxIcons.download} Export CSV</button>
                   </div>
                 </div>
                 <div class="astryx-table-wrap" id="db-table-data-view" style="max-height: 440px; overflow: auto;">Select a table to browse records.</div>
@@ -273,7 +285,7 @@ export function renderDashboardHtml(): string {
               <div id="db-subpane-graph" style="display: none;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
                   <h3 style="font-size: 0.95rem; margin: 0;">Interactive Schema Relationship Map</h3>
-                  <button class="astryx-btn btn-outline" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="loadDbSchemaGraph(currentSelectedDb)">🔄 Refresh Diagram</button>
+                  <button class="astryx-btn btn-outline" style="height: 26px; padding: 0 0.5rem; font-size: 0.72rem;" onclick="loadDbSchemaGraph(currentSelectedDb)">${astryxIcons.refresh} Refresh Diagram</button>
                 </div>
                 <div id="db-er-diagram-view">Loading schema graph...</div>
               </div>
@@ -284,9 +296,9 @@ export function renderDashboardHtml(): string {
                   <label style="font-size: 0.8rem; display: flex; align-items: center; gap: 0.35rem;">
                     <input type="checkbox" id="sql-readonly-check" checked> Read-Only Sandbox Mode
                   </label>
-                  <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.85rem;" onclick="runSqlQuery()">Run Query (Ctrl+Enter)</button>
-                  <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem;" onclick="exportSqlResultCsv()">📥 Export CSV</button>
-                  <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.55rem; font-size: 0.75rem;" onclick="clearSqlQuery()">🧹 Clear</button>
+                  <button class="astryx-btn btn-primary" onclick="runSqlQuery()">Run Query (Ctrl+Enter)</button>
+                  <button class="astryx-btn btn-outline" onclick="exportSqlResultCsv()">${astryxIcons.download} Export CSV</button>
+                  <button class="astryx-btn btn-outline" style="height: 32px; padding: 0 0.55rem; font-size: 0.75rem;" onclick="clearSqlQuery()">Clear</button>
                   <span id="sql-perf-indicator"></span>
                 </div>
                 <!-- Dynamic Quick Queries Chips Per DB -->
@@ -310,7 +322,7 @@ export function renderDashboardHtml(): string {
         <!-- Plain English Non-Technical Summary Card -->
         <div class="plain-english-card" id="plain-english-banner">
           <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <span style="font-size: 1.5rem;" id="plain-status-icon">🟢</span>
+            <span class="status-pulse-dot active" style="width: 10px; height: 10px;" id="plain-status-icon"></span>
             <div>
               <h3 id="plain-status-title" style="margin: 0; font-size: 0.95rem; color: var(--forge-text-main);">All Systems Operational</h3>
               <p id="plain-status-detail" style="margin: 0.2rem 0 0 0; font-size: 0.8rem; color: var(--forge-text-muted);">
@@ -324,23 +336,23 @@ export function renderDashboardHtml(): string {
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 0.5rem;">
             <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
               <select class="form-input" id="logs-app-select" style="max-width: 160px;" onchange="changeActiveLogApp(this.value)">
-                <option value="all">🌐 All Microservices</option>
-                <option value="landing">🏠 Landing</option>
-                <option value="auth">🔒 Auth</option>
-                <option value="portal">📂 Portal</option>
-                <option value="dev-dashboard">📊 Dev Dashboard</option>
-                <option value="dev-hub">🔀 Dev Hub</option>
-                <option value="expenses">💳 Expenses</option>
-                <option value="billing">🧾 Billing</option>
-                <option value="telemetry">📡 Telemetry</option>
+                <option value="all">All Microservices</option>
+                <option value="landing">Landing</option>
+                <option value="auth">Auth</option>
+                <option value="portal">Portal</option>
+                <option value="dev-dashboard">Dev Dashboard</option>
+                <option value="dev-hub">Dev Hub</option>
+                <option value="expenses">Expenses</option>
+                <option value="billing">Billing</option>
+                <option value="telemetry">Telemetry</option>
               </select>
 
               <select class="form-input" id="logs-source-select" style="max-width: 140px;" onchange="changeActiveLogSource(this.value)">
                 <option value="all">All Sources</option>
-                <option value="app">🖥️ Server</option>
-                <option value="browser">🌐 Browser</option>
-                <option value="docker">🐳 Docker</option>
-                <option value="db">🗄️ Database</option>
+                <option value="app">Server</option>
+                <option value="browser">Browser</option>
+                <option value="docker">Docker</option>
+                <option value="db">Database</option>
               </select>
 
               <select class="form-input" id="logs-level-select" style="max-width: 90px;" onchange="changeActiveLogLevel(this.value)">
@@ -350,13 +362,13 @@ export function renderDashboardHtml(): string {
                 <option value="ERROR">ERROR</option>
               </select>
 
-              <input type="search" class="form-input" id="logs-search-input" name="logs-search-query" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="🔍 Search text or traceId..." style="width: 170px;" oninput="onLogSearchChange(this.value)">
+              <input type="search" class="form-input" id="logs-search-input" name="logs-search-query" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search text or traceId..." style="width: 170px;" oninput="onLogSearchChange(this.value)">
             </div>
 
             <div style="display: flex; gap: 0.3rem;">
-              <button class="astryx-btn btn-outline" id="logs-pause-scroll-btn" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;" onclick="toggleAutoScrollPause()">⏸️ Pause Scroll</button>
-              <button class="astryx-btn btn-outline" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;" onclick="downloadRawLogs()">💾 Download</button>
-              <button class="astryx-btn btn-outline" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;" onclick="clearActiveAppLogs()">🗑️ Clear</button>
+              <button class="astryx-btn btn-outline" id="logs-pause-scroll-btn" style="height: 32px; padding: 0 0.55rem; font-size: 0.75rem;" onclick="toggleAutoScrollPause()">${astryxIcons.pause} Pause Scroll</button>
+              <button class="astryx-btn btn-outline" style="height: 32px; padding: 0 0.55rem; font-size: 0.75rem;" onclick="downloadRawLogs()">${astryxIcons.download} Download</button>
+              <button class="astryx-btn btn-outline" style="height: 32px; padding: 0 0.55rem; font-size: 0.75rem;" onclick="clearActiveAppLogs()">Clear</button>
             </div>
           </div>
           <div class="terminal-window" id="full-terminal" style="height: 440px;"></div>
@@ -368,18 +380,20 @@ export function renderDashboardHtml(): string {
         <div class="astryx-card" style="margin-bottom: 1rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
             <div>
-              <h2 style="font-size: 1.25rem; margin-bottom: 0.2rem;">📈 Real-time Traffic & Latency Benchmarks</h2>
+              <h2 style="font-size: 1.2rem; margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
+                <span style="color: var(--forge-primary); display: flex; align-items: center;">${astryxIcons.traffic}</span> Real-time Traffic & Latency Benchmarks
+              </h2>
               <p style="color: var(--forge-text-muted); font-size: 0.82rem;">Autocannon high-frequency stress tester (&lt;2ms target).</p>
             </div>
             <div style="display: flex; gap: 0.4rem;">
-              <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem;" onclick="exportTrafficCsv()">📥 Export CSV</button>
-              <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.85rem;" onclick="runLatencyBenchmark()">🚀 1-Click Latency Benchmark</button>
+              <button class="astryx-btn btn-outline" onclick="exportTrafficCsv()">${astryxIcons.download} Export CSV</button>
+              <button class="astryx-btn btn-primary" onclick="runLatencyBenchmark()">${astryxIcons.zap} Latency Benchmark</button>
             </div>
           </div>
           <div id="benchmark-scorecard" style="margin-top: 0.75rem;"></div>
         </div>
         <div class="astryx-card">
-          <h3 style="font-size: 0.95rem; margin-bottom: 0.5rem;">Recent Traffic Events</h3>
+          <h3 style="font-size: 0.95rem; margin-bottom: 0.5rem; font-weight: 600;">Recent Traffic Events</h3>
           <div class="astryx-table-wrap" id="traffic-table-container">Loading live traffic events...</div>
         </div>
       </section>
@@ -387,7 +401,9 @@ export function renderDashboardHtml(): string {
       <!-- Tab 8: Issues -->
       <section id="tab-issues" class="tab-pane">
         <div class="astryx-card">
-          <h2 style="font-size: 1.25rem; margin-bottom: 0.4rem;">⚠️ Issue Incident Center (RFC 7807)</h2>
+          <h2 style="font-size: 1.2rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
+            <span style="color: var(--forge-accent); display: flex; align-items: center;">${astryxIcons.issues}</span> Issue Incident Center (RFC 7807)
+          </h2>
           <div id="issues-container">Loading incident logs...</div>
         </div>
       </section>
@@ -398,7 +414,9 @@ export function renderDashboardHtml(): string {
       <!-- Tab 9: Host & Cloud -->
       <section id="tab-host" class="tab-pane">
         <div class="astryx-card">
-          <h2 style="font-size: 1.25rem; margin-bottom: 0.85rem;">☁️ Host System & Infrastructure</h2>
+          <h2 style="font-size: 1.2rem; margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
+            <span style="color: var(--forge-text-muted); display: flex; align-items: center;">${astryxIcons.host}</span> Host System & Infrastructure
+          </h2>
           <div class="astryx-grid" id="host-vitals-grid"></div>
         </div>
       </section>
@@ -406,16 +424,20 @@ export function renderDashboardHtml(): string {
       <!-- Tab 10: Settings & Tools -->
       <section id="tab-settings" class="tab-pane">
         <div class="astryx-card" style="margin-bottom: 1rem;">
-          <h2 style="font-size: 1.25rem; margin-bottom: 0.35rem;">🛠️ Developer Diagnostics & Tools</h2>
+          <h2 style="font-size: 1.2rem; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
+            <span style="color: var(--forge-text-muted); display: flex; align-items: center;">${astryxIcons.settings}</span> Developer Diagnostics & Tools
+          </h2>
           <p style="color: var(--forge-text-muted); font-size: 0.82rem; margin-bottom: 0.85rem;">Platform configuration inspection and API exploration.</p>
           <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-            <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.75rem;" onclick="openApiRegistryModal()">⚡ API Route Explorer & cURL</button>
-            <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.75rem;" onclick="openSafeEnvModal()">🔐 Masked Environment Inspector</button>
-            <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.75rem;" onclick="exportAuditCsv()">📥 Export Audit CSV</button>
+            <button class="astryx-btn btn-primary" onclick="openApiRegistryModal()">${astryxIcons.zap} API Route Explorer & cURL</button>
+            <button class="astryx-btn btn-outline" onclick="openSafeEnvModal()">${astryxIcons.key} Masked Environment Inspector</button>
+            <button class="astryx-btn btn-outline" onclick="exportAuditCsv()">${astryxIcons.download} Export Audit CSV</button>
           </div>
         </div>
         <div class="astryx-card">
-          <h2 style="font-size: 1.25rem; margin-bottom: 0.85rem;">⚙️ Administrative Audit Logs</h2>
+          <h2 style="font-size: 1.2rem; margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
+            <span style="color: var(--forge-text-muted); display: flex; align-items: center;">${astryxIcons.fileText}</span> Administrative Audit Logs
+          </h2>
           <div class="astryx-table-wrap" id="audit-table-container">Loading audit logs...</div>
         </div>
       </section>

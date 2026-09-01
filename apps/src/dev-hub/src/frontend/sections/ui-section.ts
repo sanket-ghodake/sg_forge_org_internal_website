@@ -102,7 +102,7 @@ export function renderUiSection(): string {
 
         <!-- Zero Defaults Policy -->
         <div style="margin-top: 2rem;">
-          <h3 style="font-size: 1.1rem; color: var(--forge-text-main); margin: 0 0 0.5rem 0;">2. Zero Browser Defaults Policy</h3>
+          <h3 style="font-size: 1.1rem; color: var(--forge-text-main); margin: 0 0 0.5rem 0;">2. Zero Browser Defaults Policy & Viewport Containment</h3>
           <div class="zero-defaults-grid">
             <div class="zero-card">
               <div class="zero-icon">📜</div>
@@ -112,25 +112,39 @@ export function renderUiSection(): string {
             <div class="zero-card">
               <div class="zero-icon">🍞</div>
               <h4>Astryx Toasts</h4>
-              <p>OS/browser dialog popups are forbidden. Must use Astryx Toast overlays.</p>
+              <p>OS/browser dialog popups are forbidden. Must use Astryx Toast overlays with progress bars and pause on hover.</p>
             </div>
             <div class="zero-card">
               <div class="zero-icon">🔽</div>
-              <h4>Styled Custom Selectors</h4>
-              <p>Unstyled browser select elements are replaced with custom Astryx glass dropdowns.</p>
+              <h4>Smart Glass Dropdowns</h4>
+              <p>Unstyled selects replaced with custom Astryx glass dropdowns featuring smart collision detection (auto-flip/shift).</p>
             </div>
             <div class="zero-card">
               <div class="zero-icon">🪟</div>
-              <h4>Backdrop Modals</h4>
-              <p>All modals render with top-layer z-index, glass backdrop filter, and smooth scale transitions.</p>
+              <h4>Backdrop Modals & Drawers</h4>
+              <p>All dialogs render with z-index 3000, glass backdrop filter, and smooth scale transitions.</p>
             </div>
           </div>
         </div>
 
-        <!-- UI Component Code Examples -->
+        <!-- Interactive Component Showcase -->
         <div style="margin-top: 2rem;">
-          <h3 style="font-size: 1.1rem; color: var(--forge-text-main); margin: 0 0 0.5rem 0;">3. Component & Layout Wrappers</h3>
-          <pre class="code-block"><code>import { getAstryxHeaderHtml, getAstryxStyles, renderAstryxErrorPage } from '@forge/ui';
+          <h3 style="font-size: 1.1rem; color: var(--forge-text-main); margin: 0 0 0.5rem 0;">3. Interactive Component Playground</h3>
+          <p style="font-size: 0.85rem; color: var(--forge-text-muted); margin-bottom: 0.85rem;">
+            Test the live Astryx Toast notifications and select controls directly in this playground:
+          </p>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.25rem;">
+            <button class="astryx-btn btn-primary" onclick="if(window.astryxToast) window.astryxToast('Service deployed successfully (200 OK)', 'success');">✅ Trigger Success Toast</button>
+            <button class="astryx-btn btn-outline" style="border-color: var(--forge-accent); color: var(--forge-accent);" onclick="if(window.astryxToast) window.astryxToast('Rate limit threshold reached (429)', 'error');">❌ Trigger Error Toast</button>
+            <button class="astryx-btn btn-outline" style="border-color: var(--forge-warning); color: var(--forge-warning);" onclick="if(window.astryxToast) window.astryxToast('Slow query latency detected (>50ms)', 'warning');">⚠️ Trigger Warning Toast</button>
+            <button class="astryx-btn btn-outline" onclick="if(window.astryxToast) window.astryxToast('Database checkpoint created', 'info');">ℹ️ Trigger Info Toast</button>
+          </div>
+        </div>
+
+        <!-- UI Component Code Examples -->
+        <div style="margin-top: 1rem;">
+          <h3 style="font-size: 1.1rem; color: var(--forge-text-main); margin: 0 0 0.5rem 0;">4. Component & Layout Wrappers</h3>
+          <pre class="code-block"><code>import { getAstryxHeaderHtml, getAstryxStyles, getAstryxToastScript, renderAstryxErrorPage } from '@forge/ui';
 
 // In server-rendered HTML view:
 export function renderPage() {
@@ -144,9 +158,10 @@ export function renderPage() {
   &lt;main class="astryx-container"&gt;
     &lt;div class="astryx-card"&gt;
       &lt;h2&gt;Content Card&lt;/h2&gt;
-      &lt;button class="astryx-btn btn-primary" onclick="showToast('Success!')"&gt;Action&lt;/button&gt;
+      &lt;button class="astryx-btn btn-primary" onclick="window.astryxToast('Saved successfully', 'success')"&gt;Action&lt;/button&gt;
     &lt;/div&gt;
   &lt;/main&gt;
+  &lt;script&gt;\${getAstryxToastScript()}&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;\`;
 }</code></pre>
