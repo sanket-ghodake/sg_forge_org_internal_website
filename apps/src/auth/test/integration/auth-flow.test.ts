@@ -68,4 +68,53 @@ describe('Tier 2 Integration: Auth Lifecycle & First-Time Password Setup', () =>
     expect(newLoginData.status).toBe('SUCCESS');
     expect(newLoginData.accessToken).toBeDefined();
   });
+
+  it('should guarantee password persistence and zero reset prompt across simulated app restarts', async () => {
+    // 1. Arrange: Login with default credentials and reset password
+    const loginReq = new Request('http://localhost:3004/api/v1/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: 'security@forge.internal',
+        password: 'password123',
+      }),
+    });
+
+    const loginRes = await handleLogin(loginReq);
+    const loginData = await loginRes.json();
+    expect(loginData.status).toBe('MUST_CHANGE_PASSWORD');
+
+    const setPwdReq = new Request('http://localhost:3004/api/v1/auth/set-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tempToken: loginData.tempToken,
+        newPassword: 'AdminPermanentPassword2026#',
+      }),
+    });
+
+    const setPwdRes = await handleSetPassword(setPwdReq);
+    expect(setPwdRes.status).toBe(200);
+
+    // 2. Act: Simulate service reboot / server startup (seedAuthDatabase runs on boot)
+    seedAuthDatabase(false);
+
+    // 3. Assert: Login with new password immediately succeeds with 200 OK (zero MUST_CHANGE_PASSWORD)
+    const restartLoginReq = new Request('http://localhost:3004/api/v1/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: 'security@forge.internal',
+        password: 'AdminPermanentPassword2026#',
+      }),
+    });
+
+    const restartLoginRes = await handleLogin(restartLoginReq);
+    const restartLoginData = await restartLoginRes.json();
+
+    expect(restartLoginRes.status).toBe(200);
+    expect(restartLoginData.status).toBe('SUCCESS');
+    expect(restartLoginData.accessToken).toBeDefined();
+    expect(restartLoginData.user.email).toBe('security@forge.internal');
+  });
 });

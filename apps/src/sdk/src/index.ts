@@ -18,3 +18,4 @@ export * from './registry';
 export * from './client-bridge';
 export * from './browser-bridge';
 export * from './branding';
+export * from './database';

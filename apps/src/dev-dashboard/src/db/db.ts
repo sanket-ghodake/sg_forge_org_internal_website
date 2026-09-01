@@ -7,32 +7,21 @@
 import { Database } from 'bun:sqlite';
 import { accessSync, constants, copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { createLogger, loadServiceRegistry } from '@forge/sdk';
+import {
+  createLogger,
+  loadServiceRegistry,
+  resolveCanonicalDataDir,
+  resolveCanonicalDbPath,
+} from '@forge/sdk';
 
 const logger = createLogger('dev-dashboard-db');
 
 export function resolveDataDir(): string {
-  const customDataDir = process.env.AG_DATA_DIR || process.env.FORGE_DATA_DIR || process.env.DATA_DIR;
-  if (customDataDir && existsSync(customDataDir)) {
-    return customDataDir;
-  }
-  const appsData = join(process.cwd(), 'apps', 'data');
-  if (existsSync(appsData)) return appsData;
-
-  const rootData = join(process.cwd(), 'data');
-  if (existsSync(rootData)) return rootData;
-
-  try {
-    if (!existsSync(appsData)) mkdirSync(appsData, { recursive: true });
-    return appsData;
-  } catch {
-    if (!existsSync(rootData)) mkdirSync(rootData, { recursive: true });
-    return rootData;
-  }
+  return resolveCanonicalDataDir();
 }
 
 const DATA_DIR = resolveDataDir();
-const CORE_DB_PATH = join(DATA_DIR, 'platform_core.db');
+const CORE_DB_PATH = resolveCanonicalDbPath('platform_core.db');
 
 export interface AppRegistryRecord {
   id: string;

@@ -33,6 +33,11 @@ Enterprise Foundation SDK suite for **SG Forge** microservices (`apps/src/*`) an
 * `ForgeClient.init(options)`: `postMessage` handshake bridge between micro-app iframes and parent Portal for user context, auth tokens, theme synchronization, and authenticated `fetch()`.
 * `initBrowserLogBridge(serviceName, ingestEndpoint?)`: Client-side uncaught error & console interception with sanitized beacon forwarding to `/api/logs/browser`.
 
+### 7. Canonical Database Client & Lifecycle Manager (`database.ts`)
+* `resolveCanonicalDataDir()`: Robust multi-context path resolver across host, containers, and subdirectories.
+* `getDatabaseClient(dbFileName, options)`: Standardized SQLite connection factory with WAL mode, foreign keys, and automatic test isolation (`NODE_ENV === 'test'`).
+* `closeDatabaseClient(dbInstance)`: Flushes uncheckpointed WAL pages (`PRAGMA wal_checkpoint(TRUNCATE)`) and closes handle cleanly.
+
 ---
 
 ## 🚀 Quick Usage Examples

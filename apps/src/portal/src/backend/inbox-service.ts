@@ -4,9 +4,8 @@
  * Clean initial state with zero hardcoded announcements.
  */
 
-import { Database } from 'bun:sqlite';
-import { resolveAuthDbPath } from './org-tree-service';
-import { createLogger } from '@forge/sdk';
+import type { Database } from 'bun:sqlite';
+import { createLogger, getDatabaseClient } from '@forge/sdk';
 
 const logger = createLogger('portal-inbox-service');
 
@@ -37,10 +36,7 @@ export interface LiveCompanyEvent {
 }
 
 function getDatabase(): Database {
-  const dbPath = resolveAuthDbPath();
-  const db = new Database(dbPath, { create: true });
-  db.exec('PRAGMA foreign_keys = ON;');
-  db.exec('PRAGMA busy_timeout = 5000;');
+  const db = getDatabaseClient('auth.db');
   initInboxTables(db);
   return db;
 }
@@ -89,6 +85,18 @@ function initInboxTables(db: Database): void {
       FOREIGN KEY (notification_id) REFERENCES portal_notifications(id) ON DELETE CASCADE
     );
   `);
+
+  const eventCount = db.query<{ count: number }, []>('SELECT COUNT(*) as count FROM portal_company_events').get();
+  if (!eventCount || eventCount.count === 0) {
+    const now = Date.now();
+    db.run(`
+      INSERT INTO portal_company_events (id, title, date_text, event_type, relative_time, created_at)
+      VALUES 
+        ('evt_all_hands_01', 'Q3 Global All-Hands & Product Roadmap', 'Sep 15, 2026', 'ALL_HANDS', 'In 2 weeks', ?),
+        ('evt_tech_summit_02', 'Annual Architecture & Cloud Summit', 'Oct 04, 2026', 'SOCIAL', 'In 1 month', ?),
+        ('evt_holiday_03', 'Labor & Foundation Day Holiday', 'Nov 26, 2026', 'HOLIDAY', 'In 2 months', ?)
+    `, [now, now, now]);
+  }
 }
 
 export function clearAllNotifications(): void {
@@ -107,7 +115,7 @@ export function getLiveNotifications(userId?: string, orgId?: string): LiveNotif
       ORDER BY created_at DESC
     `).all(userId || null);
 
-    return rows.map(r => ({
+    return rows.map((r: any) => ({
       id: r.id,
       userId: r.user_id,
       orgId: r.org_id,
@@ -211,7 +219,7 @@ export function getLiveCompanyEvents(): LiveCompanyEvent[] {
   const db = getDatabase();
   try {
     const rows = db.query<any, []>('SELECT id, title, date_text, event_type, relative_time FROM portal_company_events ORDER BY created_at ASC').all();
-    return rows.map(r => ({
+    return rows.map((r: any) => ({
       id: r.id,
       title: r.title,
       date: r.date_text,

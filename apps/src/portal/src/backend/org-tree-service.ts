@@ -4,10 +4,8 @@
  * progressive subtree expansion, and zero data leakage.
  */
 
-import { Database } from 'bun:sqlite';
-import { existsSync, mkdirSync } from 'node:fs';
-import { join } from 'node:path';
-import { createLogger } from '@forge/sdk';
+import type { Database } from 'bun:sqlite';
+import { createLogger, getDatabaseClient, resolveCanonicalDbPath } from '@forge/sdk';
 
 const logger = createLogger('portal-org-tree');
 
@@ -37,27 +35,11 @@ export interface OrgTreeResponse {
 }
 
 export function resolveAuthDbPath(): string {
-  const envDir = process.env.FORGE_DATA_DIR;
-  if (envDir && existsSync(envDir)) {
-    return join(envDir, 'auth.db');
-  }
-  const appsData = join(process.cwd(), 'apps', 'data');
-  if (existsSync(join(appsData, 'auth.db'))) return join(appsData, 'auth.db');
-
-  const rootData = join(process.cwd(), 'data');
-  if (existsSync(join(rootData, 'auth.db'))) return join(rootData, 'auth.db');
-
-  if (existsSync(appsData)) return join(appsData, 'auth.db');
-  if (!existsSync(rootData)) mkdirSync(rootData, { recursive: true });
-  return join(rootData, 'auth.db');
+  return resolveCanonicalDbPath('auth.db');
 }
 
 function getDatabase(): Database {
-  const dbPath = resolveAuthDbPath();
-  const db = new Database(dbPath, { create: true });
-  db.exec('PRAGMA foreign_keys = ON;');
-  db.exec('PRAGMA busy_timeout = 5000;');
-  return db;
+  return getDatabaseClient('auth.db');
 }
 
 interface RawEmployeeRow {

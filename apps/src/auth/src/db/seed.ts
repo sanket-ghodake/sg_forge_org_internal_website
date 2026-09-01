@@ -7,7 +7,7 @@
 
 import { getAuthDb } from './db';
 import { hashPassword } from '../backend/crypto';
-import { createLogger, loadBrandConfig } from '@forge/sdk';
+import { createLogger, isTestEnvironment, loadBrandConfig } from '@forge/sdk';
 
 const logger = createLogger('auth-seed');
 

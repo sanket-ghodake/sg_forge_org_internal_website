@@ -4,9 +4,13 @@
  */
 
 import { Database } from 'bun:sqlite';
-import { accessSync, constants, existsSync, mkdirSync } from 'node:fs';
-import { join } from 'node:path';
-import { createLogger } from '@forge/sdk';
+import {
+  closeDatabaseClient,
+  createLogger,
+  getDatabaseClient,
+  resolveCanonicalDataDir,
+  resolveCanonicalDbPath,
+} from '@forge/sdk';
 
 let logger: any = null;
 function getLogger() {
@@ -15,41 +19,18 @@ function getLogger() {
 }
 
 export function resolveAuthDataDir(): string {
-  const customDataDir = process.env.AG_DATA_DIR || process.env.FORGE_DATA_DIR || process.env.DATA_DIR;
-  if (customDataDir && existsSync(customDataDir)) {
-    return customDataDir;
-  }
-  const appsData = join(process.cwd(), 'apps', 'data');
-  if (existsSync(appsData)) return appsData;
-
-  const rootData = join(process.cwd(), 'data');
-  if (existsSync(rootData)) return rootData;
-
-  try {
-    if (!existsSync(appsData)) mkdirSync(appsData, { recursive: true });
-    return appsData;
-  } catch {
-    if (!existsSync(rootData)) mkdirSync(rootData, { recursive: true });
-    return rootData;
-  }
+  return resolveCanonicalDataDir();
 }
 
 let dbInstance: Database | null = null;
 
-export function getAuthDb(): Database {
+export function getAuthDb(forceLive: boolean = false): Database {
   if (dbInstance) return dbInstance;
 
-  const dataDir = resolveAuthDataDir();
-  const dbPath = join(dataDir, 'auth.db');
-
-  dbInstance = new Database(dbPath, { create: true });
-  dbInstance.exec('PRAGMA journal_mode = WAL;');
-  dbInstance.exec('PRAGMA synchronous = NORMAL;');
-  dbInstance.exec('PRAGMA foreign_keys = ON;');
-  dbInstance.exec('PRAGMA busy_timeout = 5000;');
-
+  dbInstance = getDatabaseClient('auth.db', { forceLive });
   initAuthSchema(dbInstance);
-  getLogger().info(`Auth DB connection initialized at: ${dbPath}`);
+  const resolvedPath = resolveCanonicalDbPath('auth.db', forceLive);
+  getLogger().info(`Auth DB connection initialized at: ${resolvedPath}`);
 
   return dbInstance;
 }

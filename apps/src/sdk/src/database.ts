@@ -1,0 +1,145 @@
+/**
+ * @forge/sdk - Canonical Database Client & Lifecycle Manager (2026 LTS)
+ * Google Cloud & Turso Architectural Baseline:
+ * - Deterministic Data Directory Resolution across Host, Docker, & Subdirectories
+ * - Automatic Test Isolation: Zero Mutation of Live Development/Production DBs during Tests
+ * - High-Performance WAL Mode with Automatic Pragmas & TRUNCATE Checkpointing
+ */
+
+import { Database } from 'bun:sqlite';
+import { existsSync, mkdirSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { createLogger } from './logger';
+
+const logger = createLogger('sdk-database');
+
+/**
+ * Determines whether the current process is running in an automated test environment.
+ */
+export function isTestEnvironment(): boolean {
+  return (
+    process.env.NODE_ENV === 'test' ||
+    process.env.BUN_ENV === 'test' ||
+    process.env.VITEST === 'true' ||
+    process.env.TEST === 'true' ||
+    Boolean(process.env.FORGE_TEST_MODE)
+  );
+}
+
+/**
+ * Resolves the canonical data directory across diverse runtime contexts:
+ * - Explicit Environment Override (FORGE_DATA_DIR, AG_DATA_DIR, DATA_DIR)
+ * - Container-native standard mount (/app/data)
+ * - Repository root execution (./apps/data)
+ * - Subdirectory execution
+ */
+export function resolveCanonicalDataDir(): string {
+  // 1. Explicit Environment Override
+  const customDataDir = process.env.FORGE_DATA_DIR || process.env.AG_DATA_DIR || process.env.DATA_DIR;
+  if (customDataDir && existsSync(customDataDir)) {
+    return customDataDir;
+  }
+
+  // 2. Container Standard Mount (/app/data)
+  if (existsSync('/app/data')) {
+    return '/app/data';
+  }
+
+  // 3. Search relative to current working directory or upwards
+  let currentDir = process.cwd();
+  for (let i = 0; i < 4; i++) {
+    const candidateAppsData = join(currentDir, 'apps', 'data');
+    if (existsSync(candidateAppsData)) {
+      return candidateAppsData;
+    }
+    const candidateData = join(currentDir, 'data');
+    if (existsSync(candidateData)) {
+      return candidateData;
+    }
+    const parent = dirname(currentDir);
+    if (parent === currentDir) break;
+    currentDir = parent;
+  }
+
+  // 4. Fallback: Create apps/data or data directory
+  const rootCwd = process.cwd();
+  const defaultTarget = join(rootCwd, 'apps', 'data');
+  try {
+    if (!existsSync(defaultTarget)) {
+      mkdirSync(defaultTarget, { recursive: true });
+    }
+    return defaultTarget;
+  } catch {
+    const rootFallback = join(rootCwd, 'data');
+    if (!existsSync(rootFallback)) {
+      mkdirSync(rootFallback, { recursive: true });
+    }
+    return rootFallback;
+  }
+}
+
+/**
+ * Resolves the full path to a SQLite database file, applying test isolation when applicable.
+ */
+export function resolveCanonicalDbPath(dbFileName: string, forceLive: boolean = false): string {
+  const dataDir = resolveCanonicalDataDir();
+  const baseName = dbFileName.endsWith('.db') ? dbFileName : `${dbFileName}.db`;
+
+  // Isolate automated tests from mutating live development or production databases
+  if (isTestEnvironment() && !forceLive) {
+    const testDbName = baseName.startsWith('test-') ? baseName : `test-${baseName}`;
+    return join(dataDir, testDbName);
+  }
+
+  return join(dataDir, baseName);
+}
+
+export interface DatabaseClientOptions {
+  readonly?: boolean;
+  create?: boolean;
+  forceLive?: boolean;
+  busyTimeout?: number;
+}
+
+/**
+ * Creates or retrieves a properly configured SQLite Database instance with WAL mode.
+ */
+export function getDatabaseClient(dbFileName: string, options: DatabaseClientOptions = {}): Database {
+  const dbPath = resolveCanonicalDbPath(dbFileName, options.forceLive);
+  const parentDir = dirname(dbPath);
+
+  if (!existsSync(parentDir)) {
+    mkdirSync(parentDir, { recursive: true });
+  }
+
+  const db = new Database(dbPath, {
+    readonly: options.readonly ?? false,
+    create: options.create ?? true,
+  });
+
+  if (!options.readonly) {
+    try {
+      db.exec('PRAGMA journal_mode = WAL;');
+      db.exec('PRAGMA synchronous = NORMAL;');
+      db.exec('PRAGMA foreign_keys = ON;');
+      db.exec(`PRAGMA busy_timeout = ${options.busyTimeout ?? 5000};`);
+    } catch (err) {
+      logger.warn(`Failed to configure WAL pragmas on ${dbFileName}:`, { error: String(err) });
+    }
+  }
+
+  return db;
+}
+
+/**
+ * Cleanly flushes uncheckpointed WAL transactions and closes database instance.
+ */
+export function closeDatabaseClient(db: Database | null | undefined): void {
+  if (!db) return;
+  try {
+    db.exec('PRAGMA wal_checkpoint(TRUNCATE);');
+  } catch {}
+  try {
+    db.close();
+  } catch {}
+}

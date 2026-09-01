@@ -7,27 +7,9 @@
 import { Database } from 'bun:sqlite';
 import { existsSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { resolveCanonicalDataDir } from '../apps/src/sdk/src';
 
-function resolveDataDir(): string {
-  if (process.env.FORGE_DATA_DIR && existsSync(process.env.FORGE_DATA_DIR)) {
-    return process.env.FORGE_DATA_DIR;
-  }
-  const appsData = join(process.cwd(), 'apps', 'data');
-  if (existsSync(appsData)) return appsData;
-
-  const rootData = join(process.cwd(), 'data');
-  if (existsSync(rootData)) return rootData;
-
-  try {
-    if (!existsSync(appsData)) mkdirSync(appsData, { recursive: true });
-    return appsData;
-  } catch {
-    if (!existsSync(rootData)) mkdirSync(rootData, { recursive: true });
-    return rootData;
-  }
-}
-
-const DATA_DIR = resolveDataDir();
+const DATA_DIR = resolveCanonicalDataDir();
 console.log('🚀 Initializing microservices databases in:', DATA_DIR);
 
 // 1. Auth Database (auth.db)

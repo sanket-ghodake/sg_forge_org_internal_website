@@ -392,3 +392,6 @@
 2026-09-01 23:08 | Cleaned Notifications & Announcements hub to start in a pristine empty state with zero dummy announcements and 100% dynamic event-driven rendering
 2026-09-01 23:10 | Refined badge and audience typography in Notifications & Announcements header to compact 0.68rem size
 2026-09-01 23:12 | [692ffc6] feat(portal): redesign notifications and announcements hub for non-technical employees with live SQLite service (+1303, -88)
+2026-09-01 23:12 | Committed redesigned live Notifications & Announcements hub for non-technical employees with SQLite backend, clean empty state, and 100% gate compliance
+2026-09-01 23:23 | Implemented canonical @forge/sdk database manager with automated test DB isolation ensuring persistent password resets across app reboots
+2026-09-02 03:48 | [8c22ef1] feat(auth): implement canonical database manager and test isolation for persistent resets (+255, -124)
