@@ -1,5 +1,6 @@
 import { getLogDashboardScripts } from './ui-log-scripts';
 import { getToolsDashboardScripts } from './ui-tools-scripts';
+import { getDbDashboardScripts } from './ui-db-scripts';
 import { getServicesDashboardScripts } from './ui-services-scripts';
 import { getAstryxToastScript } from '@forge/ui';
 
@@ -171,6 +172,7 @@ export function getDashboardScripts(): string {
 
     ${getLogDashboardScripts()}
     ${getToolsDashboardScripts()}
+    ${getDbDashboardScripts()}
     ${getServicesDashboardScripts()}
 
     function renderSparklineSvg(data, isArea) {
@@ -240,14 +242,23 @@ export function getDashboardScripts(): string {
       const sql = document.getElementById('sql-query-input')?.value;
       const readOnly = document.getElementById('sql-readonly-check')?.checked !== false;
       const c = document.getElementById('sql-result-container');
+      const perfEl = document.getElementById('sql-perf-indicator');
       if (!sql || !sql.trim()) {
         if (c) c.innerHTML = '<div style="color:var(--forge-accent); padding:0.5rem;">Please enter a SQL query.</div>';
         return;
       }
       if (c) c.innerHTML = '<div style="color:var(--forge-text-muted); padding:0.5rem;">Executing query in safe sandbox...</div>';
+      if (perfEl) perfEl.innerHTML = '<span style="font-size:0.75rem; color:var(--forge-text-muted);">Executing...</span>';
+
       const res = await fetch(apiBase + '/api/db/query', {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ dbName, sql, readOnly })
       }).then(r => r.json());
+
+      if (perfEl && res.durationMs !== undefined) {
+        const perfClass = res.durationMs < 2 ? 'db-perf-fast' : (res.durationMs < 15 ? 'db-perf-med' : 'db-perf-slow');
+        perfEl.innerHTML = '<span class="db-perf-badge ' + perfClass + '">⚡ ' + res.durationMs + 'ms</span>';
+      }
+
       if (res.error) {
         c.innerHTML = '<div style="color:var(--forge-accent); background:var(--forge-bg-elevated); border:1px solid var(--forge-border); padding:0.65rem; border-radius:var(--forge-radius-sm); margin-top:0.65rem;"><strong>Error:</strong> ' + res.error + '</div>';
         return;

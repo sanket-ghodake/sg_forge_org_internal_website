@@ -1,5 +1,5 @@
 import { loadServiceRegistry, redactSensitiveData } from '@forge/sdk';
-import { platformDb, remoteDbManager } from '../db';
+import { dbDiagnostics, platformDb, remoteDbManager } from '../db';
 import { servicesController } from './services-controller';
 import { telemetryEngine } from './telemetry';
 
@@ -158,14 +158,15 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
     return Response.json({ status: 'ok', schema: schema.columns, ddl: ddl.ddl, indexes: ddl.indexes });
   }
 
-  // 7c. Table Paginated Rows Browser
+  // 7c. Table Paginated Rows Browser (with Optional Search Filter)
   if (path === '/api/db/rows' && req.method === 'GET') {
     const dbName = url.searchParams.get('db');
     const table = url.searchParams.get('table');
     const page = Number(url.searchParams.get('page') || 1);
     const limit = Number(url.searchParams.get('limit') || 25);
+    const search = url.searchParams.get('search') || undefined;
     if (!dbName || !table) return Response.json({ error: 'Missing db or table query param' }, { status: 400 });
-    const result = platformDb.getTableRows(dbName, table, page, limit);
+    const result = platformDb.getTableRows(dbName, table, page, limit, search);
     return Response.json({ status: 'ok', ...result });
   }
 
@@ -174,6 +175,22 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
     const body: any = await req.json().catch(() => ({}));
     if (!body.dbName) return Response.json({ error: 'Missing dbName' }, { status: 400 });
     const result = platformDb.runIntegrityCheck(body.dbName);
+    return Response.json({ status: 'ok', ...result });
+  }
+
+  // 7e. Real-time Database Telemetry & Storage Stats
+  if (path === '/api/db/stats' && req.method === 'GET') {
+    const dbName = url.searchParams.get('db');
+    if (!dbName) return Response.json({ error: 'Missing db query param' }, { status: 400 });
+    const result = dbDiagnostics.getDatabaseTelemetry(dbName);
+    return Response.json({ status: 'ok', ...result });
+  }
+
+  // 7f. Visual Schema & Relationship Graph (ER Diagram)
+  if (path === '/api/db/graph' && req.method === 'GET') {
+    const dbName = url.searchParams.get('db');
+    if (!dbName) return Response.json({ error: 'Missing db query param' }, { status: 400 });
+    const result = dbDiagnostics.getDatabaseSchemaGraph(dbName);
     return Response.json({ status: 'ok', ...result });
   }
 

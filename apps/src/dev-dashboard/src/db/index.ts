@@ -5,3 +5,4 @@
 
 export * from './db';
 export * from './remote-connectors';
+export * from './db-diagnostics';

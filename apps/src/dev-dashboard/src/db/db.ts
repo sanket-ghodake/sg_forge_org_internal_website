@@ -401,7 +401,8 @@ class PlatformDatabaseManager {
     dbName: string,
     tableName: string,
     page = 1,
-    limit = 25
+    limit = 25,
+    search?: string
   ): { columns: string[]; rows: any[]; totalCount: number; page: number; limit: number; error?: string } {
     const targetPath = join(DATA_DIR, dbName);
     if (!existsSync(targetPath)) return { columns: [], rows: [], totalCount: 0, page, limit, error: `Database ${dbName} not found` };
@@ -412,11 +413,29 @@ class PlatformDatabaseManager {
       const offset = (safePage - 1) * safeLimit;
 
       const dbInstance = new Database(targetPath, { readonly: true });
-      const countRow = dbInstance.query(`SELECT COUNT(*) as count FROM "${sanitizedTable}";`).get() as { count: number } | null;
-      const totalCount = countRow?.count || 0;
+      const colInfo = dbInstance.query(`PRAGMA table_info("${sanitizedTable}");`).all() as any[];
+      const colNames = colInfo.map((c) => String(c.name).replace(/[^a-zA-Z0-9_]/g, ''));
 
-      const rows = dbInstance.query(`SELECT * FROM "${sanitizedTable}" LIMIT ? OFFSET ?;`).all(safeLimit, offset) as any[];
-      const columns = rows.length > 0 ? Object.keys(rows[0]) : [];
+      let rows: any[] = [];
+      let totalCount = 0;
+
+      const cleanSearch = (search || '').trim();
+      if (cleanSearch && colNames.length > 0) {
+        const whereClause = colNames.map((c) => `CAST("${c}" AS TEXT) LIKE ?`).join(' OR ');
+        const searchPattern = `%${cleanSearch}%`;
+        const searchParams = colNames.map(() => searchPattern);
+
+        const countRow = dbInstance.query(`SELECT COUNT(*) as count FROM "${sanitizedTable}" WHERE ${whereClause};`).get(...searchParams) as { count: number } | null;
+        totalCount = countRow?.count || 0;
+
+        rows = dbInstance.query(`SELECT * FROM "${sanitizedTable}" WHERE ${whereClause} LIMIT ? OFFSET ?;`).all(...searchParams, safeLimit, offset) as any[];
+      } else {
+        const countRow = dbInstance.query(`SELECT COUNT(*) as count FROM "${sanitizedTable}";`).get() as { count: number } | null;
+        totalCount = countRow?.count || 0;
+        rows = dbInstance.query(`SELECT * FROM "${sanitizedTable}" LIMIT ? OFFSET ?;`).all(safeLimit, offset) as any[];
+      }
+
+      const columns = colNames.length > 0 ? colNames : (rows.length > 0 ? Object.keys(rows[0]) : []);
       dbInstance.close();
 
       return { columns, rows, totalCount, page: safePage, limit: safeLimit };

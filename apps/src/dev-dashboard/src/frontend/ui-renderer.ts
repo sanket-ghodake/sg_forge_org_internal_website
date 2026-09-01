@@ -209,65 +209,91 @@ export function renderDashboardHtml(): string {
               <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem;" onclick="optimizeCurrentDb()">✨ 1-Click Optimize</button>
               <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.65rem;" onclick="backupCurrentDb()">📦 Snapshot</button>
             </div>
-            <div>
+            <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+              <button class="astryx-btn btn-outline" id="btn-db-fullscreen" style="padding: 0.35rem 0.65rem;" onclick="toggleDbStudioFullscreen()">🗖 Fullscreen</button>
+              <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem; border-color: var(--forge-primary); color: var(--forge-primary);" onclick="launchDrizzleStudio()" title="Launch Drizzle Studio for selected microservice DB">⚡ Drizzle Studio</button>
               <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.75rem; border-color: var(--forge-primary); color: var(--forge-primary);" onclick="openConnectModal()">+ Connect Remote DB</button>
             </div>
           </div>
+          <!-- Live Real-Time DB Telemetry & Storage Bar -->
+          <div class="db-telemetry-grid" id="db-telemetry-container">
+            <div class="db-metric-chip"><span class="db-metric-val" id="telemetry-db-size">-- KB</span><span class="db-metric-lbl">Total Storage</span></div>
+            <div class="db-metric-chip"><span class="db-metric-val" id="telemetry-wal-size">-- KB</span><span class="db-metric-lbl">WAL Journal</span></div>
+            <div class="db-metric-chip"><span class="db-metric-val" id="telemetry-tables-count">0</span><span class="db-metric-lbl">Tables / Views</span></div>
+            <div class="db-metric-chip"><span class="db-metric-val" id="telemetry-total-records">0</span><span class="db-metric-lbl">Est. Total Records</span></div>
+            <div class="db-metric-chip"><span class="db-metric-val" id="telemetry-page-cache">WAL</span><span class="db-metric-lbl">Engine Mode</span></div>
+          </div>
         </div>
 
-        <div class="db-studio-layout">
+        <div class="db-studio-layout" id="db-studio-main-layout">
           <!-- Left Explorer: Tables & Hierarchy -->
           <div class="db-studio-sidebar">
-            <div class="astryx-card">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
-                <h3 style="font-size: 0.92rem; margin: 0;">📁 Schema Tables</h3>
+            <div class="astryx-card" style="height: 100%; display: flex; flex-direction: column;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <h3 style="font-size: 0.9rem; margin: 0;">📁 Schema Tables</h3>
                 <span id="db-tables-count-badge" class="astryx-badge" style="font-size: 0.7rem;">0 tables</span>
               </div>
-              <div id="db-tables-view" style="display: flex; flex-direction: column; gap: 0.25rem;">Select database to inspect.</div>
+              <input type="search" id="db-table-filter-input" placeholder="🔍 Filter tables..." class="form-input" style="padding: 0.2rem 0.5rem; font-size: 0.72rem; width: 100%; margin-bottom: 0.5rem;" oninput="filterTableList(this.value)">
+              <div id="db-tables-view" style="display: flex; flex-direction: column; gap: 0.2rem; overflow-y: auto; max-height: 480px; flex: 1;">Select database to inspect.</div>
             </div>
           </div>
 
-          <!-- Right Workspace: Table Data / SQL Scratchpad / DDL -->
+          <!-- Right Workspace: Table Data / Visual ER / SQL Scratchpad / DDL -->
           <div class="db-studio-main">
-            <div class="astryx-card">
+            <div class="astryx-card" style="height: 100%; display: flex; flex-direction: column;">
               <div class="db-subtab-bar">
                 <button class="db-subtab-btn active" id="btn-subtab-rows" onclick="switchDbSubTab('rows')">📊 Table Data</button>
+                <button class="db-subtab-btn" id="btn-subtab-graph" onclick="switchDbSubTab('graph')">🕸️ Visual ER Diagram</button>
                 <button class="db-subtab-btn" id="btn-subtab-sql" onclick="switchDbSubTab('sql')">💻 SQL Scratchpad</button>
                 <button class="db-subtab-btn" id="btn-subtab-ddl" onclick="switchDbSubTab('ddl')">📜 Schema & DDL</button>
               </div>
 
-              <!-- Sub-pane 1: Table Data Browser -->
+              <!-- Sub-pane 1: Table Data Browser with Real-time Search -->
               <div id="db-subpane-rows">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem; flex-wrap: wrap; gap: 0.5rem;">
                   <h3 style="font-size: 0.95rem; margin: 0;" id="db-table-data-title">Table Rows</h3>
-                  <div style="display: flex; gap: 0.4rem;">
+                  <div style="display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap;">
+                    <input type="search" id="db-table-search-input" placeholder="🔍 Search in table..." class="form-input" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; width: 180px;" oninput="onDbTableSearch(this.value)">
+                    <select id="db-table-limit-select" class="form-input" style="padding: 0.2rem 0.4rem; font-size: 0.75rem;" onchange="changeTableLimit(this.value)">
+                      <option value="15">15 rows</option>
+                      <option value="25" selected>25 rows</option>
+                      <option value="50">50 rows</option>
+                      <option value="100">100 rows</option>
+                    </select>
                     <button class="astryx-btn btn-outline" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;" onclick="exportCurrentTableCsv()">📥 Export CSV</button>
                   </div>
                 </div>
-                <div class="astryx-table-wrap" id="db-table-data-view">Select a table to browse records.</div>
+                <div class="astryx-table-wrap" id="db-table-data-view" style="max-height: 440px; overflow: auto;">Select a table to browse records.</div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;" id="db-pagination-bar"></div>
               </div>
 
-              <!-- Sub-pane 2: Interactive SQL Scratchpad -->
+              <!-- Sub-pane 2: Visual ER Schema Graph -->
+              <div id="db-subpane-graph" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
+                  <h3 style="font-size: 0.95rem; margin: 0;">Interactive Schema Relationship Map</h3>
+                  <button class="astryx-btn btn-outline" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;" onclick="loadDbSchemaGraph(currentSelectedDb)">🔄 Refresh Diagram</button>
+                </div>
+                <div id="db-er-diagram-view">Loading schema graph...</div>
+              </div>
+
+              <!-- Sub-pane 3: Interactive SQL Scratchpad with Profiler -->
               <div id="db-subpane-sql" style="display: none;">
-                <div style="display: flex; gap: 0.75rem; margin-bottom: 0.65rem; align-items: center; flex-wrap: wrap;">
+                <div style="display: flex; gap: 0.75rem; margin-bottom: 0.55rem; align-items: center; flex-wrap: wrap;">
                   <label style="font-size: 0.8rem; display: flex; align-items: center; gap: 0.35rem;">
                     <input type="checkbox" id="sql-readonly-check" checked> Read-Only Sandbox Mode
                   </label>
                   <button class="astryx-btn btn-primary" style="padding: 0.35rem 0.85rem;" onclick="runSqlQuery()">Run Query (Ctrl+Enter)</button>
                   <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.65rem;" onclick="exportSqlResultCsv()">📥 Export CSV</button>
+                  <button class="astryx-btn btn-outline" style="padding: 0.35rem 0.55rem; font-size: 0.75rem;" onclick="clearSqlQuery()">🧹 Clear</button>
+                  <span id="sql-perf-indicator"></span>
                 </div>
-                <div style="display: flex; gap: 0.3rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
-                  <button class="astryx-btn btn-outline" style="padding: 0.15rem 0.4rem; font-size: 0.72rem;" onclick="insertSqlSnippet('SELECT * FROM apps_registry LIMIT 20;')">apps_registry</button>
-                  <button class="astryx-btn btn-outline" style="padding: 0.15rem 0.4rem; font-size: 0.72rem;" onclick="insertSqlSnippet('SELECT * FROM traffic_events ORDER BY timestamp DESC LIMIT 20;')">traffic_events</button>
-                  <button class="astryx-btn btn-outline" style="padding: 0.15rem 0.4rem; font-size: 0.72rem;" onclick="insertSqlSnippet('SELECT * FROM audit_logs ORDER BY timestamp DESC LIMIT 20;')">audit_logs</button>
-                  <button class="astryx-btn btn-outline" style="padding: 0.15rem 0.4rem; font-size: 0.72rem;" onclick="insertSqlSnippet('SELECT name, type FROM sqlite_master WHERE type=\\'table\\';')">sqlite_master</button>
-                </div>
-                <textarea class="sql-input" id="sql-query-input" placeholder="SELECT * FROM apps_registry LIMIT 10;">SELECT * FROM apps_registry LIMIT 10;</textarea>
+                <!-- Dynamic Quick Queries Chips Per DB -->
+                <div id="db-quick-queries-container" style="display: flex; gap: 0.35rem; margin-bottom: 0.55rem; flex-wrap: wrap;"></div>
+                <textarea class="sql-input" id="sql-query-input" placeholder="SELECT * FROM apps_registry LIMIT 10;" style="height: 110px; font-family: monospace; font-size: 0.82rem;">SELECT * FROM apps_registry LIMIT 10;</textarea>
                 <div id="sql-result-container"></div>
               </div>
 
-              <!-- Sub-pane 3: Schema DDL -->
+              <!-- Sub-pane 4: Schema DDL -->
               <div id="db-subpane-ddl" style="display: none;">
                 <h3 style="font-size: 0.95rem; margin-bottom: 0.5rem;" id="db-ddl-title">Schema Definition</h3>
                 <div class="schema-code-box" id="db-ddl-view">Select a table to view its DDL schema.</div>

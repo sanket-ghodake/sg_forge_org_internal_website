@@ -142,4 +142,38 @@ describe('Tier 2 Integration: Database Explorer & Diagnostics Endpoints', () => 
     expect(data.success).toBe(true);
     expect(data.latencyMs).toBeGreaterThanOrEqual(0);
   });
+
+  it('Arrange, Act, Assert: GET /api/db/stats returns real-time telemetry metrics', async () => {
+    // Arrange
+    const url = new URL('http://localhost:3002/api/db/stats?db=platform_core.db');
+    const req = new Request(url.toString(), { method: 'GET' });
+
+    // Act
+    const res = await handleApiRequest(req, url);
+
+    // Assert
+    expect(res).not.toBeNull();
+    const data: any = await res!.json();
+    expect(data.status).toBe('ok');
+    expect(data.fileSizeBytes).toBeGreaterThan(0);
+    expect(data.tableCount).toBeGreaterThan(0);
+    expect(data.journalMode).toBeDefined();
+  });
+
+  it('Arrange, Act, Assert: GET /api/db/graph returns ER schema graph', async () => {
+    // Arrange
+    const url = new URL('http://localhost:3002/api/db/graph?db=platform_core.db');
+    const req = new Request(url.toString(), { method: 'GET' });
+
+    // Act
+    const res = await handleApiRequest(req, url);
+
+    // Assert
+    expect(res).not.toBeNull();
+    const data: any = await res!.json();
+    expect(data.status).toBe('ok');
+    expect(Array.isArray(data.nodes)).toBe(true);
+    expect(data.nodes.length).toBeGreaterThan(0);
+    expect(Array.isArray(data.edges)).toBe(true);
+  });
 });

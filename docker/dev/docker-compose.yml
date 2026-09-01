@@ -116,7 +116,7 @@ services:
       - ../../apps/src/ui:/app/apps/src/ui:ro
       - ../../apps/src/auth:/app/apps/src/auth:ro
       - ../../apps/src/portal:/app/apps/src/portal:rw
-      - forge_dev_db_portal:/app/data
+      - ../../apps/data:/app/data:rw
       - forge_bun_cache:/root/.bun/install/cache
     command: ["bun", "--watch", "apps/src/portal/src/server.ts"]
     networks:
@@ -157,7 +157,7 @@ services:
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
       - ../../apps/src/dev-dashboard:/app/apps/src/dev-dashboard:rw
-      - forge_dev_db_dev_dashboard:/app/data
+      - ../../apps/data:/app/data:rw
       - forge_bun_cache:/root/.bun/install/cache
     command: ["bun", "--watch", "apps/src/dev-dashboard/src/server.ts"]
     networks:
@@ -238,7 +238,7 @@ services:
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
       - ../../apps/src/auth:/app/apps/src/auth:rw
-      - forge_dev_db_auth:/app/data
+      - ../../apps/data:/app/data:rw
       - forge_bun_cache:/root/.bun/install/cache
     command: ["bun", "--watch", "apps/src/auth/src/server.ts"]
     networks:
@@ -278,7 +278,7 @@ services:
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
       - ../../forge-apps/expenses:/app/forge-apps/expenses:rw
-      - forge_dev_db_expenses:/app/data
+      - ../../apps/data:/app/data:rw
       - forge_bun_cache:/root/.bun/install/cache
     command: ["bun", "--watch", "forge-apps/expenses/src/server.ts"]
     networks:
@@ -318,7 +318,7 @@ services:
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
       - ../../forge-apps/billing:/app/forge-apps/billing:rw
-      - forge_dev_db_billing:/app/data
+      - ../../apps/data:/app/data:rw
       - forge_bun_cache:/root/.bun/install/cache
     command: ["bun", "--watch", "forge-apps/billing/src/server.ts"]
     networks:
@@ -358,7 +358,7 @@ services:
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
       - ../../forge-apps/telemetry:/app/forge-apps/telemetry:rw
-      - forge_dev_db_telemetry:/app/data
+      - ../../apps/data:/app/data:rw
       - forge_bun_cache:/root/.bun/install/cache
     command: ["bun", "--watch", "forge-apps/telemetry/src/server.ts"]
     networks:

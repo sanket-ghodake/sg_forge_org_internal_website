@@ -289,3 +289,10 @@
 2026-09-01 08:06 | Refactor top header right profile button to minimal avatar icon trigger with popover anchor
 2026-09-01 08:08 | Remove organization switcher pill from top header for clean and minimal navigation
 2026-09-01 08:12 | [da003e6] feat(portal): implement modular SPA portal with auto-collapsible sidebar, minimal header, and popover profile (+1324, -234)
+2026-09-01 08:13 | Commit portal SPA architecture with auto-expandable sidebar, minimal header, and interactive popover (commit da003e6)
+2026-09-01 08:17 | Integrated real-time database telemetry, ER schema relationship diagram, table search filtering, and Drizzle Studio launcher into Dev Dashboard Database Studio
+2026-09-01 08:23 | Configured drizzle.config.ts and launched Drizzle Studio daemon on port 4983 for local.drizzle.studio connectivity
+2026-09-01 08:30 | Initialized and seeded dedicated Turso/SQLite databases for all microservices (auth, billing, expenses, telemetry, dev_hub) with dynamic Drizzle Studio routing
+2026-09-01 10:01 | Fixed Dev Dashboard docker mount to apps/data so all microservice databases are available in the dropdown
+2026-09-01 10:14 | Enhanced Database Studio with developer POV fullscreen mode, resizable table columns, dynamic contextual query pills per DB, and table search filter
+2026-09-01 10:18 | [4242cc4] feat(dev-dashboard): enhance Database Studio with multi-db discovery, Drizzle Studio integration, resizable tables, ER diagrams, and contextual query pills (+1464, -212)
