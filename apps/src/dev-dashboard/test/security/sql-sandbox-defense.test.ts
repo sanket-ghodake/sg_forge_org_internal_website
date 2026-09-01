@@ -7,6 +7,11 @@ import { describe, expect, it } from 'bun:test';
 import { platformDb, startDevDashboardServer } from '../../src';
 
 describe('Tier 3 Security: SQL Sandbox Defense & Input Hardening', () => {
+  const AUTH_HEADERS = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer password123',
+  };
+
   it('strictly rejects data-modifying mutations in read-only sandbox mode', () => {
     // Arrange: Attack payloads attempting data destruction and schema tampering
     const forbiddenQueries = [
@@ -35,7 +40,7 @@ describe('Tier 3 Security: SQL Sandbox Defense & Input Hardening', () => {
       // Act: Invalid log payload without service or message
       const res = await fetch('http://localhost:3181/api/logs/ingest', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: AUTH_HEADERS,
         body: JSON.stringify({ invalidField: true }),
       });
       const json: any = await res.json();

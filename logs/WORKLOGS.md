@@ -374,3 +374,7 @@
 2026-09-01 20:50 | Implement live SQLite real-data Org Canvas with 5-level progressive depth loading, interactive subtree expansion, and browser extension error suppression
 2026-09-01 20:53 | Fix reverse proxy ingress path resolution for Org Canvas tree endpoint and enhance fluid 320px responsive SPA viewports across all 10 portal tabs
 2026-09-01 21:29 | [e18d47d] feat(portal): implement live SQLite Org Canvas with 5-level progressive depth loading, Meta Astryx SPA views, and browser telemetry (+2819, -212)
+2026-09-01 21:38 | Implement Dev Dashboard single-session password protection & guarantee default Superadmin, Admin, HR, IT org personas and IAM roles
+2026-09-01 21:42 | Refined and modernized Dev Dashboard login UI with Meta Astryx glassmorphism, glowing mesh background, framed logo pedestal, and input styling
+2026-09-01 21:45 | Fix Dev Dashboard login endpoint routing for /devcenter ingress proxy and trim password input
+2026-09-01 21:54 | [c51619d] feat(dashboard): implement single session auth and default org personas (+1155, -137)

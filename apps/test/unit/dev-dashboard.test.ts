@@ -65,22 +65,37 @@ describe('Developer Dashboard Platform Engine', () => {
     const server = startDevDashboardServer(3099);
 
     try {
-      // Act
+      // Act 1: Health check (Public)
       const healthResp = await fetch('http://localhost:3099/health');
       const healthJson: any = await healthResp.json();
 
-      const metricsResp = await fetch('http://localhost:3099/api/system/metrics');
-      const metricsJson: any = await metricsResp.json();
-
-      const htmlResp = await fetch('http://localhost:3099/');
-      const htmlText = await htmlResp.text();
-
-      // Assert
       expect(healthResp.status).toBe(200);
       expect(healthJson.status).toBe('ok');
 
+      // Act 2: Login to get session
+      const loginResp = await fetch('http://localhost:3099/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: 'password123' }),
+      });
+      expect(loginResp.status).toBe(200);
+      const loginJson: any = await loginResp.json();
+      const sessionCookie = `dev_session=${loginJson.sessionToken}`;
+
+      // Act 3: Authenticated metrics API
+      const metricsResp = await fetch('http://localhost:3099/api/system/metrics', {
+        headers: { Cookie: sessionCookie },
+      });
+      const metricsJson: any = await metricsResp.json();
+
       expect(metricsResp.status).toBe(200);
       expect(metricsJson.vitals).toBeDefined();
+
+      // Act 4: Authenticated Dashboard HTML
+      const htmlResp = await fetch('http://localhost:3099/', {
+        headers: { Cookie: sessionCookie },
+      });
+      const htmlText = await htmlResp.text();
 
       const brand = loadBrandConfig();
       expect(htmlResp.status).toBe(200);

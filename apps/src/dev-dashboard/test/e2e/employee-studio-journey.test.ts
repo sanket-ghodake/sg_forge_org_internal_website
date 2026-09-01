@@ -10,6 +10,10 @@ import { seedAuthDatabase } from '@forge/auth';
 describe('E2E: Dev Dashboard Employee Studio Journey', () => {
   const TEST_PORT = 3290;
   let server: any;
+  const AUTH_HEADERS = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer password123',
+  };
 
   beforeAll(() => {
     server = startDevDashboardServer(TEST_PORT);
@@ -21,7 +25,9 @@ describe('E2E: Dev Dashboard Employee Studio Journey', () => {
   });
 
   it('1. Fetches employee directory via HTTP API', async () => {
-    const res = await fetch(`http://localhost:${TEST_PORT}/api/employees`);
+    const res = await fetch(`http://localhost:${TEST_PORT}/api/employees`, {
+      headers: AUTH_HEADERS,
+    });
     expect(res.status).toBe(200);
     const data = await res.json();
     expect(data.status).toBe('ok');
@@ -55,7 +61,7 @@ describe('E2E: Dev Dashboard Employee Studio Journey', () => {
 
     const res = await fetch(`http://localhost:${TEST_PORT}/api/employees/import`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: AUTH_HEADERS,
       body: JSON.stringify(payload),
     });
 
@@ -66,7 +72,9 @@ describe('E2E: Dev Dashboard Employee Studio Journey', () => {
   });
 
   it('3. Streams CSV export of employee directory', async () => {
-    const res = await fetch(`http://localhost:${TEST_PORT}/api/employees/export?format=csv`);
+    const res = await fetch(`http://localhost:${TEST_PORT}/api/employees/export?format=csv`, {
+      headers: { Authorization: 'Bearer password123' },
+    });
     expect(res.status).toBe(200);
     expect(res.headers.get('content-type')).toContain('text/csv');
     const text = await res.text();
@@ -87,7 +95,7 @@ describe('E2E: Dev Dashboard Employee Studio Journey', () => {
 
     const res = await fetch(`http://localhost:${TEST_PORT}/api/employees`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: AUTH_HEADERS,
       body: JSON.stringify(payload),
     });
 
@@ -100,7 +108,7 @@ describe('E2E: Dev Dashboard Employee Studio Journey', () => {
     // 5. Updates the created employee profile via HTTP POST /api/employees/update
     const updateRes = await fetch(`http://localhost:${TEST_PORT}/api/employees/update`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: AUTH_HEADERS,
       body: JSON.stringify({
         id: json.employee.id,
         display_name: 'E2E Created Employee (Promoted)',
@@ -115,7 +123,9 @@ describe('E2E: Dev Dashboard Employee Studio Journey', () => {
     expect(updateJson.status).toBe('ok');
 
     // 6. Validates updated employee appears in directory
-    const listRes = await fetch(`http://localhost:${TEST_PORT}/api/employees?search=${encodeURIComponent(payload.email)}`);
+    const listRes = await fetch(`http://localhost:${TEST_PORT}/api/employees?search=${encodeURIComponent(payload.email)}`, {
+      headers: AUTH_HEADERS,
+    });
     const listJson = await listRes.json();
     expect(listJson.items.length).toBe(1);
     expect(listJson.items[0].display_name).toBe('E2E Created Employee (Promoted)');
@@ -123,7 +133,9 @@ describe('E2E: Dev Dashboard Employee Studio Journey', () => {
   });
 
   it('7. Fetches complete MS Teams Org Chart Tree via HTTP GET /api/employees/tree', async () => {
-    const res = await fetch(`http://localhost:${TEST_PORT}/api/employees/tree`);
+    const res = await fetch(`http://localhost:${TEST_PORT}/api/employees/tree`, {
+      headers: { Authorization: 'Bearer password123' },
+    });
     expect(res.status).toBe(200);
     const json = await res.json();
     expect(json.status).toBe('ok');
@@ -132,13 +144,15 @@ describe('E2E: Dev Dashboard Employee Studio Journey', () => {
   });
 
   it('8. Executes Multi-Row Bulk Actions via HTTP POST /api/employees/bulk-action', async () => {
-    const listRes = await fetch(`http://localhost:${TEST_PORT}/api/employees?limit=2`);
+    const listRes = await fetch(`http://localhost:${TEST_PORT}/api/employees?limit=2`, {
+      headers: AUTH_HEADERS,
+    });
     const listJson = await listRes.json();
     const userIds = listJson.items.map((i: any) => i.id);
 
     const res = await fetch(`http://localhost:${TEST_PORT}/api/employees/bulk-action`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: AUTH_HEADERS,
       body: JSON.stringify({
         action: 'revoke',
         userIds,

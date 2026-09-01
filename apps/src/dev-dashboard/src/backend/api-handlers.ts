@@ -7,9 +7,16 @@ import { trafficController } from './traffic-controller';
 import { issuesController } from './issues-controller';
 import { hostController } from './host-controller';
 import { handleAppsApi } from './apps-controller';
+import { handleDevAuthApi } from './auth-session';
 
 export async function handleApiRequest(req: Request, url: URL): Promise<Response | null> {
   const path = url.pathname.replace(/^\/devcenter/, '');
+
+  // 0. Operator Auth APIs
+  if (path.startsWith('/api/auth')) {
+    const authRes = await handleDevAuthApi(path, req);
+    if (authRes) return authRes;
+  }
 
   // 1. SSE Realtime Log Streamer
   if (path === '/api/logs/stream') {
@@ -331,18 +338,8 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
     for (const [k, v] of Object.entries(process.env)) {
       if (!v) continue;
       const lower = k.toLowerCase();
-      if (
-        lower.includes('secret') ||
-        lower.includes('key') ||
-        lower.includes('token') ||
-        lower.includes('pass') ||
-        lower.includes('auth') ||
-        lower.includes('cred')
-      ) {
-        safeEnv[k] = '••••••••••••••••';
-      } else {
-        safeEnv[k] = v;
-      }
+      const isSensitive = ['secret', 'key', 'token', 'pass', 'auth', 'cred'].some((s) => lower.includes(s));
+      safeEnv[k] = isSensitive ? '••••••••••••••••' : v;
     }
     return Response.json({ status: 'ok', env: safeEnv });
   }

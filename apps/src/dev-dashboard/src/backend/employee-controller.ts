@@ -265,54 +265,22 @@ export class EmployeeController {
         db.run(
           `INSERT INTO auth_users (id, org_id, email, password_hash, salt, display_name, principal_type, status, must_change_password, token_version, custom_attributes, created_at, updated_at)
            VALUES (?, ?, ?, ?, ?, ?, 'EMPLOYEE', ?, ?, 1, '{}', ?, ?);`,
-          [
-            userId,
-            orgId,
-            emailClean,
-            hash,
-            salt,
-            payload.display_name.trim(),
-            payload.status || 'ACTIVE',
-            payload.must_change_password !== false ? 1 : 0,
-            now,
-            now,
-          ]
+          [userId, orgId, emailClean, hash, salt, payload.display_name.trim(), payload.status || 'ACTIVE', payload.must_change_password !== false ? 1 : 0, now, now]
         );
-
         db.run(
-          `INSERT INTO auth_employee_profiles (user_id, org_node_id, job_title, employee_code, created_at, updated_at)
-           VALUES (?, ?, ?, ?, ?, ?);`,
-          [
-            userId,
-            payload.department_id || null,
-            payload.job_title || 'Employee',
-            payload.employee_code || null,
-            now,
-            now,
-          ]
+          `INSERT INTO auth_employee_profiles (user_id, org_node_id, job_title, employee_code, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?);`,
+          [userId, payload.department_id || null, payload.job_title || 'Employee', payload.employee_code || null, now, now]
         );
-
         if (payload.manager_id) {
           const relId = `rel-${randomBytes(6).toString('hex')}`;
-          db.run(
-            `INSERT INTO auth_employee_relationships (id, org_id, employee_id, related_to_id, relationship_type, is_primary)
-             VALUES (?, ?, ?, ?, 'LINE_MANAGER', 1);`,
-            [relId, orgId, userId, payload.manager_id]
-          );
+          db.run(`INSERT INTO auth_employee_relationships (id, org_id, employee_id, related_to_id, relationship_type, is_primary) VALUES (?, ?, ?, ?, 'LINE_MANAGER', 1);`, [relId, orgId, userId, payload.manager_id]);
         }
-
         const roleId = payload.role || 'roles/employee';
         const bindingId = `bind-${randomBytes(6).toString('hex')}`;
-        db.run(
-          `INSERT INTO auth_iam_policy_bindings (id, org_id, principal_id, role_id, resource_scope, created_at)
-           VALUES (?, ?, ?, ?, 'org/*', ?);`,
-          [bindingId, orgId, userId, roleId, now]
-        );
-
+        db.run(`INSERT INTO auth_iam_policy_bindings (id, org_id, principal_id, role_id, resource_scope, created_at) VALUES (?, ?, ?, ?, 'org/*', ?);`, [bindingId, orgId, userId, roleId, now]);
         const auditId = `aud-${randomBytes(6).toString('hex')}`;
         db.run(
-          `INSERT INTO auth_audit_logs (id, org_id, actor_id, action, resource, status, details, ip_hash, timestamp)
-           VALUES (?, ?, 'devcenter-admin', 'iam.employee.create', ?, 'SUCCESS', ?, '127.0.0.1', ?);`,
+          `INSERT INTO auth_audit_logs (id, org_id, actor_id, action, resource, status, details, ip_hash, timestamp) VALUES (?, ?, 'devcenter-admin', 'iam.employee.create', ?, 'SUCCESS', ?, '127.0.0.1', ?);`,
           [auditId, orgId, userId, JSON.stringify({ email: emailClean, title: payload.job_title }), now]
         );
       })();
@@ -347,17 +315,10 @@ export class EmployeeController {
         if (payload.display_name || payload.status) {
           const updates: string[] = ['updated_at = ?'];
           const params: any[] = [now];
-
-          if (payload.display_name) {
-            updates.push('display_name = ?');
-            params.push(payload.display_name.trim());
-          }
+          if (payload.display_name) { updates.push('display_name = ?'); params.push(payload.display_name.trim()); }
           if (payload.status) {
-            updates.push('status = ?');
-            params.push(payload.status);
-            if (payload.status === 'SUSPENDED') {
-              updates.push('token_version = token_version + 1');
-            }
+            updates.push('status = ?'); params.push(payload.status);
+            if (payload.status === 'SUSPENDED') updates.push('token_version = token_version + 1');
           }
           params.push(userId);
           db.run(`UPDATE auth_users SET ${updates.join(', ')} WHERE id = ?;`, params);
@@ -366,19 +327,9 @@ export class EmployeeController {
         if (payload.job_title !== undefined || payload.employee_code !== undefined || payload.department_id !== undefined) {
           const profUpdates: string[] = ['updated_at = ?'];
           const profParams: any[] = [now];
-
-          if (payload.job_title !== undefined) {
-            profUpdates.push('job_title = ?');
-            profParams.push(payload.job_title);
-          }
-          if (payload.employee_code !== undefined) {
-            profUpdates.push('employee_code = ?');
-            profParams.push(payload.employee_code);
-          }
-          if (payload.department_id !== undefined) {
-            profUpdates.push('org_node_id = ?');
-            profParams.push(payload.department_id);
-          }
+          if (payload.job_title !== undefined) { profUpdates.push('job_title = ?'); profParams.push(payload.job_title); }
+          if (payload.employee_code !== undefined) { profUpdates.push('employee_code = ?'); profParams.push(payload.employee_code); }
+          if (payload.department_id !== undefined) { profUpdates.push('org_node_id = ?'); profParams.push(payload.department_id); }
           profParams.push(userId);
           db.run(`UPDATE auth_employee_profiles SET ${profUpdates.join(', ')} WHERE user_id = ?;`, profParams);
         }
@@ -387,22 +338,14 @@ export class EmployeeController {
           db.run(`DELETE FROM auth_employee_relationships WHERE employee_id = ? AND relationship_type = 'LINE_MANAGER';`, [userId]);
           if (payload.manager_id) {
             const relId = `rel-${randomBytes(6).toString('hex')}`;
-            db.run(
-              `INSERT INTO auth_employee_relationships (id, org_id, employee_id, related_to_id, relationship_type, is_primary)
-               VALUES (?, ?, ?, ?, 'LINE_MANAGER', 1);`,
-              [relId, user.org_id, userId, payload.manager_id]
-            );
+            db.run(`INSERT INTO auth_employee_relationships (id, org_id, employee_id, related_to_id, relationship_type, is_primary) VALUES (?, ?, ?, ?, 'LINE_MANAGER', 1);`, [relId, user.org_id, userId, payload.manager_id]);
           }
         }
 
         if (payload.role) {
           db.run(`DELETE FROM auth_iam_policy_bindings WHERE principal_id = ?;`, [userId]);
           const bindingId = `bind-${randomBytes(6).toString('hex')}`;
-          db.run(
-            `INSERT INTO auth_iam_policy_bindings (id, org_id, principal_id, role_id, resource_scope, created_at)
-             VALUES (?, ?, ?, ?, 'org/*', ?);`,
-            [bindingId, user.org_id, userId, payload.role, now]
-          );
+          db.run(`INSERT INTO auth_iam_policy_bindings (id, org_id, principal_id, role_id, resource_scope, created_at) VALUES (?, ?, ?, ?, 'org/*', ?);`, [bindingId, user.org_id, userId, payload.role, now]);
         }
       })();
 
@@ -466,6 +409,50 @@ export class EmployeeController {
         }
       })();
       return { status: 'ok', processed: userIds.length };
+    } finally {
+      db.close();
+    }
+  }
+
+  public ensureDefaultOrgPersonas(): void {
+    const db = getAuthDatabase();
+    try {
+      const org: any = db.query('SELECT id FROM auth_organizations LIMIT 1;').get();
+      if (!org) return;
+      const orgId = org.id || 'org-sg-forge-global';
+      const now = Date.now();
+      const { hash, salt } = hashPassword('password123');
+
+      const required = [
+        { id: 'usr-superadmin', email: 'superadmin@forge.internal', name: 'Rajesh Sharma (Founder & CTO)', role: 'roles/super_admin', dept: 'HQ', title: 'Founder & Chief Technology Officer', code: 'EMP-001' },
+        { id: 'usr-secadmin', email: 'security@forge.internal', name: 'Pooja Deshmukh (VP InfoSec)', role: 'roles/security.admin', dept: 'SEC-OPS', title: 'VP of Information Security & Compliance', code: 'EMP-002' },
+        { id: 'usr-hradmin', email: 'hr@forge.internal', name: 'Shalini Verma (Head of HR & People Operations)', role: 'roles/hr.admin', dept: 'HR-PEOPLE', title: 'Head of People Operations & Talent', code: 'EMP-005' },
+        { id: 'usr-itadmin', email: 'it@forge.internal', name: 'Vikram Malhotra (Lead IT & Systems Admin)', role: 'roles/it.admin', dept: 'IT-SYS', title: 'Lead IT & Workplace Systems Administrator', code: 'EMP-006' },
+      ];
+
+      for (const p of required) {
+        const user = db.query('SELECT id FROM auth_users WHERE id = ? OR email = ?;').get(p.id, p.email);
+        if (!user) {
+          const deptNode: any = db.query('SELECT id FROM auth_org_nodes WHERE code = ? LIMIT 1;').get(p.dept);
+          db.transaction(() => {
+            db.run(
+              `INSERT INTO auth_users (id, org_id, email, password_hash, salt, display_name, principal_type, status, must_change_password, token_version, custom_attributes, created_at, updated_at)
+               VALUES (?, ?, ?, ?, ?, ?, 'ADMIN', 'ACTIVE', 1, 1, '{}', ?, ?);`,
+              [p.id, orgId, p.email, hash, salt, p.name, now, now]
+            );
+            db.run(
+              `INSERT INTO auth_employee_profiles (user_id, org_node_id, job_title, employee_code, created_at, updated_at)
+               VALUES (?, ?, ?, ?, ?, ?);`,
+              [p.id, deptNode?.id || null, p.title, p.code, now, now]
+            );
+            db.run(
+              `INSERT INTO auth_iam_policy_bindings (id, org_id, principal_id, role_id, resource_scope, created_at)
+               VALUES (?, ?, ?, ?, 'org/*', ?);`,
+              [`bind-${p.id}`, orgId, p.id, p.role, now]
+            );
+          })();
+        }
+      }
     } finally {
       db.close();
     }

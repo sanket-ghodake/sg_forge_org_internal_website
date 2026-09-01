@@ -1,6 +1,7 @@
 /**
  * @forge/auth - Generic Multi-Tenant Org & IAM Seed Generator (2026 LTS)
  * Populates standard organizational trees, diverse GCP-style Admin personas, and employees.
+ * Guarantees default Superadmin, Admin, HR, and IT personas with dedicated IAM roles.
  * Default credentials: password123 with mandatory first-time password reset.
  */
 
@@ -77,6 +78,8 @@ export function seedAuthDatabase(force: boolean = false): void {
       { id: 'node_div_fin', type_id: 'type_division', name: 'Finance & Operations', code: 'FINOPS', parent_id: 'node_root', path: '/root/finops' },
       { id: 'node_dept_core_eng', type_id: 'type_department', name: 'Core Platform Engineering', code: 'ENG-CORE', parent_id: 'node_div_tech', path: '/root/tech/eng-core' },
       { id: 'node_dept_sec_ops', type_id: 'type_department', name: 'Security & Cloud Operations', code: 'SEC-OPS', parent_id: 'node_div_tech', path: '/root/tech/sec-ops' },
+      { id: 'node_dept_it', type_id: 'type_department', name: 'IT Infrastructure & Workplace Systems', code: 'IT-SYS', parent_id: 'node_div_tech', path: '/root/tech/it' },
+      { id: 'node_dept_hr', type_id: 'type_department', name: 'Human Resources & People Operations', code: 'HR-PEOPLE', parent_id: 'node_div_fin', path: '/root/finops/hr' },
       { id: 'node_dept_accounting', type_id: 'type_department', name: 'Accounting & Billing', code: 'FIN-ACC', parent_id: 'node_div_fin', path: '/root/finops/accounting' },
       { id: 'node_squad_backend', type_id: 'type_squad', name: 'Backend & Infrastructure Squad', code: 'SQ-BE', parent_id: 'node_dept_core_eng', path: '/root/tech/eng-core/be' },
     ];
@@ -96,6 +99,10 @@ export function seedAuthDatabase(force: boolean = false): void {
       { id: 'auth.users.write', service: 'auth', resource: 'users', action: 'write', desc: 'Create, update & suspend users' },
       { id: 'iam.roles.read', service: 'iam', resource: 'roles', action: 'read', desc: 'View IAM roles and policies' },
       { id: 'iam.roles.grant', service: 'iam', resource: 'roles', action: 'grant', desc: 'Grant policy bindings and privileges' },
+      // HR & People Management
+      { id: 'hr.employees.manage', service: 'hr', resource: 'employees', action: 'manage', desc: 'Manage employee profiles, onboarding and org tree' },
+      // IT & Workplace Management
+      { id: 'it.systems.manage', service: 'it', resource: 'systems', action: 'manage', desc: 'Manage workplace IT devices, platform infra and access' },
       // Portal & Workspaces
       { id: 'portal.workspace.access', service: 'portal', resource: 'workspace', action: 'access', desc: 'Access the main portal canvas' },
       { id: 'portal.settings.update', service: 'portal', resource: 'settings', action: 'update', desc: 'Update organization portal settings' },
@@ -116,10 +123,12 @@ export function seedAuthDatabase(force: boolean = false): void {
       );
     }
 
-    // 5. IAM Roles (Predefined)
+    // 5. IAM Roles (Predefined Standard Roles)
     const roles = [
       { id: 'roles/super_admin', title: 'Super Administrator', type: 'PREDEFINED', desc: 'Full administrative access across all org services' },
       { id: 'roles/security.admin', title: 'IAM & Security Administrator', type: 'PREDEFINED', desc: 'Manage identity, user directory and policy bindings' },
+      { id: 'roles/hr.admin', title: 'HR & People Administrator', type: 'PREDEFINED', desc: 'Manage employee lifecycle, onboarding and org directory' },
+      { id: 'roles/it.admin', title: 'IT & Systems Administrator', type: 'PREDEFINED', desc: 'Manage IT infrastructure, workplace systems and access' },
       { id: 'roles/dev.operator', title: 'Forge Platform Operator', type: 'PREDEFINED', desc: 'Deploy micro-apps and view system logs' },
       { id: 'roles/billing.admin', title: 'Billing Administrator', type: 'PREDEFINED', desc: 'Manage invoices, revenue and payout schedules' },
       { id: 'roles/employee', title: 'Standard Employee', type: 'PREDEFINED', desc: 'Basic portal workspace access and self-service expenses' },
@@ -136,7 +145,9 @@ export function seedAuthDatabase(force: boolean = false): void {
     // 6. Role Permissions Mapping
     const roleMap: Record<string, string[]> = {
       'roles/super_admin': permissions.map((p) => p.id),
-      'roles/security.admin': ['auth.users.read', 'auth.users.write', 'iam.roles.read', 'iam.roles.grant', 'portal.workspace.access'],
+      'roles/security.admin': ['auth.users.read', 'auth.users.write', 'iam.roles.read', 'iam.roles.grant', 'it.systems.manage', 'portal.workspace.access'],
+      'roles/hr.admin': ['auth.users.read', 'auth.users.write', 'hr.employees.manage', 'portal.workspace.access'],
+      'roles/it.admin': ['auth.users.read', 'it.systems.manage', 'forge.apps.deploy', 'forge.logs.view', 'portal.workspace.access'],
       'roles/dev.operator': ['portal.workspace.access', 'forge.apps.deploy', 'forge.logs.view'],
       'roles/billing.admin': ['portal.workspace.access', 'billing.invoices.view', 'billing.invoices.manage', 'expenses.reports.approve'],
       'roles/employee': ['portal.workspace.access', 'expenses.reports.submit', 'billing.invoices.view'],
@@ -148,9 +159,9 @@ export function seedAuthDatabase(force: boolean = false): void {
       }
     }
 
-    // 7. Seed Users & Personas (Indian Tech Org Hierarchy, Default Password: password123)
+    // 7. Seed Users & Personas (Guarantees Superadmin, Admin, HR, and IT)
     const personas = [
-      // Top Root Leader (CTO & Founder)
+      // 1. Super Administrator (Root Founder & CTO)
       {
         id: 'usr-superadmin',
         email: 'superadmin@forge.internal',
@@ -163,7 +174,7 @@ export function seedAuthDatabase(force: boolean = false): void {
         managerId: null,
       },
 
-      // Tier 1: VPs & Directors (Reporting directly to Rajesh Sharma)
+      // 2. Admin (VP of Information Security & System Admin)
       {
         id: 'usr-secadmin',
         email: 'security@forge.internal',
@@ -175,6 +186,34 @@ export function seedAuthDatabase(force: boolean = false): void {
         code: 'EMP-002',
         managerId: 'usr-superadmin',
       },
+
+      // 3. HR Administrator (Head of People Operations & HR)
+      {
+        id: 'usr-hradmin',
+        email: 'hr@forge.internal',
+        name: 'Shalini Verma (Head of HR & People Operations)',
+        type: 'ADMIN' as const,
+        role: 'roles/hr.admin',
+        nodeId: 'node_dept_hr',
+        title: 'Head of People Operations & Talent',
+        code: 'EMP-005',
+        managerId: 'usr-superadmin',
+      },
+
+      // 4. IT Administrator (Lead Workplace Systems & IT Admin)
+      {
+        id: 'usr-itadmin',
+        email: 'it@forge.internal',
+        name: 'Vikram Malhotra (Lead IT & Systems Admin)',
+        type: 'ADMIN' as const,
+        role: 'roles/it.admin',
+        nodeId: 'node_dept_it',
+        title: 'Lead IT & Workplace Systems Administrator',
+        code: 'EMP-006',
+        managerId: 'usr-superadmin',
+      },
+
+      // Tier 1: Directors & Finance
       {
         id: 'usr-billadmin',
         email: 'billing.admin@forge.internal',
@@ -209,7 +248,7 @@ export function seedAuthDatabase(force: boolean = false): void {
         managerId: 'usr-superadmin',
       },
 
-      // Tier 2: Leads & Specialists (Reporting to Directors)
+      // Tier 2: Leads & Specialists
       {
         id: 'usr-siddharth-sre',
         email: 'siddharth.verma@forge.internal',
@@ -277,7 +316,7 @@ export function seedAuthDatabase(force: boolean = false): void {
         managerId: 'usr-bob-lead',
       },
 
-      // Tier 3: Engineers & Associates (Reporting to Leads)
+      // Tier 3: Engineers & Associates
       {
         id: 'usr-sneha-cloud',
         email: 'sneha.sundaram@forge.internal',

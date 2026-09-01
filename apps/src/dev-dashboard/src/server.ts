@@ -1,12 +1,14 @@
 /**
  * @forge/dev-dashboard - Developer Monitoring & Live Telemetry Server (2026 LTS)
  * Serves on Port 3002 (Ingress /devcenter via Reverse Proxy)
+ * Enforces Single-Session Password-Protected Access Control.
  * Google SRE Observability & Meta Astryx Enterprise Baseline (v2.0.0 LTS)
  */
 
 import { createLogger, createSafeHandler, handleBrandAssetRequest } from '@forge/sdk';
 import { handleApiRequest } from './backend/api-handlers';
-import { renderDashboardHtml } from './frontend/ui-renderer';
+import { devAuthManager } from './backend/auth-session';
+import { renderDashboardHtml, renderDevLoginHtml } from './frontend';
 import { platformDb } from './db';
 
 const PORT = Number(process.env.DEV_DASHBOARD_PORT || process.env.PORT || 3002);
@@ -16,12 +18,13 @@ export function startDevDashboardServer(port: number = PORT) {
   const handler = createSafeHandler('dev-dashboard', async (req: Request) => {
     const startMs = performance.now();
     const url = new URL(req.url);
+    const path = url.pathname.replace(/^\/devcenter/, '') || '/';
 
-    // 0. Static Brand Asset Interceptor
+    // 0. Static Brand Asset Interceptor (Public)
     const assetRes = handleBrandAssetRequest(req);
     if (assetRes) return assetRes;
 
-    // 1. Dual-Probe Health Probes
+    // 1. Dual-Probe Health Probes (Public)
     if (url.pathname.endsWith('/health') || url.pathname.endsWith('/livez') || url.pathname.endsWith('/readyz')) {
       const res = Response.json({
         status: 'ok',
@@ -35,7 +38,34 @@ export function startDevDashboardServer(port: number = PORT) {
       return res;
     }
 
-    // 2. API Endpoints
+    // 2. Public Auth API Endpoints (Login / Logout / Session Check)
+    if (path.startsWith('/api/auth')) {
+      const authRes = await handleApiRequest(req, url);
+      if (authRes) return authRes;
+    }
+
+    // 3. Single Active Session Authentication Guard
+    const token = devAuthManager.extractToken(req);
+    const isAuthenticated = devAuthManager.validateSession(token);
+
+    if (!isAuthenticated) {
+      if (path.startsWith('/api/')) {
+        return Response.json(
+          {
+            error: 'Unauthorized: Session invalid, expired, or superseded by another operator login',
+            code: 'UNAUTHORIZED',
+          },
+          { status: 401 }
+        );
+      }
+
+      // Render Astryx Single-Session Login UI
+      return new Response(renderDevLoginHtml(), {
+        headers: { 'Content-Type': 'text/html; charset=utf-8' },
+      });
+    }
+
+    // 4. Authenticated API Endpoints
     const apiResponse = await handleApiRequest(req, url);
     if (apiResponse) {
       if (!url.pathname.includes('/api/logs/stream') && !url.pathname.includes('/api/analytics/traffic')) {
@@ -45,7 +75,7 @@ export function startDevDashboardServer(port: number = PORT) {
       return apiResponse;
     }
 
-    // 3. UI Dashboard Delivery
+    // 5. Authenticated UI Dashboard Delivery
     const duration = Number((performance.now() - startMs).toFixed(2));
     platformDb.recordTraffic('dev-dashboard', url.pathname, req.method, 200, duration);
     return new Response(renderDashboardHtml(), {

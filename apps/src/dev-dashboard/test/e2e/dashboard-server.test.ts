@@ -14,25 +14,50 @@ describe('Tier 5 E2E: Dev Dashboard Server & UI Rendering', () => {
     const server = startDevDashboardServer(3184);
 
     try {
-      // Act 1: Dual-Probe Health Check
+      // Act 1: Dual-Probe Health Check (Public)
       const healthRes = await fetch('http://localhost:3184/health');
       const healthJson: any = await healthRes.json();
 
       expect(healthRes.status).toBe(200);
       expect(healthJson.status).toBe('ok');
 
-      // Act 2: Astryx HTML UI entrypoint
-      const htmlRes = await fetch('http://localhost:3184/');
-      const html = await htmlRes.text();
+      // Act 2: Unauthenticated Astryx HTML UI entrypoint renders Login Screen
+      const unauthRes = await fetch('http://localhost:3184/');
+      const unauthHtml = await unauthRes.text();
 
-      expect(htmlRes.status).toBe(200);
-      expect(html).toContain(brand.name);
-      expect(html).toContain('Developer Dashboard & Diagnostics');
-      expect(html).toContain('sb-global-header');
-      expect(html).toContain('dashboard-watchdog');
+      expect(unauthRes.status).toBe(200);
+      expect(unauthHtml).toContain(brand.name);
+      expect(unauthHtml).toContain('Developer Dashboard Sign In');
+      expect(unauthHtml).toContain('Single-Operator Session Enforced');
 
-      // Act 3: 1-Click HTTP Latency Benchmark
-      const benchRes = await fetch('http://localhost:3184/api/benchmark', { method: 'POST' });
+      // Act 3: Authenticate operator via /api/auth/login
+      const loginRes = await fetch('http://localhost:3184/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: 'password123' }),
+      });
+      expect(loginRes.status).toBe(200);
+      const loginData: any = await loginRes.json();
+      expect(loginData.status).toBe('ok');
+      const sessionCookie = `dev_session=${loginData.sessionToken}`;
+
+      // Act 4: Authenticated Astryx HTML UI entrypoint renders Full Dashboard
+      const authHtmlRes = await fetch('http://localhost:3184/', {
+        headers: { Cookie: sessionCookie },
+      });
+      const authHtml = await authHtmlRes.text();
+
+      expect(authHtmlRes.status).toBe(200);
+      expect(authHtml).toContain(brand.name);
+      expect(authHtml).toContain('Developer Dashboard & Diagnostics');
+      expect(authHtml).toContain('sb-global-header');
+      expect(authHtml).toContain('dashboard-watchdog');
+
+      // Act 5: Authenticated 1-Click HTTP Latency Benchmark
+      const benchRes = await fetch('http://localhost:3184/api/benchmark', {
+        method: 'POST',
+        headers: { Cookie: sessionCookie },
+      });
       const benchJson: any = await benchRes.json();
 
       expect(benchRes.status).toBe(200);

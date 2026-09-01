@@ -11,6 +11,10 @@ describe('E2E: Dev Dashboard Forge Apps Command Center Journey', () => {
   let server: any;
   const timestamp = Date.now();
   const testAppId = `e2e-app-${timestamp}`;
+  const AUTH_HEADERS = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer password123',
+  };
 
   beforeAll(() => {
     server = startDevDashboardServer(TEST_PORT);
@@ -21,7 +25,9 @@ describe('E2E: Dev Dashboard Forge Apps Command Center Journey', () => {
   });
 
   it('1. Fetches enriched apps list and fleet overview via HTTP API', async () => {
-    const res = await fetch(`http://localhost:${TEST_PORT}/api/apps`);
+    const res = await fetch(`http://localhost:${TEST_PORT}/api/apps`, {
+      headers: AUTH_HEADERS,
+    });
     expect(res.status).toBe(200);
     const data = await res.json();
     expect(data.status).toBe('ok');
@@ -32,7 +38,9 @@ describe('E2E: Dev Dashboard Forge Apps Command Center Journey', () => {
   });
 
   it('2. Fetches next available port via HTTP API', async () => {
-    const res = await fetch(`http://localhost:${TEST_PORT}/api/apps/next-port`);
+    const res = await fetch(`http://localhost:${TEST_PORT}/api/apps/next-port`, {
+      headers: AUTH_HEADERS,
+    });
     expect(res.status).toBe(200);
     const data = await res.json();
     expect(data.status).toBe('ok');
@@ -55,7 +63,7 @@ describe('E2E: Dev Dashboard Forge Apps Command Center Journey', () => {
 
     const res = await fetch(`http://localhost:${TEST_PORT}/api/apps/register`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: AUTH_HEADERS,
       body: JSON.stringify(payload),
     });
 
@@ -66,7 +74,9 @@ describe('E2E: Dev Dashboard Forge Apps Command Center Journey', () => {
   });
 
   it('4. Deep inspects the registered app via HTTP GET /api/apps/inspect', async () => {
-    const res = await fetch(`http://localhost:${TEST_PORT}/api/apps/inspect?id=${testAppId}`);
+    const res = await fetch(`http://localhost:${TEST_PORT}/api/apps/inspect?id=${testAppId}`, {
+      headers: AUTH_HEADERS,
+    });
     expect(res.status).toBe(200);
     const data = await res.json();
     expect(data.status).toBe('ok');
@@ -87,7 +97,7 @@ describe('E2E: Dev Dashboard Forge Apps Command Center Journey', () => {
 
     const res = await fetch(`http://localhost:${TEST_PORT}/api/apps/update`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: AUTH_HEADERS,
       body: JSON.stringify(updatePayload),
     });
 
@@ -96,7 +106,9 @@ describe('E2E: Dev Dashboard Forge Apps Command Center Journey', () => {
     expect(data.success).toBe(true);
 
     // Verify inspection reflects update
-    const inspectRes = await fetch(`http://localhost:${TEST_PORT}/api/apps/inspect?id=${testAppId}`);
+    const inspectRes = await fetch(`http://localhost:${TEST_PORT}/api/apps/inspect?id=${testAppId}`, {
+      headers: AUTH_HEADERS,
+    });
     const inspectData = await inspectRes.json();
     expect(inspectData.app.name).toBe('E2E Logistics Suite (Updated)');
     expect(inspectData.app.status).toBe('maintenance');
@@ -106,7 +118,7 @@ describe('E2E: Dev Dashboard Forge Apps Command Center Journey', () => {
   it('6. Deregisters the micro-app via HTTP POST /api/apps/delete', async () => {
     const res = await fetch(`http://localhost:${TEST_PORT}/api/apps/delete`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: AUTH_HEADERS,
       body: JSON.stringify({ id: testAppId, deleteDb: true }),
     });
 
@@ -115,7 +127,9 @@ describe('E2E: Dev Dashboard Forge Apps Command Center Journey', () => {
     expect(data.success).toBe(true);
 
     // Verify app is no longer present
-    const inspectRes = await fetch(`http://localhost:${TEST_PORT}/api/apps/inspect?id=${testAppId}`);
+    const inspectRes = await fetch(`http://localhost:${TEST_PORT}/api/apps/inspect?id=${testAppId}`, {
+      headers: AUTH_HEADERS,
+    });
     expect(inspectRes.status).toBe(404);
   });
 });

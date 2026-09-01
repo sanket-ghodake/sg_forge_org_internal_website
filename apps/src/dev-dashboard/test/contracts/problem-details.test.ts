@@ -7,13 +7,20 @@ import { describe, expect, it } from 'bun:test';
 import { startDevDashboardServer } from '../../src';
 
 describe('Tier 4 Contract: RFC 7807 Problem Details & API Schema', () => {
+  const AUTH_HEADERS = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer password123',
+  };
+
   it('returns valid JSON schema contracts for /api/services and /api/apps', async () => {
     // Arrange
     const server = startDevDashboardServer(3182);
 
     try {
       // Act: /api/services
-      const resServices = await fetch('http://localhost:3182/api/services');
+      const resServices = await fetch('http://localhost:3182/api/services', {
+        headers: AUTH_HEADERS,
+      });
       const jsonServices: any = await resServices.json();
 
       // Assert Services contract
@@ -24,7 +31,9 @@ describe('Tier 4 Contract: RFC 7807 Problem Details & API Schema', () => {
       expect(typeof jsonServices.summary.sloAvailabilityPercent).toBe('number');
 
       // Act: /api/apps
-      const resApps = await fetch('http://localhost:3182/api/apps');
+      const resApps = await fetch('http://localhost:3182/api/apps', {
+        headers: AUTH_HEADERS,
+      });
       const jsonApps: any = await resApps.json();
 
       // Assert Apps contract
@@ -46,7 +55,7 @@ describe('Tier 4 Contract: RFC 7807 Problem Details & API Schema', () => {
       // Act: Missing serviceId on restart
       const resRestart = await fetch('http://localhost:3183/api/services/restart', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: AUTH_HEADERS,
         body: JSON.stringify({}),
       });
       const jsonRestart: any = await resRestart.json();

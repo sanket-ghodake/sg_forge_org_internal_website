@@ -15,5 +15,6 @@ export * from './ui-renderer-employees';
 export * from './ui-apps-styles';
 export * from './ui-apps-scripts';
 export * from './ui-renderer-apps';
+export * from './ui-renderer-login';
 export * from './ui-renderer';
 

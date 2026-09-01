@@ -208,7 +208,11 @@ export function getModalsHtml(): string {
             <select class="form-input" id="emp-form-role">
               <option value="roles/employee">Employee Standard (roles/employee)</option>
               <option value="roles/super_admin">Super Administrator (roles/super_admin)</option>
+              <option value="roles/security.admin">Security & System Admin (roles/security.admin)</option>
+              <option value="roles/hr.admin">HR & People Administrator (roles/hr.admin)</option>
+              <option value="roles/it.admin">IT & Systems Administrator (roles/it.admin)</option>
               <option value="roles/billing.admin">Billing Administrator (roles/billing.admin)</option>
+              <option value="roles/dev.operator">Platform Developer (roles/dev.operator)</option>
             </select>
           </div>
           <div>

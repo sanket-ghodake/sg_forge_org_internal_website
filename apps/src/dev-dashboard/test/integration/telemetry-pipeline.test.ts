@@ -7,6 +7,11 @@ import { describe, expect, it } from 'bun:test';
 import { telemetryEngine, startDevDashboardServer } from '../../src';
 
 describe('Tier 2 Integration: Telemetry Pipeline & Log Stream', () => {
+  const AUTH_HEADERS = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer password123',
+  };
+
   it('ingests, stores, and filters logs via REST endpoints', async () => {
     // Arrange
     const server = startDevDashboardServer(3180);
@@ -15,7 +20,7 @@ describe('Tier 2 Integration: Telemetry Pipeline & Log Stream', () => {
       // Act: Ingest log
       const ingestRes = await fetch('http://localhost:3180/api/logs/ingest', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: AUTH_HEADERS,
         body: JSON.stringify({
           service: 'test-service-ingest',
           severity: 'WARN',
@@ -31,7 +36,9 @@ describe('Tier 2 Integration: Telemetry Pipeline & Log Stream', () => {
       expect(ingestJson.status).toBe('ok');
 
       // Act: Query recent logs
-      const queryRes = await fetch('http://localhost:3180/api/logs/recent?service=test-service-ingest');
+      const queryRes = await fetch('http://localhost:3180/api/logs/recent?service=test-service-ingest', {
+        headers: AUTH_HEADERS,
+      });
       const queryJson: any = await queryRes.json();
 
       // Assert query

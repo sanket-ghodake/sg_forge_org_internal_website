@@ -26,6 +26,16 @@ export function getDashboardScripts(): string {
     let currentAppLogService = null;
     let appLogBuffer = [];
 
+    window.handleDevLogout = async function() {
+      try {
+        await fetch(apiBase + '/api/auth/logout', { method: 'POST' });
+        try { sessionStorage.removeItem('forge:devcenter:token'); } catch(e) {}
+        window.location.reload();
+      } catch (err) {
+        window.location.reload();
+      }
+    };
+
     (function initTheme() {
       const THEME_KEY = 'forge:v1:platform:theme';
       const LEGACY_KEY = 'sg-forge-theme';
