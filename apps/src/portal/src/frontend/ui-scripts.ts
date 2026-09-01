@@ -1,6 +1,7 @@
 import { getCanvasClientScript } from './ui-canvas-scripts';
 import { getAdminClientScript } from './ui-admin-scripts';
 import { getAppsClientScript } from './ui-apps-scripts';
+import { getInboxClientScript } from './ui-inbox-scripts';
 
 export function getPortalClientScript(): string {
   return `
@@ -331,5 +332,6 @@ export function getPortalClientScript(): string {
     ${getCanvasClientScript()}
     ${getAppsClientScript()}
     ${getAdminClientScript()}
+    ${getInboxClientScript()}
   `;
 }

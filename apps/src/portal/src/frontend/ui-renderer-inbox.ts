@@ -1,118 +1,243 @@
 /**
- * @forge/portal - Announcements & Inbox View Renderer (2026 LTS)
- * Company-wide broadcasts, role notifications, and direct mention alerts.
+ * @forge/portal - Live Real-Time Notifications & Company Bulletin Hub (2026 LTS)
+ * Zero hardcoded announcements: Pristine empty state, dynamic event calendar, and real preferences.
  */
 
 import { astryxIcons } from '@forge/ui';
+import type { HeaderUserContext } from './layout-header';
+import {
+  renderInboxUpcomingDates,
+  renderInboxPreferencesWidget,
+  renderInboxSupportWidget,
+  DEFAULT_COMPANY_EVENTS,
+  type CompanyEventItem,
+} from './ui-renderer-inbox-widgets';
+import {
+  getLiveNotifications,
+  getLiveCompanyEvents,
+  getUserDeliveryPreference,
+  type LiveNotificationItem,
+} from '../backend/inbox-service';
 
-export interface NotificationItem {
-  id: string;
-  type: 'BROADCAST' | 'SECURITY' | 'ACCESS' | 'MENTION';
-  title: string;
-  message: string;
-  sender: string;
-  timestamp: string;
-  isUnread: boolean;
-  priority?: 'HIGH' | 'NORMAL';
-}
+export type NotificationItem = LiveNotificationItem;
 
-export const SAMPLE_NOTIFICATIONS: NotificationItem[] = [
-  {
-    id: 'notif_1',
-    type: 'BROADCAST',
-    title: 'Q3 All-Hands Meeting & Product Roadmap Reveal',
-    message: 'Join us this Thursday at 16:00 UTC for the quarterly company all-hands and live demo of Meta Astryx 2.0.',
-    sender: 'Sanket Ghodake (CEO)',
-    timestamp: '2 hours ago',
-    isUnread: true,
-    priority: 'HIGH',
-  },
-  {
-    id: 'notif_2',
-    type: 'ACCESS',
-    title: 'Developer Dashboard Clearance Granted',
-    message: 'Your account was granted the "roles/developer" scope by Alex Laurent. You can now launch Dev Dashboard.',
-    sender: 'IT Access Engine',
-    timestamp: 'Yesterday at 14:22',
-    isUnread: true,
-  },
-  {
-    id: 'notif_3',
-    type: 'SECURITY',
-    title: 'New Login from Mumbai, India',
-    message: 'A new session was established from Chrome on Linux. If this was not you, revoke the session immediately.',
-    sender: 'Security Monitor',
-    timestamp: '2 days ago',
-    isUnread: false,
-  },
-];
+export const DEFAULT_NOTIFICATIONS: NotificationItem[] = [];
+export const SAMPLE_NOTIFICATIONS = DEFAULT_NOTIFICATIONS;
 
-export function renderInboxView(): string {
+export function renderInboxView(user?: HeaderUserContext): string {
+  let notifications: NotificationItem[] = [];
+  let events: CompanyEventItem[] = DEFAULT_COMPANY_EVENTS;
+  let deliveryPref = 'instant';
+
+  try {
+    notifications = getLiveNotifications(user?.id);
+    events = getLiveCompanyEvents();
+    if (user?.id) {
+      deliveryPref = getUserDeliveryPreference(user.id);
+    }
+  } catch {
+    notifications = [];
+    events = DEFAULT_COMPANY_EVENTS;
+  }
+
+  if (!notifications) {
+    notifications = [];
+  }
+
+  const unreadCount = notifications.filter(n => n.isUnread).length;
+  const actionCount = notifications.filter(n => n.type === 'ACTION' && n.isUnread).length;
+  const celebrationCount = notifications.filter(n => n.type === 'CELEBRATION').length;
+  const broadcastCount = notifications.filter(n => n.type === 'BROADCAST').length;
+  const mentionCount = notifications.filter(n => n.type === 'MENTION').length;
+  const securityCount = notifications.filter(n => n.type === 'SECURITY').length;
+
+  const spotlightBroadcast = notifications.find(n => n.type === 'BROADCAST');
+  const displayName = user?.displayName ? user.displayName.split(' ')[0] : 'Team Member';
+
   return `
     <div id="view-notifications" class="portal-page-view">
-      <!-- Header -->
-      <div class="portal-view-header">
-        <div>
-          <div style="display: flex; align-items: center; gap: 0.6rem;">
+      <!-- Top Morning Pulse & Header Bar -->
+      <div class="inbox-hero-banner">
+        <div class="inbox-hero-left">
+          <div class="inbox-badge-row">
             <div class="portal-view-badge">
               <span class="badge-dot"></span>
-              <span>Notifications & Feed</span>
+              <span>Notifications & Announcements</span>
             </div>
-            <span class="portal-view-audience" style="font-size: 0.74rem; color: var(--forge-text-subtle);">Audience: <strong style="color: var(--forge-text-muted); font-weight: 500;">All Employees & Staff</strong></span>
+            <span class="portal-view-audience">Audience: <strong>All Employees & Staff</strong></span>
           </div>
-          <h1 class="portal-view-title">Notifications & Announcements</h1>
-          <p class="portal-view-desc">
-            Stay updated with organization broadcasts, access grants, mentions, and security notifications.
+          <h1 class="inbox-hero-title">Good morning, ${displayName}! Here is what's happening today 👋</h1>
+          <p class="inbox-hero-subtitle">
+            Stay up to date with company announcements, pending action items, team celebrations, and workspace notices.
           </p>
+
+          <!-- Quick Pulse Summary Chips -->
+          <div class="inbox-pulse-chips">
+            <div class="inbox-pulse-badge ${unreadCount > 0 ? 'badge-primary' : 'badge-neutral'} badge-unread-count">
+              <span>📬</span>
+              <strong>${unreadCount} Unread Updates</strong>
+            </div>
+            ${actionCount > 0 ? `
+              <div class="inbox-pulse-badge badge-warning">
+                <span>⚡</span>
+                <strong>${actionCount} Action Required</strong>
+              </div>
+            ` : ''}
+            ${celebrationCount > 0 ? `
+              <div class="inbox-pulse-badge badge-celebrate">
+                <span>🎉</span>
+                <strong>${celebrationCount} Milestone Celebration</strong>
+              </div>
+            ` : ''}
+          </div>
         </div>
 
-        <div class="portal-view-actions">
-          <button class="astryx-btn btn-outline" id="mark-all-read-btn">
+        <div class="inbox-hero-actions">
+          <button class="astryx-btn btn-outline" id="mark-all-read-btn" ${unreadCount === 0 ? 'disabled' : ''}>
             ${astryxIcons.check || '✓'} Mark All as Read
           </button>
         </div>
       </div>
 
-      <!-- Notification Filter Tabs -->
-      <div class="inbox-filter-bar">
-        <div class="inbox-tabs">
-          <button class="inbox-tab active" data-type="all">All (3)</button>
-          <button class="inbox-tab" data-type="BROADCAST">Announcements</button>
-          <button class="inbox-tab" data-type="ACCESS">Access & Roles</button>
-          <button class="inbox-tab" data-type="SECURITY">Security</button>
-        </div>
-      </div>
-
-      <!-- Notifications List -->
-      <div class="notifications-feed-list" id="notifications-feed-list">
-        ${SAMPLE_NOTIFICATIONS.map(n => `
-          <div class="notification-card-item ${n.isUnread ? 'is-unread' : ''}" data-id="${n.id}" data-type="${n.type}">
-            <div class="notification-icon-wrap type-${n.type.toLowerCase()}">
-              ${n.type === 'BROADCAST' ? (astryxIcons.bell || '📢') : ''}
-              ${n.type === 'ACCESS' ? (astryxIcons.key || '🔑') : ''}
-              ${n.type === 'SECURITY' ? (astryxIcons.shield || '🛡️') : ''}
-            </div>
-
-            <div class="notification-content">
-              <div class="notification-top-row">
-                <h3 class="notification-title">${n.title}</h3>
-                <div class="notification-meta-time">
-                  ${n.priority === 'HIGH' ? '<span class="astryx-badge badge-warning">High Priority</span>' : ''}
-                  <span class="time-text">${n.timestamp}</span>
+      <!-- Main 2-Column Responsive Workspace Grid -->
+      <div class="inbox-layout-grid">
+        <!-- Left Main Feed Column -->
+        <div class="inbox-main-col">
+          <!-- Featured Leadership Spotlight Banner (Renders only if broadcast notice exists) -->
+          ${spotlightBroadcast ? `
+            <div class="inbox-spotlight-card">
+              <div class="spotlight-badge">
+                <span class="spotlight-star">⭐</span>
+                <span>Featured Broadcast</span>
+              </div>
+              <div class="spotlight-content">
+                <div class="spotlight-text-wrap">
+                  <h2 class="spotlight-title">${spotlightBroadcast.title}</h2>
+                  <p class="spotlight-desc">${spotlightBroadcast.message}</p>
+                  <div class="spotlight-meta-row">
+                    <span class="spotlight-date">🗓️ ${spotlightBroadcast.timestamp}</span>
+                    <span class="spotlight-host">From: <strong>${spotlightBroadcast.sender}</strong></span>
+                  </div>
+                </div>
+                <div class="spotlight-actions">
+                  ${spotlightBroadcast.actionLabel ? `
+                    <button class="astryx-btn btn-primary inbox-action-cta" data-action="${spotlightBroadcast.actionType || 'view'}" data-title="${spotlightBroadcast.title}">
+                      ${spotlightBroadcast.actionLabel}
+                    </button>
+                  ` : ''}
                 </div>
               </div>
+            </div>
+          ` : ''}
 
-              <p class="notification-text">${n.message}</p>
+          <!-- Feed Controls: Filter Tabs, Search & Unread Switch -->
+          <div class="inbox-controls-bar">
+            <div class="inbox-filter-tabs">
+              <button class="inbox-filter-tab active" data-type="all">
+                All <span class="tab-count">${notifications.length}</span>
+              </button>
+              <button class="inbox-filter-tab" data-type="ACTION">
+                Action Required <span class="tab-count tag-action">${actionCount}</span>
+              </button>
+              <button class="inbox-filter-tab" data-type="BROADCAST">
+                Announcements <span class="tab-count">${broadcastCount}</span>
+              </button>
+              <button class="inbox-filter-tab" data-type="CELEBRATION">
+                Celebrations <span class="tab-count tag-celebrate">${celebrationCount}</span>
+              </button>
+              <button class="inbox-filter-tab" data-type="MENTION">
+                Mentions <span class="tab-count">${mentionCount}</span>
+              </button>
+              <button class="inbox-filter-tab" data-type="SECURITY">
+                Security <span class="tab-count">${securityCount}</span>
+              </button>
+            </div>
 
-              <div class="notification-bottom-row">
-                <span class="notification-sender">From: <strong>${n.sender}</strong></span>
-                <button class="astryx-btn btn-sm btn-ghost dismiss-notif-btn" data-id="${n.id}">
-                  Dismiss
-                </button>
+            <div class="inbox-controls-right">
+              <div class="inbox-search-wrap">
+                <span class="search-icon">${astryxIcons.search || '🔍'}</span>
+                <input type="text" id="inbox-search-input" class="inbox-search-input" placeholder="Filter notices by sender or topic..." />
               </div>
+              <label class="inbox-toggle-wrap" title="Show only unread items">
+                <input type="checkbox" id="inbox-unread-only-toggle" class="inbox-toggle-input" />
+                <span class="inbox-toggle-label">Unread only</span>
+              </label>
             </div>
           </div>
-        `).join('')}
+
+          <!-- Notification Feed List -->
+          <div class="notifications-feed-list" id="notifications-feed-list">
+            ${notifications.map(n => {
+              const initial = n.sender.charAt(0).toUpperCase();
+              return `
+                <div class="astryx-card inbox-feed-card type-${n.type.toLowerCase()} ${n.isUnread ? 'is-unread' : ''}" data-id="${n.id}" data-type="${n.type}">
+                  ${n.isUnread ? '<span class="unread-indicator-dot" title="Unread"></span>' : ''}
+                  
+                  <div class="inbox-card-avatar type-${n.type.toLowerCase()}">
+                    ${n.type === 'ACTION' ? '⚡' : ''}
+                    ${n.type === 'BROADCAST' ? '📢' : ''}
+                    ${n.type === 'CELEBRATION' ? '🎉' : ''}
+                    ${n.type === 'MENTION' ? '💬' : ''}
+                    ${n.type === 'SECURITY' ? '🛡️' : ''}
+                  </div>
+
+                  <div class="inbox-card-body">
+                    <div class="inbox-card-header-row">
+                      <div class="inbox-card-tags">
+                        <span class="inbox-category-pill pill-${n.type.toLowerCase()}">${n.categoryTag}</span>
+                        ${n.priority === 'HIGH' ? '<span class="astryx-badge badge-warning">High Priority</span>' : ''}
+                      </div>
+                      <span class="inbox-card-time">${n.timestamp}</span>
+                    </div>
+
+                    <h3 class="inbox-card-title">${n.title}</h3>
+                    <p class="inbox-card-message">${n.message}</p>
+
+                    <div class="inbox-card-footer-row">
+                      <div class="inbox-card-sender-info">
+                        <div class="sender-mini-avatar">${initial}</div>
+                        <div class="sender-text">
+                          <span class="inbox-card-sender">${n.sender}</span>
+                          ${n.senderRole ? `<span class="sender-role"> · ${n.senderRole}</span>` : ''}
+                        </div>
+                      </div>
+
+                      <div class="inbox-card-actions">
+                        ${n.type === 'CELEBRATION' ? `
+                          <button class="astryx-btn btn-sm btn-outline inbox-celebrate-btn" data-id="${n.id}">
+                            ${n.actionLabel || 'Send Congratulations 🎉'}
+                          </button>
+                        ` : n.actionLabel ? `
+                          <button class="astryx-btn btn-sm ${n.type === 'ACTION' ? 'btn-primary' : 'btn-outline'} inbox-action-cta" data-action="${n.actionType}" data-title="${n.title}">
+                            ${n.actionLabel}
+                          </button>
+                        ` : ''}
+                        
+                        <button class="astryx-btn btn-sm btn-ghost inbox-dismiss-btn" data-id="${n.id}" title="Dismiss notice">
+                          Dismiss
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+
+            <!-- Empty State Container -->
+            <div id="inbox-empty-state" class="inbox-empty-state" style="${notifications.length === 0 ? 'display: flex;' : 'display: none;'}">
+              <div class="empty-state-icon">🎉</div>
+              <h3 class="empty-state-title">You're all caught up!</h3>
+              <p class="empty-state-desc">No notifications or announcements at this time. Enjoy the rest of your day!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side Utility Widgets Column -->
+        <div class="inbox-widgets-col">
+          ${renderInboxUpcomingDates(events)}
+          ${renderInboxPreferencesWidget(deliveryPref)}
+          ${renderInboxSupportWidget()}
+        </div>
       </div>
     </div>
   `;

@@ -7,6 +7,15 @@
 import { authGuard, createLogger, createSafeHandler, handleBrandAssetRequest } from '@forge/sdk';
 import { renderPortalHtml, type HeaderUserContext, REGISTERED_PORTAL_APPS, ADMIN_ROSTER_MEMBERS } from './frontend';
 import { getOrgTree } from './backend/org-tree-service';
+import {
+  getLiveNotifications,
+  markAllNotificationsAsRead,
+  dismissNotification,
+  recordCelebration,
+  getLiveCompanyEvents,
+  getUserDeliveryPreference,
+  setUserDeliveryPreference,
+} from './backend/inbox-service';
 
 const PORT = Number(process.env.PORTAL_PORT || process.env.PORT || 3001);
 const logger = createLogger('portal-service');
@@ -63,6 +72,62 @@ export function startPortalServer(port: number = PORT) {
 
     if (url.pathname === '/api/v1/portal/members' || url.pathname === '/portal/api/v1/portal/members') {
       return Response.json({ ok: true, data: ADMIN_ROSTER_MEMBERS });
+    }
+
+    // ── Live Notifications & Announcements API ──
+    if (url.pathname === '/api/v1/portal/notifications' || url.pathname === '/portal/api/v1/portal/notifications') {
+      const notifs = getLiveNotifications(auth.user!.id);
+      return Response.json({ ok: true, data: notifs });
+    }
+
+    if (url.pathname === '/api/v1/portal/notifications/mark-read' || url.pathname === '/portal/api/v1/portal/notifications/mark-read') {
+      if (req.method === 'POST') {
+        const ok = markAllNotificationsAsRead(auth.user!.id);
+        return Response.json({ ok });
+      }
+    }
+
+    if (url.pathname === '/api/v1/portal/notifications/dismiss' || url.pathname === '/portal/api/v1/portal/notifications/dismiss') {
+      if (req.method === 'POST') {
+        try {
+          const body = await req.json();
+          const ok = dismissNotification(body.id);
+          return Response.json({ ok });
+        } catch {
+          return Response.json({ ok: false }, { status: 400 });
+        }
+      }
+    }
+
+    if (url.pathname === '/api/v1/portal/notifications/celebrate' || url.pathname === '/portal/api/v1/portal/notifications/celebrate') {
+      if (req.method === 'POST') {
+        try {
+          const body = await req.json();
+          const ok = recordCelebration(body.id, auth.user!.id);
+          return Response.json({ ok });
+        } catch {
+          return Response.json({ ok: false }, { status: 400 });
+        }
+      }
+    }
+
+    if (url.pathname === '/api/v1/portal/events' || url.pathname === '/portal/api/v1/portal/events') {
+      const events = getLiveCompanyEvents();
+      return Response.json({ ok: true, data: events });
+    }
+
+    if (url.pathname === '/api/v1/portal/preferences' || url.pathname === '/portal/api/v1/portal/preferences') {
+      if (req.method === 'POST') {
+        try {
+          const body = await req.json();
+          const ok = setUserDeliveryPreference(auth.user!.id, body.pref || 'instant');
+          return Response.json({ ok });
+        } catch {
+          return Response.json({ ok: false }, { status: 400 });
+        }
+      }
+      const pref = getUserDeliveryPreference(auth.user!.id);
+      return Response.json({ ok: true, data: { digestPref: pref } });
     }
 
     const user: HeaderUserContext = {

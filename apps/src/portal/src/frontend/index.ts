@@ -13,6 +13,8 @@ export * from './ui-renderer-apps';
 export * from './ui-apps-scripts';
 export * from './ui-renderer-profile';
 export * from './ui-renderer-inbox';
+export * from './ui-renderer-inbox-widgets';
+export * from './ui-inbox-scripts';
 export * from './ui-admin-members';
 export * from './ui-admin-apps';
 export * from './ui-admin-org';

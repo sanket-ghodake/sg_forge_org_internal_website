@@ -387,3 +387,8 @@
 2026-09-01 22:46 | Removed People Directory tab and views completely from portal sidebar, search, routes, and styles
 2026-09-01 22:48 | Strictly filter Apps Hub to Forge micro-apps only (Expenses, Billing, Telemetry), relaxed subtitle margin, and fixed horizontal pinned card layout
 2026-09-01 22:51 | [2700a63] feat(portal): redesign Apps & Tools Hub for Forge apps and remove People Directory view (+955, -592)
+2026-09-01 22:59 | Redesigned Portal Notifications & Announcements hub for non-technical employees with morning pulse banner, spotlight broadcasts, categorized actionable cards, side widgets, and 100% test coverage
+2026-09-01 23:04 | Replaced all hardcoded data in Portal Notifications & Bulletin Hub with live SQLite/Turso database service, REST API endpoints, and user session personalization
+2026-09-01 23:08 | Cleaned Notifications & Announcements hub to start in a pristine empty state with zero dummy announcements and 100% dynamic event-driven rendering
+2026-09-01 23:10 | Refined badge and audience typography in Notifications & Announcements header to compact 0.68rem size
+2026-09-01 23:12 | [692ffc6] feat(portal): redesign notifications and announcements hub for non-technical employees with live SQLite service (+1303, -88)

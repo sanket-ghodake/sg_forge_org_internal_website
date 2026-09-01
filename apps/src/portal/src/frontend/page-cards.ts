@@ -181,7 +181,7 @@ export function renderPageCards(user?: HeaderUserContext): string {
     ${renderCanvasView()}
     ${renderAppsView(userContext.isAdmin)}
     ${renderProfileView(userContext)}
-    ${renderInboxView()}
+    ${renderInboxView(userContext)}
     ${renderAdminMembersView()}
     ${renderAdminAppsView()}
     ${renderAdminOrgView()}

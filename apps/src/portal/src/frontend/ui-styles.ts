@@ -3,6 +3,8 @@
  * 100% Astryx Token Compliant: SPA Layout, Canvas, Apps Hub, Directory, Admin Suite, Slim Scrollbars & Modals.
  */
 
+import { getInboxStyles } from './ui-styles-inbox';
+
 export function getPortalCustomStyles(): string {
   return `
     :root { --portal-sidebar-width: 56px; --portal-sidebar-expanded-width: 224px; --portal-header-height: 48px; }
@@ -457,5 +459,7 @@ export function getPortalCustomStyles(): string {
       .canvas-inspector-card { width: calc(100vw - 1.5rem); right: 0.5rem; top: 0.5rem; }
       .canvas-minimap-box { display: none; }
     }
+
+    ${getInboxStyles()}
   `;
 }

@@ -113,4 +113,68 @@ describe('Tier 5 E2E: Full SPA Views & Interactive Ecosystem', () => {
       server.stop(true);
     }
   });
+
+  it('serves dynamic JSON API endpoints for live notifications, company events, mark-read, and preferences', async () => {
+    // Arrange
+    const testPort = 3194;
+    const server = startPortalServer(testPort);
+
+    const token = signJwt({
+      sub: 'usr_member_test_02',
+      email: 'member2@forge.internal',
+      display_name: 'Alex Laurent',
+      principal_type: 'EMPLOYEE',
+      org_id: 'org-test',
+      roles: ['roles/employee'],
+      permissions: ['portal.workspace.access'],
+      token_version: 1,
+    });
+
+    try {
+      // Act: Live Notifications API
+      const notifsRes = await fetch(`http://localhost:${testPort}/portal/api/v1/portal/notifications`, {
+        headers: { Cookie: `forge_session=${token}` },
+      });
+      const notifsJson = await notifsRes.json();
+
+      // Assert
+      expect(notifsRes.status).toBe(200);
+      expect(notifsJson.ok).toBe(true);
+      expect(Array.isArray(notifsJson.data)).toBe(true);
+
+      // Act: Company Events API
+      const eventsRes = await fetch(`http://localhost:${testPort}/portal/api/v1/portal/events`, {
+        headers: { Cookie: `forge_session=${token}` },
+      });
+      const eventsJson = await eventsRes.json();
+
+      // Assert
+      expect(eventsRes.status).toBe(200);
+      expect(eventsJson.ok).toBe(true);
+      expect(Array.isArray(eventsJson.data)).toBe(true);
+      expect(eventsJson.data.length).toBeGreaterThan(0);
+
+      // Act: Mark all read
+      const markReadRes = await fetch(`http://localhost:${testPort}/portal/api/v1/portal/notifications/mark-read`, {
+        method: 'POST',
+        headers: { Cookie: `forge_session=${token}` },
+      });
+      const markReadJson = await markReadRes.json();
+      expect(markReadJson.ok).toBe(true);
+
+      // Act: Save delivery preference
+      const prefRes = await fetch(`http://localhost:${testPort}/portal/api/v1/portal/preferences`, {
+        method: 'POST',
+        headers: {
+          Cookie: `forge_session=${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ pref: 'morning-digest' }),
+      });
+      const prefJson = await prefRes.json();
+      expect(prefJson.ok).toBe(true);
+    } finally {
+      server.stop(true);
+    }
+  });
 });
