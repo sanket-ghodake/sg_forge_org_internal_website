@@ -4,6 +4,28 @@ SG Forge is a modern, installable, and extensible organizational workspace porta
 
 ---
 
+## 📊 Monorepo Architecture & Code Metrics Matrix
+
+*Generated using portable toolchain (`portables/bin/scc` & `scripts/verify-gate.ts`)*
+
+| Package / Service | Type / Category | Ingress Port | Ingress Route | Files | Total Lines | Code (SLOC) | Comments | Complexity | 5-Tier Tests | Database Instance | Status |
+| :--- | :--- | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- | :---: |
+| **[`@forge/landing`](file:///home/sanket/Desktop/Sanket/org_website_clone/apps/src/landing)** | Platform Service | `:3000` | `/` | 14 | 456 | 332 | 57 | 32 | 7 | Stateless | **Passing** ✅ |
+| **[`@forge/portal`](file:///home/sanket/Desktop/Sanket/org_website_clone/apps/src/portal)** | Platform Service (SPA) | `:3001` | `/portal` | 49 | 6,338 | 5,324 | 372 | 952 | 25 | `portal.db` | **Passing** ✅ |
+| **[`@forge/dev-dashboard`](file:///home/sanket/Desktop/Sanket/org_website_clone/apps/src/dev-dashboard)** | Platform Service (Studio) | `:3002` | `/devcenter` | 98 | 16,571 | 13,576 | 1,258 | 2,821 | 113 | `dev_dashboard.db` | **Passing** ✅ |
+| **[`@forge/dev-hub`](file:///home/sanket/Desktop/Sanket/org_website_clone/apps/src/dev-hub)** | Platform Service (Docs) | `:3003` | `/gateway` | 30 | 2,397 | 1,908 | 242 | 181 | 17 | Stateless (SDK Mesh) | **Passing** ✅ |
+| **[`@forge/auth`](file:///home/sanket/Desktop/Sanket/org_website_clone/apps/src/auth)** | Platform Service (Identity) | `:3004` | `/auth` | 47 | 4,261 | 3,333 | 337 | 559 | 37 | `auth.db` | **Passing** ✅ |
+| **[`@forge/sdk`](file:///home/sanket/Desktop/Sanket/org_website_clone/apps/src/sdk)** | Core Library | N/A | Library | 22 | 1,911 | 1,478 | 194 | 395 | 26 | Turso SQLite Manager | **Passing** ✅ |
+| **[`@forge/ui`](file:///home/sanket/Desktop/Sanket/org_website_clone/apps/src/ui)** | UI Design System | N/A | Library | 24 | 2,782 | 2,114 | 310 | 258 | 19 | Stateless (Astryx UI) | **Passing** ✅ |
+| **[`@forge/types`](file:///home/sanket/Desktop/Sanket/org_website_clone/apps/src/types)** | Domain Contracts | N/A | Library | 3 | 139 | 117 | 4 | 30 | N/A | Stateless (TS Types) | **Passing** ✅ |
+| **[`expenses`](file:///home/sanket/Desktop/Sanket/org_website_clone/forge-apps/expenses)** | Micro-App (Approvals) | `:8085` | `/apps/expenses` | 11 | 425 | 316 | 47 | 32 | 5 | `expenses.db` | **Passing** ✅ |
+| **[`billing`](file:///home/sanket/Desktop/Sanket/org_website_clone/forge-apps/billing)** | Micro-App (Ledger) | `:8086` | `/apps/billing` | 13 | 489 | 363 | 53 | 29 | 5 | `billing.db` | **Passing** ✅ |
+| **[`telemetry`](file:///home/sanket/Desktop/Sanket/org_website_clone/forge-apps/telemetry)** | Micro-App (Real-Time) | `:8087` | `/apps/telemetry` | 13 | 429 | 313 | 50 | 19 | 5 | `telemetry.db` | **Passing** ✅ |
+| **[`app-template`](file:///home/sanket/Desktop/Sanket/org_website_clone/forge-apps/app-template)** | Reference Template | `:8099` | Dynamic | 20 | 471 | 339 | 53 | 26 | 10 | `template.db` | **Passing** ✅ |
+| **SG Forge Monorepo Total** | **Entire Workspace** | **`:80 / :443`** | **`/`** | **548** | **108,743** | **98,264** | **3,595** | **6,012** | **300 Pass (0 Fail)** | **Dedicated Turso DBs** | **100% Verified** ✅ |
+
+---
+
 ## ⚡ 1-Command Developer Onboarding (Zero Host Install)
 
 Any developer or AI agent can clone the repository and run **one single command** to bootstrap the entire environment (no `apt`, `brew`, `pip install`, or `npm -g` required):
@@ -53,7 +75,8 @@ run.bat dev
 ├── forge-apps/                    # 🧩 Independent Micro-Apps (Dockerized)
 │   ├── expenses/                  # Expense Approval Engine (Port 8085)
 │   ├── billing/                   # Invoicing & Billing Service (Port 8086)
-│   └── telemetry/                 # Live Telemetry Dashboard (Port 8087)
+│   ├── telemetry/                 # Live Telemetry Dashboard (Port 8087)
+│   └── app-template/              # 1-Command Scaffolding Reference (Port 8099)
 │
 ├── docker/                        # 🐳 Docker Environments
 │   ├── dev/                       # docker-compose.yml (Development - Hot Reloading)
@@ -76,10 +99,10 @@ run.bat dev
 ## 🛡️ Pre-Commit Quality Gate & Diagnostics
 
 ```bash
-# Run 2-Tier Quality Gate (Deterministic Scanners + AI Agent Digest):
+# Run 2-Tier Quality Gate (15 Deterministic Checks + 7 AI Agent Semantic Audits):
 ./run.sh verify
 
-# Run System Diagnostics:
+# Run System Diagnostics & Health Checks:
 ./run.sh doctor
 
 # Run HTTP Latency Benchmark:

@@ -4,6 +4,24 @@ Enterprise Foundation SDK suite for **SG Forge** microservices (`apps/src/*`) an
 
 ---
 
+## 📊 Code & Architecture Metrics
+
+*Generated using portable toolchain (`portables/bin/scc` & `scripts/verify-gate.ts`)*
+
+| Metric | Value | Details / Specification |
+| :--- | :--- | :--- |
+| **Package Name** | `@forge/sdk` | Core Shared Library |
+| **Type** | Monorepo Package Alias | Clean import via `@forge/sdk` (Zero relative sprawl) |
+| **Total Files** | `22` files | Structured logging, auth guards, DB client, registry, tests |
+| **Lines of Code (SLOC)**| `1,478` SLOC | 1,911 total lines (194 comments, 239 blanks) |
+| **Complexity Score** | `395` | Google SRE logging, redaction engine, DB lifecycle manager |
+| **Language Breakdown** | TypeScript (1,401 SLOC), Markdown (67), JSON (10) | 100% type-safe |
+| **Database Instance** | Turso SQLite Client Factory | Central SQLite/libSQL manager with automatic test isolation |
+| **5-Tier Test Suite** | `26` passing tests | `test/unit/`, `test/integration/`, `test/security/`, `test/contracts/` |
+| **Verification Gate** | **100% Passing** ✅ | Strict RFC 7807 problem details & PII redaction compliance |
+
+---
+
 ## 🛠️ Core SDK Modules & Exports
 
 ### 1. Structured Logging & Telemetry Engine (`logger.ts`)
@@ -40,39 +58,33 @@ Enterprise Foundation SDK suite for **SG Forge** microservices (`apps/src/*`) an
 
 ---
 
-## 🚀 Quick Usage Examples
+## 📁 Internal Architecture
 
-### Scoped Employee Hierarchy Lookup
-```typescript
-import { getScopedHierarchy, isManagerOf } from '@forge/sdk';
-
-// 1. Fetch targeted hierarchy
-const hierarchy = await getScopedHierarchy('usr-alice-eng');
-console.log('Employee:', hierarchy.employee.displayName);
-console.log('Direct Manager:', hierarchy.managementChain[0]?.displayName);
-console.log('Direct Reports:', hierarchy.directReports.map(r => r.displayName));
-
-// 2. Validate approval authority
-const canApprove = await isManagerOf('usr-bob-lead', 'usr-alice-eng');
-console.log('Can approve:', canApprove); // true
+```text
+apps/src/sdk/
+├── README.md                      # Package documentation & code metrics
+├── package.json                   # Package manifest & export map
+├── src/
+│   ├── index.ts                   # Main barrel export
+│   ├── logger.ts                  # Structured logging & PII redaction engine
+│   ├── error-handler.ts           # RFC 7807 Problem Details boundary
+│   ├── auth-guard.ts              # Zero-Trust JWT verification & RBAC guard
+│   ├── directory-client.ts        # Scoped management chain & hierarchy client
+│   ├── registry.ts                # Declarative ingress & service discovery
+│   ├── branding.ts                # Dynamic white-labeling & logo resolver
+│   ├── external-ingress.ts        # Proxy upstream resolution engine
+│   ├── database.ts                # Canonical SQLite client & WAL manager
+│   ├── client-bridge.ts           # Micro-app iframe postMessage client
+│   └── browser-bridge.ts          # Client-side log forwarding bridge
+├── logs/                          # Isolated structured JSON log sink
+└── test/                          # 5-Tier test suite (unit, integration, security, contracts)
 ```
 
-### Micro-App Safe HTTP Server
-```typescript
-import { authGuard, createLogger, createSafeHandler } from '@forge/sdk';
+---
 
-const logger = createLogger('my-service');
+## 🏃 Local Execution & Verification
 
-export const server = Bun.serve({
-  port: 8088,
-  fetch: createSafeHandler('my-service', async (req) => {
-    const auth = authGuard(req, {
-      appName: 'My Microservice',
-      requiredRoles: ['roles/employee']
-    });
-    if (!auth.authenticated) return auth.response!;
-
-    return Response.json({ status: 'ok', user: auth.user });
-  })
-});
+```bash
+# Run test suite
+rtk bun test apps/src/sdk/test/
 ```

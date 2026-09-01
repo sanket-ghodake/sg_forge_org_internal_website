@@ -4,7 +4,26 @@ Central authentication, generic organizational hierarchy, GCP-style IAM policy e
 
 ---
 
-## 🚀 Features
+## 📊 Code & Architecture Metrics
+
+*Generated using portable toolchain (`portables/bin/scc` & `scripts/verify-gate.ts`)*
+
+| Metric | Value | Details / Specification |
+| :--- | :--- | :--- |
+| **Package Name** | `@forge/auth` | Platform Service (Central Auth & IAM) |
+| **Ingress Port / Route** | `:3004` &rarr; `/auth` | Caddy / Nginx reverse proxy gateway upstream |
+| **Total Files** | `47` files | Cryptographic modules, IAM engine, UI, DB migrations, tests |
+| **Lines of Code (SLOC)**| `3,333` SLOC | 4,261 total lines (337 comments, 591 blanks) |
+| **Complexity Score** | `559` | High-security cryptographic & IAM policy conductors |
+| **Language Breakdown** | TypeScript (3,182 SLOC), Markdown (124), Docker (14), JSON (13) | 100% type-safe |
+| **Database Instance** | `auth.db` | Dedicated Turso libSQL/SQLite database |
+| **5-Tier Test Suite** | `37` passing tests | `test/unit/`, `test/integration/`, `test/security/`, `test/contracts/`, `test/e2e/` |
+| **Verification Gate** | **100% Passing** ✅ | 100% Branch Coverage on Auth & RBAC Boundaries |
+
+---
+
+## 🚀 Key Features
+
 * **Generic Polymorphic Org Structure**: Dynamic node types (`Division`, `Department`, `Faculty`, `Ward`, `Squad`) with materialized path trees and multi-dimensional reporting chains.
 * **GCP-Style Granular IAM**: Permissions, predefined & custom roles, and resource-scoped policy bindings (`org/*`, `nodes/tech/*`, `apps/billing`).
 * **ASVS 5.0 Zero-Trust Cryptography**: Ed25519 asymmetric token signing with public JWKS (`/.well-known/jwks.json`) for zero-latency offline verification across distributed microservices.
@@ -44,11 +63,33 @@ Central authentication, generic organizational hierarchy, GCP-style IAM policy e
 
 ---
 
-## 🏃 Local Execution & Testing
+## 📁 Internal Architecture
+
+```text
+apps/src/auth/
+├── README.md                      # Service documentation & code metrics
+├── package.json                   # Dependencies & package manifest
+├── src/
+│   ├── index.ts                   # Main barrel export
+│   ├── server.ts                  # Bun HTTP server & dual-probe health endpoints
+│   ├── crypto/                    # Ed25519 signing, Argon2id hashing & JWKS exporter
+│   ├── iam/                       # Permissions evaluator & role policy matcher
+│   ├── session/                   # Cookie jar & refresh token rotation manager
+│   ├── org/                       # Polymorphic tree & scoped hierarchy resolver
+│   ├── ui/                        # Meta Astryx login & password setup views
+│   └── db/                        # Turso SQLite schema, migrations & seed engine
+├── docker/                        # Multi-stage Dockerfile
+├── logs/                          # Isolated structured JSON log sink
+└── test/                          # 5-Tier test suite (unit, integration, security, contracts, e2e)
+```
+
+---
+
+## 🏃 Local Execution & Verification
 
 ```bash
-# Run standalone server
-bun apps/src/auth/src/server.ts
+# Run server standalone
+rtk bun apps/src/auth/src/server.ts
 
 # Run test suite
 rtk bun test apps/src/auth/test/

@@ -395,3 +395,6 @@
 2026-09-01 23:12 | Committed redesigned live Notifications & Announcements hub for non-technical employees with SQLite backend, clean empty state, and 100% gate compliance
 2026-09-01 23:23 | Implemented canonical @forge/sdk database manager with automated test DB isolation ensuring persistent password resets across app reboots
 2026-09-02 03:48 | [8c22ef1] feat(auth): implement canonical database manager and test isolation for persistent resets (+255, -124)
+2026-09-02 03:51 | Audit and verify Forge micro-apps catalog coverage and operational correctness
+2026-09-02 03:58 | Update root and all microservice READMEs with comprehensive toolchain code metrics and architecture tables
+2026-09-02 03:58 | [679cee7] docs: update root and all microservice readmes with toolchain code metrics matrices (+3578, -856)

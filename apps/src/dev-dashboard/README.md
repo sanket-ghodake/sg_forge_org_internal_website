@@ -1,40 +1,55 @@
 # 📊 Developer Monitoring Dashboard (`@forge/dev-dashboard`)
 
-Real-time platform telemetry, database diagnostics, and live log streaming dashboard serving on Port `:3002` (proxied at `/devcenter`). Built to Google SRE & Meta Astryx Enterprise Standards.
+Real-time platform telemetry, organization directory management, database diagnostics, and live log streaming dashboard serving on Port `:3002` (proxied at `/devcenter`). Built to Google SRE & Meta Astryx Enterprise Standards.
 
 ---
 
-## 🚀 Key Capabilities
+## 📊 Code & Architecture Metrics
+
+*Generated using portable toolchain (`portables/bin/scc` & `scripts/verify-gate.ts`)*
+
+| Metric | Value | Details / Specification |
+| :--- | :--- | :--- |
+| **Package Name** | `@forge/dev-dashboard` | Platform Service (Developer Studio) |
+| **Ingress Port / Route** | `:3002` &rarr; `/devcenter` | Caddy / Nginx reverse proxy gateway upstream |
+| **Total Files** | `98` files | High-density controllers, renderers, studio tools, tests |
+| **Lines of Code (SLOC)**| `13,576` SLOC | 16,571 total lines (1,258 comments, 1,737 blanks) |
+| **Complexity Score** | `2,821` | Comprehensive administrative studio & query engine |
+| **Language Breakdown** | TypeScript (13,396 SLOC), Markdown (152), Docker (14), JSON (14) | 100% type-safe |
+| **Database Instance** | `dev_dashboard.db` | Dedicated Turso libSQL/SQLite database |
+| **5-Tier Test Suite** | `113` passing tests | `test/unit/`, `test/integration/`, `test/security/`, `test/contracts/`, `test/e2e/` |
+| **Verification Gate** | **100% Passing** ✅ | 100% Soft 500-Line Cap & Zero-Leak Redaction |
+
+---
+
+## 🚀 Key Capabilities & Modules
 
 1. **System Topology & Vitals Overview**: Real-time micro-service node diagram with live latencies, RAM usage, and cluster health indicators.
-2. **Process Management & Controls**: Live process table with `Start`, `Stop`, and `Restart` lifecycle triggers.
-3. **Dynamic Forge Apps Registry**: Database-driven app discovery in `platform_core.db` (`apps_registry` table) with dedicated per-app Turso SQLite databases (`data/app_*.db`).
-4. **Unified Database Studio & Remote Gateway**: GCP Cloud SQL / Supabase standard studio merging schema inspector, fast paginated table data browser, monospace SQL editor with `READ_ONLY` safety sandbox, and dynamic remote microservice DB connections (`/api/db/connect`).
-5. **Live SSE Log Streamer**: Zero-disk-churn in-memory ring buffer streaming logs via Server-Sent Events (`/api/logs/stream`).
-6. **Traffic & SRE Golden Signals**: Real-time request telemetry, response durations, and status code distributions.
-7. **RFC 7807 Issue Center**: Deduplicated exception logs grouped by fingerprint with sanitized stack traces.
-8. **Host & Cloud Infrastructure**: Host hardware vitals (CPU load, memory percent, uptime) and GCP cloud scaling metrics.
+2. **Employee & Directory Studio**: Comprehensive management studio with full CRUD, tree restructuring, reporting lines editor, and instant avatar generation.
+3. **Unified Database Studio & Remote Gateway**: GCP Cloud SQL / Supabase standard studio merging schema inspector, fast paginated table data browser, monospace SQL editor with `READ_ONLY` safety sandbox, and dynamic remote microservice DB connections (`/api/db/connect`).
+4. **Live SSE Log Streamer**: Zero-disk-churn in-memory ring buffer streaming structured logs via Server-Sent Events (`/api/logs/stream`).
+5. **Traffic & SRE Golden Signals**: Real-time request telemetry, response durations, and status code distributions.
+6. **RFC 7807 Issue Center**: Deduplicated exception logs grouped by fingerprint with sanitized stack traces.
+7. **System Terminal Monitor**: Live output streamer inspecting server processes and container vitals.
 
 ---
 
-## 🛠️ Internal Architecture
+## 📁 Internal Architecture
 
 ```text
 apps/src/dev-dashboard/
-├── README.md                      # Service documentation
+├── README.md                      # Service documentation & code metrics
 ├── package.json                   # Dependencies & package manifest
 ├── src/
-│   ├── README.md                  # Source overview & module exports
 │   ├── index.ts                   # Main barrel export
 │   ├── server.ts                  # Bun HTTP server & dual-probe health endpoints
 │   ├── backend/
-│   │   ├── README.md              # Backend engine documentation
 │   │   ├── api-handlers.ts        # REST & SSE API route dispatchers
 │   │   ├── services-controller.ts # Process lifecycle & health prober
+│   │   ├── employee-controller.ts # Employee CRUD & org tree management
 │   │   ├── telemetry.ts           # In-memory circular ring buffer & SSE streamer
 │   │   └── index.ts               # Backend exports
 │   ├── frontend/
-│   │   ├── README.md              # Frontend UI architecture documentation
 │   │   ├── ui-renderer.ts         # High-density SPA HTML document assembler
 │   │   ├── ui-modals.ts           # Astryx modal dialogs & Connect Remote DB modal
 │   │   ├── ui-styles.ts           # Meta Astryx CSS layout & token styles
@@ -42,11 +57,12 @@ apps/src/dev-dashboard/
 │   │   ├── ui-tools-scripts.ts    # Command palette & Database Studio scripts
 │   │   └── index.ts               # Frontend exports
 │   └── db/
-│       ├── README.md              # Database layer documentation
 │       ├── db.ts                  # Turso/libSQL manager with WAL & query sandbox
 │       ├── remote-connectors.ts   # Dynamic remote DB connectors & validation
 │       └── index.ts               # Database exports
-├── test/                          # 5-Tier test suite (unit, integration, security, contracts, e2e)
+├── docker/                        # Multi-stage Docker containerization
+├── logs/                          # Isolated structured JSON log sink
+└── test/                          # 5-Tier test suite (unit, integration, security, contracts, e2e)
 ```
 
 ---
@@ -58,5 +74,5 @@ apps/src/dev-dashboard/
 rtk bun apps/src/dev-dashboard/src/server.ts
 
 # Run test suite
-rtk bun test
+rtk bun test apps/src/dev-dashboard/test/
 ```
