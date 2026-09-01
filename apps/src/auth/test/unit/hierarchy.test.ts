@@ -14,40 +14,40 @@ describe('Tier 1 Unit: Scoped Employee Hierarchy Engine', () => {
   });
 
   it('should resolve linear upward management chain for a nested engineer', () => {
-    // Alice Chen (usr-alice-eng) -> Bob Miller (usr-bob-lead) -> Alex Rivera (usr-superadmin)
+    // Aditi Sharma (usr-alice-eng) -> Rohan Kulkarni (usr-bob-lead) -> Rajesh Sharma (usr-superadmin)
     const hierarchy = getScopedHierarchyData('usr-alice-eng');
 
     expect(hierarchy).not.toBeNull();
     expect(hierarchy?.status).toBe('SUCCESS');
     expect(hierarchy?.employee.id).toBe('usr-alice-eng');
-    expect(hierarchy?.employee.displayName).toContain('Alice Chen');
+    expect(hierarchy?.employee.displayName).toContain('Aditi Sharma');
     expect(hierarchy?.employee.departmentName).toBe('Backend & Infrastructure Squad');
 
     // Management Chain Upwards
     expect(hierarchy?.managementChain.length).toBe(2);
     expect(hierarchy?.managementChain[0].id).toBe('usr-bob-lead');
     expect(hierarchy?.managementChain[0].level).toBe(1);
-    expect(hierarchy?.managementChain[0].displayName).toContain('Bob Miller');
+    expect(hierarchy?.managementChain[0].displayName).toContain('Rohan Kulkarni');
     expect(hierarchy?.managementChain[1].id).toBe('usr-superadmin');
     expect(hierarchy?.managementChain[1].level).toBe(2);
 
-    // Direct Reports (Alice has none)
-    expect(hierarchy?.directReports.length).toBe(0);
+    // Direct Reports (Aditi manages Amitabh & Neha)
+    expect(hierarchy?.directReports.length).toBe(2);
     expect(hierarchy?.summary.isTopLevel).toBe(false);
     expect(hierarchy?.summary.totalManagersAbove).toBe(2);
   });
 
   it('should resolve direct reports downwards for a team lead', () => {
-    // Bob Miller (usr-bob-lead) manages Alice Chen
+    // Rohan Kulkarni (usr-bob-lead) manages Aditi, Tanvi, and Meera
     const hierarchy = getScopedHierarchyData('usr-bob-lead');
 
     expect(hierarchy).not.toBeNull();
     expect(hierarchy?.employee.id).toBe('usr-bob-lead');
-    expect(hierarchy?.directReports.length).toBe(1);
+    expect(hierarchy?.directReports.length).toBe(3);
     expect(hierarchy?.directReports[0].id).toBe('usr-alice-eng');
-    expect(hierarchy?.directReports[0].displayName).toContain('Alice Chen');
+    expect(hierarchy?.directReports[0].displayName).toContain('Aditi Sharma');
 
-    // Upward chain for Bob
+    // Upward chain for Rohan
     expect(hierarchy?.managementChain.length).toBe(1);
     expect(hierarchy?.managementChain[0].id).toBe('usr-superadmin');
   });

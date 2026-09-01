@@ -1,12 +1,17 @@
 /**
- * @forge/dev-dashboard - MS Teams-Inspired Interactive Org Chart & Drawer Scripts (2026 LTS)
- * Executive Lineage, Focused Hero Person, Direct Reports Grid, and Slide-Over Profile Inspector.
+ * @forge/dev-dashboard - Microsoft Teams Endless Org Chart & Drawer Scripts (2026 LTS)
+ * Infinite Pan & Zoom Canvas, Upward/Downward Traversal, Peer Navigation, and Teams Styling.
  */
 
 export function getEmployeeDrawerAndTreeScripts(): string {
   return `
-    /* MS Teams-Inspired Interactive Org Chart */
+    /* MS Teams Endless Org Chart State */
     let focusedEmployeeId = null;
+    let orgChartZoom = 1.0;
+    let orgChartPan = { x: 0, y: 0 };
+    let isPanningOrg = false;
+    let panStart = { x: 0, y: 0 };
+    let panInitPos = { x: 0, y: 0 };
 
     async function loadOrgChartTree() {
       const container = document.getElementById('org-chart-container');
@@ -14,11 +19,10 @@ export function getEmployeeDrawerAndTreeScripts(): string {
 
       const items = employeeData.items || [];
       if (items.length === 0) {
-        container.innerHTML = '<div style="padding: 2.5rem; text-align: center; color: var(--forge-text-muted);">No employee records found in organization.</div>';
+        container.innerHTML = '<div class="astryx-card" style="padding: 2.5rem; text-align: center; color: var(--forge-text-muted);">No employee records found in organization.</div>';
         return;
       }
 
-      // If no employee focused, focus the top leader (or first person without manager, or first item)
       if (!focusedEmployeeId || !items.find(i => i.id === focusedEmployeeId)) {
         const topLeader = items.find(i => !i.manager_id) || items[0];
         focusedEmployeeId = topLeader ? topLeader.id : null;
@@ -29,9 +33,87 @@ export function getEmployeeDrawerAndTreeScripts(): string {
 
     function setOrgFocus(userId) {
       focusedEmployeeId = userId;
-      renderMsTeamsOrgChart();
-      const container = document.getElementById('tab-employees');
-      if (container) container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (typeof switchEmployeeSubTab === 'function') switchEmployeeSubTab('tree');
+      else renderMsTeamsOrgChart();
+      if (typeof persistEmployeeState === 'function') persistEmployeeState();
+    }
+
+    function zoomOrgChart(delta) {
+      orgChartZoom = Math.min(1.35, Math.max(0.75, Math.round((orgChartZoom + delta) * 100) / 100));
+      updateOrgChartTransform();
+    }
+
+    function resetOrgChartTransform() {
+      orgChartZoom = 1.0;
+      orgChartPan = { x: 0, y: 0 };
+      updateOrgChartTransform();
+    }
+
+    function updateOrgChartTransform() {
+      const canvas = document.getElementById('org-chart-canvas');
+      const levelEl = document.getElementById('org-zoom-level');
+      if (canvas) {
+        canvas.style.transform = 'translate(' + orgChartPan.x + 'px, ' + orgChartPan.y + 'px) scale(' + orgChartZoom + ')';
+      }
+      if (levelEl) {
+        levelEl.textContent = Math.round(orgChartZoom * 100) + '%';
+      }
+    }
+
+    function initOrgChartCanvasListeners() {
+      const viewport = document.getElementById('org-chart-viewport');
+      if (!viewport) return;
+
+      // Mouse drag-to-pan
+      viewport.onmousedown = function(e) {
+        if (e.target.closest('.teams-hero-card') || e.target.closest('.teams-report-card') || e.target.closest('.teams-manager-node') || e.target.closest('.org-floating-controls') || e.target.closest('button') || e.target.closest('select')) return;
+        isPanningOrg = true;
+        viewport.classList.add('panning');
+        panStart = { x: e.clientX, y: e.clientY };
+        panInitPos = { x: orgChartPan.x, y: orgChartPan.y };
+      };
+
+      window.onmousemove = function(e) {
+        if (!isPanningOrg) return;
+        const dx = e.clientX - panStart.x;
+        const dy = e.clientY - panStart.y;
+        orgChartPan = { x: panInitPos.x + dx, y: panInitPos.y + dy };
+        updateOrgChartTransform();
+      };
+
+      window.onmouseup = function() {
+        if (isPanningOrg) {
+          isPanningOrg = false;
+          if (viewport) viewport.classList.remove('panning');
+        }
+      };
+
+      // Touch drag-to-pan for mobile (pinch zoom disabled - button only)
+      viewport.ontouchstart = function(e) {
+        if (e.touches.length === 1) {
+          const touch = e.touches[0];
+          if (touch.target.closest('.teams-hero-card') || touch.target.closest('.teams-report-card') || touch.target.closest('.teams-manager-node') || touch.target.closest('.org-floating-controls') || touch.target.closest('button') || touch.target.closest('select')) return;
+          isPanningOrg = true;
+          panStart = { x: touch.clientX, y: touch.clientY };
+          panInitPos = { x: orgChartPan.x, y: orgChartPan.y };
+        }
+      };
+
+      window.ontouchmove = function(e) {
+        if (!isPanningOrg || e.touches.length !== 1) return;
+        const touch = e.touches[0];
+        const dx = touch.clientX - panStart.x;
+        const dy = touch.clientY - panStart.y;
+        orgChartPan = { x: panInitPos.x + dx, y: panInitPos.y + dy };
+        updateOrgChartTransform();
+      };
+
+      window.ontouchend = function() {
+        isPanningOrg = false;
+      };
+
+      // Note: Wheel and two-finger trackpad zoom are explicitly disabled. Zoom is button-only.
+      viewport.onwheel = null;
     }
 
     function renderMsTeamsOrgChart() {
@@ -41,11 +123,11 @@ export function getEmployeeDrawerAndTreeScripts(): string {
       const items = employeeData.items || [];
       const focused = items.find(i => i.id === focusedEmployeeId) || items[0];
       if (!focused) {
-        container.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--forge-text-muted);">Select an employee to explore org chart.</div>';
+        container.innerHTML = '<div class="astryx-card" style="padding: 2rem; text-align: center; color: var(--forge-text-muted);">Select an employee to explore org chart.</div>';
         return;
       }
 
-      // Build Manager Chain (Breadcrumbs & Manager Node)
+      // Build Multi-Level Manager Lineage Chain
       const chain = [];
       let curr = focused;
       const visited = new Set([curr.id]);
@@ -60,107 +142,176 @@ export function getEmployeeDrawerAndTreeScripts(): string {
         }
       }
 
-      // Manager Node (Direct manager above)
+      // Direct Manager & Peers
       const directManager = focused.manager_id ? items.find(i => i.id === focused.manager_id) : null;
+      const peers = directManager ? items.filter(i => i.manager_id === directManager.id && i.id !== focused.id) : [];
 
-      // Direct Reports (Employees who report to focused person)
+      // Direct Reports
       const directReports = items.filter(i => i.manager_id === focused.id);
 
-      // Breadcrumb HTML
+      // Top Breadcrumb & Quick Toolbar
       let breadcrumbsHtml = '<div class="teams-org-breadcrumbs">' +
         '<span class="teams-breadcrumb-item" onclick="jumpToTopLeader()">🏢 Organization Root</span>';
       chain.forEach(mgr => {
-        breadcrumbsHtml += ' <span>/</span> <span class="teams-breadcrumb-item" onclick="setOrgFocus(\\\'' + mgr.id + '\\\')">' + (mgr.display_name || 'Manager') + '</span>';
+        breadcrumbsHtml += ' <span>&rsaquo;</span> <span class="teams-breadcrumb-item" onclick="setOrgFocus(\\\'' + mgr.id + '\\\')">' + (mgr.display_name || 'Manager') + '</span>';
       });
-      breadcrumbsHtml += ' <span>/</span> <span class="teams-breadcrumb-current">' + (focused.display_name || 'Employee') + '</span></div>';
+      breadcrumbsHtml += ' <span>&rsaquo;</span> <span class="teams-breadcrumb-current">' + (focused.display_name || 'Employee') + '</span></div>';
 
-      // Toolbar HTML with Quick Search Jump
-      let searchOpts = items.map(i => '<option value="' + i.id + '" ' + (i.id === focused.id ? 'selected' : '') + '>' + (i.display_name || 'Unnamed') + ' (' + (i.job_title || 'Employee') + ')</option>').join('');
       let toolbarHtml = '<div class="teams-org-toolbar">' +
         breadcrumbsHtml +
-        '<div style="display: flex; gap: 0.5rem; align-items: center;">' +
-          '<span style="font-size: 0.76rem; color: var(--forge-text-muted);">Jump to:</span>' +
-          '<select class="form-input" style="max-width: 240px;" onchange="setOrgFocus(this.value)">' + searchOpts + '</select>' +
-          '<button class="astryx-btn btn-outline" style="font-size: 0.72rem; padding: 0.25rem 0.5rem;" onclick="jumpToTopLeader()">🏠 Top Level</button>' +
+        '<div class="org-search-wrap">' +
+          '<div class="org-search-input-box">' +
+            '<span style="color: var(--forge-text-muted); font-size: 0.75rem;">🔍</span>' +
+            '<input type="search" id="org-chart-search-input" class="org-search-input" placeholder="Search member to focus..." oninput="filterOrgChartSearch(this.value)" onfocus="filterOrgChartSearch(this.value)" autocomplete="off" />' +
+          '</div>' +
+          '<button class="astryx-btn btn-primary" style="font-size: 0.72rem; padding: 0.22rem 0.6rem; height: 26px;" onclick="focusOrgChartSearch()">🔍 Search</button>' +
+          '<button class="astryx-btn btn-outline" style="font-size: 0.72rem; padding: 0.22rem 0.55rem; height: 26px;" onclick="resetOrgChartTransform()">⛶ Center</button>' +
+          '<div id="org-chart-search-results" class="org-search-dropdown" style="display: none;"></div>' +
         '</div>' +
       '</div>';
 
-      // Manager Node HTML
-      let managerNodeHtml = '';
+      // =========================================================================
+      // 1. UPWARD MANAGER SECTION (SMALL BUTTON & CARD)
+      // =========================================================================
+      let upwardHtml = '';
       if (directManager) {
         const mgrInitials = (directManager.display_name || 'MG').split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
-        managerNodeHtml = '<div style="display: flex; flex-direction: column; align-items: center;">' +
-          '<div class="teams-manager-node" onclick="setOrgFocus(\\\'' + directManager.id + '\\\')" title="Click to focus manager">' +
-            '<div class="emp-avatar">' + mgrInitials + '</div>' +
-            '<div style="flex: 1; min-width: 0;">' +
-              '<div class="teams-manager-role">Reporting Manager</div>' +
-              '<div class="teams-manager-name">' + (directManager.display_name || 'Manager') + '</div>' +
+        const mgrStatusColor = directManager.status === 'ACTIVE' ? 'var(--forge-success)' : directManager.status === 'INVITED' ? 'var(--forge-accent)' : 'var(--forge-text-muted)';
+        
+        upwardHtml = '<div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 0.15rem;">' +
+          '<button class="teams-up-nav-btn" onclick="setOrgFocus(\\\'' + directManager.id + '\\\')" title="Move up to direct manager">' +
+            '<span>▲</span> Reports to: ' + (directManager.display_name || 'Manager') +
+          '</button>' +
+          '<div class="teams-manager-node" onclick="setOrgFocus(\\\'' + directManager.id + '\\\')" title="Click to focus manager in org chart">' +
+            '<div class="teams-hero-avatar-wrap">' +
+              '<div class="emp-avatar" style="width: 42px; height: 42px; font-size: 0.85rem;">' + mgrInitials + '</div>' +
+              '<span class="teams-hero-status-dot" style="background: ' + mgrStatusColor + '; width: 9px; height: 9px;"></span>' +
             '</div>' +
-            '<span style="font-size: 0.75rem; color: var(--forge-primary);">↑ Focus</span>' +
+            '<div style="flex: 1; min-width: 0;">' +
+              '<div style="font-size: 0.68rem; font-weight: 700; color: var(--forge-primary); text-transform: uppercase; letter-spacing: 0.04em;">Reporting Line Manager</div>' +
+              '<div style="font-weight: 700; color: var(--forge-text-main); font-size: 0.92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' + (directManager.display_name || 'Manager') + '</div>' +
+              '<div style="font-size: 0.74rem; color: var(--forge-text-muted);">' + (directManager.job_title || 'Manager') + ' &bull; 🏢 ' + (directManager.department_name || 'Org') + '</div>' +
+            '</div>' +
+            '<button class="astryx-btn btn-outline" style="font-size: 0.7rem; padding: 0.2rem 0.5rem; flex-shrink: 0; color: var(--forge-primary); border-color: var(--forge-primary);">↑ Focus</button>' +
           '</div>' +
           '<div class="teams-connector-vertical"></div>' +
         '</div>';
+      } else {
+        upwardHtml = '<div style="margin-bottom: 0.85rem;"><span class="astryx-badge" style="background: var(--forge-bg-elevated); color: var(--forge-primary); border-color: var(--forge-border-medium); font-size: 0.72rem; padding: 0.25rem 0.65rem;">👑 Top Executive / Organization Root</span></div>';
       }
 
-      // Focused Hero Card HTML
+      // =========================================================================
+      // 2. FOCUSED HERO PERSON CARD (MICROSOFT TEAMS STYLE)
+      // =========================================================================
       const heroInitials = (focused.display_name || 'EM').split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
+      const heroStatusColor = focused.status === 'ACTIVE' ? 'var(--forge-success)' : focused.status === 'INVITED' ? 'var(--forge-accent)' : 'var(--forge-text-muted)';
+      const heroRoles = (focused.roles || ['roles/employee']).map(r => '<span class="astryx-badge">' + r.replace('roles/', '') + '</span>').join(' ');
+
+      // Peer navigation pills if siblings exist
+      let peersNavHtml = '';
+      if (peers.length > 0) {
+        peersNavHtml = '<div style="display: inline-flex; align-items: center; gap: 0.35rem; margin-bottom: 0.5rem; font-size: 0.72rem; color: var(--forge-text-muted);">' +
+          '<span>Peers (' + peers.length + '):</span>' +
+          peers.slice(0, 3).map(p => '<button class="emp-dept-chip" style="font-size: 0.68rem; padding: 0.1rem 0.45rem;" onclick="setOrgFocus(\\\'' + p.id + '\\\')">' + (p.display_name || '').split(' ')[0] + '</button>').join('') +
+          (peers.length > 3 ? '<span style="font-size: 0.68rem;">+' + (peers.length - 3) + ' more</span>' : '') +
+        '</div>';
+      }
+
       const heroCardHtml = '<div class="teams-hero-card">' +
         '<div class="teams-hero-header">' +
-          '<div class="emp-avatar hero">' + heroInitials + '</div>' +
+          '<div class="teams-hero-avatar-wrap">' +
+            '<div class="teams-hero-avatar">' + heroInitials + '</div>' +
+            '<span class="teams-hero-status-dot" style="background: ' + heroStatusColor + ';"></span>' +
+          '</div>' +
           '<div style="flex: 1; min-width: 0;">' +
-            '<div class="teams-hero-name">' + (focused.display_name || 'Employee') + '</div>' +
-            '<div class="teams-hero-title">' + (focused.job_title || 'No Title Assigned') + '</div>' +
+            '<div style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.15rem;">' +
+              '<span class="status-badge" style="background: var(--forge-primary-bg); color: var(--forge-primary); border: 1px solid var(--forge-border-medium); font-size: 0.64rem; padding: 0.05rem 0.35rem;"><span class="status-pulse-dot active" style="margin-right: 3px;"></span>FOCUSED</span>' +
+              heroRoles +
+            '</div>' +
+            '<div class="teams-hero-name">' + (focused.display_name || 'Unnamed Employee') + '</div>' +
+            '<div class="teams-hero-title">' + (focused.job_title || 'Employee') + '</div>' +
             '<div class="teams-hero-meta">' +
-              '<span>🏛️ ' + (focused.department_name || 'Unassigned') + '</span>' +
-              '<span>✉️ ' + (focused.email || 'N/A') + '</span>' +
-              '<span>🏷️ ' + (focused.employee_code || 'N/A') + '</span>' +
+              '<span>🏢 ' + (focused.department_name || 'Unassigned Department') + '</span>' +
+              '<span>✉️ <code>' + (focused.email || 'N/A') + '</code></span>' +
+              (focused.employee_code ? '<span>🏷️ Code: <code>' + focused.employee_code + '</code></span>' : '') +
             '</div>' +
           '</div>' +
-          '<div>' +
-            '<button class="astryx-btn btn-outline" style="font-size: 0.72rem; padding: 0.25rem 0.55rem;" onclick="openEditEmployeeModal(\\\'' + focused.id + '\\\')">✏️ Edit Profile</button>' +
+        '</div>' +
+        '<div class="teams-hero-actions">' +
+          peersNavHtml +
+          '<div style="display: flex; gap: 0.35rem; margin-left: auto;">' +
+            '<button class="astryx-btn btn-outline" style="font-size: 0.72rem; padding: 0.22rem 0.55rem;" onclick="openEmployeeDrawer(\\\'' + focused.id + '\\\')">👤 Profile Drawer</button>' +
+            '<button class="astryx-btn btn-outline" style="font-size: 0.72rem; padding: 0.22rem 0.55rem;" onclick="openEditEmployeeModal(\\\'' + focused.id + '\\\')">✏️ Edit Profile</button>' +
+            '<button class="astryx-btn btn-primary" style="font-size: 0.72rem; padding: 0.22rem 0.55rem;" onclick="openAddReportModal(\\\'' + focused.id + '\\\')">➕ Add Report</button>' +
           '</div>' +
         '</div>' +
       '</div>';
 
-      // Direct Reports Section HTML
+      // =========================================================================
+      // 3. DOWNSIDE DIRECT REPORTS (BRANCH GRID WITH SMALL BUTTONS)
+      // =========================================================================
       let reportsSectionHtml = '';
       if (directReports.length > 0) {
         const reportCardsHtml = directReports.map(rep => {
           const repInitials = (rep.display_name || 'EM').split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
           const subReportsCount = items.filter(i => i.manager_id === rep.id).length;
-          return '<div class="teams-report-card" onclick="setOrgFocus(\\\'' + rep.id + '\\\')">' +
+          const repStatusColor = rep.status === 'ACTIVE' ? 'var(--forge-success)' : rep.status === 'INVITED' ? 'var(--forge-accent)' : 'var(--forge-text-muted)';
+
+          return '<div class="teams-report-card" onclick="setOrgFocus(\\\'' + rep.id + '\\\')" title="Focus ' + (rep.display_name || 'employee') + ' in org chart">' +
             '<div class="teams-report-header">' +
-              '<div class="emp-avatar">' + repInitials + '</div>' +
+              '<div class="teams-hero-avatar-wrap">' +
+                '<div class="emp-avatar">' + repInitials + '</div>' +
+                '<span class="teams-hero-status-dot" style="background: ' + repStatusColor + '; width: 8px; height: 8px;"></span>' +
+              '</div>' +
               '<div style="flex: 1; min-width: 0;">' +
                 '<div class="teams-report-name">' + (rep.display_name || 'Unnamed') + '</div>' +
                 '<div class="teams-report-title">' + (rep.job_title || 'Employee') + '</div>' +
               '</div>' +
             '</div>' +
             '<div class="teams-report-footer">' +
-              '<span style="color: var(--forge-text-muted);">' + (rep.department_name || 'General') + '</span>' +
-              (subReportsCount > 0
-                ? '<button class="astryx-btn btn-outline" style="font-size: 0.68rem; padding: 0.15rem 0.45rem; color: var(--forge-primary); border-color: var(--forge-primary);" onclick="event.stopPropagation(); setOrgFocus(\\\'' + rep.id + '\\\')">' + subReportsCount + ' Reports ↓</button>'
-                : '<span style="color: var(--forge-text-muted); font-size: 0.7rem;">Individual</span>') +
+              '<span style="color: var(--forge-text-muted); font-size: 0.7rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 110px;">🏢 ' + (rep.department_name || 'Dept') + '</span>' +
+              '<div style="display: flex; gap: 0.25rem; align-items: center;">' +
+                (subReportsCount > 0
+                  ? '<button class="astryx-btn btn-outline" style="font-size: 0.68rem; padding: 0.12rem 0.45rem; color: var(--forge-primary); border-color: var(--forge-primary);" onclick="event.stopPropagation(); setOrgFocus(\\\'' + rep.id + '\\\')">👥 ' + subReportsCount + ' Reports ↓</button>'
+                  : '<span style="color: var(--forge-text-muted); font-size: 0.68rem;">Individual</span>') +
+                '<button class="astryx-btn btn-outline" style="font-size: 0.68rem; padding: 0.12rem 0.45rem;" onclick="event.stopPropagation(); setOrgFocus(\\\'' + rep.id + '\\\')">↓ Focus</button>' +
+              '</div>' +
             '</div>' +
           '</div>';
         }).join('');
 
         reportsSectionHtml = '<div class="teams-connector-vertical"></div>' +
           '<div class="teams-reports-section">' +
-            '<div class="teams-branch-header">Direct Reports (' + directReports.length + ')</div>' +
+            '<div class="teams-branch-header"><span>👥 Direct Reports</span> <span class="astryx-badge" style="background: var(--forge-primary-bg); color: var(--forge-primary);">' + directReports.length + '</span></div>' +
             '<div class="teams-reports-grid">' + reportCardsHtml + '</div>' +
           '</div>';
       } else {
-        reportsSectionHtml = '<div style="margin-top: 1.5rem; text-align: center; color: var(--forge-text-muted); font-size: 0.8rem;">' +
-          'No direct reports under ' + (focused.display_name || 'this employee') + '.' +
-          '<div style="margin-top: 0.5rem;"><button class="astryx-btn btn-outline" style="font-size: 0.75rem;" onclick="openAddReportModal(\\\'' + focused.id + '\\\')">➕ Add Direct Report</button></div>' +
+        reportsSectionHtml = '<div style="margin-top: 1.25rem; text-align: center; color: var(--forge-text-muted); font-size: 0.8rem; background: var(--forge-bg-card); padding: 1rem 1.5rem; border-radius: var(--forge-radius-md); border: 1px dashed var(--forge-border);">' +
+          '<div>Individual Contributor &bull; 0 Direct Reports under ' + (focused.display_name || 'this member') + '.</div>' +
+          '<button class="astryx-btn btn-outline" style="font-size: 0.74rem; margin-top: 0.5rem;" onclick="openAddReportModal(\\\'' + focused.id + '\\\')">➕ Add Direct Report</button>' +
         '</div>';
       }
 
-      container.innerHTML = '<div class="teams-org-container">' + toolbarHtml + managerNodeHtml + heroCardHtml + reportsSectionHtml + '</div>';
-      setTimeout(() => {
-        if (typeof window.syncAstryxSelects === 'function') window.syncAstryxSelects();
-      }, 30);
+      // =========================================================================
+      // 4. ASSEMBLE ENDLESS CANVAS VIEWPORT & FLOATING CONTROLS
+      // =========================================================================
+      container.innerHTML = toolbarHtml +
+        '<div class="org-chart-wrapper" id="org-chart-viewport">' +
+          '<div class="org-chart-canvas" id="org-chart-canvas">' +
+            upwardHtml +
+            heroCardHtml +
+            reportsSectionHtml +
+          '</div>' +
+          '<div class="org-floating-controls">' +
+            '<button class="org-zoom-btn" onclick="zoomOrgChart(0.10)" title="Zoom In (+)">+</button>' +
+            '<span class="org-zoom-level" id="org-zoom-level">' + Math.round(orgChartZoom * 100) + '%</span>' +
+            '<button class="org-zoom-btn" onclick="zoomOrgChart(-0.10)" title="Zoom Out (−)">−</button>' +
+            '<button class="org-zoom-btn" onclick="resetOrgChartTransform()" title="Reset Zoom & Center">⛶</button>' +
+          '</div>' +
+        '</div>';
+
+      initOrgChartCanvasListeners();
+      updateOrgChartTransform();
     }
 
     function jumpToTopLeader() {
@@ -168,6 +319,57 @@ export function getEmployeeDrawerAndTreeScripts(): string {
       const topLeader = items.find(i => !i.manager_id) || items[0];
       if (topLeader) setOrgFocus(topLeader.id);
     }
+
+    function filterOrgChartSearch(query) {
+      const resEl = document.getElementById('org-chart-search-results');
+      if (!resEl) return;
+      const q = (query || '').toLowerCase().trim();
+      const items = employeeData.items || [];
+      const matches = q
+        ? items.filter(i => (i.display_name && i.display_name.toLowerCase().includes(q)) || (i.email && i.email.toLowerCase().includes(q)) || (i.job_title && i.job_title.toLowerCase().includes(q)) || (i.department_name && i.department_name.toLowerCase().includes(q)))
+        : items.slice(0, 8);
+
+      if (matches.length === 0) {
+        resEl.innerHTML = '<div style="padding: 0.65rem; font-size: 0.74rem; color: var(--forge-text-muted); text-align: center;">No matching members found</div>';
+        resEl.style.display = 'flex';
+        return;
+      }
+
+      resEl.innerHTML = matches.map(m => {
+        const initials = (m.display_name || 'EM').split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
+        return '<div class="org-search-item" onclick="setOrgFocus(\\\'' + m.id + '\\\'); closeOrgChartSearch();">' +
+          '<div class="emp-avatar" style="width: 26px; height: 26px; font-size: 0.65rem;">' + initials + '</div>' +
+          '<div class="org-search-item-info">' +
+            '<div class="org-search-item-name">' + (m.display_name || 'Unnamed') + '</div>' +
+            '<div class="org-search-item-role">' + (m.job_title || 'Employee') + ' &bull; ' + (m.department_name || 'Dept') + '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+      resEl.style.display = 'flex';
+    }
+
+    function closeOrgChartSearch() {
+      const resEl = document.getElementById('org-chart-search-results');
+      if (resEl) resEl.style.display = 'none';
+      const input = document.getElementById('org-chart-search-input');
+      if (input) input.value = '';
+    }
+
+    function focusOrgChartSearch() {
+      const input = document.getElementById('org-chart-search-input');
+      if (input) {
+        input.focus();
+        filterOrgChartSearch(input.value);
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      const wrap = document.querySelector('.org-search-wrap');
+      if (wrap && !wrap.contains(e.target)) {
+        const resEl = document.getElementById('org-chart-search-results');
+        if (resEl) resEl.style.display = 'none';
+      }
+    });
 
     function openAddReportModal(managerId) {
       openAddEmployeeModal();

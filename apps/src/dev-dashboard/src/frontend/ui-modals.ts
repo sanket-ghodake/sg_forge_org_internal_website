@@ -228,14 +228,17 @@ export function getModalsHtml(): string {
     </div>
   </div>
 
-  <!-- Hierarchy Visualizer Modal -->
+  <!-- Hierarchy Visualizer Modal (Microsoft Teams Glassmorphic Style) -->
   <div class="astryx-modal-backdrop" id="modal-hierarchy-view">
-    <div class="astryx-modal" style="max-width: 600px; width: 92vw;">
+    <div class="astryx-modal" style="max-width: 660px; width: 94vw;">
       <div class="astryx-modal-header">
-        <h3>👔 Scoped Management Hierarchy & Reporting Line</h3>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="color: var(--forge-primary); display: flex; align-items: center;">👔</span>
+          <h3 style="margin: 0; font-size: 1.05rem;">Organization Lineage & Reporting Line</h3>
+        </div>
         <button class="astryx-modal-close" onclick="closeHierarchyModal()">&times;</button>
       </div>
-      <div class="astryx-modal-body" id="hierarchy-content-box" style="padding: 1.25rem; max-height: 480px; overflow-y: auto;"></div>
+      <div class="astryx-modal-body" id="hierarchy-content-box" style="padding: 1.25rem; max-height: 540px; overflow-y: auto; scrollbar-width: thin;"></div>
     </div>
   </div>
 

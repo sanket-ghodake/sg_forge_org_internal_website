@@ -5,6 +5,7 @@
 
 import { afterAll, beforeAll, describe, expect, it } from 'bun:test';
 import { startDevDashboardServer } from '../../src/server';
+import { seedAuthDatabase } from '@forge/auth';
 
 describe('E2E: Dev Dashboard Employee Studio Journey', () => {
   const TEST_PORT = 3290;
@@ -16,6 +17,7 @@ describe('E2E: Dev Dashboard Employee Studio Journey', () => {
 
   afterAll(() => {
     if (server) server.stop(true);
+    seedAuthDatabase(true);
   });
 
   it('1. Fetches employee directory via HTTP API', async () => {

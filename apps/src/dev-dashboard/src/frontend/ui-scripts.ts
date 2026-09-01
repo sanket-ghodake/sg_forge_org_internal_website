@@ -367,7 +367,7 @@ export function getDashboardScripts(): string {
       else if (tab === 'traffic') loadTraffic();
       else if (tab === 'apps') loadApps();
       else if (tab === 'issues') loadIssues();
-      else if (tab === 'employees') loadEmployees();
+      // Note: Employee Directory & Org Chart are event/mutation driven to preserve pan/zoom and editing states
     }
 
     // 🚀 Mount Initial Tab & Start Resilient SSE Watchdog

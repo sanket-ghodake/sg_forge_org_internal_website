@@ -15,14 +15,13 @@ export function getDashboardStyles(): string {
     ${getEmployeeStyles()}
     ${getDropdownStyles()}
     
-    html { font-size: 13px; }
+    html, body { font-size: 13px; height: 100vh; max-height: 100vh; overflow: hidden; margin: 0; padding: 0; display: flex; flex-direction: column; background: var(--forge-bg-root); }
     *, *::before, *::after { box-sizing: border-box; }
-    body { overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; background: var(--forge-bg-root); margin: 0; }
 
     /* 1. Global Top Header Bar */
     .sb-global-header {
-      width: 100%; height: 48px; background: var(--forge-bg-surface); border-bottom: 1px solid var(--forge-border);
-      display: flex; align-items: center; justify-content: space-between; padding: 0 1rem; position: sticky; top: 0; z-index: 100;
+      width: 100%; height: 48px; min-height: 48px; max-height: 48px; flex-shrink: 0; background: var(--forge-bg-surface); border-bottom: 1px solid var(--forge-border);
+      display: flex; align-items: center; justify-content: space-between; padding: 0 1rem; z-index: 100;
       backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
     }
     .sb-header-left, .sb-header-right { display: flex; align-items: center; gap: 0.65rem; }
@@ -55,7 +54,9 @@ export function getDashboardStyles(): string {
       display: grid;
       grid-template-columns: 56px minmax(0, 1fr);
       flex: 1;
-      min-height: calc(100vh - 48px);
+      height: calc(100vh - 48px);
+      max-height: calc(100vh - 48px);
+      overflow: hidden;
       background: var(--forge-bg-root);
       position: relative;
     }
@@ -76,15 +77,17 @@ export function getDashboardStyles(): string {
       display: flex;
       flex-direction: column;
       padding: 8px 4px;
-      position: sticky;
-      top: 48px; left: 0;
+      position: relative;
       width: 56px;
-      height: calc(100vh - 48px);
+      height: 100%;
+      max-height: 100%;
       overflow-x: hidden;
       overflow-y: auto;
+      scrollbar-width: none;
       z-index: 50;
       transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
     }
+    .sb-sidebar::-webkit-scrollbar { display: none; }
     .sb-sidebar:hover, .sb-sidebar:focus-within {
       width: 192px;
       box-shadow: var(--forge-shadow-hover);
@@ -195,9 +198,20 @@ export function getDashboardStyles(): string {
     }
     .sb-sidebar:hover .sb-footer-pill, .sb-sidebar:focus-within .sb-footer-pill { opacity: 1; }
 
-    .sb-content { padding: 1.25rem 1.5rem; max-width: 1480px; width: 100%; overflow-x: hidden; }
+    .sb-content {
+      padding: 1.1rem 1.4rem;
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      box-sizing: border-box;
+      scrollbar-width: thin;
+      scrollbar-color: var(--forge-border-medium) transparent;
+    }
     .tab-pane { display: none; }
     .tab-pane.active { display: block; animation: fadeIn 0.15s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(2px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(2px); } to { opacity: 1; transform: translateY(0); } }
 
     /* 4 Golden Vitals Summary Cards */

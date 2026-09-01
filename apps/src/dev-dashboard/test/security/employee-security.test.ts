@@ -3,10 +3,14 @@
  * Tests email validation, duplicate prevention, PII protection, and payload size bounds.
  */
 
-import { describe, expect, it } from 'bun:test';
+import { afterAll, describe, expect, it } from 'bun:test';
 import { employeeController } from '../../src/backend/employee-controller';
+import { seedAuthDatabase } from '@forge/auth';
 
 describe('Security: Employee Zero-Trust & PII Defense', () => {
+  afterAll(() => {
+    seedAuthDatabase(true);
+  });
   it('1. Rejects invalid email syntax on creation', () => {
     expect(() => {
       employeeController.createEmployee({

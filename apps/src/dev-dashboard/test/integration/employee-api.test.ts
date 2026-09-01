@@ -3,10 +3,14 @@
  * Tests employee creation, retrieval, updates, hierarchy calculation, and batch imports.
  */
 
-import { describe, expect, it } from 'bun:test';
+import { afterAll, describe, expect, it } from 'bun:test';
 import { employeeController } from '../../src/backend/employee-controller';
+import { seedAuthDatabase } from '@forge/auth';
 
 describe('Integration: Employee Controller & Database Operations', () => {
+  afterAll(() => {
+    seedAuthDatabase(true);
+  });
   const testEmail = `test.employee.${Date.now()}@forge.internal`;
   let createdUserId = '';
 

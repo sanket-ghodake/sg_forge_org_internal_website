@@ -158,6 +158,7 @@ export function getEmployeeImportScripts(): string {
         } else {
           showAstryxToast('success', \`Successfully imported \${summary.valid} employees into organization!\`);
           closeImportWizard();
+          if (typeof switchEmployeeSubTab === 'function') switchEmployeeSubTab('table');
           loadEmployees();
         }
       } catch (err) {
@@ -165,14 +166,22 @@ export function getEmployeeImportScripts(): string {
       }
     }
 
-    function exportEmployees(format) {
+    function exportEmployees(format, statusOverride) {
       const params = new URLSearchParams();
       params.set('format', format || 'csv');
       if (currentEmployeeFilter.search) params.set('search', currentEmployeeFilter.search);
       if (currentEmployeeFilter.departmentId) params.set('departmentId', currentEmployeeFilter.departmentId);
-      if (currentEmployeeFilter.status) params.set('status', currentEmployeeFilter.status);
+      const st = statusOverride !== undefined && statusOverride !== null ? statusOverride : currentEmployeeFilter.status;
+      if (st) params.set('status', st);
 
-      window.location.href = \`\${apiBase}/api/employees/export?\${params.toString()}\`;
+      const downloadUrl = \`\${apiBase}/api/employees/export?\${params.toString()}\`;
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.setAttribute('download', \`employees_export_\${Date.now()}.\${format === 'json' ? 'json' : 'csv'}\`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showAstryxToast('success', 'Exporting organization data (' + (format || 'csv').toUpperCase() + ')...');
     }
   `;
 }

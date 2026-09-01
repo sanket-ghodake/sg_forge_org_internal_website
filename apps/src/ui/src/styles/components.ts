@@ -199,12 +199,15 @@ export function getComponentStyles(): string {
       padding: 0.18rem 0.5rem;
       border-radius: var(--forge-radius-sm);
       letter-spacing: 0.02em;
+      background: var(--forge-bg-elevated);
+      color: var(--forge-text-main);
+      border: 1px solid var(--forge-border);
     }
 
     .badge-online {
       background: var(--forge-success-bg);
       color: var(--forge-success);
-      border: 1px solid rgba(62, 207, 142, 0.25);
+      border: 1px solid var(--forge-border-medium);
     }
 
     .badge-pill {
@@ -242,7 +245,7 @@ export function getComponentStyles(): string {
 
     .btn-primary {
       background: var(--forge-primary);
-      color: #121212 !important;
+      color: var(--forge-primary-btn-text, #121212) !important;
       font-weight: 600;
       border-color: transparent;
     }
@@ -250,7 +253,7 @@ export function getComponentStyles(): string {
     .btn-primary:hover {
       background: var(--forge-primary-hover, #34b27b);
       filter: brightness(1.05);
-      box-shadow: 0 1px 8px rgba(62, 207, 142, 0.25);
+      box-shadow: 0 1px 8px var(--forge-shadow-hover);
     }
 
     .btn-outline {
