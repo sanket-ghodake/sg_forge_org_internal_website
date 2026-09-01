@@ -11,7 +11,7 @@ import {
   getScopedHierarchy,
   isManagerOf,
 } from '@forge/sdk';
-import { getAstryxHeaderHtml, getAstryxStyles } from '@forge/ui';
+import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript } from '@forge/ui';
 import type { AuthUser, ScopedHierarchyResponse } from '@forge/types';
 
 const LOG_DIR = join(import.meta.dir, '..', 'logs');
@@ -33,6 +33,7 @@ function renderAppHtml(user?: AuthUser, hierarchy?: ScopedHierarchyResponse | nu
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SG Forge - Expenses Micro-App</title>
+  ${getHeadStateScript({ defaultTheme: 'dark' })}
   <style>
     ${getAstryxStyles()}
     .hierarchy-pill {
@@ -54,14 +55,14 @@ function renderAppHtml(user?: AuthUser, hierarchy?: ScopedHierarchyResponse | nu
     <div class="astryx-card" style="margin-bottom: 1.5rem;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
         <h1 style="font-size: 1.5rem; color: var(--forge-text-main); margin: 0;">💳 Expense Approval Engine</h1>
-        <span style="font-size: 0.8rem; background: rgba(62, 207, 142, 0.15); color: var(--forge-primary); border: 1px solid var(--forge-primary); border-radius: 9999px; padding: 0.25rem 0.6rem; font-weight: 600;">🛡️ ${userRole}</span>
+        <span style="font-size: 0.8rem; background: var(--forge-success-bg); color: var(--forge-primary); border: 1px solid var(--forge-primary); border-radius: 9999px; padding: 0.25rem 0.6rem; font-weight: 600;">🛡️ ${userRole}</span>
       </div>
       <p style="color: var(--forge-text-muted); margin-bottom: 1.25rem;">
         Authenticated session verified for <strong>${userName}</strong> (<code>${userEmail}</code>) &bull; Department: <strong style="color: var(--forge-text-main);">${dept}</strong>
       </p>
 
       <!-- Scoped Hierarchy Approval Chain Card -->
-      <div style="background: var(--forge-bg-surface); padding: 1.25rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border); margin-bottom: 1.5rem;">
+      <div style="background: var(--forge-bg-root); padding: 1.25rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border); margin-bottom: 1.5rem;">
         <h3 style="font-size: 0.95rem; color: var(--forge-text-main); margin: 0 0 0.75rem 0;">🏢 Linear Upward Approval Chain</h3>
         <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
           <div class="hierarchy-pill">
@@ -88,7 +89,7 @@ function renderAppHtml(user?: AuthUser, hierarchy?: ScopedHierarchyResponse | nu
       <!-- Direct Reports Approval Queue (If user is a manager) -->
       ${
         reports.length > 0
-          ? `<div style="background: var(--forge-bg-surface); padding: 1.25rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border); margin-bottom: 1.5rem;">
+          ? `<div style="background: var(--forge-bg-root); padding: 1.25rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border); margin-bottom: 1.5rem;">
               <h3 style="font-size: 0.95rem; color: var(--forge-text-main); margin: 0 0 0.5rem 0;">📋 Pending Approvals from Direct Reports (${reports.length})</h3>
               <p style="font-size: 0.8rem; color: var(--forge-text-muted); margin-bottom: 0.75rem;">Employees in your linear reporting line whose expense claims require your review:</p>
               <div style="display: flex; flex-direction: column; gap: 0.5rem;">

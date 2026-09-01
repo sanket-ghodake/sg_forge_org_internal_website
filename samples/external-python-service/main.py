@@ -59,10 +59,10 @@ def index_page(
   <meta charset="UTF-8">
   <title>Python External Service - SG Forge</title>
   <style>
-    body {{ background: #0b0f19; color: #f8fafc; font-family: sans-serif; padding: 2rem; }}
-    .card {{ background: #131b2e; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 1.5rem; max-width: 650px; margin: 0 auto; }}
-    .badge {{ background: rgba(62,207,142,0.15); color: #3ecf8e; border: 1px solid #3ecf8e; border-radius: 9999px; padding: 0.2rem 0.6rem; font-size: 0.8rem; }}
-    .pill {{ background: #0b0f19; border: 1px solid rgba(255,255,255,0.1); padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.85rem; margin-top: 0.5rem; }}
+    body {{ background: #0f0f11; color: #ededed; font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; padding: 2rem; }}
+    .card {{ background: #19191c; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 1.5rem; max-width: 650px; margin: 0 auto; }}
+    .badge {{ background: rgba(62,207,142,0.12); color: #3ecf8e; border: 1px solid #3ecf8e; border-radius: 9999px; padding: 0.2rem 0.6rem; font-size: 0.8rem; font-weight: 600; }}
+    .pill {{ background: #0f0f11; border: 1px solid rgba(255,255,255,0.08); color: #ededed; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.85rem; margin-top: 0.5rem; }}
   </style>
 </head>
 <body>

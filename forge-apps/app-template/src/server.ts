@@ -10,7 +10,7 @@ import {
   createSafeHandler,
   getScopedHierarchy,
 } from '@forge/sdk';
-import { getAstryxHeaderHtml, getAstryxStyles } from '@forge/ui';
+import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript } from '@forge/ui';
 import type { AuthUser, ScopedHierarchyResponse } from '@forge/types';
 
 const LOG_DIR = join(import.meta.dir, '..', 'logs');
@@ -30,6 +30,7 @@ function renderAppHtml(user?: AuthUser, hierarchy?: ScopedHierarchyResponse | nu
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SG Forge - Micro-App Template</title>
+  ${getHeadStateScript({ defaultTheme: 'dark' })}
   <style>
     ${getAstryxStyles()}
   </style>
@@ -40,20 +41,20 @@ function renderAppHtml(user?: AuthUser, hierarchy?: ScopedHierarchyResponse | nu
     <div class="astryx-card" style="margin-bottom: 1.5rem;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
         <h1 style="font-size: 1.5rem; color: var(--forge-text-main); margin: 0;">🚀 Forge App Template</h1>
-        <span style="font-size: 0.8rem; background: rgba(62, 207, 142, 0.15); color: var(--forge-primary); border: 1px solid var(--forge-primary); border-radius: 9999px; padding: 0.25rem 0.6rem; font-weight: 600;">🛡️ ${userRole}</span>
+        <span style="font-size: 0.8rem; background: var(--forge-success-bg); color: var(--forge-primary); border: 1px solid var(--forge-primary); border-radius: 9999px; padding: 0.25rem 0.6rem; font-weight: 600;">🛡️ ${userRole}</span>
       </div>
       <p style="color: var(--forge-text-muted); margin-bottom: 1.25rem;">
         Verified session for <strong>${userName}</strong> (<code>${userEmail}</code>) &bull; Department: <strong style="color: var(--forge-text-main);">${dept}</strong>
       </p>
 
-      <div style="background: var(--forge-bg-surface); padding: 1.25rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border); margin-bottom: 1.5rem;">
+      <div style="background: var(--forge-bg-root); padding: 1.25rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border); margin-bottom: 1.5rem;">
         <h3 style="font-size: 0.95rem; color: var(--forge-text-main); margin: 0 0 0.5rem 0;">🏢 Organization Hierarchy</h3>
         <p style="font-size: 0.85rem; color: var(--forge-text-muted); margin: 0;">
           Direct Manager / Approver: <strong style="color: var(--forge-primary);">${approver?.displayName || 'Executive'}</strong>
         </p>
       </div>
 
-      <div style="background: var(--forge-bg-elevated); padding: 0.75rem 1rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border); margin-bottom: 1.5rem;">
+      <div style="background: var(--forge-bg-root); padding: 0.75rem 1rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border); margin-bottom: 1.5rem;">
         <span style="font-size: 0.82rem; color: var(--forge-primary);">Database: <code>template_turso.db</code> (Isolated libSQL Instance)</span>
       </div>
 

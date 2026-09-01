@@ -5,7 +5,7 @@
 
 import { join } from 'node:path';
 import { authGuard, createLogger, createSafeHandler } from '@forge/sdk';
-import { getAstryxHeaderHtml, getAstryxStyles } from '@forge/ui';
+import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript } from '@forge/ui';
 import type { AuthUser } from '@forge/types';
 import { billingDb } from './db';
 
@@ -36,6 +36,7 @@ function renderAppHtml(user?: AuthUser, invoices: Invoice[] = []): string {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SG Forge - Billing Micro-App</title>
+  ${getHeadStateScript({ defaultTheme: 'dark' })}
   <style>
     ${getAstryxStyles()}
     .invoice-table {
@@ -64,7 +65,7 @@ function renderAppHtml(user?: AuthUser, invoices: Invoice[] = []): string {
     <div class="astryx-card" style="margin-bottom: 1.5rem;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
         <h1 style="font-size: 1.5rem; color: var(--forge-text-main); margin: 0;">🧾 Invoicing & Billing Service</h1>
-        <span style="font-size: 0.8rem; background: rgba(62, 207, 142, 0.15); color: var(--forge-primary); border: 1px solid var(--forge-primary); border-radius: 9999px; padding: 0.25rem 0.6rem; font-weight: 600;">🛡️ ${userRole}</span>
+        <span style="font-size: 0.8rem; background: var(--forge-success-bg); color: var(--forge-primary); border: 1px solid var(--forge-primary); border-radius: 9999px; padding: 0.25rem 0.6rem; font-weight: 600;">🛡️ ${userRole}</span>
       </div>
       <p style="color: var(--forge-text-muted); margin-bottom: 1.25rem;">
         High-security financial ledger accessible only by billing administrators. Verified session for <strong>${userName}</strong> (<code>${userEmail}</code>).
@@ -72,18 +73,18 @@ function renderAppHtml(user?: AuthUser, invoices: Invoice[] = []): string {
 
       <!-- Ledger Summary Stats -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-        <div style="background: var(--forge-bg-surface); padding: 1rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border);">
+        <div style="background: var(--forge-bg-root); padding: 1rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border);">
           <span style="font-size: 0.75rem; color: var(--forge-text-muted);">Active Ledger Total</span>
           <div style="font-size: 1.35rem; font-weight: 700; color: var(--forge-primary); margin-top: 0.25rem;">$${totalAmount.toLocaleString()}</div>
         </div>
-        <div style="background: var(--forge-bg-surface); padding: 1rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border);">
+        <div style="background: var(--forge-bg-root); padding: 1rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border);">
           <span style="font-size: 0.75rem; color: var(--forge-text-muted);">Total Invoices</span>
           <div style="font-size: 1.35rem; font-weight: 700; color: var(--forge-text-main); margin-top: 0.25rem;">${invoices.length}</div>
         </div>
       </div>
 
       <!-- Invoices Ledger Table -->
-      <div style="background: var(--forge-bg-surface); padding: 1.25rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border); margin-bottom: 1.5rem; overflow-x: auto;">
+      <div style="background: var(--forge-bg-root); padding: 1.25rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border); margin-bottom: 1.5rem; overflow-x: auto;">
         <h3 style="font-size: 0.95rem; color: var(--forge-text-main); margin: 0 0 0.5rem 0;">📋 Ledger Records (Dedicated Turso DB)</h3>
         <table class="invoice-table">
           <thead>
@@ -115,7 +116,7 @@ function renderAppHtml(user?: AuthUser, invoices: Invoice[] = []): string {
         </table>
       </div>
 
-      <div style="background: var(--forge-bg-elevated); padding: 0.75rem 1rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border); margin-bottom: 1.5rem;">
+      <div style="background: var(--forge-bg-root); padding: 0.75rem 1rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border); margin-bottom: 1.5rem;">
         <span style="font-size: 0.82rem; color: var(--forge-primary);">Database: <code>billing_turso.db</code> (Isolated libSQL Instance)</span>
       </div>
 

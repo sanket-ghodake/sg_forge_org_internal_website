@@ -6,7 +6,7 @@
  */
 
 import { createLogger, createSafeHandler, loadServiceRegistry, type ServiceEntry } from '@forge/sdk';
-import { getAstryxHeaderHtml, getAstryxStyles, renderAstryxErrorHtml } from '@forge/ui';
+import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript, renderAstryxErrorHtml } from '@forge/ui';
 
 const logger = createLogger('landing-hub');
 const PORT = Number(process.env.LANDING_PORT || process.env.PORT || 3000);
@@ -29,6 +29,7 @@ function renderHtml(): string {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SG Forge - Modular Corporate Portal & Micro-App Engine</title>
+  ${getHeadStateScript({ defaultTheme: 'dark' })}
   <style>
     ${getAstryxStyles()}
   </style>

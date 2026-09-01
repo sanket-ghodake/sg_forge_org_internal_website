@@ -5,7 +5,7 @@
 
 import { join } from 'node:path';
 import { createLogger, createSafeHandler } from '@forge/sdk';
-import { getAstryxHeaderHtml, getAstryxStyles } from '@forge/ui';
+import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript } from '@forge/ui';
 import { telemetryDb } from './db';
 
 const LOG_DIR = join(import.meta.dir, '..', 'logs');
@@ -19,6 +19,7 @@ function renderAppHtml(): string {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SG Forge - Telemetry Micro-App (Public)</title>
+  ${getHeadStateScript({ defaultTheme: 'dark' })}
   <style>
     ${getAstryxStyles()}
     .metric-grid {
@@ -28,7 +29,7 @@ function renderAppHtml(): string {
       margin-bottom: 1.5rem;
     }
     .metric-box {
-      background: var(--forge-bg-surface);
+      background: var(--forge-bg-root);
       padding: 1.25rem;
       border-radius: var(--forge-radius);
       border: 1px solid var(--forge-border);
@@ -64,7 +65,7 @@ function renderAppHtml(): string {
         <h1 style="font-size: 1.5rem; color: var(--forge-text-main); margin: 0; display: flex; align-items: center;">
           <span class="live-dot"></span> 📡 Live Telemetry Dashboard
         </h1>
-        <span style="font-size: 0.8rem; background: rgba(62, 207, 142, 0.15); color: var(--forge-primary); border: 1px solid var(--forge-primary); border-radius: 9999px; padding: 0.25rem 0.6rem; font-weight: 600;">🌐 PUBLIC ACCESS</span>
+        <span style="font-size: 0.8rem; background: var(--forge-success-bg); color: var(--forge-primary); border: 1px solid var(--forge-primary); border-radius: 9999px; padding: 0.25rem 0.6rem; font-weight: 600;">🌐 PUBLIC ACCESS</span>
       </div>
       <p style="color: var(--forge-text-muted); margin-bottom: 1.25rem;">
         Public observability micro-app. Streaming real-time telemetry metrics via Server-Sent Events (SSE) from dedicated Turso DB.
@@ -86,7 +87,7 @@ function renderAppHtml(): string {
         </div>
       </div>
 
-      <div style="background: var(--forge-bg-elevated); padding: 0.75rem 1rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border); margin-bottom: 1.5rem;">
+      <div style="background: var(--forge-bg-root); padding: 0.75rem 1rem; border-radius: var(--forge-radius); border: 1px solid var(--forge-border); margin-bottom: 1.5rem;">
         <span style="font-size: 0.82rem; color: var(--forge-primary);">Database: <code>telemetry_turso.db</code> (Isolated libSQL Instance)</span>
       </div>
 
