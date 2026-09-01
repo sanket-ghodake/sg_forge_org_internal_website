@@ -398,3 +398,5 @@
 2026-09-02 03:51 | Audit and verify Forge micro-apps catalog coverage and operational correctness
 2026-09-02 03:58 | Update root and all microservice READMEs with comprehensive toolchain code metrics and architecture tables
 2026-09-02 03:58 | [679cee7] docs: update root and all microservice readmes with toolchain code metrics matrices (+3578, -856)
+2026-09-02 04:15 | feat(devcenter): implement Forge App disabling with portal isolation and fix SSE log stream keepalive
+2026-09-02 04:17 | [b6ab999] feat(devcenter): add forge app disabling with portal isolation and fix sse log stream keepalive (+314, -86)

@@ -169,6 +169,7 @@ export function startBillingServer(port: number = PORT) {
       // 🛡️ Zero-Trust Auth & RBAC Guard (Strict Billing Admin Clearance)
       const auth = authGuard(req, {
         appName: 'Invoicing & Billing Service',
+        appId: 'billing',
         requiredRoles: ['roles/billing.admin', 'roles/super_admin'],
       });
 

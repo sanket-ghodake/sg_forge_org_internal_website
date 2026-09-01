@@ -66,6 +66,7 @@ export interface AuthGuardOptions {
   requiredPermissions?: string[];
   publicPaths?: string[];
   appName?: string;
+  appId?: string;
 }
 
 export interface OrgNodeSummary {

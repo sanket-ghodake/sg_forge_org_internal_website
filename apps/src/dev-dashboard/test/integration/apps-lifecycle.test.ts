@@ -132,7 +132,47 @@ describe('Integration: Forge Apps Lifecycle & Developer Operations', () => {
     expect(updatedRecord?.storage_quota_mb).toBe(100);
   });
 
-  it('6. POST /api/apps/delete deregisters the micro-app and cleans up', async () => {
+  it('6. POST /api/apps/toggle-status toggles app between disabled and active states', async () => {
+    // Arrange: Toggle to disabled
+    const req1 = new Request('http://localhost:3002/api/apps/toggle-status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: testAppId }),
+    });
+    const url1 = new URL(req1.url);
+
+    // Act 1
+    const res1 = await handleApiRequest(req1, url1);
+    expect(res1?.status).toBe(200);
+    const data1 = await res1?.json();
+
+    // Assert 1: App is now disabled
+    expect(data1.success).toBe(true);
+    expect(data1.status).toBe('disabled');
+    const disabledRecord = platformDb.getAppById(testAppId);
+    expect(disabledRecord?.status).toBe('disabled');
+
+    // Arrange: Toggle back to active
+    const req2 = new Request('http://localhost:3002/api/apps/toggle-status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: testAppId }),
+    });
+    const url2 = new URL(req2.url);
+
+    // Act 2
+    const res2 = await handleApiRequest(req2, url2);
+    expect(res2?.status).toBe(200);
+    const data2 = await res2?.json();
+
+    // Assert 2: App is restored to active
+    expect(data2.success).toBe(true);
+    expect(data2.status).toBe('active');
+    const activeRecord = platformDb.getAppById(testAppId);
+    expect(activeRecord?.status).toBe('active');
+  });
+
+  it('7. POST /api/apps/delete deregisters the micro-app and cleans up', async () => {
     // Arrange
     const req = new Request('http://localhost:3002/api/apps/delete', {
       method: 'POST',

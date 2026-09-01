@@ -81,15 +81,17 @@ export function getAppsDashboardScripts(): string {
         // 2. Update Filter Counts
         const cAll = document.getElementById('app-count-all');
         const cRun = document.getElementById('app-count-running');
+        const cDis = document.getElementById('app-count-disabled');
         const cDeg = document.getElementById('app-count-degraded');
         const cStop = document.getElementById('app-count-stopped');
         const cPoly = document.getElementById('app-count-polyglot');
         const cCore = document.getElementById('app-count-core');
 
         if (cAll) cAll.textContent = _cachedAppsList.length;
-        if (cRun) cRun.textContent = _cachedAppsList.filter(a => a.healthStatus === 'RUNNING').length;
+        if (cRun) cRun.textContent = _cachedAppsList.filter(a => a.healthStatus === 'RUNNING' && a.status !== 'disabled').length;
+        if (cDis) cDis.textContent = _cachedAppsList.filter(a => a.status === 'disabled').length;
         if (cDeg) cDeg.textContent = _cachedAppsList.filter(a => a.healthStatus === 'DEGRADED').length;
-        if (cStop) cStop.textContent = _cachedAppsList.filter(a => a.healthStatus === 'STOPPED').length;
+        if (cStop) cStop.textContent = _cachedAppsList.filter(a => a.healthStatus === 'STOPPED' && a.status !== 'disabled').length;
         if (cPoly) cPoly.textContent = _cachedAppsList.filter(a => a.category && a.category.toLowerCase().includes('polyglot')).length;
         if (cCore) cCore.textContent = _cachedAppsList.filter(a => a.category && a.category.toLowerCase().includes('core')).length;
 
@@ -129,18 +131,47 @@ export function getAppsDashboardScripts(): string {
     function getFilteredApps() {
       const search = (document.getElementById('apps-search-input')?.value || '').toLowerCase().trim();
       return _cachedAppsList.filter(a => {
-        if (_activeAppFilter === 'running' && a.healthStatus !== 'RUNNING') return false;
+        if (_activeAppFilter === 'disabled' && a.status !== 'disabled') return false;
+        if (_activeAppFilter === 'running' && (a.healthStatus !== 'RUNNING' || a.status === 'disabled')) return false;
         if (_activeAppFilter === 'degraded' && a.healthStatus !== 'DEGRADED') return false;
-        if (_activeAppFilter === 'stopped' && a.healthStatus !== 'STOPPED') return false;
+        if (_activeAppFilter === 'stopped' && (a.healthStatus !== 'STOPPED' || a.status === 'disabled')) return false;
         if (_activeAppFilter === 'polyglot' && !(a.category && a.category.toLowerCase().includes('polyglot'))) return false;
         if (_activeAppFilter === 'core' && !(a.category && a.category.toLowerCase().includes('core'))) return false;
 
         if (search) {
-          const matchStr = (a.name + ' ' + a.id + ' ' + a.port + ' ' + a.ingress_path + ' ' + a.category + ' ' + a.access_role).toLowerCase();
+          const matchStr = (a.name + ' ' + a.id + ' ' + a.port + ' ' + a.ingress_path + ' ' + a.category + ' ' + a.access_role + ' ' + (a.status || '')).toLowerCase();
           if (!matchStr.includes(search)) return false;
         }
         return true;
       });
+    }
+
+    async function toggleAppStatus(id) {
+      try {
+        const res = await fetch(apiBase + '/api/apps/toggle-status', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id })
+        }).then(r => r.json());
+
+        if (res.error) {
+          if (typeof window.showAstryxToast === 'function') {
+            window.showAstryxToast('error', 'Error: ' + res.error);
+          }
+        } else {
+          if (typeof window.showAstryxToast === 'function') {
+            window.showAstryxToast('success', res.message || 'Status updated');
+          }
+          await loadApps();
+          if (_inspectedAppId === id) {
+            openAppInspectorDrawer(id);
+          }
+        }
+      } catch (err) {
+        if (typeof window.showAstryxToast === 'function') {
+          window.showAstryxToast('error', 'Failed to update status: ' + err);
+        }
+      }
     }
 
     function renderAppsView() {
@@ -155,10 +186,13 @@ export function getAppsDashboardScripts(): string {
         }
 
         gridEl.innerHTML = filtered.map(a => {
+          const isDisabled = a.status === 'disabled';
           const isRunning = a.healthStatus === 'RUNNING';
           const isDegraded = a.healthStatus === 'DEGRADED';
           const icon = getAppIcon(a.id);
-          const statusBadge = isRunning
+          const statusBadge = isDisabled
+            ? '<span class="astryx-badge badge-disabled"><span class="badge-dot"></span> DISABLED</span>'
+            : isRunning
             ? '<span class="astryx-badge badge-running"><span class="badge-dot"></span> RUNNING</span>'
             : isDegraded
             ? '<span class="astryx-badge badge-degraded"><span class="badge-dot"></span> DEGRADED</span>'
@@ -169,7 +203,7 @@ export function getAppsDashboardScripts(): string {
           const targetUrl = getAppTargetUrl(a);
 
           return \`
-            <div class="app-card \${isRunning ? '' : 'card-stopped'}">
+            <div class="app-card \${isDisabled ? 'card-disabled' : isRunning ? '' : 'card-stopped'}">
               <div>
                 <div class="app-card-top">
                   <div class="app-card-title-group">
@@ -185,6 +219,7 @@ export function getAppsDashboardScripts(): string {
                 <div class="app-card-pills">
                   <span class="astryx-micro-pill">\${a.category}</span>
                   <span class="astryx-micro-pill" style="border-color: rgba(62, 207, 142, 0.3);">ROLE: \${a.access_role}</span>
+                  \${isDisabled ? '<span class="astryx-micro-pill" style="border-color: var(--forge-border-medium); color: var(--forge-accent);">HIDDEN FROM PORTAL</span>' : ''}
                 </div>
 
                 <div class="app-card-meta">
@@ -210,7 +245,7 @@ export function getAppsDashboardScripts(): string {
               <div class="app-card-actions">
                 <div class="app-card-btn-group">
                   <button class="astryx-btn btn-outline" style="padding:0.22rem 0.48rem; font-size:0.72rem;" onclick="openAppInspectorDrawer('\${a.id}')" title="Inspect Micro-App">🔍 Details</button>
-                  <button class="astryx-btn btn-outline" style="padding:0.22rem 0.48rem; font-size:0.72rem;" onclick="openAppSandboxModal('\${a.id}', '\${a.name}', '\${targetUrl}')" title="Test Sandboxed Preview">🖥️ Preview</button>
+                  <button class="astryx-btn btn-outline \${isDisabled ? 'btn-toggle-enable' : 'btn-toggle-disable'}" style="padding:0.22rem 0.48rem; font-size:0.72rem;" onclick="event.stopPropagation(); toggleAppStatus('\${a.id}')" title="\${isDisabled ? 'Enable App for Employees' : 'Disable App (Hide from Employees)'}">\${isDisabled ? '✅ Enable' : '🚫 Disable'}</button>
                   <button class="astryx-btn btn-outline" style="padding:0.22rem 0.48rem; font-size:0.72rem;" onclick="jumpToDbStudio('\${dbName}')" title="Open in Database Studio">🗄️ DB</button>
                   <button class="astryx-btn btn-outline" style="padding:0.22rem 0.48rem; font-size:0.72rem;" onclick="jumpToLogs('\${a.id}')" title="Open App Logs">📜 Logs</button>
                   <button class="astryx-btn btn-outline" style="padding:0.22rem 0.48rem; font-size:0.72rem;" onclick="openEditAppModal('\${a.id}')" title="Edit App Settings">⚙️</button>
@@ -228,16 +263,19 @@ export function getAppsDashboardScripts(): string {
         }
 
         tbodyEl.innerHTML = filtered.map(a => {
+          const isDisabled = a.status === 'disabled';
           const isRunning = a.healthStatus === 'RUNNING';
           const icon = getAppIcon(a.id);
-          const sBadge = isRunning
+          const sBadge = isDisabled
+            ? '<span class="astryx-badge badge-disabled"><span class="badge-dot"></span> DISABLED</span>'
+            : isRunning
             ? '<span class="astryx-badge badge-running"><span class="badge-dot"></span> RUNNING</span>'
             : '<span class="astryx-badge badge-stopped">STOPPED</span>';
           const dbName = a.db_file_path ? a.db_file_path.split('/').pop() : a.id + '.db';
           const targetUrl = getAppTargetUrl(a);
 
           return \`
-            <tr style="cursor: pointer;" onclick="openAppInspectorDrawer('\${a.id}')">
+            <tr style="cursor: pointer;" class="\${isDisabled ? 'card-disabled' : ''}" onclick="openAppInspectorDrawer('\${a.id}')">
               <td>\${sBadge}</td>
               <td>
                 <div style="display:flex; align-items:center; gap:0.5rem;">
@@ -267,6 +305,7 @@ export function getAppsDashboardScripts(): string {
               </td>
               <td style="text-align:right;">
                 <div style="display:inline-flex; gap:0.3rem;" onclick="event.stopPropagation()">
+                  <button class="astryx-btn btn-outline \${isDisabled ? 'btn-toggle-enable' : 'btn-toggle-disable'}" style="padding:0.2rem 0.45rem; font-size:0.72rem;" onclick="toggleAppStatus('\${a.id}')" title="\${isDisabled ? 'Enable' : 'Disable'}">\${isDisabled ? '✅' : '🚫'}</button>
                   <button class="astryx-btn btn-outline" style="padding:0.2rem 0.45rem; font-size:0.72rem;" onclick="openAppSandboxModal('\${a.id}', '\${a.name}', '\${targetUrl}')" title="Preview">🖥️</button>
                   <button class="astryx-btn btn-outline" style="padding:0.2rem 0.45rem; font-size:0.72rem;" onclick="jumpToLogs('\${a.id}')" title="Logs">📜</button>
                   <button class="astryx-btn btn-outline" style="padding:0.2rem 0.45rem; font-size:0.72rem;" onclick="openEditAppModal('\${a.id}')" title="Edit">⚙️</button>

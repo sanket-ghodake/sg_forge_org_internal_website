@@ -138,12 +138,16 @@ class TelemetryEngine {
 
   public registerSSEClient(controller: ReadableStreamDefaultController): void {
     this.sseControllers.add(controller);
-    const initData = JSON.stringify({
-      type: 'init',
-      vitals: this.getSystemVitals(),
-      recentLogs: this.getRecentLogs(50),
-    });
-    controller.enqueue(new TextEncoder().encode(`data: ${initData}\n\n`));
+    try {
+      const initData = JSON.stringify({
+        type: 'init',
+        vitals: this.getSystemVitals(),
+        recentLogs: this.getRecentLogs(50),
+      });
+      controller.enqueue(new TextEncoder().encode(`event: init\ndata: ${initData}\n\n`));
+    } catch {
+      this.sseControllers.delete(controller);
+    }
   }
 
   public removeSSEClient(controller: ReadableStreamDefaultController): void {
@@ -151,10 +155,13 @@ class TelemetryEngine {
   }
 
   public broadcastPing(): void {
-    const pingPayload = new TextEncoder().encode(`: ping ${Date.now()}\n\n`);
+    const now = Date.now();
+    const commentPayload = new TextEncoder().encode(`: ping ${now}\n\n`);
+    const eventPayload = new TextEncoder().encode(`event: ping\ndata: {"timestamp":${now}}\n\n`);
     for (const controller of this.sseControllers) {
       try {
-        controller.enqueue(pingPayload);
+        controller.enqueue(commentPayload);
+        controller.enqueue(eventPayload);
       } catch {
         this.sseControllers.delete(controller);
       }

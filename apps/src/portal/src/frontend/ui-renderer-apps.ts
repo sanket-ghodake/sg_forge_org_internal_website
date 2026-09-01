@@ -3,14 +3,15 @@
  * Human-Centric, Clean & Simple: Strictly Forge Micro-Apps (Expenses, Billing, Telemetry).
  */
 
+import { isAppDisabled } from '@forge/sdk';
 import { astryxIcons } from '@forge/ui';
 import { REGISTERED_PORTAL_APPS, MARKETPLACE_APPS } from './ui-apps-data';
 
 export * from './ui-apps-data';
 
 export function renderAppsView(isAdmin: boolean = false): string {
-  const activeApps = REGISTERED_PORTAL_APPS;
-  const marketplaceApps = MARKETPLACE_APPS;
+  const activeApps = REGISTERED_PORTAL_APPS.filter((a) => !isAppDisabled(a.id));
+  const marketplaceApps = MARKETPLACE_APPS.filter((a) => !isAppDisabled(a.id));
 
   return `
     <div id="view-apps" class="portal-page-view">

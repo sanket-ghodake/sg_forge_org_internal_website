@@ -13,7 +13,7 @@ const PORT = Number(process.env.LANDING_PORT || process.env.PORT || 3000);
 
 function renderHtml(): string {
   const brand = loadBrandConfig();
-  const services = loadServiceRegistry();
+  const services = loadServiceRegistry({ includeDisabled: false });
 
   // Group services by category
   const categories: Record<string, ServiceEntry[]> = {};

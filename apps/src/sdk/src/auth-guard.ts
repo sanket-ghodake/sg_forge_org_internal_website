@@ -9,6 +9,7 @@
 import { createHash, createPrivateKey, createPublicKey, verify } from 'node:crypto';
 import { renderAstryxErrorHtml } from '@forge/ui';
 import type { AuthGuardOptions, AuthGuardResult, AuthUser } from '@forge/types';
+import { isAppDisabled } from './registry';
 
 let cachedPublicKeyPem: string | null = null;
 let cachedSecret: string | null = null;
@@ -56,6 +57,20 @@ export function verifySessionToken(token: string): { valid: boolean; payload?: a
   }
 }
 
+function renderDisabledHtml(appName: string, userEmail?: string): string {
+  return renderAstryxErrorHtml({
+    statusCode: 503,
+    appName,
+    userEmail: userEmail || 'user@forge.internal',
+    title: 'Application Disabled',
+    message: `This micro-app has been temporarily disabled by an administrator. Please access other tools via the Workspace Portal.`,
+    primaryActionText: '&larr; Return to Workspace Portal',
+    primaryActionHref: '/portal',
+    secondaryActionText: 'Developer Console &rarr;',
+    secondaryActionHref: '/devcenter',
+  });
+}
+
 function renderForbiddenHtml(appName: string, userEmail: string): string {
   return renderAstryxErrorHtml({
     statusCode: 403,
@@ -78,7 +93,19 @@ export function authGuard(req: Request, options: AuthGuardOptions = {}): AuthGua
     return { authenticated: true };
   }
 
-  // 2. Explicit public paths bypass
+  // 2. Check if micro-app is disabled by administrator
+  if (options.appId && isAppDisabled(options.appId)) {
+    const appName = options.appName || options.appId;
+    return {
+      authenticated: false,
+      response: new Response(renderDisabledHtml(appName), {
+        status: 503,
+        headers: { 'Content-Type': 'text/html; charset=utf-8' },
+      }),
+    };
+  }
+
+  // 3. Explicit public paths bypass
   if (options.publicPaths && options.publicPaths.some((p) => url.pathname.startsWith(p))) {
     return { authenticated: true };
   }

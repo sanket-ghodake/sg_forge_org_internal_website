@@ -45,6 +45,7 @@ export function getAppsTabHtml(): string {
             <div class="filter-chip-group" id="apps-filter-chips">
               <button class="filter-chip active" data-filter="all" onclick="setAppFilter('all')">All (<span id="app-count-all">0</span>)</button>
               <button class="filter-chip" data-filter="running" onclick="setAppFilter('running')">Running (<span id="app-count-running">0</span>)</button>
+              <button class="filter-chip" data-filter="disabled" onclick="setAppFilter('disabled')">Disabled (<span id="app-count-disabled">0</span>)</button>
               <button class="filter-chip" data-filter="degraded" onclick="setAppFilter('degraded')">Degraded (<span id="app-count-degraded">0</span>)</button>
               <button class="filter-chip" data-filter="stopped" onclick="setAppFilter('stopped')">Stopped (<span id="app-count-stopped">0</span>)</button>
               <button class="filter-chip" data-filter="polyglot" onclick="setAppFilter('polyglot')">Polyglot Apps (<span id="app-count-polyglot">0</span>)</button>
@@ -320,7 +321,8 @@ export function getAppsTabHtml(): string {
             <div class="form-group">
               <label class="form-label" for="edit-app-status">Operational Status</label>
               <select id="edit-app-status" class="form-input">
-                <option value="active">Active (Serving Traffic)</option>
+                <option value="active">Active (Serving Traffic & Visible in Portal)</option>
+                <option value="disabled">Disabled (Hidden from Portal & Users, Monitored Here)</option>
                 <option value="maintenance">Maintenance Mode</option>
                 <option value="inactive">Inactive / Paused</option>
               </select>

@@ -19,6 +19,32 @@ export interface ServiceEntry {
   isExternal: boolean;
   isPublic: boolean;
   healthUrl: string;
+  status?: string;
+}
+
+export interface LoadRegistryOptions {
+  envPath?: string;
+  includeDisabled?: boolean;
+}
+
+import { Database } from 'bun:sqlite';
+import { resolveCanonicalDbPath } from './database';
+
+export function getAppStatus(appId: string): string {
+  try {
+    const dbPath = resolveCanonicalDbPath('platform_core.db');
+    if (!existsSync(dbPath)) return 'active';
+    const db = new Database(dbPath, { readonly: true });
+    const row = db.query('SELECT status FROM apps_registry WHERE id = ?').get(appId.toLowerCase()) as { status?: string } | null;
+    db.close();
+    return row?.status || 'active';
+  } catch {
+    return 'active';
+  }
+}
+
+export function isAppDisabled(appId: string): boolean {
+  return getAppStatus(appId) === 'disabled';
 }
 
 function findEnvPath(explicitPath?: string): string | null {
@@ -39,7 +65,9 @@ function findEnvPath(explicitPath?: string): string | null {
   return exampleFallback;
 }
 
-export function loadServiceRegistry(envPath?: string): ServiceEntry[] {
+export function loadServiceRegistry(options?: string | LoadRegistryOptions): ServiceEntry[] {
+  const envPath = typeof options === 'string' ? options : options?.envPath;
+  const includeDisabled = typeof options === 'object' ? options.includeDisabled ?? true : true;
   const resolvedEnvPath = findEnvPath(envPath);
   const envMap: Record<string, string> = { ...(process.env as Record<string, string>) };
 
@@ -79,6 +107,7 @@ export function loadServiceRegistry(envPath?: string): ServiceEntry[] {
     isExternal: false,
     isPublic: true,
     healthUrl: '/health',
+    status: 'active',
   });
 
   for (const [key, value] of Object.entries(envMap)) {
@@ -93,6 +122,11 @@ export function loadServiceRegistry(envPath?: string): ServiceEntry[] {
         const category = parts[3] || 'Micro-Apps';
         const role = parts[4] || 'General';
         const isPublic = role.toLowerCase().includes('public');
+        const status = getAppStatus(appId);
+
+        if (!includeDisabled && status === 'disabled') {
+          continue;
+        }
 
         // Dynamically derive container name and upstream URL
         let containerName = parts[5] || appId;
@@ -128,6 +162,7 @@ export function loadServiceRegistry(envPath?: string): ServiceEntry[] {
           isExternal: path !== '/',
           isPublic,
           healthUrl: `${path}/health`,
+          status,
         });
       }
     }

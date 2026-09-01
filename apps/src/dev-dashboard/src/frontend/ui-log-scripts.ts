@@ -44,9 +44,36 @@ export function getLogDashboardScripts(): string {
           updateWatchdogUI('reconnecting', 'Reconnecting...');
           // Auto-reconnect after brief backoff
           if (!isReconnecting) {
-            setTimeout(() => reconnectSSE(), 1500);
+            setTimeout(() => reconnectSSE(), 2000);
           }
         };
+        sseClient.onmessage = () => {
+          lastSseEventTime = Date.now();
+          updateWatchdogUI('live', 'Live Stream');
+        };
+        sseClient.addEventListener('ping', () => {
+          lastSseEventTime = Date.now();
+          updateWatchdogUI('live', 'Live Stream');
+        });
+        sseClient.addEventListener('vitals', () => {
+          lastSseEventTime = Date.now();
+          updateWatchdogUI('live', 'Live Stream');
+        });
+        sseClient.addEventListener('init', e => {
+          lastSseEventTime = Date.now();
+          updateWatchdogUI('live', 'Live Stream');
+          try {
+            const data = JSON.parse(e.data);
+            if (data && data.recentLogs && Array.isArray(data.recentLogs)) {
+              for (const log of data.recentLogs) {
+                if (!rawLogHistory.some(r => r.id === log.id)) {
+                  rawLogHistory.push(log);
+                }
+              }
+              if (rawLogHistory.length > 500) rawLogHistory.splice(0, rawLogHistory.length - 500);
+            }
+          } catch (err) {}
+        });
         sseClient.addEventListener('log', e => {
           lastSseEventTime = Date.now();
           updateWatchdogUI('live', 'Live Stream');
@@ -68,12 +95,12 @@ export function getLogDashboardScripts(): string {
 
       if (!watchdogTimer) {
         watchdogTimer = setInterval(() => {
-          // If no message/ping received for > 7.5s, auto-heal connection (sleep/wake recovery)
-          if (Date.now() - lastSseEventTime > 7500) {
+          // If no message/ping received for > 20s, auto-heal connection
+          if (Date.now() - lastSseEventTime > 20000) {
             updateWatchdogUI('reconnecting', 'Auto-Healing Stream...');
             reconnectSSE();
           }
-        }, 2500);
+        }, 3000);
       }
     }
 
@@ -83,7 +110,7 @@ export function getLogDashboardScripts(): string {
       lastSseEventTime = Date.now();
       initWatchdogAndSSE();
       loadActiveTabLogs();
-      setTimeout(() => { isReconnecting = false; }, 800);
+      setTimeout(() => { isReconnecting = false; }, 1000);
     }
 
     // 🚀 High-Performance Zero-Hang DOM Log Renderer

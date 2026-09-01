@@ -27,7 +27,7 @@ describe('Tier 1 Unit: Telemetry Stream Resilience & Auto-Recovery', () => {
 
     // Assert: Verifies self-healing auto-reconnect logic and debounce locks
     expect(logScripts).toContain('isReconnecting');
-    expect(logScripts).toContain('Date.now() - lastSseEventTime > 7500');
+    expect(logScripts).toContain('Date.now() - lastSseEventTime > 20000');
     expect(logScripts).toContain('Auto-Healing Stream...');
     expect(logScripts).toContain('function reconnectSSE()');
     expect(logScripts).toContain('loadActiveTabLogs()');

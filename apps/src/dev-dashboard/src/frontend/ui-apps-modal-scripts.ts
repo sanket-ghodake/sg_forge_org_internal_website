@@ -39,13 +39,31 @@ export function getAppsModalScripts(): string {
         const dbName = details.database.path ? details.database.path.split('/').pop() : id + '.db';
         const dbKb = (details.database.sizeBytes / 1024).toFixed(1);
         const targetUrl = getAppTargetUrl(app);
+        const isDisabled = app.status === 'disabled';
 
         bodyEl.innerHTML = \`
+          \${isDisabled ? \`
+            <div class="drawer-card drawer-banner-disabled">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <strong style="color: var(--forge-accent); font-size: 0.85rem;">🚫 Application Disabled</strong>
+                  <div style="font-size: 0.74rem; color: var(--forge-text-muted); margin-top: 0.2rem;">
+                    This micro-app is hidden from the Employee Portal and public users. It remains fully active for developer inspection and monitoring.
+                  </div>
+                </div>
+                <button class="astryx-btn btn-primary" style="padding:0.3rem 0.7rem; font-size:0.75rem; white-space:nowrap;" onclick="toggleAppStatus('\${app.id}')">✅ Enable App</button>
+              </div>
+            </div>
+          \` : ''}
+
           <!-- 1. Health Probe Test -->
           <div class="drawer-card">
             <div class="drawer-card-title">
               <span>🩺 Dual-Probe Health Verification</span>
-              <span class="astryx-badge \${details.health.status === 'RUNNING' ? 'badge-running' : 'badge-stopped'}">\${details.health.status}</span>
+              <div style="display:flex; gap:0.4rem; align-items:center;">
+                \${isDisabled ? '<span class="astryx-badge badge-disabled">DISABLED</span>' : ''}
+                <span class="astryx-badge \${details.health.status === 'RUNNING' ? 'badge-running' : 'badge-stopped'}">\${details.health.status}</span>
+              </div>
             </div>
             <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; margin-bottom:0.65rem;">
               <span>Recorded Latency: <strong style="color:var(--forge-primary);">\${details.health.latencyMs}ms</strong></span>
@@ -75,6 +93,7 @@ export function getAppsModalScripts(): string {
           <div class="drawer-card">
             <div class="drawer-card-title"><span>🛡️ RBAC & Sandbox Containment</span></div>
             <div style="font-size:0.78rem; display:flex; flex-direction:column; gap:0.35rem; color:var(--forge-text-main);">
+              <div><strong>Operational State:</strong> <span class="astryx-micro-pill" style="\${isDisabled ? 'color:var(--forge-accent); border-color:var(--forge-border-medium);' : ''}">\${(app.status || 'active').toUpperCase()}</span></div>
               <div><strong>Allowed Roles:</strong> <span class="astryx-micro-pill">\${app.access_role}</span></div>
               <div><strong>Container Name:</strong> <code>\${app.container_name || 'app-' + app.id}</code></div>
               <div><strong>Runtime Engine:</strong> <code>\${app.runtime_type || 'bun-watch'}</code></div>
@@ -86,6 +105,7 @@ export function getAppsModalScripts(): string {
           <div class="drawer-card">
             <div class="drawer-card-title"><span>⚡ Micro-App Controls</span></div>
             <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+              <button class="astryx-btn btn-outline \${isDisabled ? 'btn-toggle-enable' : 'btn-toggle-disable'}" style="padding:0.35rem 0.7rem; font-size:0.76rem;" onclick="toggleAppStatus('\${app.id}')">\${isDisabled ? '✅ Enable App' : '🚫 Disable App'}</button>
               <button class="astryx-btn btn-outline" style="padding:0.35rem 0.7rem; font-size:0.76rem;" onclick="openAppSandboxModal('\${app.id}', '\${app.name}', '\${targetUrl}')">🖥️ Sandbox Preview</button>
               <button class="astryx-btn btn-outline" style="padding:0.35rem 0.7rem; font-size:0.76rem;" onclick="jumpToLogs('\${app.id}')">📜 Stream Logs</button>
               <button class="astryx-btn btn-outline" style="padding:0.35rem 0.7rem; font-size:0.76rem;" onclick="jumpToIssues('\${app.id}')">🚨 View Issues (\${details.openIssuesCount})</button>

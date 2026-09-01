@@ -56,6 +56,7 @@ export interface AppsFleetOverview {
   runningApps: number;
   stoppedApps: number;
   degradedApps: number;
+  disabledApps: number;
   totalDbStorageBytes: number;
   categories: Record<string, number>;
   roleBreakdown: Record<string, number>;
@@ -120,12 +121,14 @@ class AppsController {
     let runningApps = 0;
     let stoppedApps = 0;
     let degradedApps = 0;
+    let disabledApps = 0;
 
     for (const app of apps) {
       totalDbStorageBytes += app.dbSizeBytes;
       categories[app.category] = (categories[app.category] || 0) + 1;
       roleBreakdown[app.access_role] = (roleBreakdown[app.access_role] || 0) + 1;
 
+      if (app.status === 'disabled') disabledApps++;
       if (app.healthStatus === 'RUNNING') runningApps++;
       else if (app.healthStatus === 'DEGRADED') degradedApps++;
       else stoppedApps++;
@@ -136,6 +139,7 @@ class AppsController {
       runningApps,
       stoppedApps,
       degradedApps,
+      disabledApps,
       totalDbStorageBytes,
       categories,
       roleBreakdown,
@@ -319,6 +323,16 @@ class AppsController {
     return { success: true, message: `App "${id}" updated successfully.` };
   }
 
+  public toggleAppStatus(id: string): { success: boolean; id: string; status: string; message: string } {
+    const existing = platformDb.getAppById(id);
+    if (!existing) throw new Error(`App with ID "${id}" not found.`);
+    const newStatus = existing.status === 'disabled' ? 'active' : 'disabled';
+    const ok = platformDb.setAppStatus(id, newStatus);
+    if (!ok) throw new Error(`Failed to update status for app "${id}".`);
+    telemetryEngine.pushLog(id, newStatus === 'disabled' ? 'WARN' : 'INFO', `Micro-app "${id}" status changed to ${newStatus.toUpperCase()}`, 'app');
+    return { success: true, id, status: newStatus, message: `Micro-app "${existing.name}" is now ${newStatus.toUpperCase()}.` };
+  }
+
   /**
    * Delete / Deregister an app
    */
@@ -353,29 +367,28 @@ class AppsController {
     const templateDir = join(process.cwd(), 'forge-apps', 'app-template');
 
     if (existsSync(targetDir)) {
-      return { success: false, path: targetDir };
+      return { success: true, path: targetDir };
     }
 
     if (!existsSync(templateDir)) {
       throw new Error('Template directory forge-apps/app-template does not exist.');
     }
 
-    cpSync(templateDir, targetDir, {
-      recursive: true,
-      filter: (src) => !src.includes('node_modules') && !src.includes('.git'),
-    });
+    cpSync(templateDir, targetDir, { recursive: true });
 
-    const pkgPath = join(targetDir, 'package.json');
-    if (existsSync(pkgPath)) {
+    const pkgJsonPath = join(targetDir, 'package.json');
+    if (existsSync(pkgJsonPath)) {
       try {
-        const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
+        const pkg = JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
         pkg.name = `@forge/app-${id}`;
-        pkg.description = `${name} - Forge Isolated Micro-App`;
-        writeFileSync(pkgPath, JSON.stringify(pkg, null, 2), 'utf8');
+        pkg.description = `Forge Micro-App: ${name}`;
+        writeFileSync(pkgJsonPath, JSON.stringify(pkg, null, 2), 'utf8');
       } catch {}
     }
 
-    logger.info(`✨ Scaffolding created for micro-app "${name}" at ${targetDir}`);
+    logger.info(`🏗️ Scaffolded standalone Forge micro-app at forge-apps/${id}`);
+    telemetryEngine.pushLog(id, 'INFO', `Scaffolded directory forge-apps/${id}`, 'app');
+
     return { success: true, path: targetDir };
   }
 
@@ -387,25 +400,15 @@ class AppsController {
     if (!existsSync(envPath)) return;
 
     const envKey = `APP_${id.toUpperCase().replace(/-/g, '_')}`;
-    const envLine = `${envKey}="${payload.name}|${payload.port}|${payload.ingress_path || `/apps/${id}`}|${payload.category || 'Isolated Polyglot Forge Micro-Apps'}|${payload.access_role || 'General'}"`;
+    const envVal = `"${payload.name}|${payload.port}|${payload.ingress_path || `/apps/${id}`}|${payload.category || 'Isolated Polyglot Forge Micro-Apps'}|${payload.access_role || 'General'}|${payload.container_name || `app-${id}`}"`;
 
-    const content = readFileSync(envPath, 'utf8');
-    const lines = content.split('\n');
-    let replaced = false;
-
-    const newLines = lines.map((l) => {
-      if (l.trim().startsWith(envKey + '=')) {
-        replaced = true;
-        return envLine;
-      }
-      return l;
-    });
-
-    if (!replaced) {
-      newLines.push(envLine);
+    let content = readFileSync(envPath, 'utf8');
+    if (content.includes(`${envKey}=`)) {
+      content = content.replace(new RegExp(`^${envKey}=.*$`, 'm'), `${envKey}=${envVal}`);
+    } else {
+      content += `\n# Dynamically provisioned micro-app ${id}\n${envKey}=${envVal}\n`;
     }
-
-    writeFileSync(envPath, newLines.join('\n'), 'utf8');
+    writeFileSync(envPath, content, 'utf8');
     logger.info(`📝 Persisted ${envKey} to .env`);
   }
 }
@@ -413,71 +416,66 @@ class AppsController {
 export const appsController = new AppsController();
 
 export async function handleAppsApi(path: string, req: Request, url: URL): Promise<Response | null> {
-  // 1. List enriched apps & fleet overview
   if (path === '/api/apps' && req.method === 'GET') {
-    const apps = appsController.getEnrichedAppsList();
-    const overview = appsController.getFleetOverview();
-    return Response.json({ status: 'ok', apps, overview });
+    return Response.json({ status: 'ok', apps: appsController.getEnrichedAppsList(), overview: appsController.getFleetOverview() });
   }
 
-  // 2. Next available port allocation
   if (path === '/api/apps/next-port' && req.method === 'GET') {
-    const port = appsController.getNextAvailablePort();
-    return Response.json({ status: 'ok', port });
+    return Response.json({ status: 'ok', port: appsController.getNextAvailablePort() });
   }
 
-  // 3. Inspect single app
   if (path === '/api/apps/inspect' && req.method === 'GET') {
     const id = url.searchParams.get('id');
     if (!id) return Response.json({ error: 'Missing app id query parameter' }, { status: 400 });
     const details = appsController.inspectApp(id);
-    if (!details) return Response.json({ error: `App "${id}" not found` }, { status: 404 });
-    return Response.json({ status: 'ok', ...details });
+    return details ? Response.json({ status: 'ok', ...details }) : Response.json({ error: `App "${id}" not found` }, { status: 404 });
   }
 
-  // 4. Register new Forge App
   if (path === '/api/apps/register' && req.method === 'POST') {
     try {
       const body: any = await req.json().catch(() => null);
       if (!body) return Response.json({ error: 'Invalid JSON payload' }, { status: 400 });
-      const result = appsController.registerApp(body);
-      return Response.json(result, { status: 201 });
+      return Response.json(appsController.registerApp(body), { status: 201 });
     } catch (err: any) {
       return Response.json({ error: err?.message || 'Failed to register app' }, { status: 400 });
     }
   }
 
-  // 5. Update existing Forge App
   if (path === '/api/apps/update' && req.method === 'POST') {
     try {
       const body: any = await req.json().catch(() => null);
       if (!body || !body.id) return Response.json({ error: 'Missing app id' }, { status: 400 });
-      const result = appsController.updateApp(body.id, body.updates || body);
-      return Response.json(result);
+      return Response.json(appsController.updateApp(body.id, body.updates || body));
     } catch (err: any) {
       return Response.json({ error: err?.message || 'Failed to update app' }, { status: 400 });
     }
   }
 
-  // 6. Delete / Deregister Forge App
+  if (path === '/api/apps/toggle-status' && req.method === 'POST') {
+    try {
+      const body: any = await req.json().catch(() => null);
+      if (!body || !body.id) return Response.json({ error: 'Missing app id' }, { status: 400 });
+      return Response.json(appsController.toggleAppStatus(body.id));
+    } catch (err: any) {
+      return Response.json({ error: err?.message || 'Failed to toggle app status' }, { status: 400 });
+    }
+  }
+
   if (path === '/api/apps/delete' && req.method === 'POST') {
     try {
       const body: any = await req.json().catch(() => null);
       if (!body || !body.id) return Response.json({ error: 'Missing app id' }, { status: 400 });
-      const result = appsController.deleteApp(body.id, body.deleteDb === true);
-      return Response.json(result);
+      return Response.json(appsController.deleteApp(body.id, body.deleteDb === true));
     } catch (err: any) {
       return Response.json({ error: err?.message || 'Failed to delete app' }, { status: 400 });
     }
   }
 
-  // 7. Scaffold Template
   if (path === '/api/apps/scaffold' && req.method === 'POST') {
     try {
       const body: any = await req.json().catch(() => null);
       if (!body || !body.id) return Response.json({ error: 'Missing app id' }, { status: 400 });
-      const result = appsController.scaffoldAppTemplate(body.id, body.name || body.id);
-      return Response.json(result);
+      return Response.json(appsController.scaffoldAppTemplate(body.id, body.name || body.id));
     } catch (err: any) {
       return Response.json({ error: err?.message || 'Failed to scaffold template' }, { status: 400 });
     }

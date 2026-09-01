@@ -3,10 +3,12 @@
  * Micro-app registry, ingress port management, and department access policy matrix.
  */
 
+import { isAppDisabled } from '@forge/sdk';
 import { astryxIcons } from '@forge/ui';
 import { REGISTERED_PORTAL_APPS } from './ui-renderer-apps';
 
 export function renderAdminAppsView(): string {
+  const visibleApps = REGISTERED_PORTAL_APPS.filter(app => !isAppDisabled(app.id));
   return `
     <div id="view-admin-apps" class="portal-page-view">
       <!-- Header -->
@@ -46,7 +48,7 @@ export function renderAdminAppsView(): string {
             </tr>
           </thead>
           <tbody>
-            ${REGISTERED_PORTAL_APPS.map(app => `
+            ${visibleApps.map(app => `
               <tr data-app-id="${app.id}">
                 <td>
                   <div class="table-user-cell">

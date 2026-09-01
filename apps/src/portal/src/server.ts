@@ -4,7 +4,7 @@
  * Integrated with Central Auth Microservice & ASVS 5.0 Authentication Gate.
  */
 
-import { authGuard, createLogger, createSafeHandler, handleBrandAssetRequest } from '@forge/sdk';
+import { authGuard, createLogger, createSafeHandler, handleBrandAssetRequest, isAppDisabled } from '@forge/sdk';
 import { renderPortalHtml, type HeaderUserContext, REGISTERED_PORTAL_APPS, ADMIN_ROSTER_MEMBERS } from './frontend';
 import { getOrgTree } from './backend/org-tree-service';
 import {
@@ -67,7 +67,8 @@ export function startPortalServer(port: number = PORT) {
     }
 
     if (url.pathname === '/api/v1/portal/apps' || url.pathname === '/portal/api/v1/portal/apps') {
-      return Response.json({ ok: true, data: REGISTERED_PORTAL_APPS });
+      const activeApps = REGISTERED_PORTAL_APPS.filter((a) => !isAppDisabled(a.id));
+      return Response.json({ ok: true, data: activeApps });
     }
 
     if (url.pathname === '/api/v1/portal/members' || url.pathname === '/portal/api/v1/portal/members') {

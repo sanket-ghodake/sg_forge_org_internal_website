@@ -4,7 +4,7 @@
  */
 
 import { join } from 'node:path';
-import { createLogger, createSafeHandler } from '@forge/sdk';
+import { authGuard, createLogger, createSafeHandler } from '@forge/sdk';
 import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript } from '@forge/ui';
 import { telemetryDb } from './db';
 
@@ -158,6 +158,17 @@ export function startTelemetryServer(port: number = PORT) {
         const body: any = await req.json().catch(() => ({}));
         logger.logBrowserEvent(body.severity || 'INFO', body.message || 'Browser event', body);
         return Response.json({ status: 'ok' });
+      }
+
+      // 🛡️ Zero-Trust Auth Guard (Public app, but subject to admin disablement)
+      const auth = authGuard(req, {
+        appName: 'Live Telemetry Dashboard',
+        appId: 'telemetry',
+        publicPaths: ['/'],
+      });
+
+      if (!auth.authenticated) {
+        return auth.response!;
       }
 
       return new Response(renderAppHtml(), {

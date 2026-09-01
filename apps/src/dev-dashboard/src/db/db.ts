@@ -252,6 +252,15 @@ class PlatformDatabaseManager {
     return (res as any).changes > 0;
   }
 
+  public setAppStatus(id: string, status: string): boolean {
+    const existing = this.getAppById(id);
+    if (!existing) return false;
+    const now = Math.floor(Date.now() / 1000);
+    const res = this.db.run('UPDATE apps_registry SET status = ?, updated_at = ? WHERE id = ?', [status, now, id]);
+    this.logAudit('developer', status === 'disabled' ? 'app_disable' : 'app_enable', id, JSON.stringify({ previousStatus: existing.status, newStatus: status }), 'success');
+    return (res as any).changes > 0;
+  }
+
   public logAudit(actorId: string, actionType: string, targetService: string, payload: string | null, status: string): void {
     const id = `audit-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
     const now = Math.floor(Date.now() / 1000);

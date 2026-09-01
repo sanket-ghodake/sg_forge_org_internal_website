@@ -268,8 +268,13 @@ export function getDashboardStyles(): string {
     /* Status Badges */
     .badge-running { background: var(--forge-success-bg); color: var(--forge-success); border: 1px solid var(--forge-success); font-weight: 700; }
     .badge-stopped { background: var(--forge-bg-elevated); color: var(--forge-text-muted); border: 1px solid var(--forge-border-medium); font-weight: 700; }
+    .badge-disabled { background: var(--forge-bg-elevated); color: var(--forge-text-muted); border: 1px solid var(--forge-border-medium); font-weight: 700; }
     .badge-degraded { background: var(--forge-bg-elevated); color: var(--forge-accent); border: 1px solid var(--forge-accent); font-weight: 700; }
     .badge-starting { background: var(--forge-bg-elevated); color: var(--forge-primary); border: 1px solid var(--forge-primary); font-weight: 700; }
+    .card-disabled { opacity: 0.82; border-color: var(--forge-border-medium); }
+    .drawer-banner-disabled { border-left: 3px solid var(--forge-accent); background: var(--forge-bg-elevated); }
+    .btn-toggle-disable { color: var(--forge-accent); border-color: var(--forge-border-medium); }
+    .btn-toggle-enable { color: var(--forge-primary); border-color: var(--forge-primary); }
 
     .help-btn {
       display: inline-flex; align-items: center; justify-content: center;

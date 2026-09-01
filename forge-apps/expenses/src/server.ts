@@ -164,6 +164,7 @@ export function startExpensesServer(port: number = PORT) {
       // 🛡️ Zero-Trust Auth Guard (Requires Employee or Admin role)
       const auth = authGuard(req, {
         appName: 'Expense Approval Engine',
+        appId: 'expenses',
         requiredRoles: ['roles/employee', 'roles/super_admin'],
       });
 
