@@ -150,20 +150,8 @@ case "$CMD" in
         ;;
 
     create-app)
-        APP_NAME="$2"
-        if [ -z "$APP_NAME" ]; then
-            echo "❌ Please specify an app name: ./run.sh create-app <name>"
-            exit 1
-        fi
-        APP_SLUG=$(echo "$APP_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
-        TARGET_DIR="$REPO_ROOT/forge-apps/$APP_SLUG"
-        if [ -d "$TARGET_DIR" ]; then
-            echo "❌ App directory already exists: $TARGET_DIR"
-            exit 1
-        fi
-        echo "🧩 Scaffolding Forge App '$APP_NAME' at forge-apps/$APP_SLUG..."
-        cp -r "$REPO_ROOT/forge-apps/app-template" "$TARGET_DIR"
-        echo "✅ Created forge-apps/$APP_SLUG with colocated docker/Dockerfile successfully!"
+        shift
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/create-app.ts" "$@"
         ;;
 
     test)

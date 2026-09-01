@@ -296,3 +296,8 @@
 2026-09-01 10:01 | Fixed Dev Dashboard docker mount to apps/data so all microservice databases are available in the dropdown
 2026-09-01 10:14 | Enhanced Database Studio with developer POV fullscreen mode, resizable table columns, dynamic contextual query pills per DB, and table search filter
 2026-09-01 10:18 | [4242cc4] feat(dev-dashboard): enhance Database Studio with multi-db discovery, Drizzle Studio integration, resizable tables, ER diagrams, and contextual query pills (+1464, -212)
+2026-09-01 10:18 | Committed Database Studio enhancements (Drizzle Studio, multi-DB seeding, resizable tables, ER diagrams, dynamic queries)
+2026-09-01 10:48 | Modularized @forge/sdk, implemented Scoped Employee Hierarchy API, added 5-tier tests, and updated Dev Hub playground
+2026-09-01 10:59 | Integrated Scoped Hierarchy into Expenses, enhanced zero-code proxy ingress, and completed app-template reference with 5-tier tests
+2026-09-01 11:16 | Implemented 1-command app generator, external Python FastAPI demo, and upgraded billing and telemetry microservices with 100% 5-tier test verification
+2026-09-01 11:48 | [d0b515e] feat(sdk): modularize sdk and add hierarchy ingress generator (+7410, -1837)

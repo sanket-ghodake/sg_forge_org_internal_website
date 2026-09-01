@@ -15,6 +15,7 @@ export interface ServiceEntry {
   category: string;
   role: string;
   containerName: string;
+  upstreamUrl: string;
   isExternal: boolean;
   isPublic: boolean;
   healthUrl: string;
@@ -35,7 +36,7 @@ function findEnvPath(explicitPath?: string): string | null {
 
 export function loadServiceRegistry(envPath?: string): ServiceEntry[] {
   const resolvedEnvPath = findEnvPath(envPath);
-  const envMap: Record<string, string> = { ...process.env as Record<string, string> };
+  const envMap: Record<string, string> = { ...(process.env as Record<string, string>) };
 
   if (resolvedEnvPath && existsSync(resolvedEnvPath)) {
     const rawContent = readFileSync(resolvedEnvPath, 'utf8');
@@ -46,7 +47,10 @@ export function loadServiceRegistry(envPath?: string): ServiceEntry[] {
       if (eqIdx > 0) {
         const key = trimmed.slice(0, eqIdx).trim();
         let val = trimmed.slice(eqIdx + 1).trim();
-        if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+        if (
+          (val.startsWith('"') && val.endsWith('"')) ||
+          (val.startsWith("'") && val.endsWith("'"))
+        ) {
           val = val.slice(1, -1);
         }
         envMap[key] = val;
@@ -66,6 +70,7 @@ export function loadServiceRegistry(envPath?: string): ServiceEntry[] {
     category: 'Core Workspaces',
     role: 'Public Ingress',
     containerName: 'landing',
+    upstreamUrl: `http://landing:${landingPort}`,
     isExternal: false,
     isPublic: true,
     healthUrl: '/health',
@@ -78,13 +83,13 @@ export function loadServiceRegistry(envPath?: string): ServiceEntry[] {
 
       if (parts.length >= 3) {
         const name = parts[0];
-        const port = Number(parts[1]);
+        const port = Number(parts[1]) || 80;
         const path = parts[2];
         const category = parts[3] || 'Micro-Apps';
         const role = parts[4] || 'General';
         const isPublic = role.toLowerCase().includes('public');
 
-        // Dynamically derive container name: optional 6th field, or check filesystem for forge-apps vs core
+        // Dynamically derive container name and upstream URL
         let containerName = parts[5] || appId;
         if (!parts[5]) {
           if (existsSync(join(process.cwd(), 'forge-apps', appId))) {
@@ -96,6 +101,16 @@ export function loadServiceRegistry(envPath?: string): ServiceEntry[] {
           }
         }
 
+        // Derive clean upstream URL (supports remote domains, host.docker.internal, or docker network)
+        let upstreamUrl: string;
+        if (containerName.startsWith('http://') || containerName.startsWith('https://')) {
+          upstreamUrl = containerName;
+        } else if (port === 443) {
+          upstreamUrl = `https://${containerName}`;
+        } else {
+          upstreamUrl = `http://${containerName}:${port}`;
+        }
+
         services.push({
           id: appId,
           name,
@@ -104,6 +119,7 @@ export function loadServiceRegistry(envPath?: string): ServiceEntry[] {
           category,
           role,
           containerName,
+          upstreamUrl,
           isExternal: path !== '/',
           isPublic,
           healthUrl: `${path}/health`,

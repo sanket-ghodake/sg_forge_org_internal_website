@@ -17,6 +17,7 @@ import {
   handleLogout,
   handleRefresh,
   handleRevokeOtherSessions,
+  handleScopedHierarchy,
   handleSetPassword,
 } from './backend/api-handlers';
 import { authTelemetry } from './backend/telemetry';
@@ -95,6 +96,22 @@ export function startAuthServer(port: number = PORT) {
     if (path === '/api/v1/auth/directory' || path === '/auth/api/v1/auth/directory') {
       if (method === 'GET') response = handleDirectory();
       else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    if (
+      path.startsWith('/api/v1/auth/hierarchy') ||
+      path.startsWith('/auth/api/v1/auth/hierarchy')
+    ) {
+      if (method === 'GET') {
+        const prefix = path.startsWith('/auth/api/v1/auth/hierarchy')
+          ? '/auth/api/v1/auth/hierarchy'
+          : '/api/v1/auth/hierarchy';
+        const targetId = path.slice(prefix.length).replace(/^\//, '') || undefined;
+        response = await handleScopedHierarchy(req, targetId);
+      } else {
+        response = new Response('Method Not Allowed', { status: 405 });
+      }
       return applySecurityHeaders(response);
     }
 

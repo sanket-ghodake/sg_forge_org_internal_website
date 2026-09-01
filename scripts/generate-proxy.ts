@@ -6,7 +6,7 @@
  */
 
 import { writeFileSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { join } from 'node:path';
 import { loadServiceRegistry } from '../apps/src/sdk/src/registry';
 
 const REPO_ROOT = process.cwd();
@@ -33,10 +33,11 @@ export function generateCaddyfile(): string {
   const subServices = services.filter((s) => s.path !== '/');
 
   for (const s of subServices) {
+    const upstream = s.upstreamUrl || `http://${s.containerName}:${s.port}`;
     caddyContent += `
-    # ${s.name} (${s.id})
+    # ${s.name} (${s.id}) [Role: ${s.role}]
     handle_path ${s.path}* {
-        reverse_proxy http://${s.containerName}:${s.port} {
+        reverse_proxy ${upstream} {
             header_up Host {host}
             header_up X-Forwarded-Host {host}
             header_up X-Forwarded-Proto {scheme}
@@ -68,6 +69,7 @@ if (import.meta.main) {
   const services = loadServiceRegistry();
   console.log(`🔀 [Caddy Ingress] Auto-generated proxy/Caddyfile with ${services.length} routes from .env`);
   for (const s of services) {
-    console.log(`   ├─ ${s.path.padEnd(18)} -> http://${s.containerName}:${s.port} (${s.name})`);
+    const upstream = s.upstreamUrl || `http://${s.containerName}:${s.port}`;
+    console.log(`   ├─ ${s.path.padEnd(18)} -> ${upstream.padEnd(30)} (${s.name})`);
   }
 }

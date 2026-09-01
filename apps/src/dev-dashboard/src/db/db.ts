@@ -212,6 +212,14 @@ class PlatformDatabaseManager {
         $runtime: 'bun-watch',
       });
     }
+
+    // Prune transient / stale test entries not present in .env
+    const validIds = services.map((s) => s.id);
+    if (validIds.length > 0) {
+      const placeholders = validIds.map(() => '?').join(',');
+      this.db.run(`DELETE FROM apps_registry WHERE id NOT IN (${placeholders})`, validIds);
+    }
+
     logger.info(`🌱 Synchronized ${services.length} services from .env registry into apps_registry`);
   }
 

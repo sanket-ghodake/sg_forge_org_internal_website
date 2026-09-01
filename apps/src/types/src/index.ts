@@ -54,9 +54,55 @@ export interface AuthGuardOptions {
   appName?: string;
 }
 
-export interface AuthGuardResult {
-  authenticated: boolean;
-  user?: AuthUser;
-  response?: Response;
+export interface OrgNodeSummary {
+  id: string;
+  name: string;
+  code?: string | null;
+  path: string;
+  parentId: string | null;
+}
+
+export interface EmployeeSummary {
+  id: string;
+  displayName: string;
+  email: string;
+  jobTitle?: string | null;
+  employeeCode?: string | null;
+  departmentName?: string | null;
+  orgPath?: string | null;
+  managerId?: string | null;
+  principalType?: 'EMPLOYEE' | 'ADMIN' | 'SERVICE_ACCOUNT';
+}
+
+export interface ManagerChainEntry {
+  level: number;
+  relationship: 'LINE_MANAGER' | 'PROJECT_LEAD' | 'DOTTED_LINE' | 'MENTOR';
+  id: string;
+  displayName: string;
+  email: string;
+  jobTitle?: string | null;
+  department?: string | null;
+}
+
+export interface ScopedHierarchyResponse {
+  status: 'SUCCESS' | 'ERROR';
+  employee: EmployeeSummary;
+  managementChain: ManagerChainEntry[];
+  directReports: EmployeeSummary[];
+  summary: {
+    totalManagersAbove: number;
+    totalDirectReports: number;
+    isTopLevel: boolean;
+  };
+}
+
+export interface OrgDirectoryResponse {
+  organization: {
+    id: string;
+    name: string;
+    domain: string;
+  };
+  nodes: OrgNodeSummary[];
+  users: EmployeeSummary[];
 }
 

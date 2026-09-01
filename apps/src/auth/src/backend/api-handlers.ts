@@ -376,6 +376,8 @@ export function handleJwks(): Response {
   });
 }
 
+import { getScopedHierarchyData } from './hierarchy';
+
 export function handleDirectory(): Response {
   const db = getAuthDb();
   const org = db.query('SELECT * FROM auth_organizations LIMIT 1;').get();
@@ -396,6 +398,33 @@ export function handleDirectory(): Response {
     organization: org,
     nodes,
     users,
+  });
+}
+
+export async function handleScopedHierarchy(req: Request, targetId?: string): Promise<Response> {
+  const url = new URL(req.url);
+  let identifier = targetId || url.searchParams.get('user_id') || url.searchParams.get('id') || url.searchParams.get('email');
+
+  // If requesting /me or identifier is omitted, resolve caller from session
+  if (!identifier || identifier === 'me') {
+    const token = extractBearerOrCookieToken(req);
+    if (!token) {
+      return problem('Unauthorized', 'Authentication required to access personal hierarchy (/me)', 401);
+    }
+    const { valid, payload } = verifyJwt(token);
+    if (!valid || !payload) {
+      return problem('Unauthorized', 'Invalid or expired session token', 401);
+    }
+    identifier = payload.sub;
+  }
+
+  const result = getScopedHierarchyData(identifier);
+  if (!result) {
+    return problem('Not Found', `Employee with identifier "${identifier}" was not found in organizational hierarchy`, 404);
+  }
+
+  return Response.json(result, {
+    headers: { 'Content-Type': 'application/json' },
   });
 }
 

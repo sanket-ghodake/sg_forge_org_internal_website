@@ -10,7 +10,7 @@
         format console
     }
 
-    # Main Workspace & Org Canvas (portal)
+    # Main Workspace & Org Canvas (portal) [Role: Employee / Admin]
     handle_path /portal* {
         reverse_proxy http://portal:3001 {
             header_up Host {host}
@@ -20,7 +20,7 @@
         }
     }
 
-    # Developer Dashboard (devcenter)
+    # Developer Dashboard (devcenter) [Role: Developer]
     handle_path /devcenter* {
         reverse_proxy http://dev-dashboard:3002 {
             header_up Host {host}
@@ -30,7 +30,7 @@
         }
     }
 
-    # Developer Hub & SDK Playground (gateway)
+    # Developer Hub & SDK Playground (gateway) [Role: Developer]
     handle_path /gateway* {
         reverse_proxy http://dev-hub:3003 {
             header_up Host {host}
@@ -40,7 +40,7 @@
         }
     }
 
-    # Central Identity & Auth (auth)
+    # Central Identity & Auth (auth) [Role: Public / OAuth]
     handle_path /auth* {
         reverse_proxy http://auth:3004 {
             header_up Host {host}
@@ -50,7 +50,7 @@
         }
     }
 
-    # Expense Approval Engine (expenses)
+    # Expense Approval Engine (expenses) [Role: Finance / Manager]
     handle_path /apps/expenses* {
         reverse_proxy http://app-expenses:8085 {
             header_up Host {host}
@@ -60,7 +60,7 @@
         }
     }
 
-    # Invoicing & Billing Service (billing)
+    # Invoicing & Billing Service (billing) [Role: Finance]
     handle_path /apps/billing* {
         reverse_proxy http://app-billing:8086 {
             header_up Host {host}
@@ -70,7 +70,7 @@
         }
     }
 
-    # Live Telemetry Dashboard (telemetry)
+    # Live Telemetry Dashboard (telemetry) [Role: Public / Engineering]
     handle_path /apps/telemetry* {
         reverse_proxy http://app-telemetry:8087 {
             header_up Host {host}
