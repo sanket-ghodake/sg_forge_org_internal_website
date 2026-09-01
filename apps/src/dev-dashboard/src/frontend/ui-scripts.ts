@@ -397,6 +397,58 @@ export function getDashboardScripts(): string {
       refreshActiveTab();
     }, 1500);
 
+    // 📐 Interactive Resizable Drawers (Services & Employee Profile)
+    function initDrawerResize(drawerId, resizerId, storageKey, defaultWidth) {
+      const drawerEl = document.getElementById(drawerId);
+      const resizerEl = document.getElementById(resizerId);
+      if (!drawerEl || !resizerEl) return;
+
+      const savedWidth = localStorage.getItem(storageKey);
+      if (savedWidth) {
+        const parsed = parseInt(savedWidth, 10);
+        if (parsed >= 320 && parsed <= window.innerWidth - 60) {
+          drawerEl.style.width = parsed + 'px';
+        }
+      }
+
+      resizerEl.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        resizerEl.classList.add('resizing');
+        document.body.classList.add('is-resizing-drawer');
+
+        const onMouseMove = (moveEv) => {
+          const newW = window.innerWidth - moveEv.clientX;
+          const minW = 320;
+          const maxW = Math.min(window.innerWidth - 60, 1200);
+          const clamped = Math.max(minW, Math.min(maxW, newW));
+          drawerEl.style.width = clamped + 'px';
+          drawerEl.style.maxWidth = 'calc(100vw - 60px)';
+        };
+
+        const onMouseUp = () => {
+          resizerEl.classList.remove('resizing');
+          document.body.classList.remove('is-resizing-drawer');
+          document.removeEventListener('mousemove', onMouseMove);
+          document.removeEventListener('mouseup', onMouseUp);
+          if (drawerEl.offsetWidth) {
+            localStorage.setItem(storageKey, String(drawerEl.offsetWidth));
+          }
+        };
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+      });
+
+      resizerEl.addEventListener('dblclick', () => {
+        drawerEl.style.width = defaultWidth + 'px';
+        localStorage.removeItem(storageKey);
+      });
+    }
+
+    initDrawerResize('service-drawer', 'service-drawer-resizer', 'forge:service_drawer_w', 540);
+    initDrawerResize('emp-profile-drawer', 'emp-drawer-resizer', 'forge:emp_drawer_w', 560);
+
     // 🧹 Clean Any Errant Browser Autofill Credentials on Startup
     function sanitizeSearchInputs() {
       const s = document.getElementById('services-search-input');

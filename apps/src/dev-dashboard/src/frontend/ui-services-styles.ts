@@ -21,10 +21,15 @@ export function getServicesStyles(): string {
     .service-row-clickable.selected-row { background: rgba(62, 207, 142, 0.08) !important; outline: 1px solid var(--forge-primary); }
     
     /* Option C Flyout Service Inspector Drawer */
-    .service-drawer-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.22s ease; }
+    .service-drawer-backdrop { position: fixed; top: 48px; left: 0; right: 0; bottom: 0; width: 100vw; height: calc(100vh - 48px); background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; z-index: 90; opacity: 0; pointer-events: none; transition: opacity 0.22s ease; }
     .service-drawer-backdrop.open { opacity: 1; pointer-events: auto; }
-    .service-drawer { position: fixed; top: 0; right: 0; width: min(94vw, 540px); height: 100vh; background: var(--forge-bg-surface); border-left: 1px solid var(--forge-border-medium); box-shadow: -16px 0 40px rgba(0, 0, 0, 0.75); transform: translateX(100%); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); z-index: 2001; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; }
+    .service-drawer { position: fixed; top: 48px; right: 0; bottom: 0; width: min(94vw, 540px); height: calc(100vh - 48px); background: var(--forge-bg-surface); border-left: 1px solid var(--forge-border-medium); box-shadow: -16px 0 40px rgba(0, 0, 0, 0.75); transform: translateX(100%); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); z-index: 95; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; }
     .service-drawer.open { transform: translateX(0); }
+    .drawer-resizer { position: absolute; left: 0; top: 0; bottom: 0; width: 8px; cursor: ew-resize; z-index: 50; background: transparent; transition: background 0.15s ease, box-shadow 0.15s ease; user-select: none; }
+    .drawer-resizer::after { content: ''; position: absolute; left: 2px; top: 50%; transform: translateY(-50%); height: 36px; width: 3px; border-radius: var(--forge-radius-full); background: var(--forge-border-medium); opacity: 0; transition: opacity 0.15s ease, background 0.15s ease; }
+    .drawer-resizer:hover, .drawer-resizer.resizing { background: rgba(62, 207, 142, 0.12); }
+    .drawer-resizer:hover::after, .drawer-resizer.resizing::after { opacity: 1; background: var(--forge-primary); box-shadow: 0 0 8px var(--forge-primary); }
+    body.is-resizing-drawer { cursor: ew-resize !important; user-select: none !important; }
     .drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; border-bottom: 1px solid var(--forge-border); background: var(--forge-bg-card); flex-shrink: 0; }
     .drawer-body { flex: 1; overflow-y: auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; scrollbar-width: thin; scrollbar-color: var(--forge-border-medium) transparent; }
     .drawer-card { background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 1rem; }

@@ -162,9 +162,9 @@ export function getEmployeeStyles(): string {
     .teams-modal-report-item:hover { border-color: var(--forge-primary); background: var(--forge-bg-card-hover); transform: translateY(-1px); }
 
     /* Slide-Over Employee Detail Drawer */
-    .emp-drawer-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.22s ease; }
+    .emp-drawer-backdrop { position: fixed; top: 48px; left: 0; right: 0; bottom: 0; width: 100vw; height: calc(100vh - 48px); background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; z-index: 90; opacity: 0; pointer-events: none; transition: opacity 0.22s ease; }
     .emp-drawer-backdrop.open { opacity: 1; pointer-events: auto; }
-    .emp-drawer { position: fixed; top: 0; right: 0; width: min(94vw, 560px); height: 100vh; background: var(--forge-bg-surface); border-left: 1px solid var(--forge-border-medium); box-shadow: -16px 0 40px rgba(0, 0, 0, 0.35); transform: translateX(100%); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); z-index: 2001; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; }
+    .emp-drawer { position: fixed; top: 48px; right: 0; bottom: 0; width: min(94vw, 560px); height: calc(100vh - 48px); background: var(--forge-bg-surface); border-left: 1px solid var(--forge-border-medium); box-shadow: -16px 0 40px rgba(0, 0, 0, 0.35); transform: translateX(100%); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); z-index: 95; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; }
     .emp-drawer.open { transform: translateX(0); }
     .emp-drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem; border-bottom: 1px solid var(--forge-border); background: var(--forge-bg-card); flex-shrink: 0; }
     .emp-drawer-tabs { display: flex; border-bottom: 1px solid var(--forge-border); background: var(--forge-bg-card); padding: 0 1.25rem; gap: 0.5rem; flex-shrink: 0; }

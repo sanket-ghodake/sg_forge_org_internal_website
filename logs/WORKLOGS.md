@@ -334,3 +334,7 @@
 2026-09-01 16:00 | [c455cf7] feat(dev-dashboard): add MS Teams org chart search, clean department dropdowns, and implement 4-tier state persistence (+3090, -1034)
 2026-09-01 16:05 | Upgraded @forge/ui light theme tokens to authentic Supabase design standard with emerald accents and warm studio canvas
 2026-09-01 16:08 | [801fccc] feat(ui): upgrade light theme tokens to authentic Supabase design standards (+539, -369)
+2026-09-01 16:08 | Committed changes: Upgraded light theme tokens to authentic Supabase design standards (commit 1681063)
+2026-09-01 16:47 | Repositioned right-side slide-over drawers in Dev Dashboard to open beneath top header bar
+2026-09-01 16:50 | Removed backdrop blur and added interactive drag-to-resize handles on Dev Dashboard side drawers
+2026-09-01 16:51 | [0ff51b1] feat(dev-dashboard): reposition side drawers below header and add drag-to-resize handles without backdrop blur (+66, -4)

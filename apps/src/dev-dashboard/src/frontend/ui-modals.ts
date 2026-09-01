@@ -146,6 +146,7 @@ export function getModalsHtml(): string {
   <!-- Slide-Out Service Inspector Drawer -->
   <div class="service-drawer-backdrop" id="service-drawer-backdrop" onclick="closeServiceDrawer()"></div>
   <aside class="service-drawer" id="service-drawer" aria-label="Service Details Inspector">
+    <div class="drawer-resizer" id="service-drawer-resizer" title="Drag edge to resize (Double-click to reset)"></div>
     <div class="drawer-header">
       <div style="display: flex; align-items: center; gap: 0.75rem;">
         <span style="font-size: 1.3rem;" id="drawer-svc-icon">⚡</span>
@@ -335,6 +336,7 @@ export function getModalsHtml(): string {
   <!-- Slide-Over Employee Profile Inspector Drawer -->
   <div class="emp-drawer-backdrop" id="emp-drawer-backdrop" onclick="closeEmployeeDrawer()"></div>
   <aside class="emp-drawer" id="emp-profile-drawer">
+    <div class="drawer-resizer" id="emp-drawer-resizer" title="Drag edge to resize (Double-click to reset)"></div>
     <div class="emp-drawer-header">
       <div style="display: flex; align-items: center; gap: 0.75rem;">
         <div class="emp-avatar" id="drawer-emp-avatar" style="width: 40px; height: 40px; font-size: 0.9rem;">EM</div>
