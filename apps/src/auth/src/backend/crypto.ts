@@ -142,13 +142,22 @@ function base64UrlDecode(input: string): string {
 }
 
 export function signJwt(
-  payload: Omit<JwtPayload, 'iat' | 'exp'>,
+  payload: Partial<Omit<JwtPayload, 'iat' | 'exp'>> & Record<string, unknown>,
   expiresInSeconds: number = 900 // 15 mins default
 ): string {
   const keys = getOrInitAuthKeys();
   const now = Math.floor(Date.now() / 1000);
 
   const fullPayload: JwtPayload = {
+    iss: 'sg-forge-auth',
+    sub: 'anonymous',
+    email: '',
+    display_name: '',
+    principal_type: 'EMPLOYEE',
+    org_id: 'org-internal',
+    roles: [],
+    permissions: [],
+    token_version: 1,
     ...payload,
     iat: now,
     exp: now + expiresInSeconds,

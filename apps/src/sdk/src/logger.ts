@@ -144,12 +144,33 @@ export class ForgeLogger {
     severity: LogLevel,
     message: string,
     meta?: Record<string, unknown>,
-    err?: Error,
+    err?: Error | unknown,
     source: 'app' | 'browser' | 'docker' | 'db' = 'app',
     traceId?: string
   ) {
     const sanitizedMeta = meta ? (redactSensitiveData(meta) as Record<string, unknown>) : undefined;
     const sanitizedMessage = typeof message === 'string' ? (redactSensitiveData(message) as string) : message;
+
+    let errorObj: { name: string; message: string; stack?: string } | undefined;
+    if (err instanceof Error) {
+      errorObj = {
+        name: err.name,
+        message: String(redactSensitiveData(err.message)),
+        stack: err.stack ? String(redactSensitiveData(err.stack)) : undefined,
+      };
+    } else if (err && typeof err === 'object') {
+      const e = err as any;
+      errorObj = {
+        name: e.name || 'Error',
+        message: String(redactSensitiveData(e.message || JSON.stringify(e))),
+        stack: e.stack ? String(redactSensitiveData(e.stack)) : undefined,
+      };
+    } else if (err !== undefined && err !== null) {
+      errorObj = {
+        name: 'Error',
+        message: String(redactSensitiveData(String(err))),
+      };
+    }
 
     const entry: LogEntry = {
       severity,
@@ -159,13 +180,7 @@ export class ForgeLogger {
       message: sanitizedMessage,
       timestamp: new Date().toISOString(),
       metadata: sanitizedMeta,
-      error: err
-        ? {
-            name: err.name,
-            message: String(redactSensitiveData(err.message)),
-            stack: err.stack ? String(redactSensitiveData(err.stack)) : undefined,
-          }
-        : undefined,
+      error: errorObj,
     };
     entry.plainEnglishSummary = explainLog(entry);
 
@@ -181,7 +196,7 @@ export class ForgeLogger {
         `${color}[${entry.timestamp}] [${entry.severity}] [${entry.service}]\x1b[0m ${entry.message}`,
         sanitizedMeta ? JSON.stringify(sanitizedMeta) : ''
       );
-      if (err?.stack) console.error(err.stack);
+      if ((err as any)?.stack) console.error((err as any).stack);
     } else if (typeof console !== 'undefined') {
       console.log(JSON.stringify(entry));
     }
@@ -218,11 +233,19 @@ export class ForgeLogger {
   public warn(msg: string, meta?: Record<string, unknown>, traceId?: string) {
     this.log('WARN', msg, meta, undefined, 'app', traceId);
   }
-  public error(msg: string, err?: Error, meta?: Record<string, unknown>, traceId?: string) {
-    this.log('ERROR', msg, meta, err, 'app', traceId);
+  public error(msg: string, err?: Error | unknown, meta?: Record<string, unknown>, traceId?: string) {
+    if (err && !(err instanceof Error) && typeof err === 'object' && !('message' in err) && !meta) {
+      this.log('ERROR', msg, err as Record<string, unknown>, undefined, 'app', traceId);
+    } else {
+      this.log('ERROR', msg, meta, err, 'app', traceId);
+    }
   }
-  public fatal(msg: string, err?: Error, meta?: Record<string, unknown>, traceId?: string) {
-    this.log('FATAL', msg, meta, err, 'app', traceId);
+  public fatal(msg: string, err?: Error | unknown, meta?: Record<string, unknown>, traceId?: string) {
+    if (err && !(err instanceof Error) && typeof err === 'object' && !('message' in err) && !meta) {
+      this.log('FATAL', msg, err as Record<string, unknown>, undefined, 'app', traceId);
+    } else {
+      this.log('FATAL', msg, meta, err, 'app', traceId);
+    }
   }
 
   public logDbQuery(sql: string, durationMs: number, err?: Error, traceId?: string) {

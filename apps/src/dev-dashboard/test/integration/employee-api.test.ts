@@ -180,10 +180,12 @@ describe('Integration: Employee Controller & Database Operations', () => {
     const created1 = employeeController.createEmployee({
       email: email1,
       display_name: 'Bulk User 1',
+      job_title: 'Software Engineer',
     });
     const created2 = employeeController.createEmployee({
       email: email2,
       display_name: 'Bulk User 2',
+      job_title: 'Product Designer',
     });
 
     // Act - Suspend both

@@ -52,7 +52,7 @@ describe('Tier 1 Unit: Cryptographic Subsystem', () => {
     };
 
     // Act
-    const jwt = signJwt(payload, '15m');
+    const jwt = signJwt(payload, 900);
     const { valid, payload: verified } = verifyJwt(jwt);
 
     // Assert

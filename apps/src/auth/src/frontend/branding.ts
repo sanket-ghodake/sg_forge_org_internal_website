@@ -10,6 +10,8 @@ export interface BrandConfig {
   short: string;
   tagline: string;
   logoText: string;
+  logoUrl?: string;
+  faviconUrl?: string;
 }
 
 export function resolveBrandConfig(): BrandConfig {
@@ -19,5 +21,7 @@ export function resolveBrandConfig(): BrandConfig {
     short: brand.short,
     tagline: brand.tagline,
     logoText: brand.short,
+    logoUrl: brand.logoUrl,
+    faviconUrl: brand.faviconUrl,
   };
 }

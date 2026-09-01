@@ -239,25 +239,6 @@ class PlatformDatabaseManager {
     );
   }
 
-  public recordIssue(appId: string, errorType: string, message: string, stackTrace?: string, contextJson?: string, traceId?: string): void {
-    const fingerprint = `${appId}:${errorType}:${message.slice(0, 100)}`;
-    const now = Math.floor(Date.now() / 1000);
-    const existing = this.db.query('SELECT id, occurrence_count FROM issue_reports WHERE fingerprint = ?').get(fingerprint) as { id: string; occurrence_count: number } | null;
-
-    if (existing) {
-      this.db.run(
-        'UPDATE issue_reports SET occurrence_count = occurrence_count + 1, last_seen = ?, trace_id = ? WHERE id = ?',
-        [now, traceId || null, existing.id]
-      );
-    } else {
-      const id = `iss-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
-      this.db.run(
-        'INSERT INTO issue_reports (id, app_id, fingerprint, error_type, message, stack_trace, context_json, trace_id, occurrence_count, status, first_seen, last_seen) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, "open", ?, ?)',
-        [id, appId, fingerprint, errorType, message, stackTrace || null, contextJson || null, traceId || null, now, now]
-      );
-    }
-  }
-
   public listDatabases(): Array<{ name: string; path: string; sizeBytes: number }> {
     const dbs: Array<{ name: string; path: string; sizeBytes: number }> = [];
     if (existsSync(DATA_DIR)) {

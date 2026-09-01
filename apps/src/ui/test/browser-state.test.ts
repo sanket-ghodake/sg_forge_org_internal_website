@@ -47,28 +47,21 @@ describe('Forge Client State Engine', () => {
   beforeEach(() => {
     // Setup clean mock window and storage
     const mockStorage = new MockStorage();
-    // @ts-expect-error test mock
-    globalThis.localStorage = mockStorage;
-    // @ts-expect-error test mock
-    globalThis.sessionStorage = new MockStorage();
-    // @ts-expect-error test mock
-    globalThis.window = {
+    (globalThis as any).localStorage = mockStorage;
+    (globalThis as any).sessionStorage = new MockStorage();
+    (globalThis as any).window = {
       localStorage: mockStorage,
       sessionStorage: mockStorage,
       location: new URL('http://localhost:3000/portal?view=canvas&page=1'),
       history: {
         state: {},
         replaceState: (state: unknown, _title: string, url: string) => {
-          // @ts-expect-error test mock
-          globalThis.window.location = new URL(url, 'http://localhost:3000');
-          // @ts-expect-error test mock
-          globalThis.window.history.state = state;
+          (globalThis as any).window.location = new URL(url, 'http://localhost:3000');
+          (globalThis as any).window.history.state = state;
         },
         pushState: (state: unknown, _title: string, url: string) => {
-          // @ts-expect-error test mock
-          globalThis.window.location = new URL(url, 'http://localhost:3000');
-          // @ts-expect-error test mock
-          globalThis.window.history.state = state;
+          (globalThis as any).window.location = new URL(url, 'http://localhost:3000');
+          (globalThis as any).window.history.state = state;
         },
       },
       addEventListener: () => {},

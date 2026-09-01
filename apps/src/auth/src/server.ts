@@ -7,6 +7,7 @@
 
 import { createLogger, createSafeHandler, handleBrandAssetRequest } from '@forge/sdk';
 import { seedAuthDatabase } from './db/seed';
+import { closeAuthDb } from './db/db';
 import {
   handleBrowserLog,
   handleDirectory,

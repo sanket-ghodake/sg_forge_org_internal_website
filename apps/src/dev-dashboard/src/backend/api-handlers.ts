@@ -24,8 +24,9 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
     return new Response(stream, {
       headers: {
         'Content-Type': 'text/event-stream',
-        'Cache-Control': 'no-cache',
-        Connection: 'keep-alive',
+        'Cache-Control': 'no-cache, no-transform',
+        'Connection': 'keep-alive',
+        'X-Accel-Buffering': 'no',
       },
     });
   }
@@ -275,7 +276,7 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
     const body: any = await req.json().catch(() => ({}));
     if (!body.issueId || !body.status) return Response.json({ error: 'Missing issueId or status' }, { status: 400 });
     const result = issuesController.triageIssue(body.issueId, body.status);
-    return Response.json({ status: 'ok', ...result });
+    return Response.json(result);
   }
 
   // 13c. RFC 7807 Bulk Resolve All Issues

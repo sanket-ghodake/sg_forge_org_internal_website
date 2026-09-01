@@ -53,7 +53,7 @@ export function startPortalServer(port: number = PORT) {
       email: auth.user!.email,
       displayName: auth.user!.displayName,
       roles: auth.user!.roles,
-      isAdmin: auth.user!.roles.some(r => r.includes('admin') || r.includes('manager')),
+      isAdmin: auth.user!.roles.some((r: string) => r.includes('admin') || r.includes('manager')),
     };
 
     return new Response(renderPortalHtml(user), {

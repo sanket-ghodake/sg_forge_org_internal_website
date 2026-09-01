@@ -9,7 +9,7 @@ import { seedAuthDatabase } from '../../src/auth/src/db/seed';
 import { handleLogin, handleSetPassword } from '../../src/auth/src/backend/api-handlers';
 import { startPortalServer } from '../../src/portal/src/server';
 import { getAuthDb } from '../../src/auth/src/db/db';
-import { createSafeHandler, loadBrandConfig, type ServerLike } from '@forge/sdk';
+import { createSafeHandler, loadBrandConfig } from '@forge/sdk';
 
 describe('Tier 5 E2E Journey: End-to-End Auth Gateway to Portal Live Network Handoff', () => {
   let authServer: any = null;

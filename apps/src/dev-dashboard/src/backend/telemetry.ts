@@ -41,6 +41,7 @@ class TelemetryEngine {
 
   constructor() {
     this.pushLog('dev-dashboard', 'INFO', 'Developer Dashboard telemetry engine online.', 'app');
+    setInterval(() => this.broadcastPing(), 15000);
   }
 
   public pushLog(

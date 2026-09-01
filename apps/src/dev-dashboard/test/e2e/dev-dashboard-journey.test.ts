@@ -10,7 +10,7 @@ import { handleApiRequest } from '../../src/backend/api-handlers';
 import { renderDashboardHtml } from '../../src/frontend/ui-renderer';
 
 describe('Tier 5 E2E: Developer Dashboard Live Server & Endpoints', () => {
-  let server: Server;
+  let server: any;
   const TEST_PORT = 3102;
   const BASE_URL = `http://localhost:${TEST_PORT}`;
 

@@ -38,7 +38,7 @@ export function seedCroOrganization(): void {
       dryRun: false,
     });
 
-    logger.info(`✅ Successfully seeded CRO organization: ${result.created} created, ${result.updated} updated, ${result.departmentsCreated} new departments.`);
+    logger.info(`✅ Successfully seeded CRO organization: ${result.valid} valid records (${result.invalid} invalid), ${result.createdDepartments.length} new departments.`);
     console.log('\n🌳 Seeded CRO Organization Tree Structure:');
     console.log('└─ Elena Rostova (CRO / Chief Revenue Officer)');
     console.log('   ├─ Marcus Thorne (VP of Global Enterprise Sales) [18 Direct & Indirect Reports]');

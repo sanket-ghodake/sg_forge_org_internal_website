@@ -47,6 +47,20 @@ export interface AuthUser {
 
 export type AppAccessPolicy = 'PUBLIC' | 'AUTHENTICATED' | 'ROLE_RESTRICTED';
 
+export interface BrandConfig {
+  name: string;
+  short: string;
+  tagline: string;
+  logoUrl?: string;
+  faviconUrl?: string;
+}
+
+export interface AuthGuardResult {
+  authenticated: boolean;
+  user?: AuthUser;
+  response?: Response;
+}
+
 export interface AuthGuardOptions {
   requiredRoles?: string[];
   requiredPermissions?: string[];
