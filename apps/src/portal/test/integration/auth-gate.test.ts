@@ -34,8 +34,9 @@ describe('Tier 2 Integration: Portal Auth Gate & JWT Session Validation', () => 
       // Assert
       expect(res.status).toBe(200);
       expect(html).toContain('Jane Doe');
-      expect(html).toContain('Main Workspace & Org Canvas');
-      expect(html).toContain('portal-nav-tab');
+      expect(html).toContain('SG Forge Portal');
+      expect(html).toContain('portal-nav-item');
+      expect(html).toContain('portal-sidebar');
     } finally {
       server.stop();
     }

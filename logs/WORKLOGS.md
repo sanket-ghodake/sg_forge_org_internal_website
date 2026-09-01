@@ -278,3 +278,14 @@
 2026-09-01 07:32 | Fixed services and logs search input autofill by enforcing type=search and autocomplete=off
 2026-09-01 07:35 | Completely decoupled Chrome password manager heuristics: added autofill trap, wrapped modal forms, and added startup input sanitizer
 2026-09-01 07:35 | [f700f8d] feat(dev-dashboard): unified Database Studio, Supabase-grade design tokens, sleep/wake auto-recovery, and autofill decoupling (+1049, -310)
+2026-09-01 07:36 | Committed changes: Unified Database Studio, Supabase-grade design tokens, sleep/wake auto-recovery, and autofill decoupling (commit f700f8d)
+2026-09-01 07:53 | Build SG Forge Portal shell with top header, Supabase-inspired expandable sidebar, and 10 dual-persona overview pages
+2026-09-01 07:55 | Refactor portal sidebar to dev-dashboard auto-collapsible behavior and enforce 100% pure Astryx design tokens for seamless light/dark theme switching
+2026-09-01 07:56 | Elevate sidebar aesthetics with precision monochrome SVG stroke icons, glassmorphic backdrop, micro-status rail, and subtle translate hover effects
+2026-09-01 07:58 | Eliminate collapsed sidebar top whitespace by collapsing section label height to zero in minimized state
+2026-09-01 08:01 | Move header controls into modern right-side user profile dropdown popover with role elevation switcher, appearance toggle, and quick preferences
+2026-09-01 08:03 | Remove My Profile item and bottom Turso DB status rail from sidebar for clean minimal vertical layout
+2026-09-01 08:05 | Codify Check 15 strict Portal SPA and fluid multi-device responsiveness invariant in AGENTS.md, UI directives, and automated unit tests
+2026-09-01 08:06 | Refactor top header right profile button to minimal avatar icon trigger with popover anchor
+2026-09-01 08:08 | Remove organization switcher pill from top header for clean and minimal navigation
+2026-09-01 08:12 | [da003e6] feat(portal): implement modular SPA portal with auto-collapsible sidebar, minimal header, and popover profile (+1324, -234)

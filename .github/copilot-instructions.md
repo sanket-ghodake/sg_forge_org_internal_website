@@ -5,7 +5,7 @@
 
 ---
 
-## ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (14 CHECKS)
+## ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (15 CHECKS)
 Before writing code, running commands, or staging/committing changes, verify:
 1. [ ] **RTK Command Prefix**: Every bash command MUST be prefixed with `rtk` (e.g. `rtk git status`, `rtk bun test`, `rtk git add .`).
 2. [ ] **Zero Host Modification**: All runtimes/tools strictly use portable repo binaries (`portables/bun/bin/bun`, `portables/bin/*`) or Docker. ZERO host modifications (`apt`, `brew`, `npm -g`, `pip install`).
@@ -21,6 +21,7 @@ Before writing code, running commands, or staging/committing changes, verify:
 12. [ ] **AI-Driven Ignore & Attrib Governance**: Before staging, AI Agent MUST contextually audit all newly created files in session diff. If any cache, transient, build output, SQLite DB, or secret was introduced, ensure it is added to the canonical ignore/attrib definitions via `rtk bun scripts/sync-ignores.ts`.
 13. [ ] **5-Tier Microservice Test Governance & Testing for Truth**: Every microservice across `apps/src/*` and `forge-apps/*` MUST maintain an isolated `test/` folder with required subtiers (`unit/`, `integration/`, `security/`, `contracts/`, `e2e/`). Zero shallow mocks that bypass real network/cookie boundaries; 100% Branch Coverage on Auth & RBAC; $\ge 90\%$ on business logic.
 14. [ ] **AI Semantic Scenario Audit**: All critical security invariants (anti-brute force, token replay defense, tamper detection, cross-tenant isolation) MUST have explicit negative assertion tests.
+15. [ ] **Strict Portal SPA & Fluid Responsiveness Governance**: The Portal application (`@forge/portal`) MUST strictly operate as a Single Page Application (SPA) with zero full-page hard refreshes across internal navigation (using client-side view routing, instantaneous DOM hydration, and history management). Fully fluid and responsive across desktop, tablet, and mobile down to 320px viewport with zero horizontal overflow.
 
 ---
 

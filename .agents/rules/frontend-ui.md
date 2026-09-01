@@ -5,7 +5,7 @@
 
 ---
 
-## 🛑 THE 7 META ASTRYX UI INVARIANTS
+## 🛑 THE 12 META ASTRYX UI INVARIANTS
 
 ### 1. Zero Ad-Hoc Styling (Mandatory Token Consumption)
 - **NEVER** use random hex colors, arbitrary inline styles, or ad-hoc gradients.
@@ -75,3 +75,12 @@
 - **NEVER** leave `<select>` elements with unstyled default OS appearance or bright white OS option menus in dark mode.
 - **ALWAYS** style with `appearance: none`, custom SVG chevron arrow, `var(--forge-bg-surface)` / `var(--forge-bg-card)` options, `--forge-border` borders, and high-visibility `--forge-primary` focus rings.
 - For complex multi-selects or comboboxes, use Astryx dropdown menu primitives (`.astryx-dropdown`, `.astryx-dropdown-menu`, `.astryx-dropdown-item`).
+
+### 12. Strict Portal Single Page Application (SPA) & Responsiveness Invariant
+- **Single Page Application**: The portal workspace (`apps/src/portal`) MUST strictly operate as an SPA.
+  - Zero full-page hard refreshes when switching between workspace views or admin suite sections.
+  - All navigation links must use client-side view switching (`data-view` / `data-nav` and `switchView()`) with URL query parameter history preservation (`history.replaceState`).
+  - Active state must persist across tab/view transitions and client-side reload hydration.
+- **Fluid Responsiveness**:
+  - Fully responsive across desktop (>1024px), tablet (768px-1024px), and mobile (320px-768px).
+  - Search trigger, organization pills, user triggers, and cards must seamlessly adapt to viewport width down to 320px with zero horizontal scrollbars.
