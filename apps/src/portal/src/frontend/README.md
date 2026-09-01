@@ -21,8 +21,10 @@ Modular, accessible, and performant frontend presentation layer for SG Forge Por
 13. **`ui-modals.ts`**: Viewport-safe slide-out action drawers and confirmation dialogs.
 14. **`ui-command-palette.ts`**: Universal `⌘K` Quick Search overlay indexing all views, colleagues, and tools.
 15. **`ui-canvas-scripts.ts`**: Interactive 2D pan/zoom and node centering engine.
-16. **`ui-directory-scripts.ts`**: Client-side fuzzy filtering and live timezone clock updates.
-17. **`ui-admin-scripts.ts`**: Admin action handlers and feedback toasts.
-18. **`ui-styles.ts`**: Meta Astryx CSS styles conforming strictly to `--forge-*` custom properties.
-19. **`ui-scripts.ts`**: Master client-side router, ⌘K command modal, and state persistence.
-20. **`ui-renderer.ts`**: Master HTML layout assembler.
+16. **`ui-canvas-views.ts`**: Divisions Matrix and Leadership Pipeline multi-perspective view renderers.
+17. **`ui-canvas-inspector.ts`**: Colleague profile inspector drawer, reporting chain breadcrumbs, and manager jumps.
+18. **`ui-directory-scripts.ts`**: Client-side fuzzy filtering and live timezone clock updates.
+19. **`ui-admin-scripts.ts`**: Admin action handlers and feedback toasts.
+20. **`ui-styles.ts`**: Meta Astryx CSS styles conforming strictly to `--forge-*` custom properties.
+21. **`ui-scripts.ts`**: Master client-side router, ⌘K command modal, and state persistence.
+22. **`ui-renderer.ts`**: Master HTML layout assembler.

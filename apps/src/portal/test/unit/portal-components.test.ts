@@ -116,4 +116,38 @@ describe('Tier 1 Unit: Portal Layout Components', () => {
     expect(html).toContain('@media (max-width: 768px)');
     expect(html).toContain('@media (max-width: 480px)');
   });
+
+  it('renders Company Map & Org Canvas with progressive tree controls, multi-perspective tabs, and zero emoji clutter', () => {
+    // Arrange & Act
+    const html = renderPortalHtml();
+
+    // Assert: Uncluttered layout without unneeded vitals grid cards
+    expect(html).not.toContain('canvas-vitals-grid');
+    expect(html).toContain('canvas-hero-banner');
+    expect(html).toContain('canvas-total-summary');
+    expect(html).toContain('canvas-div-summary');
+
+    // Assert: Progressive depth scope selector with default Heads (L2)
+    expect(html).toContain('canvas-depth-selector');
+    expect(html).toContain('data-depth="2"');
+
+    // Assert: Multi-View Tabs
+    expect(html).toContain('canvas-tab-pills');
+    expect(html).toContain('data-mode="canvas"');
+    expect(html).toContain('data-mode="divisions"');
+    expect(html).toContain('data-mode="leadership"');
+
+    // Assert: Fixed Minimap Wrapper & Inspector
+    expect(html).toContain('canvas-viewport-wrapper');
+    expect(html).toContain('canvas-minimap-box');
+    expect(html).toContain('canvas-inspector-card');
+    expect(html).toContain('inspector-chain');
+    expect(html).toContain('inspector-manager-box');
+    expect(html).toContain('inspector-reports-box');
+
+    // Assert: Zero emoji characters in the rendered canvas view
+    const canvasSection = html.slice(html.indexOf('id="view-canvas"'), html.indexOf('id="view-apps"'));
+    const emojiRegex = /[\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/u;
+    expect(emojiRegex.test(canvasSection)).toBe(false);
+  });
 });

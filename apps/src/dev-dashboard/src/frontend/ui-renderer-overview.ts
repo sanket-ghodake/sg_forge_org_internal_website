@@ -33,15 +33,15 @@ export function renderOverviewTab(): string {
 
         <div class="overview-hero-actions">
           <button class="astryx-btn btn-outline" style="padding: 0.28rem 0.65rem; font-size: 0.74rem; gap: 0.35rem;" onclick="runFleetBenchmark()" title="Run 15-sample fleet latency benchmark">
-            <span>⚡</span>
+            <span style="display:flex; align-items:center;">${astryxIcons.zap}</span>
             <span>Fleet Benchmark</span>
           </button>
           <button class="astryx-btn btn-outline" style="padding: 0.28rem 0.65rem; font-size: 0.74rem; gap: 0.35rem;" onclick="runOverviewHealthProbe()" title="Ping and probe all service endpoints">
-            <span>🔄</span>
+            <span style="display:flex; align-items:center;">${astryxIcons.refresh}</span>
             <span>Probe Fleet</span>
           </button>
           <button class="astryx-btn btn-outline" style="padding: 0.28rem 0.65rem; font-size: 0.74rem; gap: 0.35rem;" onclick="flushTelemetryBuffer()" title="Flush ring buffer logs">
-            <span>🧹</span>
+            <span style="display:flex; align-items:center;">${astryxIcons.slash}</span>
             <span>Flush Logs</span>
           </button>
         </div>
@@ -245,7 +245,7 @@ export function renderOverviewTab(): string {
           Live Services & Micro-Apps Fleet
         </h3>
         <button class="astryx-btn btn-outline" style="height: 24px; padding: 0 0.5rem; font-size: 0.7rem;" onclick="loadOverviewData()">
-          Refresh Matrix ↺
+          Refresh Matrix
         </button>
       </div>
       <div class="overview-fleet-grid" id="overview-services-fleet-grid">
@@ -267,7 +267,7 @@ export function renderOverviewTab(): string {
               <span class="cockpit-filter-pill" id="filter-ov-warn" onclick="filterOverviewLogs('WARN')">Warn</span>
               <span class="cockpit-filter-pill" id="filter-ov-error" onclick="filterOverviewLogs('ERROR')">Error</span>
               <button class="astryx-btn btn-outline" style="height: 22px; padding: 0 0.45rem; font-size: 0.68rem;" onclick="clearLogs()">Clear</button>
-              <button class="astryx-btn btn-outline" style="height: 22px; padding: 0 0.45rem; font-size: 0.68rem;" id="btn-stream-pause" onclick="toggleOverviewStreamPause()">Pause ⏸</button>
+              <button class="astryx-btn btn-outline" style="height: 22px; padding: 0 0.45rem; font-size: 0.68rem;" id="btn-stream-pause" onclick="toggleOverviewStreamPause()">Pause</button>
             </div>
           </div>
           <div class="cockpit-terminal-window" id="overview-terminal">Connecting to SSE telemetry stream...</div>
@@ -298,8 +298,8 @@ export function renderOverviewTab(): string {
               <strong style="color: var(--forge-text-main);" id="radar-db-tables-count">-- tables</strong>
             </div>
             <div style="display: flex; gap: 0.35rem; margin-top: 0.4rem;">
-              <button class="fleet-btn-xs" style="flex: 1; justify-content: center;" onclick="switchTab('database')">Open Studio ↗</button>
-              <button class="fleet-btn-xs" style="flex: 1; justify-content: center;" onclick="runOverviewQuickSql()">Run Test Query ⚡</button>
+              <button class="fleet-btn-xs" style="flex: 1; justify-content: center;" onclick="switchTab('database')">Open Studio</button>
+              <button class="fleet-btn-xs" style="flex: 1; justify-content: center;" onclick="runOverviewQuickSql()">Run Test Query</button>
             </div>
           </div>
 
@@ -318,7 +318,7 @@ export function renderOverviewTab(): string {
               <strong style="color: var(--forge-success);">100% Passing</strong>
             </div>
             <div style="margin-top: 0.35rem;">
-              <button class="fleet-btn-xs" style="width: 100%; justify-content: center;" onclick="switchTab('issues')">View Issue Center ↗</button>
+              <button class="fleet-btn-xs" style="width: 100%; justify-content: center;" onclick="switchTab('issues')">View Issue Center</button>
             </div>
           </div>
         </div>

@@ -241,7 +241,7 @@ export function getOverviewDashboardScripts(): string {
       isOverviewStreamPaused = !isOverviewStreamPaused;
       const btn = document.getElementById('btn-stream-pause');
       if (btn) {
-        btn.textContent = isOverviewStreamPaused ? 'Resume ▶' : 'Pause ⏸';
+        btn.textContent = isOverviewStreamPaused ? 'Resume' : 'Pause';
         btn.style.color = isOverviewStreamPaused ? 'var(--forge-accent)' : 'var(--forge-text-muted)';
       }
       if (window.showAstryxToast) {
@@ -292,7 +292,7 @@ export function getOverviewDashboardScripts(): string {
     }
 
     async function runFleetBenchmark() {
-      if (window.showAstryxToast) window.showAstryxToast('info', '⚡ Running 15-sample fleet latency benchmark...');
+      if (window.showAstryxToast) window.showAstryxToast('info', 'Running 15-sample fleet latency benchmark...');
       try {
         const res = await fetch(apiBase + '/api/benchmark', { method: 'POST' }).then(r => r.json());
         if (res && res.status === 'ok') {
@@ -312,7 +312,7 @@ export function getOverviewDashboardScripts(): string {
             scorecard.innerHTML = \`
               <div class="astryx-card" style="background:var(--forge-bg-elevated); border:1px solid var(--forge-border-medium);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
-                  <strong style="color:var(--forge-primary);">⚡ Latency Benchmark Scorecard</strong>
+                  <strong style="color:var(--forge-primary);">Latency Benchmark Scorecard</strong>
                   <span class="astryx-badge \${res.targetMet ? 'badge-running' : 'badge-degraded'}">\${res.targetMet ? 'SLO TARGET MET (<2ms)' : 'LATENCY WARNING'}</span>
                 </div>
                 <div style="display:flex; gap:1.5rem; flex-wrap:wrap; font-size:0.85rem;">
@@ -325,7 +325,7 @@ export function getOverviewDashboardScripts(): string {
           }
 
           if (window.showAstryxToast) {
-            window.showAstryxToast('success', '⚡ Benchmark Complete: p50 ' + res.p50Ms + 'ms | p99 ' + res.p99Ms + 'ms (' + res.reqPerSec + ' req/sec)');
+            window.showAstryxToast('success', 'Benchmark Complete: p50 ' + res.p50Ms + 'ms | p99 ' + res.p99Ms + 'ms (' + res.reqPerSec + ' req/sec)');
           }
         }
       } catch (err) {

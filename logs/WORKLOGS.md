@@ -378,3 +378,6 @@
 2026-09-01 21:42 | Refined and modernized Dev Dashboard login UI with Meta Astryx glassmorphism, glowing mesh background, framed logo pedestal, and input styling
 2026-09-01 21:45 | Fix Dev Dashboard login endpoint routing for /devcenter ingress proxy and trim password input
 2026-09-01 21:54 | [c51619d] feat(dashboard): implement single session auth and default org personas (+1155, -137)
+2026-09-01 22:04 | Redesigned Company Map & Org Canvas in portal app with 4 golden vitals, multi-perspective tabs, minimap, and Supabase-grade emoji-free aesthetics
+2026-09-01 22:12 | Refined Org Canvas to focus on real employee data, removed redundant top vitals cards, enabled default L2 progressive tree rendering, and fixed position-locked minimap viewport indicator
+2026-09-01 22:13 | [8e7e7fe] feat(portal): redesign company map & org canvas with employee-focused progressive tree, fixed minimap, and supabase craft standard (+11394, -3396)

@@ -1,17 +1,27 @@
 /**
- * @forge/portal - Progressive 5-Level Org Canvas Client Script (2026 LTS)
- * Dynamic SQLite hierarchy rendering, smooth bezier connections,
- * depth bounding (5-levels), on-click subtree expansion, and interactive inspector.
+ * @forge/portal - Progressive Multi-View Org Canvas Client Script (2026 LTS)
+ * Executive-grade 2D hierarchy canvas, progressive tree expansion (default L2),
+ * position-fixed minimap sync & click-to-pan, and employee-focused navigation.
  */
+
+import { getCanvasViewsScript } from './ui-canvas-views';
+import { getCanvasInspectorScript } from './ui-canvas-inspector';
 
 export function getCanvasClientScript(): string {
   return `
     (function initCanvasEngine() {
       let currentZoom = 1.0;
-      let currentMaxDepth = 5;
+      let currentMaxDepth = 2; // Default to Level 2 (Heads) for fast & uncluttered loading
       let activeRootId = null;
       let activeOrgTree = null;
       let allRenderedNodes = [];
+      let activeDivisionFilter = 'all';
+      let activeMode = 'canvas';
+
+      // Pan State
+      let isPanning = false;
+      let startX = 0, startY = 0;
+      let scrollLeft = 0, scrollTop = 0;
 
       const viewport = document.getElementById('canvas-viewport');
       const surface = document.getElementById('canvas-surface');
@@ -19,63 +29,147 @@ export function getCanvasClientScript(): string {
       const svgLayer = document.getElementById('canvas-svg-layer');
       const zoomLevelEl = document.getElementById('canvas-zoom-level');
       const searchInput = document.getElementById('canvas-search-input');
-      const nodeCountEl = document.getElementById('canvas-node-count');
       const deptFiltersContainer = document.getElementById('canvas-dept-filters');
       const inspector = document.getElementById('canvas-node-inspector');
       const inspectorCloseBtn = document.getElementById('inspector-close-btn');
+      const minimapBox = document.getElementById('canvas-minimap');
+      const minimapIndicator = document.getElementById('minimap-indicator');
 
-      function updateTransform() {
-        if (!surface || !zoomLevelEl) return;
-        surface.style.transform = 'scale(' + currentZoom + ')';
-        zoomLevelEl.textContent = Math.round(currentZoom * 100) + '%';
+      // ── View Mode Switching (Canvas / Divisions / Leadership) ──
+      document.querySelectorAll('.canvas-tab-pill').forEach(function(pill) {
+        pill.addEventListener('click', function() {
+          const mode = pill.getAttribute('data-mode');
+          if (!mode || mode === activeMode) return;
+          activeMode = mode;
+
+          document.querySelectorAll('.canvas-tab-pill').forEach(function(p) { p.classList.remove('active'); });
+          pill.classList.add('active');
+
+          document.querySelectorAll('.canvas-mode-container').forEach(function(c) { c.classList.remove('active'); });
+          const targetContainer = document.getElementById('canvas-mode-' + mode);
+          if (targetContainer) targetContainer.classList.add('active');
+
+          if (mode === 'divisions') renderDivisionsMatrix();
+          if (mode === 'leadership') renderLeadershipPipeline();
+        });
+      });
+
+      // ── Pan & Drag Engine ──
+      if (viewport) {
+        viewport.addEventListener('mousedown', function(e) {
+          if (e.target.closest('.canvas-org-cluster') || e.target.closest('.canvas-inspector-card')) return;
+          isPanning = true;
+          viewport.classList.add('is-dragging');
+          startX = e.pageX - viewport.offsetLeft;
+          startY = e.pageY - viewport.offsetTop;
+          scrollLeft = viewport.scrollLeft;
+          scrollTop = viewport.scrollTop;
+        });
+
+        window.addEventListener('mousemove', function(e) {
+          if (!isPanning || !viewport) return;
+          e.preventDefault();
+          const x = e.pageX - viewport.offsetLeft;
+          const y = e.pageY - viewport.offsetTop;
+          viewport.scrollLeft = scrollLeft - (x - startX);
+          viewport.scrollTop = scrollTop - (y - startY);
+          updateMinimap();
+        });
+
+        window.addEventListener('mouseup', function() {
+          if (isPanning && viewport) {
+            isPanning = false;
+            viewport.classList.remove('is-dragging');
+          }
+        });
+
+        viewport.addEventListener('scroll', updateMinimap, { passive: true });
+
+        // Wheel Zoom Support
+        viewport.addEventListener('wheel', function(e) {
+          if (e.ctrlKey || e.metaKey) {
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? -0.1 : 0.1;
+            setZoom(Math.max(0.3, Math.min(2.0, currentZoom + delta)));
+          }
+        }, { passive: false });
       }
 
-      // Zoom Controls
+      function setZoom(z) {
+        currentZoom = Math.round(z * 100) / 100;
+        if (surface) surface.style.transform = 'scale(' + currentZoom + ')';
+        if (zoomLevelEl) zoomLevelEl.textContent = Math.round(currentZoom * 100) + '%';
+        updateMinimap();
+      }
+
+      // Zoom Button Controls
       const zoomInBtn = document.getElementById('canvas-zoom-in');
       const zoomOutBtn = document.getElementById('canvas-zoom-out');
       const resetBtn = document.getElementById('canvas-reset-btn');
+      const fitBtn = document.getElementById('canvas-btn-fit');
+      const leadBtn = document.getElementById('canvas-btn-lead');
+      const findMeBtn = document.getElementById('canvas-find-me-btn');
 
-      if (zoomInBtn) {
-        zoomInBtn.addEventListener('click', function() {
-          if (currentZoom < 2.0) {
-            currentZoom = Math.min(2.0, currentZoom + 0.15);
-            updateTransform();
-          }
-        });
-      }
-
-      if (zoomOutBtn) {
-        zoomOutBtn.addEventListener('click', function() {
-          if (currentZoom > 0.4) {
-            currentZoom = Math.max(0.4, currentZoom - 0.15);
-            updateTransform();
-          }
-        });
-      }
-
+      if (zoomInBtn) zoomInBtn.addEventListener('click', function() { setZoom(Math.min(2.0, currentZoom + 0.15)); });
+      if (zoomOutBtn) zoomOutBtn.addEventListener('click', function() { setZoom(Math.max(0.3, currentZoom - 0.15)); });
       if (resetBtn) {
         resetBtn.addEventListener('click', function() {
-          currentZoom = 1.0;
+          setZoom(1.0);
           activeRootId = null;
-          updateTransform();
           loadCanvasTree(currentMaxDepth, null);
         });
       }
 
-      // Depth Buttons (3 Lvl, 5 Lvl, All)
+      if (fitBtn) {
+        fitBtn.addEventListener('click', function() {
+          if (!viewport || !surface) return;
+          const vWidth = viewport.clientWidth;
+          const sWidth = parseInt(surface.style.width || '1900', 10);
+          const ratio = Math.max(0.35, Math.min(1.0, (vWidth - 60) / sWidth));
+          setZoom(ratio);
+          viewport.scrollLeft = Math.max(0, (sWidth * ratio - vWidth) / 2);
+          viewport.scrollTop = 0;
+        });
+      }
+
+      if (leadBtn) {
+        leadBtn.addEventListener('click', function() {
+          const rootEl = document.querySelector('.canvas-org-cluster[data-level="1"]');
+          if (rootEl) {
+            rootEl.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+            rootEl.classList.add('selected-node');
+            setTimeout(function() { rootEl.classList.remove('selected-node'); }, 2000);
+          }
+        });
+      }
+
+      if (findMeBtn) {
+        findMeBtn.addEventListener('click', function() {
+          // Focus on the first team node or lead
+          const target = document.querySelector('.canvas-org-cluster');
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+            target.classList.add('selected-node');
+            const nId = target.getAttribute('data-node-id');
+            const node = allRenderedNodes.find(function(item) { return item.id === nId; });
+            if (node) showNodeInspector(node);
+          }
+        });
+      }
+
+      // Depth Buttons (Progressive Tree Scope)
       document.querySelectorAll('.canvas-depth-selector .depth-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
           document.querySelectorAll('.canvas-depth-selector .depth-btn').forEach(function(b) { b.classList.remove('active'); });
           btn.classList.add('active');
-          currentMaxDepth = parseInt(btn.getAttribute('data-depth') || '5', 10);
+          currentMaxDepth = parseInt(btn.getAttribute('data-depth') || '2', 10);
           loadCanvasTree(currentMaxDepth, activeRootId);
         });
       });
 
-      // Fetch Real Database Tree
+      // ── Fetch Progressive Hierarchy Data from Real SQLite DB ──
       async function loadCanvasTree(depth, rootId) {
         if (!nodesContainer || !svgLayer) return;
-        if (nodeCountEl) nodeCountEl.textContent = 'Loading live organization...';
 
         try {
           const prefix = window.location.pathname.startsWith('/portal') ? '/portal' : '';
@@ -85,18 +179,25 @@ export function getCanvasClientScript(): string {
           const body = await res.json();
           activeOrgTree = body.data;
 
-          if (nodeCountEl && activeOrgTree) {
-            nodeCountEl.textContent = activeOrgTree.totalEmployees + ' Colleagues (' + (activeOrgTree.divisions || []).length + ' Divisions)';
-          }
-
+          updateHeaderSummary(activeOrgTree);
           renderDynamicFilters(activeOrgTree.divisions || []);
           renderCanvasNodesAndEdges(activeOrgTree.root);
         } catch(e) {
-          if (nodeCountEl) nodeCountEl.textContent = 'Live tree sync offline';
+          console.error('Failed to load org tree:', e);
         }
       }
 
-      // Render Dynamic Division Filter Buttons
+      function updateHeaderSummary(tree) {
+        if (!tree) return;
+        const total = tree.totalEmployees || 0;
+        const divs = tree.divisions || [];
+        const totalSumEl = document.getElementById('canvas-total-summary');
+        const divSumEl = document.getElementById('canvas-div-summary');
+
+        if (totalSumEl) totalSumEl.textContent = total + ' Team Members';
+        if (divSumEl) divSumEl.textContent = divs.length + ' Operational Divisions';
+      }
+
       function renderDynamicFilters(divisions) {
         if (!deptFiltersContainer) return;
         deptFiltersContainer.innerHTML = '<button class="filter-pill active" data-div="all">All Divisions</button>' +
@@ -108,8 +209,8 @@ export function getCanvasClientScript(): string {
           pill.addEventListener('click', function() {
             deptFiltersContainer.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('active'); });
             pill.classList.add('active');
-            const targetDiv = pill.getAttribute('data-div');
-            filterNodesByDivision(targetDiv);
+            activeDivisionFilter = pill.getAttribute('data-div');
+            filterNodesByDivision(activeDivisionFilter);
           });
         });
       }
@@ -121,13 +222,13 @@ export function getCanvasClientScript(): string {
             c.style.opacity = '1';
             c.style.filter = 'none';
           } else {
-            c.style.opacity = '0.2';
+            c.style.opacity = '0.15';
             c.style.filter = 'grayscale(100%)';
           }
         });
       }
 
-      // Layout Algorithm & Coordinate Computation
+      // ── 2D Canvas Layout Algorithm ──
       function renderCanvasNodesAndEdges(rootNode) {
         if (!rootNode) {
           nodesContainer.innerHTML = '<div style="padding: 2rem; color: var(--forge-text-muted);">No organization nodes found.</div>';
@@ -139,7 +240,6 @@ export function getCanvasClientScript(): string {
         const levels = {};
         const nodePositions = new Map();
 
-        // Group nodes by level (1 to 5+)
         function traverse(node, parentId) {
           if (!levels[node.level]) levels[node.level] = [];
           levels[node.level].push({ node: node, parentId: parentId });
@@ -148,23 +248,21 @@ export function getCanvasClientScript(): string {
         }
         traverse(rootNode, null);
 
-        const cardWidth = 270;
-        const cardHeight = 110;
-        const levelYSpacing = 170;
+        const cardWidth = 280;
+        const cardHeight = 115;
+        const levelYSpacing = 180;
         const startY = 40;
 
-        // Determine max breadth across all rendered levels
         let maxBreadth = 1;
         Object.keys(levels).forEach(function(lvl) {
           if (levels[lvl].length > maxBreadth) maxBreadth = levels[lvl].length;
         });
 
-        const totalWidth = Math.max(1800, maxBreadth * (cardWidth + 40) + 200);
-        const totalHeight = Math.max(1000, Object.keys(levels).length * levelYSpacing + 300);
+        const totalWidth = Math.max(1600, maxBreadth * (cardWidth + 48) + 200);
+        const totalHeight = Math.max(800, Object.keys(levels).length * levelYSpacing + 260);
         surface.style.width = totalWidth + 'px';
         surface.style.height = totalHeight + 'px';
 
-        // Compute X & Y coordinates
         Object.keys(levels).forEach(function(lvlStr) {
           const lvl = parseInt(lvlStr, 10);
           const nodesInLevel = levels[lvl];
@@ -177,7 +275,7 @@ export function getCanvasClientScript(): string {
           });
         });
 
-        // Generate SVG Bezier Connection Lines
+        // Dynamic SVG Bezier Connection Curves
         let svgHtml = '';
         nodePositions.forEach(function(pos, nodeId) {
           const parentId = pos.item.parentId;
@@ -189,12 +287,14 @@ export function getCanvasClientScript(): string {
             const cy = pos.y;
             const midY = (py + cy) / 2;
 
-            svgHtml += '<path class="canvas-edge-line" d="M ' + px + ' ' + py + ' C ' + px + ' ' + midY + ', ' + cx + ' ' + midY + ', ' + cx + ' ' + cy + '" />';
+            svgHtml += '<path class="canvas-edge-line" id="edge-' + parentId + '-' + nodeId + '" ' +
+              'data-from="' + parentId + '" data-to="' + nodeId + '" ' +
+              'd="M ' + px + ' ' + py + ' C ' + px + ' ' + midY + ', ' + cx + ' ' + midY + ', ' + cx + ' ' + cy + '" />';
           }
         });
         svgLayer.innerHTML = svgHtml;
 
-        // Generate Node Cards
+        // Render Astryx Node Cards
         let nodesHtml = '';
         nodePositions.forEach(function(pos, nodeId) {
           const n = pos.item.node;
@@ -202,14 +302,15 @@ export function getCanvasClientScript(): string {
           const statusClass = n.status === 'ONLINE' ? 'status-online' : (n.status === 'BUSY' ? 'status-busy' : 'status-away');
 
           let expandHtml = '';
-          if (n.hasMoreChildren) {
-            expandHtml = '<button class="node-expand-btn" data-expand-id="' + n.id + '">+ ' + n.directReportCount + ' Reports (Expand Lvl ' + (n.level + 1) + ')</button>';
+          if (n.hasMoreChildren || (n.directReportCount > 0 && (!n.children || !n.children.length))) {
+            expandHtml = '<button class="node-expand-btn" data-expand-id="' + n.id + '">+ ' + n.directReportCount + ' Reports (Expand Team)</button>';
           }
 
-          nodesHtml += '<div class="canvas-org-cluster" style="left: ' + pos.x + 'px; top: ' + pos.y + 'px;" data-node-id="' + n.id + '" data-division="' + n.division + '">' +
+          nodesHtml += '<div class="canvas-org-cluster" style="left: ' + pos.x + 'px; top: ' + pos.y + 'px;" ' +
+            'data-node-id="' + n.id + '" data-division="' + n.division + '" data-level="' + n.level + '" data-manager="' + (n.managerId || '') + '">' +
             '<div class="cluster-header">' +
-              '<span class="cluster-badge">' + n.department + '</span>' +
-              '<span class="cluster-count">Lvl ' + n.level + (n.directReportCount > 0 ? ' • ' + n.directReportCount + ' reports' : '') + '</span>' +
+              '<span class="cluster-badge">' + n.division + '</span>' +
+              '<span class="cluster-count">L' + n.level + (n.directReportCount > 0 ? ' • ' + n.directReportCount + ' reports' : '') + '</span>' +
             '</div>' +
             '<div class="org-node-card ' + (n.level === 1 ? 'node-lead' : '') + '">' +
               '<div class="node-avatar">' + initials + '</div>' +
@@ -224,105 +325,108 @@ export function getCanvasClientScript(): string {
         });
         nodesContainer.innerHTML = nodesHtml;
 
-        // Attach Node Interaction Listeners
         attachNodeListeners();
+        updateMinimap();
       }
 
       function attachNodeListeners() {
-        // Node Selection & Inspector Display
         document.querySelectorAll('.canvas-org-cluster').forEach(function(card) {
           card.addEventListener('click', function(e) {
             if (e.target.closest('.node-expand-btn')) return;
             const nId = card.getAttribute('data-node-id');
             const targetNode = allRenderedNodes.find(function(item) { return item.id === nId; });
-            if (targetNode) showNodeInspector(targetNode);
+            if (targetNode) {
+              showNodeInspector(targetNode);
+              highlightPathToRoot(targetNode.id);
+            }
+          });
+
+          card.addEventListener('mouseenter', function() {
+            const nId = card.getAttribute('data-node-id');
+            highlightPathToRoot(nId);
+          });
+
+          card.addEventListener('mouseleave', function() {
+            const selected = document.querySelector('.canvas-org-cluster.selected-node');
+            if (selected) {
+              highlightPathToRoot(selected.getAttribute('data-node-id'));
+            } else {
+              clearPathHighlights();
+            }
           });
         });
 
-        // On-Click Progressive Subtree Expansion (for Level 5+ Nodes)
+        // Subtree Progressive Expansion
         document.querySelectorAll('.node-expand-btn').forEach(function(btn) {
           btn.addEventListener('click', function(e) {
             e.stopPropagation();
             const expandId = btn.getAttribute('data-expand-id');
             activeRootId = expandId;
-            loadCanvasTree(currentMaxDepth, expandId);
+            loadCanvasTree(currentMaxDepth + 2, expandId);
           });
         });
       }
 
-      // Show Colleague Inspector Panel
-      function showNodeInspector(node) {
-        if (!inspector) return;
-        document.querySelectorAll('.canvas-org-cluster').forEach(function(c) { c.classList.remove('selected-node'); });
-        const selected = document.querySelector('.canvas-org-cluster[data-node-id="' + node.id + '"]');
-        if (selected) selected.classList.add('selected-node');
+      // ── Position-Fixed Minimap Synchronization & Click-to-Pan ──
+      function updateMinimap() {
+        if (!minimapIndicator || !viewport || !surface) return;
+        const vW = viewport.clientWidth, vH = viewport.clientHeight;
+        const sW = (parseInt(surface.style.width || '1600', 10)) * currentZoom;
+        const sH = (parseInt(surface.style.height || '800', 10)) * currentZoom;
 
-        const initials = node.name.split(' ').map(function(w) { return w[0]; }).join('').slice(0, 2).toUpperCase();
-        document.getElementById('inspector-avatar').textContent = initials;
-        document.getElementById('inspector-full-name').textContent = node.name;
-        document.getElementById('inspector-role').textContent = node.title;
-        document.getElementById('inspector-division').textContent = node.division;
-        document.getElementById('inspector-department').textContent = node.department;
-        document.getElementById('inspector-email').textContent = node.email;
-        document.getElementById('inspector-level').textContent = 'Level ' + node.level;
-        document.getElementById('inspector-reports').textContent = node.directReportCount + ' direct (' + node.totalSubtreeCount + ' total in subtree)';
+        const wPct = Math.min(100, Math.max(12, (vW / sW) * 100));
+        const hPct = Math.min(100, Math.max(15, (vH / sH) * 100));
+        const lPct = Math.min(100 - wPct, Math.max(0, (viewport.scrollLeft / sW) * 100));
+        const tPct = Math.min(100 - hPct, Math.max(0, (viewport.scrollTop / sH) * 100));
 
-        const focusBtn = document.getElementById('inspector-focus-sub-btn');
-        if (focusBtn) {
-          focusBtn.onclick = function() {
-            activeRootId = node.id;
-            loadCanvasTree(currentMaxDepth, node.id);
-          };
-        }
-
-        const copyBtn = document.getElementById('inspector-copy-email-btn');
-        if (copyBtn) {
-          copyBtn.onclick = function() {
-            if (navigator.clipboard) navigator.clipboard.writeText(node.email);
-            if (window.astryxToast) window.astryxToast.show('Copied email: ' + node.email, 'success');
-          };
-        }
-
-        inspector.style.display = 'block';
+        minimapIndicator.style.width = wPct.toFixed(1) + '%';
+        minimapIndicator.style.height = hPct.toFixed(1) + '%';
+        minimapIndicator.style.left = lPct.toFixed(1) + '%';
+        minimapIndicator.style.top = tPct.toFixed(1) + '%';
       }
 
-      if (inspectorCloseBtn) {
-        inspectorCloseBtn.addEventListener('click', function() {
-          if (inspector) inspector.style.display = 'none';
+      if (minimapBox && viewport && surface) {
+        minimapBox.addEventListener('click', function(e) {
+          const rect = minimapBox.getBoundingClientRect();
+          const clickX = (e.clientX - rect.left) / rect.width;
+          const clickY = (e.clientY - rect.top) / rect.height;
+          const sW = (parseInt(surface.style.width || '1600', 10)) * currentZoom;
+          const sH = (parseInt(surface.style.height || '800', 10)) * currentZoom;
+
+          viewport.scrollLeft = clickX * sW - viewport.clientWidth / 2;
+          viewport.scrollTop = clickY * sH - viewport.clientHeight / 2;
+          updateMinimap();
         });
       }
 
-      // Search & Center on Node
+      // ── Instant Search ──
       if (searchInput) {
         searchInput.addEventListener('input', function(e) {
           const q = (e.target.value || '').toLowerCase().trim();
+          let firstMatch = null;
+
           document.querySelectorAll('.canvas-org-cluster').forEach(function(card) {
             const text = (card.textContent || '').toLowerCase();
             if (!q || text.includes(q)) {
               card.style.opacity = '1';
               card.style.filter = 'none';
+              if (q && !firstMatch) firstMatch = card;
             } else {
-              card.style.opacity = '0.2';
+              card.style.opacity = '0.15';
               card.style.filter = 'grayscale(100%)';
             }
           });
-        });
-      }
 
-      // Find My Team (Center on Level 1 Lead)
-      const findMeBtn = document.getElementById('canvas-find-me-btn');
-      if (findMeBtn && viewport) {
-        findMeBtn.addEventListener('click', function() {
-          const lead = document.querySelector('.canvas-org-cluster[style*="top: 40px"]');
-          if (lead) {
-            lead.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
-            lead.classList.add('selected-node');
-            setTimeout(function() { lead.classList.remove('selected-node'); }, 2000);
+          if (firstMatch && q.length > 2) {
+            firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
           }
         });
       }
 
-      // Initialize on load
+      ${getCanvasInspectorScript()}
+      ${getCanvasViewsScript()}
+
+      // Initial load with focused Depth 2
       loadCanvasTree(currentMaxDepth, null);
     })();
   `;
