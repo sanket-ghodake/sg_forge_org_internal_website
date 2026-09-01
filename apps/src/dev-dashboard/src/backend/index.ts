@@ -5,4 +5,6 @@
 
 export * from './telemetry';
 export * from './services-controller';
+export * from './employee-controller';
 export * from './api-handlers';
+

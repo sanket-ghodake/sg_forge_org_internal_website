@@ -4,100 +4,45 @@
  */
 
 import { getAstryxStyles } from '@forge/ui';
+import { getEmployeeStyles } from './ui-employee-styles';
+import { getDbStudioStyles } from './ui-db-styles';
+import { getServicesStyles } from './ui-services-styles';
+import { getDropdownStyles } from './ui-dropdown-styles';
 
 export function getDashboardStyles(): string {
   return `
     ${getAstryxStyles()}
+    ${getEmployeeStyles()}
+    ${getDropdownStyles()}
     
     html { font-size: 13px; }
     *, *::before, *::after { box-sizing: border-box; }
-    body {
-      overflow-x: hidden;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background: var(--forge-bg-root);
-      margin: 0;
-    }
+    body { overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; background: var(--forge-bg-root); margin: 0; }
 
     /* 1. Global Top Header Bar */
     .sb-global-header {
-      width: 100%;
-      height: 48px;
-      background: var(--forge-bg-surface);
-      border-bottom: 1px solid var(--forge-border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+      width: 100%; height: 48px; background: var(--forge-bg-surface); border-bottom: 1px solid var(--forge-border);
+      display: flex; align-items: center; justify-content: space-between; padding: 0 1rem; position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
     }
     .sb-header-left, .sb-header-right { display: flex; align-items: center; gap: 0.65rem; }
     .sb-header-center { display: flex; align-items: center; flex: 1; max-width: 440px; margin: 0 1rem; }
-
     .sb-mobile-menu-btn {
-      display: none;
-      background: transparent;
-      border: 1px solid var(--forge-border);
-      border-radius: var(--forge-radius-sm);
-      color: var(--forge-text-main);
-      font-size: 1.1rem;
-      padding: 0.2rem 0.45rem;
-      cursor: pointer;
-      line-height: 1;
-      transition: var(--forge-transition);
+      display: none; background: transparent; border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm);
+      color: var(--forge-text-main); font-size: 1.1rem; padding: 0.2rem 0.45rem; cursor: pointer; line-height: 1; transition: var(--forge-transition);
     }
     .sb-mobile-menu-btn:hover { background: var(--forge-bg-card-hover); border-color: var(--forge-border-medium); }
-
-    .sb-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--forge-text-main);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-    }
+    .sb-brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 0.95rem; color: var(--forge-text-main); text-decoration: none; letter-spacing: -0.02em; }
     .sb-header-divider { width: 1px; height: 18px; background: var(--forge-border); margin: 0 0.35rem; }
-
     .sb-header-breadcrumb {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.2rem 0.55rem;
-      background: var(--forge-bg-card);
-      border: 1px solid var(--forge-border);
-      border-radius: var(--forge-radius-full);
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--forge-text-muted);
+      display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.2rem 0.55rem; background: var(--forge-bg-card);
+      border: 1px solid var(--forge-border); border-radius: var(--forge-radius-full); font-size: 0.72rem; font-weight: 600; color: var(--forge-text-muted);
     }
-    .sb-header-breadcrumb .breadcrumb-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--forge-primary); box-shadow: 0 0 6px var(--forge-primary);
-    }
-
+    .sb-header-breadcrumb .breadcrumb-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--forge-primary); box-shadow: 0 0 6px var(--forge-primary); }
     .sb-quick-find-bar {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      padding: 0.3rem 0.75rem;
-      background: var(--forge-bg-card);
-      border: 1px solid var(--forge-border);
-      border-radius: var(--forge-radius-full);
-      cursor: pointer;
-      color: var(--forge-text-muted);
-      font-size: 0.76rem;
-      transition: var(--forge-transition);
-      user-select: none;
+      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.3rem 0.75rem;
+      background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-full);
+      cursor: pointer; color: var(--forge-text-muted); font-size: 0.76rem; transition: var(--forge-transition); user-select: none;
     }
     .sb-quick-find-bar:hover {
       border-color: var(--forge-primary);
@@ -345,17 +290,116 @@ export function getDashboardStyles(): string {
     }
     .data-table tr:hover { background: var(--forge-bg-card-hover); }
 
+    /* Universal Modern Form & Astryx Dropdown Elements */
     .form-input {
       padding: 0.4rem 0.65rem; background: var(--forge-bg-card);
       border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm);
       color: var(--forge-text-main); font-size: 0.82rem; outline: none;
       transition: var(--forge-transition);
     }
-    select.form-input {
-      padding-right: 2rem;
-      cursor: pointer;
-    }
     .form-input:focus { border-color: var(--forge-primary); box-shadow: 0 0 0 2px rgba(62, 207, 142, 0.2); }
+
+    select, select.form-input, .astryx-select {
+      appearance: none !important;
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      background-color: var(--forge-bg-card) !important;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%233ecf8e' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: right 0.75rem center !important;
+      background-size: 13px 13px !important;
+      padding: 0.42rem 2.2rem 0.42rem 0.75rem !important;
+      border: 1px solid var(--forge-border) !important;
+      border-radius: var(--forge-radius-sm) !important;
+      color: var(--forge-text-main) !important;
+      font-size: 0.82rem !important;
+      font-family: inherit !important;
+      outline: none !important;
+      cursor: pointer !important;
+      transition: var(--forge-transition) !important;
+    }
+    select:focus, select.form-input:focus, .astryx-select:focus {
+      border-color: var(--forge-primary) !important;
+      box-shadow: 0 0 0 2px rgba(62, 207, 142, 0.2) !important;
+    }
+    select option, select optgroup {
+      background-color: var(--forge-bg-surface) !important;
+      color: var(--forge-text-main) !important;
+      padding: 0.5rem !important;
+    }
+
+    /* Universal Slim Astryx Scrollbars (Anti-Browser OS Defaults) */
+    *, *::before, *::after {
+      scrollbar-width: thin !important;
+      scrollbar-color: var(--forge-border-medium) transparent !important;
+    }
+    *::-webkit-scrollbar {
+      width: 6px !important;
+      height: 6px !important;
+    }
+    *::-webkit-scrollbar-track {
+      background: transparent !important;
+    }
+    *::-webkit-scrollbar-thumb {
+      background: var(--forge-border-medium) !important;
+      border-radius: 9999px !important;
+      border: 1px solid transparent !important;
+      background-clip: padding-box !important;
+      transition: background-color 0.2s ease !important;
+    }
+    *::-webkit-scrollbar-thumb:hover {
+      background: var(--forge-primary) !important;
+    }
+    *::-webkit-scrollbar-corner {
+      background: transparent !important;
+    }
+
+    /* Modern Astryx Glassmorphic Toast Notifications */
+    .astryx-toast-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      z-index: 9999;
+      pointer-events: none;
+      max-width: 420px;
+      width: calc(100vw - 3rem);
+    }
+    .astryx-toast {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: var(--forge-bg-surface);
+      border: 1px solid var(--forge-border-medium);
+      border-radius: var(--forge-radius-sm);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(62, 207, 142, 0.1);
+      backdrop-filter: blur(12px);
+      color: var(--forge-text-main);
+      font-size: 0.84rem;
+      font-weight: 500;
+      animation: toastSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes toastSlideIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .astryx-toast-success { border-left: 4px solid var(--forge-success); }
+    .astryx-toast-error { border-left: 4px solid var(--forge-accent); }
+    .astryx-toast-warning { border-left: 4px solid var(--forge-accent); }
+    .astryx-toast-info { border-left: 4px solid var(--forge-primary); }
+    .astryx-toast-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .astryx-toast-content { flex: 1; line-height: 1.4; word-break: break-word; }
+    .astryx-toast-close {
+      background: none; border: none; color: var(--forge-text-muted);
+      cursor: pointer; font-size: 1.1rem; padding: 0 0.2rem;
+      transition: color 0.15s ease;
+    }
+    .astryx-toast-close:hover { color: var(--forge-text-main); }
 
     /* Watchdog Heartbeat Pill */
     .watchdog-pill {
@@ -401,83 +445,8 @@ export function getDashboardStyles(): string {
     .palette-item { display: flex; align-items: center; justify-content: space-between; padding: 0.55rem 0.75rem; border-radius: var(--forge-radius-sm); cursor: pointer; color: var(--forge-text-main); font-size: 0.84rem; }
     .palette-item:hover, .palette-item.active { background: var(--forge-bg-card-hover); color: var(--forge-primary); }
 
-    /* Table Browser & Schema Drawer */
-    .schema-code-box { background: var(--forge-bg-elevated); padding: 0.75rem; border-radius: var(--forge-radius-sm); border: 1px solid var(--forge-border); font-family: monospace; font-size: 0.78rem; color: var(--forge-text-main); overflow-x: auto; white-space: pre-wrap; }
-
-    /* Unified Database Studio Layout (Developer POV / Full-Screen IDE) */
-    .db-studio-layout { display: grid; grid-template-columns: 240px 1fr; gap: 0.85rem; align-items: stretch; min-height: 520px; }
-    @media (max-width: 1024px) { .db-studio-layout { grid-template-columns: 1fr; } }
-    .db-studio-sidebar { display: flex; flex-direction: column; gap: 0.65rem; min-width: 0; }
-    .db-studio-main { display: flex; flex-direction: column; gap: 0.65rem; min-width: 0; }
-    .db-studio-fullscreen { position: fixed; inset: 0; z-index: 500; background: var(--forge-bg-surface); padding: 0.85rem; overflow: auto; display: flex; flex-direction: column; }
-    .db-subtab-bar { display: flex; gap: 0.35rem; border-bottom: 1px solid var(--forge-border); padding-bottom: 0.45rem; margin-bottom: 0.65rem; }
-    .db-subtab-btn { padding: 0.3rem 0.75rem; border-radius: var(--forge-radius-sm); font-size: 0.8rem; font-weight: 600; border: 1px solid var(--forge-border); background: var(--forge-bg-card); color: var(--forge-text-muted); cursor: pointer; transition: var(--forge-transition); }
-    .db-subtab-btn:hover { color: var(--forge-text-main); border-color: var(--forge-border-medium); }
-    .db-subtab-btn.active { background: var(--forge-bg-card-hover); color: var(--forge-primary); border-color: var(--forge-primary); box-shadow: 0 0 8px rgba(62, 207, 142, 0.15); }
-    .db-table-item { display: flex; align-items: center; justify-content: space-between; padding: 0.4rem 0.6rem; border-radius: var(--forge-radius-sm); cursor: pointer; border: 1px solid transparent; transition: var(--forge-transition); font-size: 0.8rem; }
-    .db-table-item:hover { background: var(--forge-bg-card-hover); border-color: var(--forge-border); }
-    .db-table-item.active { background: rgba(62, 207, 142, 0.1); border-color: var(--forge-primary); color: var(--forge-primary); font-weight: 600; }
-
-    /* DB Live Telemetry Bar & Metrics */
-    .db-telemetry-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.45rem; margin-top: 0.65rem; padding-top: 0.65rem; border-top: 1px solid var(--forge-border); }
-    .db-metric-chip { background: var(--forge-bg-elevated); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.4rem 0.6rem; display: flex; flex-direction: column; gap: 0.1rem; }
-    .db-metric-val { font-size: 0.92rem; font-weight: 700; color: var(--forge-text-main); font-family: monospace; }
-    .db-metric-lbl { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--forge-text-muted); }
-    .db-perf-badge { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.72rem; font-family: monospace; padding: 0.15rem 0.45rem; border-radius: var(--forge-radius-full); font-weight: 600; }
-    .db-perf-fast { background: rgba(62, 207, 142, 0.15); color: var(--forge-primary); border: 1px solid var(--forge-primary); }
-    .db-perf-med { background: rgba(245, 166, 35, 0.15); color: var(--forge-accent); border: 1px solid var(--forge-border); }
-    .db-perf-slow { background: rgba(255, 77, 79, 0.15); color: var(--forge-accent); border: 1px solid var(--forge-border); }
-
-    /* Dynamic Query Chips & Resizable Data Grid */
-    .db-query-chip { background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-full); padding: 0.2rem 0.6rem; font-size: 0.72rem; color: var(--forge-text-muted); cursor: pointer; transition: var(--forge-transition); display: inline-flex; align-items: center; gap: 0.25rem; font-family: monospace; }
-    .db-query-chip:hover { border-color: var(--forge-primary); color: var(--forge-primary); background: rgba(62,207,142,0.08); }
-    .col-resizable-th { position: relative; user-select: none; }
-    .col-resizer { position: absolute; right: 0; top: 0; bottom: 0; width: 6px; cursor: col-resize; z-index: 20; background: transparent; transition: background 0.15s; }
-    .col-resizer:hover, .col-resizer.resizing { background: var(--forge-primary); }
-    .cell-null { font-style: italic; color: var(--forge-text-muted); opacity: 0.6; font-size: 0.74rem; }
-    .cell-pk { color: var(--forge-primary); margin-right: 0.25rem; font-size: 0.75rem; }
-    .cell-row-num { color: var(--forge-text-muted); font-size: 0.7rem; text-align: center; width: 34px; background: rgba(255,255,255,0.02); font-family: monospace; }
-    .cell-copyable { cursor: pointer; transition: background 0.12s ease; font-family: monospace; font-size: 0.8rem; }
-    .cell-copyable:hover { background: rgba(62, 207, 142, 0.12); color: var(--forge-primary); }
-
-    /* Visual ER Schema Relationship Graph */
-    .db-er-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.85rem; padding: 0.4rem 0; }
-    .db-er-card { background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: var(--forge-transition); }
-    .db-er-card:hover { border-color: var(--forge-primary); transform: translateY(-2px); }
-    .db-er-header { background: var(--forge-bg-elevated); padding: 0.45rem 0.65rem; border-bottom: 1px solid var(--forge-border); display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 0.82rem; }
-    .db-er-cols { padding: 0.35rem 0.45rem; display: flex; flex-direction: column; gap: 0.15rem; max-height: 240px; overflow-y: auto; font-size: 0.74rem; }
-    .db-er-col { display: flex; justify-content: space-between; align-items: center; padding: 0.15rem 0.3rem; border-radius: var(--forge-radius-xs); }
-    .db-er-col:hover { background: var(--forge-bg-elevated); }
-    .db-er-pk { color: var(--forge-primary); font-weight: 700; }
-    .db-er-fk { color: var(--forge-accent); font-weight: 600; }
-    .db-er-edge-badge { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.68rem; background: rgba(62, 207, 142, 0.08); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-xs); padding: 0.15rem 0.35rem; color: var(--forge-text-main); margin-top: 0.2rem; }
-
-    /* 2026 Services & Processes Command Center (Option C) */
-    .services-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1rem; }
-    .services-search-box { display: flex; align-items: center; gap: 0.5rem; background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-full); padding: 0.35rem 0.85rem; flex: 1; max-width: 360px; min-width: 220px; }
-    .services-search-box input { background: transparent; border: none; outline: none; color: var(--forge-text-main); font-size: 0.82rem; width: 100%; -webkit-appearance: none; appearance: none; }
-    .services-search-box input::-webkit-search-cancel-button,
-    .services-search-box input::-webkit-search-decoration { -webkit-appearance: none; display: none; }
-    .filter-chip-group { display: flex; gap: 0.35rem; align-items: center; flex-wrap: wrap; }
-    .filter-chip { padding: 0.25rem 0.65rem; border-radius: var(--forge-radius-full); font-size: 0.72rem; font-weight: 600; border: 1px solid var(--forge-border); background: var(--forge-bg-card); color: var(--forge-text-muted); cursor: pointer; transition: var(--forge-transition); user-select: none; }
-    .filter-chip:hover { color: var(--forge-text-main); border-color: var(--forge-border-medium); }
-    .filter-chip.active { background: var(--forge-bg-card-hover); color: var(--forge-primary); border-color: var(--forge-primary); box-shadow: 0 0 8px rgba(62, 207, 142, 0.15); }
-    
-    .service-row-clickable { cursor: pointer; transition: background 0.15s ease; }
-    .service-row-clickable:hover { background: var(--forge-bg-card-hover) !important; }
-    .service-row-clickable.selected-row { background: rgba(62, 207, 142, 0.08) !important; outline: 1px solid var(--forge-primary); }
-    
-    /* Option C Flyout Service Inspector Drawer */
-    .service-drawer-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(4px); z-index: 210; opacity: 0; pointer-events: none; transition: opacity 0.22s ease; }
-    .service-drawer-backdrop.open { opacity: 1; pointer-events: auto; }
-    .service-drawer { position: fixed; top: 0; right: 0; width: min(94vw, 540px); height: 100vh; background: var(--forge-bg-surface); border-left: 1px solid var(--forge-border-medium); box-shadow: -12px 0 40px rgba(0, 0, 0, 0.55); transform: translateX(100%); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); z-index: 220; display: flex; flex-direction: column; overflow: hidden; }
-    .service-drawer.open { transform: translateX(0); }
-    .drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; border-bottom: 1px solid var(--forge-border); background: var(--forge-bg-card); flex-shrink: 0; }
-    .drawer-body { flex: 1; overflow-y: auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; }
-    .drawer-card { background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 1rem; }
-    .drawer-card-title { font-size: 0.85rem; font-weight: 700; color: var(--forge-text-main); margin-bottom: 0.65rem; display: flex; align-items: center; justify-content: space-between; }
-    .drawer-probe-result { font-family: monospace; font-size: 0.74rem; background: var(--forge-bg-elevated); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.65rem; max-height: 160px; overflow-y: auto; white-space: pre-wrap; color: var(--forge-text-main); }
-    .drawer-log-list { font-family: monospace; font-size: 0.72rem; background: var(--forge-bg-elevated); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.5rem; max-height: 180px; overflow-y: auto; }
+    ${getDbStudioStyles()}
+    ${getServicesStyles()}
 
     /* Responsive Mobile Breakpoint */
     @media (max-width: 900px) {

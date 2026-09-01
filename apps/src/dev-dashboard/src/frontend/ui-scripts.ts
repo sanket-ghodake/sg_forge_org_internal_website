@@ -2,11 +2,20 @@ import { getLogDashboardScripts } from './ui-log-scripts';
 import { getToolsDashboardScripts } from './ui-tools-scripts';
 import { getDbDashboardScripts } from './ui-db-scripts';
 import { getServicesDashboardScripts } from './ui-services-scripts';
+import { getEmployeeDashboardScripts } from './ui-employee-scripts';
+import { getDropdownScripts } from './ui-dropdown-scripts';
 import { getAstryxToastScript } from '@forge/ui';
 
 export function getDashboardScripts(): string {
   return `
     ${getAstryxToastScript()}
+    ${getDropdownScripts()}
+
+    window.showAstryxToast = function(type, message, duration = 4000) {
+      if (typeof window.astryxToast === 'function') {
+        window.astryxToast(message, type, duration);
+      }
+    };
 
     const apiBase = window.location.pathname.startsWith('/devcenter') ? '/devcenter' : '';
     let currentAppLogService = null;
@@ -110,6 +119,7 @@ export function getDashboardScripts(): string {
       logs: 'Isolated App Logs',
       traffic: 'Traffic Analytics',
       issues: 'Issue Center',
+      employees: 'Employees & Org',
       host: 'Host & Cloud',
       settings: 'Settings & Tools'
     };
@@ -149,6 +159,7 @@ export function getDashboardScripts(): string {
       if (tabId === 'logs') loadActiveTabLogs();
       if (tabId === 'traffic') loadTraffic();
       if (tabId === 'issues') loadIssues();
+      if (tabId === 'employees') loadEmployees();
       if (tabId === 'host') loadHostVitals();
       if (tabId === 'settings') loadAudit();
     }
@@ -174,6 +185,7 @@ export function getDashboardScripts(): string {
     ${getToolsDashboardScripts()}
     ${getDbDashboardScripts()}
     ${getServicesDashboardScripts()}
+    ${getEmployeeDashboardScripts()}
 
     function renderSparklineSvg(data, isArea) {
       if (!data || !data.length) return '';
@@ -355,6 +367,7 @@ export function getDashboardScripts(): string {
       else if (tab === 'traffic') loadTraffic();
       else if (tab === 'apps') loadApps();
       else if (tab === 'issues') loadIssues();
+      else if (tab === 'employees') loadEmployees();
     }
 
     // 🚀 Mount Initial Tab & Start Resilient SSE Watchdog

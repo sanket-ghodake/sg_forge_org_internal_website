@@ -79,6 +79,7 @@ export function getToolsDashboardScripts(): string {
       { label: '🧩 Registered Forge Apps', action: () => switchTab('apps') },
       { label: '🗄️ Unified Database Studio', action: () => switchTab('database') },
       { label: '📜 Isolated App Logs & Observability', action: () => switchTab('logs') },
+      { label: '👥 Organization Command & Employee Studio', action: () => switchTab('employees') },
       { label: '📈 Real-time Traffic Analytics', action: () => switchTab('traffic') },
       { label: '⚠️ Issue Incident Center (RFC 7807)', action: () => switchTab('issues') },
       { label: '☁️ Host Infrastructure Metrics', action: () => switchTab('host') },
@@ -189,8 +190,12 @@ export function getToolsDashboardScripts(): string {
         closeHelpModal();
         closeAppLogsModal();
         if (typeof closeServiceDrawer === 'function') closeServiceDrawer();
+        if (typeof closeEmployeeModal === 'function') closeEmployeeModal();
+        if (typeof closeEmployeeDrawer === 'function') closeEmployeeDrawer();
+        if (typeof closeHierarchyModal === 'function') closeHierarchyModal();
+        if (typeof closeImportWizard === 'function') closeImportWizard();
       } else if (document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
-        const tabMap = { '1': 'overview', '2': 'services', '3': 'apps', '4': 'database', '5': 'logs', '6': 'traffic', '7': 'issues', '8': 'host', '9': 'settings' };
+        const tabMap = { '1': 'overview', '2': 'services', '3': 'apps', '4': 'database', '5': 'logs', '6': 'traffic', '7': 'issues', '8': 'employees', '9': 'host', '0': 'settings' };
         if (tabMap[e.key]) switchTab(tabMap[e.key]);
       }
     });

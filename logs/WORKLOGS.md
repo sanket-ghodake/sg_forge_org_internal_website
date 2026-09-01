@@ -306,3 +306,12 @@
 2026-09-01 12:22 | Standardized Supabase dark theme depth, elevation hierarchy, and head state script across Developer Gateway and all micro-apps
 2026-09-01 12:26 | Upgraded Developer Gateway to 2026 Tech Giant standard with live health mesh, token mint/inspector, dynamic route matrix, and polyglot request generator
 2026-09-01 12:30 | [34a5c08] feat(dev-hub): elevate developer gateway to 2026 tech giant standard with live health mesh, token mint, route matrix, and polyglot request builder (+2017, -180)
+2026-09-01 12:55 | Implemented Employee Directory & Bulk CSV/JSON Import Studio in Dev Dashboard with full 5-tier test verification
+2026-09-01 13:10 | Enhanced Dev Dashboard Employee Studio with interactive Org Chart Tree, Slide-Over Profile Drawer, and Multi-Row Batch Actions
+2026-09-01 13:15 | Fixed Employee Edit/Add Member flyout modals and transformed Org Chart into MS Teams-inspired focused explorer with manager chain and direct reports
+2026-09-01 13:23 | Modernized all UI dropdowns with Astryx styling, applied slim scrollbars across views, and integrated glassmorphic toast notification engine
+2026-09-01 13:33 | Integrated enterprise table footer with pagination and upgraded floating batch action bar to Linear-grade pill
+2026-09-01 13:48 | Created comprehensive 54-member CRO organizational test dataset and automated seeder script
+2026-09-01 13:49 | Purged obsolete dummy records and aligned all sample templates and datasets with the clean 54-member CRO org hierarchy
+2026-09-01 14:01 | Implemented Meta Astryx custom select dropdown engine with glassmorphic menus and zero OS defaults
+2026-09-01 14:07 | [d994ca6] feat(dev-dashboard): add employee studio, 54-member CRO hierarchy, and custom select dropdowns (+8858, -976)

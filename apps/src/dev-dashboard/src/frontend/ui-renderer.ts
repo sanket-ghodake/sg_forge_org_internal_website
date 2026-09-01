@@ -8,6 +8,7 @@ import { astryxIcons } from '@forge/ui';
 import { getModalsHtml } from './ui-modals';
 import { getDashboardScripts } from './ui-scripts';
 import { getDashboardStyles } from './ui-styles';
+import { renderEmployeesTab } from './ui-renderer-employees';
 
 export function renderDashboardHtml(): string {
   return `<!DOCTYPE html>
@@ -102,6 +103,7 @@ export function renderDashboardHtml(): string {
       <div class="sb-nav-item" data-tab="issues" onclick="switchTab('issues')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('issues')" title="Issue Center" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.issues}</span><span class="sb-nav-label">Issue Center</span></div>
 
       <div class="sb-nav-section-label">Platform</div>
+      <div class="sb-nav-item" data-tab="employees" onclick="switchTab('employees')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('employees')" title="Employees & Org" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.users}</span><span class="sb-nav-label">Employees & Org</span></div>
       <div class="sb-nav-item" data-tab="host" onclick="switchTab('host')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('host')" title="Host & Cloud" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.host}</span><span class="sb-nav-label">Host & Cloud</span></div>
       <div class="sb-nav-item" data-tab="settings" onclick="switchTab('settings')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('settings')" title="Settings & Tools" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.settings}</span><span class="sb-nav-label">Settings & Tools</span></div>
 
@@ -254,7 +256,7 @@ export function renderDashboardHtml(): string {
                   <h3 style="font-size: 0.95rem; margin: 0;" id="db-table-data-title">Table Rows</h3>
                   <div style="display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap;">
                     <input type="search" id="db-table-search-input" placeholder="🔍 Search in table..." class="form-input" style="padding: 0.2rem 0.55rem; font-size: 0.75rem; width: 180px;" oninput="onDbTableSearch(this.value)">
-                    <select id="db-table-limit-select" class="form-input" style="padding: 0.2rem 0.4rem; font-size: 0.75rem;" onchange="changeTableLimit(this.value)">
+                    <select id="db-table-limit-select" class="form-input" onchange="changeTableLimit(this.value)">
                       <option value="15">15 rows</option>
                       <option value="25" selected>25 rows</option>
                       <option value="50">50 rows</option>
@@ -389,6 +391,9 @@ export function renderDashboardHtml(): string {
           <div id="issues-container">Loading incident logs...</div>
         </div>
       </section>
+
+      <!-- Tab: Employees & Org Studio -->
+      ${renderEmployeesTab()}
 
       <!-- Tab 9: Host & Cloud -->
       <section id="tab-host" class="tab-pane">

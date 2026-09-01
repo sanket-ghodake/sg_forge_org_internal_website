@@ -158,5 +158,202 @@ export function getModalsHtml(): string {
     </div>
     <div class="drawer-body" id="drawer-body-content"></div>
   </aside>
+
+  <!-- Add / Edit Employee Flyout Modal -->
+  <div class="astryx-modal-backdrop" id="modal-employee-flyout">
+    <div class="astryx-modal" style="max-width: 580px; width: 92vw;">
+      <div class="astryx-modal-header">
+        <h3 id="modal-employee-title">➕ Add New Employee Profile</h3>
+        <button class="astryx-modal-close" onclick="closeEmployeeModal()">&times;</button>
+      </div>
+      <form class="astryx-modal-body" onsubmit="saveEmployeeForm(event)" style="display: flex; flex-direction: column; gap: 0.85rem; padding: 1.25rem;">
+        <input type="hidden" id="emp-form-id">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+          <div>
+            <label style="font-size: 0.78rem; font-weight: 600; display: block; margin-bottom: 0.25rem;">Full Name *</label>
+            <input type="text" class="form-input" id="emp-form-name" required placeholder="e.g. Elena Rostova">
+          </div>
+          <div>
+            <label style="font-size: 0.78rem; font-weight: 600; display: block; margin-bottom: 0.25rem;">Work Email *</label>
+            <input type="email" class="form-input" id="emp-form-email" required placeholder="elena.r@forge.internal">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+          <div>
+            <label style="font-size: 0.78rem; font-weight: 600; display: block; margin-bottom: 0.25rem;">Job Title</label>
+            <input type="text" class="form-input" id="emp-form-title" placeholder="e.g. Senior Platform Architect">
+          </div>
+          <div>
+            <label style="font-size: 0.78rem; font-weight: 600; display: block; margin-bottom: 0.25rem;">Employee Code</label>
+            <input type="text" class="form-input" id="emp-form-code" placeholder="e.g. ENG-0204">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+          <div>
+            <label style="font-size: 0.78rem; font-weight: 600; display: block; margin-bottom: 0.25rem;">Department / Node</label>
+            <select class="form-input" id="emp-form-dept"></select>
+          </div>
+          <div>
+            <label style="font-size: 0.78rem; font-weight: 600; display: block; margin-bottom: 0.25rem;">Line Manager</label>
+            <select class="form-input" id="emp-form-manager"></select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+          <div>
+            <label style="font-size: 0.78rem; font-weight: 600; display: block; margin-bottom: 0.25rem;">Primary IAM Role</label>
+            <select class="form-input" id="emp-form-role">
+              <option value="roles/employee">Employee Standard (roles/employee)</option>
+              <option value="roles/super_admin">Super Administrator (roles/super_admin)</option>
+              <option value="roles/billing.admin">Billing Administrator (roles/billing.admin)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.78rem; font-weight: 600; display: block; margin-bottom: 0.25rem;">Account Status</label>
+            <select class="form-input" id="emp-form-status">
+              <option value="ACTIVE">🟢 Active</option>
+              <option value="INVITED">🟡 Invited (Pending Password)</option>
+              <option value="SUSPENDED">🔴 Suspended (Blocked)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 0.75rem;">
+          <button type="button" class="astryx-btn btn-outline" onclick="closeEmployeeModal()">Cancel</button>
+          <button type="submit" class="astryx-btn btn-primary">💾 Save Employee</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Hierarchy Visualizer Modal -->
+  <div class="astryx-modal-backdrop" id="modal-hierarchy-view">
+    <div class="astryx-modal" style="max-width: 600px; width: 92vw;">
+      <div class="astryx-modal-header">
+        <h3>👔 Scoped Management Hierarchy & Reporting Line</h3>
+        <button class="astryx-modal-close" onclick="closeHierarchyModal()">&times;</button>
+      </div>
+      <div class="astryx-modal-body" id="hierarchy-content-box" style="padding: 1.25rem; max-height: 480px; overflow-y: auto;"></div>
+    </div>
+  </div>
+
+  <!-- Multi-Step Bulk Import Wizard Modal -->
+  <div class="astryx-modal-backdrop" id="modal-import-wizard">
+    <div class="astryx-modal" style="max-width: 720px; width: 94vw;">
+      <div class="astryx-modal-header">
+        <h3>📥 Bulk Import Organization Employees (CSV / JSON)</h3>
+        <button class="astryx-modal-close" onclick="closeImportWizard()">&times;</button>
+      </div>
+      <div class="astryx-modal-body" style="padding: 1.25rem;">
+        <!-- Step 1: Upload Dropzone -->
+        <div id="import-step-1">
+          <div class="import-dropzone" ondragover="this.classList.add('dragover'); event.preventDefault();" ondragleave="this.classList.remove('dragover');" ondrop="this.classList.remove('dragover'); handleFileDrop(event);">
+            <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">📁</div>
+            <h4 style="margin: 0 0 0.25rem 0;">Drag & Drop CSV or JSON File</h4>
+            <p style="font-size: 0.78rem; color: var(--forge-text-muted); margin: 0 0 1rem 0;">Supports up to 5,000 employee records with auto-column matching</p>
+            <input type="file" id="import-file-input" accept=".csv,.json" style="display: none;" onchange="handleImportFileSelect(event)">
+            <button type="button" class="astryx-btn btn-primary" onclick="document.getElementById('import-file-input').click()">Browse Files</button>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; font-size: 0.75rem; color: var(--forge-text-muted); flex-wrap: wrap; gap: 0.5rem;">
+            <div>💡 Required columns: <code>display_name</code>, <code>email</code>. Optional: <code>job_title</code>, <code>department</code>, <code>manager_email</code>, <code>employee_code</code>, <code>role</code></div>
+            <button type="button" class="astryx-btn btn-outline" style="font-size: 0.72rem; padding: 0.2rem 0.5rem;" onclick="downloadSampleCsvTemplate()">📥 Download Sample CSV</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Auto-Mapping & Settings -->
+        <div id="import-step-2" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <h4 style="margin: 0;">Step 2: Review File Data & Options</h4>
+            <span class="astryx-badge" id="import-record-count-badge">0 records</span>
+          </div>
+
+          <div class="astryx-table-wrap" style="max-height: 220px; overflow-y: auto; margin-bottom: 1rem;">
+            <table class="data-table" style="font-size: 0.75rem;">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Title</th>
+                  <th>Department</th>
+                  <th>Manager</th>
+                  <th>Role</th>
+                </tr>
+              </thead>
+              <tbody id="import-preview-tbody"></tbody>
+            </table>
+          </div>
+
+          <div style="background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.85rem; display: flex; flex-direction: column; gap: 0.5rem;">
+            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; cursor: pointer;">
+              <input type="checkbox" id="import-opt-autodept" checked>
+              <span>Auto-create missing departments/squads in hierarchy tree</span>
+            </label>
+            <div style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.78rem;">
+              <span>Duplicate Handling:</span>
+              <select class="form-input" id="import-opt-duplicate" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">
+                <option value="update">Overwrite & Update Existing (Recommended)</option>
+                <option value="skip">Skip Existing</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+            <button type="button" class="astryx-btn btn-outline" onclick="openImportWizard()">← Back</button>
+            <div style="display: flex; gap: 0.5rem;">
+              <button type="button" class="astryx-btn btn-outline" onclick="executeImportValidation(true)">🩺 Run Dry-Run Check</button>
+              <button type="button" class="astryx-btn btn-primary" onclick="executeImportValidation(false)">🚀 Commit Import</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Dry-Run Summary -->
+        <div id="import-step-3" style="display: none;">
+          <h4 style="margin: 0 0 0.75rem 0;">Step 3: Dry-Run Validation Summary</h4>
+          <div class="db-telemetry-grid" style="margin-bottom: 1rem;">
+            <div class="db-metric-chip"><span class="db-metric-val" style="color: var(--forge-success);" id="dryrun-valid-count">0</span><span class="db-metric-lbl">Valid Rows</span></div>
+            <div class="db-metric-chip"><span class="db-metric-val" style="color: var(--forge-accent);" id="dryrun-invalid-count">0</span><span class="db-metric-lbl">Invalid Rows</span></div>
+            <div class="db-metric-chip"><span class="db-metric-val" id="dryrun-dept-count">0</span><span class="db-metric-lbl">New Depts</span></div>
+          </div>
+
+          <div id="dryrun-errors-box" style="display: none; background: var(--forge-bg-elevated); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.75rem; color: var(--forge-accent); font-size: 0.75rem; max-height: 160px; overflow-y: auto; margin-bottom: 1rem;"></div>
+
+          <div style="display: flex; justify-content: space-between;">
+            <button type="button" class="astryx-btn btn-outline" onclick="showImportStep2()">← Back</button>
+            <button type="button" class="astryx-btn btn-primary" onclick="executeImportValidation(false)">🚀 Confirm & Commit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide-Over Employee Profile Inspector Drawer -->
+  <div class="emp-drawer-backdrop" id="emp-drawer-backdrop" onclick="closeEmployeeDrawer()"></div>
+  <aside class="emp-drawer" id="emp-profile-drawer">
+    <div class="emp-drawer-header">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <div class="emp-avatar" id="drawer-emp-avatar" style="width: 40px; height: 40px; font-size: 0.9rem;">EM</div>
+        <div>
+          <h3 id="drawer-emp-name" style="margin: 0; font-size: 1rem;">Employee Profile</h3>
+          <div id="drawer-emp-email" style="font-size: 0.75rem; color: var(--forge-text-muted); font-family: monospace;">email@forge.internal</div>
+        </div>
+      </div>
+      <button class="astryx-modal-close" onclick="closeEmployeeDrawer()">&times;</button>
+    </div>
+    <div class="emp-drawer-tabs">
+      <button class="emp-tab-btn active" id="tab-btn-emp-overview" onclick="switchDrawerTab('overview')">Overview</button>
+      <button class="emp-tab-btn" id="tab-btn-emp-roles" onclick="switchDrawerTab('roles')">IAM & Access</button>
+      <button class="emp-tab-btn" id="tab-btn-emp-chain" onclick="switchDrawerTab('chain')">Management Chain</button>
+    </div>
+    <div class="emp-drawer-body" id="emp-drawer-body">
+      Loading profile details...
+    </div>
+  </aside>
+
+  <!-- Modern Astryx Toast Overlay Viewport Container -->
+  <div id="astryx-toast-container" class="astryx-toast-container" aria-live="polite" aria-atomic="true"></div>
   `;
 }
+
