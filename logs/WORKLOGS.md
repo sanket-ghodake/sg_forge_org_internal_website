@@ -381,3 +381,9 @@
 2026-09-01 22:04 | Redesigned Company Map & Org Canvas in portal app with 4 golden vitals, multi-perspective tabs, minimap, and Supabase-grade emoji-free aesthetics
 2026-09-01 22:12 | Refined Org Canvas to focus on real employee data, removed redundant top vitals cards, enabled default L2 progressive tree rendering, and fixed position-locked minimap viewport indicator
 2026-09-01 22:13 | [8e7e7fe] feat(portal): redesign company map & org canvas with employee-focused progressive tree, fixed minimap, and supabase craft standard (+11394, -3396)
+2026-09-01 22:23 | Redesign My Apps & Tools Hub in portal with 4 employee-first views (Active Apps, Marketplace, Shortcuts, Requests), personal pinning, and Astryx tokens
+2026-09-01 22:28 | Comprehensive security and architectural audit of password reset and first-time setup flow
+2026-09-01 22:36 | Refactor Apps & Tools Hub to human-centric 2-mode design with 100% real repository services, zero dummy data, and unclipped pinned cards
+2026-09-01 22:46 | Removed People Directory tab and views completely from portal sidebar, search, routes, and styles
+2026-09-01 22:48 | Strictly filter Apps Hub to Forge micro-apps only (Expenses, Billing, Telemetry), relaxed subtitle margin, and fixed horizontal pinned card layout
+2026-09-01 22:51 | [2700a63] feat(portal): redesign Apps & Tools Hub for Forge apps and remove People Directory view (+955, -592)

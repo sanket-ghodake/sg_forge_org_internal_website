@@ -5,7 +5,7 @@
  */
 
 import { authGuard, createLogger, createSafeHandler, handleBrandAssetRequest } from '@forge/sdk';
-import { renderPortalHtml, type HeaderUserContext, REGISTERED_PORTAL_APPS, DIRECTORY_MEMBERS } from './frontend';
+import { renderPortalHtml, type HeaderUserContext, REGISTERED_PORTAL_APPS, ADMIN_ROSTER_MEMBERS } from './frontend';
 import { getOrgTree } from './backend/org-tree-service';
 
 const PORT = Number(process.env.PORTAL_PORT || process.env.PORT || 3001);
@@ -62,7 +62,7 @@ export function startPortalServer(port: number = PORT) {
     }
 
     if (url.pathname === '/api/v1/portal/members' || url.pathname === '/portal/api/v1/portal/members') {
-      return Response.json({ ok: true, data: DIRECTORY_MEMBERS });
+      return Response.json({ ok: true, data: ADMIN_ROSTER_MEMBERS });
     }
 
     const user: HeaderUserContext = {

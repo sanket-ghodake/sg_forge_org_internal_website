@@ -7,7 +7,6 @@ import { astryxIcons } from '@forge/ui';
 import type { HeaderUserContext } from './layout-header';
 import { renderCanvasView } from './ui-renderer-canvas';
 import { renderAppsView } from './ui-renderer-apps';
-import { renderDirectoryView } from './ui-renderer-directory';
 import { renderProfileView } from './ui-renderer-profile';
 import { renderInboxView } from './ui-renderer-inbox';
 import { renderAdminMembersView } from './ui-admin-members';
@@ -47,33 +46,18 @@ export const PORTAL_PAGES: PageDefinition[] = [
   },
   {
     id: 'apps',
-    title: 'My Apps & Tools Hub',
+    title: 'Apps & Tools',
     category: 'Workspace',
     iconSvg: astryxIcons.rocket,
-    badge: 'App Drawer',
-    summary: 'A central launchpad where team members can open all company tools, forms, and custom mini-apps in one window.',
+    badge: 'Launchpad',
+    summary: 'A unified workspace for active daily tools, organization applications, and department access requests.',
     targetAudience: 'All Employees & Staff',
     features: [
-      { iconSvg: astryxIcons.apps, title: 'Sandboxed Micro-Apps', desc: 'Launch internal tools securely inside an isolated, fast-loading sandbox.' },
-      { iconSvg: astryxIcons.key, title: 'Zero-Reauth SSO', desc: 'Apps open pre-authenticated with your work identity and role tokens.' },
-      { iconSvg: astryxIcons.sparkles, title: 'Pinned Favorites', desc: 'Pin your most-used tools to the top of your workspace for quick access.' },
+      { iconSvg: astryxIcons.apps, title: 'Single Sign-On Hub', desc: 'Launch all assigned daily tools securely with single sign-on.' },
+      { iconSvg: astryxIcons.sparkles, title: 'Elevated Access Tools', desc: 'Discover organization software and request access from your lead.' },
+      { iconSvg: astryxIcons.zap, title: 'Pinned Favorites', desc: 'Quickly access your most frequently used everyday applications.' },
     ],
-    nextSteps: ['Connect Expenses & Billing Forge Apps', 'Add personal app pinning', 'Implement recent apps drawer'],
-  },
-  {
-    id: 'directory',
-    title: 'People Directory',
-    category: 'Workspace',
-    iconSvg: astryxIcons.users,
-    badge: 'Directory',
-    summary: 'A searchable contact book of all colleagues with photos, job titles, department tags, email, and time zones.',
-    targetAudience: 'All Employees & Staff',
-    features: [
-      { iconSvg: astryxIcons.zap, title: 'Instant Filtering', desc: 'Filter team members by department, office location, skills, or job title.' },
-      { iconSvg: astryxIcons.clock, title: 'Local Time & Working Hours', desc: 'See coworkers local time and availability before scheduling.' },
-      { iconSvg: astryxIcons.messageSquare, title: 'One-Click Connect', desc: 'Quickly copy email, start a Slack chat, or view their reporting chain.' },
-    ],
-    nextSteps: ['Connect Turso employees table', 'Add timezone clock badge', 'Add direct Slack/email action triggers'],
+    nextSteps: ['Connect real-time access approval notifications', 'Add department-curated app bundles', 'Telemetry usage analytics'],
   },
   {
     id: 'profile',
@@ -196,7 +180,6 @@ export function renderPageCards(user?: HeaderUserContext): string {
   return `
     ${renderCanvasView()}
     ${renderAppsView(userContext.isAdmin)}
-    ${renderDirectoryView()}
     ${renderProfileView(userContext)}
     ${renderInboxView()}
     ${renderAdminMembersView()}

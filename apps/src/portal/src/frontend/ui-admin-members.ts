@@ -4,7 +4,80 @@
  */
 
 import { astryxIcons } from '@forge/ui';
-import { DIRECTORY_MEMBERS } from './ui-renderer-directory';
+
+export interface AdminRosterMember {
+  id: string;
+  name: string;
+  email: string;
+  jobTitle: string;
+  department: string;
+  division: string;
+  status: 'ONLINE' | 'AWAY' | 'OFFLINE';
+  avatarInitial: string;
+}
+
+export const ADMIN_ROSTER_MEMBERS: AdminRosterMember[] = [
+  {
+    id: 'usr_sanket',
+    name: 'Sanket Ghodake',
+    email: 'sanket@forge.internal',
+    jobTitle: 'Founder & Chief Architect',
+    department: 'Executive Office',
+    division: 'Leadership',
+    status: 'ONLINE',
+    avatarInitial: 'SG',
+  },
+  {
+    id: 'usr_alex',
+    name: 'Alex Jordan',
+    email: 'alex.jordan@forge.internal',
+    jobTitle: 'VP of Engineering',
+    department: 'Engineering',
+    division: 'Technology',
+    status: 'ONLINE',
+    avatarInitial: 'AJ',
+  },
+  {
+    id: 'usr_sarah',
+    name: 'Sarah Chen',
+    email: 'sarah.chen@forge.internal',
+    jobTitle: 'Head of Product',
+    department: 'Product',
+    division: 'Product & Design',
+    status: 'ONLINE',
+    avatarInitial: 'SC',
+  },
+  {
+    id: 'usr_marcus',
+    name: 'Marcus Vance',
+    email: 'marcus.v@forge.internal',
+    jobTitle: 'VP of Finance & Operations',
+    department: 'Finance',
+    division: 'Operations',
+    status: 'ONLINE',
+    avatarInitial: 'MV',
+  },
+  {
+    id: 'usr_elena',
+    name: 'Elena Rostova',
+    email: 'elena.r@forge.internal',
+    jobTitle: 'Chief People Officer',
+    department: 'Human Resources',
+    division: 'People & Workplace',
+    status: 'AWAY',
+    avatarInitial: 'ER',
+  },
+  {
+    id: 'usr_priya',
+    name: 'Priya Sharma',
+    email: 'priya.s@forge.internal',
+    jobTitle: 'Staff Security Engineer',
+    department: 'Security & IT',
+    division: 'Technology',
+    status: 'ONLINE',
+    avatarInitial: 'PS',
+  },
+];
 
 export function renderAdminMembersView(): string {
   return `
@@ -38,15 +111,15 @@ export function renderAdminMembersView(): string {
       <!-- Controls & Search -->
       <div class="admin-table-controls">
         <div class="canvas-search-input-wrap" style="width: 280px;">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          <input type="text" id="admin-member-search" placeholder="Search by name, email, or role..." />
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="admin-member-search-input" placeholder="Search team members by name or email..." />
         </div>
-        <div class="table-summary-pill">
-          Total Members: <strong>${DIRECTORY_MEMBERS.length}</strong>
+        <div class="table-stats-pill">
+          Total Members: <strong id="admin-total-members">${ADMIN_ROSTER_MEMBERS.length}</strong>
         </div>
       </div>
 
-      <!-- Members Data Table -->
+      <!-- Table -->
       <div class="astryx-table-container">
         <table class="astryx-table" id="admin-members-table">
           <thead>
@@ -60,7 +133,7 @@ export function renderAdminMembersView(): string {
             </tr>
           </thead>
           <tbody>
-            ${DIRECTORY_MEMBERS.map(m => `
+            ${ADMIN_ROSTER_MEMBERS.map(m => `
               <tr data-id="${m.id}">
                 <td>
                   <div class="table-user-cell">
@@ -86,10 +159,10 @@ export function renderAdminMembersView(): string {
                 </td>
                 <td style="text-align: right;">
                   <button class="astryx-btn btn-sm btn-ghost edit-role-btn" data-id="${m.id}" data-name="${m.name}" title="Edit IAM Roles">
-                    ${astryxIcons.shield || '🛡️'}
+                    ${astryxIcons.shield || ''}
                   </button>
                   <button class="astryx-btn btn-sm btn-ghost delete-user-btn" data-id="${m.id}" data-name="${m.name}" title="Suspend Account" style="color: var(--forge-danger);">
-                    ${astryxIcons.slash || '⊘'}
+                    ${astryxIcons.slash || ''}
                   </button>
                 </td>
               </tr>

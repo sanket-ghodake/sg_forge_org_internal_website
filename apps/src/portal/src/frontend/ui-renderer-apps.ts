@@ -1,181 +1,203 @@
 /**
  * @forge/portal - Apps & Tools Hub View Renderer (2026 LTS)
- * Displays Pinned Apps dock, active Micro-App cards with dual-probe latency, and Access Request drawers.
+ * Human-Centric, Clean & Simple: Strictly Forge Micro-Apps (Expenses, Billing, Telemetry).
  */
 
 import { astryxIcons } from '@forge/ui';
+import { REGISTERED_PORTAL_APPS, MARKETPLACE_APPS } from './ui-apps-data';
 
-export interface MicroAppItem {
-  id: string;
-  name: string;
-  category: string;
-  description: string;
-  ingressPath: string;
-  port: number;
-  iconSvg: string;
-  status: 'ONLINE' | 'DEGRADED' | 'MAINTENANCE';
-  latencyMs: number;
-  isPinned?: boolean;
-  requiredRole?: string;
-  isRestricted?: boolean;
-}
-
-export const REGISTERED_PORTAL_APPS: MicroAppItem[] = [
-  {
-    id: 'dev-dashboard',
-    name: 'Developer Dashboard',
-    category: 'Engineering & Ops',
-    description: 'Centralized observability, system metrics, traffic analysis, and service management.',
-    ingressPath: '/dev-dashboard',
-    port: 3004,
-    iconSvg: astryxIcons.traffic || '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>',
-    status: 'ONLINE',
-    latencyMs: 8,
-    isPinned: true,
-  },
-  {
-    id: 'dev-hub',
-    name: 'Developer Hub',
-    category: 'Engineering & Docs',
-    description: 'SDK documentation, API schema explorer, code snippets, and integration blueprints.',
-    ingressPath: '/dev-hub',
-    port: 3003,
-    iconSvg: astryxIcons.terminal || '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>',
-    status: 'ONLINE',
-    latencyMs: 12,
-    isPinned: true,
-  },
-  {
-    id: 'expenses',
-    name: 'Expenses & Reimbursements',
-    category: 'Finance & HR',
-    description: 'Submit expense claims, mileage reports, travel receipts, and track approval status.',
-    ingressPath: '/apps/expenses',
-    port: 3010,
-    iconSvg: astryxIcons.layers || '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>',
-    status: 'ONLINE',
-    latencyMs: 14,
-    isPinned: true,
-  },
-  {
-    id: 'billing',
-    name: 'Enterprise Billing & Invoices',
-    category: 'Finance & Accounts',
-    description: 'Customer invoice ledger, subscription management, payment gateways, and tax reconciliation.',
-    ingressPath: '/apps/billing',
-    port: 3011,
-    iconSvg: astryxIcons.table || '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>',
-    status: 'ONLINE',
-    latencyMs: 19,
-    requiredRole: 'roles/billing.admin',
-  },
-  {
-    id: 'telemetry',
-    name: 'Platform Telemetry & APM',
-    category: 'Infrastructure',
-    description: 'Dual-probe health metrics, distributed request traces, log ingestion, and alert routing.',
-    ingressPath: '/apps/telemetry',
-    port: 3012,
-    iconSvg: astryxIcons.cpu || '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg>',
-    status: 'ONLINE',
-    latencyMs: 11,
-    requiredRole: 'roles/super_admin',
-    isRestricted: true,
-  },
-];
+export * from './ui-apps-data';
 
 export function renderAppsView(isAdmin: boolean = false): string {
-  const pinnedApps = REGISTERED_PORTAL_APPS.filter(a => a.isPinned);
+  const activeApps = REGISTERED_PORTAL_APPS;
+  const marketplaceApps = MARKETPLACE_APPS;
 
   return `
     <div id="view-apps" class="portal-page-view">
-      <!-- Header -->
-      <div class="portal-view-header">
-        <div>
-          <div style="display: flex; align-items: center; gap: 0.6rem;">
-            <div class="portal-view-badge">
-              <span class="badge-dot"></span>
-              <span>Microservice Hub</span>
-            </div>
-            <span class="portal-view-audience" style="font-size: 0.74rem; color: var(--forge-text-subtle);">Audience: <strong style="color: var(--forge-text-muted); font-weight: 500;">All Employees & Staff</strong></span>
-          </div>
-          <h1 class="portal-view-title">My Apps & Tools Hub</h1>
-          <p class="portal-view-desc">
-            Launch internal tools, sandboxed micro-apps, and enterprise utilities with zero-reauth SSO pass-through.
+      <!-- 1. Clean Human Header with relaxed spacing -->
+      <div class="apps-hub-header">
+        <div class="apps-hub-title-wrap">
+          <h1 class="portal-view-title">Apps & Tools</h1>
+          <p class="apps-hub-subtitle">
+            Launch your active workplace tools or request access to organization applications.
           </p>
         </div>
 
-        <div class="portal-view-actions">
-          <div class="canvas-search-input-wrap" style="width: 240px;">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" id="apps-search-input" placeholder="Filter tools..." />
+        <div class="apps-header-actions">
+          <div class="canvas-search-input-wrap apps-search-box">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="apps-hub-search-input" placeholder="Search apps by name or keyword..." />
           </div>
           ${isAdmin ? `
-            <button class="astryx-btn btn-primary" onclick="if(window.portalSPA){window.portalSPA.navigate('admin-apps');}">
-              ${astryxIcons.plus || '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>'}
-              <span>Manage Catalog</span>
+            <button class="astryx-btn btn-outline btn-sm" onclick="if(window.portalSPA){window.portalSPA.navigate('admin-apps');}">
+              ${astryxIcons.settings || ''} <span>Admin Catalog</span>
             </button>
           ` : ''}
         </div>
       </div>
 
-      <!-- Pinned Favorites Bar -->
-      <div class="pinned-apps-container">
-        <div class="section-sub-title">
-          <span style="color: var(--forge-primary);">${astryxIcons.sparkles || '★'}</span>
-          <span>Pinned Favorites</span>
+      <!-- 2. Simple 2-Mode Segmented View Switcher -->
+      <div class="apps-view-switcher-bar">
+        <div class="apps-nav-tabs" role="tablist" aria-label="Apps View Modes">
+          <button class="apps-tab-btn active" data-hub-tab="my-apps" role="tab" aria-selected="true">
+            <span class="tab-icon">${astryxIcons.apps || ''}</span>
+            <span>My Active Apps</span>
+            <span class="apps-tab-counter">${activeApps.length}</span>
+          </button>
+          <button class="apps-tab-btn" data-hub-tab="marketplace" role="tab" aria-selected="false">
+            <span class="tab-icon">${astryxIcons.sparkles || ''}</span>
+            <span>Request Access</span>
+            <span class="apps-tab-counter">${marketplaceApps.length}</span>
+          </button>
         </div>
-        <div class="pinned-apps-grid">
-          ${pinnedApps.map(app => `
-            <a href="${app.ingressPath}" class="pinned-app-chip" target="_self">
-              <span class="app-chip-icon">${app.iconSvg}</span>
-              <span class="app-chip-name">${app.name}</span>
-              <span class="status-indicator status-online"></span>
-            </a>
+
+        <div id="pending-requests-indicator" class="pending-requests-indicator" style="display: none;">
+          <span class="badge-dot" style="background: var(--forge-warning);"></span>
+          <span id="pending-req-count-text">1 Request Pending Review</span>
+        </div>
+      </div>
+
+      <!-- 3. TAB 1: MY ACTIVE APPS -->
+      <div id="tab-content-my-apps" class="apps-tab-content active">
+        <!-- Pinned Favorites Panel -->
+        <div class="pinned-favorites-panel" id="pinned-favorites-panel">
+          <div class="pinned-panel-header">
+            <div class="section-sub-title" style="margin-bottom: 0;">
+              <span style="color: var(--forge-primary); display: flex;">${astryxIcons.sparkles || ''}</span>
+              <span>Pinned Favorites</span>
+            </div>
+            <span style="font-size: 0.74rem; color: var(--forge-text-subtle);">Click the star on any tool card to pin or unpin</span>
+          </div>
+          <div class="pinned-apps-dock" id="pinned-apps-dock">
+            ${activeApps.filter(a => a.isPinned).map(app => `
+              <a href="${app.ingressPath}" class="pinned-dock-card" data-app-id="${app.id}">
+                <div class="dock-card-icon">${app.iconSvg}</div>
+                <div class="dock-card-info">
+                  <span class="dock-card-title">${app.name}</span>
+                  <span class="dock-card-category">${app.category}</span>
+                </div>
+                <span class="status-indicator status-online" title="Ready to launch"></span>
+              </a>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Category Filter & View Mode Bar -->
+        <div class="apps-category-filter-bar">
+          <div class="category-pills-list">
+            <button class="cat-pill active" data-cat="ALL">All Tools</button>
+            <button class="cat-pill" data-cat="Finance">Finance</button>
+            <button class="cat-pill" data-cat="Operations">Operations</button>
+          </div>
+          <div class="view-mode-toggle">
+            <button class="view-mode-btn active" id="view-mode-grid" title="Grid View">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            </button>
+            <button class="view-mode-btn" id="view-mode-list" title="Compact List View">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Apps Catalog Grid -->
+        <div class="apps-catalog-grid" id="apps-catalog-grid">
+          ${activeApps.map(app => `
+            <div class="app-card-item ${app.isPinned ? 'is-pinned' : ''}" data-app-id="${app.id}" data-category="${app.category}" data-tags="${(app.tags || []).join(' ')}">
+              <div class="app-card-top">
+                <div class="app-card-brand">
+                  <div class="app-card-icon-box">${app.iconSvg}</div>
+                  <div>
+                    <h3 class="app-card-title">${app.name}</h3>
+                    <span class="app-card-cat">${app.category}</span>
+                  </div>
+                </div>
+                <button class="app-pin-btn ${app.isPinned ? 'active' : ''}" data-pin-id="${app.id}" title="${app.isPinned ? 'Unpin from favorites' : 'Pin to favorites'}">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="${app.isPinned ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                </button>
+              </div>
+
+              <p class="app-card-desc">${app.description}</p>
+
+              <div class="app-card-tags-row">
+                ${(app.tags || []).map(t => `<span class="app-tag-pill">${t}</span>`).join('')}
+              </div>
+
+              <div class="app-card-footer">
+                <div class="app-status-badge" title="Single Sign-On Active">
+                  <span class="status-indicator status-online"></span>
+                  <span style="font-size: 0.74rem; font-weight: 500; color: var(--forge-text-muted);">Active</span>
+                </div>
+                <div class="app-card-actions">
+                  <button class="astryx-btn btn-sm btn-ghost open-app-info-btn" data-info-id="${app.id}" title="App Details">
+                    Details
+                  </button>
+                  <a href="${app.ingressPath}" class="astryx-btn btn-sm btn-primary app-launch-action" target="_self">
+                    <span>Open</span>
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
           `).join('')}
         </div>
       </div>
 
-      <!-- All Microservices Grid -->
-      <div class="section-sub-title" style="margin-top: 1.5rem;">
-        <span>All Available Workspaces</span>
-      </div>
+      <!-- 4. TAB 2: REQUEST ACCESS / MARKETPLACE -->
+      <div id="tab-content-marketplace" class="apps-tab-content">
+        <div class="marketplace-intro-banner">
+          <div class="marketplace-intro-text">
+            <h2 class="marketplace-title">Elevated Access Applications</h2>
+            <p class="marketplace-subtitle">
+              These applications require specific department approval. Click Request Access to submit an approval request to your lead.
+            </p>
+          </div>
+        </div>
 
-      <div class="apps-catalog-grid" id="apps-catalog-grid">
-        ${REGISTERED_PORTAL_APPS.map(app => `
-          <div class="app-card-item" data-app-id="${app.id}" data-category="${app.category}">
-            <div class="app-card-top">
-              <div class="app-card-brand">
-                <div class="app-card-icon-box">${app.iconSvg}</div>
-                <div>
-                  <h3 class="app-card-title">${app.name}</h3>
-                  <span class="app-card-cat">${app.category}</span>
+        <!-- User Submitted Requests List -->
+        <div id="active-user-requests-list" class="active-user-requests-list"></div>
+
+        <div class="marketplace-grid" id="marketplace-grid">
+          ${marketplaceApps.map(app => `
+            <div class="marketplace-card-item" data-app-id="${app.id}" data-category="${app.category}" data-tags="${(app.tags || []).join(' ')}">
+              <div class="market-card-header">
+                <div class="app-card-icon-box" style="width: 42px; height: 42px;">${app.iconSvg}</div>
+                <div class="market-card-meta">
+                  <h3 class="market-card-title">${app.name}</h3>
+                  <div class="market-card-sub">
+                    <span class="market-dept-tag">${app.departmentOwner || app.category}</span>
+                    <span class="approval-type-tag">${app.approvalType || 'Approval Required'}</span>
+                  </div>
                 </div>
               </div>
-              <div class="app-health-badge badge-online">
-                <span class="status-indicator status-online"></span>
-                <span>${app.latencyMs}ms</span>
+
+              <p class="market-card-desc">${app.description}</p>
+
+              <div class="market-features-list">
+                ${(app.tags || []).map(t => `
+                  <div class="market-feature-item">
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="var(--forge-primary)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span>${t}</span>
+                  </div>
+                `).join('')}
               </div>
-            </div>
 
-            <p class="app-card-desc">${app.description}</p>
-
-            <div class="app-card-footer">
-              <div class="app-port-tag">Port :${app.port}</div>
-              <div class="app-card-actions">
-                ${app.isRestricted && !isAdmin ? `
-                  <button class="astryx-btn btn-sm btn-outline request-access-btn" data-app-name="${app.name}">
+              <div class="market-card-footer">
+                <div class="required-role-pill">
+                  ${astryxIcons.shield || ''}
+                  <span>${app.requiredRole ? 'Role: ' + app.requiredRole : 'Department Approval'}</span>
+                </div>
+                <div class="market-actions">
+                  <button class="astryx-btn btn-sm btn-ghost open-app-info-btn" data-info-id="${app.id}">
+                    Details
+                  </button>
+                  <button class="astryx-btn btn-sm btn-primary request-access-btn" data-app-name="${app.name}" data-app-id="${app.id}" data-approval="${app.approvalType || 'Manager Approval'}">
                     Request Access
                   </button>
-                ` : `
-                  <a href="${app.ingressPath}" class="astryx-btn btn-sm btn-primary" target="_self">
-                    Launch App &rarr;
-                  </a>
-                `}
+                </div>
               </div>
             </div>
-          </div>
-        `).join('')}
+          `).join('')}
+        </div>
       </div>
     </div>
   `;

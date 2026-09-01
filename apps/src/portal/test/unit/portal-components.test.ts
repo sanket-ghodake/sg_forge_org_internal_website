@@ -55,13 +55,13 @@ describe('Tier 1 Unit: Portal Layout Components', () => {
     expect(employeeSidebar).toContain('display: none;');
   });
 
-  it('renderPageCards defines and renders all 10 distinct pages', () => {
+  it('renderPageCards defines and renders all 9 distinct pages', () => {
     // Arrange
-    expect(PORTAL_PAGES).toHaveLength(10);
+    expect(PORTAL_PAGES).toHaveLength(9);
     const workspacePages = PORTAL_PAGES.filter(p => p.category === 'Workspace');
     const adminPages = PORTAL_PAGES.filter(p => p.category === 'Admin Console');
 
-    expect(workspacePages).toHaveLength(5);
+    expect(workspacePages).toHaveLength(4);
     expect(adminPages).toHaveLength(5);
 
     // Act
@@ -108,7 +108,6 @@ describe('Tier 1 Unit: Portal Layout Components', () => {
     // Assert: SPA navigation uses data-view attributes with zero full-page hard navigation hrefs
     expect(html).toContain('data-view="canvas"');
     expect(html).toContain('data-view="apps"');
-    expect(html).toContain('data-view="directory"');
     expect(html).toContain('data-view="notifications"');
 
     // Assert: Responsive viewport meta tag and CSS media queries
@@ -149,5 +148,45 @@ describe('Tier 1 Unit: Portal Layout Components', () => {
     const canvasSection = html.slice(html.indexOf('id="view-canvas"'), html.indexOf('id="view-apps"'));
     const emojiRegex = /[\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/u;
     expect(emojiRegex.test(canvasSection)).toBe(false);
+  });
+
+  it('renders redesigned My Apps & Tools Hub with human-centric layout, real apps, and zero emojis', () => {
+    // Arrange & Act
+    const html = renderPortalHtml();
+
+    // Assert: Clean Hub header
+    expect(html).toContain('apps-hub-header');
+    expect(html).toContain('id="apps-hub-search-input"');
+
+    // Assert: 2-Mode Segmented Switcher
+    expect(html).toContain('data-hub-tab="my-apps"');
+    expect(html).toContain('data-hub-tab="marketplace"');
+
+    // Assert: Tab Contents
+    expect(html).toContain('id="tab-content-my-apps"');
+    expect(html).toContain('id="tab-content-marketplace"');
+
+    // Assert: Pinned dock & category pills
+    expect(html).toContain('id="pinned-favorites-panel"');
+    expect(html).toContain('id="pinned-apps-dock"');
+    expect(html).toContain('apps-category-filter-bar');
+    expect(html).toContain('data-cat="ALL"');
+    expect(html).toContain('data-cat="Finance"');
+
+    // Assert: Real active and requestable Forge apps rendered
+    expect(html).toContain('/apps/expenses');
+    expect(html).toContain('data-app-id="billing"');
+    expect(html).toContain('data-app-id="telemetry"');
+
+    // Assert: Marketplace and Request Access
+    expect(html).toContain('id="marketplace-grid"');
+    expect(html).toContain('request-access-btn');
+    expect(html).toContain('id="modal-request-access"');
+    expect(html).toContain('id="modal-app-details"');
+
+    // Assert: Zero emojis in apps hub section
+    const appsSection = html.slice(html.indexOf('id="view-apps"'), html.indexOf('id="view-profile"'));
+    const emojiRegex = /[\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/u;
+    expect(emojiRegex.test(appsSection)).toBe(false);
   });
 });

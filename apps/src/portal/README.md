@@ -23,7 +23,7 @@ Primary enterprise employee workspace, admin governance center, visual 2D intera
 ## 🚀 Features
 * **Top Header Bar**: Multi-tenant organization selector, command finder trigger (`⌘K`), theme switcher, and modern top-right user profile popover.
 * **Auto-Collapsible Left Sidebar**: Compact 56px icon rail and 224px expanded navigation drawer with hover-peek and role-guarded Admin Console.
-* **10 Purpose-Built Views**: 5 Employee views (*Company Map, Apps Hub, People Directory, My Profile, Announcements*) + 5 Admin Console views (*Member Management, App Permissions, Org Chart Editor, Security & Audit, Workspace Settings*).
+* **9 Purpose-Built Views**: 4 Employee views (*Company Map, Apps & Tools Hub, My Profile, Announcements*) + 5 Admin Console views (*Member Management, App Permissions, Org Chart Editor, Security & Audit, Workspace Settings*).
 * **Zero-Trust SSO Integration**: Integrated with central `@forge/auth` gateway and ASVS 5.0 security tokens.
 
 ---

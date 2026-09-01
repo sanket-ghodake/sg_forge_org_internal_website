@@ -1,6 +1,6 @@
 import { getCanvasClientScript } from './ui-canvas-scripts';
-import { getDirectoryClientScript } from './ui-directory-scripts';
 import { getAdminClientScript } from './ui-admin-scripts';
+import { getAppsClientScript } from './ui-apps-scripts';
 
 export function getPortalClientScript(): string {
   return `
@@ -231,8 +231,7 @@ export function getPortalClientScript(): string {
       // ── 6. Quick Finder / Command Palette (⌘K) ──
       var searchPages = [
         { id: 'canvas', title: 'Company Map & Org Canvas', category: 'Workspace' },
-        { id: 'apps', title: 'My Apps & Tools Hub', category: 'Workspace' },
-        { id: 'directory', title: 'People Directory', category: 'Workspace' },
+        { id: 'apps', title: 'Apps & Tools Hub', category: 'Workspace' },
         { id: 'profile', title: 'My Profile & Account', category: 'Workspace' },
         { id: 'notifications', title: 'Notifications & Announcements', category: 'Workspace' },
         { id: 'admin-members', title: 'Team & Member Management', category: 'Admin Console' },
@@ -330,7 +329,7 @@ export function getPortalClientScript(): string {
     })();
 
     ${getCanvasClientScript()}
-    ${getDirectoryClientScript()}
+    ${getAppsClientScript()}
     ${getAdminClientScript()}
   `;
 }

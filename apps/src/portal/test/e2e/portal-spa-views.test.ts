@@ -34,10 +34,9 @@ describe('Tier 5 E2E: Full SPA Views & Interactive Ecosystem', () => {
       // Assert: Status 200 OK
       expect(res.status).toBe(200);
 
-      // Assert: All 10 views rendered
+      // Assert: All 9 views rendered
       expect(html).toContain('id="view-canvas"');
       expect(html).toContain('id="view-apps"');
-      expect(html).toContain('id="view-directory"');
       expect(html).toContain('id="view-profile"');
       expect(html).toContain('id="view-notifications"');
       expect(html).toContain('id="view-admin-members"');
@@ -52,7 +51,6 @@ describe('Tier 5 E2E: Full SPA Views & Interactive Ecosystem', () => {
       expect(html).toContain('id="modal-request-access"');
       expect(html).toContain('canvas-pan-surface');
       expect(html).toContain('apps-catalog-grid');
-      expect(html).toContain('directory-grid');
     } finally {
       server.stop(true);
     }
