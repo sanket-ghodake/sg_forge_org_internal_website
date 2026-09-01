@@ -1,23 +1,24 @@
 #!/usr/bin/env bun
 /**
  * Dynamic Ingress & Caddyfile Generator (2026 LTS)
- * Reads declarative service registry from .env and generates proxy/Caddyfile
+ * Reads declarative service registry and brand identity dynamically from .env and generates proxy/Caddyfile
  * Industry Standard: Declarative Ingress Controller Pattern
  */
 
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { loadServiceRegistry } from '../apps/src/sdk/src/registry';
+import { loadBrandConfig, loadServiceRegistry } from '../apps/src/sdk/src';
 
 const REPO_ROOT = process.cwd();
 const CADDYFILE_PATH = join(REPO_ROOT, 'proxy', 'Caddyfile');
 
 export function generateCaddyfile(): string {
+  const brand = loadBrandConfig();
   const services = loadServiceRegistry();
   const httpPort = process.env.HTTP_PORT || '80';
 
   let caddyContent = `# ==============================================================================
-# SG Forge - Unified Reverse Proxy Gateway (Auto-Generated from .env)
+# ${brand.name} - Unified Reverse Proxy Gateway (Auto-Generated from .env)
 # DO NOT EDIT DIRECTLY: Modify routes in .env and run './run.sh sync-proxy'
 # ==============================================================================
 
@@ -66,8 +67,9 @@ export function generateCaddyfile(): string {
 
 if (import.meta.main) {
   generateCaddyfile();
+  const brand = loadBrandConfig();
   const services = loadServiceRegistry();
-  console.log(`🔀 [Caddy Ingress] Auto-generated proxy/Caddyfile with ${services.length} routes from .env`);
+  console.log(`🔀 [${brand.name}] Auto-generated proxy/Caddyfile with ${services.length} routes from .env`);
   for (const s of services) {
     const upstream = s.upstreamUrl || `http://${s.containerName}:${s.port}`;
     console.log(`   ├─ ${s.path.padEnd(18)} -> ${upstream.padEnd(30)} (${s.name})`);

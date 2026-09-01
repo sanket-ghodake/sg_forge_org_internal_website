@@ -3,7 +3,10 @@
  * Meta Astryx Design Standards (2026 LTS Baseline)
  */
 
+import { loadBrandConfig } from '@forge/sdk';
+
 export function renderRegistryMatrixSection(): string {
+  const brand = loadBrandConfig();
   return `
     <section id="section-routes" class="hub-section">
       <div class="astryx-card" style="margin-bottom: 2rem;">
@@ -16,7 +19,7 @@ export function renderRegistryMatrixSection(): string {
               Declarative routes parsed from <code>.env</code> and mapped to upstream reverse proxy handlers.
             </span>
           </div>
-          <span class="astryx-badge badge-online">Auto-Generated</span>
+          <span class="astryx-badge badge-pill">Dynamic Ingress Spec</span>
         </div>
 
         <p style="font-size: 0.85rem; color: var(--forge-text-muted); margin-bottom: 1.25rem;">
@@ -38,7 +41,7 @@ export function renderRegistryMatrixSection(): string {
             <tbody>
               <tr>
                 <td><code>landing</code></td>
-                <td>SG Forge Landing Hub</td>
+                <td>${brand.name} Landing Hub</td>
                 <td><code>/</code></td>
                 <td><span class="astryx-badge badge-pill">Public / All</span></td>
                 <td><code>landing:3000</code></td>

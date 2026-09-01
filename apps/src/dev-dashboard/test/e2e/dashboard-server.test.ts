@@ -4,11 +4,13 @@
  */
 
 import { describe, expect, it } from 'bun:test';
+import { loadBrandConfig } from '@forge/sdk';
 import { startDevDashboardServer } from '../../src';
 
 describe('Tier 5 E2E: Dev Dashboard Server & UI Rendering', () => {
   it('serves dynamic Astryx HTML, dual-probe health checks, and 1-Click Latency Benchmark', async () => {
     // Arrange
+    const brand = loadBrandConfig();
     const server = startDevDashboardServer(3184);
 
     try {
@@ -24,7 +26,7 @@ describe('Tier 5 E2E: Dev Dashboard Server & UI Rendering', () => {
       const html = await htmlRes.text();
 
       expect(htmlRes.status).toBe(200);
-      expect(html).toContain('SG Forge');
+      expect(html).toContain(brand.name);
       expect(html).toContain('Developer Dashboard & Diagnostics');
       expect(html).toContain('sb-global-header');
       expect(html).toContain('dashboard-watchdog');

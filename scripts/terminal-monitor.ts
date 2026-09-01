@@ -1,9 +1,11 @@
 #!/usr/bin/env bun
 /**
  * @forge/scripts - Live Terminal Cluster Performance HUD (2026 LTS)
- * High-density ANSI colorful terminal dashboard for SG Forge Monorepo
+ * High-density ANSI colorful terminal dashboard dynamically driven by .env brand config
  * Google Cloud Borg & Meta AST Console Standard
  */
+
+import { loadBrandConfig } from '../apps/src/sdk/src';
 
 const API_ENDPOINT = 'http://localhost:3002/api/services';
 
@@ -53,22 +55,24 @@ async function fetchClusterState() {
 }
 
 async function renderFrame() {
+  const brand = loadBrandConfig();
   const state: any = await fetchClusterState();
   const timeStr = new Date().toLocaleTimeString();
 
   // Clear screen and home cursor
   process.stdout.write('\x1b[H\x1b[J\x1b[?25l');
 
+  const titleText = `🚀 ${brand.name.toUpperCase()} CLUSTER MONITOR`;
   const banner = [
     `${C.emerald}╔══════════════════════════════════════════════════════════════════════════════════════════════════════╗${C.reset}`,
-    `${C.emerald}║${C.reset}  ${C.bold}${C.emerald}🚀 SG FORGE 2.0 CLUSTER MONITOR${C.reset} ${C.dim}(Real-Time Process & Container HUD)${C.reset}        ${C.cyan}${timeStr}${C.reset}  ${C.emerald}║${C.reset}`,
+    `${C.emerald}║${C.reset}  ${C.bold}${C.emerald}${titleText.padEnd(42, ' ')}${C.reset} ${C.dim}(Real-Time Process & Container HUD)${C.reset}        ${C.cyan}${timeStr}${C.reset}  ${C.emerald}║${C.reset}`,
     `${C.emerald}╚══════════════════════════════════════════════════════════════════════════════════════════════════════╝${C.reset}`,
   ].join('\n');
 
   console.log(banner);
 
   if (!state || !state.services) {
-    console.log(`\n  ${C.yellow}⏳ Connecting to SG Forge DevCenter Gateway on :3002...${C.reset}\n`);
+    console.log(`\n  ${C.yellow}⏳ Connecting to ${brand.name} DevCenter Gateway on :3002...${C.reset}\n`);
     return;
   }
 

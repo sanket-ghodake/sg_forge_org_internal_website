@@ -5,13 +5,14 @@
  * 100% Dynamically driven by @forge/sdk service registry (.env)
  */
 
-import { createLogger, createSafeHandler, loadServiceRegistry, type ServiceEntry } from '@forge/sdk';
+import { createLogger, createSafeHandler, loadServiceRegistry, loadBrandConfig, handleBrandAssetRequest, type ServiceEntry } from '@forge/sdk';
 import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript, renderAstryxErrorHtml } from '@forge/ui';
 
 const logger = createLogger('landing-hub');
 const PORT = Number(process.env.LANDING_PORT || process.env.PORT || 3000);
 
 function renderHtml(): string {
+  const brand = loadBrandConfig();
   const services = loadServiceRegistry();
 
   // Group services by category
@@ -28,14 +29,14 @@ function renderHtml(): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SG Forge - Modular Corporate Portal & Micro-App Engine</title>
+  <title>${brand.name} - Modular Corporate Portal & Micro-App Engine</title>
   ${getHeadStateScript({ defaultTheme: 'dark' })}
   <style>
     ${getAstryxStyles()}
   </style>
 </head>
 <body>
-  ${getAstryxHeaderHtml('SG', 'FORGE PLATFORM')}
+  ${getAstryxHeaderHtml(brand.short, 'PLATFORM HUB')}
 
   <main class="astryx-container">
     <section class="astryx-hero">
@@ -90,7 +91,7 @@ function renderHtml(): string {
   </main>
 
   <footer style="margin-top: auto; padding: 2.5rem 1.5rem; text-align: center; border-top: 1px solid var(--forge-border); font-size: 0.82rem; color: var(--forge-text-subtle);">
-    SG Forge Platform Engine v2.0.0 &bull; Meta Astryx Design Tokens &bull; Bun v1.3.14 Runtime &bull; Dynamic Service Registry
+    ${brand.name} Platform Engine v2.0.0 &bull; Meta Astryx Design Tokens &bull; Bun v1.3.14 Runtime &bull; Dynamic Service Registry
   </footer>
 </body>
 </html>`;
@@ -99,6 +100,10 @@ function renderHtml(): string {
 export function startLandingServer(port: number = PORT) {
   const handler = createSafeHandler('landing-hub', async (req: Request) => {
     const url = new URL(req.url);
+
+    // 0. Static Brand Asset Interceptor
+    const assetRes = handleBrandAssetRequest(req);
+    if (assetRes) return assetRes;
 
     if (url.pathname === '/health') {
       return Response.json({
@@ -111,11 +116,12 @@ export function startLandingServer(port: number = PORT) {
     }
 
     if (url.pathname !== '/' && url.pathname !== '') {
+      const brand = loadBrandConfig();
       return new Response(
         renderAstryxErrorHtml({
           statusCode: 404,
           title: 'Page Not Found',
-          message: `The requested path "${url.pathname}" does not exist on SG Forge Platform.`,
+          message: `The requested path "${url.pathname}" does not exist on ${brand.name} Platform.`,
           primaryActionText: '&larr; Return to Platform Hub',
           primaryActionHref: '/',
           secondaryActionText: 'Workspace Portal &rarr;',

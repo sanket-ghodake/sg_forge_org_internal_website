@@ -4,6 +4,7 @@
  */
 
 import { getAstryxHeaderHtml, getHeadStateScript } from '@forge/ui';
+import { loadBrandConfig } from '@forge/sdk';
 import { getClientScripts } from './client-scripts';
 import { getDevHubStyles } from './hub-styles';
 import { renderGatewaySection } from './sections/gateway-section';
@@ -19,19 +20,20 @@ import { renderTokenMintSection } from './sections/token-mint-section';
 import { renderUiSection } from './sections/ui-section';
 
 export function renderDevHubHtml(): string {
+  const brand = loadBrandConfig();
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SG Forge - Developer Gateway & SDK Documentation</title>
+  <title>${brand.name} - Developer Gateway & SDK Documentation</title>
   ${getHeadStateScript({ defaultTheme: 'dark' })}
   <style>
     ${getDevHubStyles()}
   </style>
 </head>
 <body>
-  ${getAstryxHeaderHtml('HUB', 'DEVELOPER GATEWAY')}
+  ${getAstryxHeaderHtml(brand.short, 'DEVELOPER GATEWAY')}
 
   <main class="hub-container">
     <!-- Top Action Bar with Search & Quick Links -->
@@ -76,7 +78,7 @@ export function renderDevHubHtml(): string {
   </main>
 
   <footer style="margin-top: 3rem; padding: 2rem; text-align: center; border-top: 1px solid var(--forge-border); font-size: 0.8rem; color: var(--forge-text-muted);">
-    SG Forge Developer Gateway &bull; @forge/sdk v2.0.0 LTS &bull; Meta Astryx Design System
+    ${brand.name} Developer Gateway &bull; @forge/sdk v2.0.0 LTS &bull; Meta Astryx Design System
   </footer>
 
   <script>

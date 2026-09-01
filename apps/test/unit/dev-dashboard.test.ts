@@ -4,6 +4,7 @@
  */
 
 import { describe, expect, it } from 'bun:test';
+import { loadBrandConfig } from '@forge/sdk';
 import { platformDb, telemetryEngine, servicesController, startDevDashboardServer } from '../../src/dev-dashboard/src';
 
 describe('Developer Dashboard Platform Engine', () => {
@@ -81,8 +82,9 @@ describe('Developer Dashboard Platform Engine', () => {
       expect(metricsResp.status).toBe(200);
       expect(metricsJson.vitals).toBeDefined();
 
+      const brand = loadBrandConfig();
       expect(htmlResp.status).toBe(200);
-      expect(htmlText).toContain('SG Forge');
+      expect(htmlText).toContain(brand.name);
       expect(htmlText).toContain('System Topology & Cluster Health');
     } finally {
       server.stop();

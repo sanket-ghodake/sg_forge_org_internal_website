@@ -3,7 +3,10 @@
  * Meta Astryx Design Standards (2026 LTS Baseline)
  */
 
+import { loadBrandConfig } from '@forge/sdk';
+
 export function renderSandboxSection(): string {
+  const brand = loadBrandConfig();
   return `
     <section id="section-sandbox" class="hub-section">
       <div class="astryx-card" style="margin-bottom: 2rem;">
@@ -13,7 +16,7 @@ export function renderSandboxSection(): string {
               ⚡ Interactive Live API Sandbox & Polyglot Request Builder
             </h2>
             <span style="font-size: 0.85rem; color: var(--forge-text-muted);">
-              Dispatch live requests to SG Forge Gateway endpoints or generate instant code in multiple languages.
+              Dispatch live requests to ${brand.name} Gateway endpoints or generate instant code in multiple languages.
             </span>
           </div>
           <span class="astryx-badge badge-online">Live Network Client</span>

@@ -5,18 +5,20 @@
  */
 
 import { astryxIcons } from '@forge/ui';
+import { loadBrandConfig } from '@forge/sdk';
 import { getModalsHtml } from './ui-modals';
 import { getDashboardScripts } from './ui-scripts';
 import { getDashboardStyles } from './ui-styles';
 import { renderEmployeesTab } from './ui-renderer-employees';
 
 export function renderDashboardHtml(): string {
+  const brand = loadBrandConfig();
   return `<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SG Forge - Developer Dashboard & Diagnostics</title>
+  <title>${brand.name} - Developer Dashboard & Diagnostics</title>
   <style>${getDashboardStyles()}</style>
 </head>
 <body>
@@ -30,9 +32,10 @@ export function renderDashboardHtml(): string {
   <header class="sb-global-header">
     <div class="sb-header-left">
       <button class="sb-mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle Mobile Navigation">☰</button>
-      <a href="/" class="sb-brand">
-        <span class="astryx-logo-badge">SG</span>
-        <span>SG FORGE</span>
+      <a href="/" class="sb-brand" style="display: flex; align-items: center; gap: 0.55rem;">
+        ${brand.logoUrl ? `<img src="${brand.logoUrl}" alt="${brand.name}" class="astryx-brand-logo-img" style="height: 42px; max-height: 90%; width: auto; max-width: 200px; object-fit: contain; flex-shrink: 0; border-radius: 4px;" onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='inline-flex';" />` : ''}
+        <span class="astryx-logo-badge" style="${brand.logoUrl ? 'display: none;' : ''}">${brand.short}</span>
+        <span class="sb-app-tag">DEVELOPER CENTER</span>
       </a>
       <div class="sb-header-divider"></div>
       <div class="sb-header-breadcrumb" id="header-active-view">

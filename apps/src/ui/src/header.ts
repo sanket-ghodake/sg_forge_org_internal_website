@@ -15,18 +15,26 @@ export interface AstryxHeaderOptions {
  * Google Standard: Namespaced storage key, cross-tab BroadcastChannel sync, and resilient fallback.
  */
 export function getAstryxHeaderHtml(
-  badgeLabel = 'SG',
-  title = 'FORGE PLATFORM',
+  badgeLabel?: string,
+  title?: string,
   options?: AstryxHeaderOptions
 ): string {
-  const badge = options?.badgeLabel || badgeLabel;
-  const heading = options?.title || title;
+  const defaultShort = process.env.NEXT_PUBLIC_BRAND_SHORT || 'AG';
+  const defaultName = 'WORKSPACE';
+  const logoUrl =
+    process.env.NEXT_PUBLIC_BRAND_LOGO_URL ||
+    process.env.BRAND_LOGO_URL ||
+    process.env.BRAND_LOGO_PATH ||
+    '/brand/logo.png';
+  const badge = options?.badgeLabel || badgeLabel || defaultShort;
+  const heading = options?.title || title || defaultName;
 
   return `
   <header class="astryx-header">
-    <div class="astryx-logo">
-      <span class="astryx-logo-badge">${badge}</span>
-      <span>${heading}</span>
+    <div class="astryx-logo" style="display: flex; align-items: center; gap: 0.65rem;">
+      ${logoUrl ? `<img src="${logoUrl}" alt="${heading}" class="astryx-brand-logo-img" style="height: 42px; max-height: 90%; width: auto; max-width: 200px; object-fit: contain; flex-shrink: 0; border-radius: 4px;" onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='inline-flex';" />` : ''}
+      <span class="astryx-logo-badge" style="${logoUrl ? 'display: none;' : ''}">${badge}</span>
+      <span class="astryx-app-tag">${heading}</span>
     </div>
     <div style="display: flex; gap: 0.75rem; align-items: center;">
       <button class="astryx-theme-toggle" id="theme-toggle-btn" title="Toggle Light / Dark Theme" aria-label="Toggle Theme">

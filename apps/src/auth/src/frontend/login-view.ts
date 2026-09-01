@@ -28,7 +28,8 @@ export function renderLoginHtml(returnUrl: string = '/portal'): string {
 
   <div class="auth-wrapper">
     <div class="auth-card">
-      <div class="auth-header">
+      <div class="auth-header" style="text-align: center;">
+        ${brand.logoUrl ? `<img src="${brand.logoUrl}" alt="${brand.name}" style="height: 48px; max-height: 48px; width: auto; max-width: 180px; object-fit: contain; margin-bottom: 0.85rem; border-radius: 6px;" onerror="this.style.display='none';" />` : ''}
         <h1 class="auth-title">${brand.name}</h1>
         <p class="auth-subtitle">${brand.tagline}</p>
       </div>

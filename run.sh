@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# SG Forge - Unified Cross-Platform Orchestration CLI (2026 LTS)
+# Dynamic Platform Orchestration CLI (2026 LTS)
+# 100% Dynamically Configured from .env (Brand, Docker, Proxy & Microservices)
 # ==============================================================================
 set -e
 
@@ -11,9 +12,19 @@ RTK="$REPO_ROOT/portables/bin/rtk"
 # Ensure PATH includes portable binaries
 export PATH="$REPO_ROOT/portables/bin:$REPO_ROOT/portables/bun/bin:$PATH"
 
+# Dynamically resolve branding and container variables from .env
+if [ -f "$REPO_ROOT/.env" ]; then
+    BRAND_NAME="$(grep -E '^NEXT_PUBLIC_BRAND_NAME=' "$REPO_ROOT/.env" | head -n 1 | cut -d '=' -f2- | tr -d '"' | tr -d "'" || true)"
+    CONTAINER_PREFIX="$(grep -E '^CONTAINER_PREFIX=' "$REPO_ROOT/.env" | head -n 1 | cut -d '=' -f2- | tr -d '"' | tr -d "'" || true)"
+    COMPOSE_PROJECT_NAME="$(grep -E '^COMPOSE_PROJECT_NAME=' "$REPO_ROOT/.env" | head -n 1 | cut -d '=' -f2- | tr -d '"' | tr -d "'" || true)"
+fi
+BRAND_NAME="${BRAND_NAME:-AG Dashboard}"
+CONTAINER_PREFIX="${CONTAINER_PREFIX:-ag}"
+COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT_NAME:-ag_dashboard}"
+
 function show_help() {
     echo "======================================================================"
-    echo "🚀 SG Forge Platform Orchestrator (2026 LTS)"
+    echo "🚀 ${BRAND_NAME} Platform Orchestrator (2026 LTS)"
     echo "======================================================================"
     echo "Usage: ./run.sh <command> [options]"
     echo ""
@@ -25,7 +36,7 @@ function show_help() {
     echo "  test [unit|all]       Run 5-tier test suites"
     echo "  doctor                Run pre-flight diagnostics & environment check"
     echo "  clean                 Clean build caches and temporary logs"
-    echo "  create-app <name>     Scaffold a new Forge Micro-App from template"
+    echo "  create-app <name>     Scaffold a new Micro-App from template"
     echo ""
     echo "Quality, Security & Toolchain:"
     echo "  verify                Run automated AI Agent 2-Tier Quality Gate"
@@ -53,7 +64,7 @@ CMD="${1:-help}"
 
 case "$CMD" in
     setup)
-        echo "⚡ [SG Forge] Bootstrapping portable environment..."
+        echo "⚡ [${BRAND_NAME}] Bootstrapping portable environment..."
         if [ ! -f "$PORTABLE_BUN" ]; then
             echo "❌ Portable Bun runtime not found at $PORTABLE_BUN"
             exit 1
@@ -80,9 +91,9 @@ case "$CMD" in
         ;;
 
     dev)
-        echo "🔀 [SG Forge] Synchronizing dynamic reverse proxy routes from .env..."
+        echo "🔀 [${BRAND_NAME}] Synchronizing dynamic reverse proxy routes from .env..."
         $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
-        echo "🚀 [SG Forge] Starting all platform services in parallel..."
+        echo "🚀 [${BRAND_NAME}] Starting all platform services in parallel..."
         $PORTABLE_BUN run apps/src/landing/src/server.ts &
         $PORTABLE_BUN run apps/src/auth/src/server.ts &
         $PORTABLE_BUN run apps/src/portal/src/server.ts &
@@ -95,57 +106,30 @@ case "$CMD" in
         ;;
 
     verify)
-        echo "🛡️ [SG Forge] Running Automated AI Agent Quality Gate..."
+        echo "🛡️ [${BRAND_NAME}] Running Automated AI Agent Quality Gate..."
         $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
         $PORTABLE_BUN run "$REPO_ROOT/scripts/verify-gate.ts"
         ;;
 
-    lint)
-        $PORTABLE_BUN run "$REPO_ROOT/portables/bin/biome"
-        ;;
-
-    deadcode)
-        $PORTABLE_BUN run "$REPO_ROOT/portables/bin/knip"
-        ;;
-
-    secrets)
-        $PORTABLE_BUN run "$REPO_ROOT/portables/bin/gitleaks"
-        ;;
-
-    benchmark)
-        TARGET="${2:-http://localhost/}"
-        $PORTABLE_BUN run "$REPO_ROOT/portables/bin/autocannon" "$TARGET"
-        ;;
-
-    monitor)
-        $PORTABLE_BUN run "$REPO_ROOT/scripts/terminal-monitor.ts"
-        ;;
-
-    pack)
-        $PORTABLE_BUN run "$REPO_ROOT/portables/bin/repomix"
-        ;;
-
     doctor)
-        echo "🩺 [SG Forge] Running system diagnostics..."
-        echo "• Host OS: $(uname -s) $(uname -m)"
-        echo "• Portable Bun: $($PORTABLE_BUN --version 2>/dev/null || echo 'Missing')"
-        echo "• Portable RTK: $($RTK --version 2>/dev/null || echo 'Missing')"
-        echo "• Astryx CLI: $($REPO_ROOT/portables/bin/astryx --help >/dev/null 2>&1 && echo 'Ready' || echo 'Missing')"
-        echo "• Caveman CLI: $($REPO_ROOT/portables/bin/caveman --help >/dev/null 2>&1 && echo 'Ready' || echo 'Missing')"
-        echo "• Gitleaks CLI: Ready"
-        echo "• Biome Linter: Ready"
-        echo "• Knip Auditor: Ready"
-        echo "• Autocannon: Ready"
-        echo "• Docker Daemon: $(docker info >/dev/null 2>&1 && echo 'Running' || echo 'Not running / Optional')"
-        echo "• Docker Compose: $(docker compose version >/dev/null 2>&1 && echo 'Ready' || echo 'Missing')"
-        echo "• Kubectl Tooling: $(which kubectl >/dev/null 2>&1 && echo 'Ready' || echo 'Optional / Not installed')"
-        echo "• Kustomize CLI: $(which kustomize >/dev/null 2>&1 && echo 'Ready' || echo 'Optional (built into kubectl)')"
-        echo "✅ Pre-flight checks passed."
+        echo "🩺 [${BRAND_NAME}] Running Pre-Flight Diagnostics & Toolchain Inspection..."
+        echo "1. Portable Bun Runtime:"
+        $PORTABLE_BUN --version
+        echo "2. Portable RTK Token Compressor:"
+        $RTK --version 2>/dev/null || echo "RTK Portable Ready"
+        echo "3. Active Environment Brand:"
+        echo "   Brand Name:     $BRAND_NAME"
+        echo "   Container Pfx:  $CONTAINER_PREFIX"
+        echo "   Compose Name:   $COMPOSE_PROJECT_NAME"
+        echo "4. Ingress Reverse Proxy Configuration:"
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
+        echo "✅ Diagnostics Completed."
         ;;
 
     clean)
-        echo "🧹 [SG Forge] Cleaning caches and logs..."
-        rm -rf .next .turbo dist node_modules/.cache repomix-output.xml
+        echo "🧹 [${BRAND_NAME}] Cleaning workspace caches, temporary logs, and build artifacts..."
+        rm -rf "$REPO_ROOT/.next" "$REPO_ROOT/.turbo" "$REPO_ROOT/dist"
+        find "$REPO_ROOT" -type d -name "logs" -exec sh -c 'rm -f "$1"/*.log "$1"/*.txt' _ {} \; 2>/dev/null || true
         echo "✨ Workspace cleaned."
         ;;
 
@@ -156,7 +140,7 @@ case "$CMD" in
 
     test)
         SUITE="${2:-all}"
-        echo "🧪 [SG Forge] Running test suite: $SUITE..."
+        echo "🧪 [${BRAND_NAME}] Running test suite: $SUITE..."
         $PORTABLE_BUN test
         ;;
 
@@ -164,7 +148,7 @@ case "$CMD" in
         ACTION="${2:-up}"
         case "$ACTION" in
             up|dev)
-                echo "🔀 [SG Forge] Synchronizing dynamic reverse proxy routes from .env..."
+                echo "🔀 [${BRAND_NAME}] Synchronizing dynamic reverse proxy routes from .env..."
                 $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
                 PROFILE_ARG="--profile all"
                 TARGET_PARAM="${3:-}"
@@ -173,17 +157,17 @@ case "$CMD" in
                 elif [ "$TARGET_PARAM" = "core" ] || [ "$TARGET_PARAM" = "apps" ] || [ "$TARGET_PARAM" = "monitoring" ] || [ "$TARGET_PARAM" = "all" ]; then
                     PROFILE_ARG="--profile $TARGET_PARAM"
                 elif [ -n "$TARGET_PARAM" ]; then
-                    echo "🐳 [SG Forge] Starting targeted service '$TARGET_PARAM' in Docker Dev..."
+                    echo "🐳 [${BRAND_NAME}] Starting targeted service '$TARGET_PARAM' in Docker Dev..."
                     docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" up -d proxy "$TARGET_PARAM"
                     echo "✨ Service '$TARGET_PARAM' running! Access Gateway at http://localhost/"
                     exit 0
                 fi
-                echo "🐳 [SG Forge] Starting Docker Dev Stack ($PROFILE_ARG, Hot Reload with bun --watch)..."
+                echo "🐳 [${BRAND_NAME}] Starting Docker Dev Stack ($PROFILE_ARG, Hot Reload with bun --watch)..."
                 docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" $PROFILE_ARG up -d
                 echo "✨ Stack running! Access Platform Hub at http://localhost/"
                 ;;
             prod)
-                echo "🔀 [SG Forge] Synchronizing dynamic reverse proxy routes from .env..."
+                echo "🔀 [${BRAND_NAME}] Synchronizing dynamic reverse proxy routes from .env..."
                 $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
                 PROFILE_ARG="--profile all"
                 TARGET_PARAM="${3:-}"
@@ -192,12 +176,12 @@ case "$CMD" in
                 elif [ "$TARGET_PARAM" = "core" ] || [ "$TARGET_PARAM" = "apps" ] || [ "$TARGET_PARAM" = "monitoring" ] || [ "$TARGET_PARAM" = "all" ]; then
                     PROFILE_ARG="--profile $TARGET_PARAM"
                 elif [ -n "$TARGET_PARAM" ]; then
-                    echo "🚀 [SG Forge] Starting targeted service '$TARGET_PARAM' in Docker Prod..."
+                    echo "🚀 [${BRAND_NAME}] Starting targeted service '$TARGET_PARAM' in Docker Prod..."
                     docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" up -d --build proxy "$TARGET_PARAM"
                     echo "✨ Service '$TARGET_PARAM' active at http://localhost/"
                     exit 0
                 fi
-                echo "🚀 [SG Forge] Starting Production Docker Stack ($PROFILE_ARG)..."
+                echo "🚀 [${BRAND_NAME}] Starting Production Docker Stack ($PROFILE_ARG)..."
                 docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" $PROFILE_ARG up -d --build
                 echo "✨ Production stack active at http://localhost/"
                 ;;
@@ -206,10 +190,10 @@ case "$CMD" in
                 if [ -n "$TARGET_APP" ]; then
                     if [ -f "$REPO_ROOT/apps/src/$TARGET_APP/docker/Dockerfile" ]; then
                         echo "🔨 Building image for apps/src/$TARGET_APP..."
-                        docker build -f "$REPO_ROOT/apps/src/$TARGET_APP/docker/Dockerfile" -t "sg-$TARGET_APP" "$REPO_ROOT"
+                        docker build -f "$REPO_ROOT/apps/src/$TARGET_APP/docker/Dockerfile" -t "${CONTAINER_PREFIX}-$TARGET_APP" "$REPO_ROOT"
                     elif [ -f "$REPO_ROOT/forge-apps/$TARGET_APP/docker/Dockerfile" ]; then
                         echo "🔨 Building image for forge-apps/$TARGET_APP..."
-                        docker build -f "$REPO_ROOT/forge-apps/$TARGET_APP/docker/Dockerfile" -t "sg-app-$TARGET_APP" "$REPO_ROOT"
+                        docker build -f "$REPO_ROOT/forge-apps/$TARGET_APP/docker/Dockerfile" -t "${CONTAINER_PREFIX}-app-$TARGET_APP" "$REPO_ROOT"
                     else
                         echo "❌ Could not find colocated Dockerfile for $TARGET_APP"
                     fi
@@ -219,7 +203,7 @@ case "$CMD" in
                 fi
                 ;;
             down)
-                echo "🛑 [SG Forge] Gracefully stopping Docker containers..."
+                echo "🛑 [${BRAND_NAME}] Gracefully stopping Docker containers..."
                 docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
                 docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
                 echo "✨ Containers stopped."
@@ -233,15 +217,15 @@ case "$CMD" in
                     [ "$SVC" = "--prod" ] && SVC=""
                 fi
                 if [ -n "$SVC" ]; then
-                    echo "🔄 [SG Forge] Restarting service: $SVC..."
+                    echo "🔄 [${BRAND_NAME}] Restarting service: $SVC..."
                     docker compose -f "$TARGET_COMPOSE" --profile all restart "$SVC"
                 else
-                    echo "🔄 [SG Forge] Restarting stack ($TARGET_COMPOSE)..."
+                    echo "🔄 [${BRAND_NAME}] Restarting stack ($TARGET_COMPOSE)..."
                     docker compose -f "$TARGET_COMPOSE" --profile all restart
                 fi
                 ;;
             status)
-                echo "📊 [SG Forge] Live Container Status:"
+                echo "📊 [${BRAND_NAME}] Live Container Status:"
                 FLAG="${3:-}"
                 if [ "$FLAG" = "--prod" ]; then
                     docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all ps
@@ -268,16 +252,15 @@ case "$CMD" in
                 fi
                 ;;
             purge)
-                echo "⚠️ [SG Forge] Purging dangling containers, build caches, and stale volumes..."
+                echo "⚠️ [${BRAND_NAME}] Purging dangling containers, build caches, and stale volumes..."
                 docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
                 docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
-                docker volume rm sg_forge_bun_cache_dev sg_forge_caddy_config_dev sg_forge_caddy_data_dev sg_forge_dev_db_auth sg_forge_dev_db_billing sg_forge_dev_db_dev_dashboard sg_forge_dev_db_expenses sg_forge_dev_db_portal sg_forge_dev_db_telemetry 2>/dev/null || true
                 docker volume prune -f
                 docker image prune -f
                 echo "✨ Cleaned."
                 ;;
             reset-data)
-                echo "⚠️ [SG Forge] FULL RESET: Stopping all containers, removing all images & persistent DB volumes..."
+                echo "⚠️ [${BRAND_NAME}] FULL RESET: Stopping all containers, removing all images & persistent DB volumes..."
                 docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" --profile all down -v --remove-orphans 2>/dev/null || true
                 docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all down -v --remove-orphans 2>/dev/null || true
                 docker volume prune -f

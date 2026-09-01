@@ -3,6 +3,8 @@
  * Reads brand tokens from .env with enterprise fallbacks.
  */
 
+import { loadBrandConfig } from '@forge/sdk';
+
 export interface BrandConfig {
   name: string;
   short: string;
@@ -11,14 +13,11 @@ export interface BrandConfig {
 }
 
 export function resolveBrandConfig(): BrandConfig {
-  const name = process.env.NEXT_PUBLIC_BRAND_NAME || 'SG Forge Global';
-  const short = process.env.NEXT_PUBLIC_BRAND_SHORT || 'SG';
-  const tagline = process.env.NEXT_PUBLIC_BRAND_TAGLINE || 'Central Identity & Auth Gateway';
-
+  const brand = loadBrandConfig();
   return {
-    name,
-    short,
-    tagline,
-    logoText: short,
+    name: brand.name,
+    short: brand.short,
+    tagline: brand.tagline,
+    logoText: brand.short,
   };
 }

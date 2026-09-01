@@ -1,21 +1,23 @@
 # ==============================================================================
-# SG Forge 2.0 - Production Docker Environment
+# AG Dashboard 2.0 - Production Docker Environment
+# 100% Dynamically Driven by .env parameters (COMPOSE_PROJECT_NAME, CONTAINER_PREFIX, DOCKER_NETWORK)
 # ==============================================================================
-name: sg-forge-prod
+name: ${COMPOSE_PROJECT_NAME:-ag_dashboard}-prod
 
 networks:
   forge-net:
+    name: ${DOCKER_NETWORK:-ag_net}
     driver: bridge
 
 volumes:
-  forge_caddy_data:
-  forge_caddy_config:
-  forge_prod_db_auth:
-  forge_prod_db_portal:
-  forge_prod_db_dev_dashboard:
-  forge_prod_db_expenses:
-  forge_prod_db_billing:
-  forge_prod_db_telemetry:
+  ag_caddy_data:
+  ag_caddy_config:
+  ag_prod_db_auth:
+  ag_prod_db_portal:
+  ag_prod_db_dev_dashboard:
+  ag_prod_db_expenses:
+  ag_prod_db_billing:
+  ag_prod_db_telemetry:
 
 x-logging: &default-logging
   driver: json-file
@@ -27,15 +29,15 @@ services:
   # 🔀 Unified Reverse Proxy Gateway
   proxy:
     image: caddy:2-alpine
-    container_name: forge-proxy-prod
+    container_name: ${CONTAINER_PREFIX:-ag}-proxy-prod
     profiles: ["core", "apps", "monitoring", "all"]
     ports:
       - "${HTTP_PORT:-80}:80"
       - "${HTTPS_PORT:-443}:443"
     volumes:
       - ../../proxy/Caddyfile:/etc/caddy/Caddyfile:ro
-      - forge_caddy_data:/data
-      - forge_caddy_config:/config
+      - ag_caddy_data:/data
+      - ag_caddy_config:/config
     networks:
       - forge-net
     restart: always
@@ -57,7 +59,7 @@ services:
     build:
       context: ../../
       dockerfile: apps/src/landing/docker/Dockerfile
-    container_name: forge-landing-prod
+    container_name: ${CONTAINER_PREFIX:-ag}-landing-prod
     profiles: ["core", "all"]
     env_file:
       - ../../.env
@@ -86,7 +88,7 @@ services:
     build:
       context: ../../
       dockerfile: apps/src/portal/docker/Dockerfile
-    container_name: forge-portal-prod
+    container_name: ${CONTAINER_PREFIX:-ag}-portal-prod
     profiles: ["core", "all"]
     env_file:
       - ../../.env
@@ -95,7 +97,7 @@ services:
       - PORTAL_PORT=${PORTAL_PORT:-3001}
       - NODE_ENV=production
     volumes:
-      - forge_prod_db_portal:/app/data
+      - ag_prod_db_portal:/app/data
     networks:
       - forge-net
     restart: always
@@ -117,7 +119,7 @@ services:
     build:
       context: ../../
       dockerfile: apps/src/dev-dashboard/docker/Dockerfile
-    container_name: forge-dev-dashboard-prod
+    container_name: ${CONTAINER_PREFIX:-ag}-dev-dashboard-prod
     profiles: ["monitoring", "all"]
     env_file:
       - ../../.env
@@ -126,7 +128,7 @@ services:
       - DEV_DASHBOARD_PORT=${DEV_DASHBOARD_PORT:-3002}
       - NODE_ENV=production
     volumes:
-      - forge_prod_db_dev_dashboard:/app/data
+      - ag_prod_db_dev_dashboard:/app/data
     networks:
       - forge-net
     restart: always
@@ -148,7 +150,7 @@ services:
     build:
       context: ../../
       dockerfile: apps/src/dev-hub/docker/Dockerfile
-    container_name: forge-dev-hub-prod
+    container_name: ${CONTAINER_PREFIX:-ag}-dev-hub-prod
     profiles: ["monitoring", "all"]
     env_file:
       - ../../.env
@@ -177,7 +179,7 @@ services:
     build:
       context: ../../
       dockerfile: apps/src/auth/docker/Dockerfile
-    container_name: forge-auth-prod
+    container_name: ${CONTAINER_PREFIX:-ag}-auth-prod
     profiles: ["core", "all"]
     env_file:
       - ../../.env
@@ -186,7 +188,7 @@ services:
       - AUTH_PORT=${AUTH_PORT:-3004}
       - NODE_ENV=production
     volumes:
-      - forge_prod_db_auth:/app/data
+      - ag_prod_db_auth:/app/data
     networks:
       - forge-net
     restart: always
@@ -208,7 +210,7 @@ services:
     build:
       context: ../../
       dockerfile: forge-apps/expenses/docker/Dockerfile
-    container_name: forge-app-expenses-prod
+    container_name: ${CONTAINER_PREFIX:-ag}-app-expenses-prod
     profiles: ["apps", "all"]
     env_file:
       - ../../.env
@@ -216,7 +218,7 @@ services:
       - PORT=8085
       - NODE_ENV=production
     volumes:
-      - forge_prod_db_expenses:/app/data
+      - ag_prod_db_expenses:/app/data
     networks:
       - forge-net
     restart: always
@@ -238,7 +240,7 @@ services:
     build:
       context: ../../
       dockerfile: forge-apps/billing/docker/Dockerfile
-    container_name: forge-app-billing-prod
+    container_name: ${CONTAINER_PREFIX:-ag}-app-billing-prod
     profiles: ["apps", "all"]
     env_file:
       - ../../.env
@@ -246,7 +248,7 @@ services:
       - PORT=8086
       - NODE_ENV=production
     volumes:
-      - forge_prod_db_billing:/app/data
+      - ag_prod_db_billing:/app/data
     networks:
       - forge-net
     restart: always
@@ -268,7 +270,7 @@ services:
     build:
       context: ../../
       dockerfile: forge-apps/telemetry/docker/Dockerfile
-    container_name: forge-app-telemetry-prod
+    container_name: ${CONTAINER_PREFIX:-ag}-app-telemetry-prod
     profiles: ["apps", "all"]
     env_file:
       - ../../.env
@@ -276,7 +278,7 @@ services:
       - PORT=8087
       - NODE_ENV=production
     volumes:
-      - forge_prod_db_telemetry:/app/data
+      - ag_prod_db_telemetry:/app/data
     networks:
       - forge-net
     restart: always

@@ -1,0 +1,117 @@
+/**
+ * @forge/sdk - Tier 1 Unit: Dynamic Brand Configuration Resolver & Logo Handler
+ * 3A Pattern (Arrange, Act, Assert) Testing Suite
+ */
+
+import { afterEach, beforeEach, describe, expect, it } from 'bun:test';
+import { handleBrandAssetRequest, loadBrandConfig, renderBrandLogoHtml } from '../../src/branding';
+
+describe('Tier 1 Unit: Brand Configuration Resolver Engine', () => {
+  const originalBrandName = process.env.NEXT_PUBLIC_BRAND_NAME;
+  const originalBrandShort = process.env.NEXT_PUBLIC_BRAND_SHORT;
+  const originalBrandTagline = process.env.NEXT_PUBLIC_BRAND_TAGLINE;
+  const originalBrandLogo = process.env.NEXT_PUBLIC_BRAND_LOGO_URL;
+
+  beforeEach(() => {
+    delete process.env.NEXT_PUBLIC_BRAND_NAME;
+    delete process.env.NEXT_PUBLIC_BRAND_SHORT;
+    delete process.env.NEXT_PUBLIC_BRAND_TAGLINE;
+    delete process.env.NEXT_PUBLIC_BRAND_LOGO_URL;
+  });
+
+  afterEach(() => {
+    if (originalBrandName) process.env.NEXT_PUBLIC_BRAND_NAME = originalBrandName;
+    if (originalBrandShort) process.env.NEXT_PUBLIC_BRAND_SHORT = originalBrandShort;
+    if (originalBrandTagline) process.env.NEXT_PUBLIC_BRAND_TAGLINE = originalBrandTagline;
+    if (originalBrandLogo) process.env.NEXT_PUBLIC_BRAND_LOGO_URL = originalBrandLogo;
+  });
+
+  it('Arrange, Act, Assert: loads default AG Dashboard branding when env vars are unset', () => {
+    // Act
+    const brand = loadBrandConfig();
+
+    // Assert
+    expect(brand.name).toBeDefined();
+    expect(brand.short).toBeDefined();
+    expect(brand.tagline).toBeDefined();
+    expect(brand.logoUrl).toBeDefined();
+  });
+
+  it('Arrange, Act, Assert: dynamically resolves custom brand tokens from process.env', () => {
+    // Arrange
+    process.env.NEXT_PUBLIC_BRAND_NAME = 'Acme Global Cloud';
+    process.env.NEXT_PUBLIC_BRAND_SHORT = 'AGC';
+    process.env.NEXT_PUBLIC_BRAND_TAGLINE = 'Next-Gen Enterprise Cloud Engine';
+    process.env.NEXT_PUBLIC_BRAND_LOGO_URL = '/custom/logo.svg';
+
+    // Act
+    const brand = loadBrandConfig();
+
+    // Assert
+    expect(brand.name).toBe('Acme Global Cloud');
+    expect(brand.short).toBe('AGC');
+    expect(brand.tagline).toBe('Next-Gen Enterprise Cloud Engine');
+    expect(brand.logoUrl).toBe('/custom/logo.svg');
+  });
+
+  it('Arrange, Act, Assert: dynamically resolves AG Dashboard branding and logo from .env', () => {
+    // Arrange
+    process.env.NEXT_PUBLIC_BRAND_NAME = 'AG Dashboard';
+    process.env.NEXT_PUBLIC_BRAND_SHORT = 'AG';
+    process.env.NEXT_PUBLIC_BRAND_TAGLINE = 'Modular Corporate Portal & Sandboxing Engine';
+    process.env.NEXT_PUBLIC_BRAND_LOGO_URL = '/brand/logo.png';
+
+    // Act
+    const brand = loadBrandConfig();
+
+    // Assert
+    expect(brand.name).toBe('AG Dashboard');
+    expect(brand.short).toBe('AG');
+    expect(brand.tagline).toContain('Modular Corporate Portal');
+    expect(brand.logoUrl).toBe('/brand/logo.png');
+  });
+
+  it('Arrange, Act, Assert: handleBrandAssetRequest serves static brand logo file with correct content type', async () => {
+    // Arrange
+    const req = new Request('http://localhost:3000/brand/logo.png');
+
+    // Act
+    const res = handleBrandAssetRequest(req);
+
+    // Assert
+    expect(res).not.toBeNull();
+    expect(res?.status).toBe(200);
+    expect(res?.headers.get('Content-Type')).toBe('image/png');
+    expect(res?.headers.get('Cache-Control')).toContain('max-age=86400');
+  });
+
+  it('Arrange, Act, Assert: handleBrandAssetRequest returns null for non-asset routes', () => {
+    // Arrange
+    const req = new Request('http://localhost:3000/api/users');
+
+    // Act
+    const res = handleBrandAssetRequest(req);
+
+    // Assert
+    expect(res).toBeNull();
+  });
+
+  it('Arrange, Act, Assert: renderBrandLogoHtml renders accessible img with fallback', () => {
+    // Arrange
+    const brand = {
+      name: 'AG Dashboard',
+      short: 'AG',
+      tagline: 'Engine',
+      logoUrl: '/brand/logo.png',
+    };
+
+    // Act
+    const html = renderBrandLogoHtml(brand, { height: 28 });
+
+    // Assert
+    expect(html).toContain('src="/brand/logo.png"');
+    expect(html).toContain('alt="AG Dashboard"');
+    expect(html).toContain('height: 28px');
+    expect(html).toContain('astryx-logo-badge');
+  });
+});

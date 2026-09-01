@@ -4,7 +4,7 @@
  * Google SRE Observability & Meta Astryx Enterprise Baseline (v2.0.0 LTS)
  */
 
-import { createLogger, createSafeHandler } from '@forge/sdk';
+import { createLogger, createSafeHandler, handleBrandAssetRequest } from '@forge/sdk';
 import { handleApiRequest } from './backend/api-handlers';
 import { renderDashboardHtml } from './frontend/ui-renderer';
 
@@ -14,6 +14,10 @@ const logger = createLogger('dev-dashboard');
 export function startDevDashboardServer(port: number = PORT) {
   const handler = createSafeHandler('dev-dashboard', async (req: Request) => {
     const url = new URL(req.url);
+
+    // 0. Static Brand Asset Interceptor
+    const assetRes = handleBrandAssetRequest(req);
+    if (assetRes) return assetRes;
 
     // 1. Dual-Probe Health Probes
     if (url.pathname.endsWith('/health') || url.pathname.endsWith('/livez') || url.pathname.endsWith('/readyz')) {

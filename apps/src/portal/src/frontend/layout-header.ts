@@ -3,6 +3,8 @@
  * Modern uncluttered top header with interactive user profile dropdown popover.
  */
 
+import { loadBrandConfig } from '@forge/sdk';
+
 export interface HeaderUserContext {
   id: string;
   email: string;
@@ -12,6 +14,7 @@ export interface HeaderUserContext {
 }
 
 export function renderPortalHeader(user: HeaderUserContext): string {
+  const brand = loadBrandConfig();
   const roleDisplay = user.isAdmin ? 'Admin' : 'Employee';
   const initial = (user.displayName || 'U').charAt(0).toUpperCase();
 
@@ -19,13 +22,14 @@ export function renderPortalHeader(user: HeaderUserContext): string {
     <header class="portal-header">
       <!-- Left: Brand & Org Switcher -->
       <div class="portal-header-left">
-        <a href="/portal" class="portal-brand">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--forge-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <a href="/portal" class="portal-brand" style="display: flex; align-items: center; gap: 0.55rem;">
+          ${brand.logoUrl ? `<img src="${brand.logoUrl}" alt="${brand.name}" class="astryx-brand-logo-img" style="height: 42px; max-height: 90%; width: auto; max-width: 200px; object-fit: contain; flex-shrink: 0; border-radius: 4px;" onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='inline-block';" />` : ''}
+          <svg style="${brand.logoUrl ? 'display: none;' : ''}" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--forge-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
             <polyline points="2 17 12 22 22 17"></polyline>
             <polyline points="2 12 12 17 22 12"></polyline>
           </svg>
-          <span>SG FORGE</span>
+          <span class="portal-app-tag">PORTAL</span>
         </a>
 
         <div class="portal-header-divider"></div>

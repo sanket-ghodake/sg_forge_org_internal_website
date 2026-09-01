@@ -4,7 +4,7 @@ metadata:
   name: forge-app-telemetry
   labels:
     app.kubernetes.io/name: forge-app-telemetry
-    app.kubernetes.io/part-of: sg-forge
+    app.kubernetes.io/part-of: ag-dashboard
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: telemetry
-          image: sg-forge/app-telemetry:latest
+          image: ag-dashboard/app-telemetry:latest
           env:
             - name: PORT
               value: "8087"

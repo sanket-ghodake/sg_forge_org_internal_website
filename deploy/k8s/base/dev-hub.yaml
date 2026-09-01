@@ -4,7 +4,7 @@ metadata:
   name: forge-dev-hub
   labels:
     app.kubernetes.io/name: forge-dev-hub
-    app.kubernetes.io/part-of: sg-forge
+    app.kubernetes.io/part-of: ag-dashboard
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: dev-hub
-          image: sg-forge/dev-hub:latest
+          image: ag-dashboard/dev-hub:latest
           env:
             - name: PORT
               value: "3003"

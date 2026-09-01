@@ -3,7 +3,10 @@
  * Meta Astryx Design Standards (2026 LTS Baseline)
  */
 
+import { loadBrandConfig } from '@forge/sdk';
+
 export function renderOverviewSection(): string {
+  const brand = loadBrandConfig();
   return `
     <section id="section-overview" class="hub-section active">
       <!-- Hero Banner -->
@@ -20,7 +23,7 @@ export function renderOverviewSection(): string {
               🚀 Developer Hub & SDK Playground
             </h1>
             <p style="color: var(--forge-text-muted); line-height: 1.6; margin: 0 0 1.25rem 0; font-size: 0.95rem;">
-              The centralized developer control plane for <strong>SG Forge</strong> microservices. Access complete <strong>Forge SDK Contract</strong> specifications, <strong>Docker App Templates</strong>, Zero-Trust gateway headers, and an interactive live API sandbox.
+              The centralized developer control plane for <strong>${brand.name}</strong> microservices. Access complete <strong>Forge SDK Contract</strong> specifications, <strong>Docker App Templates</strong>, Zero-Trust gateway headers, and an interactive live API sandbox.
             </p>
             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
               <button class="astryx-btn btn-primary" onclick="switchTab('sandbox')">⚡ Launch API Sandbox</button>

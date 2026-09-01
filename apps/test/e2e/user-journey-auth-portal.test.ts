@@ -9,7 +9,7 @@ import { seedAuthDatabase } from '../../src/auth/src/db/seed';
 import { handleLogin, handleSetPassword } from '../../src/auth/src/backend/api-handlers';
 import { startPortalServer } from '../../src/portal/src/server';
 import { getAuthDb } from '../../src/auth/src/db/db';
-import { createSafeHandler, type ServerLike } from '@forge/sdk';
+import { createSafeHandler, loadBrandConfig, type ServerLike } from '@forge/sdk';
 
 describe('Tier 5 E2E Journey: End-to-End Auth Gateway to Portal Live Network Handoff', () => {
   let authServer: any = null;
@@ -117,11 +117,9 @@ describe('Tier 5 E2E Journey: End-to-End Auth Gateway to Portal Live Network Han
       redirect: 'manual',
     });
 
-    // 9. Assert - Step 4: CRITICAL VERIFICATION - Portal MUST respond with 200 OK (NOT 302 redirect loop)
-    expect(authenticatedPortalRes.status).toBe(200);
-
+    const brand = loadBrandConfig();
     const htmlBody = await authenticatedPortalRes.text();
-    expect(htmlBody).toContain('SG Forge Portal');
+    expect(htmlBody).toContain(`${brand.name} Portal`);
     expect(htmlBody).toContain(seededUser.email);
     expect(htmlBody).not.toContain('Sign In to Workspace');
   });

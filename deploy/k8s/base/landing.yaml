@@ -4,7 +4,7 @@ metadata:
   name: forge-landing
   labels:
     app.kubernetes.io/name: forge-landing
-    app.kubernetes.io/part-of: sg-forge
+    app.kubernetes.io/part-of: ag-dashboard
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: landing
-          image: sg-forge/landing:latest
+          image: ag-dashboard/landing:latest
           env:
             - name: PORT
               value: "3000"

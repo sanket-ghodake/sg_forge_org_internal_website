@@ -4,6 +4,7 @@
  */
 
 import { getAstryxStyles, getHeadStateScript } from '@forge/ui';
+import { loadBrandConfig } from '@forge/sdk';
 import { getPortalCustomStyles } from './ui-styles';
 import { renderPortalHeader, type HeaderUserContext } from './layout-header';
 import { renderPortalSidebar } from './layout-sidebar';
@@ -11,6 +12,7 @@ import { renderPageCards } from './page-cards';
 import { getPortalClientScript } from './ui-scripts';
 
 export function renderPortalHtml(user?: HeaderUserContext): string {
+  const brand = loadBrandConfig();
   const userContext: HeaderUserContext = {
     id: user?.id || 'usr_guest',
     email: user?.email || 'employee@forge.internal',
@@ -24,7 +26,7 @@ export function renderPortalHtml(user?: HeaderUserContext): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SG Forge Portal - Workspace & Admin Console</title>
+  <title>${brand.name} Portal - Workspace & Admin Console</title>
   ${getHeadStateScript({ defaultTheme: 'dark' })}
   <style>
     ${getAstryxStyles()}

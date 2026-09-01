@@ -34,7 +34,14 @@ export function getPortalCustomStyles(): string {
       padding: 0 1rem; z-index: 40; flex-shrink: 0; box-sizing: border-box; backdrop-filter: blur(8px);
     }
     .portal-header-left { display: flex; align-items: center; gap: 0.75rem; }
-    .portal-brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 0.92rem; color: var(--forge-text-main); text-decoration: none; letter-spacing: -0.02em; }
+    .portal-brand { display: flex; align-items: center; gap: 0.55rem; text-decoration: none; user-select: none; }
+    .portal-app-tag {
+      display: inline-flex; align-items: center;
+      font-size: 0.76rem; font-weight: 600; letter-spacing: 0.03em;
+      color: var(--forge-text-main); background: var(--forge-bg-card);
+      border: 1px solid var(--forge-border); padding: 0.18rem 0.52rem;
+      border-radius: 5px; transition: var(--forge-transition);
+    }
     .portal-header-divider { width: 1px; height: 16px; background: var(--forge-border); }
 
     .portal-search-trigger {

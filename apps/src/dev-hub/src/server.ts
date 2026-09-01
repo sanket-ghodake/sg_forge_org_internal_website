@@ -4,7 +4,7 @@
  * Meta Astryx Enterprise Baseline (v2.0.0 LTS)
  */
 
-import { createLogger, createSafeHandler } from '@forge/sdk';
+import { createLogger, createSafeHandler, handleBrandAssetRequest } from '@forge/sdk';
 import { renderDevHubHtml } from './frontend/hub-view';
 
 const PORT = Number(process.env.DEV_HUB_PORT || process.env.PORT || 3003);
@@ -13,6 +13,10 @@ const logger = createLogger('dev-hub');
 export function startDevHubServer(port: number = PORT) {
   const handler = createSafeHandler('dev-hub', async (req: Request) => {
     const url = new URL(req.url);
+
+    // 0. Static Brand Asset Interceptor
+    const assetRes = handleBrandAssetRequest(req);
+    if (assetRes) return assetRes;
 
     if (url.pathname.endsWith('/health')) {
       return Response.json({

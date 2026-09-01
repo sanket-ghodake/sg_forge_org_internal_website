@@ -4,7 +4,7 @@ metadata:
   name: forge-proxy
   labels:
     app.kubernetes.io/name: forge-proxy
-    app.kubernetes.io/part-of: sg-forge
+    app.kubernetes.io/part-of: ag-dashboard
 spec:
   replicas: 1
   selector:

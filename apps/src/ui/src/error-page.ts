@@ -81,12 +81,14 @@ export function renderAstryxErrorHtml(options: ErrorPageOptions): string {
   const secondaryText = options.secondaryActionText || (code === 403 ? 'Switch Account &rarr;' : 'Platform Hub &rarr;');
   const secondaryHref = options.secondaryActionHref || (code === 403 ? '/auth/login' : '/');
 
+  const brandName = process.env.NEXT_PUBLIC_BRAND_NAME || 'AG Dashboard';
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${code} ${heading} - SG Forge</title>
+  <title>${code} ${heading} - ${brandName}</title>
   ${getHeadStateScript({ defaultTheme: 'dark' })}
   <style>
     ${getAstryxStyles()}

@@ -5,6 +5,7 @@
 
 import { afterAll, beforeAll, describe, expect, it } from 'bun:test';
 import { type Server } from 'bun';
+import { loadBrandConfig } from '@forge/sdk';
 import { handleApiRequest } from '../../src/backend/api-handlers';
 import { renderDashboardHtml } from '../../src/frontend/ui-renderer';
 
@@ -36,13 +37,14 @@ describe('Tier 5 E2E: Developer Dashboard Live Server & Endpoints', () => {
 
   it('Arrange, Act, Assert: GET / serves SPA document with Command Palette and Table Browser markup', async () => {
     // Act
+    const brand = loadBrandConfig();
     const res = await fetch(`${BASE_URL}/`);
     const html = await res.text();
 
     // Assert
     expect(res.status).toBe(200);
     expect(res.headers.get('Content-Type')).toContain('text/html');
-    expect(html).toContain('SG Forge - Developer Dashboard');
+    expect(html).toContain(`${brand.name} - Developer Dashboard`);
     expect(html).toContain('cmd-palette-modal');
     expect(html).toContain('tab-database');
     expect(html).toContain('connect-db-modal');

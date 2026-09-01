@@ -5,11 +5,13 @@
 
 import { describe, expect, it } from 'bun:test';
 import { signJwt } from '@forge/auth';
+import { loadBrandConfig } from '@forge/sdk';
 import { startPortalServer } from '../../src/server';
 
 describe('Tier 2 Integration: Portal Auth Gate & JWT Session Validation', () => {
   it('authenticates valid JWT cookie and serves full portal workspace', async () => {
     // Arrange
+    const brand = loadBrandConfig();
     const server = startPortalServer(3185);
     const validToken = signJwt({
       sub: 'usr_portal_test',
@@ -34,7 +36,7 @@ describe('Tier 2 Integration: Portal Auth Gate & JWT Session Validation', () => 
       // Assert
       expect(res.status).toBe(200);
       expect(html).toContain('Jane Doe');
-      expect(html).toContain('SG Forge Portal');
+      expect(html).toContain(`${brand.name} Portal`);
       expect(html).toContain('portal-nav-item');
       expect(html).toContain('portal-sidebar');
     } finally {

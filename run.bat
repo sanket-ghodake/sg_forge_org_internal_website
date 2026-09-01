@@ -1,6 +1,7 @@
 @echo off
 REM ==============================================================================
-REM SG Forge - Unified Windows Orchestration CLI (Native CMD & PowerShell)
+REM Dynamic Platform Orchestration CLI (Windows 2026 LTS)
+REM 100% Dynamically Configured from .env (Brand, Docker, Proxy & Microservices)
 REM ==============================================================================
 
 set "REPO_ROOT=%~dp0"
@@ -18,36 +19,40 @@ if "%1"=="docker" goto docker
 goto help
 
 :setup
-echo ⚡ [SG Forge] Bootstrapping portable environment on Windows...
+echo ⚡ Bootstrapping portable environment on Windows...
 bun install
+bun run "%REPO_ROOT%scripts\generate-proxy.ts"
 echo ✨ Setup completed successfully! Run 'run.bat dev' or 'run.bat docker up' to start.
 goto end
 
 :dev
-echo 🚀 [SG Forge] Starting development services...
+echo 🚀 Starting development services...
+bun run "%REPO_ROOT%scripts\generate-proxy.ts"
 bun run apps/src/landing/src/server.ts
 goto end
 
 :doctor
-echo 🩺 [SG Forge] Running Windows system diagnostics...
+echo 🩺 Running Windows system diagnostics...
 bun --version
+bun run "%REPO_ROOT%scripts\generate-proxy.ts"
 echo ✅ Pre-flight checks passed.
 goto end
 
 :clean
-echo 🧹 [SG Forge] Cleaning caches and logs...
+echo 🧹 Cleaning caches and logs...
 if exist .next rmdir /s /q .next
 if exist .turbo rmdir /s /q .turbo
 echo ✨ Workspace cleaned.
 goto end
 
 :test
-echo 🧪 [SG Forge] Running tests...
+echo 🧪 Running tests...
 bun test
 goto end
 
 :docker
 if "%2"=="up" (
+    bun run "%REPO_ROOT%scripts\generate-proxy.ts"
     docker compose -f "%REPO_ROOT%docker\dev\docker-compose.yml" up -d
 ) else if "%2"=="down" (
     docker compose -f "%REPO_ROOT%docker\dev\docker-compose.yml" down
@@ -60,7 +65,7 @@ goto end
 
 :help
 echo ======================================================================
-echo 🚀 SG Forge Platform Orchestrator (Windows 2026 LTS)
+echo 🚀 Platform Orchestrator (Windows 2026 LTS)
 echo ======================================================================
 echo Usage: run.bat [setup ^| dev ^| doctor ^| clean ^| test ^| docker]
 echo ======================================================================

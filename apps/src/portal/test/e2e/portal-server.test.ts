@@ -5,11 +5,13 @@
 
 import { describe, expect, it } from 'bun:test';
 import { signJwt } from '@forge/auth';
+import { loadBrandConfig } from '@forge/sdk';
 import { startPortalServer } from '../../src/server';
 
 describe('Tier 5 E2E: Portal Server Bootstrap & Astryx UI Lifecycle', () => {
   it('serves full authenticated portal page with Astryx header and tabs', async () => {
     // Arrange
+    const brand = loadBrandConfig();
     const server = startPortalServer(3189);
     const token = signJwt({
       sub: 'usr_e2e_portal',
@@ -33,7 +35,7 @@ describe('Tier 5 E2E: Portal Server Bootstrap & Astryx UI Lifecycle', () => {
 
       // Assert
       expect(res.status).toBe(200);
-      expect(html).toContain('SG Forge Portal');
+      expect(html).toContain(`${brand.name} Portal`);
       expect(html).toContain('astryx-container');
       expect(html).toContain('logout-btn');
     } finally {

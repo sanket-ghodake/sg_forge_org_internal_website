@@ -31,7 +31,14 @@ export function getDashboardStyles(): string {
       color: var(--forge-text-main); font-size: 1.1rem; padding: 0.2rem 0.45rem; cursor: pointer; line-height: 1; transition: var(--forge-transition);
     }
     .sb-mobile-menu-btn:hover { background: var(--forge-bg-card-hover); border-color: var(--forge-border-medium); }
-    .sb-brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 0.95rem; color: var(--forge-text-main); text-decoration: none; letter-spacing: -0.02em; }
+    .sb-brand { display: flex; align-items: center; gap: 0.55rem; text-decoration: none; user-select: none; }
+    .sb-app-tag {
+      display: inline-flex; align-items: center;
+      font-size: 0.76rem; font-weight: 600; letter-spacing: 0.03em;
+      color: var(--forge-text-main); background: var(--forge-bg-card);
+      border: 1px solid var(--forge-border); padding: 0.18rem 0.52rem;
+      border-radius: 5px; transition: var(--forge-transition);
+    }
     .sb-header-divider { width: 1px; height: 18px; background: var(--forge-border); margin: 0 0.35rem; }
     .sb-header-breadcrumb {
       display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.2rem 0.55rem; background: var(--forge-bg-card);

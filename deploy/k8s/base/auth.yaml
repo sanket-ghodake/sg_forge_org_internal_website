@@ -4,7 +4,7 @@ metadata:
   name: forge-auth
   labels:
     app.kubernetes.io/name: forge-auth
-    app.kubernetes.io/part-of: sg-forge
+    app.kubernetes.io/part-of: ag-dashboard
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: sg-forge/auth:latest
+          image: ag-dashboard/auth:latest
           env:
             - name: PORT
               value: "3004"

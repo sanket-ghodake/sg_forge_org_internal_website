@@ -9,39 +9,63 @@ export function getComponentStyles(): string {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.75rem 2rem;
+      padding: 0 1.75rem;
+      height: 48px;
+      min-height: 48px;
+      max-height: 48px;
       background: var(--forge-bg-surface);
       border-bottom: 1px solid var(--forge-border);
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      transition: background-color 0.25s ease, border-color 0.25s ease;
-      min-height: 52px;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+      box-sizing: border-box;
     }
 
     .astryx-logo {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--forge-text-main);
+      gap: 0.65rem;
       text-decoration: none;
-      letter-spacing: -0.02em;
-      cursor: default;
       user-select: none;
-      pointer-events: none;
+      height: 100%;
+    }
+
+    .astryx-brand-logo-img {
+      height: 42px;
+      max-height: 90%;
+      width: auto;
+      max-width: 200px;
+      object-fit: contain;
+      flex-shrink: 0;
+      border-radius: 4px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .astryx-app-tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: var(--forge-text-main);
+      background: var(--forge-bg-card);
+      border: 1px solid var(--forge-border);
+      padding: 0.18rem 0.55rem;
+      border-radius: 5px;
+      transition: var(--forge-transition);
     }
 
     .astryx-logo-badge {
       background: var(--forge-primary-gradient);
-      color: var(--forge-primary-btn-text, #ffffff);
-      padding: 0.25rem 0.65rem;
-      border-radius: var(--forge-radius-sm);
-      font-size: 0.8rem;
-      font-weight: 800;
+      color: #ffffff;
+      padding: 0.2rem 0.55rem;
+      border-radius: 5px;
+      font-size: 0.75rem;
+      font-weight: 700;
       letter-spacing: 0.05em;
       display: inline-block;
     }

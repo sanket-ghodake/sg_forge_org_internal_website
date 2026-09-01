@@ -5,7 +5,7 @@
  * Manages ASVS 5.0 Authentication, GCP-Style IAM, Org Trees & 4-Pillar Observability.
  */
 
-import { createLogger, createSafeHandler } from '@forge/sdk';
+import { createLogger, createSafeHandler, handleBrandAssetRequest } from '@forge/sdk';
 import { seedAuthDatabase } from './db/seed';
 import {
   handleBrowserLog,
@@ -40,6 +40,10 @@ export function startAuthServer(port: number = PORT) {
     const url = new URL(req.url);
     const path = url.pathname;
     const method = req.method.toUpperCase();
+
+    // 0. Static Brand Asset Interceptor
+    const assetRes = handleBrandAssetRequest(req);
+    if (assetRes) return assetRes;
 
     let response: Response;
 

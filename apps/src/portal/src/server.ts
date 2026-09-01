@@ -4,7 +4,7 @@
  * Integrated with Central Auth Microservice & ASVS 5.0 Authentication Gate.
  */
 
-import { authGuard, createLogger, createSafeHandler } from '@forge/sdk';
+import { authGuard, createLogger, createSafeHandler, handleBrandAssetRequest } from '@forge/sdk';
 import { renderPortalHtml, type HeaderUserContext } from './frontend';
 
 const PORT = Number(process.env.PORTAL_PORT || process.env.PORT || 3001);
@@ -13,6 +13,10 @@ const logger = createLogger('portal-service');
 export function startPortalServer(port: number = PORT) {
   const handler = createSafeHandler('portal-service', async (req: Request) => {
     const url = new URL(req.url);
+
+    // 0. Static Brand Asset Interceptor
+    const assetRes = handleBrandAssetRequest(req);
+    if (assetRes) return assetRes;
 
     if (url.pathname.endsWith('/health')) {
       return Response.json({ status: 'ok', service: 'portal', port, uptime: process.uptime() });

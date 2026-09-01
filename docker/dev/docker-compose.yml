@@ -1,22 +1,24 @@
 # ==============================================================================
-# SG Forge 2.0 - Optimized Development Docker Environment (Hot-Reload Enabled)
+# AG Dashboard 2.0 - Optimized Development Docker Environment (Hot-Reload Enabled)
+# 100% Dynamically Driven by .env parameters (COMPOSE_PROJECT_NAME, CONTAINER_PREFIX, DOCKER_NETWORK)
 # ==============================================================================
-name: sg-forge-dev
+name: ${COMPOSE_PROJECT_NAME:-ag_dashboard}-dev
 
 networks:
   forge-net:
+    name: ${DOCKER_NETWORK:-ag_net}
     driver: bridge
 
 volumes:
-  forge_bun_cache:
-  forge_caddy_data:
-  forge_caddy_config:
-  forge_dev_db_auth:
-  forge_dev_db_portal:
-  forge_dev_db_dev_dashboard:
-  forge_dev_db_expenses:
-  forge_dev_db_billing:
-  forge_dev_db_telemetry:
+  ag_bun_cache:
+  ag_caddy_data:
+  ag_caddy_config:
+  ag_dev_db_auth:
+  ag_dev_db_portal:
+  ag_dev_db_dev_dashboard:
+  ag_dev_db_expenses:
+  ag_dev_db_billing:
+  ag_dev_db_telemetry:
 
 x-logging: &default-logging
   driver: json-file
@@ -28,15 +30,15 @@ services:
   # 🔀 Unified Reverse Proxy Gateway (Port 80 / 443)
   proxy:
     image: caddy:2-alpine
-    container_name: forge-proxy-dev
+    container_name: ${CONTAINER_PREFIX:-ag}-proxy-dev
     profiles: ["core", "apps", "monitoring", "all"]
     ports:
       - "${HTTP_PORT:-80}:80"
       - "${HTTPS_PORT:-443}:443"
     volumes:
       - ../../proxy/Caddyfile:/etc/caddy/Caddyfile:ro
-      - forge_caddy_data:/data
-      - forge_caddy_config:/config
+      - ag_caddy_data:/data
+      - ag_caddy_config:/config
     networks:
       - forge-net
     restart: unless-stopped
@@ -56,7 +58,7 @@ services:
   # 🌐 1. Platform Landing & Discovery Hub (Port 3000) - Hot-Reload
   landing:
     image: oven/bun:1.3-alpine
-    container_name: forge-landing-dev
+    container_name: ${CONTAINER_PREFIX:-ag}-landing-dev
     profiles: ["core", "all"]
     working_dir: /app
     env_file:
@@ -75,7 +77,8 @@ services:
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
       - ../../apps/src/landing:/app/apps/src/landing:rw
-      - forge_bun_cache:/root/.bun/install/cache
+      - ../../public:/app/public:ro
+      - ag_bun_cache:/root/.bun/install/cache
     command: ["bun", "--watch", "apps/src/landing/src/server.ts"]
     networks:
       - forge-net
@@ -96,7 +99,7 @@ services:
   # 🏢 2. Main Portal & Org Canvas (Port 3001) - Hot-Reload
   portal:
     image: oven/bun:1.3-alpine
-    container_name: forge-portal-dev
+    container_name: ${CONTAINER_PREFIX:-ag}-portal-dev
     profiles: ["core", "all"]
     working_dir: /app
     env_file:
@@ -116,8 +119,9 @@ services:
       - ../../apps/src/ui:/app/apps/src/ui:ro
       - ../../apps/src/auth:/app/apps/src/auth:ro
       - ../../apps/src/portal:/app/apps/src/portal:rw
+      - ../../public:/app/public:ro
       - ../../apps/data:/app/data:rw
-      - forge_bun_cache:/root/.bun/install/cache
+      - ag_bun_cache:/root/.bun/install/cache
     command: ["bun", "--watch", "apps/src/portal/src/server.ts"]
     networks:
       - forge-net
@@ -138,7 +142,7 @@ services:
   # 📊 3. Developer Monitoring Dashboard (Port 3002) - Hot-Reload
   dev-dashboard:
     image: oven/bun:1.3-alpine
-    container_name: forge-dev-dashboard
+    container_name: ${CONTAINER_PREFIX:-ag}-dev-dashboard-dev
     profiles: ["monitoring", "all"]
     working_dir: /app
     env_file:
@@ -157,8 +161,9 @@ services:
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
       - ../../apps/src/dev-dashboard:/app/apps/src/dev-dashboard:rw
+      - ../../public:/app/public:ro
       - ../../apps/data:/app/data:rw
-      - forge_bun_cache:/root/.bun/install/cache
+      - ag_bun_cache:/root/.bun/install/cache
     command: ["bun", "--watch", "apps/src/dev-dashboard/src/server.ts"]
     networks:
       - forge-net
@@ -179,7 +184,7 @@ services:
   # 📚 4. Developer Hub & SDK Playground (Port 3003) - Hot-Reload
   dev-hub:
     image: oven/bun:1.3-alpine
-    container_name: forge-dev-hub
+    container_name: ${CONTAINER_PREFIX:-ag}-dev-hub-dev
     profiles: ["monitoring", "all"]
     working_dir: /app
     env_file:
@@ -198,7 +203,8 @@ services:
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
       - ../../apps/src/dev-hub:/app/apps/src/dev-hub:rw
-      - forge_bun_cache:/root/.bun/install/cache
+      - ../../public:/app/public:ro
+      - ag_bun_cache:/root/.bun/install/cache
     command: ["bun", "--watch", "apps/src/dev-hub/src/server.ts"]
     networks:
       - forge-net
@@ -219,7 +225,7 @@ services:
   # 🔐 5. Central Identity & Auth Service (Port 3004) - Hot-Reload
   auth:
     image: oven/bun:1.3-alpine
-    container_name: forge-auth-dev
+    container_name: ${CONTAINER_PREFIX:-ag}-auth-dev
     profiles: ["core", "all"]
     working_dir: /app
     env_file:
@@ -238,8 +244,9 @@ services:
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
       - ../../apps/src/auth:/app/apps/src/auth:rw
+      - ../../public:/app/public:ro
       - ../../apps/data:/app/data:rw
-      - forge_bun_cache:/root/.bun/install/cache
+      - ag_bun_cache:/root/.bun/install/cache
     command: ["bun", "--watch", "apps/src/auth/src/server.ts"]
     networks:
       - forge-net
@@ -260,7 +267,7 @@ services:
   # 🧩 6. Forge App: Expenses (Port 8085) - Hot-Reload
   app-expenses:
     image: oven/bun:1.3-alpine
-    container_name: forge-app-expenses
+    container_name: ${CONTAINER_PREFIX:-ag}-app-expenses-dev
     profiles: ["apps", "all"]
     working_dir: /app
     env_file:
@@ -278,8 +285,9 @@ services:
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
       - ../../forge-apps/expenses:/app/forge-apps/expenses:rw
+      - ../../public:/app/public:ro
       - ../../apps/data:/app/data:rw
-      - forge_bun_cache:/root/.bun/install/cache
+      - ag_bun_cache:/root/.bun/install/cache
     command: ["bun", "--watch", "forge-apps/expenses/src/server.ts"]
     networks:
       - forge-net
@@ -300,7 +308,7 @@ services:
   # 🧩 7. Forge App: Billing (Port 8086) - Hot-Reload
   app-billing:
     image: oven/bun:1.3-alpine
-    container_name: forge-app-billing
+    container_name: ${CONTAINER_PREFIX:-ag}-app-billing-dev
     profiles: ["apps", "all"]
     working_dir: /app
     env_file:
@@ -318,8 +326,9 @@ services:
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
       - ../../forge-apps/billing:/app/forge-apps/billing:rw
+      - ../../public:/app/public:ro
       - ../../apps/data:/app/data:rw
-      - forge_bun_cache:/root/.bun/install/cache
+      - ag_bun_cache:/root/.bun/install/cache
     command: ["bun", "--watch", "forge-apps/billing/src/server.ts"]
     networks:
       - forge-net
@@ -340,7 +349,7 @@ services:
   # 🧩 8. Forge App: Telemetry (Port 8087) - Hot-Reload
   app-telemetry:
     image: oven/bun:1.3-alpine
-    container_name: forge-app-telemetry
+    container_name: ${CONTAINER_PREFIX:-ag}-app-telemetry-dev
     profiles: ["apps", "all"]
     working_dir: /app
     env_file:
@@ -358,8 +367,9 @@ services:
       - ../../apps/src/types:/app/apps/src/types:ro
       - ../../apps/src/ui:/app/apps/src/ui:ro
       - ../../forge-apps/telemetry:/app/forge-apps/telemetry:rw
+      - ../../public:/app/public:ro
       - ../../apps/data:/app/data:rw
-      - forge_bun_cache:/root/.bun/install/cache
+      - ag_bun_cache:/root/.bun/install/cache
     command: ["bun", "--watch", "forge-apps/telemetry/src/server.ts"]
     networks:
       - forge-net

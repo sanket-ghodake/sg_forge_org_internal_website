@@ -4,6 +4,7 @@
  */
 
 import { describe, expect, it } from 'bun:test';
+import { loadBrandConfig } from '@forge/sdk';
 import {
   renderPortalHeader,
   renderPortalSidebar,
@@ -17,6 +18,7 @@ import {
 describe('Tier 1 Unit: Portal Layout Components', () => {
   it('renderPortalHeader renders organization title, search bar, and user profile', () => {
     // Arrange
+    const brand = loadBrandConfig();
     const adminUser = {
       id: 'usr_admin_01',
       email: 'sanket@forge.internal',
@@ -29,7 +31,7 @@ describe('Tier 1 Unit: Portal Layout Components', () => {
     const html = renderPortalHeader(adminUser);
 
     // Assert
-    expect(html).toContain('SG FORGE');
+    expect(html).toContain('PORTAL');
     expect(html).toContain('Search anything...');
     expect(html).toContain('Admin');
     expect(html).toContain('user-dropdown-popover');

@@ -4,7 +4,7 @@ metadata:
   name: forge-app-billing
   labels:
     app.kubernetes.io/name: forge-app-billing
-    app.kubernetes.io/part-of: sg-forge
+    app.kubernetes.io/part-of: ag-dashboard
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: billing
-          image: sg-forge/app-billing:latest
+          image: ag-dashboard/app-billing:latest
           env:
             - name: PORT
               value: "8086"

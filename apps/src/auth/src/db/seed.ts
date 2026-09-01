@@ -6,7 +6,7 @@
 
 import { getAuthDb } from './db';
 import { hashPassword } from '../backend/crypto';
-import { createLogger } from '@forge/sdk';
+import { createLogger, loadBrandConfig } from '@forge/sdk';
 
 const logger = createLogger('auth-seed');
 
@@ -40,8 +40,9 @@ export function seedAuthDatabase(force: boolean = false): void {
   logger.info('Seeding Auth database with generic Org structure, GCP-style IAM, and test personas...');
 
   const now = Date.now();
-  const brandName = process.env.NEXT_PUBLIC_BRAND_NAME || 'SG Forge Global';
-  const brandTagline = process.env.NEXT_PUBLIC_BRAND_TAGLINE || 'Modular Corporate Portal & Identity Gateway';
+  const brand = loadBrandConfig();
+  const brandName = brand.name || 'AG Dashboard';
+  const brandTagline = brand.tagline || 'Modular Corporate Portal & Identity Gateway';
 
   const orgId = 'org-sg-forge-global';
   const { hash: defaultHash, salt: defaultSalt } = hashPassword(DEFAULT_PASSWORD);
@@ -51,7 +52,7 @@ export function seedAuthDatabase(force: boolean = false): void {
     db.run(
       `INSERT INTO auth_organizations (id, name, domain, brand_name, brand_tagline, created_at, updated_at)
        VALUES (?, ?, ?, ?, ?, ?, ?);`,
-      [orgId, brandName, 'forge.internal', brandName, brandTagline, now, now]
+      [orgId, brandName, process.env.AUTH_ORG_DOMAIN || 'forge.internal', brandName, brandTagline, now, now]
     );
 
     // 2. Generic Org Node Types (Dynamic levels)

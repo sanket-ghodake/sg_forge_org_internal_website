@@ -3,7 +3,10 @@
  * Meta Astryx Design Standards (2026 LTS Baseline)
  */
 
+import { loadBrandConfig } from '@forge/sdk';
+
 export function renderGatewaySection(): string {
+  const brand = loadBrandConfig();
   return `
     <section id="section-gateway" class="hub-section">
       <div class="astryx-card" style="margin-bottom: 2rem;">
@@ -22,7 +25,7 @@ export function renderGatewaySection(): string {
         <!-- Section 1: Injected Headers Table -->
         <h3 style="font-size: 1.1rem; color: var(--forge-text-main); margin: 0 0 0.5rem 0;">1. Injected Identity Headers</h3>
         <p style="font-size: 0.85rem; color: var(--forge-text-muted); margin-bottom: 1rem;">
-          When requests pass through the SG Forge Gateway, upstream microservices automatically receive pre-authenticated user context. You can read these headers directly in Python, Go, or Node without verifying cookies:
+          When requests pass through the ${brand.name} Gateway, upstream microservices automatically receive pre-authenticated user context. You can read these headers directly in Python, Go, or Node without verifying cookies:
         </p>
 
         <div class="tokens-table-wrap" style="margin-bottom: 1.5rem;">

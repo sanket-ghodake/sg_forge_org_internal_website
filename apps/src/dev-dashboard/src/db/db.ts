@@ -12,8 +12,9 @@ import { createLogger, loadServiceRegistry } from '@forge/sdk';
 const logger = createLogger('dev-dashboard-db');
 
 export function resolveDataDir(): string {
-  if (process.env.FORGE_DATA_DIR && existsSync(process.env.FORGE_DATA_DIR)) {
-    return process.env.FORGE_DATA_DIR;
+  const customDataDir = process.env.AG_DATA_DIR || process.env.FORGE_DATA_DIR || process.env.DATA_DIR;
+  if (customDataDir && existsSync(customDataDir)) {
+    return customDataDir;
   }
   const appsData = join(process.cwd(), 'apps', 'data');
   if (existsSync(appsData)) return appsData;
