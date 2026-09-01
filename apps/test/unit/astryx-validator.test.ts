@@ -27,6 +27,13 @@ describe('Meta Astryx UI Validator & Token Governance Engine', () => {
     expect(darkKeys.length).toBeGreaterThanOrEqual(10);
     expect(themeTokens.dark.primaryGradient).toContain('linear-gradient');
     expect(themeTokens.light.primaryGradient).toContain('linear-gradient');
+
+    // Assert authentic Supabase light palette invariants
+    expect(themeTokens.light.primary).toBe('#24b47e');
+    expect(themeTokens.light.bgRoot).toBe('#fafafa');
+    expect(themeTokens.light.bgSurface).toBe('#ffffff');
+    expect(themeTokens.light.textMain).toBe('#171717');
+    expect(themeTokens.light.borderSubtle).toBe('#eaeaea');
   });
 
   it('enforces mandatory CSS variables across all core tokens', () => {

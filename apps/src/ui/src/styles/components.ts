@@ -37,7 +37,7 @@ export function getComponentStyles(): string {
 
     .astryx-logo-badge {
       background: var(--forge-primary-gradient);
-      color: #040711;
+      color: var(--forge-primary-btn-text, #ffffff);
       padding: 0.25rem 0.65rem;
       border-radius: var(--forge-radius-sm);
       font-size: 0.8rem;
@@ -130,6 +130,7 @@ export function getComponentStyles(): string {
       overflow: hidden;
       text-decoration: none;
       color: inherit;
+      box-shadow: var(--forge-shadow-card);
     }
 
     .sb-card:hover {
@@ -169,7 +170,7 @@ export function getComponentStyles(): string {
 
     .sb-card-kebab:hover {
       color: var(--forge-text-main);
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--forge-bg-card-hover);
     }
 
     .sb-card-body {
@@ -182,7 +183,7 @@ export function getComponentStyles(): string {
     .sb-card-footer {
       padding: 0.6rem 1.15rem;
       border-top: 1px solid var(--forge-border);
-      background: rgba(0, 0, 0, 0.15);
+      background: var(--forge-bg-elevated);
       display: flex;
       align-items: center;
       justify-content: space-between;

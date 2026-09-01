@@ -50,8 +50,8 @@ export function getBaseStyles(): string {
       --forge-border-medium: ${l.borderMedium};
       --forge-border-hover: ${l.borderMedium};
       --forge-primary: ${l.primary};
-      --forge-primary-hover: #0369a1;
-      --forge-primary-bg: rgba(2, 132, 199, 0.1);
+      --forge-primary-hover: #1ea672;
+      --forge-primary-bg: rgba(36, 180, 126, 0.10);
       --forge-primary-btn-text: #ffffff;
       --forge-primary-gradient: ${l.primaryGradient};
       --forge-accent: ${l.accent};

@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "logs/WORKLOGS.md": {
-    "mtime": 1788258485.5759137,
-    "ast_hash": "e44a9111a643789f4b7b1da4ebeb4a58",
+    "mtime": 1788258656.548682,
+    "ast_hash": "623c850111ffa3f6a3da66ff228ed009",
     "semantic_hash": ""
   },
   "docs/setup/PORTABLE_SETUP.md": {
@@ -295,8 +295,8 @@
     "semantic_hash": ""
   },
   "logs/reports/LATEST_COMMIT_REPORT.md": {
-    "mtime": 1788253950.9638603,
-    "ast_hash": "1e0970fcd7be38e9abfbdbb4f4bc44bc",
+    "mtime": 1788258656.548682,
+    "ast_hash": "5e2e2e1bd0006b260c349ec0a70a104d",
     "semantic_hash": ""
   },
   "apps/src/sdk/src/registry.ts": {
@@ -1695,13 +1695,13 @@
     "semantic_hash": ""
   },
   "apps/src/ui/src/styles/base.ts": {
-    "mtime": 1788257788.3554108,
-    "ast_hash": "1ac786be9ba115922ce6dc36b1f6da05",
+    "mtime": 1788258889.6999152,
+    "ast_hash": "1b8b5170393462e2de3abde436cc66a3",
     "semantic_hash": ""
   },
   "apps/src/ui/src/styles/components.ts": {
-    "mtime": 1788257680.8341753,
-    "ast_hash": "c0c2b66473980446733d29b5108d27e0",
+    "mtime": 1788258906.4327385,
+    "ast_hash": "a155d330353c5e0b4c24c595ac941d0d",
     "semantic_hash": ""
   },
   "apps/src/ui/src/styles/overlays.ts": {
@@ -1920,18 +1920,18 @@
     "semantic_hash": ""
   },
   "apps/src/dev-dashboard/test/e2e/employee-studio-journey.test.ts": {
-    "mtime": 1788257200.8492935,
-    "ast_hash": "b5391a255f1fbecb871d981dc1ac7d3d",
+    "mtime": 1788258632.44886,
+    "ast_hash": "d38c77a900c7b57da207792fed6bdeae",
     "semantic_hash": ""
   },
   "apps/src/dev-dashboard/test/integration/employee-api.test.ts": {
-    "mtime": 1788257195.5574105,
-    "ast_hash": "3513b5430a6b5cfe28a15cae28c05818",
+    "mtime": 1788258612.8483205,
+    "ast_hash": "d03d48f77871e6c709d7951062df8f9f",
     "semantic_hash": ""
   },
   "apps/src/dev-dashboard/test/security/employee-security.test.ts": {
-    "mtime": 1788257206.0331795,
-    "ast_hash": "6ae30e467fb033213d52b0ddb4ce8cb2",
+    "mtime": 1788258622.7551053,
+    "ast_hash": "b4e25134dbcf8e8daaeecc1b7685ab1c",
     "semantic_hash": ""
   },
   "apps/src/dev-dashboard/test/unit/employee-controller.test.ts": {
@@ -2202,6 +2202,11 @@
   "logs/reports/2026-09/REPORT_20260901_d994ca6.md": {
     "mtime": 1788251850.2283487,
     "ast_hash": "133572cf40ae310855cbd8d89cbe8a2e",
+    "semantic_hash": ""
+  },
+  "logs/reports/2026-09/REPORT_20260901_c455cf7.md": {
+    "mtime": 1788258656.548682,
+    "ast_hash": "5e2e2e1bd0006b260c349ec0a70a104d",
     "semantic_hash": ""
   }
 }

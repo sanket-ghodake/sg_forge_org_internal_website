@@ -332,3 +332,5 @@
 2026-09-01 15:54 | Implemented Google-grade multi-tier state persistence across Organization Command & Directory Studio (subtabs, search, filters, pagination, and org chart focus with URL sync)
 2026-09-01 15:58 | Cleaned department dropdown labels by removing verbose path suffix and added live employee search & focus button in MS Teams Org Chart
 2026-09-01 16:00 | [c455cf7] feat(dev-dashboard): add MS Teams org chart search, clean department dropdowns, and implement 4-tier state persistence (+3090, -1034)
+2026-09-01 16:05 | Upgraded @forge/ui light theme tokens to authentic Supabase design standard with emerald accents and warm studio canvas
+2026-09-01 16:08 | [801fccc] feat(ui): upgrade light theme tokens to authentic Supabase design standards (+539, -369)
