@@ -1,0 +1,199 @@
+/**
+ * @forge/dev-dashboard - Host Infrastructure & Cloud Diagnostics Client Scripts (2026 LTS)
+ * Client logic for updating circular SVG gauges, multi-core CPU matrix, disk stats, and network interfaces.
+ */
+
+export function getHostDashboardScripts(): string {
+  return `
+    async function loadHostVitals() {
+      try {
+        const res = await fetch(apiBase + '/api/host/vitals').then(r => r.json());
+        if (res && res.status === 'ok') {
+          updateHostHeaderAndSystem(res.system);
+          updateHostGauges(res);
+          renderHostCpus(res.cpu);
+          renderHostStorage(res.storage, res.memory);
+          renderHostNetwork(res.network);
+        }
+      } catch (err) {
+        console.error('Failed to load host vitals', err);
+      }
+    }
+
+    function updateHostHeaderAndSystem(sys) {
+      if (!sys) return;
+      const pill = document.getElementById('host-engine-pill');
+      const pidPill = document.getElementById('host-pid-pill');
+      const uptimeSub = document.getElementById('host-uptime-sub');
+
+      if (pill) pill.textContent = 'Bun v' + sys.bunVersion + ' (' + sys.platform + ' ' + sys.architecture + ')';
+      if (pidPill) pidPill.textContent = 'PID: ' + sys.pid;
+      if (uptimeSub) {
+        const h = Math.floor(sys.hostUptimeSeconds / 3600);
+        const m = Math.floor((sys.hostUptimeSeconds % 3600) / 60);
+        uptimeSub.textContent = 'Host Uptime: ' + h + 'h ' + m + 'm';
+      }
+    }
+
+    function updateHostGauges(data) {
+      // 1. CPU Gauge
+      const cpuLoad = data.cpu?.loadAvg?.[0] || 0;
+      const coreCount = data.cpu?.coreCount || 1;
+      const cpuLoadNormalized = Math.min(100, Math.round((cpuLoad / coreCount) * 100));
+
+      const cpuValEl = document.getElementById('host-cpu-load-val');
+      const cpuCoresEl = document.getElementById('host-cpu-cores-count');
+      const cpuSubEl = document.getElementById('host-cpu-loadavg-sub');
+      const cpuRing = document.getElementById('gauge-cpu-ring');
+
+      if (cpuValEl) cpuValEl.textContent = cpuLoadNormalized;
+      if (cpuCoresEl) cpuCoresEl.textContent = coreCount + ' Cores';
+      if (cpuSubEl) cpuSubEl.textContent = 'Load Avg: ' + (data.cpu?.loadAvg || []).join(', ');
+      if (cpuRing) {
+        const offset = 100 - cpuLoadNormalized;
+        cpuRing.setAttribute('stroke-dashoffset', offset);
+        cpuRing.style.stroke = cpuLoadNormalized > 80 ? 'var(--forge-accent)' : 'var(--forge-primary)';
+      }
+
+      // 2. Memory Gauge
+      const memUsedPct = data.memory?.usedPercent || 0;
+      const memValEl = document.getElementById('host-mem-percent-val');
+      const memSubEl = document.getElementById('host-mem-breakdown-sub');
+      const memRing = document.getElementById('gauge-mem-ring');
+
+      if (memValEl) memValEl.textContent = memUsedPct;
+      if (memSubEl) {
+        const usedGb = (data.memory.usedBytes / (1024 * 1024 * 1024)).toFixed(1);
+        const totalGb = (data.memory.totalBytes / (1024 * 1024 * 1024)).toFixed(1);
+        memSubEl.textContent = usedGb + ' GB / ' + totalGb + ' GB';
+      }
+      if (memRing) {
+        const offset = 100 - memUsedPct;
+        memRing.setAttribute('stroke-dashoffset', offset);
+        memRing.style.stroke = memUsedPct > 85 ? 'var(--forge-accent)' : 'var(--forge-primary)';
+      }
+
+      // 3. Disk Gauge (Root Volume)
+      const diskUsedPct = data.storage?.rootVolume?.usedPercent || 0;
+      const diskValEl = document.getElementById('host-disk-percent-val');
+      const diskSubEl = document.getElementById('host-disk-breakdown-sub');
+      const diskRing = document.getElementById('gauge-disk-ring');
+
+      if (diskValEl) diskValEl.textContent = diskUsedPct;
+      if (diskSubEl) {
+        const freeGb = (data.storage.rootVolume.availableBytes / (1024 * 1024 * 1024)).toFixed(1);
+        const totalGb = (data.storage.rootVolume.totalBytes / (1024 * 1024 * 1024)).toFixed(1);
+        diskSubEl.textContent = freeGb + ' GB free of ' + totalGb + ' GB';
+      }
+      if (diskRing) {
+        const offset = 100 - diskUsedPct;
+        diskRing.setAttribute('stroke-dashoffset', offset);
+      }
+
+      // 4. Process RSS
+      const rssMb = (data.memory?.processRssBytes / (1024 * 1024)).toFixed(1);
+      const rssValEl = document.getElementById('host-process-rss-val');
+      if (rssValEl) rssValEl.textContent = rssMb;
+    }
+
+    function renderHostCpus(cpu) {
+      if (!cpu) return;
+      const modelEl = document.getElementById('host-cpu-model-label');
+      const grid = document.getElementById('host-cores-grid');
+
+      if (modelEl) modelEl.textContent = cpu.model || 'CPU Cores Matrix';
+      if (grid && cpu.cores) {
+        grid.innerHTML = cpu.cores.map(c => \`
+          <div class="core-item-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.7rem;">
+              <span style="font-weight:600; color:var(--forge-text-main);">Core #\${c.coreIndex}</span>
+              <span style="color:var(--forge-text-subtle); font-family:monospace;">\${c.speedMhz} MHz</span>
+            </div>
+            <div class="core-bar-track">
+              <div class="core-bar-fill" style="width:\${c.usagePercent}%; background:\${c.usagePercent > 80 ? 'var(--forge-accent)' : 'var(--forge-primary)'};"></div>
+            </div>
+            <div style="font-size:0.68rem; color:var(--forge-text-muted); text-align:right;">\${c.usagePercent}% load</div>
+          </div>
+        \`).join('');
+      }
+    }
+
+    function renderHostStorage(storage, memory) {
+      const grid = document.getElementById('host-storage-grid');
+      if (!grid || !storage) return;
+
+      const root = storage.rootVolume;
+      const dataVol = storage.dataVolume;
+
+      const rootTotalGb = (root.totalBytes / (1024 * 1024 * 1024)).toFixed(1);
+      const rootUsedGb = (root.usedBytes / (1024 * 1024 * 1024)).toFixed(1);
+      const dataTotalGb = (dataVol.totalBytes / (1024 * 1024 * 1024)).toFixed(1);
+      const dataUsedGb = (dataVol.usedBytes / (1024 * 1024 * 1024)).toFixed(1);
+
+      const heapUsedMb = (memory?.processHeapUsedBytes / (1024 * 1024)).toFixed(1);
+      const heapTotalMb = (memory?.processHeapTotalBytes / (1024 * 1024)).toFixed(1);
+
+      grid.innerHTML = \`
+        <div class="storage-volume-card">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong style="font-size:0.82rem; color:var(--forge-text-main);">Root Filesystem (/)</strong>
+            <span class="astryx-micro-pill">\${root.usedPercent}% FULL</span>
+          </div>
+          <div class="core-bar-track" style="height:6px;">
+            <div class="core-bar-fill" style="width:\${root.usedPercent}%;"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--forge-text-subtle);">
+            <span>Used: \${rootUsedGb} GB</span>
+            <span>Total Capacity: \${rootTotalGb} GB</span>
+          </div>
+        </div>
+
+        <div class="storage-volume-card">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong style="font-size:0.82rem; color:var(--forge-text-main);">Process Heap & Buffers</strong>
+            <span class="astryx-micro-pill" style="color:var(--forge-primary);">ALLOCATED</span>
+          </div>
+          <div class="core-bar-track" style="height:6px;">
+            <div class="core-bar-fill" style="width:\${Math.min(100, Math.round((memory.processHeapUsedBytes / memory.processHeapTotalBytes) * 100))}%;"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--forge-text-subtle);">
+            <span>Heap Used: \${heapUsedMb} MB</span>
+            <span>Heap Total: \${heapTotalMb} MB</span>
+          </div>
+        </div>
+      \`;
+    }
+
+    function renderHostNetwork(network) {
+      const container = document.getElementById('host-network-table-container');
+      if (!container || !network || !network.interfaces) return;
+
+      container.innerHTML = \`
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Interface</th>
+              <th>Family</th>
+              <th>IP Address</th>
+              <th>Netmask</th>
+              <th>Hardware MAC</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            \${network.interfaces.map(iface => \`
+              <tr>
+                <td><span class="astryx-micro-pill" style="font-weight:700;">\${iface.name}</span></td>
+                <td><code style="font-size:0.72rem;">\${iface.family}</code></td>
+                <td><strong style="font-family:monospace; font-size:0.76rem; color:var(--forge-primary);">\${iface.address}</strong></td>
+                <td><span style="font-family:monospace; font-size:0.72rem; color:var(--forge-text-muted);">\${iface.netmask}</span></td>
+                <td><code style="font-size:0.72rem;">\${iface.mac || '--'}</code></td>
+                <td><span class="astryx-badge \${iface.internal ? 'badge-degraded' : 'badge-running'}">\${iface.internal ? 'LOOPBACK' : 'EXTERNAL'}</span></td>
+              </tr>
+            \`).join('')}
+          </tbody>
+        </table>
+      \`;
+    }
+  `;
+}

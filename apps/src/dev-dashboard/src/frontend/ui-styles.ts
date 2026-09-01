@@ -8,6 +8,10 @@ import { getEmployeeStyles } from './ui-employee-styles';
 import { getDbStudioStyles } from './ui-db-styles';
 import { getServicesStyles } from './ui-services-styles';
 import { getDropdownStyles } from './ui-dropdown-styles';
+import { getOverviewStyles } from './ui-overview-styles';
+import { getTrafficStyles } from './ui-traffic-styles';
+import { getIssuesStyles } from './ui-issues-styles';
+import { getHostStyles } from './ui-host-styles';
 
 export function getDashboardStyles(): string {
   return `
@@ -470,6 +474,10 @@ export function getDashboardStyles(): string {
 
     ${getDbStudioStyles()}
     ${getServicesStyles()}
+    ${getOverviewStyles()}
+    ${getTrafficStyles()}
+    ${getIssuesStyles()}
+    ${getHostStyles()}
 
     /* Responsive Mobile Breakpoint */
     @media (max-width: 900px) {

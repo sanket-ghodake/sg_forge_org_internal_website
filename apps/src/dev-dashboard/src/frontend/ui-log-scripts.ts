@@ -54,6 +54,9 @@ export function getLogDashboardScripts(): string {
             const log = JSON.parse(e.data);
             rawLogHistory.push(log);
             if (rawLogHistory.length > 500) rawLogHistory.shift();
+            window.appLogBuffer = rawLogHistory;
+            const eventsEl = document.getElementById('vital-events-val');
+            if (eventsEl) eventsEl.textContent = String(rawLogHistory.length);
             appendLogToTerminal(log);
             appendAppLogModalLine(log);
             updatePlainEnglishBanner(log);

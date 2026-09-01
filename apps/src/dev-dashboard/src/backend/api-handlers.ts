@@ -3,6 +3,9 @@ import { dbDiagnostics, platformDb, remoteDbManager } from '../db';
 import { servicesController } from './services-controller';
 import { employeeController } from './employee-controller';
 import { telemetryEngine } from './telemetry';
+import { trafficController } from './traffic-controller';
+import { issuesController } from './issues-controller';
+import { hostController } from './host-controller';
 
 export async function handleApiRequest(req: Request, url: URL): Promise<Response | null> {
   const path = url.pathname.replace(/^\/devcenter/, '');
@@ -227,44 +230,71 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
   }
 
   // 11. Latency Benchmark
+  // 11. Multi-Target Active Benchmark & Stress Tester
   if (path === '/api/benchmark' && req.method === 'POST') {
-    const start = performance.now();
-    const latencies: number[] = [];
-    const samples = 15;
-    for (let i = 0; i < samples; i++) {
-      const s = performance.now();
-      await fetch('http://localhost:3002/health').catch(() => null);
-      latencies.push(Number((performance.now() - s).toFixed(2)));
-    }
-    latencies.sort((a, b) => a - b);
-    const p50 = latencies[Math.floor(samples * 0.5)];
-    const p99 = latencies[samples - 1];
-    const avg = Number((latencies.reduce((a, b) => a + b, 0) / samples).toFixed(2));
-    const totalDuration = Number((performance.now() - start).toFixed(2));
-    const rps = Math.round((samples / totalDuration) * 1000);
-
-    return Response.json({
-      status: 'ok',
-      samples,
-      p50Ms: p50,
-      p99Ms: p99,
-      avgMs: avg,
-      reqPerSec: rps,
-      targetMet: p50 < 2.0,
-      timestamp: Date.now(),
-    });
+    const body: any = await req.json().catch(() => ({}));
+    const target = body.target || 'dev-dashboard';
+    const samples = Number(body.samples) || 15;
+    const concurrency = Number(body.concurrency) || 1;
+    const result = await trafficController.runTargetBenchmark(target, samples, concurrency);
+    return Response.json({ status: 'ok', ...result });
   }
 
-  // 12. Traffic Telemetry Events
+  // 12a. Aggregated Traffic Metrics (Golden Signals & Time Series)
+  if (path === '/api/analytics/traffic/metrics' && req.method === 'GET') {
+    const metrics = trafficController.getTrafficMetrics();
+    return Response.json({ status: 'ok', ...metrics });
+  }
+
+  // 12b. Top Endpoint Route Performance Matrix
+  if (path === '/api/analytics/traffic/routes' && req.method === 'GET') {
+    const routes = trafficController.getTopRoutes();
+    return Response.json({ status: 'ok', routes });
+  }
+
+  // 12c. Raw Traffic Telemetry Events Stream
   if (path === '/api/analytics/traffic' && req.method === 'GET') {
-    const events = platformDb.getTrafficSummary(100);
+    const limit = Number(url.searchParams.get('limit')) || 100;
+    const events = platformDb.getTrafficSummary(limit);
     return Response.json({ status: 'ok', events });
   }
 
-  // 13. RFC 7807 Issues & Incident Reports
+  // 13a. RFC 7807 Issues List & Filter
   if (path === '/api/issues' && req.method === 'GET') {
-    const issues = platformDb.getIssues(50);
-    return Response.json({ status: 'ok', issues });
+    const status = url.searchParams.get('status') || undefined;
+    const appId = url.searchParams.get('appId') || undefined;
+    const search = url.searchParams.get('search') || undefined;
+    const limit = Number(url.searchParams.get('limit')) || 50;
+    const offset = Number(url.searchParams.get('offset')) || 0;
+    const result = issuesController.listIssues({ status, appId, search, limit, offset });
+    return Response.json({ status: 'ok', ...result });
+  }
+
+  // 13b. RFC 7807 Issue Triage Transition
+  if (path === '/api/issues/triage' && req.method === 'POST') {
+    const body: any = await req.json().catch(() => ({}));
+    if (!body.issueId || !body.status) return Response.json({ error: 'Missing issueId or status' }, { status: 400 });
+    const result = issuesController.triageIssue(body.issueId, body.status);
+    return Response.json({ status: 'ok', ...result });
+  }
+
+  // 13c. RFC 7807 Bulk Resolve All Issues
+  if (path === '/api/issues/resolve-all' && req.method === 'POST') {
+    const result = issuesController.resolveAllIssues();
+    return Response.json({ status: 'ok', ...result });
+  }
+
+  // 13d. RFC 7807 Simulate Diagnostic Exception
+  if (path === '/api/issues/simulate' && req.method === 'POST') {
+    const body: any = await req.json().catch(() => ({}));
+    const issue = issuesController.simulateTestIssue(body.appId, body.errorType);
+    return Response.json({ status: 'ok', issue });
+  }
+
+  // 13e. Extended Host Infrastructure & Cloud Vitals
+  if (path === '/api/host/vitals' && req.method === 'GET') {
+    const report = hostController.getHostDiagnostics();
+    return Response.json({ status: 'ok', ...report });
   }
 
   // 14. Administrative Audit Logs
@@ -325,13 +355,16 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
     if (type === 'table') {
       const rowsRes = platformDb.getTableRows(dbName, table, 1, 1000);
       if (rowsRes.columns.length) {
-        csvContent += rowsRes.columns.join(',') + '\n';
-        csvContent += rowsRes.rows.map(r => rowsRes.columns.map(c => JSON.stringify(r[c] ?? '')).join(',')).join('\n');
+        csvContent = rowsRes.columns.join(',') + '\n' + rowsRes.rows.map(r => rowsRes.columns.map(c => JSON.stringify(r[c] ?? '')).join(',')).join('\n');
       }
     } else if (type === 'traffic') {
       const events = platformDb.getTrafficSummary(500);
       csvContent = 'Timestamp,App,Path,Method,StatusCode,DurationMs\n' +
         events.map(e => `${new Date(e.timestamp*1000).toISOString()},${e.app_id},"${e.path}",${e.method},${e.status_code},${e.duration_ms}`).join('\n');
+    } else if (type === 'issues') {
+      const { issues } = issuesController.listIssues({ limit: 500 });
+      csvContent = 'ID,App,ErrorType,Occurrences,Status,Message,LastSeen\n' +
+        issues.map(i => `"${i.id}","${i.app_id}","${i.error_type}",${i.occurrence_count},"${i.status}","${(i.message || '').replace(/"/g, '""')}",${new Date(i.last_seen*1000).toISOString()}`).join('\n');
     } else if (type === 'audit') {
       const logs = platformDb.getAuditLogs(500);
       csvContent = 'Timestamp,Actor,Action,Target,Status\n' +
@@ -420,43 +453,23 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
   // 18g. Export Employees
   if (path === '/api/employees/export' && req.method === 'GET') {
     const format = url.searchParams.get('format') || 'csv';
-    const search = url.searchParams.get('search') || undefined;
-    const departmentId = url.searchParams.get('departmentId') || undefined;
-    const status = url.searchParams.get('status') || undefined;
-
-    const data = employeeController.listEmployees({ search, departmentId, status, limit: 5000, offset: 0 });
+    const data = employeeController.listEmployees({ search: url.searchParams.get('search') || undefined, departmentId: url.searchParams.get('departmentId') || undefined, status: url.searchParams.get('status') || undefined, limit: 5000, offset: 0 });
 
     if (format === 'json') {
       return new Response(JSON.stringify(data.items, null, 2), {
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-          'Content-Disposition': `attachment; filename="employees_export_${Date.now()}.json"`,
-        },
+        headers: { 'Content-Type': 'application/json; charset=utf-8', 'Content-Disposition': `attachment; filename="employees_export_${Date.now()}.json"` },
       });
     }
 
-    // CSV format
     const headers = ['id', 'display_name', 'email', 'job_title', 'employee_code', 'department_name', 'manager_email', 'status', 'roles'];
-    let csv = headers.join(',') + '\n';
-    csv += data.items.map(item => {
-      return [
-        JSON.stringify(item.id || ''),
-        JSON.stringify(item.display_name || ''),
-        JSON.stringify(item.email || ''),
-        JSON.stringify(item.job_title || ''),
-        JSON.stringify(item.employee_code || ''),
-        JSON.stringify(item.department_name || ''),
-        JSON.stringify(item.manager_email || ''),
-        JSON.stringify(item.status || ''),
-        JSON.stringify((item.roles || []).join('; ')),
-      ].join(',');
-    }).join('\n');
+    const csv = headers.join(',') + '\n' + data.items.map(item => [
+      JSON.stringify(item.id || ''), JSON.stringify(item.display_name || ''), JSON.stringify(item.email || ''),
+      JSON.stringify(item.job_title || ''), JSON.stringify(item.employee_code || ''), JSON.stringify(item.department_name || ''),
+      JSON.stringify(item.manager_email || ''), JSON.stringify(item.status || ''), JSON.stringify((item.roles || []).join('; ')),
+    ].join(',')).join('\n');
 
     return new Response(csv, {
-      headers: {
-        'Content-Type': 'text/csv; charset=utf-8',
-        'Content-Disposition': `attachment; filename="employees_export_${Date.now()}.csv"`,
-      },
+      headers: { 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': `attachment; filename="employees_export_${Date.now()}.csv"` },
     });
   }
 

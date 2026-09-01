@@ -3,6 +3,10 @@ import { getToolsDashboardScripts } from './ui-tools-scripts';
 import { getDbDashboardScripts } from './ui-db-scripts';
 import { getServicesDashboardScripts } from './ui-services-scripts';
 import { getEmployeeDashboardScripts } from './ui-employee-scripts';
+import { getOverviewDashboardScripts } from './ui-overview-scripts';
+import { getTrafficDashboardScripts } from './ui-traffic-scripts';
+import { getIssuesDashboardScripts } from './ui-issues-scripts';
+import { getHostDashboardScripts } from './ui-host-scripts';
 import { getDropdownScripts } from './ui-dropdown-scripts';
 import { getAstryxToastScript } from '@forge/ui';
 
@@ -186,35 +190,15 @@ export function getDashboardScripts(): string {
     ${getDbDashboardScripts()}
     ${getServicesDashboardScripts()}
     ${getEmployeeDashboardScripts()}
+    ${getOverviewDashboardScripts()}
+    ${getTrafficDashboardScripts()}
+    ${getIssuesDashboardScripts()}
+    ${getHostDashboardScripts()}
 
-    function renderSparklineSvg(data, isArea) {
-      if (!data || !data.length) return '';
-      const min = Math.min(...data, 0), max = Math.max(...data, 30), range = max - min || 1;
-      const w = 84, h = 20, step = w / (data.length - 1);
-      const points = data.map((d, i) => (i * step).toFixed(1) + ',' + (h - ((d - min) / range) * (h - 4) - 2).toFixed(1)).join(' ');
-      const fill = isArea ? '<polygon points="0,' + h + ' ' + points + ' ' + w + ',' + h + '" fill="rgba(62, 207, 142, 0.18)" />' : '';
-      return '<svg class="sparkline-svg" viewBox="0 0 ' + w + ' ' + h + '">' + fill +
-        '<polyline points="' + points + '" fill="none" stroke="var(--forge-primary)" stroke-width="1.5" stroke-linecap="round" />' +
-      '</svg>';
-    }
-
-    async function loadTopology() {
-      try {
-        const res = await fetch(apiBase + '/api/services').then(r => r.json());
-        const c = document.getElementById('topology-nodes');
-        if (!c || !res.services) return;
-        c.innerHTML = res.services.map(s => \`
-          <div class="service-node">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
-              <span style="font-weight:700; font-size:0.88rem;">\${s.name}</span>
-              <span class="astryx-badge \${s.status === 'RUNNING' ? 'badge-running' : 'badge-stopped'}">\${s.status}</span>
-            </div>
-            <div style="font-size:0.75rem; color:var(--forge-text-muted);">
-              <div>Port: <code class="astryx-code-badge">\${s.port}</code> \${s.ingressPath}</div>
-              <div>Latency: <strong>\${s.latencyMs}ms</strong></div>
-            </div>
-          </div>\`).join('');
-      } catch (err) { console.error('Topology load failed', err); }
+    function loadTopology() {
+      if (typeof loadOverviewData === 'function') {
+        loadOverviewData();
+      }
     }
 
     async function loadApps() {
@@ -285,67 +269,10 @@ export function getDashboardScripts(): string {
       c.innerHTML = html;
     }
 
-    async function runLatencyBenchmark() {
-      const scorecard = document.getElementById('benchmark-scorecard');
-      if (scorecard) scorecard.innerHTML = '<div style="color:var(--forge-primary); font-size:0.85rem;">Running 15-sample latency stress test against reverse proxy...</div>';
-      try {
-        const res = await fetch(apiBase + '/api/benchmark', { method: 'POST' }).then(r => r.json());
-        if (scorecard && res.status === 'ok') {
-          scorecard.innerHTML = \`
-            <div class="astryx-card" style="background:var(--forge-bg-elevated); border:1px solid var(--forge-border-medium);">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
-                <strong style="color:var(--forge-primary);">⚡ Latency Benchmark Scorecard</strong>
-                <span class="astryx-badge \${res.targetMet ? 'badge-running' : 'badge-degraded'}">\${res.targetMet ? 'SLO TARGET MET (<2ms)' : 'LATENCY WARNING'}</span>
-              </div>
-              <div style="display:flex; gap:1.5rem; flex-wrap:wrap; font-size:0.85rem;">
-                <div>P50 Median: <strong style="color:var(--forge-success);">\${res.p50Ms}ms</strong></div>
-                <div>P99 Tail: <strong>\${res.p99Ms}ms</strong></div>
-                <div>Avg Latency: <strong>\${res.avgMs}ms</strong></div>
-                <div>Throughput: <strong style="color:var(--forge-primary);">\${res.reqPerSec} req/sec</strong></div>
-              </div>
-            </div>\`;
-        }
-      } catch (err) {
-        if (scorecard) scorecard.innerHTML = '<div style="color:var(--forge-accent);">Benchmark failed.</div>';
+    function runLatencyBenchmark() {
+      if (typeof runFleetBenchmark === 'function') {
+        runFleetBenchmark();
       }
-    }
-
-    async function loadTraffic() {
-      try {
-        const res = await fetch(apiBase + '/api/analytics/traffic').then(r => r.json());
-        const cont = document.getElementById('traffic-table-container');
-        if (!cont || !res.events) return;
-        cont.innerHTML = res.events.length ? '<table class="data-table"><thead><tr><th>Time</th><th>App</th><th>Path</th><th>Method</th><th>Status</th><th>Latency</th></tr></thead><tbody>' +
-          res.events.map(e => '<tr><td>' + new Date(e.timestamp*1000).toLocaleTimeString() + '</td><td>' + e.app_id + '</td><td><code>' + e.path + '</code></td><td>' + e.method + '</td><td><span class="astryx-badge badge-running">' + e.status_code + '</span></td><td>' + e.duration_ms + 'ms</td></tr>').join('') +
-          '</tbody></table>' : '<p style="color:var(--forge-text-muted);">No traffic recorded yet.</p>';
-      } catch (err) { console.error('Traffic load failed', err); }
-    }
-
-    async function loadIssues() {
-      try {
-        const res = await fetch(apiBase + '/api/issues').then(r => r.json());
-        const cont = document.getElementById('issues-container');
-        if (!cont || !res.issues) return;
-        cont.innerHTML = res.issues.length ? res.issues.map(i => \`
-          <div class="astryx-card" style="margin-bottom:0.65rem;">
-            <div style="display:flex; justify-content:space-between;"><strong>\${i.error_type}</strong><span class="astryx-badge badge-pill">Count: \${i.occurrence_count}</span></div>
-            <p style="font-size:0.8rem; color:var(--forge-text-muted); margin:0.35rem 0;">\${i.message}</p>
-            <div style="font-size:0.72rem; color:var(--forge-text-subtle);">App: \${i.app_id} | Status: \${i.status}</div>
-          </div>\`).join('') : '<p style="color:var(--forge-text-muted);">Zero active issues reported.</p>';
-      } catch (err) { console.error('Issues load failed', err); }
-    }
-
-    async function loadHostVitals() {
-      try {
-        const res = await fetch(apiBase + '/api/system/metrics').then(r => r.json());
-        const grid = document.getElementById('host-vitals-grid');
-        if (!grid || !res.vitals) return;
-        const v = res.vitals;
-        grid.innerHTML = \`
-          <div class="astryx-card"><h3>Memory Usage</h3><p style="font-size:1.3rem; font-weight:700; color:var(--forge-primary);">\${v.memPercent}%</p><p style="font-size:0.75rem; color:var(--forge-text-muted);">\${Math.round(v.usedMemBytes/1024/1024/1024)}GB / \${Math.round(v.totalMemBytes/1024/1024/1024)}GB</p></div>
-          <div class="astryx-card"><h3>CPU Cores</h3><p style="font-size:1.3rem; font-weight:700; color:var(--forge-accent);">\${v.cpuCount} Cores</p><p style="font-size:0.75rem; color:var(--forge-text-muted);">Load: \${v.cpuLoad.join(', ')}</p></div>
-          <div class="astryx-card"><h3>Host Platform</h3><p style="font-size:1.3rem; font-weight:700; color:var(--forge-success);">\${v.platformName}</p><p style="font-size:0.75rem; color:var(--forge-text-muted);">Uptime: \${Math.floor(v.hostUptimeSeconds/3600)}h \${Math.floor((v.hostUptimeSeconds%3600)/60)}m</p></div>\`;
-      } catch (err) { console.error('Host vitals load failed', err); }
     }
 
     async function loadAudit() {

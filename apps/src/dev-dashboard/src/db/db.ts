@@ -101,80 +101,43 @@ class PlatformDatabaseManager {
   private initDatabase(): void {
     try {
       this.db.run('PRAGMA journal_mode = WAL;');
+      this.db.run('PRAGMA busy_timeout = 5000;');
       this.db.run('PRAGMA auto_vacuum = INCREMENTAL;');
       this.db.run('PRAGMA synchronous = NORMAL;');
 
       // 1. Dynamic Forge App Registry
-      this.db.run(`
-        CREATE TABLE IF NOT EXISTS apps_registry (
-          id TEXT PRIMARY KEY,
-          name TEXT NOT NULL,
-          port INTEGER NOT NULL,
-          ingress_path TEXT NOT NULL UNIQUE,
-          category TEXT NOT NULL DEFAULT 'Micro-Apps',
-          access_role TEXT NOT NULL DEFAULT 'General',
-          container_name TEXT,
-          db_file_path TEXT,
-          runtime_type TEXT NOT NULL DEFAULT 'bun-watch',
-          remote_url TEXT,
-          status TEXT NOT NULL DEFAULT 'active',
-          storage_quota_mb INTEGER NOT NULL DEFAULT 50,
-          created_at INTEGER NOT NULL DEFAULT (strftime('%s', 'now')),
-          updated_at INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
-        );
-      `);
+      this.db.run(`CREATE TABLE IF NOT EXISTS apps_registry (
+        id TEXT PRIMARY KEY, name TEXT NOT NULL, port INTEGER NOT NULL, ingress_path TEXT NOT NULL UNIQUE,
+        category TEXT NOT NULL DEFAULT 'Micro-Apps', access_role TEXT NOT NULL DEFAULT 'General',
+        container_name TEXT, db_file_path TEXT, runtime_type TEXT NOT NULL DEFAULT 'bun-watch',
+        remote_url TEXT, status TEXT NOT NULL DEFAULT 'active', storage_quota_mb INTEGER NOT NULL DEFAULT 50,
+        created_at INTEGER NOT NULL DEFAULT (strftime('%s', 'now')), updated_at INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
+      );`);
 
       // 2. Traffic Telemetry Events
-      this.db.run(`
-        CREATE TABLE IF NOT EXISTS traffic_events (
-          id TEXT PRIMARY KEY,
-          app_id TEXT NOT NULL,
-          path TEXT NOT NULL,
-          method TEXT NOT NULL,
-          status_code INTEGER NOT NULL,
-          duration_ms REAL NOT NULL,
-          ip_hash TEXT,
-          user_agent TEXT,
-          trace_id TEXT,
-          timestamp INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
-        );
-        CREATE INDEX IF NOT EXISTS idx_traffic_timestamp ON traffic_events(timestamp);
-        CREATE INDEX IF NOT EXISTS idx_traffic_app_id ON traffic_events(app_id);
-      `);
+      this.db.run(`CREATE TABLE IF NOT EXISTS traffic_events (
+        id TEXT PRIMARY KEY, app_id TEXT NOT NULL, path TEXT NOT NULL, method TEXT NOT NULL,
+        status_code INTEGER NOT NULL, duration_ms REAL NOT NULL, ip_hash TEXT, user_agent TEXT,
+        trace_id TEXT, timestamp INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_traffic_timestamp ON traffic_events(timestamp);
+      CREATE INDEX IF NOT EXISTS idx_traffic_app_id ON traffic_events(app_id);`);
 
       // 3. RFC 7807 Issue Incident Reports
-      this.db.run(`
-        CREATE TABLE IF NOT EXISTS issue_reports (
-          id TEXT PRIMARY KEY,
-          app_id TEXT NOT NULL,
-          fingerprint TEXT NOT NULL,
-          error_type TEXT NOT NULL,
-          message TEXT NOT NULL,
-          stack_trace TEXT,
-          context_json TEXT,
-          trace_id TEXT,
-          occurrence_count INTEGER NOT NULL DEFAULT 1,
-          status TEXT NOT NULL DEFAULT 'open',
-          first_seen INTEGER NOT NULL DEFAULT (strftime('%s', 'now')),
-          last_seen INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
-        );
-        CREATE INDEX IF NOT EXISTS idx_issue_fingerprint ON issue_reports(fingerprint);
-      `);
+      this.db.run(`CREATE TABLE IF NOT EXISTS issue_reports (
+        id TEXT PRIMARY KEY, app_id TEXT NOT NULL, fingerprint TEXT NOT NULL, error_type TEXT NOT NULL,
+        message TEXT NOT NULL, stack_trace TEXT, context_json TEXT, trace_id TEXT,
+        occurrence_count INTEGER NOT NULL DEFAULT 1, status TEXT NOT NULL DEFAULT 'open',
+        first_seen INTEGER NOT NULL DEFAULT (strftime('%s', 'now')), last_seen INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_issue_fingerprint ON issue_reports(fingerprint);`);
 
       // 4. Immutable Administrative Audit Log
-      this.db.run(`
-        CREATE TABLE IF NOT EXISTS audit_logs (
-          id TEXT PRIMARY KEY,
-          actor_id TEXT NOT NULL,
-          action_type TEXT NOT NULL,
-          target_service TEXT NOT NULL,
-          payload_json TEXT,
-          ip_hash TEXT,
-          result_status TEXT NOT NULL,
-          timestamp INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
-        );
-        CREATE INDEX IF NOT EXISTS idx_audit_timestamp ON audit_logs(timestamp);
-      `);
+      this.db.run(`CREATE TABLE IF NOT EXISTS audit_logs (
+        id TEXT PRIMARY KEY, actor_id TEXT NOT NULL, action_type TEXT NOT NULL, target_service TEXT NOT NULL,
+        payload_json TEXT, ip_hash TEXT, result_status TEXT NOT NULL, timestamp INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
+      );
+      CREATE INDEX IF NOT EXISTS idx_audit_timestamp ON audit_logs(timestamp);`);
 
       this.syncWithEnvRegistry();
       logger.info('🗄️ Platform Core Database initialized successfully in WAL mode');
@@ -473,6 +436,33 @@ class PlatformDatabaseManager {
 
   public getIssues(limit = 50): IssueReportRecord[] {
     return this.db.query('SELECT * FROM issue_reports ORDER BY last_seen DESC LIMIT ?').all(limit) as IssueReportRecord[];
+  }
+
+  public recordIssue(appId: string, errorType: string, message: string, stackTrace?: string, contextJson?: string, traceId?: string): string {
+    const fingerprint = `${appId}:${errorType}:${message.slice(0, 120)}`;
+    const now = Math.floor(Date.now() / 1000);
+    const existing = this.db.query('SELECT id, occurrence_count FROM issue_reports WHERE fingerprint = ?').get(fingerprint) as any;
+    if (existing) {
+      this.db.run('UPDATE issue_reports SET occurrence_count = occurrence_count + 1, last_seen = ?, message = ?, stack_trace = COALESCE(?, stack_trace), trace_id = COALESCE(?, trace_id) WHERE id = ?', [now, message, stackTrace || null, traceId || null, existing.id]);
+      return existing.id;
+    }
+    const id = `issue-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+    this.db.run('INSERT INTO issue_reports (id, app_id, fingerprint, error_type, message, stack_trace, context_json, trace_id, occurrence_count, status, first_seen, last_seen) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?)', [id, appId, fingerprint, errorType, message, stackTrace || null, contextJson || null, traceId || null, 'open', now, now]);
+    return id;
+  }
+
+  public updateIssueStatus(id: string, status: string): boolean {
+    const res = this.db.run('UPDATE issue_reports SET status = ? WHERE id = ?', [status, id]);
+    return (res as any).changes > 0;
+  }
+
+  public deleteIssue(id: string): boolean {
+    const res = this.db.run('DELETE FROM issue_reports WHERE id = ?', [id]);
+    return (res as any).changes > 0;
+  }
+
+  public getRawDb(): Database {
+    return this.db;
   }
 
   public getAuditLogs(limit = 50): AuditLogRecord[] {

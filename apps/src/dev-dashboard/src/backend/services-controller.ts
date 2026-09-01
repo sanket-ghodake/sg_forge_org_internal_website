@@ -100,12 +100,10 @@ class ServicesController {
       // Grounded real process memory & host CPU load
       const ramVal = body.memoryMb
         ? Number(body.memoryMb)
-        : (app.id === 'devcenter' || app.id === 'dev-dashboard')
-          ? Number((process.memoryUsage().rss / (1024 * 1024)).toFixed(1))
-          : Number((12.4 + (latencyMs * 0.4)).toFixed(1));
+        : Number((process.memoryUsage().rss / (1024 * 1024)).toFixed(1));
 
-      const hostLoad = loadavg()[0] || 0.15;
-      const cpuVal = Number(Math.min(100, Math.max(0.1, (hostLoad * 2.5) + (latencyMs * 0.5))).toFixed(1));
+      const hostLoad = loadavg()[0] || 0.0;
+      const cpuVal = Number(Math.min(100, Math.max(0.1, (hostLoad * 2.0))).toFixed(1));
 
       const cpuArr = this.appendHistory(this.cpuHistory, app.id, cpuVal);
       const ramArr = this.appendHistory(this.ramHistory, app.id, ramVal);

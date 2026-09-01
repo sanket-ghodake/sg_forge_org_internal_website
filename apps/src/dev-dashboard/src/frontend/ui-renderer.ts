@@ -10,6 +10,10 @@ import { getModalsHtml } from './ui-modals';
 import { getDashboardScripts } from './ui-scripts';
 import { getDashboardStyles } from './ui-styles';
 import { renderEmployeesTab } from './ui-renderer-employees';
+import { renderOverviewTab } from './ui-renderer-overview';
+import { renderTrafficTab } from './ui-renderer-traffic';
+import { renderIssuesTab } from './ui-renderer-issues';
+import { renderHostTab } from './ui-renderer-host';
 
 export function renderDashboardHtml(): string {
   const brand = loadBrandConfig();
@@ -55,12 +59,6 @@ export function renderDashboardHtml(): string {
     </div>
 
     <div class="sb-header-right">
-      <!-- 1-Click Latency Benchmark -->
-      <button class="astryx-btn btn-outline" style="padding: 0.22rem 0.55rem; font-size: 0.72rem; gap: 0.35rem;" onclick="runFleetBenchmark()" title="Run 1-Click Service Latency Benchmark">
-        <span>⚡</span>
-        <span style="display: inline-block;">Benchmark</span>
-      </button>
-
       <!-- Heartbeat & Connection Watchdog -->
       <div class="watchdog-pill" id="dashboard-watchdog" title="Live SSE telemetry stream status (click to reconnect)" onclick="reconnectSSE()">
         <span class="watchdog-dot live" id="watchdog-dot"></span>
@@ -119,25 +117,7 @@ export function renderDashboardHtml(): string {
     </aside>
 
     <main class="sb-content">
-      <!-- Tab 1: Overview -->
-      <section id="tab-overview" class="tab-pane active">
-        <div class="astryx-card" style="margin-bottom: 1.25rem;">
-          <h2 style="font-size: 1.2rem; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
-            <span style="color: var(--forge-primary); display: flex; align-items: center;">${astryxIcons.topology}</span> System Topology & Cluster Health
-          </h2>
-          <p style="color: var(--forge-text-muted); font-size: 0.85rem;">Real-time service nodes, micro-app latencies, and dual-probe vitals.</p>
-        </div>
-        <div class="node-canvas" id="topology-nodes"></div>
-        <div class="astryx-card" style="margin-top: 1.25rem;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
-            <h3 style="font-size: 0.92rem; display: flex; align-items: center; gap: 0.4rem; font-weight: 600;">
-              <span style="color: var(--forge-text-muted); display: flex; align-items: center;">${astryxIcons.terminal}</span> Live Cluster Stream Preview
-            </h3>
-            <button class="astryx-btn btn-outline" style="height: 26px; padding: 0 0.5rem; font-size: 0.72rem;" onclick="clearLogs()">Clear</button>
-          </div>
-          <div class="terminal-window" id="overview-terminal">Connecting to SSE live stream...</div>
-        </div>
-      </section>
+      ${renderOverviewTab()}
 
       <!-- Tab 2: Services & Processes Command Center (2026 GCP Standard) -->
       <section id="tab-services" class="tab-pane">
@@ -378,51 +358,17 @@ export function renderDashboardHtml(): string {
         </div>
       </section>
 
-      <!-- Tab 7: Traffic Analytics & Benchmark -->
-      <section id="tab-traffic" class="tab-pane">
-        <div class="astryx-card" style="margin-bottom: 1rem;">
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-            <div>
-              <h2 style="font-size: 1.2rem; margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
-                <span style="color: var(--forge-primary); display: flex; align-items: center;">${astryxIcons.traffic}</span> Real-time Traffic & Latency Benchmarks
-              </h2>
-              <p style="color: var(--forge-text-muted); font-size: 0.82rem;">Autocannon high-frequency stress tester (&lt;2ms target).</p>
-            </div>
-            <div style="display: flex; gap: 0.4rem;">
-              <button class="astryx-btn btn-outline" onclick="exportTrafficCsv()">${astryxIcons.download} Export CSV</button>
-              <button class="astryx-btn btn-primary" onclick="runLatencyBenchmark()">${astryxIcons.zap} Latency Benchmark</button>
-            </div>
-          </div>
-          <div id="benchmark-scorecard" style="margin-top: 0.75rem;"></div>
-        </div>
-        <div class="astryx-card">
-          <h3 style="font-size: 0.95rem; margin-bottom: 0.5rem; font-weight: 600;">Recent Traffic Events</h3>
-          <div class="astryx-table-wrap" id="traffic-table-container">Loading live traffic events...</div>
-        </div>
-      </section>
+      <!-- Tab 7: Real-time Traffic Analytics & Latency Benchmarks -->
+      ${renderTrafficTab()}
 
-      <!-- Tab 8: Issues -->
-      <section id="tab-issues" class="tab-pane">
-        <div class="astryx-card">
-          <h2 style="font-size: 1.2rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
-            <span style="color: var(--forge-accent); display: flex; align-items: center;">${astryxIcons.issues}</span> Issue Incident Center (RFC 7807)
-          </h2>
-          <div id="issues-container">Loading incident logs...</div>
-        </div>
-      </section>
+      <!-- Tab 8: Sentry-Style Issue Incident Center -->
+      ${renderIssuesTab()}
 
       <!-- Tab: Employees & Org Studio -->
       ${renderEmployeesTab()}
 
-      <!-- Tab 9: Host & Cloud -->
-      <section id="tab-host" class="tab-pane">
-        <div class="astryx-card">
-          <h2 style="font-size: 1.2rem; margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
-            <span style="color: var(--forge-text-muted); display: flex; align-items: center;">${astryxIcons.host}</span> Host System & Infrastructure
-          </h2>
-          <div class="astryx-grid" id="host-vitals-grid"></div>
-        </div>
-      </section>
+      <!-- Tab 9: Host System & Infrastructure Diagnostics -->
+      ${renderHostTab()}
 
       <!-- Tab 10: Settings & Tools -->
       <section id="tab-settings" class="tab-pane">

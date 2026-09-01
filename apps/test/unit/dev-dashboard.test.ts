@@ -85,7 +85,7 @@ describe('Developer Dashboard Platform Engine', () => {
       const brand = loadBrandConfig();
       expect(htmlResp.status).toBe(200);
       expect(htmlText).toContain(brand.name);
-      expect(htmlText).toContain('System Topology & Cluster Health');
+      expect(htmlText).toContain('Cluster Architecture & Ingress Pipeline');
     } finally {
       server.stop();
     }
