@@ -160,13 +160,18 @@ runTier1Check(3, 'Zero Hardcoded Secrets & Keys', 'Gitleaks Portable', () => {
   return { status: 'PASSED', details: 'Zero hardcoded secrets, API keys, or private credentials detected across all files.' };
 });
 
-// 4. Biome Fast Code Quality & Linter
-runTier1Check(4, 'Code Quality & Formatting', 'Biome Portable', () => {
+// 4. TypeScript Static Type Safety & Biome AST Linter
+runTier1Check(4, 'TypeScript Compilation & Code Quality', 'TypeScript Compiler & Biome', () => {
+  const tscProc = Bun.spawnSync(['bunx', 'tsc', '--noEmit'], { cwd: REPO_ROOT });
+  if (tscProc.exitCode !== 0) {
+    const errText = tscProc.stdout.toString().trim() || tscProc.stderr.toString().trim();
+    return { status: 'FAILED', details: `TypeScript compiler detected errors:\n${errText.slice(0, 500)}` };
+  }
   const proc = Bun.spawnSync(['bun', join(REPO_ROOT, 'portables', 'bin', 'biome')], { cwd: REPO_ROOT });
   if (proc.exitCode !== 0) {
     return { status: 'FAILED', details: 'Biome detected code quality or formatting errors.' };
   }
-  return { status: 'PASSED', details: 'Fast AST style checks passed with zero errors.' };
+  return { status: 'PASSED', details: '100% type-safe compilation (tsc --noEmit) and fast AST style checks passed.' };
 });
 
 // 5. Knip Dead Code & Unused Export Scanner

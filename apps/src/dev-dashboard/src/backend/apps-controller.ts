@@ -292,7 +292,7 @@ class AppsController {
       id,
       'INFO',
       `🚀 Forge App "${payload.name}" (${id}) registered successfully on port :${payload.port}`,
-      'registry'
+      'app'
     );
 
     return {
@@ -315,7 +315,7 @@ class AppsController {
     const ok = platformDb.updateApp(id, updates);
     if (!ok) throw new Error('Failed to update app record.');
 
-    telemetryEngine.pushLog(id, 'INFO', `App "${id}" configuration updated.`, 'registry');
+    telemetryEngine.pushLog(id, 'INFO', `App "${id}" configuration updated.`, 'app');
     return { success: true, message: `App "${id}" updated successfully.` };
   }
 
@@ -341,7 +341,7 @@ class AppsController {
       }
     }
 
-    telemetryEngine.pushLog(id, 'WARN', `App "${id}" deregistered from Platform Registry.`, 'registry');
+    telemetryEngine.pushLog(id, 'WARN', `App "${id}" deregistered from Platform Registry.`, 'app');
     return { success: true, message: `App "${id}" deregistered successfully.` };
   }
 

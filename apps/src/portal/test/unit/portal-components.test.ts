@@ -87,6 +87,7 @@ describe('Tier 1 Unit: Portal Layout Components', () => {
 
     // Assert
     expect(html).toContain('<!DOCTYPE html>');
+    expect(html).toContain('<html lang="en">');
     expect(html).toContain('portal-app-shell');
     expect(html).toContain('portal-header');
     expect(html).toContain('portal-sidebar');
