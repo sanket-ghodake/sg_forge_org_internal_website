@@ -16,68 +16,7 @@ export interface AdminRosterMember {
   avatarInitial: string;
 }
 
-export const ADMIN_ROSTER_MEMBERS: AdminRosterMember[] = [
-  {
-    id: 'usr_sanket',
-    name: 'Sanket Ghodake',
-    email: 'sanket@forge.internal',
-    jobTitle: 'Founder & Chief Architect',
-    department: 'Executive Office',
-    division: 'Leadership',
-    status: 'ONLINE',
-    avatarInitial: 'SG',
-  },
-  {
-    id: 'usr_alex',
-    name: 'Alex Jordan',
-    email: 'alex.jordan@forge.internal',
-    jobTitle: 'VP of Engineering',
-    department: 'Engineering',
-    division: 'Technology',
-    status: 'ONLINE',
-    avatarInitial: 'AJ',
-  },
-  {
-    id: 'usr_sarah',
-    name: 'Sarah Chen',
-    email: 'sarah.chen@forge.internal',
-    jobTitle: 'Head of Product',
-    department: 'Product',
-    division: 'Product & Design',
-    status: 'ONLINE',
-    avatarInitial: 'SC',
-  },
-  {
-    id: 'usr_marcus',
-    name: 'Marcus Vance',
-    email: 'marcus.v@forge.internal',
-    jobTitle: 'VP of Finance & Operations',
-    department: 'Finance',
-    division: 'Operations',
-    status: 'ONLINE',
-    avatarInitial: 'MV',
-  },
-  {
-    id: 'usr_elena',
-    name: 'Elena Rostova',
-    email: 'elena.r@forge.internal',
-    jobTitle: 'Chief People Officer',
-    department: 'Human Resources',
-    division: 'People & Workplace',
-    status: 'AWAY',
-    avatarInitial: 'ER',
-  },
-  {
-    id: 'usr_priya',
-    name: 'Priya Sharma',
-    email: 'priya.s@forge.internal',
-    jobTitle: 'Staff Security Engineer',
-    department: 'Security & IT',
-    division: 'Technology',
-    status: 'ONLINE',
-    avatarInitial: 'PS',
-  },
-];
+export const ADMIN_ROSTER_MEMBERS: AdminRosterMember[] = [];
 
 export function renderAdminMembersView(): string {
   return `
@@ -115,7 +54,7 @@ export function renderAdminMembersView(): string {
           <input type="text" id="admin-member-search-input" placeholder="Search team members by name or email..." />
         </div>
         <div class="table-stats-pill">
-          Total Members: <strong id="admin-total-members">${ADMIN_ROSTER_MEMBERS.length}</strong>
+          Total Members: <strong id="admin-total-members">--</strong>
         </div>
       </div>
 
@@ -132,41 +71,15 @@ export function renderAdminMembersView(): string {
               <th style="text-align: right;">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            ${ADMIN_ROSTER_MEMBERS.map(m => `
-              <tr data-id="${m.id}">
-                <td>
-                  <div class="table-user-cell">
-                    <div class="table-user-avatar">${m.avatarInitial}</div>
-                    <div>
-                      <div class="table-user-name">${m.name}</div>
-                      <div class="table-user-email">${m.email}</div>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="table-dept-tag">${m.department}</div>
-                  <div class="table-div-sub">${m.division}</div>
-                </td>
-                <td>${m.jobTitle}</td>
-                <td>
-                  <span class="astryx-badge badge-${m.status === 'ONLINE' ? 'online' : 'muted'}">
-                    ${m.status}
-                  </span>
-                </td>
-                <td>
-                  <span class="iam-role-tag">${m.id === 'usr_sanket' ? 'Super Admin' : (m.id.includes('lead') || m.id === 'usr_alex' ? 'Dept Admin' : 'Employee')}</span>
-                </td>
-                <td style="text-align: right;">
-                  <button class="astryx-btn btn-sm btn-ghost edit-role-btn" data-id="${m.id}" data-name="${m.name}" title="Edit IAM Roles">
-                    ${astryxIcons.shield || ''}
-                  </button>
-                  <button class="astryx-btn btn-sm btn-ghost delete-user-btn" data-id="${m.id}" data-name="${m.name}" title="Suspend Account" style="color: var(--forge-danger);">
-                    ${astryxIcons.slash || ''}
-                  </button>
-                </td>
-              </tr>
-            `).join('')}
+          <tbody id="admin-members-tbody">
+            <tr>
+              <td colspan="6" style="text-align: center; padding: 2.5rem; color: var(--forge-text-muted);">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 0.6rem;">
+                  <span class="badge-dot" style="background: var(--forge-primary);"></span>
+                  <span>Loading organization members from central identity...</span>
+                </div>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

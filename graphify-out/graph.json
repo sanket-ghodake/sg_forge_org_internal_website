@@ -306,7 +306,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_auth_src_backend_api_handlers_ts_backend_api_handlers",
-      "community": 249,
+      "community": 18,
       "norm_label": "api-handlers.ts"
     },
     {
@@ -316,7 +316,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "backend_api_handlers_logger",
-      "community": 249,
+      "community": 18,
       "norm_label": "logger"
     },
     {
@@ -326,7 +326,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "backend_api_handlers_passwordresettokens",
-      "community": 249,
+      "community": 18,
       "norm_label": "passwordresettokens"
     },
     {
@@ -336,7 +336,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "backend_api_handlers_problem",
-      "community": 249,
+      "community": 18,
       "norm_label": "problem()"
     },
     {
@@ -356,7 +356,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "backend_api_handlers_extractbearerorcookietoken",
-      "community": 249,
+      "community": 18,
       "norm_label": "extractbearerorcookietoken()"
     },
     {
@@ -386,7 +386,7 @@
       "source_location": "L295",
       "_origin": "ast",
       "id": "backend_api_handlers_handlerefresh",
-      "community": 249,
+      "community": 18,
       "norm_label": "handlerefresh()"
     },
     {
@@ -396,7 +396,7 @@
       "source_location": "L332",
       "_origin": "ast",
       "id": "backend_api_handlers_handlelogout",
-      "community": 249,
+      "community": 18,
       "norm_label": "handlelogout()"
     },
     {
@@ -406,7 +406,7 @@
       "source_location": "L351",
       "_origin": "ast",
       "id": "backend_api_handlers_handlebrowserlog",
-      "community": 249,
+      "community": 267,
       "norm_label": "handlebrowserlog()"
     },
     {
@@ -426,7 +426,7 @@
       "source_location": "L381",
       "_origin": "ast",
       "id": "backend_api_handlers_handledirectory",
-      "community": 249,
+      "community": 281,
       "norm_label": "handledirectory()"
     },
     {
@@ -436,7 +436,7 @@
       "source_location": "L404",
       "_origin": "ast",
       "id": "backend_api_handlers_handlescopedhierarchy",
-      "community": 249,
+      "community": 18,
       "norm_label": "handlescopedhierarchy()"
     },
     {
@@ -446,7 +446,7 @@
       "source_location": "L431",
       "_origin": "ast",
       "id": "backend_api_handlers_handlegetmysessions",
-      "community": 249,
+      "community": 18,
       "norm_label": "handlegetmysessions()"
     },
     {
@@ -456,7 +456,7 @@
       "source_location": "L442",
       "_origin": "ast",
       "id": "backend_api_handlers_handlerevokeothersessions",
-      "community": 249,
+      "community": 18,
       "norm_label": "handlerevokeothersessions()"
     },
     {
@@ -466,7 +466,7 @@
       "source_location": "L472",
       "_origin": "ast",
       "id": "backend_api_handlers_handlegettelemetrylogs",
-      "community": 249,
+      "community": 267,
       "norm_label": "handlegettelemetrylogs()"
     },
     {
@@ -656,7 +656,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "backend_audit_logger_logauditevent",
-      "community": 242,
+      "community": 18,
       "norm_label": "logauditevent()"
     },
     {
@@ -1016,7 +1016,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_hierarchy",
-      "community": 183,
+      "community": 18,
       "norm_label": "hierarchy.ts"
     },
     {
@@ -1026,7 +1026,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "backend_hierarchy_getscopedhierarchydata",
-      "community": 249,
+      "community": 18,
       "norm_label": "getscopedhierarchydata()"
     },
     {
@@ -1036,7 +1036,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_iam_engine",
-      "community": 18,
+      "community": 310,
       "norm_label": "iam-engine.ts"
     },
     {
@@ -1046,7 +1046,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "backend_iam_engine_evaluatediamcontext",
-      "community": 18,
+      "community": 310,
       "norm_label": "evaluatediamcontext"
     },
     {
@@ -1056,7 +1056,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "backend_iam_engine_evaluateuserpermissions",
-      "community": 18,
+      "community": 310,
       "norm_label": "evaluateuserpermissions()"
     },
     {
@@ -1066,7 +1066,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "backend_iam_engine_haspermission",
-      "community": 18,
+      "community": 310,
       "norm_label": "haspermission()"
     },
     {
@@ -1086,7 +1086,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_org_tree_service",
-      "community": 293,
+      "community": 281,
       "norm_label": "org-tree-service.ts"
     },
     {
@@ -1096,7 +1096,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "backend_org_tree_service_logger",
-      "community": 293,
+      "community": 281,
       "norm_label": "logger"
     },
     {
@@ -1106,7 +1106,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "backend_org_tree_service_orgtreenode",
-      "community": 293,
+      "community": 281,
       "norm_label": "orgtreenode"
     },
     {
@@ -1116,7 +1116,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "backend_org_tree_service_orgtreeresponse",
-      "community": 293,
+      "community": 281,
       "norm_label": "orgtreeresponse"
     },
     {
@@ -1126,7 +1126,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "backend_org_tree_service_rawemployeerow",
-      "community": 293,
+      "community": 281,
       "norm_label": "rawemployeerow"
     },
     {
@@ -1136,7 +1136,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "backend_org_tree_service_resolvelivestatus",
-      "community": 293,
+      "community": 281,
       "norm_label": "resolvelivestatus()"
     },
     {
@@ -1146,7 +1146,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "backend_org_tree_service_getrealorgtree",
-      "community": 293,
+      "community": 281,
       "norm_label": "getrealorgtree()"
     },
     {
@@ -1156,7 +1156,7 @@
       "source_location": "L211",
       "_origin": "ast",
       "id": "backend_org_tree_service_getorgtree",
-      "community": 293,
+      "community": 281,
       "norm_label": "getorgtree()"
     },
     {
@@ -1376,7 +1376,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_auth_src_backend_telemetry_ts_backend_telemetry",
-      "community": 241,
+      "community": 248,
       "norm_label": "telemetry.ts"
     },
     {
@@ -1386,7 +1386,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "apps_src_auth_src_backend_telemetry_ts_backend_telemetry_logger",
-      "community": 241,
+      "community": 248,
       "norm_label": "logger"
     },
     {
@@ -1396,7 +1396,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "backend_telemetry_telemetrylogentry",
-      "community": 241,
+      "community": 248,
       "norm_label": "telemetrylogentry"
     },
     {
@@ -1406,7 +1406,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "backend_telemetry_dualprobehealthstatus",
-      "community": 241,
+      "community": 248,
       "norm_label": "dualprobehealthstatus"
     },
     {
@@ -1416,7 +1416,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "backend_telemetry_authtelemetryengine",
-      "community": 241,
+      "community": 248,
       "norm_label": "authtelemetryengine"
     },
     {
@@ -1426,7 +1426,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "backend_telemetry_authtelemetryengine_constructor",
-      "community": 241,
+      "community": 248,
       "norm_label": ".constructor()"
     },
     {
@@ -1436,57 +1436,57 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "backend_telemetry_authtelemetryengine_ensurelogdir",
-      "community": 241,
+      "community": 248,
       "norm_label": ".ensurelogdir()"
     },
     {
       "label": ".appendLogFile()",
       "file_type": "code",
       "source_file": "apps/src/auth/src/backend/telemetry.ts",
-      "source_location": "L73",
+      "source_location": "L74",
       "_origin": "ast",
       "id": "backend_telemetry_authtelemetryengine_appendlogfile",
-      "community": 241,
+      "community": 248,
       "norm_label": ".appendlogfile()"
     },
     {
       "label": ".recordLog()",
       "file_type": "code",
       "source_file": "apps/src/auth/src/backend/telemetry.ts",
-      "source_location": "L95",
+      "source_location": "L96",
       "_origin": "ast",
       "id": "backend_telemetry_authtelemetryengine_recordlog",
-      "community": 241,
+      "community": 248,
       "norm_label": ".recordlog()"
     },
     {
       "label": ".getHealthStatus()",
       "file_type": "code",
       "source_file": "apps/src/auth/src/backend/telemetry.ts",
-      "source_location": "L141",
+      "source_location": "L142",
       "_origin": "ast",
       "id": "backend_telemetry_authtelemetryengine_gethealthstatus",
-      "community": 241,
+      "community": 248,
       "norm_label": ".gethealthstatus()"
     },
     {
       "label": ".getRecentLogs()",
       "file_type": "code",
       "source_file": "apps/src/auth/src/backend/telemetry.ts",
-      "source_location": "L187",
+      "source_location": "L188",
       "_origin": "ast",
       "id": "backend_telemetry_authtelemetryengine_getrecentlogs",
-      "community": 241,
+      "community": 248,
       "norm_label": ".getrecentlogs()"
     },
     {
       "label": "authTelemetry",
       "file_type": "code",
       "source_file": "apps/src/auth/src/backend/telemetry.ts",
-      "source_location": "L196",
+      "source_location": "L197",
       "_origin": "ast",
       "id": "backend_telemetry_authtelemetry",
-      "community": 249,
+      "community": 267,
       "norm_label": "authtelemetry"
     },
     {
@@ -1626,7 +1626,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "db_db_getauthdb",
-      "community": 296,
+      "community": 281,
       "norm_label": "getauthdb()"
     },
     {
@@ -2046,7 +2046,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_observability_test",
-      "community": 249,
+      "community": 267,
       "norm_label": "observability.test.ts"
     },
     {
@@ -2136,7 +2136,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_auth_test_unit_employee_controller_test_ts_unit_employee_controller_test",
-      "community": 293,
+      "community": 296,
       "norm_label": "employee-controller.test.ts"
     },
     {
@@ -2146,7 +2146,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_hierarchy_test",
-      "community": 249,
+      "community": 18,
       "norm_label": "hierarchy.test.ts"
     },
     {
@@ -2156,7 +2156,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_iam_engine_test",
-      "community": 18,
+      "community": 310,
       "norm_label": "iam-engine.test.ts"
     },
     {
@@ -2633,7 +2633,7 @@
       "label": "DiskVolumeStats",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/host-controller.ts",
-      "source_location": "L11",
+      "source_location": "L12",
       "_origin": "ast",
       "id": "backend_host_controller_diskvolumestats",
       "community": 226,
@@ -2643,7 +2643,7 @@
       "label": "NetworkInterfaceInfo",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/host-controller.ts",
-      "source_location": "L20",
+      "source_location": "L21",
       "_origin": "ast",
       "id": "backend_host_controller_networkinterfaceinfo",
       "community": 226,
@@ -2653,7 +2653,7 @@
       "label": "HostDiagnosticsReport",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/host-controller.ts",
-      "source_location": "L29",
+      "source_location": "L30",
       "_origin": "ast",
       "id": "backend_host_controller_hostdiagnosticsreport",
       "community": 226,
@@ -2663,7 +2663,7 @@
       "label": "HighAvailabilityReport",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/host-controller.ts",
-      "source_location": "L68",
+      "source_location": "L72",
       "_origin": "ast",
       "id": "backend_host_controller_highavailabilityreport",
       "community": 226,
@@ -2673,7 +2673,7 @@
       "label": "HostController",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/host-controller.ts",
-      "source_location": "L98",
+      "source_location": "L102",
       "_origin": "ast",
       "id": "backend_host_controller_hostcontroller",
       "community": 226,
@@ -2683,7 +2683,7 @@
       "label": ".getDiskVolumeStats()",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/host-controller.ts",
-      "source_location": "L99",
+      "source_location": "L103",
       "_origin": "ast",
       "id": "backend_host_controller_hostcontroller_getdiskvolumestats",
       "community": 226,
@@ -2693,7 +2693,7 @@
       "label": ".getHostDiagnostics()",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/host-controller.ts",
-      "source_location": "L128",
+      "source_location": "L132",
       "_origin": "ast",
       "id": "backend_host_controller_hostcontroller_gethostdiagnostics",
       "community": 226,
@@ -2703,7 +2703,7 @@
       "label": ".getHighAvailabilityReport()",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/host-controller.ts",
-      "source_location": "L204",
+      "source_location": "L209",
       "_origin": "ast",
       "id": "backend_host_controller_hostcontroller_gethighavailabilityreport",
       "community": 226,
@@ -2963,7 +2963,7 @@
       "label": ".restartService()",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/services-controller.ts",
-      "source_location": "L241",
+      "source_location": "L242",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_restartservice",
       "community": 20,
@@ -2973,7 +2973,7 @@
       "label": ".toggleService()",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/services-controller.ts",
-      "source_location": "L263",
+      "source_location": "L264",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_toggleservice",
       "community": 20,
@@ -2993,17 +2993,27 @@
       "label": "logger",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
-      "source_location": "L9",
+      "source_location": "L11",
       "_origin": "ast",
       "id": "apps_src_dev_dashboard_src_backend_telemetry_ts_backend_telemetry_logger",
       "community": 241,
       "norm_label": "logger"
     },
     {
+      "label": "detectHostMemoryAndVirtualization()",
+      "file_type": "code",
+      "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "backend_telemetry_detecthostmemoryandvirtualization",
+      "community": 241,
+      "norm_label": "detecthostmemoryandvirtualization()"
+    },
+    {
       "label": "LogEntry",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
-      "source_location": "L13",
+      "source_location": "L107",
       "_origin": "ast",
       "id": "backend_telemetry_logentry",
       "community": 241,
@@ -3013,7 +3023,7 @@
       "label": "SystemVitals",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
-      "source_location": "L25",
+      "source_location": "L119",
       "_origin": "ast",
       "id": "backend_telemetry_systemvitals",
       "community": 241,
@@ -3023,7 +3033,7 @@
       "label": "TelemetryEngine",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
-      "source_location": "L37",
+      "source_location": "L134",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine",
       "community": 241,
@@ -3033,7 +3043,7 @@
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
-      "source_location": "L42",
+      "source_location": "L139",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_constructor",
       "community": 241,
@@ -3043,7 +3053,7 @@
       "label": ".pushLog()",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
-      "source_location": "L47",
+      "source_location": "L144",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_pushlog",
       "community": 241,
@@ -3053,7 +3063,7 @@
       "label": ".getRecentLogs()",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
-      "source_location": "L94",
+      "source_location": "L191",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_getrecentlogs",
       "community": 241,
@@ -3063,7 +3073,7 @@
       "label": ".clearLogs()",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
-      "source_location": "L111",
+      "source_location": "L208",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_clearlogs",
       "community": 241,
@@ -3073,7 +3083,7 @@
       "label": ".getSystemVitals()",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
-      "source_location": "L120",
+      "source_location": "L217",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_getsystemvitals",
       "community": 241,
@@ -3083,7 +3093,7 @@
       "label": ".registerSSEClient()",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
-      "source_location": "L139",
+      "source_location": "L236",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_registersseclient",
       "community": 241,
@@ -3093,7 +3103,7 @@
       "label": ".removeSSEClient()",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
-      "source_location": "L153",
+      "source_location": "L250",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_removesseclient",
       "community": 241,
@@ -3103,7 +3113,7 @@
       "label": ".broadcastPing()",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
-      "source_location": "L157",
+      "source_location": "L254",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_broadcastping",
       "community": 241,
@@ -3113,7 +3123,7 @@
       "label": ".broadcastSSE()",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
-      "source_location": "L171",
+      "source_location": "L268",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_broadcastsse",
       "community": 241,
@@ -3123,7 +3133,7 @@
       "label": ".broadcastVitalsTick()",
       "file_type": "code",
       "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
-      "source_location": "L184",
+      "source_location": "L281",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_broadcastvitalstick",
       "community": 241,
@@ -3326,7 +3336,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_dev_dashboard_src_db_db_ts_db_db",
-      "community": 309,
+      "community": 239,
       "norm_label": "db.ts"
     },
     {
@@ -3336,7 +3346,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "db_db_logger",
-      "community": 309,
+      "community": 239,
       "norm_label": "logger"
     },
     {
@@ -3356,7 +3366,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "db_db_data_dir",
-      "community": 309,
+      "community": 239,
       "norm_label": "data_dir"
     },
     {
@@ -3366,7 +3376,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "db_db_core_db_path",
-      "community": 309,
+      "community": 239,
       "norm_label": "core_db_path"
     },
     {
@@ -3386,7 +3396,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "db_db_trafficeventrecord",
-      "community": 309,
+      "community": 239,
       "norm_label": "trafficeventrecord"
     },
     {
@@ -3406,7 +3416,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "db_db_auditlogrecord",
-      "community": 309,
+      "community": 239,
       "norm_label": "auditlogrecord"
     },
     {
@@ -3696,7 +3706,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_dev_dashboard_src_db_index_ts_db_index",
-      "community": 222,
+      "community": 249,
       "norm_label": "index.ts"
     },
     {
@@ -3706,7 +3716,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "db_remote_connectors",
-      "community": 241,
+      "community": 249,
       "norm_label": "remote-connectors.ts"
     },
     {
@@ -3716,7 +3726,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "db_remote_connectors_logger",
-      "community": 241,
+      "community": 249,
       "norm_label": "logger"
     },
     {
@@ -3726,7 +3736,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "db_remote_connectors_remotedbconfig",
-      "community": 241,
+      "community": 249,
       "norm_label": "remotedbconfig"
     },
     {
@@ -3736,7 +3746,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "db_remote_connectors_remotequeryresult",
-      "community": 241,
+      "community": 249,
       "norm_label": "remotequeryresult"
     },
     {
@@ -3746,7 +3756,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "db_remote_connectors_remotedbconnectormanager",
-      "community": 241,
+      "community": 249,
       "norm_label": "remotedbconnectormanager"
     },
     {
@@ -3756,7 +3766,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "db_remote_connectors_remotedbconnectormanager_registerconnection",
-      "community": 241,
+      "community": 243,
       "norm_label": ".registerconnection()"
     },
     {
@@ -3766,7 +3776,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "db_remote_connectors_remotedbconnectormanager_listremoteconnections",
-      "community": 241,
+      "community": 249,
       "norm_label": ".listremoteconnections()"
     },
     {
@@ -3776,7 +3786,7 @@
       "source_location": "L85",
       "_origin": "ast",
       "id": "db_remote_connectors_remotedbconnectormanager_testconnection",
-      "community": 241,
+      "community": 249,
       "norm_label": ".testconnection()"
     },
     {
@@ -3786,7 +3796,7 @@
       "source_location": "L124",
       "_origin": "ast",
       "id": "db_remote_connectors_remotedbconnectormanager_executeremotequery",
-      "community": 241,
+      "community": 249,
       "norm_label": ".executeremotequery()"
     },
     {
@@ -3796,7 +3806,7 @@
       "source_location": "L182",
       "_origin": "ast",
       "id": "db_remote_connectors_remotedbmanager",
-      "community": 241,
+      "community": 249,
       "norm_label": "remotedbmanager"
     },
     {
@@ -4636,7 +4646,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_dev_dashboard_journey_test",
-      "community": 159,
+      "community": 227,
       "norm_label": "dev-dashboard-journey.test.ts"
     },
     {
@@ -4646,7 +4656,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "e2e_dev_dashboard_journey_test_fetch",
-      "community": 159,
+      "community": 227,
       "norm_label": "fetch()"
     },
     {
@@ -4866,7 +4876,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_remote_connectors_test",
-      "community": 241,
+      "community": 249,
       "norm_label": "remote-connectors.test.ts"
     },
     {
@@ -5326,7 +5336,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_dev_hub_src_server_ts_src_server",
-      "community": 297,
+      "community": 169,
       "norm_label": "server.ts"
     },
     {
@@ -5336,7 +5346,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "apps_src_dev_hub_src_server_ts_src_server_port",
-      "community": 297,
+      "community": 169,
       "norm_label": "port"
     },
     {
@@ -5346,7 +5356,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_src_dev_hub_src_server_ts_src_server_logger",
-      "community": 297,
+      "community": 169,
       "norm_label": "logger"
     },
     {
@@ -5356,7 +5366,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "src_server_startdevhubserver",
-      "community": 312,
+      "community": 169,
       "norm_label": "startdevhubserver()"
     },
     {
@@ -5366,7 +5376,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_dev_hub_test_contracts_problem_json_test_ts_contracts_problem_json_test",
-      "community": 312,
+      "community": 169,
       "norm_label": "problem-json.test.ts"
     },
     {
@@ -5376,7 +5386,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_dev_hub_server_test",
-      "community": 312,
+      "community": 169,
       "norm_label": "dev-hub-server.test.ts"
     },
     {
@@ -5386,7 +5396,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_hub_routes_test",
-      "community": 312,
+      "community": 169,
       "norm_label": "hub-routes.test.ts"
     },
     {
@@ -5396,7 +5406,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "security_input_sanitization_test",
-      "community": 312,
+      "community": 169,
       "norm_label": "input-sanitization.test.ts"
     },
     {
@@ -5556,7 +5566,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_landing_src_server_ts_src_server",
-      "community": 251,
+      "community": 160,
       "norm_label": "server.ts"
     },
     {
@@ -5566,7 +5576,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_src_landing_src_server_ts_src_server_logger",
-      "community": 251,
+      "community": 160,
       "norm_label": "logger"
     },
     {
@@ -5576,7 +5586,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "apps_src_landing_src_server_ts_src_server_port",
-      "community": 251,
+      "community": 160,
       "norm_label": "port"
     },
     {
@@ -5586,7 +5596,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "src_server_renderhtml",
-      "community": 251,
+      "community": 160,
       "norm_label": "renderhtml()"
     },
     {
@@ -5596,7 +5606,7 @@
       "source_location": "L100",
       "_origin": "ast",
       "id": "src_server_startlandingserver",
-      "community": 310,
+      "community": 223,
       "norm_label": "startlandingserver()"
     },
     {
@@ -5606,7 +5616,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "contracts_landing_health_test",
-      "community": 310,
+      "community": 223,
       "norm_label": "landing-health.test.ts"
     },
     {
@@ -5616,7 +5626,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_landing_server_test",
-      "community": 310,
+      "community": 223,
       "norm_label": "landing-server.test.ts"
     },
     {
@@ -5626,7 +5636,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_not_found_route_test",
-      "community": 310,
+      "community": 223,
       "norm_label": "not-found-route.test.ts"
     },
     {
@@ -5636,7 +5646,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_registry_sync_test",
-      "community": 310,
+      "community": 223,
       "norm_label": "registry-sync.test.ts"
     },
     {
@@ -5646,7 +5656,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "security_xss_defense_test",
-      "community": 310,
+      "community": 223,
       "norm_label": "xss-defense.test.ts"
     },
     {
@@ -5656,7 +5666,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_catalog_grouping_test",
-      "community": 243,
+      "community": 223,
       "norm_label": "catalog-grouping.test.ts"
     },
     {
@@ -6153,7 +6163,7 @@
       "label": "renderAdminMembersView()",
       "file_type": "code",
       "source_file": "apps/src/portal/src/frontend/ui-admin-members.ts",
-      "source_location": "L82",
+      "source_location": "L21",
       "_origin": "ast",
       "id": "frontend_ui_admin_members_renderadminmembersview",
       "community": 157,
@@ -6756,7 +6766,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_org_tree_service_test",
-      "community": 293,
+      "community": 281,
       "norm_label": "org-tree-service.test.ts"
     },
     {
@@ -6766,7 +6776,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "unit_org_tree_service_test_checkdepth",
-      "community": 293,
+      "community": 281,
       "norm_label": "checkdepth()"
     },
     {
@@ -6776,7 +6786,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "unit_org_tree_service_test_checkdepth3",
-      "community": 293,
+      "community": 281,
       "norm_label": "checkdepth3()"
     },
     {
@@ -6896,7 +6906,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_auth_guard",
-      "community": 248,
+      "community": 251,
       "norm_label": "auth-guard.ts"
     },
     {
@@ -6906,7 +6916,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "src_auth_guard_getverificationpublickey",
-      "community": 248,
+      "community": 251,
       "norm_label": "getverificationpublickey()"
     },
     {
@@ -6916,7 +6926,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "src_auth_guard_verifysessiontoken",
-      "community": 248,
+      "community": 251,
       "norm_label": "verifysessiontoken()"
     },
     {
@@ -6926,7 +6936,7 @@
       "source_location": "L60",
       "_origin": "ast",
       "id": "src_auth_guard_renderdisabledhtml",
-      "community": 248,
+      "community": 251,
       "norm_label": "renderdisabledhtml()"
     },
     {
@@ -6936,7 +6946,7 @@
       "source_location": "L74",
       "_origin": "ast",
       "id": "src_auth_guard_renderforbiddenhtml",
-      "community": 248,
+      "community": 251,
       "norm_label": "renderforbiddenhtml()"
     },
     {
@@ -6946,7 +6956,7 @@
       "source_location": "L88",
       "_origin": "ast",
       "id": "src_auth_guard_authguard",
-      "community": 248,
+      "community": 251,
       "norm_label": "authguard()"
     },
     {
@@ -7036,7 +7046,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_browser_bridge",
-      "community": 241,
+      "community": 243,
       "norm_label": "browser-bridge.ts"
     },
     {
@@ -7046,7 +7056,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "src_browser_bridge_initbrowserlogbridge",
-      "community": 241,
+      "community": 243,
       "norm_label": "initbrowserlogbridge()"
     },
     {
@@ -7056,7 +7066,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_client_bridge",
-      "community": 183,
+      "community": 292,
       "norm_label": "client-bridge.ts"
     },
     {
@@ -7066,7 +7076,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "src_client_bridge_forgeclientoptions",
-      "community": 183,
+      "community": 292,
       "norm_label": "forgeclientoptions"
     },
     {
@@ -7076,7 +7086,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "src_client_bridge_forgeclient",
-      "community": 183,
+      "community": 292,
       "norm_label": "forgeclient"
     },
     {
@@ -7086,7 +7096,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "src_client_bridge_forgeclient_constructor",
-      "community": 183,
+      "community": 292,
       "norm_label": ".constructor()"
     },
     {
@@ -7096,7 +7106,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "src_client_bridge_forgeclient_init",
-      "community": 183,
+      "community": 292,
       "norm_label": ".init()"
     },
     {
@@ -7106,7 +7116,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "src_client_bridge_forgeclient_fetch",
-      "community": 183,
+      "community": 292,
       "norm_label": ".fetch()"
     },
     {
@@ -7153,7 +7163,7 @@
       "label": "resolveCanonicalDbPath()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/database.ts",
-      "source_location": "L84",
+      "source_location": "L107",
       "_origin": "ast",
       "id": "src_database_resolvecanonicaldbpath",
       "community": 281,
@@ -7163,7 +7173,7 @@
       "label": "DatabaseClientOptions",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/database.ts",
-      "source_location": "L97",
+      "source_location": "L120",
       "_origin": "ast",
       "id": "src_database_databaseclientoptions",
       "community": 281,
@@ -7173,7 +7183,7 @@
       "label": "getDatabaseClient()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/database.ts",
-      "source_location": "L107",
+      "source_location": "L130",
       "_origin": "ast",
       "id": "src_database_getdatabaseclient",
       "community": 281,
@@ -7183,7 +7193,7 @@
       "label": "closeDatabaseClient()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/database.ts",
-      "source_location": "L137",
+      "source_location": "L160",
       "_origin": "ast",
       "id": "src_database_closedatabaseclient",
       "community": 281,
@@ -7383,7 +7393,7 @@
       "label": "createSafeHandler()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/error-handler.ts",
-      "source_location": "L11",
+      "source_location": "L12",
       "_origin": "ast",
       "id": "src_error_handler_createsafehandler",
       "community": 169,
@@ -7396,7 +7406,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_sdk_src_index_ts_src_index",
-      "community": 183,
+      "community": 292,
       "norm_label": "index.ts"
     },
     {
@@ -7406,7 +7416,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_logger",
-      "community": 241,
+      "community": 243,
       "norm_label": "logger.ts"
     },
     {
@@ -7416,7 +7426,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "src_logger_loglevel",
-      "community": 241,
+      "community": 243,
       "norm_label": "loglevel"
     },
     {
@@ -7426,7 +7436,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "src_logger_redactsensitivedata",
-      "community": 241,
+      "community": 243,
       "norm_label": "redactsensitivedata()"
     },
     {
@@ -7436,7 +7446,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "src_logger_logentry",
-      "community": 241,
+      "community": 243,
       "norm_label": "logentry"
     },
     {
@@ -7446,7 +7456,7 @@
       "source_location": "L70",
       "_origin": "ast",
       "id": "src_logger_explainlog",
-      "community": 241,
+      "community": 243,
       "norm_label": "explainlog()"
     },
     {
@@ -7456,7 +7466,7 @@
       "source_location": "L105",
       "_origin": "ast",
       "id": "src_logger_forgelogger",
-      "community": 241,
+      "community": 246,
       "norm_label": "forgelogger"
     },
     {
@@ -7466,7 +7476,7 @@
       "source_location": "L108",
       "_origin": "ast",
       "id": "src_logger_forgelogger_constructor",
-      "community": 241,
+      "community": 246,
       "norm_label": ".constructor()"
     },
     {
@@ -7476,7 +7486,7 @@
       "source_location": "L114",
       "_origin": "ast",
       "id": "src_logger_forgelogger_setlogdir",
-      "community": 241,
+      "community": 246,
       "norm_label": ".setlogdir()"
     },
     {
@@ -7486,7 +7496,7 @@
       "source_location": "L118",
       "_origin": "ast",
       "id": "src_logger_forgelogger_appendtodisk",
-      "community": 241,
+      "community": 246,
       "norm_label": ".appendtodisk()"
     },
     {
@@ -7496,7 +7506,7 @@
       "source_location": "L143",
       "_origin": "ast",
       "id": "src_logger_forgelogger_log",
-      "community": 241,
+      "community": 246,
       "norm_label": ".log()"
     },
     {
@@ -7506,7 +7516,7 @@
       "source_location": "L227",
       "_origin": "ast",
       "id": "src_logger_forgelogger_debug",
-      "community": 241,
+      "community": 246,
       "norm_label": ".debug()"
     },
     {
@@ -7516,7 +7526,7 @@
       "source_location": "L230",
       "_origin": "ast",
       "id": "src_logger_forgelogger_info",
-      "community": 241,
+      "community": 246,
       "norm_label": ".info()"
     },
     {
@@ -7526,7 +7536,7 @@
       "source_location": "L233",
       "_origin": "ast",
       "id": "src_logger_forgelogger_warn",
-      "community": 241,
+      "community": 246,
       "norm_label": ".warn()"
     },
     {
@@ -7536,7 +7546,7 @@
       "source_location": "L236",
       "_origin": "ast",
       "id": "src_logger_forgelogger_error",
-      "community": 241,
+      "community": 246,
       "norm_label": ".error()"
     },
     {
@@ -7546,7 +7556,7 @@
       "source_location": "L243",
       "_origin": "ast",
       "id": "src_logger_forgelogger_fatal",
-      "community": 241,
+      "community": 246,
       "norm_label": ".fatal()"
     },
     {
@@ -7556,7 +7566,7 @@
       "source_location": "L251",
       "_origin": "ast",
       "id": "src_logger_forgelogger_logdbquery",
-      "community": 241,
+      "community": 246,
       "norm_label": ".logdbquery()"
     },
     {
@@ -7566,7 +7576,7 @@
       "source_location": "L258",
       "_origin": "ast",
       "id": "src_logger_forgelogger_logbrowserevent",
-      "community": 241,
+      "community": 246,
       "norm_label": ".logbrowserevent()"
     },
     {
@@ -7586,7 +7596,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_registry",
-      "community": 243,
+      "community": 223,
       "norm_label": "registry.ts"
     },
     {
@@ -7596,7 +7606,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "src_registry_serviceentry",
-      "community": 243,
+      "community": 223,
       "norm_label": "serviceentry"
     },
     {
@@ -7606,7 +7616,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "src_registry_loadregistryoptions",
-      "community": 243,
+      "community": 223,
       "norm_label": "loadregistryoptions"
     },
     {
@@ -7616,7 +7626,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "src_registry_getappstatus",
-      "community": 243,
+      "community": 223,
       "norm_label": "getappstatus()"
     },
     {
@@ -7626,7 +7636,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "src_registry_isappdisabled",
-      "community": 248,
+      "community": 251,
       "norm_label": "isappdisabled()"
     },
     {
@@ -7636,7 +7646,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "src_registry_findenvpath",
-      "community": 243,
+      "community": 223,
       "norm_label": "findenvpath()"
     },
     {
@@ -7646,8 +7656,48 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "src_registry_loadserviceregistry",
-      "community": 243,
+      "community": 223,
       "norm_label": "loadserviceregistry()"
+    },
+    {
+      "label": "security-headers.ts",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/security-headers.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_security_headers",
+      "community": 169,
+      "norm_label": "security-headers.ts"
+    },
+    {
+      "label": "AIR_GAPPED_CSP",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/security-headers.ts",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "src_security_headers_air_gapped_csp",
+      "community": 169,
+      "norm_label": "air_gapped_csp"
+    },
+    {
+      "label": "AIR_GAPPED_SECURITY_HEADERS",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/security-headers.ts",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "src_security_headers_air_gapped_security_headers",
+      "community": 169,
+      "norm_label": "air_gapped_security_headers"
+    },
+    {
+      "label": "applySecurityHeaders()",
+      "file_type": "code",
+      "source_file": "apps/src/sdk/src/security-headers.ts",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "src_security_headers_applysecurityheaders",
+      "community": 169,
+      "norm_label": "applysecurityheaders()"
     },
     {
       "label": "sdk-exports.test.ts",
@@ -7676,7 +7726,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_auth_guard_test",
-      "community": 248,
+      "community": 251,
       "norm_label": "auth-guard.test.ts"
     },
     {
@@ -7696,7 +7746,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_browser_bridge_test",
-      "community": 241,
+      "community": 243,
       "norm_label": "browser-bridge.test.ts"
     },
     {
@@ -7726,7 +7776,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_external_ingress_test",
-      "community": 243,
+      "community": 223,
       "norm_label": "external-ingress.test.ts"
     },
     {
@@ -7736,7 +7786,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_logger_test",
-      "community": 241,
+      "community": 243,
       "norm_label": "logger.test.ts"
     },
     {
@@ -7746,7 +7796,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_registry_test",
-      "community": 243,
+      "community": 223,
       "norm_label": "registry.test.ts"
     },
     {
@@ -7836,7 +7886,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "src_index_usercontext",
-      "community": 183,
+      "community": 292,
       "norm_label": "usercontext"
     },
     {
@@ -7856,7 +7906,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "src_index_postmessageevent",
-      "community": 183,
+      "community": 292,
       "norm_label": "postmessageevent"
     },
     {
@@ -7926,7 +7976,7 @@
       "source_location": "L80",
       "_origin": "ast",
       "id": "src_index_employeesummary",
-      "community": 183,
+      "community": 18,
       "norm_label": "employeesummary"
     },
     {
@@ -7946,7 +7996,7 @@
       "source_location": "L102",
       "_origin": "ast",
       "id": "src_index_scopedhierarchyresponse",
-      "community": 183,
+      "community": 251,
       "norm_label": "scopedhierarchyresponse"
     },
     {
@@ -8046,7 +8096,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_error_page",
-      "community": 248,
+      "community": 160,
       "norm_label": "error-page.ts"
     },
     {
@@ -8056,7 +8106,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "src_error_page_errorpageoptions",
-      "community": 248,
+      "community": 160,
       "norm_label": "errorpageoptions"
     },
     {
@@ -8066,7 +8116,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "src_error_page_status_defaults",
-      "community": 248,
+      "community": 160,
       "norm_label": "status_defaults"
     },
     {
@@ -8076,7 +8126,7 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "src_error_page_renderastryxerrorhtml",
-      "community": 248,
+      "community": 160,
       "norm_label": "renderastryxerrorhtml()"
     },
     {
@@ -8106,7 +8156,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "src_header_getastryxheaderhtml",
-      "community": 251,
+      "community": 160,
       "norm_label": "getastryxheaderhtml()"
     },
     {
@@ -8166,7 +8216,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "state_head_script_getheadstatescript",
-      "community": 251,
+      "community": 160,
       "norm_label": "getheadstatescript()"
     },
     {
@@ -8416,7 +8466,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_styles",
-      "community": 160,
+      "community": 309,
       "norm_label": "styles.ts"
     },
     {
@@ -8436,7 +8486,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "styles_base",
-      "community": 160,
+      "community": 309,
       "norm_label": "base.ts"
     },
     {
@@ -8446,7 +8496,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "styles_base_getbasestyles",
-      "community": 160,
+      "community": 309,
       "norm_label": "getbasestyles()"
     },
     {
@@ -8456,7 +8506,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "styles_components",
-      "community": 160,
+      "community": 309,
       "norm_label": "components.ts"
     },
     {
@@ -8466,7 +8516,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "styles_components_getcomponentstyles",
-      "community": 160,
+      "community": 309,
       "norm_label": "getcomponentstyles()"
     },
     {
@@ -8476,7 +8526,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "styles_overlays",
-      "community": 160,
+      "community": 309,
       "norm_label": "overlays.ts"
     },
     {
@@ -8486,7 +8536,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "styles_overlays_getoverlaystyles",
-      "community": 160,
+      "community": 309,
       "norm_label": "getoverlaystyles()"
     },
     {
@@ -8626,7 +8676,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_error_page_test",
-      "community": 248,
+      "community": 160,
       "norm_label": "error-page.test.ts"
     },
     {
@@ -8646,7 +8696,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "chaos_concurrent_wal_writes_test",
-      "community": 296,
+      "community": 281,
       "norm_label": "concurrent-wal-writes.test.ts"
     },
     {
@@ -8756,7 +8806,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_user_journey_microapps_dispatch_test",
-      "community": 241,
+      "community": 243,
       "norm_label": "user-journey-microapps-dispatch.test.ts"
     },
     {
@@ -8776,7 +8826,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_user_journey_telemetry_pipeline_test",
-      "community": 241,
+      "community": 243,
       "norm_label": "user-journey-telemetry-pipeline.test.ts"
     },
     {
@@ -8786,8 +8836,38 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_dynamic_rebranding_test",
-      "community": 248,
+      "community": 160,
       "norm_label": "dynamic-rebranding.test.ts"
+    },
+    {
+      "label": "air-gap-compliance.test.ts",
+      "file_type": "code",
+      "source_file": "apps/test/security/air-gap-compliance.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "security_air_gap_compliance_test",
+      "community": 169,
+      "norm_label": "air-gap-compliance.test.ts"
+    },
+    {
+      "label": "REPO_ROOT",
+      "file_type": "code",
+      "source_file": "apps/test/security/air-gap-compliance.test.ts",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "security_air_gap_compliance_test_repo_root",
+      "community": 169,
+      "norm_label": "repo_root"
+    },
+    {
+      "label": "getSourceFiles()",
+      "file_type": "code",
+      "source_file": "apps/test/security/air-gap-compliance.test.ts",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "security_air_gap_compliance_test_getsourcefiles",
+      "community": 169,
+      "norm_label": "getsourcefiles()"
     },
     {
       "label": "astryx-validator.test.ts",
@@ -8838,36 +8918,6 @@
       "id": "unit_sdk_test",
       "community": 169,
       "norm_label": "sdk.test.ts"
-    },
-    {
-      "label": "drizzle.config.ts",
-      "file_type": "code",
-      "source_file": "drizzle.config.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "drizzle_config",
-      "community": 246,
-      "norm_label": "drizzle.config.ts"
-    },
-    {
-      "label": "resolveDataDir()",
-      "file_type": "code",
-      "source_file": "drizzle.config.ts",
-      "source_location": "L11",
-      "_origin": "ast",
-      "id": "drizzle_config_resolvedatadir",
-      "community": 246,
-      "norm_label": "resolvedatadir()"
-    },
-    {
-      "label": "dataDir",
-      "file_type": "code",
-      "source_file": "drizzle.config.ts",
-      "source_location": "L24",
-      "_origin": "ast",
-      "id": "drizzle_config_datadir",
-      "community": 246,
-      "norm_label": "datadir"
     },
     {
       "label": "package.json",
@@ -8996,7 +9046,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_app_template_src_db_index_ts_db_index",
-      "community": 292,
+      "community": 169,
       "norm_label": "index.ts"
     },
     {
@@ -9006,7 +9056,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "forge_apps_app_template_src_db_index_ts_db_index_logger",
-      "community": 292,
+      "community": 169,
       "norm_label": "logger"
     },
     {
@@ -9016,7 +9066,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "forge_apps_app_template_src_db_index_ts_db_index_data_dir",
-      "community": 292,
+      "community": 169,
       "norm_label": "data_dir"
     },
     {
@@ -9026,7 +9076,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "forge_apps_app_template_src_db_index_ts_db_index_db_path",
-      "community": 292,
+      "community": 169,
       "norm_label": "db_path"
     },
     {
@@ -9036,7 +9086,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "db_index_templatedb",
-      "community": 292,
+      "community": 169,
       "norm_label": "templatedb"
     },
     {
@@ -9086,7 +9136,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "forge_apps_app_template_src_server_ts_src_server_renderapphtml",
-      "community": 251,
+      "community": 160,
       "norm_label": "renderapphtml()"
     },
     {
@@ -9096,7 +9146,7 @@
       "source_location": "L80",
       "_origin": "ast",
       "id": "src_server_starttemplateserver",
-      "community": 314,
+      "community": 251,
       "norm_label": "starttemplateserver()"
     },
     {
@@ -9106,7 +9156,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "contracts_health_schema_test",
-      "community": 314,
+      "community": 251,
       "norm_label": "health-schema.test.ts"
     },
     {
@@ -9126,7 +9176,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_server_test",
-      "community": 314,
+      "community": 251,
       "norm_label": "server.test.ts"
     },
     {
@@ -9146,7 +9196,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_health_test",
-      "community": 314,
+      "community": 251,
       "norm_label": "health.test.ts"
     },
     {
@@ -9166,7 +9216,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "security_auth_gate_test",
-      "community": 314,
+      "community": 251,
       "norm_label": "auth-gate.test.ts"
     },
     {
@@ -9266,7 +9316,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_billing_src_server_ts_src_server",
-      "community": 251,
+      "community": 166,
       "norm_label": "server.ts"
     },
     {
@@ -9276,7 +9326,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "forge_apps_billing_src_server_ts_src_server_log_dir",
-      "community": 251,
+      "community": 166,
       "norm_label": "log_dir"
     },
     {
@@ -9286,7 +9336,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "forge_apps_billing_src_server_ts_src_server_logger",
-      "community": 251,
+      "community": 166,
       "norm_label": "logger"
     },
     {
@@ -9296,7 +9346,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "forge_apps_billing_src_server_ts_src_server_port",
-      "community": 251,
+      "community": 166,
       "norm_label": "port"
     },
     {
@@ -9306,7 +9356,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "src_server_invoice",
-      "community": 251,
+      "community": 166,
       "norm_label": "invoice"
     },
     {
@@ -9316,7 +9366,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "forge_apps_billing_src_server_ts_src_server_renderapphtml",
-      "community": 251,
+      "community": 160,
       "norm_label": "renderapphtml()"
     },
     {
@@ -9326,7 +9376,7 @@
       "source_location": "L142",
       "_origin": "ast",
       "id": "src_server_startbillingserver",
-      "community": 315,
+      "community": 166,
       "norm_label": "startbillingserver()"
     },
     {
@@ -9336,7 +9386,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_billing_test_contracts_problem_json_test_ts_contracts_problem_json_test",
-      "community": 315,
+      "community": 166,
       "norm_label": "problem-json.test.ts"
     },
     {
@@ -9346,7 +9396,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_billing_server_test",
-      "community": 315,
+      "community": 166,
       "norm_label": "billing-server.test.ts"
     },
     {
@@ -9356,7 +9406,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_billing_test_integration_db_isolation_test_ts_integration_db_isolation_test",
-      "community": 315,
+      "community": 166,
       "norm_label": "db-isolation.test.ts"
     },
     {
@@ -9426,7 +9476,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "forge_apps_expenses_src_server_ts_src_server_renderapphtml",
-      "community": 251,
+      "community": 160,
       "norm_label": "renderapphtml()"
     },
     {
@@ -9436,7 +9486,7 @@
       "source_location": "L137",
       "_origin": "ast",
       "id": "src_server_startexpensesserver",
-      "community": 169,
+      "community": 251,
       "norm_label": "startexpensesserver()"
     },
     {
@@ -9446,7 +9496,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_expenses_test_contracts_problem_json_test_ts_contracts_problem_json_test",
-      "community": 169,
+      "community": 251,
       "norm_label": "problem-json.test.ts"
     },
     {
@@ -9456,7 +9506,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_expenses_server_test",
-      "community": 169,
+      "community": 251,
       "norm_label": "expenses-server.test.ts"
     },
     {
@@ -9466,7 +9516,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_expenses_test_integration_db_isolation_test_ts_integration_db_isolation_test",
-      "community": 169,
+      "community": 251,
       "norm_label": "db-isolation.test.ts"
     },
     {
@@ -9496,7 +9546,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_telemetry_src_db_index_ts_db_index",
-      "community": 305,
+      "community": 169,
       "norm_label": "index.ts"
     },
     {
@@ -9506,7 +9556,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "forge_apps_telemetry_src_db_index_ts_db_index_logger",
-      "community": 305,
+      "community": 169,
       "norm_label": "logger"
     },
     {
@@ -9516,7 +9566,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "forge_apps_telemetry_src_db_index_ts_db_index_data_dir",
-      "community": 305,
+      "community": 169,
       "norm_label": "data_dir"
     },
     {
@@ -9526,7 +9576,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "forge_apps_telemetry_src_db_index_ts_db_index_db_path",
-      "community": 305,
+      "community": 169,
       "norm_label": "db_path"
     },
     {
@@ -9536,7 +9586,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "db_index_telemetrydb",
-      "community": 305,
+      "community": 169,
       "norm_label": "telemetrydb"
     },
     {
@@ -9546,7 +9596,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_telemetry_src_server_ts_src_server",
-      "community": 251,
+      "community": 169,
       "norm_label": "server.ts"
     },
     {
@@ -9556,7 +9606,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "forge_apps_telemetry_src_server_ts_src_server_log_dir",
-      "community": 251,
+      "community": 169,
       "norm_label": "log_dir"
     },
     {
@@ -9566,7 +9616,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "forge_apps_telemetry_src_server_ts_src_server_logger",
-      "community": 251,
+      "community": 169,
       "norm_label": "logger"
     },
     {
@@ -9576,7 +9626,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "forge_apps_telemetry_src_server_ts_src_server_port",
-      "community": 251,
+      "community": 169,
       "norm_label": "port"
     },
     {
@@ -9586,7 +9636,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "forge_apps_telemetry_src_server_ts_src_server_renderapphtml",
-      "community": 251,
+      "community": 160,
       "norm_label": "renderapphtml()"
     },
     {
@@ -9596,7 +9646,7 @@
       "source_location": "L125",
       "_origin": "ast",
       "id": "src_server_starttelemetryserver",
-      "community": 316,
+      "community": 169,
       "norm_label": "starttelemetryserver()"
     },
     {
@@ -9606,7 +9656,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_telemetry_test_contracts_problem_json_test_ts_contracts_problem_json_test",
-      "community": 316,
+      "community": 169,
       "norm_label": "problem-json.test.ts"
     },
     {
@@ -9616,7 +9666,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_telemetry_server_test",
-      "community": 316,
+      "community": 169,
       "norm_label": "telemetry-server.test.ts"
     },
     {
@@ -9626,7 +9676,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_telemetry_test_integration_db_isolation_test_ts_integration_db_isolation_test",
-      "community": 316,
+      "community": 169,
       "norm_label": "db-isolation.test.ts"
     },
     {
@@ -9780,20 +9830,10 @@
       "norm_label": "create-app"
     },
     {
-      "label": "db:studio",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L17",
-      "_origin": "ast",
-      "id": "package_scripts_db_studio",
-      "community": 0,
-      "norm_label": "db:studio"
-    },
-    {
       "label": "devDependencies",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L19",
+      "source_location": "L18",
       "_origin": "ast",
       "id": "package_devdependencies",
       "community": 0,
@@ -9803,7 +9843,7 @@
       "label": "@libsql/client",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L20",
+      "source_location": "L19",
       "_origin": "ast",
       "id": "package_devdependencies_libsql_client",
       "community": 0,
@@ -9813,7 +9853,7 @@
       "label": "@types/bun",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L21",
+      "source_location": "L20",
       "_origin": "ast",
       "id": "package_devdependencies_types_bun",
       "community": 0,
@@ -9823,27 +9863,17 @@
       "label": "@types/node",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L22",
+      "source_location": "L21",
       "_origin": "ast",
       "id": "package_devdependencies_types_node",
       "community": 0,
       "norm_label": "@types/node"
     },
     {
-      "label": "drizzle-kit",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L23",
-      "_origin": "ast",
-      "id": "package_devdependencies_drizzle_kit",
-      "community": 0,
-      "norm_label": "drizzle-kit"
-    },
-    {
       "label": "drizzle-orm",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L24",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "package_devdependencies_drizzle_orm",
       "community": 0,
@@ -9853,7 +9883,7 @@
       "label": "typescript",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L25",
+      "source_location": "L23",
       "_origin": "ast",
       "id": "package_devdependencies_typescript",
       "community": 0,
@@ -10544,7 +10574,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scripts_create_app",
-      "community": 243,
+      "community": 223,
       "norm_label": "create-app.ts"
     },
     {
@@ -10554,7 +10584,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "scripts_create_app_repo_root",
-      "community": 243,
+      "community": 223,
       "norm_label": "repo_root"
     },
     {
@@ -10564,7 +10594,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "scripts_create_app_createappoptions",
-      "community": 243,
+      "community": 223,
       "norm_label": "createappoptions"
     },
     {
@@ -10574,7 +10604,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "scripts_create_app_createapp",
-      "community": 243,
+      "community": 223,
       "norm_label": "createapp()"
     },
     {
@@ -10624,7 +10654,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scripts_generate_proxy",
-      "community": 243,
+      "community": 223,
       "norm_label": "generate-proxy.ts"
     },
     {
@@ -10634,7 +10664,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "scripts_generate_proxy_repo_root",
-      "community": 243,
+      "community": 223,
       "norm_label": "repo_root"
     },
     {
@@ -10644,7 +10674,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "scripts_generate_proxy_caddyfile_path",
-      "community": 243,
+      "community": 223,
       "norm_label": "caddyfile_path"
     },
     {
@@ -10654,7 +10684,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "scripts_generate_proxy_generatecaddyfile",
-      "community": 243,
+      "community": 223,
       "norm_label": "generatecaddyfile()"
     },
     {
@@ -10692,67 +10722,67 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scripts_init_all_databases",
-      "community": 302,
+      "community": 296,
       "norm_label": "init-all-databases.ts"
     },
     {
       "label": "DATA_DIR",
       "file_type": "code",
       "source_file": "scripts/init-all-databases.ts",
-      "source_location": "L12",
+      "source_location": "L14",
       "_origin": "ast",
       "id": "scripts_init_all_databases_data_dir",
-      "community": 302,
+      "community": 296,
       "norm_label": "data_dir"
     },
     {
       "label": "initAuthDb()",
       "file_type": "code",
       "source_file": "scripts/init-all-databases.ts",
-      "source_location": "L16",
+      "source_location": "L18",
       "_origin": "ast",
       "id": "scripts_init_all_databases_initauthdb",
-      "community": 302,
+      "community": 296,
       "norm_label": "initauthdb()"
     },
     {
       "label": "initBillingDb()",
       "file_type": "code",
       "source_file": "scripts/init-all-databases.ts",
-      "source_location": "L81",
+      "source_location": "L24",
       "_origin": "ast",
       "id": "scripts_init_all_databases_initbillingdb",
-      "community": 302,
+      "community": 296,
       "norm_label": "initbillingdb()"
     },
     {
       "label": "initExpensesDb()",
       "file_type": "code",
       "source_file": "scripts/init-all-databases.ts",
-      "source_location": "L154",
+      "source_location": "L97",
       "_origin": "ast",
       "id": "scripts_init_all_databases_initexpensesdb",
-      "community": 302,
+      "community": 296,
       "norm_label": "initexpensesdb()"
     },
     {
       "label": "initTelemetryDb()",
       "file_type": "code",
       "source_file": "scripts/init-all-databases.ts",
-      "source_location": "L211",
+      "source_location": "L154",
       "_origin": "ast",
       "id": "scripts_init_all_databases_inittelemetrydb",
-      "community": 302,
+      "community": 296,
       "norm_label": "inittelemetrydb()"
     },
     {
       "label": "initDevHubDb()",
       "file_type": "code",
       "source_file": "scripts/init-all-databases.ts",
-      "source_location": "L266",
+      "source_location": "L209",
       "_origin": "ast",
       "id": "scripts_init_all_databases_initdevhubdb",
-      "community": 302,
+      "community": 296,
       "norm_label": "initdevhubdb()"
     },
     {
@@ -11120,7 +11150,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "test_create_app_test",
-      "community": 243,
+      "community": 223,
       "norm_label": "create-app.test.ts"
     },
     {
@@ -15384,20 +15414,30 @@
       "norm_label": "6. micro-app client & browser bridge (`client-bridge.ts` & `browser-bridge.ts`)"
     },
     {
-      "label": "7. Canonical Database Client & Lifecycle Manager (`database.ts`)",
+      "label": "7. Universal Air-Gapped Security & CSP Headers (`security-headers.ts`)",
       "file_type": "document",
       "source_file": "apps/src/sdk/README.md",
       "source_location": "L54",
       "_origin": "ast",
-      "id": "sdk_readme_7_canonical_database_client_lifecycle_manager_database_ts",
+      "id": "sdk_readme_7_universal_air_gapped_security_csp_headers_security_headers_ts",
       "community": 42,
-      "norm_label": "7. canonical database client & lifecycle manager (`database.ts`)"
+      "norm_label": "7. universal air-gapped security & csp headers (`security-headers.ts`)"
+    },
+    {
+      "label": "8. Canonical Database Client & Lifecycle Manager (`database.ts`)",
+      "file_type": "document",
+      "source_file": "apps/src/sdk/README.md",
+      "source_location": "L59",
+      "_origin": "ast",
+      "id": "sdk_readme_8_canonical_database_client_lifecycle_manager_database_ts",
+      "community": 42,
+      "norm_label": "8. canonical database client & lifecycle manager (`database.ts`)"
     },
     {
       "label": "\ud83d\udcc1 Internal Architecture",
       "file_type": "document",
       "source_file": "apps/src/sdk/README.md",
-      "source_location": "L61",
+      "source_location": "L66",
       "_origin": "ast",
       "id": "sdk_readme_internal_architecture",
       "community": 42,
@@ -15407,7 +15447,7 @@
       "label": "\ud83c\udfc3 Local Execution & Verification",
       "file_type": "document",
       "source_file": "apps/src/sdk/README.md",
-      "source_location": "L85",
+      "source_location": "L90",
       "_origin": "ast",
       "id": "sdk_readme_local_execution_verification",
       "community": 42,
@@ -15544,20 +15584,20 @@
       "norm_label": "1. theme tokens & css variables (`tokens.ts`)"
     },
     {
-      "label": "2. Universal Stylesheet & Components (`styles.ts`)",
+      "label": "2. Universal Stylesheet & 100% Air-Gapped Typography (`styles.ts` & `base.ts`)",
       "file_type": "document",
       "source_file": "apps/src/ui/README.md",
       "source_location": "L31",
       "_origin": "ast",
-      "id": "ui_readme_2_universal_stylesheet_components_styles_ts",
+      "id": "ui_readme_2_universal_stylesheet_100_air_gapped_typography_styles_ts_base_ts",
       "community": 45,
-      "norm_label": "2. universal stylesheet & components (`styles.ts`)"
+      "norm_label": "2. universal stylesheet & 100% air-gapped typography (`styles.ts` & `base.ts`)"
     },
     {
       "label": "3. Unified Navigation Header (`header.ts`)",
       "file_type": "document",
       "source_file": "apps/src/ui/README.md",
-      "source_location": "L34",
+      "source_location": "L35",
       "_origin": "ast",
       "id": "ui_readme_3_unified_navigation_header_header_ts",
       "community": 45,
@@ -15567,7 +15607,7 @@
       "label": "4. Interactive Toast & Smart Dropdown Engines (`toast-dropdown.ts`)",
       "file_type": "document",
       "source_file": "apps/src/ui/README.md",
-      "source_location": "L37",
+      "source_location": "L38",
       "_origin": "ast",
       "id": "ui_readme_4_interactive_toast_smart_dropdown_engines_toast_dropdown_ts",
       "community": 45,
@@ -15577,7 +15617,7 @@
       "label": "5. Universal RFC 7807 Error Pages (`error-page.ts`)",
       "file_type": "document",
       "source_file": "apps/src/ui/README.md",
-      "source_location": "L41",
+      "source_location": "L42",
       "_origin": "ast",
       "id": "ui_readme_5_universal_rfc_7807_error_pages_error_page_ts",
       "community": 45,
@@ -15587,7 +15627,7 @@
       "label": "\ud83d\udcc1 Internal Architecture",
       "file_type": "document",
       "source_file": "apps/src/ui/README.md",
-      "source_location": "L46",
+      "source_location": "L47",
       "_origin": "ast",
       "id": "ui_readme_internal_architecture",
       "community": 45,
@@ -15597,7 +15637,7 @@
       "label": "\ud83c\udfc3 Local Execution & Verification",
       "file_type": "document",
       "source_file": "apps/src/ui/README.md",
-      "source_location": "L66",
+      "source_location": "L67",
       "_origin": "ast",
       "id": "ui_readme_local_execution_verification",
       "community": 45,
@@ -20574,6 +20614,76 @@
       "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
     },
     {
+      "label": "REPORT_20260902_46e86d9.md",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_46e86d9.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_46e86d9",
+      "community": 293,
+      "norm_label": "report_20260902_46e86d9.md"
+    },
+    {
+      "label": "\ud83d\udee1\ufe0f SG Forge Atomic Commit Audit Report",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_46e86d9.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_46e86d9_sg_forge_atomic_commit_audit_report",
+      "community": 293,
+      "norm_label": "\ud83d\udee1\ufe0f sg forge atomic commit audit report"
+    },
+    {
+      "label": "\ud83d\udcdd Commit Overview & Context",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_46e86d9.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_46e86d9_commit_overview_context",
+      "community": 293,
+      "norm_label": "\ud83d\udcdd commit overview & context"
+    },
+    {
+      "label": "\ud83d\udcca Changes & Diff Statistics",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_46e86d9.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_46e86d9_changes_diff_statistics",
+      "community": 293,
+      "norm_label": "\ud83d\udcca changes & diff statistics"
+    },
+    {
+      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (10 Files)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_46e86d9.md",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_46e86d9_detailed_file_changes_10_files",
+      "community": 293,
+      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (10 files)"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_46e86d9.md",
+      "source_location": "L45",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_46e86d9_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "community": 293,
+      "norm_label": "\ud83d\udee0\ufe0f tier 1: deterministic engine checks (checked by logic & open source tools)"
+    },
+    {
+      "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_46e86d9.md",
+      "source_location": "L66",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_46e86d9_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "community": 293,
+      "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
+    },
+    {
       "label": "REPORT_20260902_541f4fc.md",
       "file_type": "document",
       "source_file": "logs/reports/2026-09/REPORT_20260902_541f4fc.md",
@@ -20641,6 +20751,76 @@
       "_origin": "ast",
       "id": "2026_09_report_20260902_541f4fc_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
       "community": 269,
+      "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
+    },
+    {
+      "label": "REPORT_20260902_63d91d6.md",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_63d91d6.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_63d91d6",
+      "community": 302,
+      "norm_label": "report_20260902_63d91d6.md"
+    },
+    {
+      "label": "\ud83d\udee1\ufe0f SG Forge Atomic Commit Audit Report",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_63d91d6.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_63d91d6_sg_forge_atomic_commit_audit_report",
+      "community": 302,
+      "norm_label": "\ud83d\udee1\ufe0f sg forge atomic commit audit report"
+    },
+    {
+      "label": "\ud83d\udcdd Commit Overview & Context",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_63d91d6.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_63d91d6_commit_overview_context",
+      "community": 302,
+      "norm_label": "\ud83d\udcdd commit overview & context"
+    },
+    {
+      "label": "\ud83d\udcca Changes & Diff Statistics",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_63d91d6.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_63d91d6_changes_diff_statistics",
+      "community": 302,
+      "norm_label": "\ud83d\udcca changes & diff statistics"
+    },
+    {
+      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (14 Files)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_63d91d6.md",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_63d91d6_detailed_file_changes_14_files",
+      "community": 302,
+      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (14 files)"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_63d91d6.md",
+      "source_location": "L49",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_63d91d6_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "community": 302,
+      "norm_label": "\ud83d\udee0\ufe0f tier 1: deterministic engine checks (checked by logic & open source tools)"
+    },
+    {
+      "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_63d91d6.md",
+      "source_location": "L70",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_63d91d6_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "community": 302,
       "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
     },
     {
@@ -20851,6 +21031,76 @@
       "_origin": "ast",
       "id": "2026_09_report_20260902_aa6bdc8_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
       "community": 304,
+      "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
+    },
+    {
+      "label": "REPORT_20260902_b59f775.md",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_b59f775.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_b59f775",
+      "community": 305,
+      "norm_label": "report_20260902_b59f775.md"
+    },
+    {
+      "label": "\ud83d\udee1\ufe0f SG Forge Atomic Commit Audit Report",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_b59f775.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_b59f775_sg_forge_atomic_commit_audit_report",
+      "community": 305,
+      "norm_label": "\ud83d\udee1\ufe0f sg forge atomic commit audit report"
+    },
+    {
+      "label": "\ud83d\udcdd Commit Overview & Context",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_b59f775.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_b59f775_commit_overview_context",
+      "community": 305,
+      "norm_label": "\ud83d\udcdd commit overview & context"
+    },
+    {
+      "label": "\ud83d\udcca Changes & Diff Statistics",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_b59f775.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_b59f775_changes_diff_statistics",
+      "community": 305,
+      "norm_label": "\ud83d\udcca changes & diff statistics"
+    },
+    {
+      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (7 Files)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_b59f775.md",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_b59f775_detailed_file_changes_7_files",
+      "community": 305,
+      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (7 files)"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_b59f775.md",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_b59f775_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "community": 305,
+      "norm_label": "\ud83d\udee0\ufe0f tier 1: deterministic engine checks (checked by logic & open source tools)"
+    },
+    {
+      "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_b59f775.md",
+      "source_location": "L63",
+      "_origin": "ast",
+      "id": "2026_09_report_20260902_b59f775_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "community": 305,
       "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
     },
     {
@@ -21104,20 +21354,20 @@
       "norm_label": "\ud83d\udcca changes & diff statistics"
     },
     {
-      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (20 Files)",
+      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (7 Files)",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
       "source_location": "L28",
       "_origin": "ast",
-      "id": "reports_latest_commit_report_detailed_file_changes_20_files",
+      "id": "reports_latest_commit_report_detailed_file_changes_7_files",
       "community": 27,
-      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (20 files)"
+      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (7 files)"
     },
     {
       "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
-      "source_location": "L55",
+      "source_location": "L42",
       "_origin": "ast",
       "id": "reports_latest_commit_report_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
       "community": 27,
@@ -21127,7 +21377,7 @@
       "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
-      "source_location": "L76",
+      "source_location": "L63",
       "_origin": "ast",
       "id": "reports_latest_commit_report_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
       "community": 27,
@@ -28534,6 +28784,17 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "scripts/init-all-databases.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "scripts_init_all_databases",
+      "target": "db_seed",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "apps/src/auth/test/security/employee-rbac.test.ts",
       "source_location": "L2",
       "weight": 1.0,
@@ -28760,6 +29021,28 @@
       "confidence_score": 1.0,
       "source": "integration_session_rotation_test",
       "target": "db_seed_seedauthdatabase"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/init-all-databases.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "scripts_init_all_databases",
+      "target": "db_seed_seedauthdatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/init-all-databases.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "scripts_init_all_databases_initauthdb",
+      "target": "db_seed_seedauthdatabase",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -29409,9 +29692,9 @@
       "source_file": "apps/src/portal/test/e2e/portal-spa-views.test.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "e2e_portal_spa_views_test",
-      "target": "src_server_startauthserver",
-      "confidence_score": 1.0
+      "target": "src_server_startauthserver"
     },
     {
       "relation": "calls",
@@ -30901,6 +31184,17 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/src/dev-dashboard/src/backend/host-controller.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "backend_host_controller",
+      "target": "backend_telemetry_detecthostmemoryandvirtualization",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-dashboard/src/backend/host-controller.ts",
       "source_location": "L9",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -31002,6 +31296,17 @@
       "confidence_score": 1.0,
       "source": "backend_host_controller_hostcontroller_gethostdiagnostics",
       "target": "backend_host_controller_hostcontroller_getdiskvolumestats"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/src/dev-dashboard/src/backend/host-controller.ts",
+      "source_location": "L134",
+      "weight": 1.0,
+      "source": "backend_host_controller_hostcontroller_gethostdiagnostics",
+      "target": "backend_telemetry_detecthostmemoryandvirtualization"
     },
     {
       "relation": "calls",
@@ -31532,6 +31837,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "apps_src_dev_dashboard_src_backend_telemetry_ts_backend_telemetry",
+      "target": "backend_telemetry_detecthostmemoryandvirtualization",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
       "source_location": "L13",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -31579,6 +31894,17 @@
       "confidence_score": 1.0,
       "source": "apps_src_dev_dashboard_src_backend_telemetry_ts_backend_telemetry",
       "target": "src_logger_explainlog"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/dev-dashboard/src/backend/telemetry.ts",
+      "source_location": "L218",
+      "weight": 1.0,
+      "source": "backend_telemetry_telemetryengine_getsystemvitals",
+      "target": "backend_telemetry_detecthostmemoryandvirtualization",
+      "confidence_score": 1.0
     },
     {
       "relation": "method",
@@ -34261,9 +34587,9 @@
       "source_file": "apps/src/dev-dashboard/src/frontend/ui-renderer-login.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_ui_renderer_login",
-      "target": "state_head_script_getheadstatescript",
-      "confidence_score": 1.0
+      "target": "state_head_script_getheadstatescript"
     },
     {
       "relation": "imports",
@@ -34522,9 +34848,9 @@
       "source_file": "apps/src/dev-dashboard/src/frontend/ui-renderer.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_dev_dashboard_src_frontend_ui_renderer_ts_frontend_ui_renderer",
-      "target": "state_head_script_getheadstatescript",
-      "confidence_score": 1.0
+      "target": "state_head_script_getheadstatescript"
     },
     {
       "relation": "imports",
@@ -40575,9 +40901,9 @@
       "source_file": "apps/src/sdk/test/unit/browser-bridge.test.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_browser_bridge_test",
-      "target": "src_browser_bridge",
-      "confidence_score": 1.0
+      "target": "src_browser_bridge"
     },
     {
       "relation": "imports",
@@ -40586,9 +40912,9 @@
       "source_file": "apps/src/sdk/test/unit/browser-bridge.test.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_browser_bridge_test",
-      "target": "src_browser_bridge_initbrowserlogbridge",
-      "confidence_score": 1.0
+      "target": "src_browser_bridge_initbrowserlogbridge"
     },
     {
       "relation": "re_exports",
@@ -41334,6 +41660,28 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/error-handler.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_error_handler",
+      "target": "src_security_headers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/error-handler.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_error_handler",
+      "target": "src_security_headers_applysecurityheaders",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "apps/src/sdk/test/unit/error-handler.test.ts",
       "source_location": "L6",
       "weight": 1.0,
@@ -41417,6 +41765,17 @@
       "confidence_score": 1.0,
       "source": "forge_apps_telemetry_src_server_ts_src_server",
       "target": "src_error_handler_createsafehandler"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/test/security/air-gap-compliance.test.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "security_air_gap_compliance_test",
+      "target": "src_error_handler_createsafehandler",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -41549,6 +41908,17 @@
       "confidence_score": 1.0,
       "source": "apps_src_sdk_src_index_ts_src_index",
       "target": "src_registry"
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/index.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "apps_src_sdk_src_index_ts_src_index",
+      "target": "src_security_headers",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -42285,6 +42655,69 @@
       "confidence_score": 1.0,
       "source": "unit_sdk_test",
       "target": "src_registry_loadserviceregistry"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/security-headers.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "src_security_headers",
+      "target": "src_security_headers_air_gapped_csp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/security-headers.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "src_security_headers",
+      "target": "src_security_headers_air_gapped_security_headers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/src/security-headers.ts",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "src_security_headers",
+      "target": "src_security_headers_applysecurityheaders",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/test/security/air-gap-compliance.test.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "security_air_gap_compliance_test",
+      "target": "src_security_headers_air_gapped_csp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/test/security/air-gap-compliance.test.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "security_air_gap_compliance_test",
+      "target": "src_security_headers_air_gapped_security_headers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/test/security/air-gap-compliance.test.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "security_air_gap_compliance_test",
+      "target": "src_security_headers_applysecurityheaders",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -43981,6 +44414,48 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "apps/test/security/air-gap-compliance.test.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "security_air_gap_compliance_test",
+      "target": "scripts_generate_proxy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/test/security/air-gap-compliance.test.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "security_air_gap_compliance_test",
+      "target": "scripts_generate_proxy_generatecaddyfile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/test/security/air-gap-compliance.test.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "security_air_gap_compliance_test",
+      "target": "security_air_gap_compliance_test_getsourcefiles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/test/security/air-gap-compliance.test.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "security_air_gap_compliance_test",
+      "target": "security_air_gap_compliance_test_repo_root",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "apps/test/unit/astryx-validator.test.ts",
       "source_location": "L7",
       "weight": 1.0,
@@ -44074,26 +44549,6 @@
       "confidence_score": 1.0,
       "source": "unit_ignores_test",
       "target": "unit_ignores_test_repo_root"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "drizzle.config.ts",
-      "source_location": "L24",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "drizzle_config",
-      "target": "drizzle_config_datadir"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "drizzle.config.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "drizzle_config",
-      "target": "drizzle_config_resolvedatadir"
     },
     {
       "relation": "contains",
@@ -44811,16 +45266,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "package.json",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "package_scripts",
-      "target": "package_scripts_db_studio"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "package.json",
       "source_location": "L12",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -44858,16 +45303,6 @@
       "confidence_score": 1.0,
       "source": "package_scripts",
       "target": "package_scripts_test"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "package_devdependencies",
-      "target": "package_devdependencies_drizzle_kit"
     },
     {
       "relation": "contains",
@@ -45739,9 +46174,9 @@
       "source_file": "scripts/generate-logo.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_generate_logo",
-      "target": "scripts_generate_logo_createchunk",
-      "confidence_score": 1.0
+      "target": "scripts_generate_logo_createchunk"
     },
     {
       "relation": "contains",
@@ -45749,9 +46184,9 @@
       "source_file": "scripts/generate-logo.ts",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_generate_logo",
-      "target": "scripts_generate_logo_paeth",
-      "confidence_score": 1.0
+      "target": "scripts_generate_logo_paeth"
     },
     {
       "relation": "contains",
@@ -45759,9 +46194,9 @@
       "source_file": "scripts/generate-logo.ts",
       "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_generate_logo",
-      "target": "scripts_generate_logo_processandgeneratelogo",
-      "confidence_score": 1.0
+      "target": "scripts_generate_logo_processandgeneratelogo"
     },
     {
       "relation": "calls",
@@ -45770,9 +46205,9 @@
       "source_file": "scripts/generate-logo.ts",
       "source_location": "L161",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_generate_logo_processandgeneratelogo",
-      "target": "scripts_generate_logo_createchunk",
-      "confidence_score": 1.0
+      "target": "scripts_generate_logo_createchunk"
     },
     {
       "relation": "calls",
@@ -45781,9 +46216,9 @@
       "source_file": "scripts/generate-logo.ts",
       "source_location": "L80",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_generate_logo_processandgeneratelogo",
-      "target": "scripts_generate_logo_paeth",
-      "confidence_score": 1.0
+      "target": "scripts_generate_logo_paeth"
     },
     {
       "relation": "contains",
@@ -49877,11 +50312,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/src/sdk/README.md",
-      "source_location": "L36",
+      "source_location": "L54",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "sdk_readme_core_sdk_modules_exports",
-      "target": "sdk_readme_7_canonical_database_client_lifecycle_manager_database_ts"
+      "target": "sdk_readme_7_universal_air_gapped_security_csp_headers_security_headers_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/src/sdk/README.md",
+      "source_location": "L59",
+      "weight": 1.0,
+      "source": "sdk_readme_core_sdk_modules_exports",
+      "target": "sdk_readme_8_canonical_database_client_lifecycle_manager_database_ts",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -50009,9 +50454,9 @@
       "source_file": "apps/src/ui/README.md",
       "source_location": "L31",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "ui_readme_core_exports_ui_tokens",
-      "target": "ui_readme_2_universal_stylesheet_components_styles_ts"
+      "target": "ui_readme_2_universal_stylesheet_100_air_gapped_typography_styles_ts_base_ts",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -54116,6 +54561,66 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_46e86d9.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_46e86d9",
+      "target": "2026_09_report_20260902_46e86d9_sg_forge_atomic_commit_audit_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_46e86d9.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_46e86d9_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260902_46e86d9_changes_diff_statistics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_46e86d9.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_46e86d9_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260902_46e86d9_commit_overview_context",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_46e86d9.md",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_46e86d9_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260902_46e86d9_detailed_file_changes_10_files",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_46e86d9.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_46e86d9_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260902_46e86d9_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_46e86d9.md",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_46e86d9_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260902_46e86d9_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "logs/reports/2026-09/REPORT_20260902_541f4fc.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -54172,6 +54677,66 @@
       "confidence_score": 1.0,
       "source": "2026_09_report_20260902_541f4fc_sg_forge_atomic_commit_audit_report",
       "target": "2026_09_report_20260902_541f4fc_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_63d91d6.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_63d91d6",
+      "target": "2026_09_report_20260902_63d91d6_sg_forge_atomic_commit_audit_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_63d91d6.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_63d91d6_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260902_63d91d6_changes_diff_statistics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_63d91d6.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_63d91d6_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260902_63d91d6_commit_overview_context",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_63d91d6.md",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_63d91d6_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260902_63d91d6_detailed_file_changes_14_files",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_63d91d6.md",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_63d91d6_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260902_63d91d6_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_63d91d6.md",
+      "source_location": "L70",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_63d91d6_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260902_63d91d6_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -54299,9 +54864,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_aa6bdc8.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_aa6bdc8",
-      "target": "2026_09_report_20260902_aa6bdc8_sg_forge_atomic_commit_audit_report",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_aa6bdc8_sg_forge_atomic_commit_audit_report"
     },
     {
       "relation": "contains",
@@ -54309,9 +54874,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_aa6bdc8.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_aa6bdc8_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260902_aa6bdc8_changes_diff_statistics",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_aa6bdc8_changes_diff_statistics"
     },
     {
       "relation": "contains",
@@ -54319,9 +54884,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_aa6bdc8.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_aa6bdc8_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260902_aa6bdc8_commit_overview_context",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_aa6bdc8_commit_overview_context"
     },
     {
       "relation": "contains",
@@ -54329,9 +54894,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_aa6bdc8.md",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_aa6bdc8_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260902_aa6bdc8_detailed_file_changes_9_files",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_aa6bdc8_detailed_file_changes_9_files"
     },
     {
       "relation": "contains",
@@ -54339,9 +54904,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_aa6bdc8.md",
       "source_location": "L44",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_aa6bdc8_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260902_aa6bdc8_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_aa6bdc8_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -54349,8 +54914,68 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_aa6bdc8.md",
       "source_location": "L65",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_aa6bdc8_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260902_aa6bdc8_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "target": "2026_09_report_20260902_aa6bdc8_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_b59f775.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_b59f775",
+      "target": "2026_09_report_20260902_b59f775_sg_forge_atomic_commit_audit_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_b59f775.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_b59f775_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260902_b59f775_changes_diff_statistics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_b59f775.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_b59f775_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260902_b59f775_commit_overview_context",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_b59f775.md",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_b59f775_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260902_b59f775_detailed_file_changes_7_files",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_b59f775.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_b59f775_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260902_b59f775_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260902_b59f775.md",
+      "source_location": "L63",
+      "weight": 1.0,
+      "source": "2026_09_report_20260902_b59f775_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260902_b59f775_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
       "confidence_score": 1.0
     },
     {
@@ -54419,9 +55044,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_c73e82d.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_c73e82d",
-      "target": "2026_09_report_20260902_c73e82d_sg_forge_atomic_commit_audit_report",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_c73e82d_sg_forge_atomic_commit_audit_report"
     },
     {
       "relation": "contains",
@@ -54429,9 +55054,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_c73e82d.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_c73e82d_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260902_c73e82d_changes_diff_statistics",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_c73e82d_changes_diff_statistics"
     },
     {
       "relation": "contains",
@@ -54439,9 +55064,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_c73e82d.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_c73e82d_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260902_c73e82d_commit_overview_context",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_c73e82d_commit_overview_context"
     },
     {
       "relation": "contains",
@@ -54449,9 +55074,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_c73e82d.md",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_c73e82d_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260902_c73e82d_detailed_file_changes_17_files",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_c73e82d_detailed_file_changes_17_files"
     },
     {
       "relation": "contains",
@@ -54459,9 +55084,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_c73e82d.md",
       "source_location": "L52",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_c73e82d_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260902_c73e82d_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_c73e82d_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -54469,9 +55094,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_c73e82d.md",
       "source_location": "L73",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_c73e82d_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260902_c73e82d_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_c73e82d_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
     },
     {
       "relation": "contains",
@@ -54479,9 +55104,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_fba4205.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_fba4205",
-      "target": "2026_09_report_20260902_fba4205_sg_forge_atomic_commit_audit_report",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_fba4205_sg_forge_atomic_commit_audit_report"
     },
     {
       "relation": "contains",
@@ -54489,9 +55114,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_fba4205.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_fba4205_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260902_fba4205_changes_diff_statistics",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_fba4205_changes_diff_statistics"
     },
     {
       "relation": "contains",
@@ -54499,9 +55124,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_fba4205.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_fba4205_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260902_fba4205_commit_overview_context",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_fba4205_commit_overview_context"
     },
     {
       "relation": "contains",
@@ -54509,9 +55134,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_fba4205.md",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_fba4205_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260902_fba4205_detailed_file_changes_20_files",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_fba4205_detailed_file_changes_20_files"
     },
     {
       "relation": "contains",
@@ -54519,9 +55144,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_fba4205.md",
       "source_location": "L55",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_fba4205_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260902_fba4205_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_fba4205_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -54529,9 +55154,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260902_fba4205.md",
       "source_location": "L76",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260902_fba4205_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260902_fba4205_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260902_fba4205_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
     },
     {
       "relation": "contains",
@@ -54570,7 +55195,7 @@
       "source_location": "L28",
       "weight": 1.0,
       "source": "reports_latest_commit_report_sg_forge_atomic_commit_audit_report",
-      "target": "reports_latest_commit_report_detailed_file_changes_20_files",
+      "target": "reports_latest_commit_report_detailed_file_changes_7_files",
       "confidence_score": 1.0
     },
     {
@@ -56355,5 +56980,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "8311b70968f96e2760eb057f2ad9e89f7a2cd4d1"
+  "built_at_commit": "9742d2137b51c918e5f8e4ec9ac778faefced5d6"
 }

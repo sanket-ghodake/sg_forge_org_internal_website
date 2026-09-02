@@ -44,37 +44,10 @@ export function renderAdminOrgView(): string {
           <div class="astryx-badge badge-online">Synced with Turso DB</div>
         </div>
 
-        <div class="org-tree-builder-view">
-          <div class="tree-node root-tree-node">
-            <div class="tree-node-card node-root">
-              <span class="node-icon">${astryxIcons.building || '🏢'}</span>
-              <span class="node-title">Executive Office & Board</span>
-              <span class="node-lead-name">Sanket Ghodake</span>
-            </div>
-
-            <div class="tree-children-container">
-              <div class="tree-node">
-                <div class="tree-node-card">
-                  <span class="node-title">Engineering & Platform</span>
-                  <span class="node-lead-name">Alex Laurent (VP)</span>
-                  <span class="node-sub-count">18 members</span>
-                </div>
-              </div>
-              <div class="tree-node">
-                <div class="tree-node-card">
-                  <span class="node-title">Product & Design</span>
-                  <span class="node-lead-name">Sarah Connor (Head)</span>
-                  <span class="node-sub-count">9 members</span>
-                </div>
-              </div>
-              <div class="tree-node">
-                <div class="tree-node-card">
-                  <span class="node-title">People & Operations</span>
-                  <span class="node-lead-name">Elena Rostova (Dir)</span>
-                  <span class="node-sub-count">7 members</span>
-                </div>
-              </div>
-            </div>
+        <div class="org-tree-builder-view" id="admin-org-tree-container">
+          <div style="text-align: center; padding: 2.5rem; color: var(--forge-text-muted);">
+            <span class="badge-dot" style="background: var(--forge-primary); margin-right: 0.5rem;"></span>
+            <span>Loading live organizational hierarchy from SQLite database...</span>
           </div>
         </div>
       </div>

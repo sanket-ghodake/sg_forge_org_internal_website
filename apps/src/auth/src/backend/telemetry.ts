@@ -54,7 +54,7 @@ class AuthTelemetryEngine {
   private ringBuffer: TelemetryLogEntry[] = [];
 
   constructor() {
-    this.logDir = join(process.cwd(), 'apps', 'src', 'auth', 'logs');
+    this.logDir = join(import.meta.dir, '..', '..', 'logs');
     this.ensureLogDir();
   }
 
@@ -65,8 +65,9 @@ class AuthTelemetryEngine {
       }
     } catch {
       // Fallback relative path
-      this.logDir = join(process.cwd(), 'logs');
-      if (!existsSync(this.logDir)) mkdirSync(this.logDir, { recursive: true });
+      const fallback = join(import.meta.dir, '..', '..', 'logs');
+      if (!existsSync(fallback)) mkdirSync(fallback, { recursive: true });
+      this.logDir = fallback;
     }
   }
 

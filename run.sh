@@ -172,12 +172,12 @@ case "$CMD" in
                     PROFILE_ARG="--profile $TARGET_PARAM"
                 elif [ -n "$TARGET_PARAM" ]; then
                     echo "🐳 [${BRAND_NAME}] Starting targeted service '$TARGET_PARAM' in Docker Dev..."
-                    docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" up -d proxy "$TARGET_PARAM"
+                    docker compose --project-directory "$REPO_ROOT" -f "$REPO_ROOT/docker/dev/docker-compose.yml" up -d proxy "$TARGET_PARAM"
                     echo "✨ Service '$TARGET_PARAM' running! Access Gateway at http://localhost/"
                     exit 0
                 fi
                 echo "🐳 [${BRAND_NAME}] Starting Docker Dev Stack ($PROFILE_ARG, Hot Reload with bun --watch)..."
-                docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" $PROFILE_ARG up -d
+                docker compose --project-directory "$REPO_ROOT" -f "$REPO_ROOT/docker/dev/docker-compose.yml" $PROFILE_ARG up -d
                 echo "✨ Stack running! Access Platform Hub at http://localhost/"
                 ;;
             prod)
@@ -191,12 +191,12 @@ case "$CMD" in
                     PROFILE_ARG="--profile $TARGET_PARAM"
                 elif [ -n "$TARGET_PARAM" ]; then
                     echo "🚀 [${BRAND_NAME}] Starting targeted service '$TARGET_PARAM' in Docker Prod..."
-                    docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" up -d --build proxy "$TARGET_PARAM"
+                    docker compose --project-directory "$REPO_ROOT" -f "$REPO_ROOT/docker/prod/docker-compose.yml" up -d --build proxy "$TARGET_PARAM"
                     echo "✨ Service '$TARGET_PARAM' active at http://localhost/"
                     exit 0
                 fi
                 echo "🚀 [${BRAND_NAME}] Starting Production Docker Stack ($PROFILE_ARG)..."
-                docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" $PROFILE_ARG up -d --build
+                docker compose --project-directory "$REPO_ROOT" -f "$REPO_ROOT/docker/prod/docker-compose.yml" $PROFILE_ARG up -d --build
                 echo "✨ Production stack active at http://localhost/"
                 ;;
             build)
@@ -213,13 +213,13 @@ case "$CMD" in
                     fi
                 else
                     echo "🔨 Building all production images via docker/prod/docker-compose.yml..."
-                    docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all build
+                    docker compose --project-directory "$REPO_ROOT" -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all build
                 fi
                 ;;
             down)
                 echo "🛑 [${BRAND_NAME}] Gracefully stopping Docker containers..."
-                docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
-                docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
+                docker compose --project-directory "$REPO_ROOT" -f "$REPO_ROOT/docker/dev/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
+                docker compose --project-directory "$REPO_ROOT" -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
                 echo "✨ Containers stopped."
                 ;;
             restart)
@@ -232,20 +232,20 @@ case "$CMD" in
                 fi
                 if [ -n "$SVC" ]; then
                     echo "🔄 [${BRAND_NAME}] Restarting service: $SVC..."
-                    docker compose -f "$TARGET_COMPOSE" --profile all restart "$SVC"
+                    docker compose --project-directory "$REPO_ROOT" -f "$TARGET_COMPOSE" --profile all restart "$SVC"
                 else
                     echo "🔄 [${BRAND_NAME}] Restarting stack ($TARGET_COMPOSE)..."
-                    docker compose -f "$TARGET_COMPOSE" --profile all restart
+                    docker compose --project-directory "$REPO_ROOT" -f "$TARGET_COMPOSE" --profile all restart
                 fi
                 ;;
             status)
                 echo "📊 [${BRAND_NAME}] Live Container Status:"
                 FLAG="${3:-}"
                 if [ "$FLAG" = "--prod" ]; then
-                    docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all ps
+                    docker compose --project-directory "$REPO_ROOT" -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all ps
                 else
-                    docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" --profile all ps
-                    docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all ps 2>/dev/null || true
+                    docker compose --project-directory "$REPO_ROOT" -f "$REPO_ROOT/docker/dev/docker-compose.yml" --profile all ps
+                    docker compose --project-directory "$REPO_ROOT" -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all ps 2>/dev/null || true
                 fi
                 ;;
             monitor)
@@ -260,23 +260,23 @@ case "$CMD" in
                     [ "$SVC" = "--prod" ] && SVC=""
                 fi
                 if [ -n "$SVC" ]; then
-                    docker compose -f "$TARGET_COMPOSE" --profile all logs --tail=100 "$SVC"
+                    docker compose --project-directory "$REPO_ROOT" -f "$TARGET_COMPOSE" --profile all logs --tail=100 "$SVC"
                 else
-                    docker compose -f "$TARGET_COMPOSE" --profile all logs --tail=50
+                    docker compose --project-directory "$REPO_ROOT" -f "$TARGET_COMPOSE" --profile all logs --tail=50
                 fi
                 ;;
             purge)
                 echo "⚠️ [${BRAND_NAME}] Purging dangling containers, build caches, and stale volumes..."
-                docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
-                docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
+                docker compose --project-directory "$REPO_ROOT" -f "$REPO_ROOT/docker/dev/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
+                docker compose --project-directory "$REPO_ROOT" -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all down --remove-orphans 2>/dev/null || true
                 docker volume prune -f
                 docker image prune -f
                 echo "✨ Cleaned."
                 ;;
             reset-data)
                 echo "⚠️ [${BRAND_NAME}] FULL RESET: Stopping all containers, removing all images & persistent DB volumes..."
-                docker compose -f "$REPO_ROOT/docker/dev/docker-compose.yml" --profile all down -v --remove-orphans 2>/dev/null || true
-                docker compose -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all down -v --remove-orphans 2>/dev/null || true
+                docker compose --project-directory "$REPO_ROOT" -f "$REPO_ROOT/docker/dev/docker-compose.yml" --profile all down -v --remove-orphans 2>/dev/null || true
+                docker compose --project-directory "$REPO_ROOT" -f "$REPO_ROOT/docker/prod/docker-compose.yml" --profile all down -v --remove-orphans 2>/dev/null || true
                 docker volume prune -f
                 docker image prune -a -f
                 echo "✨ All containers, images, and volumes purged."

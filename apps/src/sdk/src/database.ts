@@ -45,7 +45,30 @@ export function resolveCanonicalDataDir(): string {
     return '/app/data';
   }
 
-  // 3. Search relative to current working directory or upwards
+  // 3. Anchor via module location (find root containing package.json and apps/src)
+  try {
+    let moduleCursor = import.meta.dir;
+    for (let i = 0; i < 6; i++) {
+      const candidateAppsData = join(moduleCursor, 'apps', 'data');
+      if (existsSync(candidateAppsData)) {
+        return candidateAppsData;
+      }
+      const candidateData = join(moduleCursor, 'data');
+      if (existsSync(candidateData)) {
+        return candidateData;
+      }
+      if (existsSync(join(moduleCursor, 'package.json')) && existsSync(join(moduleCursor, 'apps', 'src'))) {
+        const target = join(moduleCursor, 'apps', 'data');
+        if (!existsSync(target)) mkdirSync(target, { recursive: true });
+        return target;
+      }
+      const parent = dirname(moduleCursor);
+      if (parent === moduleCursor) break;
+      moduleCursor = parent;
+    }
+  } catch {}
+
+  // 4. Search relative to current working directory or upwards
   let currentDir = process.cwd();
   for (let i = 0; i < 4; i++) {
     const candidateAppsData = join(currentDir, 'apps', 'data');

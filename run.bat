@@ -66,11 +66,11 @@ goto end
 :docker
 if "%2"=="up" (
     bun run "%REPO_ROOT%scripts\generate-proxy.ts"
-    docker compose -f "%REPO_ROOT%docker\dev\docker-compose.yml" up -d
+    docker compose --project-directory "%REPO_ROOT%" -f "%REPO_ROOT%docker\dev\docker-compose.yml" up -d
 ) else if "%2"=="down" (
-    docker compose -f "%REPO_ROOT%docker\dev\docker-compose.yml" down
+    docker compose --project-directory "%REPO_ROOT%" -f "%REPO_ROOT%docker\dev\docker-compose.yml" down
 ) else if "%2"=="status" (
-    docker compose -f "%REPO_ROOT%docker\dev\docker-compose.yml" ps
+    docker compose --project-directory "%REPO_ROOT%" -f "%REPO_ROOT%docker\dev\docker-compose.yml" ps
 ) else (
     echo Usage: run.bat docker [up ^| down ^| status]
 )

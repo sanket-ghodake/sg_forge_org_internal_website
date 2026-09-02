@@ -144,15 +144,62 @@ export function getCanvasClientScript(): string {
       }
 
       if (findMeBtn) {
-        findMeBtn.addEventListener('click', function() {
-          // Focus on the first team node or lead
-          const target = document.querySelector('.canvas-org-cluster');
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
-            target.classList.add('selected-node');
-            const nId = target.getAttribute('data-node-id');
+        findMeBtn.addEventListener('click', async function() {
+          const currentUser = window.__PORTAL_USER__ || {};
+          const userIdentifier = (currentUser.id || '').toLowerCase();
+          const userEmail = (currentUser.email || '').toLowerCase();
+
+          function focusNode(node) {
+            const target = document.querySelector('.canvas-org-cluster[data-node-id="' + node.id + '"]');
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+              target.classList.add('selected-node');
+              setTimeout(function() { target.classList.remove('selected-node'); }, 3000);
+              showNodeInspector(node);
+              if (window.astryxToast) {
+                window.astryxToast('Focused your profile: ' + node.name + ' (' + node.title + ')', 'info');
+              }
+              return true;
+            }
+            return false;
+          }
+
+          let myNode = allRenderedNodes.find(function(item) {
+            return (item.id && item.id.toLowerCase() === userIdentifier) ||
+                   (item.email && item.email.toLowerCase() === userEmail);
+          });
+
+          if (myNode && focusNode(myNode)) {
+            return;
+          }
+
+          // If node not found in current bounded depth, auto-expand to full hierarchy
+          if (currentMaxDepth < 10) {
+            currentMaxDepth = 10;
+            document.querySelectorAll('.canvas-depth-selector .depth-btn').forEach(function(b) {
+              b.classList.toggle('active', b.getAttribute('data-depth') === '10');
+            });
+            await loadCanvasTree(10, activeRootId);
+            myNode = allRenderedNodes.find(function(item) {
+              return (item.id && item.id.toLowerCase() === userIdentifier) ||
+                     (item.email && item.email.toLowerCase() === userEmail);
+            });
+            if (myNode && focusNode(myNode)) {
+              return;
+            }
+          }
+
+          // Fallback if guest or not in directory: focus root with informative toast
+          const fallback = document.querySelector('.canvas-org-cluster');
+          if (fallback) {
+            fallback.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+            fallback.classList.add('selected-node');
+            const nId = fallback.getAttribute('data-node-id');
             const node = allRenderedNodes.find(function(item) { return item.id === nId; });
             if (node) showNodeInspector(node);
+            if (window.astryxToast) {
+              window.astryxToast('Logged in as ' + (currentUser.displayName || currentUser.email || 'Member') + ' (Executive directory overview)', 'info');
+            }
           }
         });
       }

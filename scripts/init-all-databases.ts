@@ -9,72 +9,15 @@ import { existsSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { resolveCanonicalDataDir } from '../apps/src/sdk/src';
 
+import { seedAuthDatabase } from '../apps/src/auth/src/db/seed';
+
 const DATA_DIR = resolveCanonicalDataDir();
 console.log('🚀 Initializing microservices databases in:', DATA_DIR);
 
 // 1. Auth Database (auth.db)
 function initAuthDb() {
-  const dbPath = join(DATA_DIR, 'auth.db');
-  const db = new Database(dbPath, { create: true });
-  db.run('PRAGMA journal_mode = WAL;');
-  db.run('PRAGMA synchronous = NORMAL;');
-
-  db.run(`
-    CREATE TABLE IF NOT EXISTS users (
-      id TEXT PRIMARY KEY,
-      email TEXT UNIQUE NOT NULL,
-      password_hash TEXT NOT NULL,
-      display_name TEXT NOT NULL,
-      role TEXT NOT NULL DEFAULT 'developer',
-      status TEXT NOT NULL DEFAULT 'active',
-      created_at INTEGER NOT NULL DEFAULT (strftime('%s', 'now')),
-      updated_at INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
-    );
-
-    CREATE TABLE IF NOT EXISTS sessions (
-      id TEXT PRIMARY KEY,
-      user_id TEXT NOT NULL,
-      token_hash TEXT NOT NULL UNIQUE,
-      expires_at INTEGER NOT NULL,
-      ip_address TEXT,
-      user_agent TEXT,
-      created_at INTEGER NOT NULL DEFAULT (strftime('%s', 'now')),
-      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-    );
-
-    CREATE TABLE IF NOT EXISTS roles (
-      id TEXT PRIMARY KEY,
-      name TEXT NOT NULL UNIQUE,
-      permissions_json TEXT NOT NULL,
-      description TEXT
-    );
-
-    CREATE TABLE IF NOT EXISTS audit_events (
-      id TEXT PRIMARY KEY,
-      user_id TEXT,
-      action TEXT NOT NULL,
-      ip_address TEXT,
-      timestamp INTEGER NOT NULL DEFAULT (strftime('%s', 'now')),
-      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
-    );
-  `);
-
-  const userCount = db.query('SELECT COUNT(*) as c FROM users;').get() as any;
-  if (!userCount?.c) {
-    db.run(`
-      INSERT INTO users (id, email, password_hash, display_name, role, status) VALUES
-      ('usr_admin_01', 'admin@forge.internal', '$argon2id$v=19$m=65536,t=3,p=4$dummyhash', 'Platform Administrator', 'admin', 'active'),
-      ('usr_dev_01', 'dev@forge.internal', '$argon2id$v=19$m=65536,t=3,p=4$dummyhash', 'Senior Engineer', 'developer', 'active'),
-      ('usr_billing_01', 'billing@forge.internal', '$argon2id$v=19$m=65536,t=3,p=4$dummyhash', 'Billing Lead', 'billing_admin', 'active');
-      
-      INSERT INTO roles (id, name, permissions_json, description) VALUES
-      ('role_admin', 'Administrator', '["*"]', 'Full platform access'),
-      ('role_dev', 'Developer', '["services:read", "services:inspect", "db:query"]', 'Standard engineering clearance'),
-      ('role_billing', 'Billing Admin', '["billing:*", "invoices:*"]', 'Financial clearance');
-    `);
-  }
-  db.close();
-  console.log('  ✅ auth.db initialized (users, sessions, roles, audit_events)');
+  seedAuthDatabase(false);
+  console.log('  ✅ auth.db initialized (canonical IAM, org tree, test personas)');
 }
 
 // 2. Billing Database (billing.db)

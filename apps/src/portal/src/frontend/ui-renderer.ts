@@ -75,6 +75,7 @@ export function renderPortalHtml(user?: HeaderUserContext): string {
 
   <!-- Interactive Scripts -->
   <script>
+    window.__PORTAL_USER__ = ${JSON.stringify(userContext)};
     ${getAstryxToastScript()}
     ${getAstryxDropdownScript()}
     ${getAstryxTooltipScript()}

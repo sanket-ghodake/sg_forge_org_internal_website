@@ -436,3 +436,5 @@
 2026-09-02 21:32 | Committed 100% Air-Gapped Compliance features and updated SDK, UI, and proxy documentation
 2026-09-02 21:39 | Completely removed Drizzle Studio, drizzle-kit, and cloud UI bridge; verified 100% open-source local toolchain
 2026-09-02 21:45 | [b59f775] feat(toolchain): remove Drizzle Studio and enforce 100% open-source local toolchain (+5, -224)
+2026-09-02 23:05 | Unified Portal dynamic hydration, aligned database seeders, anchored docker project-directory, and fixed My Team user selector
+2026-09-02 23:06 | [391cd40] feat(portal): unify dynamic member hydration, anchor docker project directory, and fix user team focus (+1510, -803)
