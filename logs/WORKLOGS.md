@@ -416,3 +416,8 @@
 2026-09-02 19:48 | Committed 24/7 high-availability suite, auto-healing watchdogs, systemd installer, and universal Meta Astryx tooltips
 2026-09-02 19:57 | Normalized Developer Dashboard font scale, root zoom, and typography to align consistently with Meta Astryx and Portal
 2026-09-02 19:59 | [aa6bdc8] style(dev-dashboard): normalize font size and zoom scale to standard Meta Astryx baseline (+1726, -852)
+2026-09-02 20:06 | Harden client runtime with universal error shield and defensive PerformanceObserver boundaries against extension/DevTools startTime errors
+2026-09-02 20:17 | Enhanced brand logo with transparent dual-theme emerald/cyan graphics and refined 32px viewport header sizing
+2026-09-02 20:22 | Refactored generate-logo.ts down to 261 lines ensuring strict compliance with 500-line limit across all modified files
+2026-09-02 20:35 | Replaced brand logo with clean transparent coral-red emblem and G Forge logotype matching user design
+2026-09-02 20:39 | [c73e82d] feat(branding): integrate custom coral-red SG Forge brand logo with dual-theme styling and 32px header sizing (+434, -38)

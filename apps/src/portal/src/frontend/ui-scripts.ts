@@ -8,12 +8,23 @@ export function getPortalClientScript(): string {
     (function() {
       // 0. Browser Telemetry & Log Bridge
       try {
+        var isNoise = function(m, s, stk) {
+          var str = ((m || '') + ' ' + (s || '') + ' ' + (stk || '')).toLowerCase();
+          return (
+            str.indexOf("reading 'starttime'") !== -1 ||
+            str.indexOf("reportallchanges") !== -1 ||
+            str.indexOf("chrome-extension:") !== -1 ||
+            str.indexOf("moz-extension:") !== -1 ||
+            str.indexOf("safari-extension:") !== -1 ||
+            str.indexOf("edge-extension:") !== -1 ||
+            str.indexOf("extensions::") !== -1 ||
+            (str.indexOf("starttime") !== -1 && (str.indexOf("vm") !== -1 || str.indexOf("<anonymous>") !== -1))
+          );
+        };
+
         window.addEventListener('error', function(e) {
           try {
-            if (e.filename && (e.filename.startsWith('chrome-extension:') || e.filename.startsWith('moz-extension:') || e.filename.includes('VM') || e.filename.includes('extensions::'))) {
-              return;
-            }
-            if (e.message && e.message.includes("reading 'startTime'")) {
+            if (isNoise(e.message, e.filename, e.error && e.error.stack)) {
               return;
             }
             if (navigator.sendBeacon) {

@@ -228,15 +228,18 @@ describe('Forge Client State Engine', () => {
   });
 
   describe('Zero-FOUC Head State Script', () => {
-    it('generates valid synchronous head script containing theme and sidebar restoration', () => {
+    it('generates valid synchronous head script containing theme, sidebar restoration, and universal error shield', () => {
       // Arrange & Act
       const script = getHeadStateScript({ defaultTheme: 'dark' });
 
       // Assert
       expect(script).toContain('<script>');
-      expect(script).toContain('document.documentElement.setAttribute(\'data-theme\'');
+      expect(script).toContain("document.documentElement.setAttribute('data-theme'");
       expect(script).toContain('data-sidebar-collapsed');
       expect(script).toContain('forge:v1:platform:theme');
+      expect(script).toContain("reading 'starttime'");
+      expect(script).toContain('reportallchanges');
+      expect(script).toContain('PerformanceObserver');
     });
   });
 });

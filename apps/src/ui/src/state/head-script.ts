@@ -36,6 +36,64 @@ export function getHeadStateScript(
 
   const js = `(function(){
     try {
+      /* 1. Universal Browser Error & Extension Telemetry Shield */
+      var isNoise = function(m, s, stk) {
+        var str = ((m || '') + ' ' + (s || '') + ' ' + (stk || '')).toLowerCase();
+        return (
+          str.indexOf("reading 'starttime'") !== -1 ||
+          str.indexOf("reportallchanges") !== -1 ||
+          str.indexOf("chrome-extension:") !== -1 ||
+          str.indexOf("moz-extension:") !== -1 ||
+          str.indexOf("safari-extension:") !== -1 ||
+          str.indexOf("edge-extension:") !== -1 ||
+          str.indexOf("extensions::") !== -1 ||
+          (str.indexOf("starttime") !== -1 && (str.indexOf("vm") !== -1 || str.indexOf("<anonymous>") !== -1))
+        );
+      };
+
+      var prevOnError = window.onerror;
+      window.onerror = function(msg, src, line, col, err) {
+        if (isNoise(msg, src, err && err.stack)) {
+          return true;
+        }
+        if (typeof prevOnError === 'function') {
+          return prevOnError.apply(this, arguments);
+        }
+        return false;
+      };
+
+      window.addEventListener('error', function(e) {
+        if (isNoise(e.message, e.filename, e.error && e.error.stack)) {
+          e.preventDefault && e.preventDefault();
+          e.stopPropagation && e.stopPropagation();
+          e.stopImmediatePropagation && e.stopImmediatePropagation();
+        }
+      }, true);
+
+      window.addEventListener('unhandledrejection', function(e) {
+        var reason = e.reason;
+        var msg = reason instanceof Error ? reason.message : String(reason || '');
+        var stk = reason instanceof Error ? reason.stack : '';
+        if (isNoise(msg, '', stk)) {
+          e.preventDefault && e.preventDefault();
+          e.stopPropagation && e.stopPropagation();
+          e.stopImmediatePropagation && e.stopImmediatePropagation();
+        }
+      }, true);
+
+      /* 2. Defensive PerformanceObserver Safe-Guard */
+      if (typeof PerformanceObserver !== 'undefined' && PerformanceObserver.prototype && PerformanceObserver.prototype.observe) {
+        var origObserve = PerformanceObserver.prototype.observe;
+        PerformanceObserver.prototype.observe = function(opts) {
+          try {
+            return origObserve.call(this, opts);
+          } catch(err) {
+            /* Ignore unsupported metrics or observe collisions from injected scripts */
+          }
+        };
+      }
+
+      /* 3. Zero-FOUC Theme & Sidebar State Restoration */
       var rawTheme = localStorage.getItem('${themeKey}') || localStorage.getItem('sg-forge-theme');
       var theme = '${defaultTheme}';
       if (rawTheme) {

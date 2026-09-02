@@ -4,7 +4,7 @@
  * Meta Astryx Enterprise Baseline (v2.0.0 LTS)
  */
 
-import { astryxIcons } from '@forge/ui';
+import { astryxIcons, getHeadStateScript } from '@forge/ui';
 import { loadBrandConfig } from '@forge/sdk';
 import { getModalsHtml } from './ui-modals';
 import { getDashboardScripts } from './ui-scripts';
@@ -24,6 +24,7 @@ export function renderDashboardHtml(): string {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${brand.name} - Developer Dashboard & Diagnostics</title>
+  ${getHeadStateScript({ defaultTheme: 'dark' })}
   <script>
     (function() {
       try {
@@ -52,7 +53,7 @@ export function renderDashboardHtml(): string {
     <div class="sb-header-left">
       <button class="sb-mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle Mobile Navigation">☰</button>
       <a href="/" class="sb-brand" style="display: flex; align-items: center; gap: 0.55rem;">
-        ${brand.logoUrl ? `<img src="${brand.logoUrl}" alt="${brand.name}" class="astryx-brand-logo-img" style="height: 42px; max-height: 90%; width: auto; max-width: 200px; object-fit: contain; flex-shrink: 0; border-radius: 4px;" onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='inline-flex';" />` : ''}
+        ${brand.logoUrl ? `<img src="${brand.logoUrl}" alt="${brand.name}" class="astryx-brand-logo-img" style="height: 32px; max-height: 80%; width: auto; max-width: 180px; object-fit: contain; flex-shrink: 0;" onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='inline-flex';" />` : ''}
         <span class="astryx-logo-badge" style="${brand.logoUrl ? 'display: none;' : ''}">${brand.short}</span>
         <span class="sb-app-tag">DEVELOPER CENTER</span>
       </a>

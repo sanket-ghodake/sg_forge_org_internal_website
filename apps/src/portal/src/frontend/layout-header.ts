@@ -23,7 +23,7 @@ export function renderPortalHeader(user: HeaderUserContext): string {
       <!-- Left: Brand & Org Switcher -->
       <div class="portal-header-left">
         <a href="/portal" class="portal-brand" style="display: flex; align-items: center; gap: 0.55rem;">
-          ${brand.logoUrl ? `<img src="${brand.logoUrl}" alt="${brand.name}" class="astryx-brand-logo-img" style="height: 42px; max-height: 90%; width: auto; max-width: 200px; object-fit: contain; flex-shrink: 0; border-radius: 4px;" onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='inline-block';" />` : ''}
+          ${brand.logoUrl ? `<img src="${brand.logoUrl}" alt="${brand.name}" class="astryx-brand-logo-img" style="height: 32px; max-height: 80%; width: auto; max-width: 180px; object-fit: contain; flex-shrink: 0;" onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='inline-block';" />` : ''}
           <svg style="${brand.logoUrl ? 'display: none;' : ''}" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--forge-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
             <polyline points="2 17 12 22 22 17"></polyline>

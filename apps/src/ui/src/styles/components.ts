@@ -34,15 +34,27 @@ export function getComponentStyles(): string {
     }
 
     .astryx-brand-logo-img {
-      height: 42px;
-      max-height: 90%;
+      height: 32px;
+      max-height: 80%;
       width: auto;
-      max-width: 200px;
+      max-width: 180px;
       object-fit: contain;
       flex-shrink: 0;
-      border-radius: 4px;
       display: inline-block;
       vertical-align: middle;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .astryx-brand-logo-img:hover {
+      transform: scale(1.02);
+    }
+
+    [data-theme="light"] .astryx-brand-logo-img {
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.08));
+    }
+
+    [data-theme="dark"] .astryx-brand-logo-img {
+      filter: drop-shadow(0 2px 10px rgba(235, 87, 87, 0.35));
     }
 
     .astryx-app-tag {

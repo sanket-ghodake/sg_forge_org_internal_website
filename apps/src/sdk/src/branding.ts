@@ -151,7 +151,7 @@ export function renderBrandLogoHtml(
   brand: BrandConfig,
   options?: { height?: number; className?: string; style?: string }
 ): string {
-  const height = options?.height || 42;
+  const height = options?.height || 32;
   const customClass = options?.className || 'astryx-brand-logo-img';
   const customStyle = options?.style || '';
 
@@ -163,7 +163,7 @@ export function renderBrandLogoHtml(
     <img src="${brand.logoUrl}" 
          alt="${brand.name}" 
          class="${customClass}" 
-         style="height: ${height}px; max-height: 90%; width: auto; max-width: 200px; object-fit: contain; vertical-align: middle; border-radius: 4px; ${customStyle}" 
+         style="height: ${height}px; max-height: 80%; width: auto; max-width: 180px; object-fit: contain; vertical-align: middle; ${customStyle}" 
          onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='inline-flex';" />
     <span class="astryx-logo-badge" style="display: none;">${brand.short}</span>
   `.trim();

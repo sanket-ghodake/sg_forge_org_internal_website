@@ -3,11 +3,30 @@
  * 3A Pattern (Arrange, Act, Assert) Testing Suite
  */
 
-import { describe, expect, it } from 'bun:test';
-import { signJwt } from '@forge/auth';
+import { afterAll, beforeAll, describe, expect, it } from 'bun:test';
+import { signJwt, startAuthServer } from '@forge/auth';
 import { startPortalServer } from '../../src/server';
 
 describe('Tier 5 E2E: Full SPA Views & Interactive Ecosystem', () => {
+  let authServer: any = null;
+
+  beforeAll(async () => {
+    try {
+      const ping = await fetch('http://localhost:3004/health').catch(() => null);
+      if (!ping || !ping.ok) {
+        authServer = startAuthServer(3004);
+      }
+    } catch {
+      authServer = startAuthServer(3004);
+    }
+  });
+
+  afterAll(() => {
+    if (authServer) {
+      authServer.stop(true);
+    }
+  });
+
   it('renders all 10 interactive SPA views inside the unified portal layout', async () => {
     // Arrange
     const testPort = 3192;

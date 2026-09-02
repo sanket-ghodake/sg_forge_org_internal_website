@@ -5,6 +5,7 @@
  */
 
 import { loadBrandConfig } from '@forge/sdk';
+import { getHeadStateScript } from '@forge/ui';
 import { getDashboardStyles } from './ui-styles';
 
 export function renderDevLoginHtml(errorMessage: string = ''): string {
@@ -16,6 +17,7 @@ export function renderDevLoginHtml(errorMessage: string = ''): string {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${brand.name} - Developer Dashboard Sign In</title>
+  ${getHeadStateScript({ defaultTheme: 'dark' })}
   <style>
     ${getDashboardStyles()}
 
@@ -87,19 +89,20 @@ export function renderDevLoginHtml(errorMessage: string = ''): string {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 8px 16px;
+      padding: 10px 22px;
       background: var(--forge-bg-card);
       border: 1px solid var(--forge-border);
       border-radius: var(--forge-radius-md, 12px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
-      margin-bottom: 0.35rem;
+      box-shadow: var(--forge-shadow-card, 0 4px 12px rgba(0, 0, 0, 0.2));
+      margin-bottom: 0.5rem;
     }
 
     .login-logo-img {
-      height: 38px;
+      height: 40px;
       width: auto;
-      max-width: 160px;
+      max-width: 180px;
       object-fit: contain;
+      transition: transform 0.2s ease;
     }
 
     .login-logo-badge {

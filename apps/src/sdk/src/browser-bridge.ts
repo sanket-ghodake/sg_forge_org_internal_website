@@ -12,10 +12,10 @@ export function initBrowserLogBridge(
   serviceName: string,
   ingestEndpoint = '/api/logs/browser'
 ): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined' || !window.console) return;
 
-  const originalConsoleError = window.console.error;
-  const originalConsoleWarn = window.console.warn;
+  const originalConsoleError = window.console.error ? window.console.error.bind(window.console) : () => {};
+  const originalConsoleWarn = window.console.warn ? window.console.warn.bind(window.console) : () => {};
 
   const sendBrowserLog = (severity: 'WARN' | 'ERROR', message: string, stack?: string) => {
     try {
@@ -49,18 +49,23 @@ export function initBrowserLogBridge(
     } catch {}
   };
 
+  const isNoise = (message?: string, filename?: string, stack?: string): boolean => {
+    const combined = `${message || ''} ${filename || ''} ${stack || ''}`.toLowerCase();
+    return (
+      combined.includes("reading 'starttime'") ||
+      combined.includes('reportallchanges') ||
+      combined.includes('chrome-extension:') ||
+      combined.includes('moz-extension:') ||
+      combined.includes('safari-extension:') ||
+      combined.includes('edge-extension:') ||
+      combined.includes('extensions::') ||
+      (combined.includes('starttime') && (combined.includes('vm') || combined.includes('<anonymous>')))
+    );
+  };
+
   window.addEventListener('error', (event) => {
     // Suppress browser extension, Chrome DevTools, and third-party script errors
-    if (
-      event.filename &&
-      (event.filename.startsWith('chrome-extension:') ||
-        event.filename.startsWith('moz-extension:') ||
-        event.filename.includes('VM') ||
-        event.filename.includes('extensions::'))
-    ) {
-      return;
-    }
-    if (event.message && event.message.includes("reading 'startTime'")) {
+    if (isNoise(event.message, event.filename, event.error?.stack)) {
       return;
     }
     sendBrowserLog('ERROR', event.message || 'Uncaught Script Error', event.error?.stack);
@@ -68,10 +73,10 @@ export function initBrowserLogBridge(
 
   window.addEventListener('unhandledrejection', (event) => {
     const msg = event.reason instanceof Error ? event.reason.message : String(event.reason);
-    if (msg && msg.includes("reading 'startTime'")) {
+    const stack = event.reason instanceof Error ? event.reason.stack : undefined;
+    if (isNoise(msg, undefined, stack)) {
       return;
     }
-    const stack = event.reason instanceof Error ? event.reason.stack : undefined;
     sendBrowserLog('ERROR', `Unhandled Promise Rejection: ${msg}`, stack);
   });
 
@@ -80,6 +85,9 @@ export function initBrowserLogBridge(
     const message = args
       .map((a) => (typeof a === 'object' ? JSON.stringify(a) : String(a)))
       .join(' ');
+    if (isNoise(message)) {
+      return;
+    }
     sendBrowserLog('ERROR', message);
   };
 
@@ -88,6 +96,9 @@ export function initBrowserLogBridge(
     const message = args
       .map((a) => (typeof a === 'object' ? JSON.stringify(a) : String(a)))
       .join(' ');
+    if (isNoise(message)) {
+      return;
+    }
     sendBrowserLog('WARN', message);
   };
 }

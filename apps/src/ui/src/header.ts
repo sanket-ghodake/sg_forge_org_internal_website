@@ -32,7 +32,7 @@ export function getAstryxHeaderHtml(
   return `
   <header class="astryx-header">
     <div class="astryx-logo" style="display: flex; align-items: center; gap: 0.65rem;">
-      ${logoUrl ? `<img src="${logoUrl}" alt="${heading}" class="astryx-brand-logo-img" style="height: 42px; max-height: 90%; width: auto; max-width: 200px; object-fit: contain; flex-shrink: 0; border-radius: 4px;" onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='inline-flex';" />` : ''}
+      ${logoUrl ? `<img src="${logoUrl}" alt="${heading}" class="astryx-brand-logo-img" style="height: 32px; max-height: 80%; width: auto; max-width: 180px; object-fit: contain; flex-shrink: 0;" onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='inline-flex';" />` : ''}
       <span class="astryx-logo-badge" style="${logoUrl ? 'display: none;' : ''}">${badge}</span>
       <span class="astryx-app-tag">${heading}</span>
     </div>

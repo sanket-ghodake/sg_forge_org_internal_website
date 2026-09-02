@@ -75,10 +75,32 @@ export function renderLoginHtml(returnUrl: string = '/portal'): string {
       } catch(e) {}
     }
 
+    var isNoise = function(m, s, stk) {
+      var str = ((m || '') + ' ' + (s || '') + ' ' + (stk || '')).toLowerCase();
+      return (
+        str.indexOf("reading 'starttime'") !== -1 ||
+        str.indexOf("reportallchanges") !== -1 ||
+        str.indexOf("chrome-extension:") !== -1 ||
+        str.indexOf("moz-extension:") !== -1 ||
+        str.indexOf("safari-extension:") !== -1 ||
+        str.indexOf("edge-extension:") !== -1 ||
+        str.indexOf("extensions::") !== -1 ||
+        (str.indexOf("starttime") !== -1 && (str.indexOf("vm") !== -1 || str.indexOf("<anonymous>") !== -1))
+      );
+    };
+
+    var prevOnError = window.onerror;
     window.onerror = function(msg, url, line, col, err) {
+      if (isNoise(msg, url, err && err.stack)) {
+        return true;
+      }
       reportBrowserLog('ERROR', 'Unhandled browser error: ' + msg, {
         url: url, line: line, col: col, stack: err ? err.stack : undefined
       });
+      if (typeof prevOnError === 'function') {
+        return prevOnError.apply(this, arguments);
+      }
+      return false;
     };
 
     var form = document.getElementById('login-form');
