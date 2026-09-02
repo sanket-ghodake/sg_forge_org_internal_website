@@ -1,6 +1,6 @@
 /**
  * @forge/dev-dashboard - Supabase-Inspired Meta Astryx UI Renderer (2026 LTS)
- * Full-width top header, below-header vertical sidebar, theme toggler, and 80% compact SPA layout.
+ * Full-width top header, below-header vertical sidebar, theme toggler, and responsive SPA layout.
  * Meta Astryx Enterprise Baseline (v2.0.0 LTS)
  */
 

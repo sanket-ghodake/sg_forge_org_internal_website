@@ -413,3 +413,6 @@
 2026-09-02 19:39 | Removed scrollbar shadow bleed, removed duplicate header guide button, streamlined 6-stage cards with Meta Astryx tooltips, and enforced custom tooltips repo-wide
 2026-09-02 19:45 | Audited repo-wide UI standards, strengthened Astryx scrollbars, tooltips, popups, and dropdowns, and enforced non-negotiable UI invariants in agent rules and verify gate
 2026-09-02 19:48 | [541f4fc] feat(reliability): implement 24/7 high-availability suite, auto-healing watchdogs, systemd service, and universal astryx tooltips (+1301, -42)
+2026-09-02 19:48 | Committed 24/7 high-availability suite, auto-healing watchdogs, systemd installer, and universal Meta Astryx tooltips
+2026-09-02 19:57 | Normalized Developer Dashboard font scale, root zoom, and typography to align consistently with Meta Astryx and Portal
+2026-09-02 19:59 | [aa6bdc8] style(dev-dashboard): normalize font size and zoom scale to standard Meta Astryx baseline (+1726, -852)

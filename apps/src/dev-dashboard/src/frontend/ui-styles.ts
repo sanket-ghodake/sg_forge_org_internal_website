@@ -1,6 +1,6 @@
 /**
  * @forge/dev-dashboard - Supabase-Inspired Astryx Dashboard Styles (2026 LTS)
- * High-density responsive CSS styles strictly consuming Meta Astryx design tokens at 80% compact scale.
+ * High-density responsive CSS styles strictly consuming Meta Astryx design tokens.
  */
 
 import { getAstryxStyles } from '@forge/ui';
@@ -20,7 +20,7 @@ export function getDashboardStyles(): string {
     ${getEmployeeStyles()}
     ${getDropdownStyles()}
     
-    html, body { font-size: 13px; height: 100vh; max-height: 100vh; overflow: hidden; margin: 0; padding: 0; display: flex; flex-direction: column; background: var(--forge-bg-root); }
+    html, body { height: 100vh; max-height: 100vh; overflow: hidden; margin: 0; padding: 0; display: flex; flex-direction: column; background: var(--forge-bg-root); font-family: var(--forge-font-sans, 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif); color: var(--forge-text-main); }
     *, *::before, *::after { box-sizing: border-box; }
 
     /* 1. Global Top Header Bar */
@@ -101,7 +101,7 @@ export function getDashboardStyles(): string {
     }
     .sb-sidebar::-webkit-scrollbar { display: none; }
     .sb-sidebar:hover, .sb-sidebar:focus-within {
-      width: 192px;
+      width: 220px;
       box-shadow: var(--forge-shadow-hover);
       border-color: var(--forge-border-medium);
       background: var(--forge-bg-surface);
@@ -480,7 +480,7 @@ export function getDashboardStyles(): string {
       .sb-mobile-menu-btn { display: inline-flex; }
       .sb-header-center { display: none; }
       .sb-body-container { grid-template-columns: 1fr; }
-      .sb-sidebar { position: fixed; left: 0; top: 48px; width: 192px; height: calc(100vh - 48px); transform: translateX(-100%); box-shadow: var(--forge-shadow-hover); }
+      .sb-sidebar { position: fixed; left: 0; top: 48px; width: 220px; height: calc(100vh - 48px); transform: translateX(-100%); box-shadow: var(--forge-shadow-hover); }
       .sb-sidebar .sb-nav-label, .sb-sidebar .sb-hotkey-badge, .sb-sidebar .sb-nav-section-label, .sb-sidebar .sb-footer-pill { opacity: 1; transform: none; }
       .sb-sidebar.open { transform: translateX(0); }
       .sb-sidebar-backdrop.open { display: block; }
