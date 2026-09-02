@@ -7,6 +7,7 @@ import { cpus, freemem, loadavg, networkInterfaces, platform, release, totalmem,
 import { statfsSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { resolveDataDir } from '../db';
+import { detectHostMemoryAndVirtualization } from './telemetry';
 
 export interface DiskVolumeStats {
   path: string;
@@ -50,6 +51,9 @@ export interface HostDiagnosticsReport {
     freeBytes: number;
     usedBytes: number;
     usedPercent: number;
+    physicalHostTotalBytes: number;
+    virtualizationType: 'native' | 'wsl2' | 'docker' | 'cgroup';
+    virtualizationNote: string;
     processRssBytes: number;
     processHeapTotalBytes: number;
     processHeapUsedBytes: number;
@@ -127,9 +131,7 @@ class HostController {
 
   public getHostDiagnostics(): HostDiagnosticsReport {
     const rawCpus = cpus();
-    const totalMem = totalmem();
-    const freeMem = freemem();
-    const usedMem = totalMem - freeMem;
+    const memInfo = detectHostMemoryAndVirtualization();
     const procMem = process.memoryUsage();
     const dataDir = resolveDataDir();
 
@@ -181,10 +183,13 @@ class HostController {
         cores,
       },
       memory: {
-        totalBytes: totalMem,
-        freeBytes: freeMem,
-        usedBytes: usedMem,
-        usedPercent: Number(((usedMem / totalMem) * 100).toFixed(1)),
+        totalBytes: memInfo.totalBytes,
+        freeBytes: memInfo.freeBytes,
+        usedBytes: memInfo.usedBytes,
+        usedPercent: memInfo.memPercent,
+        physicalHostTotalBytes: memInfo.physicalHostTotalBytes,
+        virtualizationType: memInfo.virtualizationType,
+        virtualizationNote: memInfo.virtualizationNote,
         processRssBytes: procMem.rss,
         processHeapTotalBytes: procMem.heapTotal,
         processHeapUsedBytes: procMem.heapUsed,

@@ -74,8 +74,8 @@ export function getOverviewDashboardScripts(): string {
     function updateOverviewGoldenVitals(services, vitals, databases) {
       // 1. Latency Vital
       const latencies = services.map(s => s.latencyMs || 0).filter(l => l > 0);
-      const avgLat = latencies.length ? (latencies.reduce((a, b) => a + b, 0) / latencies.length).toFixed(1) : '0.8';
-      const maxLat = latencies.length ? Math.max(...latencies).toFixed(1) : '1.5';
+      const avgLat = latencies.length ? (latencies.reduce((a, b) => a + b, 0) / latencies.length).toFixed(1) : '0.0';
+      const maxLat = latencies.length ? Math.max(...latencies).toFixed(1) : '0.0';
 
       const latEl = document.getElementById('vital-latency-val');
       const p99El = document.getElementById('vital-latency-p99');
@@ -92,16 +92,29 @@ export function getOverviewDashboardScripts(): string {
       // 2. Memory Vital
       const memPct = vitals.memPercent || 0;
       const usedMb = vitals.usedMemBytes ? Math.round(vitals.usedMemBytes / (1024 * 1024)) : 0;
-      const totalGb = vitals.totalMemBytes ? (vitals.totalMemBytes / (1024 * 1024 * 1024)).toFixed(1) : '0';
+      const totalGb = vitals.totalMemBytes ? (vitals.totalMemBytes / (1024 * 1024 * 1024)).toFixed(1) : '0.0';
+      const physGb = vitals.physicalHostTotalBytes ? (vitals.physicalHostTotalBytes / (1024 * 1024 * 1024)).toFixed(1) : totalGb;
 
       const ramPctEl = document.getElementById('vital-ram-pct');
       const ramValEl = document.getElementById('vital-ram-val');
       const ramTotalEl = document.getElementById('vital-ram-total');
       const ramBarEl = document.getElementById('vital-ram-bar');
 
-      if (ramPctEl) ramPctEl.textContent = memPct + '%';
+      if (ramPctEl) {
+        ramPctEl.textContent = memPct + '%';
+        if (vitals.virtualizationType && vitals.virtualizationType !== 'native') {
+          ramPctEl.title = vitals.virtualizationNote || '';
+        }
+      }
       if (ramValEl) ramValEl.textContent = usedMb >= 1024 ? (usedMb / 1024).toFixed(2) + ' GB' : usedMb + ' MB';
-      if (ramTotalEl) ramTotalEl.textContent = '/ ' + totalGb + ' GB';
+      if (ramTotalEl) {
+        if (Number(physGb) > Number(totalGb)) {
+          ramTotalEl.textContent = '/ ' + totalGb + ' GB (' + physGb + ' GB Host)';
+          ramTotalEl.title = vitals.virtualizationNote || 'Allocated inside virtual machine';
+        } else {
+          ramTotalEl.textContent = '/ ' + totalGb + ' GB';
+        }
+      }
       if (ramBarEl) ramBarEl.style.width = Math.min(100, memPct) + '%';
 
       // 3. Database Fleet Vital

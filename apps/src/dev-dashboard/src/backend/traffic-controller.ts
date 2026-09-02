@@ -92,13 +92,13 @@ export class TrafficController {
 
     // Calculate Latency Percentiles from recent events
     const durations = rawEvents.map(e => e.duration_ms || 0).sort((a, b) => a - b);
-    let p50Ms = 0.8;
-    let p90Ms = 1.5;
-    let p95Ms = 2.2;
-    let p99Ms = 3.5;
-    let minMs = 0.2;
-    let maxMs = 4.8;
-    let avgMs = 1.1;
+    let p50Ms = 0.0;
+    let p90Ms = 0.0;
+    let p95Ms = 0.0;
+    let p99Ms = 0.0;
+    let minMs = 0.0;
+    let maxMs = 0.0;
+    let avgMs = 0.0;
 
     if (durations.length > 0) {
       minMs = Number(durations[0].toFixed(2));

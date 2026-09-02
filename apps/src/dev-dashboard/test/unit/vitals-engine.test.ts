@@ -16,6 +16,9 @@ describe('Tier 1 Unit: Vitals & Telemetry Engine', () => {
     expect(vitals.freeMemBytes).toBeGreaterThan(0);
     expect(vitals.memPercent).toBeGreaterThanOrEqual(0);
     expect(vitals.memPercent).toBeLessThanOrEqual(100);
+    expect(vitals.physicalHostTotalBytes).toBeGreaterThanOrEqual(vitals.totalMemBytes);
+    expect(['native', 'wsl2', 'docker', 'cgroup']).toContain(vitals.virtualizationType || 'native');
+    expect(vitals.virtualizationNote).toBeDefined();
     expect(vitals.cpuCount).toBeGreaterThan(0);
     expect(Array.isArray(vitals.cpuLoad)).toBe(true);
     expect(vitals.hostUptimeSeconds).toBeGreaterThan(0);

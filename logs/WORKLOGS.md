@@ -425,3 +425,6 @@
 2026-09-02 20:58 | Removed hook hover jump animations across website in favor of clean regular cursor and palm interactions
 2026-09-02 21:07 | Eliminated cursor:help (hook cursor) and tooltip transform animations from core UI overlay tokens
 2026-09-02 21:08 | [fba4205] feat(dev-dashboard): elevate developer console with deep linking and clean cursor interactions (+170, -116)
+2026-09-02 21:09 | Committed changes for Dev Dashboard console transformation, cross-tab deep linking, and cursor improvements (fba4205)
+2026-09-02 21:17 | Fix 32GB vs 16GB memory detection with virtualization awareness and eliminate hardcoded mock fallbacks across dev-dashboard
+2026-09-02 21:19 | [63d91d6] fix(dev-dashboard): resolve 32GB vs 16GB memory detection with virtualization awareness and eliminate hardcoded mock fallbacks (+1372, -569)

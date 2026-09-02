@@ -3,12 +3,106 @@
  * Google Monarch-Inspired Zero-Disk-Churn SSE Realtime Log & Metrics Streamer
  */
 
-import { cpus, freemem, loadavg, platform, totalmem, uptime } from 'node:os';
+import { existsSync, readFileSync } from 'node:fs';
+import { cpus, freemem, loadavg, platform, release, totalmem, uptime } from 'node:os';
+import { execSync } from 'node:child_process';
 import { createLogger, explainLog } from '@forge/sdk';
 
 const logger = createLogger('telemetry-engine');
 const MAX_APP_BUFFER_SIZE = 1000;
 const MAX_GLOBAL_BUFFER_SIZE = 2000;
+
+let cachedPhysicalHostTotalBytes: number | null = null;
+let cachedVirtualizationType: 'native' | 'wsl2' | 'docker' | 'cgroup' = 'native';
+let cachedVirtualizationNote = 'Native Host Environment';
+let hasCheckedVirtualization = false;
+
+export function detectHostMemoryAndVirtualization(): {
+  totalBytes: number;
+  freeBytes: number;
+  usedBytes: number;
+  memPercent: number;
+  physicalHostTotalBytes: number;
+  virtualizationType: 'native' | 'wsl2' | 'docker' | 'cgroup';
+  virtualizationNote: string;
+} {
+  const envTotal = totalmem();
+  const envFree = freemem();
+  const envUsed = envTotal - envFree;
+  const memPercent = envTotal > 0 ? Number(((envUsed / envTotal) * 100).toFixed(1)) : 0;
+
+  if (!hasCheckedVirtualization) {
+    hasCheckedVirtualization = true;
+    const rawPlatform = platform();
+    const rawRelease = release().toLowerCase();
+    const isDocker = existsSync('/.dockerenv') || !!process.env.DOCKER_CONTAINER;
+    const isWSL = rawPlatform === 'linux' && (rawRelease.includes('microsoft') || rawRelease.includes('wsl'));
+
+    cachedPhysicalHostTotalBytes = envTotal;
+
+    if (isDocker) {
+      cachedVirtualizationType = 'docker';
+      cachedVirtualizationNote = 'Docker Container Isolation';
+      // Check cgroup v2 / v1 memory limits
+      try {
+        if (existsSync('/sys/fs/cgroup/memory.max')) {
+          const maxStr = readFileSync('/sys/fs/cgroup/memory.max', 'utf8').trim();
+          if (maxStr && maxStr !== 'max' && !isNaN(Number(maxStr))) {
+            const cgroupBytes = Number(maxStr);
+            if (cgroupBytes > 0 && cgroupBytes < envTotal) {
+              cachedVirtualizationNote = `Docker Container (Cgroup limit: ${(cgroupBytes / (1024 * 1024 * 1024)).toFixed(1)} GB)`;
+            }
+          }
+        }
+      } catch {}
+    } else if (isWSL) {
+      cachedVirtualizationType = 'wsl2';
+      cachedVirtualizationNote = 'WSL2 Virtual Machine';
+      // Query Windows physical host memory via PowerShell interop if available
+      try {
+        const psPaths = [
+          '/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe',
+          '/mnt/c/Windows/system32/cmd.exe',
+          'powershell.exe',
+        ];
+        let foundPs = '';
+        for (const p of psPaths) {
+          if (existsSync(p)) {
+            foundPs = p;
+            break;
+          }
+        }
+        if (foundPs) {
+          const stdout = execSync(`"${foundPs}" -NoProfile -Command "(Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory"`, {
+            timeout: 800,
+            stdio: ['ignore', 'pipe', 'ignore'],
+            encoding: 'utf8',
+          }).trim();
+          const parsed = Number(stdout.replace(/[^0-9]/g, ''));
+          if (parsed && parsed > envTotal) {
+            cachedPhysicalHostTotalBytes = parsed;
+            cachedVirtualizationNote = `WSL2 VM allocated ${(envTotal / (1024 * 1024 * 1024)).toFixed(1)} GB of ${(parsed / (1024 * 1024 * 1024)).toFixed(1)} GB Host Physical RAM`;
+          }
+        }
+      } catch {
+        // Fallback gracefully without throwing
+      }
+    } else {
+      cachedVirtualizationType = 'native';
+      cachedVirtualizationNote = 'Native Bare-Metal OS';
+    }
+  }
+
+  return {
+    totalBytes: envTotal,
+    freeBytes: envFree,
+    usedBytes: envUsed,
+    memPercent,
+    physicalHostTotalBytes: cachedPhysicalHostTotalBytes || envTotal,
+    virtualizationType: cachedVirtualizationType,
+    virtualizationNote: cachedVirtualizationNote,
+  };
+}
 
 export interface LogEntry {
   id: string;
@@ -27,6 +121,9 @@ export interface SystemVitals {
   freeMemBytes: number;
   usedMemBytes: number;
   memPercent: number;
+  physicalHostTotalBytes?: number;
+  virtualizationType?: 'native' | 'wsl2' | 'docker' | 'cgroup';
+  virtualizationNote?: string;
   cpuLoad: number[];
   cpuCount: number;
   hostUptimeSeconds: number;
@@ -118,16 +215,16 @@ class TelemetryEngine {
   }
 
   public getSystemVitals(): SystemVitals {
-    const total = totalmem();
-    const free = freemem();
-    const used = total - free;
-    const memPercent = Number(((used / total) * 100).toFixed(1));
+    const memInfo = detectHostMemoryAndVirtualization();
 
     return {
-      totalMemBytes: total,
-      freeMemBytes: free,
-      usedMemBytes: used,
-      memPercent,
+      totalMemBytes: memInfo.totalBytes,
+      freeMemBytes: memInfo.freeBytes,
+      usedMemBytes: memInfo.usedBytes,
+      memPercent: memInfo.memPercent,
+      physicalHostTotalBytes: memInfo.physicalHostTotalBytes,
+      virtualizationType: memInfo.virtualizationType,
+      virtualizationNote: memInfo.virtualizationNote,
       cpuLoad: loadavg().map((l) => Number(l.toFixed(2))),
       cpuCount: cpus().length,
       hostUptimeSeconds: Math.floor(uptime()),

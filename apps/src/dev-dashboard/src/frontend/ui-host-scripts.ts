@@ -63,10 +63,16 @@ export function getHostDashboardScripts(): string {
       const memRing = document.getElementById('gauge-mem-ring');
 
       if (memValEl) memValEl.textContent = memUsedPct;
-      if (memSubEl) {
+      if (memSubEl && data.memory) {
         const usedGb = (data.memory.usedBytes / (1024 * 1024 * 1024)).toFixed(1);
         const totalGb = (data.memory.totalBytes / (1024 * 1024 * 1024)).toFixed(1);
-        memSubEl.textContent = usedGb + ' GB / ' + totalGb + ' GB';
+        const physGb = data.memory.physicalHostTotalBytes ? (data.memory.physicalHostTotalBytes / (1024 * 1024 * 1024)).toFixed(1) : totalGb;
+        if (Number(physGb) > Number(totalGb)) {
+          memSubEl.textContent = usedGb + ' / ' + totalGb + ' GB (' + physGb + ' GB Host)';
+          memSubEl.title = data.memory.virtualizationNote || 'WSL2/Container allocated RAM vs Host Machine RAM';
+        } else {
+          memSubEl.textContent = usedGb + ' GB / ' + totalGb + ' GB';
+        }
       }
       if (memRing) {
         const offset = 100 - memUsedPct;
@@ -81,7 +87,7 @@ export function getHostDashboardScripts(): string {
       const diskRing = document.getElementById('gauge-disk-ring');
 
       if (diskValEl) diskValEl.textContent = diskUsedPct;
-      if (diskSubEl) {
+      if (diskSubEl && data.storage?.rootVolume) {
         const freeGb = (data.storage.rootVolume.availableBytes / (1024 * 1024 * 1024)).toFixed(1);
         const totalGb = (data.storage.rootVolume.totalBytes / (1024 * 1024 * 1024)).toFixed(1);
         diskSubEl.textContent = freeGb + ' GB free of ' + totalGb + ' GB';
@@ -133,6 +139,9 @@ export function getHostDashboardScripts(): string {
 
       const heapUsedMb = (memory?.processHeapUsedBytes / (1024 * 1024)).toFixed(1);
       const heapTotalMb = (memory?.processHeapTotalBytes / (1024 * 1024)).toFixed(1);
+      const totalRamGb = (memory?.totalBytes / (1024 * 1024 * 1024)).toFixed(1);
+      const physRamGb = memory?.physicalHostTotalBytes ? (memory.physicalHostTotalBytes / (1024 * 1024 * 1024)).toFixed(1) : totalRamGb;
+      const isVirt = Number(physRamGb) > Number(totalRamGb);
 
       grid.innerHTML = \`
         <div class="storage-volume-card">
@@ -155,11 +164,25 @@ export function getHostDashboardScripts(): string {
             <span class="astryx-micro-pill" style="color:var(--forge-primary);">ALLOCATED</span>
           </div>
           <div class="core-bar-track" style="height:6px;">
-            <div class="core-bar-fill" style="width:\${Math.min(100, Math.round((memory.processHeapUsedBytes / memory.processHeapTotalBytes) * 100))}%;"></div>
+            <div class="core-bar-fill" style="width:\${Math.min(100, Math.round((memory?.processHeapUsedBytes / (memory?.processHeapTotalBytes || 1)) * 100))}%;"></div>
           </div>
           <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--forge-text-subtle);">
             <span>Heap Used: \${heapUsedMb} MB</span>
             <span>Heap Total: \${heapTotalMb} MB</span>
+          </div>
+        </div>
+
+        <div class="storage-volume-card">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong style="font-size:0.82rem; color:var(--forge-text-main);">Physical Host Hardware RAM</strong>
+            <span class="astryx-micro-pill" style="color:\${isVirt ? 'var(--forge-accent)' : 'var(--forge-success)'};">\${isVirt ? memory.virtualizationType?.toUpperCase() : 'BARE METAL'}</span>
+          </div>
+          <div class="core-bar-track" style="height:6px;">
+            <div class="core-bar-fill" style="width:\${Math.min(100, Math.round((memory?.usedBytes / (memory?.totalBytes || 1)) * 100))}%;"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--forge-text-subtle);">
+            <span>Active VM RAM: \${totalRamGb} GB</span>
+            <span>Host Physical RAM: \${physRamGb} GB</span>
           </div>
         </div>
       \`;

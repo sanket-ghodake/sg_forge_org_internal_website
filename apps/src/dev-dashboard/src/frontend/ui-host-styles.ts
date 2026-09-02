@@ -341,7 +341,7 @@ export function getHostStyles(): string {
     /* ========================================================================= */
     .storage-volumes-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 0.85rem;
       margin-top: 0.65rem;
     }

@@ -29,6 +29,9 @@ describe('Tier 2 Integration: Host Infrastructure & Cloud Diagnostics', () => {
     expect(report.memory.totalBytes).toBeGreaterThan(0);
     expect(report.memory.usedPercent).toBeGreaterThanOrEqual(0);
     expect(report.memory.usedPercent).toBeLessThanOrEqual(100);
+    expect(report.memory.physicalHostTotalBytes).toBeGreaterThanOrEqual(report.memory.totalBytes);
+    expect(['native', 'wsl2', 'docker', 'cgroup']).toContain(report.memory.virtualizationType);
+    expect(report.memory.virtualizationNote).toBeDefined();
     expect(report.memory.processRssBytes).toBeGreaterThan(0);
 
     // Assert Disk Storage (statfs)

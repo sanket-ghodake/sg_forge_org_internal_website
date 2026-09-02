@@ -156,7 +156,7 @@ class ServicesController {
   }
 
   private appendHistory(map: Map<string, number[]>, id: string, val: number): number[] {
-    const list = map.get(id) || [10, 12, 11, 14, 13, 15, 12];
+    const list = map.get(id) || [];
     list.push(val);
     if (list.length > 10) list.shift();
     map.set(id, list);
@@ -177,16 +177,16 @@ class ServicesController {
           name: a.name,
           port: a.port,
           ingressPath: a.ingress_path,
-          status: 'RUNNING',
-          livez: true,
-          readyz: true,
-          latencyMs: 1.2,
+          status: 'STARTING',
+          livez: false,
+          readyz: false,
+          latencyMs: 0,
           lastChecked: Date.now(),
-          memoryMb: 24.5,
-          cpuPercent: 14,
-          cpuSparkline: [10, 14, 12, 16, 15, 14, 18, 14],
-          ramSparkline: [20, 22, 21, 24, 23, 25, 24, 24],
-          uptimeSeconds: 3600,
+          memoryMb: 0,
+          cpuPercent: 0,
+          cpuSparkline: [0],
+          ramSparkline: [0],
+          uptimeSeconds: 0,
         }
       );
     });
@@ -203,6 +203,7 @@ class ServicesController {
     const avgCpuPercent = Number(((loads[0] / cpuCores) * 100).toFixed(1));
 
     const totalAllocatedRamMb = statuses.reduce((acc, s) => acc + s.memoryMb, 0);
+    const hostTotalRamMb = Math.round(totalmem() / (1024 * 1024));
 
     // Scan real SQLite storage size across resolveDataDir()
     let storageSizeBytes = 0;
@@ -227,13 +228,13 @@ class ServicesController {
       totalServices,
       onlineCount,
       sloAvailabilityPercent,
-      avgCpuPercent: avgCpuPercent > 0 ? avgCpuPercent : 14.2,
+      avgCpuPercent,
       cpuCores,
-      totalAllocatedRamMb: Math.round(totalAllocatedRamMb) || 184,
-      maxAllocatedRamMb: 1024,
-      storageSizeBytes: storageSizeBytes || 12400000,
+      totalAllocatedRamMb: Math.round(totalAllocatedRamMb),
+      maxAllocatedRamMb: hostTotalRamMb > 0 ? hostTotalRamMb : 16384,
+      storageSizeBytes,
       storageQuotaMb: 50,
-      tursoDbsCount: tursoDbsCount || 8,
+      tursoDbsCount,
       autoVacuum: 'ACTIVE',
     };
   }
