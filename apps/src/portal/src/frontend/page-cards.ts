@@ -179,7 +179,7 @@ export function renderPageCards(user?: HeaderUserContext): string {
 
   return `
     ${renderCanvasView()}
-    ${renderAppsView(userContext.isAdmin)}
+    ${renderAppsView(userContext.roles)}
     ${renderProfileView(userContext)}
     ${renderInboxView(userContext)}
     ${renderAdminMembersView()}

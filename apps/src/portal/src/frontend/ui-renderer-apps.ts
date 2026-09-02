@@ -3,15 +3,20 @@
  * Human-Centric, Clean & Simple: Strictly Forge Micro-Apps (Expenses, Billing, Telemetry).
  */
 
-import { isAppDisabled } from '@forge/sdk';
 import { astryxIcons } from '@forge/ui';
-import { REGISTERED_PORTAL_APPS, MARKETPLACE_APPS } from './ui-apps-data';
+import { getPortalApps, type MicroAppItem } from './ui-apps-data';
 
 export * from './ui-apps-data';
 
-export function renderAppsView(isAdmin: boolean = false): string {
-  const activeApps = REGISTERED_PORTAL_APPS.filter((a) => !isAppDisabled(a.id));
-  const marketplaceApps = MARKETPLACE_APPS.filter((a) => !isAppDisabled(a.id));
+export function renderAppsView(userContextOrAdmin: boolean | string[] = false): string {
+  const userRoles = Array.isArray(userContextOrAdmin)
+    ? userContextOrAdmin
+    : userContextOrAdmin
+      ? ['roles/admin']
+      : ['roles/employee'];
+  const isAdmin = userRoles.some((r) => r.includes('admin') || r.includes('manager'));
+  const { activeApps, marketplaceApps } = getPortalApps(userRoles);
+  const uniqueCategories = Array.from(new Set([...activeApps, ...marketplaceApps].map((a) => a.category).filter(Boolean)));
 
   return `
     <div id="view-apps" class="portal-page-view">
@@ -87,8 +92,7 @@ export function renderAppsView(isAdmin: boolean = false): string {
         <div class="apps-category-filter-bar">
           <div class="category-pills-list">
             <button class="cat-pill active" data-cat="ALL">All Tools</button>
-            <button class="cat-pill" data-cat="Finance">Finance</button>
-            <button class="cat-pill" data-cat="Operations">Operations</button>
+            ${uniqueCategories.map((cat) => `<button class="cat-pill" data-cat="${cat}">${cat}</button>`).join('')}
           </div>
           <div class="view-mode-toggle">
             <button class="view-mode-btn active" id="view-mode-grid" title="Grid View">

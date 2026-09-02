@@ -13,8 +13,10 @@ import {
   fetchOrgTree,
   fetchEmployeesList,
   createEmployeeApi,
+  fetchAuditLogs,
+  fetchUserSessions,
 } from '@forge/sdk';
-import { renderPortalHtml, type HeaderUserContext, REGISTERED_PORTAL_APPS } from './frontend';
+import { renderPortalHtml, type HeaderUserContext, getPortalApps } from './frontend';
 import {
   getLiveNotifications,
   markAllNotificationsAsRead,
@@ -80,8 +82,38 @@ export function startPortalServer(port: number = PORT) {
     }
 
     if (url.pathname === '/api/v1/portal/apps' || url.pathname === '/portal/api/v1/portal/apps') {
-      const activeApps = REGISTERED_PORTAL_APPS.filter((a) => !isAppDisabled(a.id));
-      return Response.json({ ok: true, data: activeApps });
+      const { activeApps, marketplaceApps } = getPortalApps(auth.user?.roles || []);
+      return Response.json({ ok: true, data: activeApps, marketplace: marketplaceApps });
+    }
+
+    if (url.pathname === '/api/v1/portal/audit' || url.pathname === '/portal/api/v1/portal/audit') {
+      try {
+        const limit = Math.min(100, Number(url.searchParams.get('limit') || 50));
+        const cookie = req.headers.get('cookie') || '';
+        const authorization = req.headers.get('authorization') || '';
+        const headers: Record<string, string> = {};
+        if (cookie) headers['cookie'] = cookie;
+        if (authorization) headers['authorization'] = authorization;
+        const logs = await fetchAuditLogs({ limit, headers });
+        return Response.json({ ok: true, data: logs });
+      } catch (err: any) {
+        logger.error('Failed to fetch audit logs from Auth service:', err);
+        return Response.json({ ok: false, error: err?.message || 'Failed to fetch audit logs' }, { status: 500 });
+      }
+    }
+
+    if (url.pathname === '/api/v1/portal/sessions' || url.pathname === '/portal/api/v1/portal/sessions') {
+      try {
+        const cookie = req.headers.get('cookie') || '';
+        const authorization = req.headers.get('authorization') || '';
+        const headers: Record<string, string> = {};
+        if (cookie) headers['cookie'] = cookie;
+        if (authorization) headers['authorization'] = authorization;
+        const sessions = await fetchUserSessions({ headers });
+        return Response.json({ ok: true, data: sessions });
+      } catch (err: any) {
+        return Response.json({ ok: false, error: err?.message || 'Failed to fetch sessions' }, { status: 500 });
+      }
     }
 
     if (url.pathname === '/api/v1/portal/members' || url.pathname === '/portal/api/v1/portal/members') {
@@ -179,12 +211,14 @@ export function startPortalServer(port: number = PORT) {
       return Response.json({ ok: true, data: { digestPref: pref } });
     }
 
+    const userAgent = req.headers.get('user-agent') || 'Browser Session';
     const user: HeaderUserContext = {
       id: auth.user!.id,
       email: auth.user!.email,
       displayName: auth.user!.displayName,
       roles: auth.user!.roles,
       isAdmin: auth.user!.roles.some((r: string) => r.includes('admin') || r.includes('manager')),
+      userAgent,
     };
 
     return new Response(renderPortalHtml(user), {

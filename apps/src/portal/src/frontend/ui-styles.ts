@@ -409,8 +409,9 @@ export function getPortalCustomStyles(): string {
     .table-summary-pill { font-size: 0.8rem; color: var(--forge-text-muted); }
 
     /* ── Modals & Backdrop Dialogs ── */
-    .astryx-modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(16px); z-index: 2500; align-items: center; justify-content: center; }
-    .astryx-modal-backdrop.active { display: flex; animation: viewFadeIn 0.15s ease; }
+    .astryx-modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(16px); z-index: 2500; align-items: center; justify-content: center; opacity: 0; }
+    .astryx-modal-backdrop.active, .astryx-modal-backdrop.open { display: flex !important; opacity: 1 !important; animation: viewFadeIn 0.15s ease; }
+    .astryx-modal-backdrop.active .astryx-modal, .astryx-modal-backdrop.open .astryx-modal { transform: scale(1) translateY(0) !important; }
     .astryx-modal-box { width: 90%; max-width: 480px; background: var(--forge-bg-surface); border: 1px solid var(--forge-border-medium); border-radius: var(--forge-radius); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8); overflow: hidden; }
     .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border-bottom: 1px solid var(--forge-border); }
     .modal-title { margin: 0; font-size: 1rem; font-weight: 700; color: var(--forge-text-main); }

@@ -270,7 +270,19 @@ export function getPortalClientScript(): string {
       function renderSearchResults(query) {
         if (!searchResults) return;
         var q = (query || '').toLowerCase().trim();
-        var matches = searchPages.filter(function(p) {
+        var allItems = searchPages.slice();
+        document.querySelectorAll('.app-card-item').forEach(function(card) {
+          var titleEl = card.querySelector('.app-card-title');
+          var linkEl = card.querySelector('.app-launch-action');
+          var name = titleEl ? titleEl.textContent.trim() : '';
+          var href = linkEl ? linkEl.getAttribute('href') : '';
+          var cat = card.getAttribute('data-category') || 'Forge App';
+          if (name && href) {
+            allItems.push({ id: href, title: name, category: cat, isExternalApp: true });
+          }
+        });
+
+        var matches = allItems.filter(function(p) {
           if (currentRole !== 'Admin' && p.category === 'Admin Console') return false;
           return p.title.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
         });
@@ -281,7 +293,7 @@ export function getPortalClientScript(): string {
         }
 
         searchResults.innerHTML = matches.map(function(item) {
-          return '<div class="portal-search-item command-item" data-target="' + item.id + '">' +
+          return '<div class="portal-search-item command-item" data-target="' + item.id + '" data-external="' + (item.isExternalApp ? 'true' : 'false') + '">' +
             '<span class="badge-dot" style="background: var(--forge-primary); width: 6px; height: 6px; border-radius: 50%;"></span>' +
             '<span class="cmd-text" style="font-weight: 500;">' + item.title + '</span>' +
             '<span class="cmd-shortcut">' + item.category + '</span>' +
@@ -291,8 +303,13 @@ export function getPortalClientScript(): string {
         searchResults.querySelectorAll('.portal-search-item').forEach(function(row) {
           row.addEventListener('click', function() {
             var target = row.getAttribute('data-target');
+            var isExt = row.getAttribute('data-external') === 'true';
             if (target) {
-              switchView(target, true);
+              if (isExt) {
+                window.location.href = target;
+              } else {
+                switchView(target, true);
+              }
               closeSearch();
             }
           });

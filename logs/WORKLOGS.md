@@ -438,3 +438,9 @@
 2026-09-02 21:45 | [b59f775] feat(toolchain): remove Drizzle Studio and enforce 100% open-source local toolchain (+5, -224)
 2026-09-02 23:05 | Unified Portal dynamic hydration, aligned database seeders, anchored docker project-directory, and fixed My Team user selector
 2026-09-02 23:06 | [391cd40] feat(portal): unify dynamic member hydration, anchor docker project directory, and fix user team focus (+1510, -803)
+2026-09-03 00:20 | Replace hardcoded mock data in Portal with dynamic micro-apps discovery, live audit logs, real sessions, and dynamic org filters
+2026-09-03 00:22 | [0506e38] feat(portal): dynamic micro-apps discovery, live audit logs, and real session hydration (+1913, -530)
+2026-09-03 00:24 | Fix browser SyntaxError by replacing unescaped newline in CSV export string in ui-admin-scripts.ts
+2026-09-03 00:27 | Fix ReferenceError in ui-admin-scripts.ts by moving initialization calls after function definitions and resolving DOM references dynamically
+2026-09-03 00:34 | Fix App Details modal opening and visibility by adding .open class and dynamic DOM resolution in ui-apps-scripts.ts
+2026-09-03 00:36 | [a9936b1] feat(portal): add dynamic micro apps discovery real audit logs and details modal fix (+2355, -663)

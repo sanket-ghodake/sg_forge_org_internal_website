@@ -11,6 +11,8 @@ export interface HeaderUserContext {
   displayName: string;
   roles: string[];
   isAdmin: boolean;
+  userAgent?: string;
+  ip?: string;
 }
 
 export function renderPortalHeader(user: HeaderUserContext): string {

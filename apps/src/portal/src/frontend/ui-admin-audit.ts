@@ -90,7 +90,7 @@ export function renderAdminAuditView(): string {
           <input type="text" id="audit-search-input" placeholder="Search by trace ID, actor, or action..." />
         </div>
         <div class="table-summary-pill">
-          Showing <strong>${SAMPLE_AUDIT_LOGS.length}</strong> security events
+          Showing <strong id="audit-events-count">${SAMPLE_AUDIT_LOGS.length}</strong> security events
         </div>
       </div>
 
@@ -107,7 +107,7 @@ export function renderAdminAuditView(): string {
               <th>Trace ID</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="admin-audit-tbody">
             ${SAMPLE_AUDIT_LOGS.map(a => `
               <tr>
                 <td style="font-family: var(--forge-font-mono, monospace); font-size: 0.78rem; color: var(--forge-text-muted);">${a.timestamp}</td>

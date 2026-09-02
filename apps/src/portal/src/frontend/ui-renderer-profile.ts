@@ -6,6 +6,23 @@
 import { astryxIcons } from '@forge/ui';
 import type { HeaderUserContext } from './layout-header';
 
+function parseUserAgentMeta(ua?: string): string {
+  if (!ua) return 'Modern Web Browser · Active Now';
+  let os = 'Linux / Unix';
+  if (ua.includes('Macintosh') || ua.includes('Mac OS')) os = 'macOS';
+  else if (ua.includes('Windows')) os = 'Windows';
+  else if (ua.includes('Android')) os = 'Android';
+  else if (ua.includes('iPhone') || ua.includes('iPad')) os = 'iOS';
+  else if (ua.includes('Linux')) os = 'Linux x86_64';
+
+  let browser = 'Chrome';
+  if (ua.includes('Firefox')) browser = 'Firefox';
+  else if (ua.includes('Safari') && !ua.includes('Chrome')) browser = 'Safari';
+  else if (ua.includes('Edg')) browser = 'Edge';
+
+  return `${os} · ${browser} · Active Now`;
+}
+
 export function renderProfileView(user: HeaderUserContext): string {
   const initial = (user.displayName || 'U').charAt(0).toUpperCase();
 
@@ -90,14 +107,14 @@ export function renderProfileView(user: HeaderUserContext): string {
               </button>
             </div>
 
-            <div class="sessions-list">
+            <div class="sessions-list" id="active-sessions-list">
               <div class="session-item current-session">
                 <div class="session-icon">
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
                 </div>
                 <div class="session-info">
                   <div class="session-device">Current Browser Session <span class="astryx-badge badge-online">This Device</span></div>
-                  <div class="session-meta">Linux x86_64 · Chrome 132 · Active Now</div>
+                  <div class="session-meta" id="current-session-meta">${parseUserAgentMeta(user.userAgent)}</div>
                 </div>
                 <div class="session-status">Active</div>
               </div>

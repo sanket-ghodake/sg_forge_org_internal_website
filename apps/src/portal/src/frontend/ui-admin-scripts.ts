@@ -130,21 +130,9 @@ export function getAdminClientScript(): string {
         });
       }
 
-      // Automatically fetch when document loads or when switching to admin-members view
-      loadAdminMembers();
-      loadAdminOrgTree();
-      window.addEventListener('hashchange', function() {
-        if (window.location.hash === '#admin-members') loadAdminMembers();
-        if (window.location.hash === '#admin-org') loadAdminOrgTree();
-      });
-      document.addEventListener('viewchange', function(e) {
-        if (e && e.detail === 'admin-members') loadAdminMembers();
-        if (e && e.detail === 'admin-org') loadAdminOrgTree();
-      });
-
       // ── Dynamic Admin Organization Tree Builder ──
-      const orgTreeContainer = document.getElementById('admin-org-tree-container');
       async function loadAdminOrgTree() {
+        const orgTreeContainer = document.getElementById('admin-org-tree-container');
         if (!orgTreeContainer) return;
         try {
           const endpoint = getApiPrefix() + '/api/v1/portal/canvas/tree?max_depth=4';
@@ -156,6 +144,22 @@ export function getAdminClientScript(): string {
           if (!rootNode) {
             orgTreeContainer.innerHTML = '<div style="text-align:center; padding:2rem; color:var(--forge-text-muted);">No organization structure found in central identity.</div>';
             return;
+          }
+
+          const divSelect = document.getElementById('invite-division');
+          if (divSelect && rootNode) {
+            const depts = new Set();
+            function extractDepts(n) {
+              if (n.department) depts.add(n.department);
+              if (n.division) depts.add(n.division);
+              if (n.children) n.children.forEach(extractDepts);
+            }
+            extractDepts(rootNode);
+            if (depts.size > 0) {
+              divSelect.innerHTML = Array.from(depts).map(function(d) {
+                return '<option value="' + d + '">' + d + '</option>';
+              }).join('');
+            }
           }
 
           function renderNodeHtml(node) {
@@ -238,24 +242,117 @@ export function getAdminClientScript(): string {
         });
       }
 
-      // Export Audit Logs Actions
+      // ── Dynamic Audit Logs Hydration & Filtering ──
+      let cachedAuditLogs = [];
+      const auditSearchInput = document.getElementById('audit-search-input');
+
+      function renderAuditRows(logs) {
+        const auditTbody = document.getElementById('admin-audit-tbody');
+        if (!auditTbody) return;
+        if (!logs || logs.length === 0) {
+          auditTbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem; color: var(--forge-text-muted);">No audit logs found.</td></tr>';
+          return;
+        }
+
+        auditTbody.innerHTML = logs.map(function(a) {
+          const badgeClass = a.status === 'SUCCESS' ? 'badge-online' : (a.status === 'DENIED' ? 'badge-warning' : 'badge-danger');
+          return '<tr>' +
+            '<td style="font-family: var(--forge-font-mono, monospace); font-size: 0.78rem; color: var(--forge-text-muted);">' + (a.timestamp || '') + '</td>' +
+            '<td><strong style="color: var(--forge-text-main); font-size: 0.84rem;">' + (a.actor || '') + '</strong></td>' +
+            '<td><code>' + (a.action || '') + '</code></td>' +
+            '<td><span style="font-size: 0.82rem; color: var(--forge-text-muted);">' + (a.resource || '') + '</span></td>' +
+            '<td><span class="astryx-badge ' + badgeClass + '">' + (a.status || 'SUCCESS') + '</span></td>' +
+            '<td><code style="font-size: 0.75rem; color: var(--forge-primary);">' + (a.traceId || '') + '</code></td>' +
+          '</tr>';
+        }).join('');
+      }
+
+      async function loadAdminAuditLogs() {
+        const auditTbody = document.getElementById('admin-audit-tbody');
+        if (!auditTbody) return;
+        const auditCountEl = document.getElementById('audit-events-count');
+        try {
+          const endpoint = getApiPrefix() + '/api/v1/portal/audit';
+          const res = await fetch(endpoint, { headers: { 'Accept': 'application/json' } });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          const body = await res.json();
+          cachedAuditLogs = body.data || [];
+          if (auditCountEl) auditCountEl.textContent = String(cachedAuditLogs.length);
+          renderAuditRows(cachedAuditLogs);
+        } catch (err) {
+          console.warn('Failed to load audit logs:', err);
+        }
+      }
+
+      if (auditSearchInput) {
+        auditSearchInput.addEventListener('input', function() {
+          const q = (auditSearchInput.value || '').toLowerCase().trim();
+          if (!q) {
+            renderAuditRows(cachedAuditLogs);
+            return;
+          }
+          const filtered = cachedAuditLogs.filter(function(a) {
+            return (a.actor && a.actor.toLowerCase().includes(q)) ||
+                   (a.action && a.action.toLowerCase().includes(q)) ||
+                   (a.resource && a.resource.toLowerCase().includes(q)) ||
+                   (a.traceId && a.traceId.toLowerCase().includes(q));
+          });
+          renderAuditRows(filtered);
+        });
+      }
+
+      // Export Audit Logs Actions (Real dynamic download)
       const exportJsonBtn = document.getElementById('export-audit-json-btn');
       if (exportJsonBtn) {
         exportJsonBtn.addEventListener('click', function() {
-          if (window.astryxToast) {
-            window.astryxToast('Audit logs exported as JSON (RFC 7807 compliance)', 'info');
+          if (!cachedAuditLogs || cachedAuditLogs.length === 0) {
+            if (window.astryxToast) window.astryxToast('No audit logs to export', 'warning');
+            return;
           }
+          const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(cachedAuditLogs, null, 2));
+          const dlAnchor = document.createElement('a');
+          dlAnchor.setAttribute('href', dataStr);
+          dlAnchor.setAttribute('download', 'security-audit-logs.json');
+          dlAnchor.click();
+          if (window.astryxToast) window.astryxToast('Exported audit logs as JSON', 'success');
         });
       }
 
       const exportCsvBtn = document.getElementById('export-audit-csv-btn');
       if (exportCsvBtn) {
         exportCsvBtn.addEventListener('click', function() {
-          if (window.astryxToast) {
-            window.astryxToast('Audit logs exported as CSV', 'info');
+          if (!cachedAuditLogs || cachedAuditLogs.length === 0) {
+            if (window.astryxToast) window.astryxToast('No audit logs to export', 'warning');
+            return;
           }
+          const headers = ['Timestamp', 'Actor', 'Action', 'Resource', 'Status', 'TraceId'];
+          const csvRows = [headers.join(',')];
+          cachedAuditLogs.forEach(function(l) {
+            csvRows.push(['"' + (l.timestamp||'') + '"', '"' + (l.actor||'') + '"', '"' + (l.action||'') + '"', '"' + (l.resource||'') + '"', '"' + (l.status||'') + '"', '"' + (l.traceId||'') + '"'].join(','));
+          });
+          const csvStr = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvRows.join(String.fromCharCode(10)));
+          const dlAnchor = document.createElement('a');
+          dlAnchor.setAttribute('href', csvStr);
+          dlAnchor.setAttribute('download', 'security-audit-logs.csv');
+          dlAnchor.click();
+          if (window.astryxToast) window.astryxToast('Exported audit logs as CSV', 'success');
         });
       }
+
+      // Automatically fetch when document loads or when switching to admin views
+      loadAdminMembers();
+      loadAdminOrgTree();
+      loadAdminAuditLogs();
+      window.addEventListener('hashchange', function() {
+        if (window.location.hash === '#admin-members') loadAdminMembers();
+        if (window.location.hash === '#admin-org') loadAdminOrgTree();
+        if (window.location.hash === '#admin-audit') loadAdminAuditLogs();
+      });
+      document.addEventListener('viewchange', function(e) {
+        if (e && e.detail === 'admin-members') loadAdminMembers();
+        if (e && e.detail === 'admin-org') loadAdminOrgTree();
+        if (e && e.detail === 'admin-audit') loadAdminAuditLogs();
+      });
     })();
   `;
 }

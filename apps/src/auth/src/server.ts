@@ -32,6 +32,7 @@ import {
   handleBulkAction,
   handleExportEmployees,
 } from './backend/api-org-handlers';
+import { handleGetAuditLogs } from './backend/audit-session-controller';
 
 import { authTelemetry } from './backend/telemetry';
 import { applySecurityHeaders } from './backend/security-headers';
@@ -212,6 +213,12 @@ export function startAuthServer(port: number = PORT) {
       path === '/auth/api/v1/auth/sessions/revoke-others'
     ) {
       if (method === 'POST') response = await handleRevokeOtherSessions(req);
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    if (path === '/api/v1/auth/audit' || path === '/auth/api/v1/auth/audit') {
+      if (method === 'GET') response = handleGetAuditLogs(req);
       else response = new Response('Method Not Allowed', { status: 405 });
       return applySecurityHeaders(response);
     }

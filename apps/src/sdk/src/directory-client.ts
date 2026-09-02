@@ -401,3 +401,43 @@ export async function isManagerOf(
     return false;
   }
 }
+
+/**
+ * Fetch organization security audit logs from Auth service
+ */
+export async function fetchAuditLogs(options: {
+  limit?: number;
+  baseUrl?: string;
+  headers?: Record<string, string>;
+} = {}): Promise<any[]> {
+  const base = resolveAuthBaseUrl(options.baseUrl);
+  const limit = options.limit || 50;
+  const target = `${base}/api/v1/auth/audit?limit=${limit}`;
+  const res = await fetch(target, {
+    headers: { Accept: 'application/json', ...(options.headers || {}) },
+    signal: AbortSignal.timeout(5000),
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch audit logs (HTTP ${res.status})`);
+  }
+  const json = (await res.json()) as any;
+  return json.data || [];
+}
+
+/**
+ * Fetch active sessions for the authenticated user
+ */
+export async function fetchUserSessions(options: {
+  baseUrl?: string;
+  headers?: Record<string, string>;
+} = {}): Promise<any[]> {
+  const base = resolveAuthBaseUrl(options.baseUrl);
+  const target = `${base}/api/v1/auth/sessions/me`;
+  const res = await fetch(target, {
+    headers: { Accept: 'application/json', ...(options.headers || {}) },
+    signal: AbortSignal.timeout(5000),
+  });
+  if (!res.ok) return [];
+  const json = (await res.json()) as any;
+  return json.sessions || json.data || [];
+}

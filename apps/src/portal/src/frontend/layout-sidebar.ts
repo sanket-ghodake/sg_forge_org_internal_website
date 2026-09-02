@@ -20,13 +20,11 @@ export const WORKSPACE_NAV_ITEMS: SidebarNavOption[] = [
   {
     id: 'apps',
     label: 'Apps & Tools',
-    badge: '4',
     iconSvg: `<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>`,
   },
   {
     id: 'notifications',
     label: 'Announcements',
-    badge: '3',
     iconSvg: `<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>`,
   },
 ];
@@ -64,13 +62,23 @@ export const ADMIN_NAV_ITEMS: SidebarNavOption[] = [
   },
 ];
 
-export function renderPortalSidebar(isAdmin: boolean): string {
+export function renderPortalSidebar(isAdmin: boolean, counts?: { appsCount?: number; unreadCount?: number }): string {
+  const appsBadge = counts?.appsCount !== undefined ? String(counts.appsCount) : undefined;
+  const unreadBadge = counts?.unreadCount !== undefined && counts.unreadCount > 0 ? String(counts.unreadCount) : undefined;
+
+  const navItems = WORKSPACE_NAV_ITEMS.map((item) => {
+    let badge = item.badge;
+    if (item.id === 'apps' && appsBadge !== undefined) badge = appsBadge;
+    if (item.id === 'notifications') badge = unreadBadge;
+    return { ...item, badge };
+  });
+
   return `
     <aside class="portal-sidebar" id="portal-sidebar" aria-label="Portal Navigation Sidebar">
       <div class="portal-sidebar-nav">
         <!-- Section: Workspace -->
         <div class="portal-nav-section-label">Workspace</div>
-        ${WORKSPACE_NAV_ITEMS.map(item => `
+        ${navItems.map(item => `
           <button class="portal-nav-item" data-view="${item.id}" title="${item.label}">
             <span class="portal-nav-icon">${item.iconSvg}</span>
             <span class="portal-nav-label">${item.label}</span>

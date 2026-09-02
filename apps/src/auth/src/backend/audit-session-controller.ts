@@ -1,0 +1,46 @@
+/**
+ * @forge/auth - Audit & Session Management Controller (2026 LTS)
+ * Handles security audit query stream and active multi-device session inspection.
+ */
+
+import { getOrgAuditLogs } from './audit-logger';
+import { getUserActiveSessions, revokeOtherSessions } from './session-manager';
+import { verifyJwt } from './crypto';
+
+function extractToken(req: Request): string | null {
+  const authHeader = req.headers.get('authorization') || '';
+  if (authHeader.startsWith('Bearer ')) return authHeader.slice(7);
+  const cookieHeader = req.headers.get('cookie') || '';
+  const match = cookieHeader.match(/forge_session=([^;]+)/);
+  return match ? match[1] : null;
+}
+
+export function handleGetAuditLogs(req: Request): Response {
+  const token = extractToken(req);
+  if (!token) {
+    return Response.json({ ok: false, error: 'Authentication required' }, { status: 401 });
+  }
+  const { valid, payload } = verifyJwt(token);
+  if (!valid || !payload) {
+    return Response.json({ ok: false, error: 'Invalid token' }, { status: 401 });
+  }
+
+  const url = new URL(req.url);
+  const limit = Math.min(100, Number(url.searchParams.get('limit') || 50));
+  const logs = getOrgAuditLogs(limit);
+  return Response.json({ ok: true, data: logs });
+}
+
+export function handleGetUserSessions(req: Request): Response {
+  const token = extractToken(req);
+  if (!token) {
+    return Response.json({ ok: false, error: 'Authentication required' }, { status: 401 });
+  }
+  const { valid, payload } = verifyJwt(token);
+  if (!valid || !payload) {
+    return Response.json({ ok: false, error: 'Invalid token' }, { status: 401 });
+  }
+
+  const sessions = getUserActiveSessions(payload.sub);
+  return Response.json({ ok: true, data: sessions });
+}

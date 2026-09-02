@@ -3,12 +3,11 @@
  * Micro-app registry, ingress port management, and department access policy matrix.
  */
 
-import { isAppDisabled } from '@forge/sdk';
 import { astryxIcons } from '@forge/ui';
-import { REGISTERED_PORTAL_APPS } from './ui-renderer-apps';
+import { getPortalApps } from './ui-apps-data';
 
 export function renderAdminAppsView(): string {
-  const visibleApps = REGISTERED_PORTAL_APPS.filter(app => !isAppDisabled(app.id));
+  const visibleApps = getPortalApps(['roles/admin']).allApps;
   return `
     <div id="view-admin-apps" class="portal-page-view">
       <!-- Header -->

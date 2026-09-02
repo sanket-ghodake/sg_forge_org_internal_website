@@ -12,6 +12,8 @@ import { renderPageCards } from './page-cards';
 import { renderPortalModals } from './ui-modals';
 import { renderCommandPalette } from './ui-command-palette';
 import { getPortalClientScript } from './ui-scripts';
+import { getPortalApps } from './ui-apps-data';
+import { getLiveNotifications } from '../backend/inbox-service';
 
 export function renderPortalHtml(user?: HeaderUserContext): string {
   const brand = loadBrandConfig();
@@ -22,6 +24,13 @@ export function renderPortalHtml(user?: HeaderUserContext): string {
     roles: user?.roles || ['roles/employee'],
     isAdmin: user?.isAdmin ?? Boolean(user?.roles?.some(r => r.includes('admin') || r.includes('manager'))),
   };
+
+  const { allApps } = getPortalApps(userContext.roles);
+  let unreadCount = 0;
+  try {
+    const notifs = getLiveNotifications(userContext.id);
+    unreadCount = notifs.filter((n) => n.isUnread).length;
+  } catch {}
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -56,7 +65,7 @@ export function renderPortalHtml(user?: HeaderUserContext): string {
     <!-- Main Workspace Area -->
     <div class="portal-main-body">
       <!-- Supabase-Inspired Auto-Expandable Left Sidebar -->
-      ${renderPortalSidebar(userContext.isAdmin)}
+      ${renderPortalSidebar(userContext.isAdmin, { appsCount: allApps.length, unreadCount })}
 
       <!-- Main Content Viewport -->
       <main class="portal-viewport">

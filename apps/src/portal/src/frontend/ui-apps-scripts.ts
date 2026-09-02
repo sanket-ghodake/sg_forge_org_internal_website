@@ -41,6 +41,11 @@ export function getAppsClientScript(): string {
           var raw = localStorage.getItem(PINNED_STORAGE_KEY);
           if (raw) return JSON.parse(raw);
         } catch(e) {}
+        var firstCard = document.querySelector('.app-card-item');
+        if (firstCard) {
+          var firstId = firstCard.getAttribute('data-app-id');
+          if (firstId) return [firstId];
+        }
         return ['expenses'];
       }
 
@@ -312,17 +317,13 @@ export function getAppsClientScript(): string {
 
       // ── 6. App Details Inspection Modal ──
       function initAppDetailsModal() {
-        var detailsModal = document.getElementById('modal-app-details');
-        var dTitle = document.getElementById('app-details-title');
-        var dDept = document.getElementById('app-details-dept');
-        var dDesc = document.getElementById('app-details-desc');
-        var dTags = document.getElementById('app-details-tags');
-        var dActionBtn = document.getElementById('app-details-action-btn');
-
         document.addEventListener('click', function(e) {
           var infoBtn = e.target.closest('.open-app-info-btn');
-          if (infoBtn && detailsModal) {
+          if (infoBtn) {
             e.preventDefault();
+            var modal = document.getElementById('modal-app-details');
+            if (!modal) return;
+
             var card = infoBtn.closest('.app-card-item, .marketplace-card-item');
             if (card) {
               var title = card.querySelector('.app-card-title, .market-card-title');
@@ -330,6 +331,12 @@ export function getAppsClientScript(): string {
               var dept = card.getAttribute('data-category') || 'Platform Workspace';
               var tags = card.getAttribute('data-tags') || '';
               var launchLink = card.querySelector('.app-launch-action');
+
+              var dTitle = document.getElementById('app-details-title');
+              var dDept = document.getElementById('app-details-dept');
+              var dDesc = document.getElementById('app-details-desc');
+              var dTags = document.getElementById('app-details-tags');
+              var dActionBtn = document.getElementById('app-details-action-btn');
 
               if (dTitle && title) dTitle.textContent = title.textContent.trim();
               if (dDept) dDept.textContent = dept;
@@ -342,7 +349,7 @@ export function getAppsClientScript(): string {
               }
               if (dActionBtn) {
                 if (launchLink) {
-                  dActionBtn.textContent = 'Launch Application';
+                  dActionBtn.textContent = 'Open Application';
                   dActionBtn.setAttribute('href', launchLink.getAttribute('href'));
                   dActionBtn.style.display = 'inline-flex';
                 } else {
@@ -350,9 +357,25 @@ export function getAppsClientScript(): string {
                 }
               }
 
-              detailsModal.classList.add('active');
-              detailsModal.setAttribute('aria-hidden', 'false');
+              modal.classList.add('open');
+              modal.classList.add('active');
+              modal.setAttribute('aria-hidden', 'false');
             }
+          }
+
+          var closeBtn = e.target.closest('[data-close-modal="modal-app-details"], .astryx-modal-close');
+          if (closeBtn) {
+            var modalToClose = document.getElementById('modal-app-details');
+            if (modalToClose) {
+              modalToClose.classList.remove('open');
+              modalToClose.classList.remove('active');
+              modalToClose.setAttribute('aria-hidden', 'true');
+            }
+          }
+          if (e.target && e.target.id === 'modal-app-details') {
+            e.target.classList.remove('open');
+            e.target.classList.remove('active');
+            e.target.setAttribute('aria-hidden', 'true');
           }
         });
       }

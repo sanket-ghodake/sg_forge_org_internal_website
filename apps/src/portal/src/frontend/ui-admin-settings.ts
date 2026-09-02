@@ -49,11 +49,11 @@ export function renderAdminSettingsView(): string {
               </div>
               <div class="form-field">
                 <label>Custom Workspace Domain</label>
-                <input type="text" class="astryx-input" value="app.forge.internal" disabled />
+                <input type="text" class="astryx-input" value="${process.env.PUBLIC_DOMAIN || 'app.forge.internal'}" disabled />
               </div>
               <div class="form-field">
                 <label>Support Contact Email</label>
-                <input type="email" class="astryx-input" value="it-security@forge.internal" />
+                <input type="email" class="astryx-input" value="${process.env.SUPPORT_EMAIL || 'support@' + (brand.short || 'forge').toLowerCase() + '.internal'}" />
               </div>
             </div>
 
