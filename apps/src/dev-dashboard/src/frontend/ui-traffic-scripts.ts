@@ -9,6 +9,19 @@ export function getTrafficDashboardScripts(): string {
     let trafficSearchFilter = '';
 
     async function loadTraffic() {
+      if (window._initialTrafficTarget) {
+        const targetSel = document.getElementById('benchmark-target-select');
+        if (targetSel) {
+          for (let i = 0; i < targetSel.options.length; i++) {
+            if (targetSel.options[i].value === window._initialTrafficTarget || targetSel.options[i].text.includes(window._initialTrafficTarget)) {
+              targetSel.selectedIndex = i;
+              break;
+            }
+          }
+        }
+        window._initialTrafficTarget = null;
+      }
+
       await Promise.all([
         loadTrafficMetrics(),
         loadTrafficRoutes(),

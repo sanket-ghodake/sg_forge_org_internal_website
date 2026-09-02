@@ -115,7 +115,7 @@ export function renderDashboardHtml(): string {
     <div class="sb-sidebar-backdrop" id="sidebar-backdrop" onclick="toggleMobileSidebar(false)"></div>
 
     <aside class="sb-sidebar" id="main-sidebar" aria-label="Main Navigation">
-      <div class="sb-nav-section-label">Monitoring</div>
+      <div class="sb-nav-section-label">Runtime & Fleet</div>
       <div class="sb-nav-item" data-tab="overview" onclick="switchTab('overview')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('overview')" title="Overview" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.topology}</span><span class="sb-nav-label">Overview</span></div>
       <div class="sb-nav-item" data-tab="services" onclick="switchTab('services')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('services')" title="Services & Processes" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.services}</span><span class="sb-nav-label">Services & Processes</span></div>
       <div class="sb-nav-item" data-tab="apps" onclick="switchTab('apps')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('apps')" title="Forge Apps" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.apps}</span><span class="sb-nav-label">Forge Apps</span></div>
@@ -128,7 +128,7 @@ export function renderDashboardHtml(): string {
       <div class="sb-nav-item" data-tab="logs" onclick="switchTab('logs')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('logs')" title="Isolated App Logs" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.logs}</span><span class="sb-nav-label">Isolated App Logs</span></div>
       <div class="sb-nav-item" data-tab="issues" onclick="switchTab('issues')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('issues')" title="Issue Center" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.issues}</span><span class="sb-nav-label">Issue Center</span></div>
 
-      <div class="sb-nav-section-label">Platform</div>
+      <div class="sb-nav-section-label">Platform & Host</div>
       <div class="sb-nav-item" data-tab="employees" onclick="switchTab('employees')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('employees')" title="Employees & Org" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.users}</span><span class="sb-nav-label">Employees & Org</span></div>
       <div class="sb-nav-item" data-tab="host" onclick="switchTab('host')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('host')" title="Host & Cloud" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.host}</span><span class="sb-nav-label">Host & Cloud</span></div>
       <div class="sb-nav-item" data-tab="settings" onclick="switchTab('settings')" onkeydown="if(event.key==='Enter'||event.key===' ')switchTab('settings')" title="Settings & Tools" tabindex="0" role="button"><span class="sb-nav-icon">${astryxIcons.settings}</span><span class="sb-nav-label">Settings & Tools</span></div>
@@ -318,15 +318,23 @@ export function renderDashboardHtml(): string {
 
       <!-- Tab 6: Isolated App Logs & Observability -->
       <section id="tab-logs" class="tab-pane">
-        <!-- Plain English Non-Technical Summary Card -->
-        <div class="plain-english-card" id="plain-english-banner">
-          <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <span class="status-pulse-dot active" style="width: 10px; height: 10px;" id="plain-status-icon"></span>
-            <div>
-              <h3 id="plain-status-title" style="margin: 0; font-size: 0.95rem; color: var(--forge-text-main);">All Systems Operational</h3>
-              <p id="plain-status-detail" style="margin: 0.2rem 0 0 0; font-size: 0.8rem; color: var(--forge-text-muted);">
-                All microservices and database instances are responding with healthy latency (&lt;5ms).
-              </p>
+        <div class="astryx-card" style="margin-bottom: 1rem; padding: 0.75rem 1rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+            <div style="display: flex; align-items: center; gap: 0.65rem;">
+              <span class="status-pulse-dot active" style="width: 9px; height: 9px;"></span>
+              <div>
+                <h2 style="font-size: 1.05rem; margin: 0; display: flex; align-items: center; gap: 0.45rem; font-weight: 700;">
+                  <span>Isolated App Logs & Observability Stream</span>
+                  <span class="astryx-badge badge-running" style="font-size: 0.68rem; padding: 0.1rem 0.45rem;">LIVE TAIL</span>
+                </h2>
+                <p style="color: var(--forge-text-muted); font-size: 0.78rem; margin: 0.15rem 0 0 0;">
+                  Real-time structured JSON telemetry, automated secret/PII redaction, and multi-service trace correlation.
+                </p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.4rem; align-items: center;">
+              <span class="astryx-micro-pill" id="log-buffer-count-pill" style="color: var(--forge-primary);">2000 msgs buffer</span>
+              <button class="astryx-btn btn-outline" style="padding: 0.22rem 0.55rem; font-size: 0.72rem;" onclick="clearActiveAppLogs()">Clear Stream</button>
             </div>
           </div>
         </div>
@@ -389,59 +397,33 @@ export function renderDashboardHtml(): string {
       <!-- Tab 10: Settings & Tools -->
       <section id="tab-settings" class="tab-pane">
         <div class="astryx-card" style="margin-bottom: 1rem;">
-          <h2 style="font-size: 1.2rem; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
-            <span style="color: var(--forge-text-muted); display: flex; align-items: center;">${astryxIcons.settings}</span> Developer Diagnostics & Tools
-          </h2>
-          <p style="color: var(--forge-text-muted); font-size: 0.82rem; margin-bottom: 0.85rem;">Platform configuration inspection and API exploration.</p>
-          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-            <button class="astryx-btn btn-primary" onclick="openApiRegistryModal()">${astryxIcons.zap} API Route Explorer & cURL</button>
-            <button class="astryx-btn btn-outline" onclick="openSafeEnvModal()">${astryxIcons.key} Masked Environment Inspector</button>
-            <button class="astryx-btn btn-outline" onclick="open247GuideModal()">🛡️ 24/7 Host Setup Guide</button>
-            <button class="astryx-btn btn-outline" onclick="exportAuditCsv()">${astryxIcons.download} Export Audit CSV</button>
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+            <div>
+              <h2 style="font-size: 1.15rem; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 700;">
+                <span style="color: var(--forge-text-muted); display: flex; align-items: center;">${astryxIcons.settings}</span> Platform Configuration & Tools
+              </h2>
+              <p style="color: var(--forge-text-muted); font-size: 0.8rem; margin: 0;">Inspect masked environment variables, explore registered API routes, and review administrative audit trails.</p>
+            </div>
+            <div style="display: flex; gap: 0.45rem; flex-wrap: wrap;">
+              <button class="astryx-btn btn-primary" onclick="openApiRegistryModal()">${astryxIcons.zap} API Route Explorer & cURL</button>
+              <button class="astryx-btn btn-outline" onclick="openSafeEnvModal()">${astryxIcons.key} Masked Environment Inspector</button>
+              <button class="astryx-btn btn-outline" onclick="open247GuideModal()">🛡️ 24/7 Host Setup Guide</button>
+              <button class="astryx-btn btn-outline" onclick="exportAuditCsv()">${astryxIcons.download} Export Audit CSV</button>
+            </div>
           </div>
         </div>
 
-        <div class="astryx-card" style="margin-bottom: 1rem;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
-            <h2 style="font-size: 1.1rem; margin: 0; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
-              <span style="color: var(--forge-primary); display: flex; align-items: center;">${astryxIcons.shield}</span> 24/7 High-Availability & Persistence
-            </h2>
-            <div style="display: flex; gap: 0.4rem; align-items: center;">
-              <span class="astryx-micro-pill" style="color: var(--forge-primary);" id="settings-ha-os-pill">Detected OS</span>
-              <button class="astryx-btn btn-outline" style="padding: 0.2rem 0.55rem; font-size: 0.72rem;" onclick="switchTab('host')">
-                View Live Telemetry →
-              </button>
-            </div>
-          </div>
-          <p style="color: var(--forge-text-muted); font-size: 0.8rem; margin-bottom: 0.85rem;">
-            Inspect container recovery policies, auto-healing watchdogs, named volume data persistence, and cross-platform setup commands.
-          </p>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.6rem;">
-            <div style="background: var(--forge-bg-root); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.6rem 0.75rem;">
-              <div style="font-size: 0.7rem; color: var(--forge-text-muted); text-transform: uppercase;">Restart Policy</div>
-              <div style="font-size: 0.88rem; font-weight: 700; color: var(--forge-success);">Active (unless-stopped)</div>
-            </div>
-            <div style="background: var(--forge-bg-root); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.6rem 0.75rem;">
-              <div style="font-size: 0.7rem; color: var(--forge-text-muted); text-transform: uppercase;">Persistence</div>
-              <div style="font-size: 0.88rem; font-weight: 700; color: var(--forge-success);">Locked (Named Volumes)</div>
-            </div>
-            <div style="background: var(--forge-bg-root); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.6rem 0.75rem;">
-              <div style="font-size: 0.7rem; color: var(--forge-text-muted); text-transform: uppercase;">Health Probes</div>
-              <div style="font-size: 0.88rem; font-weight: 700; color: var(--forge-success);">Active (Dual Spider)</div>
-            </div>
-            <div style="background: var(--forge-bg-root); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.6rem 0.75rem;">
-              <div style="font-size: 0.7rem; color: var(--forge-text-muted); text-transform: uppercase;">Autoheal Watchdog</div>
-              <div style="font-size: 0.88rem; font-weight: 700; color: var(--forge-success);">Configured (Compose)</div>
-            </div>
-          </div>
-        </div>
         <div class="astryx-card">
-          <h2 style="font-size: 1.2rem; margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
-            <span style="color: var(--forge-text-muted); display: flex; align-items: center;">${astryxIcons.fileText}</span> Administrative Audit Logs
-          </h2>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 0.5rem;">
+            <h2 style="font-size: 1.05rem; margin: 0; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
+              <span style="color: var(--forge-text-muted); display: flex; align-items: center;">${astryxIcons.fileText}</span> Administrative & Security Audit Trail
+            </h2>
+            <span class="astryx-badge">RFC 7807 Traceable</span>
+          </div>
           <div class="astryx-table-wrap" id="audit-table-container">Loading audit logs...</div>
         </div>
       </section>
+    </main>
     </main>
   </div>
 

@@ -47,7 +47,7 @@ export function getDbStudioStyles(): string {
     /* Visual ER Schema Relationship Graph */
     .db-er-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.85rem; padding: 0.4rem 0; }
     .db-er-card { background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: var(--forge-transition); }
-    .db-er-card:hover { border-color: var(--forge-primary); transform: translateY(-2px); }
+    .db-er-card:hover { border-color: var(--forge-primary); }
     .db-er-header { background: var(--forge-bg-elevated); padding: 0.45rem 0.65rem; border-bottom: 1px solid var(--forge-border); display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 0.82rem; }
     .db-er-cols { padding: 0.35rem 0.45rem; display: flex; flex-direction: column; gap: 0.15rem; max-height: 240px; overflow-y: auto; font-size: 0.74rem; }
     .db-er-col { display: flex; justify-content: space-between; align-items: center; padding: 0.15rem 0.3rem; border-radius: var(--forge-radius-xs); }

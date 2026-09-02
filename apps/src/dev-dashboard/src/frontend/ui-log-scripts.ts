@@ -218,14 +218,38 @@ export function getLogDashboardScripts(): string {
       }
     }
 
+    function filterByTraceId(traceId) {
+      if (typeof window.navigateToTab === 'function') {
+        window.navigateToTab('logs', { search: traceId });
+      } else {
+        logSearchFilter = traceId;
+        const searchInput = document.getElementById('logs-search-input');
+        if (searchInput) searchInput.value = traceId;
+        switchTab('logs');
+      }
+    }
+
     async function loadActiveTabLogs() {
       const term = document.getElementById('full-terminal');
       if (!term) return;
 
-      if (window._initialAppFilter && !logSearchFilter) {
-        logSearchFilter = window._initialAppFilter;
+      if (window._initialAppFilter) {
+        activeLogApp = window._initialAppFilter;
+        const sel = document.getElementById('logs-app-select');
+        if (sel) sel.value = window._initialAppFilter;
+        window._initialAppFilter = null;
+      }
+      if (window._initialLogSearch) {
+        logSearchFilter = window._initialLogSearch;
         const searchInput = document.getElementById('logs-search-input');
-        if (searchInput) searchInput.value = window._initialAppFilter;
+        if (searchInput) searchInput.value = logSearchFilter;
+        window._initialLogSearch = null;
+      }
+      if (window._initialLogLevel) {
+        activeLogLevel = window._initialLogLevel;
+        const lvlSel = document.getElementById('logs-level-select');
+        if (lvlSel) lvlSel.value = activeLogLevel;
+        window._initialLogLevel = null;
       }
 
       term.innerHTML = '<div style="color:var(--forge-text-muted);">Loading logs...</div>';

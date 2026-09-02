@@ -101,7 +101,6 @@ export function getComponentStyles(): string {
     .astryx-theme-toggle:hover {
       border-color: var(--forge-primary);
       background: var(--forge-bg-card-hover);
-      transform: scale(1.05);
     }
 
     .astryx-theme-toggle svg {

@@ -192,18 +192,50 @@ export function getDashboardScripts(): string {
       if (tabId === 'settings') { loadAudit(); if (typeof loadReliabilityDiagnostics === 'function') loadReliabilityDiagnostics(); }
     }
 
+    window.navigateToTab = function(tabId, params = {}) {
+      if (!tabId || !TAB_TITLES[tabId]) tabId = 'overview';
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set('tab', tabId);
+        url.hash = '#' + tabId;
+        
+        ['app', 'service', 'filter', 'db', 'table', 'traceId', 'search', 'level', 'target', 'section'].forEach(k => {
+          if (params[k] === undefined) url.searchParams.delete(k);
+        });
+
+        Object.entries(params).forEach(([k, v]) => {
+          if (v !== undefined && v !== null && v !== '') {
+            url.searchParams.set(k, String(v));
+          }
+        });
+
+        window.history.pushState({ tab: tabId, ...params }, '', url.toString());
+      } catch {}
+
+      if (params.app || params.service || params.filter) window._initialAppFilter = params.app || params.service || params.filter;
+      if (params.db) window._initialSelectedDb = params.db;
+      if (params.table) window._initialSelectedTable = params.table;
+      if (params.traceId || params.search) window._initialLogSearch = params.traceId || params.search;
+      if (params.level) window._initialLogLevel = params.level;
+      if (params.target) window._initialTrafficTarget = params.target;
+
+      switchTab(tabId, false);
+    };
+
     function syncTabFromHash() {
       const params = new URLSearchParams(window.location.search);
       let tabFromUrl = params.get('tab') || window.location.hash.replace('#', '');
       const dbParam = params.get('db');
       const appParam = params.get('app') || params.get('service') || params.get('filter');
+      const traceParam = params.get('traceId') || params.get('search');
+      const levelParam = params.get('level');
+      const targetParam = params.get('target');
 
-      if (dbParam) {
-        window._initialSelectedDb = dbParam;
-      }
-      if (appParam) {
-        window._initialAppFilter = appParam;
-      }
+      if (dbParam) window._initialSelectedDb = dbParam;
+      if (appParam) window._initialAppFilter = appParam;
+      if (traceParam) window._initialLogSearch = traceParam;
+      if (levelParam) window._initialLogLevel = levelParam;
+      if (targetParam) window._initialTrafficTarget = targetParam;
 
       let savedTab = null;
       try { savedTab = sessionStorage.getItem(TAB_KEY); } catch {}

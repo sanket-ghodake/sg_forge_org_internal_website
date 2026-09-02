@@ -9,7 +9,7 @@ export function getEmployeeStyles(): string {
     .emp-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.85rem; margin-top: 1rem; }
     .emp-stat-card { background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 1rem; display: flex; align-items: center; gap: 0.85rem; box-shadow: var(--forge-shadow-card); transition: var(--forge-transition); position: relative; overflow: hidden; }
     .emp-stat-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--forge-primary), var(--forge-accent)); opacity: 0.7; }
-    .emp-stat-card:hover { border-color: var(--forge-border-medium); transform: translateY(-2px); box-shadow: var(--forge-shadow-hover); }
+    .emp-stat-card:hover { border-color: var(--forge-border-medium); box-shadow: var(--forge-shadow-hover); }
     .emp-stat-icon { width: 38px; height: 38px; border-radius: var(--forge-radius-sm); background: var(--forge-bg-elevated); border: 1px solid var(--forge-border); display: flex; align-items: center; justify-content: center; font-size: 1.15rem; flex-shrink: 0; color: var(--forge-primary); }
     .emp-stat-info { display: flex; flex-direction: column; }
     .emp-stat-val { font-size: 1.35rem; font-weight: 800; color: var(--forge-text-main); line-height: 1.1; letter-spacing: -0.02em; }
@@ -86,8 +86,8 @@ export function getEmployeeStyles(): string {
     .status-pulse-dot.suspended { background: var(--forge-text-muted); }
 
     /* MS Teams Endless Org Chart Canvas & Zoom Toolbar */
-    .org-chart-wrapper { position: relative; width: 100%; height: calc(100vh - 200px); min-height: 400px; max-height: calc(100vh - 200px); overflow: hidden; background: radial-gradient(var(--forge-border) 1px, transparent 1px); background-size: 20px 20px; background-color: var(--forge-bg-surface); border-radius: var(--forge-radius-md); border: 1px solid var(--forge-border); user-select: none; cursor: grab; display: flex; justify-content: center; align-items: flex-start; }
-    .org-chart-wrapper.panning { cursor: grabbing; }
+    .org-chart-wrapper { position: relative; width: 100%; height: calc(100vh - 200px); min-height: 400px; max-height: calc(100vh - 200px); overflow: hidden; background: radial-gradient(var(--forge-border) 1px, transparent 1px); background-size: 20px 20px; background-color: var(--forge-bg-surface); border-radius: var(--forge-radius-md); border: 1px solid var(--forge-border); user-select: none; cursor: default; display: flex; justify-content: center; align-items: flex-start; }
+    .org-chart-wrapper.panning { cursor: default; }
     .org-chart-canvas { position: absolute; top: 0; left: 0; right: 0; min-height: 100%; display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem 4rem; transform-origin: top center; transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1); width: 100%; max-width: 100%; box-sizing: border-box; }
     
     /* Floating Floating Zoom & Pan Toolbar */
@@ -115,11 +115,11 @@ export function getEmployeeStyles(): string {
 
     /* Small Navigation Buttons (Upward Manager & Peer Traversal) */
     .teams-up-nav-btn { background: var(--forge-bg-elevated); border: 1px dashed var(--forge-border-medium); border-radius: var(--forge-radius-full); padding: 0.28rem 0.85rem; font-size: 0.74rem; font-weight: 600; color: var(--forge-primary); display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; transition: var(--forge-transition); box-shadow: var(--forge-shadow-card); margin-bottom: 0.35rem; }
-    .teams-up-nav-btn:hover { border-color: var(--forge-primary); background: var(--forge-bg-card-hover); transform: translateY(-2px); box-shadow: var(--forge-shadow-hover); }
+    .teams-up-nav-btn:hover { border-color: var(--forge-primary); background: var(--forge-bg-card-hover); box-shadow: var(--forge-shadow-hover); }
     
     /* Manager Node Card */
     .teams-manager-node { background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-md); padding: 0.75rem 1.1rem; width: min(92vw, 380px); min-width: 260px; display: flex; align-items: center; gap: 0.85rem; cursor: pointer; transition: var(--forge-transition); box-shadow: var(--forge-shadow-card); position: relative; }
-    .teams-manager-node:hover { border-color: var(--forge-primary); background: var(--forge-bg-card-hover); transform: translateY(-2px); box-shadow: var(--forge-shadow-hover); }
+    .teams-manager-node:hover { border-color: var(--forge-primary); background: var(--forge-bg-card-hover); box-shadow: var(--forge-shadow-hover); }
     .teams-connector-vertical { width: 2px; height: 26px; background: linear-gradient(180deg, var(--forge-border-medium), var(--forge-primary)); margin: 0 auto; position: relative; }
     .teams-connector-vertical::after { content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 6px; height: 6px; border-radius: 50%; background: var(--forge-primary); }
 
@@ -141,7 +141,7 @@ export function getEmployeeStyles(): string {
     .teams-branch-header { font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--forge-primary); background: var(--forge-bg-card); padding: 0.28rem 0.85rem; border-radius: var(--forge-radius-full); border: 1px solid var(--forge-border); margin-bottom: 0.85rem; display: inline-flex; align-items: center; gap: 0.4rem; }
     .teams-reports-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; width: 100%; max-width: 1050px; justify-content: center; }
     .teams-report-card { background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-md); padding: 0.8rem 0.95rem; display: flex; flex-direction: column; justify-content: space-between; gap: 0.6rem; transition: var(--forge-transition); box-shadow: var(--forge-shadow-card); cursor: pointer; position: relative; min-width: 200px; }
-    .teams-report-card:hover { border-color: var(--forge-primary); transform: translateY(-2px); box-shadow: var(--forge-shadow-hover); background: var(--forge-bg-card-hover); }
+    .teams-report-card:hover { border-color: var(--forge-primary); box-shadow: var(--forge-shadow-hover); background: var(--forge-bg-card-hover); }
     .teams-report-header { display: flex; align-items: center; gap: 0.75rem; }
     .teams-report-name { font-size: 0.88rem; font-weight: 700; color: var(--forge-text-main); }
     .teams-report-title { font-size: 0.74rem; color: var(--forge-text-muted); }
@@ -151,7 +151,7 @@ export function getEmployeeStyles(): string {
     .teams-modal-chain { display: flex; flex-direction: column; align-items: center; width: 100%; gap: 0; }
     .teams-modal-step { display: flex; flex-direction: column; align-items: center; width: 100%; }
     .teams-modal-person-card { background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-md); padding: 0.85rem 1.15rem; width: min(100%, 420px); display: flex; align-items: center; gap: 0.85rem; box-shadow: var(--forge-shadow-card); cursor: pointer; transition: var(--forge-transition); position: relative; }
-    .teams-modal-person-card:hover { border-color: var(--forge-primary); transform: translateY(-2px); box-shadow: var(--forge-shadow-hover); background: var(--forge-bg-card-hover); }
+    .teams-modal-person-card:hover { border-color: var(--forge-primary); box-shadow: var(--forge-shadow-hover); background: var(--forge-bg-card-hover); }
     .teams-modal-level-badge { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--forge-primary); background: var(--forge-bg-elevated); padding: 0.1rem 0.45rem; border-radius: var(--forge-radius-full); border: 1px solid var(--forge-border); display: inline-block; margin-bottom: 0.2rem; }
     .teams-modal-connector { display: flex; flex-direction: column; align-items: center; height: 26px; justify-content: center; color: var(--forge-text-muted); font-size: 0.8rem; }
     .teams-modal-connector-line { width: 2px; height: 100%; background: linear-gradient(180deg, var(--forge-primary), var(--forge-border-medium)); }
@@ -159,7 +159,7 @@ export function getEmployeeStyles(): string {
     .teams-modal-reports-container { width: 100%; margin-top: 1rem; padding-top: 0.85rem; border-top: 1px solid var(--forge-border); }
     .teams-modal-reports-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.65rem; width: 100%; margin-top: 0.65rem; }
     .teams-modal-report-item { background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.65rem 0.85rem; display: flex; align-items: center; gap: 0.65rem; cursor: pointer; transition: var(--forge-transition); }
-    .teams-modal-report-item:hover { border-color: var(--forge-primary); background: var(--forge-bg-card-hover); transform: translateY(-1px); }
+    .teams-modal-report-item:hover { border-color: var(--forge-primary); background: var(--forge-bg-card-hover); }
 
     /* Slide-Over Employee Detail Drawer */
     .emp-drawer-backdrop { position: fixed; top: 48px; left: 0; right: 0; bottom: 0; width: 100vw; height: calc(100vh - 48px); background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; z-index: 90; opacity: 0; pointer-events: none; transition: opacity 0.22s ease; }

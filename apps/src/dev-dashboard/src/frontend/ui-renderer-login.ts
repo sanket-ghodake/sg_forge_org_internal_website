@@ -264,12 +264,11 @@ export function renderDevLoginHtml(errorMessage: string = ''): string {
 
     .login-submit-btn:hover {
       filter: brightness(1.08);
-      transform: translateY(-1px);
       box-shadow: 0 6px 18px var(--forge-primary-glow, rgba(36, 180, 126, 0.45));
     }
 
     .login-submit-btn:active {
-      transform: translateY(0);
+      filter: brightness(0.96);
     }
 
     .login-error-box {

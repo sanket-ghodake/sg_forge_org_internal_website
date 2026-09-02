@@ -52,7 +52,6 @@ export function getTrafficStyles(): string {
     .traffic-signal-card:hover {
       border-color: var(--forge-border-medium);
       background: var(--forge-bg-card-hover);
-      transform: translateY(-1px);
     }
     .signal-top {
       display: flex;

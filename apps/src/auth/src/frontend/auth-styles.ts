@@ -98,7 +98,6 @@ export function getAuthViewStyles(): string {
 
     .auth-submit-btn:hover {
       opacity: 0.92;
-      transform: translateY(-1px);
     }
 
     .auth-alert {

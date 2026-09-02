@@ -52,7 +52,6 @@ export function getIssuesStyles(): string {
     .issues-vital-card:hover {
       border-color: var(--forge-border-medium);
       background: var(--forge-bg-card-hover);
-      transform: translateY(-1px);
     }
 
     /* ========================================================================= */
@@ -141,7 +140,6 @@ export function getIssuesStyles(): string {
     .issue-item-card:hover {
       border-color: var(--forge-border-medium);
       background: var(--forge-bg-card-hover);
-      transform: translateY(-1px);
     }
     .issue-item-main {
       flex: 1;

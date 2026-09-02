@@ -180,14 +180,19 @@ export function getDbDashboardScripts(): string {
         if (res.rows && res.rows.length) {
           currentLoadedTables = res.rows.map(r => r.name);
           if (badge) badge.textContent = res.rows.length + ' tables';
+          const targetTable = (window._initialSelectedTable && res.rows.some(r => r.name === window._initialSelectedTable))
+            ? window._initialSelectedTable
+            : res.rows[0].name;
+          window._initialSelectedTable = null;
+
           c.innerHTML = res.rows.map(r =>
-            '<div class="db-table-item ' + (r.name === currentSelectedTable ? 'active' : '') + '" onclick="selectTable(\\'' + dbName + '\\', \\'' + r.name + '\\')">' +
+            '<div class="db-table-item ' + (r.name === targetTable ? 'active' : '') + '" onclick="selectTable(\\'' + dbName + '\\', \\'' + r.name + '\\')">' +
               '<span>📄 <strong>' + r.name + '</strong></span>' +
               '<span style="font-size:0.7rem; color:var(--forge-text-muted);">' + r.type + '</span>' +
             '</div>'
           ).join('');
           renderQuickQueries(dbName, currentLoadedTables);
-          selectTable(dbName, res.rows[0].name);
+          selectTable(dbName, targetTable);
         } else {
           currentLoadedTables = [];
           if (badge) badge.textContent = '0 tables';

@@ -101,7 +101,6 @@ export function getOverviewStyles(): string {
     .overview-vital-card:hover {
       border-color: var(--forge-border-medium);
       background: var(--forge-bg-card-hover);
-      transform: translateY(-1px);
     }
     .vital-top {
       display: flex;
@@ -204,7 +203,6 @@ export function getOverviewStyles(): string {
       border-color: var(--forge-primary);
       background: var(--forge-bg-card-hover);
       box-shadow: 0 0 10px rgba(62, 207, 142, 0.1);
-      transform: translateY(-1px);
     }
     .node-title-row {
       display: flex;

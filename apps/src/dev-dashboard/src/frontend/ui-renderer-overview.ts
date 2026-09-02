@@ -132,7 +132,7 @@ export function renderOverviewTab(): string {
               <span>1. Ingress</span>
               <span class="badge-dot" style="background: var(--forge-success);"></span>
             </div>
-            <div class="topology-node-card" onclick="switchTab('settings')" title="Caddy Reverse Proxy Gateway">
+            <div class="topology-node-card" onclick="window.navigateToTab ? window.navigateToTab('settings') : switchTab('settings')" title="Caddy Reverse Proxy Gateway">
               <div class="node-title-row">
                 <span class="node-name">Caddy Gateway</span>
                 <span class="astryx-micro-pill">:80/:443</span>
@@ -168,7 +168,7 @@ export function renderOverviewTab(): string {
               <span>3. Platform APIs</span>
               <span class="badge-dot" style="background: var(--forge-success);"></span>
             </div>
-            <div class="topology-node-card" onclick="switchTab('services')" title="Portal API Service">
+            <div class="topology-node-card" onclick="window.navigateToTab ? window.navigateToTab('services', { service: 'portal' }) : switchTab('services')" title="Portal API Service">
               <div class="node-title-row">
                 <span class="node-name">Portal API</span>
                 <span class="astryx-micro-pill">:3001</span>
@@ -178,7 +178,7 @@ export function renderOverviewTab(): string {
                 <span style="color: var(--forge-success);" id="topo-node-3001-latency">-- ms</span>
               </div>
             </div>
-            <div class="topology-node-card" onclick="switchTab('services')" title="Developer Center & Diagnostics">
+            <div class="topology-node-card" onclick="window.navigateToTab ? window.navigateToTab('services', { service: 'dev-dashboard' }) : switchTab('services')" title="Developer Center & Diagnostics">
               <div class="node-title-row">
                 <span class="node-name">Dev Dashboard</span>
                 <span class="astryx-micro-pill">:3002</span>
@@ -196,7 +196,7 @@ export function renderOverviewTab(): string {
               <span>4. Micro-Apps</span>
               <span class="badge-dot" style="background: var(--forge-success);"></span>
             </div>
-            <div class="topology-node-card" onclick="switchTab('employees')" title="Employee Directory & Org Studio">
+            <div class="topology-node-card" onclick="window.navigateToTab ? window.navigateToTab('employees') : switchTab('employees')" title="Employee Directory & Org Studio">
               <div class="node-title-row">
                 <span class="node-name">Directory Studio</span>
                 <span class="astryx-micro-pill">:3003</span>
@@ -214,7 +214,7 @@ export function renderOverviewTab(): string {
               <span>5. Data & Logs</span>
               <span class="badge-dot" style="background: var(--forge-success);"></span>
             </div>
-            <div class="topology-node-card" onclick="switchTab('database')" title="Dedicated Turso / libSQL Storage">
+            <div class="topology-node-card" onclick="window.navigateToTab ? window.navigateToTab('database') : switchTab('database')" title="Dedicated Turso / libSQL Storage">
               <div class="node-title-row">
                 <span class="node-name">Turso libSQL</span>
                 <span class="astryx-micro-pill">SQLite</span>
@@ -224,7 +224,7 @@ export function renderOverviewTab(): string {
                 <span style="color: var(--forge-success);" id="topo-db-status">ONLINE</span>
               </div>
             </div>
-            <div class="topology-node-card" onclick="switchTab('logs')" title="Zero-Disk Telemetry Buffer">
+            <div class="topology-node-card" onclick="window.navigateToTab ? window.navigateToTab('logs') : switchTab('logs')" title="Zero-Disk Telemetry Buffer">
               <div class="node-title-row">
                 <span class="node-name">SSE Ring Buffer</span>
                 <span class="astryx-micro-pill">Stream</span>

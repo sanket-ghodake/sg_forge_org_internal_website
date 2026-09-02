@@ -439,7 +439,7 @@ export function getOverlayStyles(): string {
 
     /* ── Astryx Modern Floating Tooltips & Popovers (Anti-Browser Defaults) ── */
     [data-astryx-tooltip], [data-tooltip] {
-      cursor: help;
+      cursor: inherit;
     }
     .astryx-floating-tooltip {
       position: fixed;
@@ -458,14 +458,12 @@ export function getOverlayStyles(): string {
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       opacity: 0;
-      transform: translateY(4px) scale(0.97);
-      transition: opacity 0.14s cubic-bezier(0.16, 1, 0.3, 1), transform 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.12s ease;
       display: none;
     }
     .astryx-floating-tooltip.visible {
       display: block;
       opacity: 1;
-      transform: translateY(0) scale(1);
     }
     .astryx-tooltip-title {
       font-weight: 700;

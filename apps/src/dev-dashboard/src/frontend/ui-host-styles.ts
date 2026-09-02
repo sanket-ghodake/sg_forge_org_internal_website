@@ -77,11 +77,10 @@ export function getHostStyles(): string {
       align-items: center;
     }
     .ha-badge-repo, .ha-badge-host, .ha-status-badge {
-      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
-      cursor: help;
+      transition: box-shadow 0.15s ease, filter 0.15s ease;
+      cursor: default;
     }
     .ha-badge-repo:hover, .ha-badge-host:hover, .ha-status-badge:hover {
-      transform: translateY(-1px) scale(1.04);
       filter: brightness(1.15);
     }
     .ha-stages-grid {
@@ -105,7 +104,6 @@ export function getHostStyles(): string {
     .ha-stage-card:hover {
       border-color: var(--forge-border-medium);
       background: var(--forge-bg-card-hover);
-      transform: translateY(-2px);
     }
     .ha-stage-card::before {
       content: '';
@@ -270,7 +268,6 @@ export function getHostStyles(): string {
     .host-vital-gauge-card:hover {
       border-color: var(--forge-border-medium);
       background: var(--forge-bg-card-hover);
-      transform: translateY(-1px);
     }
     .gauge-circle-container {
       display: flex;

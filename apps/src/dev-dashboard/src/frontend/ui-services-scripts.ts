@@ -108,6 +108,14 @@ export function getServicesDashboardScripts(): string {
         if (countStop) countStop.textContent = _cachedServices.filter(s => s.status === 'STOPPED').length;
         if (countFast) countFast.textContent = _cachedServices.filter(s => s.latencyMs < 5).length;
 
+        if (window._initialAppFilter) {
+          const searchInput = document.getElementById('services-search-input');
+          if (searchInput) searchInput.value = window._initialAppFilter;
+          const match = _cachedServices.find(s => s.id === window._initialAppFilter || s.name.toLowerCase().includes(window._initialAppFilter.toLowerCase()));
+          if (match) openServiceDrawer(match.id);
+          window._initialAppFilter = null;
+        }
+
         renderFilteredServicesTable();
       } catch (err) { console.error('Services load failed', err); }
     }

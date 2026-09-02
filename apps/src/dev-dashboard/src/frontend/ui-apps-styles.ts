@@ -23,8 +23,8 @@ export function getAppsStyles(): string {
        2. Rich App Cards Grid View
        ============================================================================== */
     .apps-grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; margin-top: 1rem; }
-    .app-card { background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-md); padding: 1.15rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; position: relative; }
-    .app-card:hover { border-color: var(--forge-border-medium); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }
+    .app-card { background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-md); padding: 1.15rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; transition: border-color 0.2s ease, box-shadow 0.2s ease; position: relative; }
+    .app-card:hover { border-color: var(--forge-border-medium); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }
     .app-card.card-stopped { opacity: 0.85; border-style: dashed; }
 
     .app-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem; }
@@ -85,7 +85,7 @@ export function getAppsStyles(): string {
     .required-star { color: var(--forge-accent); font-weight: 700; margin-left: 2px; }
     
     .astryx-micro-btn { background: var(--forge-bg-card-hover); border: 1px solid var(--forge-border); color: var(--forge-primary); font-size: 0.68rem; font-weight: 650; padding: 0.15rem 0.5rem; border-radius: var(--forge-radius-sm); cursor: pointer; transition: all 0.15s ease; display: inline-flex; align-items: center; gap: 0.25rem; }
-    .astryx-micro-btn:hover { border-color: var(--forge-primary); background: rgba(62, 207, 142, 0.12); color: var(--forge-primary-hover); transform: translateY(-1px); }
+    .astryx-micro-btn:hover { border-color: var(--forge-primary); background: rgba(62, 207, 142, 0.12); color: var(--forge-primary-hover); }
     
     .font-mono { font-family: 'Geist Mono', ui-monospace, SFMono-Regular, monospace !important; }
     

@@ -50,7 +50,7 @@ export function getPortalCustomStyles(): string {
       border-radius: 50%; background: transparent; border: 2px solid transparent; cursor: pointer;
       transition: var(--forge-transition); user-select: none; outline: none; box-sizing: border-box;
     }
-    .user-profile-trigger:hover, .user-profile-trigger.active { border-color: var(--forge-primary); box-shadow: 0 0 10px -2px var(--forge-primary); transform: scale(1.05); }
+    .user-profile-trigger:hover, .user-profile-trigger.active { border-color: var(--forge-primary); box-shadow: 0 0 10px -2px var(--forge-primary); }
     .user-avatar-initial {
       width: 28px; height: 28px; border-radius: 50%; background: var(--forge-primary); color: var(--forge-bg-root);
       display: flex; align-items: center; justify-content: center; font-size: 0.82rem; font-weight: 700; flex-shrink: 0;
@@ -104,12 +104,12 @@ export function getPortalCustomStyles(): string {
     .portal-nav-item {
       display: flex; align-items: center; height: 36px; padding: 0 8px; border-radius: var(--forge-radius-sm); color: var(--forge-text-muted);
       text-decoration: none; font-size: 0.82rem; font-weight: 500; margin-bottom: 2px; cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.15s ease; border: 1px solid transparent;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease; border: 1px solid transparent;
       user-select: none; white-space: nowrap; overflow: hidden; position: relative; background: transparent; width: 100%; box-sizing: border-box; outline: none;
     }
-    .portal-nav-item:hover { background: var(--forge-bg-card); color: var(--forge-text-main); border-color: var(--forge-border); transform: translateX(2px); }
+    .portal-nav-item:hover { background: var(--forge-bg-card); color: var(--forge-text-main); border-color: var(--forge-border); }
     .portal-nav-item:focus-visible { box-shadow: 0 0 0 2px var(--forge-primary); }
-    .portal-nav-item.active { background: var(--forge-bg-card-hover); color: var(--forge-primary); border-color: var(--forge-border-medium); font-weight: 600; box-shadow: inset 0 0 12px var(--forge-success-bg); transform: translateX(2px); }
+    .portal-nav-item.active { background: var(--forge-bg-card-hover); color: var(--forge-primary); border-color: var(--forge-border-medium); font-weight: 600; box-shadow: inset 0 0 12px var(--forge-success-bg); }
     .portal-nav-item.active::before { content: ''; position: absolute; left: 2px; top: 6px; bottom: 6px; width: 3px; border-radius: var(--forge-radius-full); background: var(--forge-primary); box-shadow: 0 0 8px var(--forge-primary); }
     .portal-nav-icon { min-width: 24px; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-right: 8px; color: var(--forge-text-muted); transition: color 0.15s ease; }
     .portal-nav-item:hover .portal-nav-icon, .portal-nav-item.active .portal-nav-icon { color: var(--forge-primary); }
@@ -179,10 +179,10 @@ export function getPortalCustomStyles(): string {
     .canvas-viewport-wrapper { position: relative; width: 100%; border-radius: var(--forge-radius); overflow: hidden; border: 1px solid var(--forge-border); }
     .canvas-viewport-frame {
       width: 100%; height: 620px; background: var(--forge-bg-surface);
-      position: relative; overflow: auto; cursor: grab; user-select: none;
+      position: relative; overflow: auto; cursor: default; user-select: none;
       background-image: radial-gradient(var(--forge-border) 1px, transparent 1px); background-size: 24px 24px;
     }
-    .canvas-viewport-frame.is-dragging { cursor: grabbing; }
+    .canvas-viewport-frame.is-dragging { cursor: default; }
     .canvas-pan-surface { min-width: 1600px; min-height: 800px; position: relative; transform-origin: 0 0; transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1); }
     .canvas-nodes-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
 
@@ -213,7 +213,7 @@ export function getPortalCustomStyles(): string {
       position: absolute; bottom: 0.85rem; right: 0.85rem; width: 140px; height: 80px;
       background: rgba(18, 18, 18, 0.88); border: 1px solid var(--forge-border-medium);
       border-radius: var(--forge-radius-sm); z-index: 10; backdrop-filter: blur(12px);
-      cursor: crosshair; box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      cursor: default; box-shadow: 0 4px 16px rgba(0,0,0,0.5);
     }
     .minimap-viewport-indicator {
       position: absolute; border: 1.5px solid var(--forge-primary);
@@ -258,7 +258,7 @@ export function getPortalCustomStyles(): string {
     .divisions-matrix-desc { margin: 0.2rem 0 0; font-size: 0.78rem; color: var(--forge-text-muted); }
     .divisions-fleet-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1rem; }
     .division-fleet-card { background: var(--forge-bg-surface); border: 1px solid var(--forge-border); border-radius: var(--forge-radius); padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; transition: var(--forge-transition); }
-    .division-fleet-card:hover { border-color: var(--forge-border-medium); transform: translateY(-2px); box-shadow: var(--forge-shadow-hover); }
+    .division-fleet-card:hover { border-color: var(--forge-border-medium); box-shadow: var(--forge-shadow-hover); }
     .div-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.65rem; border-bottom: 1px solid var(--forge-border); padding-bottom: 0.5rem; }
     .div-card-title { margin: 0; font-size: 0.92rem; font-weight: 700; color: var(--forge-text-main); }
     .div-card-subtitle { font-size: 0.7rem; color: var(--forge-text-muted); }
@@ -279,7 +279,7 @@ export function getPortalCustomStyles(): string {
     .tier-badge { font-size: 0.68rem; font-family: var(--forge-font-mono, monospace); color: var(--forge-primary); }
     .tier-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.65rem; }
     .leadership-node-item { display: flex; align-items: center; gap: 0.5rem; background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.45rem 0.6rem; cursor: pointer; transition: var(--forge-transition); }
-    .leadership-node-item:hover { border-color: var(--forge-primary); transform: translateX(2px); }
+    .leadership-node-item:hover { border-color: var(--forge-primary); }
 
     /* ── Apps Hub Clean & Human-Centric Styles ── */
     .apps-hub-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--forge-border); padding-bottom: 1.25rem; }
@@ -306,7 +306,7 @@ export function getPortalCustomStyles(): string {
     .pinned-panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap; gap: 0.5rem; }
     .pinned-apps-dock { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.85rem; }
     .pinned-dock-card { display: flex; flex-direction: row; align-items: center; gap: 0.85rem; background: var(--forge-bg-card); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.75rem 1rem; text-decoration: none; color: var(--forge-text-main); transition: var(--forge-transition); box-sizing: border-box; white-space: nowrap; }
-    .pinned-dock-card:hover { border-color: var(--forge-primary); transform: translateY(-1px); background: var(--forge-bg-card-hover); }
+    .pinned-dock-card:hover { border-color: var(--forge-primary); background: var(--forge-bg-card-hover); }
     .dock-card-icon { width: 36px; height: 36px; border-radius: 6px; background: var(--forge-bg-surface); border: 1px solid var(--forge-border); display: inline-flex; align-items: center; justify-content: center; color: var(--forge-primary); flex-shrink: 0; }
     .dock-card-icon svg { display: block; flex-shrink: 0; width: 18px; height: 18px; }
     .dock-card-info { display: flex; flex-direction: column; flex: 1; min-width: 0; justify-content: center; }
@@ -326,7 +326,7 @@ export function getPortalCustomStyles(): string {
     /* Apps Catalog Grid & Cards */
     .apps-catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.15rem; }
     .app-card-item { background: var(--forge-bg-surface); border: 1px solid var(--forge-border); border-radius: var(--forge-radius); padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; transition: var(--forge-transition); box-shadow: var(--forge-shadow-card); position: relative; }
-    .app-card-item:hover { border-color: var(--forge-border-medium); transform: translateY(-2px); box-shadow: var(--forge-shadow-hover); }
+    .app-card-item:hover { border-color: var(--forge-border-medium); box-shadow: var(--forge-shadow-hover); }
     .app-card-item.is-pinned { border-color: rgba(var(--forge-primary-rgb, 99, 102, 241), 0.4); }
     .app-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
     .app-card-brand { display: flex; align-items: center; gap: 0.65rem; }
@@ -357,7 +357,7 @@ export function getPortalCustomStyles(): string {
     .marketplace-subtitle { margin: 0; font-size: 0.82rem; color: var(--forge-text-muted); max-width: 600px; }
     .marketplace-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1.25rem; }
     .marketplace-card-item { background: var(--forge-bg-surface); border: 1px solid var(--forge-border); border-radius: var(--forge-radius); padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; transition: var(--forge-transition); box-shadow: var(--forge-shadow-card); }
-    .marketplace-card-item:hover { border-color: var(--forge-primary); transform: translateY(-2px); box-shadow: var(--forge-shadow-hover); }
+    .marketplace-card-item:hover { border-color: var(--forge-primary); box-shadow: var(--forge-shadow-hover); }
     .market-card-header { display: flex; gap: 0.75rem; align-items: center; margin-bottom: 0.85rem; }
     .market-card-meta { flex: 1; }
     .market-card-title { margin: 0 0 0.2rem; font-size: 0.95rem; font-weight: 700; color: var(--forge-text-main); }
