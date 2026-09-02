@@ -5,22 +5,29 @@
 
 import { afterAll, beforeAll, describe, expect, it } from 'bun:test';
 import { startDevDashboardServer } from '../../src/server';
-import { seedAuthDatabase } from '@forge/auth';
+import { startAuthServer, seedAuthDatabase } from '@forge/auth';
 
 describe('E2E: Dev Dashboard Employee Studio Journey', () => {
   const TEST_PORT = 3290;
   let server: any;
+  let authServer: any;
   const AUTH_HEADERS = {
     'Content-Type': 'application/json',
     Authorization: 'Bearer password123',
   };
 
   beforeAll(() => {
+    try {
+      authServer = startAuthServer(3004);
+    } catch {
+      // 3004 already active in background
+    }
     server = startDevDashboardServer(TEST_PORT);
   });
 
   afterAll(() => {
     if (server) server.stop(true);
+    if (authServer) authServer.stop(true);
     seedAuthDatabase(true);
   });
 

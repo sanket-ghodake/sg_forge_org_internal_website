@@ -21,6 +21,18 @@ import {
   handleScopedHierarchy,
   handleSetPassword,
 } from './backend/api-handlers';
+import {
+  handleGetOrgTree,
+  handleListEmployees,
+  handleGetEmployee,
+  handleCreateEmployee,
+  handleUpdateEmployee,
+  handleRevokeEmployee,
+  handleBatchImport,
+  handleBulkAction,
+  handleExportEmployees,
+} from './backend/api-org-handlers';
+
 import { authTelemetry } from './backend/telemetry';
 import { applySecurityHeaders } from './backend/security-headers';
 import { renderLoginHtml } from './frontend/login-view';
@@ -104,6 +116,74 @@ export function startAuthServer(port: number = PORT) {
       return applySecurityHeaders(response);
     }
 
+    // ── Organization Tree & Hierarchy Engine ──
+    if (path === '/api/v1/auth/org/tree' || path === '/auth/api/v1/auth/org/tree') {
+      if (method === 'GET') response = handleGetOrgTree(req);
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    // ── Employee Directory CRUD, Search & Management ──
+    if (path === '/api/v1/auth/org/employees' || path === '/auth/api/v1/auth/org/employees') {
+      if (method === 'GET') response = handleListEmployees(req);
+      else if (method === 'POST') response = await handleCreateEmployee(req);
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    if (path === '/api/v1/auth/org/employees/update' || path === '/auth/api/v1/auth/org/employees/update') {
+      if (method === 'POST' || method === 'PATCH') response = await handleUpdateEmployee(req);
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    if (path === '/api/v1/auth/org/employees/revoke' || path === '/auth/api/v1/auth/org/employees/revoke') {
+      if (method === 'POST') response = await handleRevokeEmployee(req);
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    if (path === '/api/v1/auth/org/employees/import' || path === '/auth/api/v1/auth/org/employees/import') {
+      if (method === 'POST') response = await handleBatchImport(req);
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    if (path === '/api/v1/auth/org/employees/bulk-action' || path === '/auth/api/v1/auth/org/employees/bulk-action') {
+      if (method === 'POST') response = await handleBulkAction(req);
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    if (path === '/api/v1/auth/org/employees/export' || path === '/auth/api/v1/auth/org/employees/export') {
+      if (method === 'GET') response = handleExportEmployees(req);
+      else response = new Response('Method Not Allowed', { status: 405 });
+      return applySecurityHeaders(response);
+    }
+
+    if (
+      path.startsWith('/api/v1/auth/org/employees/') ||
+      path.startsWith('/auth/api/v1/auth/org/employees/')
+    ) {
+      const prefix = path.startsWith('/auth/api/v1/auth/org/employees/')
+        ? '/auth/api/v1/auth/org/employees/'
+        : '/api/v1/auth/org/employees/';
+      const subPath = path.slice(prefix.length);
+      const parts = subPath.split('/');
+      const empId = parts[0];
+
+      if (parts[1] === 'revoke' && method === 'POST') {
+        response = await handleRevokeEmployee(req, empId);
+      } else if (method === 'PATCH' || method === 'POST') {
+        response = await handleUpdateEmployee(req, empId);
+      } else if (method === 'GET') {
+        response = handleGetEmployee(req, empId);
+      } else {
+        response = new Response('Method Not Allowed', { status: 405 });
+      }
+      return applySecurityHeaders(response);
+    }
+
     if (
       path.startsWith('/api/v1/auth/hierarchy') ||
       path.startsWith('/auth/api/v1/auth/hierarchy')
@@ -119,6 +199,7 @@ export function startAuthServer(port: number = PORT) {
       }
       return applySecurityHeaders(response);
     }
+
 
     if (path === '/api/v1/auth/sessions/me' || path === '/auth/api/v1/auth/sessions/me') {
       if (method === 'GET') response = await handleGetMySessions(req);

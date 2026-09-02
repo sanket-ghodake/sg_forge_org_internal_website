@@ -4,7 +4,7 @@
  */
 
 import { describe, expect, it } from 'bun:test';
-import { hashPassword, sanitizeCsvField } from '../../src/backend/employee-controller';
+import { hashPassword, sanitizeCsvField } from '@forge/auth';
 
 describe('Unit: Employee Controller & Utilities', () => {
   describe('Password Hashing & Salt Verification', () => {

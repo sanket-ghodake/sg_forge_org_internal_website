@@ -4,8 +4,7 @@
  */
 
 import { afterAll, describe, expect, it } from 'bun:test';
-import { employeeController } from '../../src/backend/employee-controller';
-import { seedAuthDatabase } from '@forge/auth';
+import { employeeController, seedAuthDatabase } from '@forge/auth';
 
 describe('Security: Employee Zero-Trust & PII Defense', () => {
   afterAll(() => {

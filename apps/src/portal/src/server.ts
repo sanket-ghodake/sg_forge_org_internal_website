@@ -4,9 +4,17 @@
  * Integrated with Central Auth Microservice & ASVS 5.0 Authentication Gate.
  */
 
-import { authGuard, createLogger, createSafeHandler, handleBrandAssetRequest, isAppDisabled } from '@forge/sdk';
-import { renderPortalHtml, type HeaderUserContext, REGISTERED_PORTAL_APPS, ADMIN_ROSTER_MEMBERS } from './frontend';
-import { getOrgTree } from './backend/org-tree-service';
+import {
+  authGuard,
+  createLogger,
+  createSafeHandler,
+  handleBrandAssetRequest,
+  isAppDisabled,
+  fetchOrgTree,
+  fetchEmployeesList,
+  createEmployeeApi,
+} from '@forge/sdk';
+import { renderPortalHtml, type HeaderUserContext, REGISTERED_PORTAL_APPS } from './frontend';
 import {
   getLiveNotifications,
   markAllNotificationsAsRead,
@@ -60,10 +68,15 @@ export function startPortalServer(port: number = PORT) {
 
     // JSON API Endpoints for dynamic hydration
     if (url.pathname === '/api/v1/portal/canvas/tree' || url.pathname === '/portal/api/v1/portal/canvas/tree') {
-      const maxDepth = url.searchParams.get('max_depth') ? Number(url.searchParams.get('max_depth')) : 5;
-      const rootId = url.searchParams.get('root_id') || undefined;
-      const tree = getOrgTree({ maxDepth, rootId });
-      return Response.json({ ok: true, data: tree });
+      try {
+        const maxDepth = url.searchParams.get('max_depth') ? Number(url.searchParams.get('max_depth')) : 10;
+        const rootId = url.searchParams.get('root_id') || undefined;
+        const tree = await fetchOrgTree({ maxDepth, rootId });
+        return Response.json({ ok: true, data: tree });
+      } catch (err: any) {
+        logger.error('Failed to fetch org tree from Auth service:', err);
+        return Response.json({ ok: false, error: err?.message || 'Failed to fetch tree' }, { status: 500 });
+      }
     }
 
     if (url.pathname === '/api/v1/portal/apps' || url.pathname === '/portal/api/v1/portal/apps') {
@@ -72,7 +85,42 @@ export function startPortalServer(port: number = PORT) {
     }
 
     if (url.pathname === '/api/v1/portal/members' || url.pathname === '/portal/api/v1/portal/members') {
-      return Response.json({ ok: true, data: ADMIN_ROSTER_MEMBERS });
+      try {
+        const empData = await fetchEmployeesList({ limit: 500 });
+        const members = (empData.items || []).map((m: any) => ({
+          id: m.id,
+          name: m.display_name,
+          email: m.email,
+          jobTitle: m.job_title || 'Team Member',
+          department: m.department_name || 'Enterprise',
+          division: m.department_path ? m.department_path.split('/')[1] || m.department_name || 'General' : m.department_name || 'General',
+          status: m.status === 'ACTIVE' ? 'ONLINE' : 'OFFLINE',
+          avatarInitial: m.display_name ? m.display_name.split(' ').map((w: string) => w[0]).join('').slice(0, 2).toUpperCase() : '--',
+          roles: m.roles || [],
+        }));
+        return Response.json({ ok: true, data: members });
+      } catch (err: any) {
+        logger.error('Failed to fetch members list from Auth service:', err);
+        return Response.json({ ok: false, error: err?.message || 'Failed to fetch members' }, { status: 500 });
+      }
+    }
+
+    if (url.pathname === '/api/v1/portal/members/invite' || url.pathname === '/portal/api/v1/portal/members/invite') {
+      if (req.method === 'POST') {
+        try {
+          const body = await req.json();
+          const created = await createEmployeeApi({
+            display_name: body.name || body.display_name || 'New Member',
+            email: body.email,
+            job_title: body.jobTitle || body.job_title || 'Team Member',
+            department_id: body.department_id,
+            role: body.role || 'roles/employee',
+          });
+          return Response.json({ ok: true, data: created });
+        } catch (err: any) {
+          return Response.json({ ok: false, error: err?.message || 'Failed to invite member' }, { status: 400 });
+        }
+      }
     }
 
     // ── Live Notifications & Announcements API ──

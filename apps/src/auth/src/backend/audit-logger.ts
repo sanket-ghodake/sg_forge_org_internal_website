@@ -12,7 +12,12 @@ export type AuditAction =
   | 'AUTH_PASSWORD_CHANGED'
   | 'AUTH_MFA_ENROLLED'
   | 'AUTH_SESSION_REVOKED'
-  | 'AUTH_RATE_LIMITED';
+  | 'AUTH_RATE_LIMITED'
+  | 'EMPLOYEE_CREATED'
+  | 'EMPLOYEE_UPDATED'
+  | 'EMPLOYEE_REVOKED'
+  | 'EMPLOYEE_BULK_ACTION'
+  | 'EMPLOYEE_BATCH_IMPORTED';
 
 export interface AuditEventParams {
   orgId: string;

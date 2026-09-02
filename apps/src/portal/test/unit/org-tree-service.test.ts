@@ -4,7 +4,7 @@
  */
 
 import { describe, expect, it } from 'bun:test';
-import { getOrgTree } from '../../src/backend/org-tree-service';
+import { getOrgTree } from '@forge/auth';
 
 describe('Tier 1 Unit: Real Org Tree & 5-Level Progressive Resolution', () => {
   it('Arrange, Act, Assert: builds organizational tree bounded to maxDepth = 5', () => {

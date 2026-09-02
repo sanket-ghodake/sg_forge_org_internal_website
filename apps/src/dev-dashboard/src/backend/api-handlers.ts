@@ -1,13 +1,13 @@
 import { loadServiceRegistry, redactSensitiveData } from '@forge/sdk';
 import { dbDiagnostics, platformDb, remoteDbManager } from '../db';
 import { servicesController } from './services-controller';
-import { employeeController } from './employee-controller';
 import { telemetryEngine } from './telemetry';
 import { trafficController } from './traffic-controller';
 import { issuesController } from './issues-controller';
 import { hostController } from './host-controller';
 import { handleAppsApi } from './apps-controller';
 import { handleDevAuthApi } from './auth-session';
+import { handleDevEmployeeApi } from './api-employee-handlers';
 
 export async function handleApiRequest(req: Request, url: URL): Promise<Response | null> {
   const path = url.pathname.replace(/^\/devcenter/, '');
@@ -378,116 +378,10 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
     });
   }
 
-  // 18. Employee Studio - List & Filter
-  if (path === '/api/employees' && req.method === 'GET') {
-    const search = url.searchParams.get('search') || undefined;
-    const departmentId = url.searchParams.get('departmentId') || undefined;
-    const status = url.searchParams.get('status') || undefined;
-    const limit = Number(url.searchParams.get('limit') || 50);
-    const offset = Number(url.searchParams.get('offset') || 0);
-
-    const result = employeeController.listEmployees({ search, departmentId, status, limit, offset });
-    return Response.json({ status: 'ok', ...result });
-  }
-
-  // 18b. Employee Hierarchy Lookup
-  if (path === '/api/employees/hierarchy' && req.method === 'GET') {
-    const userId = url.searchParams.get('userId');
-    if (!userId) return Response.json({ error: 'Missing userId parameter' }, { status: 400 });
-    const result = employeeController.getEmployeeHierarchy(userId);
-    if (!result) return Response.json({ error: 'Employee not found' }, { status: 404 });
-    return Response.json({ status: 'ok', ...result });
-  }
-
-  // 18c. Create Single Employee
-  if (path === '/api/employees' && req.method === 'POST') {
-    try {
-      const body: any = await req.json().catch(() => null);
-      if (!body) return Response.json({ error: 'Invalid JSON body' }, { status: 400 });
-      const created = employeeController.createEmployee(body);
-      return Response.json({ status: 'ok', employee: created }, { status: 201 });
-    } catch (err: any) {
-      return Response.json({ error: err?.message || 'Failed to create employee' }, { status: 400 });
-    }
-  }
-
-  // 18d. Update Single Employee
-  if (path === '/api/employees/update' && req.method === 'POST') {
-    try {
-      const body: any = await req.json().catch(() => null);
-      if (!body || !body.id) return Response.json({ error: 'Missing employee ID' }, { status: 400 });
-      const updated = employeeController.updateEmployee(body.id, body);
-      return Response.json(updated);
-    } catch (err: any) {
-      return Response.json({ error: err?.message || 'Failed to update employee' }, { status: 400 });
-    }
-  }
-
-  // 18e. Revoke Employee Active Sessions
-  if (path === '/api/employees/revoke' && req.method === 'POST') {
-    try {
-      const body: any = await req.json().catch(() => null);
-      if (!body || !body.id) return Response.json({ error: 'Missing employee ID' }, { status: 400 });
-      const revoked = employeeController.revokeSessions(body.id);
-      return Response.json(revoked);
-    } catch (err: any) {
-      return Response.json({ error: err?.message || 'Failed to revoke sessions' }, { status: 400 });
-    }
-  }
-
-  // 18f. Bulk Import Employees (CSV / JSON)
-  if (path === '/api/employees/import' && req.method === 'POST') {
-    try {
-      const body: any = await req.json().catch(() => null);
-      if (!body || !Array.isArray(body.records)) {
-        return Response.json({ error: 'Invalid payload: records array is required' }, { status: 400 });
-      }
-      const summary = employeeController.batchImport(body.records, body.options || {});
-      return Response.json({ status: 'ok', summary });
-    } catch (err: any) {
-      return Response.json({ error: err?.message || 'Bulk import failed' }, { status: 400 });
-    }
-  }
-
-  // 18g. Export Employees
-  if (path === '/api/employees/export' && req.method === 'GET') {
-    const format = url.searchParams.get('format') || 'csv';
-    const data = employeeController.listEmployees({ search: url.searchParams.get('search') || undefined, departmentId: url.searchParams.get('departmentId') || undefined, status: url.searchParams.get('status') || undefined, limit: 5000, offset: 0 });
-
-    if (format === 'json') {
-      return new Response(JSON.stringify(data.items, null, 2), {
-        headers: { 'Content-Type': 'application/json; charset=utf-8', 'Content-Disposition': `attachment; filename="employees_export_${Date.now()}.json"` },
-      });
-    }
-
-    const headers = ['id', 'display_name', 'email', 'job_title', 'employee_code', 'department_name', 'manager_email', 'status', 'roles'];
-    const csv = headers.join(',') + '\n' + data.items.map(item => [
-      JSON.stringify(item.id || ''), JSON.stringify(item.display_name || ''), JSON.stringify(item.email || ''),
-      JSON.stringify(item.job_title || ''), JSON.stringify(item.employee_code || ''), JSON.stringify(item.department_name || ''),
-      JSON.stringify(item.manager_email || ''), JSON.stringify(item.status || ''), JSON.stringify((item.roles || []).join('; ')),
-    ].join(',')).join('\n');
-
-    return new Response(csv, {
-      headers: { 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': `attachment; filename="employees_export_${Date.now()}.csv"` },
-    });
-  }
-
-  // 18h. Employee Org Graph Tree
-  if (path === '/api/employees/tree' && req.method === 'GET') {
-    const orgId = url.searchParams.get('orgId') || 'org_main';
-    const tree = employeeController.getFullOrgTree(orgId);
-    return Response.json({ status: 'ok', ...tree });
-  }
-
-  // 18i. Employee Bulk Action
-  if (path === '/api/employees/bulk-action' && req.method === 'POST') {
-    try {
-      const body = await req.json();
-      const res = employeeController.bulkAction(body.orgId || 'org_main', body.action, body.userIds);
-      return Response.json(res);
-    } catch (err: any) {
-      return Response.json({ error: err?.message || 'Bulk action failed' }, { status: 400 });
-    }
+  // 18. Employee Studio APIs (Delegated to @forge/auth via SDK)
+  if (path.startsWith('/api/employees')) {
+    const empRes = await handleDevEmployeeApi(path, req, url);
+    if (empRes) return empRes;
   }
 
   return null;

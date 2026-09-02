@@ -5,8 +5,8 @@
 
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { getAuthDatabase } from '../apps/src/dev-dashboard/src/backend/employee-controller';
-import { executeBatchImport, type BatchImportRecord } from '../apps/src/dev-dashboard/src/backend/employee-import';
+import { getAuthDb } from '../apps/src/auth/src/db/db';
+import { executeBatchImport, type BatchImportRecord } from '../apps/src/auth/src/backend/employee-import';
 import { createLogger } from '@forge/sdk';
 
 const logger = createLogger('seed-cro-org');
@@ -23,7 +23,7 @@ export function seedCroOrganization(): void {
 
   logger.info(`Starting seeding of ${records.length} CRO hierarchy records...`);
 
-  const db = getAuthDatabase();
+  const db = getAuthDb();
 
   try {
     // Purge old transient test rows and orphaned dummy records

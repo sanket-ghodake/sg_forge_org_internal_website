@@ -1,13 +1,14 @@
 /**
- * @forge/portal - Real Organizational Tree & Hierarchy Engine (2026 LTS)
+ * @forge/auth - Real Organizational Tree & Hierarchy Engine (2026 LTS)
  * Resolves live SQLite employee records with 5-level depth bounding,
  * progressive subtree expansion, and zero data leakage.
  */
 
 import type { Database } from 'bun:sqlite';
-import { createLogger, getDatabaseClient, resolveCanonicalDbPath } from '@forge/sdk';
+import { createLogger } from '@forge/sdk';
+import { getAuthDb } from '../db/db';
 
-const logger = createLogger('portal-org-tree');
+const logger = createLogger('auth-org-tree');
 
 export interface OrgTreeNode {
   id: string;
@@ -32,14 +33,7 @@ export interface OrgTreeResponse {
   maxRenderedDepth: number;
   divisions: Array<{ name: string; headCount: number }>;
   root: OrgTreeNode | null;
-}
-
-export function resolveAuthDbPath(): string {
-  return resolveCanonicalDbPath('auth.db');
-}
-
-function getDatabase(): Database {
-  return getDatabaseClient('auth.db');
+  roots: OrgTreeNode[];
 }
 
 interface RawEmployeeRow {
@@ -69,37 +63,48 @@ function resolveLiveStatus(index: number, status: string): 'ONLINE' | 'BUSY' | '
 /**
  * Fetch and construct the real organizational tree with bounded depth (Default 5 levels).
  */
-export function getOrgTree(options: { maxDepth?: number; rootId?: string; department?: string } = {}): OrgTreeResponse {
-  const maxDepth = Math.max(1, Math.min(options.maxDepth || 5, 20));
-  const db = getDatabase();
+export function getRealOrgTree(
+  db: Database,
+  options: {
+    maxDepth?: number;
+    rootId?: string;
+    departmentFilter?: string;
+  } = {}
+): OrgTreeResponse {
+  const maxDepth = Math.max(1, Math.min(20, options.maxDepth || 10));
 
   try {
-    const rawRows = db
-      .query<RawEmployeeRow, []>(
-        `SELECT u.id, u.email, u.display_name, u.status,
-                p.job_title, p.employee_code,
-                r.related_to_id as manager_id,
-                n.name as department_name, n.path as department_path
-         FROM auth_users u
-         LEFT JOIN auth_employee_profiles p ON u.id = p.user_id
-         LEFT JOIN auth_org_nodes n ON p.org_node_id = n.id
-         LEFT JOIN auth_employee_relationships r ON u.id = r.employee_id AND r.is_primary = 1
-         WHERE u.principal_type IN ('EMPLOYEE', 'ADMIN')
-         ORDER BY u.display_name ASC;`
-      )
-      .all();
+    const rawRows = (db.query(`
+      SELECT 
+        u.id,
+        u.email,
+        u.display_name,
+        u.status,
+        p.job_title,
+        p.employee_code,
+        p.org_node_id,
+        r.related_to_id AS manager_id,
+        n.name AS department_name,
+        n.path AS department_path
+      FROM auth_users u
+      LEFT JOIN auth_employee_profiles p ON u.id = p.user_id
+      LEFT JOIN auth_org_nodes n ON p.org_node_id = n.id
+      LEFT JOIN auth_employee_relationships r ON u.id = r.employee_id AND r.is_primary = 1
+      ORDER BY u.created_at ASC;
+    `).all() as RawEmployeeRow[]);
 
-    if (rawRows.length === 0) {
+    if (!rawRows || rawRows.length === 0) {
       return {
         organizationName: 'SG Forge Enterprise',
         totalEmployees: 0,
         maxRenderedDepth: maxDepth,
         divisions: [],
         root: null,
+        roots: [],
       };
     }
 
-    // Map rows to intermediate objects
+    // Build Node Index Map and Direct Reports Registry
     const nodeMap = new Map<string, { raw: RawEmployeeRow; directReports: string[]; index: number }>();
     const divisionCounts = new Map<string, number>();
 
@@ -109,19 +114,21 @@ export function getOrgTree(options: { maxDepth?: number; rootId?: string; depart
       divisionCounts.set(div, (divisionCounts.get(div) || 0) + 1);
     });
 
-    // Populate direct reports
-    let detectedRootId: string | null = null;
+    // Populate Parent -> Children links
     rawRows.forEach((row) => {
-      if (row.manager_id && nodeMap.has(row.manager_id)) {
+      if (row.manager_id && nodeMap.has(row.manager_id) && row.manager_id !== row.id) {
         nodeMap.get(row.manager_id)!.directReports.push(row.id);
-      } else if (!detectedRootId && !row.manager_id) {
-        detectedRootId = row.id;
       }
     });
 
-    const targetRootId = options.rootId && nodeMap.has(options.rootId) ? options.rootId : detectedRootId || rawRows[0].id;
+    // Find Root Node
+    let targetRootId = options.rootId;
+    if (!targetRootId || !nodeMap.has(targetRootId)) {
+      const topLevel = rawRows.find((r) => !r.manager_id || !nodeMap.has(r.manager_id) || r.manager_id === r.id);
+      targetRootId = topLevel ? topLevel.id : rawRows[0].id;
+    }
 
-    // Helper to calculate total subtree count
+    // Recursive total subtree counter
     function countSubtree(nodeId: string): number {
       const entry = nodeMap.get(nodeId);
       if (!entry) return 0;
@@ -186,6 +193,7 @@ export function getOrgTree(options: { maxDepth?: number; rootId?: string; depart
       maxRenderedDepth: maxDepth,
       divisions,
       root: rootNode,
+      roots: rootNode ? [rootNode] : [],
     };
   } catch (err: any) {
     logger.error('Failed to construct real org tree from database:', err);
@@ -195,6 +203,11 @@ export function getOrgTree(options: { maxDepth?: number; rootId?: string; depart
       maxRenderedDepth: maxDepth,
       divisions: [],
       root: null,
+      roots: [],
     };
   }
+}
+
+export function getOrgTree(options: { maxDepth?: number; rootId?: string; department?: string } = {}): OrgTreeResponse {
+  return getRealOrgTree(getAuthDb(), options);
 }

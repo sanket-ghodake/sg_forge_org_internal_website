@@ -1,14 +1,14 @@
 /**
- * @forge/dev-dashboard - Employee Bulk Import Engine (2026 LTS)
+ * @forge/auth - Employee Bulk Import Engine (2026 LTS)
  * High-performance batch CSV/JSON importer with dry-run validation and atomic transactions.
  */
 
 import { Database } from 'bun:sqlite';
 import { randomBytes } from 'node:crypto';
 import { createLogger } from '@forge/sdk';
-import { hashPassword } from './employee-controller';
+import { hashPassword } from './crypto';
 
-const logger = createLogger('dev-dashboard-import');
+const logger = createLogger('auth-import');
 
 export interface BatchImportRecord {
   display_name: string;
@@ -99,95 +99,107 @@ export function executeBatchImport(
     let nodeId: string | null = null;
     const deptName = String(row.department || '').trim();
     if (deptName) {
-      const lower = deptName.toLowerCase();
-      if (nodeMap.has(lower)) {
-        nodeId = nodeMap.get(lower)!;
-      } else if (options.autoCreateDepartments && !options.dryRun) {
-        const newId = `node_${deptName.toLowerCase().replace(/[^a-z0-9]/g, '_')}`;
-        const divNode: any = db.query("SELECT id FROM auth_org_nodes WHERE type_id = 'type_division' LIMIT 1;").get();
-        const parentId = divNode?.id || 'node_root';
-        const path = `/root/auto/${newId}`;
-
-        db.run(
-          `INSERT OR IGNORE INTO auth_org_nodes (id, org_id, type_id, name, code, parent_id, path, created_at, updated_at)
-           VALUES (?, ?, 'type_department', ?, ?, ?, ?, ?, ?);`,
-          [newId, orgId, deptName, deptName.slice(0, 8).toUpperCase(), parentId, path, now, now]
-        );
-        nodeMap.set(lower, newId);
-        nodeId = newId;
+      const lowerDept = deptName.toLowerCase();
+      if (nodeMap.has(lowerDept)) {
+        nodeId = nodeMap.get(lowerDept)!;
+      } else if (options.autoCreateDepartments !== false) {
+        const newDeptId = `dept-${randomBytes(6).toString('hex')}`;
+        const slug = deptName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        const path = `/root/${slug}`;
+        if (!options.dryRun) {
+          db.run(
+            `INSERT INTO auth_org_nodes (id, org_id, type_id, parent_id, name, code, path, created_at, updated_at)
+             VALUES (?, ?, 'type_department', 'node_root', ?, ?, ?, ?, ?);`,
+            [newDeptId, orgId, deptName, slug.toUpperCase(), path, now, now]
+          );
+        }
+        nodeMap.set(lowerDept, newDeptId);
+        nodeId = newDeptId;
         validation.createdDepartments.push(deptName);
       }
     }
 
-    const existingRoles: any[] = db.query('SELECT id FROM auth_iam_roles;').all();
-    const validRoleIds = new Set<string>(existingRoles.map(r => r.id));
-
-    let assignedRole = String(row.role || 'roles/employee').trim();
-    if (assignedRole === 'roles/admin') assignedRole = 'roles/super_admin';
-    if (!validRoleIds.has(assignedRole)) assignedRole = 'roles/employee';
-
+    validation.valid++;
     validRows.push({
       email,
       name,
-      title: String(row.job_title || 'Employee').trim(),
-      code: row.employee_code ? String(row.employee_code).trim() : null,
+      title: row.job_title || 'Employee',
+      code: row.employee_code || null,
       nodeId,
-      role: assignedRole,
+      role: row.role || 'roles/employee',
       status: row.status || 'ACTIVE',
       managerEmail: row.manager_email ? String(row.manager_email).trim().toLowerCase() : null,
     });
-    validation.valid++;
   });
 
-  if (options.dryRun) {
-    return validation;
+  if (options.dryRun || validRows.length === 0) {
+    return {
+      ...validation,
+      created: 0,
+      updated: 0,
+      skipped: 0,
+    };
   }
 
-  // 2. Commit Phase (Atomic Transaction)
-  const { hash: defaultHash, salt: defaultSalt } = hashPassword('password123');
+  // 2. Execution Phase (Atomic Transaction)
+  let created = 0;
+  let updated = 0;
+  let skipped = 0;
+
+  const defaultPassword = 'password123';
+  const { hash, salt } = hashPassword(defaultPassword);
 
   db.transaction(() => {
-    for (const item of validRows) {
-      let userId = userEmailMap.get(item.email);
+    // A. Insert or update users & profiles
+    for (const r of validRows) {
+      if (userEmailMap.has(r.email)) {
+        const existingUserId = userEmailMap.get(r.email)!;
+        if (options.duplicateAction === 'error') {
+          throw new Error(`Duplicate employee email found: ${r.email}`);
+        } else if (options.duplicateAction === 'skip') {
+          skipped++;
+          continue;
+        }
 
-      if (!userId) {
-        userId = `usr-${randomBytes(6).toString('hex')}`;
+        // Default: Update
+        db.run(
+          `UPDATE auth_users SET display_name = ?, status = ?, updated_at = ? WHERE id = ?;`,
+          [r.name, r.status, now, existingUserId]
+        );
+        db.run(
+          `UPDATE auth_employee_profiles SET job_title = ?, employee_code = ?, org_node_id = ?, updated_at = ? WHERE user_id = ?;`,
+          [r.title, r.code, r.nodeId, now, existingUserId]
+        );
+        updated++;
+      } else {
+        // Create new
+        const newUserId = `usr-${randomBytes(6).toString('hex')}`;
         db.run(
           `INSERT INTO auth_users (id, org_id, email, password_hash, salt, display_name, principal_type, status, must_change_password, token_version, custom_attributes, created_at, updated_at)
            VALUES (?, ?, ?, ?, ?, ?, 'EMPLOYEE', ?, 1, 1, '{}', ?, ?);`,
-          [userId, orgId, item.email, defaultHash, defaultSalt, item.name, item.status, now, now]
+          [newUserId, orgId, r.email, hash, salt, r.name, r.status, now, now]
         );
-
         db.run(
           `INSERT INTO auth_employee_profiles (user_id, org_node_id, job_title, employee_code, created_at, updated_at)
            VALUES (?, ?, ?, ?, ?, ?);`,
-          [userId, item.nodeId, item.title, item.code, now, now]
+          [newUserId, r.nodeId, r.title, r.code, now, now]
         );
-
         const bindingId = `bind-${randomBytes(6).toString('hex')}`;
         db.run(
           `INSERT INTO auth_iam_policy_bindings (id, org_id, principal_id, role_id, resource_scope, created_at)
            VALUES (?, ?, ?, ?, 'org/*', ?);`,
-          [bindingId, orgId, userId, item.role, now]
+          [bindingId, orgId, newUserId, r.role, now]
         );
-
-        userEmailMap.set(item.email, userId);
-      } else if (options.duplicateAction === 'update') {
-        db.run(
-          `UPDATE auth_users SET display_name = ?, status = ?, updated_at = ? WHERE id = ?;`,
-          [item.name, item.status, now, userId]
-        );
-        db.run(
-          `UPDATE auth_employee_profiles SET org_node_id = ?, job_title = ?, employee_code = ?, updated_at = ? WHERE user_id = ?;`,
-          [item.nodeId, item.title, item.code, now, userId]
-        );
+        userEmailMap.set(r.email, newUserId);
+        created++;
       }
     }
 
-    for (const item of validRows) {
-      if (item.managerEmail && userEmailMap.has(item.managerEmail)) {
-        const employeeId = userEmailMap.get(item.email)!;
-        const managerId = userEmailMap.get(item.managerEmail)!;
+    // B. Link Manager Relationships
+    for (const r of validRows) {
+      if (r.managerEmail && userEmailMap.has(r.managerEmail)) {
+        const employeeId = userEmailMap.get(r.email)!;
+        const managerId = userEmailMap.get(r.managerEmail)!;
 
         if (employeeId !== managerId) {
           db.run(
@@ -203,15 +215,19 @@ export function executeBatchImport(
         }
       }
     }
-
-    const auditId = `aud-${randomBytes(6).toString('hex')}`;
-    db.run(
-      `INSERT INTO auth_audit_logs (id, org_id, actor_id, action, resource, status, details, ip_hash, timestamp)
-       VALUES (?, ?, 'devcenter-admin', 'iam.employees.batch_import', 'batch', 'SUCCESS', ?, '127.0.0.1', ?);`,
-      [auditId, orgId, JSON.stringify({ importedCount: validRows.length }), now]
-    );
   })();
 
-  logger.info(`Batch imported ${validRows.length} employees into auth.db`);
-  return validation;
+  logger.info(`Batch import finished: ${created} created, ${updated} updated, ${skipped} skipped, ${validation.invalid} invalid`);
+
+  return {
+    total: records.length,
+    valid: validRows.length,
+    invalid: validation.invalid,
+    errors: validation.errors,
+    created,
+    updated,
+    skipped,
+    createdDepartments: validation.createdDepartments,
+    dryRun: !!options.dryRun,
+  };
 }
