@@ -19,3 +19,4 @@ export * from './client-bridge';
 export * from './browser-bridge';
 export * from './branding';
 export * from './database';
+export * from './security-headers';

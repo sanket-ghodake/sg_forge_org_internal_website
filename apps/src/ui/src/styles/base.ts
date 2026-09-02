@@ -33,8 +33,8 @@ export function getBaseStyles(): string {
       --forge-success-bg: ${d.successBg};
       --forge-shadow-card: ${d.shadowCard};
       --forge-shadow-hover: ${d.shadowHover};
-      --forge-font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
-      --forge-font-mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+      --forge-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, Helvetica, Arial, sans-serif;
+      --forge-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
       --forge-warning: #f59e0b;
       --forge-warning-bg: rgba(245, 158, 11, 0.12);
       --forge-error: #ef4444;
@@ -69,8 +69,8 @@ export function getBaseStyles(): string {
       --forge-success-bg: ${l.successBg};
       --forge-shadow-card: ${l.shadowCard};
       --forge-shadow-hover: ${l.shadowHover};
-      --forge-font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
-      --forge-font-mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+      --forge-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, Helvetica, Arial, sans-serif;
+      --forge-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
       --forge-warning: #d97706;
       --forge-warning-bg: rgba(217, 119, 6, 0.10);
       --forge-error: #dc2626;
@@ -114,10 +114,9 @@ export function getBaseStyles(): string {
       background: transparent;
     }
 
-    @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap');
-
+    /* 100% Air-Gapped High Performance Typography (Zero External Network Imports) */
     body {
-      font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+      font-family: var(--forge-font-sans);
       background-color: var(--forge-bg-root);
       color: var(--forge-text-main);
       min-height: 100vh;
@@ -132,7 +131,7 @@ export function getBaseStyles(): string {
     }
 
     code, kbd, pre, .astryx-mono, .astryx-badge, .astryx-stat-value {
-      font-family: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+      font-family: var(--forge-font-mono);
       font-variant-numeric: tabular-nums;
     }
 

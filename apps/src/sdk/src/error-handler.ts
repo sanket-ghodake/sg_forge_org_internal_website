@@ -7,6 +7,7 @@
  */
 
 import { createLogger } from './logger';
+import { applySecurityHeaders } from './security-headers';
 
 export function createSafeHandler(
   serviceName: string,
@@ -32,14 +33,15 @@ export function createSafeHandler(
         traceId
       );
 
-      // Inject immutable trace ID into response headers
-      const headers = new Headers(response.headers);
+      // Inject immutable trace ID and apply strict air-gapped security headers
+      const securedResponse = applySecurityHeaders(response);
+      const headers = new Headers(securedResponse.headers);
       if (!headers.has('x-trace-id')) {
         headers.set('x-trace-id', traceId);
       }
-      return new Response(response.body, {
-        status: response.status,
-        statusText: response.statusText,
+      return new Response(securedResponse.body, {
+        status: securedResponse.status,
+        statusText: securedResponse.statusText,
         headers,
       });
     } catch (err: unknown) {
@@ -52,7 +54,7 @@ export function createSafeHandler(
         traceId
       );
 
-      return Response.json(
+      const errResponse = Response.json(
         {
           type: 'https://forge.internal/errors/internal-server-error',
           title: 'Internal Server Error',
@@ -70,6 +72,7 @@ export function createSafeHandler(
           },
         }
       );
+      return applySecurityHeaders(errResponse);
     }
   };
 }

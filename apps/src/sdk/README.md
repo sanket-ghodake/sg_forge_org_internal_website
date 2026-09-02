@@ -51,7 +51,12 @@ Enterprise Foundation SDK suite for **SG Forge** microservices (`apps/src/*`) an
 * `ForgeClient.init(options)`: `postMessage` handshake bridge between micro-app iframes and parent Portal for user context, auth tokens, theme synchronization, and authenticated `fetch()`.
 * `initBrowserLogBridge(serviceName, ingestEndpoint?)`: Client-side uncaught error & console interception with sanitized beacon forwarding to `/api/logs/browser`.
 
-### 7. Canonical Database Client & Lifecycle Manager (`database.ts`)
+### 7. Universal Air-Gapped Security & CSP Headers (`security-headers.ts`)
+* `AIR_GAPPED_CSP`: Strict offline Content-Security-Policy blocking all external script, font, and telemetry origins.
+* `AIR_GAPPED_SECURITY_HEADERS`: Comprehensive OWASP/ASVS 5.0 security headers (`HSTS`, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`).
+* `applySecurityHeaders(res, customHeaders?)`: Automatically wraps HTTP responses with air-gapped security boundaries.
+
+### 8. Canonical Database Client & Lifecycle Manager (`database.ts`)
 * `resolveCanonicalDataDir()`: Robust multi-context path resolver across host, containers, and subdirectories.
 * `getDatabaseClient(dbFileName, options)`: Standardized SQLite connection factory with WAL mode, foreign keys, and automatic test isolation (`NODE_ENV === 'test'`).
 * `closeDatabaseClient(dbInstance)`: Flushes uncheckpointed WAL pages (`PRAGMA wal_checkpoint(TRUNCATE)`) and closes handle cleanly.

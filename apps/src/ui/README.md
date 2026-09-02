@@ -28,8 +28,9 @@ Meta Astryx Design System v2.0.0 LTS tokens, CSS variables (`--forge-*`), dual-p
 * `themeTokens`: Dual palette definition for `dark` and `light` modes.
 * Standard CSS variables: `--forge-bg-root`, `--forge-bg-surface`, `--forge-bg-card`, `--forge-border`, `--forge-primary`, `--forge-accent`, `--forge-text-main`, `--forge-text-muted`.
 
-### 2. Universal Stylesheet & Components (`styles.ts`)
+### 2. Universal Stylesheet & 100% Air-Gapped Typography (`styles.ts` & `base.ts`)
 * `getAstryxStyles()`: High-contrast, responsive CSS string with glassmorphic cards, buttons, badges, tables, and custom slim scrollbars.
+* **100% Air-Gapped Typography**: Zero external font network calls (`@import`), powered by a modern native system font stack for ultra-fast rendering with zero external telemetry.
 
 ### 3. Unified Navigation Header (`header.ts`)
 * `getAstryxHeaderHtml(appName, subtitle)`: Standard enterprise navigation header with animated Sun/Moon SVG theme toggle, dynamic white-labeled logo, and cross-tab `localStorage` theme synchronization.

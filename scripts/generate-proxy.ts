@@ -16,17 +16,50 @@ export function generateCaddyfile(): string {
   const brand = loadBrandConfig();
   const services = loadServiceRegistry();
   const httpPort = process.env.HTTP_PORT || '80';
+  const httpsPort = process.env.HTTPS_PORT;
+  const enableTls = process.env.ENABLE_HTTPS === 'true' || Boolean(httpsPort);
+  const tlsCert = process.env.TLS_CERT_PATH;
+  const tlsKey = process.env.TLS_KEY_PATH;
 
   let caddyContent = `# ==============================================================================
 # ${brand.name} - Unified Reverse Proxy Gateway (Auto-Generated from .env)
+# 100% Air-Gapped & Zero-Trust Compliant (Zero External ACME Lookups)
 # DO NOT EDIT DIRECTLY: Modify routes in .env and run './run.sh sync-proxy'
 # ==============================================================================
 
-:${httpPort} {
+:${httpPort}${enableTls ? `, :${httpsPort || '443'}` : ''} {
     # Structured Logging
     log {
         output stdout
         format console
+    }
+`;
+
+  if (enableTls) {
+    if (tlsCert && tlsKey) {
+      caddyContent += `
+    # Air-Gapped Enterprise Custom CA Certificate
+    tls ${tlsCert} ${tlsKey}
+`;
+    } else {
+      caddyContent += `
+    # Air-Gapped Local Internal PKI (Zero External Network / ACME)
+    tls internal
+`;
+    }
+  }
+
+  caddyContent += `
+    # Global Air-Gapped Security & CSP Headers
+    header {
+        Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        X-XSS-Protection "0"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Permissions-Policy "geolocation=(), camera=(), microphone=(), payment=()"
+        Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+        -Server
     }
 `;
 
