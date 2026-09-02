@@ -40,7 +40,7 @@ This repository is engineered with a **Zero-Host-Modification Policy**. All deve
 ./run.sh dev
 ```
 
-### Windows Native:
+### Windows Native (CMD / PowerShell):
 ```cmd
 run.bat setup
 run.bat dev
@@ -48,8 +48,31 @@ run.bat dev
 
 ---
 
+## 🌐 Cross-Platform & Zero-Drift Git Standards (WSL, Windows, macOS, Linux)
+
+To guarantee that portable tools and script files never show unexpected file modifications (`filemode changed` or CRLF line ending drift) across operating systems:
+
+1. **Automatic Git Hardening (`setup` command)**:
+   Running `./run.sh setup` (or `run.bat setup`) automatically configures your local clone:
+   * `git config core.filemode false`: Prevents Windows/NTFS permission bit discrepancies from dirtying Git status.
+   * `git config core.autocrlf false`: Ensures script wrappers retain Unix `LF` line endings.
+
+2. **Canonical `.gitattributes` Protection**:
+   All shell scripts, extensionless tool wrappers (`portables/bin/*`), and environment templates are locked to `eol=lf` via `.gitattributes` to prevent Windows CRLF conversions.
+
+3. **Symlink-Free Portable Wrappers**:
+   All portable runners (`bunx`, `rtk`, `biome`, etc.) use self-resolving POSIX shell wrappers instead of OS symlinks, ensuring 100% compatibility across Windows, WSL, and macOS.
+
+4. **WSL Best Practice**:
+   When working in WSL, clone the repository into the native Linux filesystem (e.g. `~/workspace/` or `/home/<user>/...`) rather than Windows mounts (`/mnt/c/...`) for optimal I/O speed and filesystem fidelity.
+
+---
+
 ## 🩺 System Diagnostics & Health Check
+
+Run the built-in diagnostic tool to verify all runtimes, wrappers, and Git configurations:
 
 ```bash
 ./run.sh doctor
 ```
+*(On Windows Native: `run.bat doctor`)*

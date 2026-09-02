@@ -1,6 +1,21 @@
 # 🧰 Standalone Portable Runtimes & Toolchain (`portables/`)
 
-Zero-host portable binaries and runtime engines.
+Zero-host portable binaries, runtime engines, and cross-platform CLI toolchains.
 
-* **[`bin/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/bin/)**: `gitleaks`, `biome`, `knip`, `hadolint`, `autocannon`, `repomix`, `scc`, `hyperfine`, `caveman`, `graphify`.
-* **[`bun/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/bun/)**: Portable Bun v1.3.14 (LTS 2026).
+---
+
+## 📦 Directory Structure
+
+* **[`bin/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/bin/)**: Standalone executable CLI wrappers (`gitleaks`, `biome`, `knip`, `hadolint`, `autocannon`, `repomix`, `scc`, `hyperfine`, `caveman`, `graphify`, `rtk`, `astryx`).
+* **[`bun/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/bun/)**: Portable Bun v1.3.14 (LTS 2026) runtime and portable `bunx` runner.
+* **[`rtk/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/rtk/)**: Portable RTK Token Optimizer.
+* **[`scc/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/scc/)**: Portable Sloc, Cloc & Complexity Analyzer.
+* **[`hyperfine/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/hyperfine/)**: Portable CLI benchmarking engine.
+
+---
+
+## 🌐 Cross-Platform Engineering Invariants
+
+1. **Zero Host Modification**: Tools run from portable wrappers without requiring global `npm`, `pip`, `apt`, or `brew` installations.
+2. **Symlink-Free Design**: All CLI entries use self-resolving POSIX shell scripts to ensure error-free operation on Windows, WSL, and macOS without symlink permission failures.
+3. **Line Ending & Filemode Hardening**: Locked to Unix `LF` via `.gitattributes` and protected against Windows/NTFS permission drift via `core.filemode false` (configured automatically via `./run.sh setup`).

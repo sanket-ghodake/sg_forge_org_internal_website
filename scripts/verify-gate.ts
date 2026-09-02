@@ -113,8 +113,8 @@ console.log('\n🛡️ [SG Forge] Starting 2-Tier Quality Gate (Deterministic To
 // TIER 1: DETERMINISTIC CHECKS (ZERO AI NEEDED — PURE LOGIC & OPEN SOURCE TOOLS)
 // ==============================================================================
 
-// 1. Ignore & Attrib Files Uniformity & Integrity
-runTier1Check(1, 'Ignore & Attrib Files Uniformity', 'Sync Ignores Validator', () => {
+// 1. Ignore & Attrib Files Uniformity & Cross-Platform Integrity
+runTier1Check(1, 'Ignore, Attrib & Cross-Platform Integrity', 'Sync Ignores Validator', () => {
   const res = validateIgnores();
   if (!res.valid) {
     const issues: string[] = [];
@@ -122,6 +122,7 @@ runTier1Check(1, 'Ignore & Attrib Files Uniformity', 'Sync Ignores Validator', (
     if (res.missingPatterns.length) issues.push(`${res.missingPatterns.length} pattern(s) missing`);
     if (res.missingAttributes.length) issues.push(`Missing attributes: ${res.missingAttributes.join(', ')}`);
     if (res.subfolderLogIgnoresMissing.length) issues.push(`Missing log .gitignore: ${res.subfolderLogIgnoresMissing.length} folder(s)`);
+    if (res.symlinksDetected && res.symlinksDetected.length) issues.push(`Symlinks forbidden: ${res.symlinksDetected.join(', ')}`);
     return {
       status: 'FAILED',
       details: `Discrepancies found: ${issues.join(' | ')}. Run "rtk bun scripts/sync-ignores.ts" to fix.`,
@@ -129,7 +130,7 @@ runTier1Check(1, 'Ignore & Attrib Files Uniformity', 'Sync Ignores Validator', (
   }
   return {
     status: 'PASSED',
-    details: 'All 7 root ignore files, .gitattributes, and subfolder log ignore files are 100% synchronized.',
+    details: 'All 7 root ignore files, .gitattributes, zero-symlink toolchains, and subfolder log ignore files are 100% synchronized.',
   };
 });
 

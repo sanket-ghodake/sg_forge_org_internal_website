@@ -1,1 +1,17 @@
-/home/sanket/Desktop/Sanket/org_website/portables/bun/bin/bun
+#!/usr/bin/env bash
+# ==============================================================================
+# Standalone Portable Bunx Wrapper (2026 LTS)
+# Cross-Platform Wrapper: Replaces fragile symlink for Windows, WSL, macOS & Linux
+# ==============================================================================
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+if [ -x "$SCRIPT_DIR/bun" ]; then
+    exec "$SCRIPT_DIR/bun" x "$@"
+elif command -v bun >/dev/null 2>&1; then
+    exec bun x "$@"
+else
+    echo "❌ [bunx] Bun runtime not found in portable toolchain or system PATH." >&2
+    exit 1
+fi

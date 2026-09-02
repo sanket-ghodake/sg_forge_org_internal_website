@@ -66,6 +66,7 @@ services:
     environment:
       - PORT=${LANDING_PORT:-3000}
       - LANDING_PORT=${LANDING_PORT:-3000}
+      - AUTH_SERVICE_URL=http://auth:${AUTH_PORT:-3004}
       - NODE_ENV=development
     ports:
       - "${LANDING_PORT:-3000}:${LANDING_PORT:-3000}"
@@ -107,6 +108,7 @@ services:
     environment:
       - PORT=${PORTAL_PORT:-3001}
       - PORTAL_PORT=${PORTAL_PORT:-3001}
+      - AUTH_SERVICE_URL=http://auth:${AUTH_PORT:-3004}
       - NODE_ENV=development
     ports:
       - "${PORTAL_PORT:-3001}:${PORTAL_PORT:-3001}"
@@ -150,6 +152,7 @@ services:
     environment:
       - PORT=${DEV_DASHBOARD_PORT:-3002}
       - DEV_DASHBOARD_PORT=${DEV_DASHBOARD_PORT:-3002}
+      - AUTH_SERVICE_URL=http://auth:${AUTH_PORT:-3004}
       - NODE_ENV=development
     ports:
       - "${DEV_DASHBOARD_PORT:-3002}:${DEV_DASHBOARD_PORT:-3002}"
@@ -192,6 +195,7 @@ services:
     environment:
       - PORT=${DEV_HUB_PORT:-3003}
       - DEV_HUB_PORT=${DEV_HUB_PORT:-3003}
+      - AUTH_SERVICE_URL=http://auth:${AUTH_PORT:-3004}
       - NODE_ENV=development
     ports:
       - "${DEV_HUB_PORT:-3003}:${DEV_HUB_PORT:-3003}"
@@ -274,6 +278,7 @@ services:
       - ../../.env
     environment:
       - PORT=8085
+      - AUTH_SERVICE_URL=http://auth:${AUTH_PORT:-3004}
       - NODE_ENV=development
     ports:
       - "8085:8085"
@@ -315,6 +320,7 @@ services:
       - ../../.env
     environment:
       - PORT=8086
+      - AUTH_SERVICE_URL=http://auth:${AUTH_PORT:-3004}
       - NODE_ENV=development
     ports:
       - "8086:8086"
@@ -356,6 +362,7 @@ services:
       - ../../.env
     environment:
       - PORT=8087
+      - AUTH_SERVICE_URL=http://auth:${AUTH_PORT:-3004}
       - NODE_ENV=development
     ports:
       - "8087:8087"

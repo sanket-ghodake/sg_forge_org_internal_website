@@ -66,6 +66,7 @@ services:
     environment:
       - PORT=${LANDING_PORT:-3000}
       - LANDING_PORT=${LANDING_PORT:-3000}
+      - AUTH_SERVICE_URL=http://auth:${AUTH_PORT:-3004}
       - NODE_ENV=production
     networks:
       - forge-net
@@ -95,6 +96,7 @@ services:
     environment:
       - PORT=${PORTAL_PORT:-3001}
       - PORTAL_PORT=${PORTAL_PORT:-3001}
+      - AUTH_SERVICE_URL=http://auth:${AUTH_PORT:-3004}
       - NODE_ENV=production
     volumes:
       - ag_prod_db_portal:/app/data
@@ -126,6 +128,7 @@ services:
     environment:
       - PORT=${DEV_DASHBOARD_PORT:-3002}
       - DEV_DASHBOARD_PORT=${DEV_DASHBOARD_PORT:-3002}
+      - AUTH_SERVICE_URL=http://auth:${AUTH_PORT:-3004}
       - NODE_ENV=production
     volumes:
       - ag_prod_db_dev_dashboard:/app/data
@@ -157,6 +160,7 @@ services:
     environment:
       - PORT=${DEV_HUB_PORT:-3003}
       - DEV_HUB_PORT=${DEV_HUB_PORT:-3003}
+      - AUTH_SERVICE_URL=http://auth:${AUTH_PORT:-3004}
       - NODE_ENV=production
     networks:
       - forge-net
@@ -216,6 +220,7 @@ services:
       - ../../.env
     environment:
       - PORT=8085
+      - AUTH_SERVICE_URL=http://auth:${AUTH_PORT:-3004}
       - NODE_ENV=production
     volumes:
       - ag_prod_db_expenses:/app/data
@@ -246,6 +251,7 @@ services:
       - ../../.env
     environment:
       - PORT=8086
+      - AUTH_SERVICE_URL=http://auth:${AUTH_PORT:-3004}
       - NODE_ENV=production
     volumes:
       - ag_prod_db_billing:/app/data
@@ -276,6 +282,7 @@ services:
       - ../../.env
     environment:
       - PORT=8087
+      - AUTH_SERVICE_URL=http://auth:${AUTH_PORT:-3004}
       - NODE_ENV=production
     volumes:
       - ag_prod_db_telemetry:/app/data

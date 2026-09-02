@@ -402,3 +402,8 @@
 2026-09-02 04:17 | [b6ab999] feat(devcenter): add forge app disabling with portal isolation and fix sse log stream keepalive (+314, -86)
 2026-09-02 09:35 | Centralize employee and organization directory APIs in @forge/auth, decouple portal and dev-dashboard direct DB access, and verify full 2-tier quality gate
 2026-09-02 09:38 | [144192c] feat(auth): centralize employee & org directory REST APIs and decouple microservices (+8398, -4198)
+2026-09-02 18:14 | Fix inter-container Auth service discovery for Portal canvas tree and DevCenter employee endpoints
+2026-09-02 18:30 | Apply industry-standard cross-platform Git and portable toolchain fixes for Windows, WSL, macOS, and Linux
+2026-09-02 18:33 | Update developer setup guides, portables documentation, run.bat, and agent cross-platform guidelines
+2026-09-02 18:38 | Perform comprehensive cross-platform audit and embed automated zero-symlink/cross-platform checks into verify gate
+2026-09-02 18:41 | [017384c] fix(toolchain): resolve cross-platform git drift and harden portable toolchain for windows wsl mac linux (+173, -23)

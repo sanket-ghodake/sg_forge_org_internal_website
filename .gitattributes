@@ -7,6 +7,9 @@
 * text=auto
 
 # Enforce strict LF line-endings on shell and code scripts
+run.sh text eol=lf
+portables/bin/* text eol=lf
+portables/**/bin/* text eol=lf
 *.sh text eol=lf
 *.bash text eol=lf
 *.ts text eol=lf
@@ -15,6 +18,10 @@
 *.jsx text eol=lf
 *.json text eol=lf
 *.md text eol=lf
+*.env* text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
 
 # Protect binary and compiled assets from git corruption
 *.db binary

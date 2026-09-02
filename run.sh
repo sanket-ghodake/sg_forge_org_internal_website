@@ -69,10 +69,17 @@ case "$CMD" in
             echo "❌ Portable Bun runtime not found at $PORTABLE_BUN"
             exit 1
         fi
+        # Cross-platform permission & git attribute hardening (Windows/WSL/macOS/Linux)
+        chmod +x "$REPO_ROOT"/portables/bin/* "$REPO_ROOT"/portables/bun/bin/* "$REPO_ROOT"/run.sh 2>/dev/null || true
+        if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+            git config core.filemode false
+            git config core.autocrlf false
+        fi
         echo "✅ Using Portable Bun: $($PORTABLE_BUN --version)"
         echo "✅ Using Portable RTK: $($RTK --version 2>/dev/null || echo 'Ready')"
         echo "📦 Installing workspace packages with Bun..."
         $PORTABLE_BUN install
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/sync-ignores.ts"
         $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
         echo "✨ Setup completed successfully! Run './run.sh dev' or './run.sh docker up' to start."
         ;;
@@ -115,13 +122,20 @@ case "$CMD" in
         echo "🩺 [${BRAND_NAME}] Running Pre-Flight Diagnostics & Toolchain Inspection..."
         echo "1. Portable Bun Runtime:"
         $PORTABLE_BUN --version
-        echo "2. Portable RTK Token Compressor:"
+        echo "2. Portable Bunx Wrapper:"
+        "$REPO_ROOT/portables/bun/bin/bunx" --version
+        echo "3. Portable RTK Token Compressor:"
         $RTK --version 2>/dev/null || echo "RTK Portable Ready"
-        echo "3. Active Environment Brand:"
+        echo "4. Active Environment Brand:"
         echo "   Brand Name:     $BRAND_NAME"
         echo "   Container Pfx:  $CONTAINER_PREFIX"
         echo "   Compose Name:   $COMPOSE_PROJECT_NAME"
-        echo "4. Ingress Reverse Proxy Configuration:"
+        echo "5. Cross-Platform Git Configuration:"
+        if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+            echo "   core.filemode:  $(git config core.filemode || echo 'unset')"
+            echo "   core.autocrlf:  $(git config core.autocrlf || echo 'unset')"
+        fi
+        echo "6. Ingress Reverse Proxy Configuration:"
         $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
         echo "✅ Diagnostics Completed."
         ;;

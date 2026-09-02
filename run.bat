@@ -20,7 +20,13 @@ goto help
 
 :setup
 echo ⚡ Bootstrapping portable environment on Windows...
+git rev-parse --is-inside-work-tree >nul 2>&1
+if %ERRORLEVEL% EQU 0 (
+    git config core.filemode false
+    git config core.autocrlf false
+)
 bun install
+bun run "%REPO_ROOT%scripts\sync-ignores.ts"
 bun run "%REPO_ROOT%scripts\generate-proxy.ts"
 echo ✨ Setup completed successfully! Run 'run.bat dev' or 'run.bat docker up' to start.
 goto end
@@ -34,6 +40,13 @@ goto end
 :doctor
 echo 🩺 Running Windows system diagnostics...
 bun --version
+git rev-parse --is-inside-work-tree >nul 2>&1
+if %ERRORLEVEL% EQU 0 (
+    echo Git core.filemode:
+    git config core.filemode
+    echo Git core.autocrlf:
+    git config core.autocrlf
+)
 bun run "%REPO_ROOT%scripts\generate-proxy.ts"
 echo ✅ Pre-flight checks passed.
 goto end

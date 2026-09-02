@@ -7,7 +7,7 @@
  * Google & Meta Clean Architecture Standard
  */
 
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const REPO_ROOT = process.cwd();
@@ -54,6 +54,9 @@ export const ROOT_IGNORE_FILES = [
 /** Mandatory attributes in .gitattributes */
 export const MANDATORY_ATTRIBUTES = [
   '* text=auto',
+  'run.sh text eol=lf',
+  'portables/bin/* text eol=lf',
+  'portables/**/bin/* text eol=lf',
   '*.sh text eol=lf',
   '*.bash text eol=lf',
   '*.ts text eol=lf',
@@ -62,6 +65,10 @@ export const MANDATORY_ATTRIBUTES = [
   '*.jsx text eol=lf',
   '*.json text eol=lf',
   '*.md text eol=lf',
+  '*.env* text eol=lf',
+  '*.yml text eol=lf',
+  '*.yaml text eol=lf',
+  '*.toml text eol=lf',
   '*.db binary',
   '*.sqlite binary',
   '*.sqlite3 binary',
@@ -77,6 +84,7 @@ export interface ValidationResult {
   missingPatterns: { file: string; pattern: string }[];
   missingAttributes: string[];
   subfolderLogIgnoresMissing: string[];
+  symlinksDetected: string[];
 }
 
 /**
@@ -87,6 +95,7 @@ export function validateIgnores(): ValidationResult {
   const missingPatterns: { file: string; pattern: string }[] = [];
   const missingAttributes: string[] = [];
   const subfolderLogIgnoresMissing: string[] = [];
+  const symlinksDetected: string[] = [];
 
   // 1. Validate root ignore files
   for (const file of ROOT_IGNORE_FILES) {
@@ -146,13 +155,32 @@ export function validateIgnores(): ValidationResult {
   checkSubfolders(appsDir);
   checkSubfolders(forgeAppsDir);
 
+  // 4. Validate Zero Symlinks in portable toolchains (guarantees Windows / WSL / macOS parity)
+  const portableDirs = [
+    join(REPO_ROOT, 'portables', 'bin'),
+    join(REPO_ROOT, 'portables', 'bun', 'bin'),
+  ];
+  for (const pDir of portableDirs) {
+    if (existsSync(pDir)) {
+      const entries = readdirSync(pDir);
+      for (const entry of entries) {
+        const fullPath = join(pDir, entry);
+        const lstat = lstatSync(fullPath);
+        if (lstat.isSymbolicLink()) {
+          symlinksDetected.push(join(pDir.replace(REPO_ROOT + '/', ''), entry));
+        }
+      }
+    }
+  }
+
   const valid =
     missingFiles.length === 0 &&
     missingPatterns.length === 0 &&
     missingAttributes.length === 0 &&
-    subfolderLogIgnoresMissing.length === 0;
+    subfolderLogIgnoresMissing.length === 0 &&
+    symlinksDetected.length === 0;
 
-  return { valid, missingFiles, missingPatterns, missingAttributes, subfolderLogIgnoresMissing };
+  return { valid, missingFiles, missingPatterns, missingAttributes, subfolderLogIgnoresMissing, symlinksDetected };
 }
 
 /**
@@ -287,6 +315,9 @@ graphify-out/20*/
 * text=auto
 
 # Enforce strict LF line-endings on shell and code scripts
+run.sh text eol=lf
+portables/bin/* text eol=lf
+portables/**/bin/* text eol=lf
 *.sh text eol=lf
 *.bash text eol=lf
 *.ts text eol=lf
@@ -295,6 +326,10 @@ graphify-out/20*/
 *.jsx text eol=lf
 *.json text eol=lf
 *.md text eol=lf
+*.env* text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
 
 # Protect binary and compiled assets from git corruption
 *.db binary

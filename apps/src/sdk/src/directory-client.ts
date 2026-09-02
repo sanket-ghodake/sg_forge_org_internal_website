@@ -7,6 +7,7 @@
  * - Fast deterministic approval chain validation (isManagerOf)
  */
 
+import { existsSync } from 'node:fs';
 import type { OrgDirectoryResponse, ScopedHierarchyResponse } from '@forge/types';
 
 export interface OrgTreeNodeDto {
@@ -69,7 +70,14 @@ export function resolveAuthBaseUrl(customUrl?: string): string {
   const envUrl = process.env.AUTH_SERVICE_URL || process.env.NEXT_PUBLIC_AUTH_URL;
   if (envUrl) return envUrl.replace(/\/+$/, '');
   const authPort = process.env.AUTH_PORT || 3004;
-  return `http://localhost:${authPort}`;
+
+  const isDocker =
+    process.env.DOCKER_CONTAINER === 'true' ||
+    process.env.IS_DOCKER === 'true' ||
+    existsSync('/.dockerenv');
+
+  const authHost = process.env.AUTH_HOST || (isDocker ? 'auth' : 'localhost');
+  return `http://${authHost}:${authPort}`;
 }
 
 /**
