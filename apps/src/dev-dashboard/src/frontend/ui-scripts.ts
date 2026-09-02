@@ -9,11 +9,12 @@ import { getIssuesDashboardScripts } from './ui-issues-scripts';
 import { getHostDashboardScripts } from './ui-host-scripts';
 import { getAppsDashboardScripts } from './ui-apps-scripts';
 import { getDropdownScripts } from './ui-dropdown-scripts';
-import { getAstryxToastScript } from '@forge/ui';
+import { getAstryxToastScript, getAstryxTooltipScript } from '@forge/ui';
 
 export function getDashboardScripts(): string {
   return `
     ${getAstryxToastScript()}
+    ${getAstryxTooltipScript()}
     ${getDropdownScripts()}
 
     window.showAstryxToast = function(type, message, duration = 4000) {
@@ -187,8 +188,8 @@ export function getDashboardScripts(): string {
       if (tabId === 'traffic') loadTraffic();
       if (tabId === 'issues') loadIssues();
       if (tabId === 'employees') loadEmployees();
-      if (tabId === 'host') loadHostVitals();
-      if (tabId === 'settings') loadAudit();
+      if (tabId === 'host') { loadHostVitals(); if (typeof loadReliabilityDiagnostics === 'function') loadReliabilityDiagnostics(); }
+      if (tabId === 'settings') { loadAudit(); if (typeof loadReliabilityDiagnostics === 'function') loadReliabilityDiagnostics(); }
     }
 
     function syncTabFromHash() {

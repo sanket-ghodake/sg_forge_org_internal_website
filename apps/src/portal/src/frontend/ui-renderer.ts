@@ -3,7 +3,7 @@
  * Combines Header, Expandable Sidebar, Viewport Containers, Modals, and Scripts into a cohesive Meta Astryx layout.
  */
 
-import { getAstryxStyles, getHeadStateScript, getAstryxToastScript, getAstryxDropdownScript } from '@forge/ui';
+import { getAstryxStyles, getHeadStateScript, getAstryxToastScript, getAstryxDropdownScript, getAstryxTooltipScript } from '@forge/ui';
 import { loadBrandConfig } from '@forge/sdk';
 import { getPortalCustomStyles } from './ui-styles';
 import { renderPortalHeader, type HeaderUserContext } from './layout-header';
@@ -77,6 +77,7 @@ export function renderPortalHtml(user?: HeaderUserContext): string {
   <script>
     ${getAstryxToastScript()}
     ${getAstryxDropdownScript()}
+    ${getAstryxTooltipScript()}
     ${getPortalClientScript()}
   </script>
 </body>

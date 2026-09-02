@@ -189,6 +189,7 @@ export function getToolsDashboardScripts(): string {
         closeApiRegistryModal();
         closeHelpModal();
         closeAppLogsModal();
+        if (typeof close247GuideModal === 'function') close247GuideModal();
         if (typeof closeServiceDrawer === 'function') closeServiceDrawer();
         if (typeof closeEmployeeModal === 'function') closeEmployeeModal();
         if (typeof closeEmployeeDrawer === 'function') closeEmployeeDrawer();

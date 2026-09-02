@@ -56,9 +56,8 @@ export function getAppsStyles(): string {
        4. Slide-Out App Inspector Drawer
        ============================================================================== */
     .app-drawer-backdrop { position: fixed; top: 48px; left: 0; right: 0; bottom: 0; width: 100vw; height: calc(100vh - 48px); background: transparent; z-index: 90; opacity: 0; pointer-events: none; transition: opacity 0.22s ease; }
-    .app-drawer-backdrop.open { opacity: 1; pointer-events: auto; }
-    .app-drawer { position: fixed; top: 48px; right: 0; bottom: 0; width: min(94vw, 560px); height: calc(100vh - 48px); background: var(--forge-bg-surface); border-left: 1px solid var(--forge-border-medium); box-shadow: -16px 0 40px rgba(0, 0, 0, 0.8); transform: translateX(100%); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); z-index: 95; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; }
-    .app-drawer.open { transform: translateX(0); }
+    .app-drawer { position: fixed; top: 48px; right: 0; bottom: 0; width: min(94vw, 560px); height: calc(100vh - 48px); background: var(--forge-bg-surface); border-left: 1px solid var(--forge-border-medium); box-shadow: none; visibility: hidden; pointer-events: none; transform: translateX(100%); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s, box-shadow 0.25s; z-index: 95; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; }
+    .app-drawer.open { transform: translateX(0); visibility: visible; pointer-events: auto; box-shadow: -16px 0 40px rgba(0, 0, 0, 0.8); }
     .app-drawer-resizer { position: absolute; left: 0; top: 0; bottom: 0; width: 8px; cursor: ew-resize; z-index: 50; }
     .app-drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; border-bottom: 1px solid var(--forge-border); background: var(--forge-bg-card); flex-shrink: 0; }
     .app-drawer-body { flex: 1; overflow-y: auto; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; scrollbar-width: thin; scrollbar-color: var(--forge-border-medium) transparent; }

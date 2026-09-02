@@ -83,6 +83,14 @@ describe('Meta Astryx UI Validator & Token Governance Engine', () => {
     expect(css).toContain('astryx-toast-container');
     expect(css).toContain('astryx-toast');
     expect(toastScript).toContain('window.astryxToast');
+
+    // Assert - Tooltip & Viewport-Safe Popover Engine
+    const { getAstryxTooltipScript } = require('../../src/ui/src/index');
+    const tooltipScript = getAstryxTooltipScript();
+    expect(css).toContain('astryx-floating-tooltip');
+    expect(tooltipScript).toContain('initAstryxUniversalTooltips');
+    expect(tooltipScript).toContain('data-astryx-tooltip');
+    expect(tooltipScript).toContain('window.astryxTooltip');
   });
 });
 

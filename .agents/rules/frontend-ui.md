@@ -100,5 +100,16 @@
   - In-Page Dropdown Menus & Popovers: `z-index: 1000 - 1200`
   - Slideout Drawers: `z-index: 2000 - 2500`
   - Modal Dialogs & Backdrops: `z-index: 3000 - 5000`
+  - Floating Tooltips & Popovers: `z-index: 100000`
   - Toast Notifications: `z-index: 9999+`
+
+### 14. Modern Astryx Floating Tooltips & Informational Popovers (Zero Native OS `title` Tooltips)
+- **NEVER** rely on browser default `title="..."` tooltips, which produce delayed, unstyled, OS-dependent boxes.
+- **ALWAYS** use Meta Astryx custom floating tooltips (`data-astryx-tooltip="..."`, `data-tooltip-title="..."`, `getAstryxTooltipScript()`):
+  - Glassmorphic backdrop (`backdrop-filter: blur(16px)`, `background: var(--forge-bg-surface)`).
+  - Hairline border (`1px solid var(--forge-border-medium)`), subtle glow, and elevated shadow (`box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45)`).
+  - High-visibility typography with primary color title and clean readable text.
+  - **Smart Viewport Collision Detection**: Auto-flips UP when near the bottom of the viewport, horizontally clamps to remain 100% visible inside the active viewport window without clipping.
+  - Smooth micro-animation (`opacity 0.14s ease, transform 0.14s ease`).
+
 

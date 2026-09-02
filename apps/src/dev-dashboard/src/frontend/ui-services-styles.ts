@@ -22,9 +22,8 @@ export function getServicesStyles(): string {
     
     /* Option C Flyout Service Inspector Drawer */
     .service-drawer-backdrop { position: fixed; top: 48px; left: 0; right: 0; bottom: 0; width: 100vw; height: calc(100vh - 48px); background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; z-index: 90; opacity: 0; pointer-events: none; transition: opacity 0.22s ease; }
-    .service-drawer-backdrop.open { opacity: 1; pointer-events: auto; }
-    .service-drawer { position: fixed; top: 48px; right: 0; bottom: 0; width: min(94vw, 540px); height: calc(100vh - 48px); background: var(--forge-bg-surface); border-left: 1px solid var(--forge-border-medium); box-shadow: -16px 0 40px rgba(0, 0, 0, 0.75); transform: translateX(100%); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); z-index: 95; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; }
-    .service-drawer.open { transform: translateX(0); }
+    .service-drawer { position: fixed; top: 48px; right: 0; bottom: 0; width: min(94vw, 540px); height: calc(100vh - 48px); background: var(--forge-bg-surface); border-left: 1px solid var(--forge-border-medium); box-shadow: none; visibility: hidden; pointer-events: none; transform: translateX(100%); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s, box-shadow 0.25s; z-index: 95; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; }
+    .service-drawer.open { transform: translateX(0); visibility: visible; pointer-events: auto; box-shadow: -16px 0 40px rgba(0, 0, 0, 0.75); }
     .drawer-resizer { position: absolute; left: 0; top: 0; bottom: 0; width: 8px; cursor: ew-resize; z-index: 50; background: transparent; transition: background 0.15s ease, box-shadow 0.15s ease; user-select: none; }
     .drawer-resizer::after { content: ''; position: absolute; left: 2px; top: 50%; transform: translateY(-50%); height: 36px; width: 3px; border-radius: var(--forge-radius-full); background: var(--forge-border-medium); opacity: 0; transition: opacity 0.15s ease, background 0.15s ease; }
     .drawer-resizer:hover, .drawer-resizer.resizing { background: rgba(62, 207, 142, 0.12); }

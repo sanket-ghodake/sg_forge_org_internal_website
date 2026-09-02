@@ -363,6 +363,131 @@ export function getModalsHtml(): string {
 
   <!-- Modern Astryx Toast Overlay Viewport Container -->
   <div id="astryx-toast-container" class="astryx-toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- 24/7 High-Availability & Host Setup Guide Modal -->
+  <div class="astryx-modal-backdrop" id="modal-247-guide" style="display: none;" onclick="if(event.target===this)close247GuideModal()">
+    <div class="astryx-modal" style="max-width: 720px; max-height: 85vh; display: flex; flex-direction: column;">
+      <div class="astryx-modal-header" style="flex-shrink: 0;">
+        <h3 style="display: flex; align-items: center; gap: 0.5rem; font-size: 1.05rem;">
+          <span>🛡️</span> 24/7 High-Availability & Host Auto-Start Setup Guide
+        </h3>
+        <button class="astryx-modal-close" onclick="close247GuideModal()">&times;</button>
+      </div>
+      
+      <!-- OS Selector Tabs -->
+      <div class="guide-tabs-nav">
+        <button class="guide-tab-btn active" data-guide-tab="ubuntu" onclick="switch247GuideTab('ubuntu')">🐧 Ubuntu / Linux</button>
+        <button class="guide-tab-btn" data-guide-tab="wsl" onclick="switch247GuideTab('wsl')">🪟 WSL2 (Windows)</button>
+        <button class="guide-tab-btn" data-guide-tab="macos" onclick="switch247GuideTab('macos')">🍏 macOS</button>
+        <button class="guide-tab-btn" data-guide-tab="windows" onclick="switch247GuideTab('windows')">💻 Windows Native</button>
+      </div>
+
+      <div class="astryx-modal-body" style="overflow-y: auto; padding: 0;">
+        <!-- Pane 1: Ubuntu -->
+        <div class="guide-tab-pane" id="guide-pane-ubuntu" style="display: block;">
+          <div class="guide-step-card">
+            <div class="guide-step-header">
+              <span class="guide-step-title">1. Enable Docker & Containerd on Host Boot</span>
+            </div>
+            <div class="guide-step-desc">Ensures the Docker engine automatically restarts when the server boots.</div>
+            <div class="guide-code-box">
+              <code>sudo systemctl enable docker.service containerd.service</code>
+              <button class="guide-copy-btn" onclick="copyGuideCode(this, 'sudo systemctl enable docker.service containerd.service')">Copy</button>
+            </div>
+          </div>
+
+          <div class="guide-step-card">
+            <div class="guide-step-header">
+              <span class="guide-step-title">2. Enable Zero-Downtime Live-Restore</span>
+            </div>
+            <div class="guide-step-desc">Keeps containers running even during Docker daemon restarts or upgrades.</div>
+            <div class="guide-code-box">
+              <code>echo '{"live-restore":true,"log-driver":"json-file","log-opts":{"max-size":"10m","max-file":"3"}}' | sudo tee /etc/docker/daemon.json && sudo systemctl restart docker</code>
+              <button class="guide-copy-btn" onclick="copyGuideCode(this, 'echo \'{\"live-restore\":true,\"log-driver\":\"json-file\",\"log-opts\":{\"max-size\":\"10m\",\"max-file\":\"3\"}}\' | sudo tee /etc/docker/daemon.json && sudo systemctl restart docker')">Copy</button>
+            </div>
+          </div>
+
+          <div class="guide-step-card">
+            <div class="guide-step-header">
+              <span class="guide-step-title">3. Install SG Forge 24/7 Systemd Boot Service</span>
+            </div>
+            <div class="guide-step-desc">Registers the production compose stack as a managed system service.</div>
+            <div class="guide-code-box">
+              <code>sudo bash scripts/systemd/install-service.sh</code>
+              <button class="guide-copy-btn" onclick="copyGuideCode(this, 'sudo bash scripts/systemd/install-service.sh')">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pane 2: WSL2 -->
+        <div class="guide-tab-pane" id="guide-pane-wsl">
+          <div class="guide-step-card">
+            <div class="guide-step-header">
+              <span class="guide-step-title">1. Enable Systemd in WSL2</span>
+            </div>
+            <div class="guide-step-desc">Add systemd boot flag to <code>/etc/wsl.conf</code> so services initialize automatically:</div>
+            <div class="guide-code-box">
+              <code>echo -e "[boot]\nsystemd=true\n[automount]\noptions = \"metadata\"" | sudo tee /etc/wsl.conf</code>
+              <button class="guide-copy-btn" onclick="copyGuideCode(this, 'echo -e \"[boot]\\nsystemd=true\\n[automount]\\noptions = \\\"metadata\\\"\" | sudo tee /etc/wsl.conf')">Copy</button>
+            </div>
+          </div>
+
+          <div class="guide-step-card">
+            <div class="guide-step-header">
+              <span class="guide-step-title">2. Windows Background Startup (Headless 24/7)</span>
+            </div>
+            <div class="guide-step-desc">In Windows Task Scheduler, create a task on system startup that runs:</div>
+            <div class="guide-code-box">
+              <code>wsl.exe -d Ubuntu -u root -- systemctl start docker</code>
+              <button class="guide-copy-btn" onclick="copyGuideCode(this, 'wsl.exe -d Ubuntu -u root -- systemctl start docker')">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pane 3: macOS -->
+        <div class="guide-tab-pane" id="guide-pane-macos">
+          <div class="guide-step-card">
+            <div class="guide-step-header">
+              <span class="guide-step-title">1. Prevent Mac Sleep on Idle</span>
+            </div>
+            <div class="guide-step-desc">In macOS System Settings > Energy Saver, enable <strong>"Prevent automatic sleeping when display is off"</strong> and <strong>"Wake for network access"</strong>.</div>
+          </div>
+
+          <div class="guide-step-card">
+            <div class="guide-step-header">
+              <span class="guide-step-title">2. Headless Colima / Launchd Setup (Recommended)</span>
+            </div>
+            <div class="guide-step-desc">Start Colima as a background service managed by macOS launchd:</div>
+            <div class="guide-code-box">
+              <code>brew install colima docker && brew services start colima</code>
+              <button class="guide-copy-btn" onclick="copyGuideCode(this, 'brew install colima docker && brew services start colima')">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pane 4: Windows Native -->
+        <div class="guide-tab-pane" id="guide-pane-windows">
+          <div class="guide-step-card">
+            <div class="guide-step-header">
+              <span class="guide-step-title">1. Windows Power & Sleep Settings</span>
+            </div>
+            <div class="guide-step-desc">Open Windows Settings > Power & battery > Sleep: set <strong>"When plugged in, put my PC to sleep"</strong> to <strong>Never</strong>.</div>
+          </div>
+
+          <div class="guide-step-card">
+            <div class="guide-step-header">
+              <span class="guide-step-title">2. Docker Desktop Auto-Start Settings</span>
+            </div>
+            <div class="guide-step-desc">In Docker Desktop > Settings > General: Enable <strong>"Start Docker Desktop when you log in"</strong> and <strong>"Use WSL 2 based engine"</strong>.</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="astryx-modal-footer" style="flex-shrink: 0; display: flex; justify-content: flex-end; padding: 0.75rem 1rem; border-top: 1px solid var(--forge-border);">
+        <button class="astryx-btn btn-outline" onclick="close247GuideModal()">Close Guide</button>
+      </div>
+    </div>
+  </div>
   `;
 }
 

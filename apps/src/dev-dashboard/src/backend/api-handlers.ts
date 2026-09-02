@@ -306,6 +306,12 @@ export async function handleApiRequest(req: Request, url: URL): Promise<Response
     return Response.json({ status: 'ok', ...report });
   }
 
+  // 13f. 24/7 High-Availability & Persistence Reliability Probe
+  if (path === '/api/host/reliability' && req.method === 'GET') {
+    const report = hostController.getHighAvailabilityReport();
+    return Response.json({ status: 'ok', ...report });
+  }
+
   // 14. Administrative Audit Logs
   if (path === '/api/audit' && req.method === 'GET') {
     const logs = platformDb.getAuditLogs(50);

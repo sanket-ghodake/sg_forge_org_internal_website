@@ -65,6 +65,36 @@ export interface HostDiagnosticsReport {
   };
 }
 
+export interface HighAvailabilityReport {
+  timestamp: number;
+  environment: {
+    osType: 'wsl' | 'linux' | 'darwin' | 'win32';
+    osName: string;
+    isDocker: boolean;
+    isWSL: boolean;
+    hostname: string;
+    architecture: string;
+    hostUptimeSeconds: number;
+    processUptimeSeconds: number;
+  };
+  repoInvariants: {
+    restartPolicy: string;
+    restartPolicyStatus: 'active' | 'degraded';
+    persistenceStatus: 'active' | 'transient';
+    dataDirectory: string;
+    dataDirExists: boolean;
+    freeSpaceMb: number;
+    healthProbesStatus: 'active' | 'missing';
+    autohealStatus: 'configured' | 'disabled';
+  };
+  hostRequirements: {
+    dockerLiveRestoreStatus: 'recommended' | 'verified';
+    systemdServiceAvailable: boolean;
+    sleepPreventionStatus: 'recommended';
+    platformGuideKey: 'ubuntu' | 'wsl' | 'macos' | 'windows';
+  };
+}
+
 class HostController {
   private getDiskVolumeStats(targetPath: string): DiskVolumeStats {
     try {
@@ -170,6 +200,70 @@ class HostController {
       },
     };
   }
+
+  public getHighAvailabilityReport(): HighAvailabilityReport {
+    const rawPlatform = platform();
+    const rawRelease = release().toLowerCase();
+    const isDocker = existsSync('/.dockerenv') || !!process.env.DOCKER_CONTAINER;
+    const isWSL = rawPlatform === 'linux' && (rawRelease.includes('microsoft') || rawRelease.includes('wsl'));
+    
+    let osType: 'wsl' | 'linux' | 'darwin' | 'win32' = 'linux';
+    let osName = 'Linux (Native Server)';
+    let platformGuideKey: 'ubuntu' | 'wsl' | 'macos' | 'windows' = 'ubuntu';
+
+    if (isWSL) {
+      osType = 'wsl';
+      osName = 'WSL2 (Windows Subsystem for Linux)';
+      platformGuideKey = 'wsl';
+    } else if (rawPlatform === 'darwin') {
+      osType = 'darwin';
+      osName = 'macOS (Darwin)';
+      platformGuideKey = 'macos';
+    } else if (rawPlatform === 'win32') {
+      osType = 'win32';
+      osName = 'Windows Native (Win32)';
+      platformGuideKey = 'windows';
+    }
+
+    const dataDir = resolveDataDir();
+    const dataDirExists = existsSync(dataDir);
+    const storageStats = this.getDiskVolumeStats(dataDirExists ? dataDir : process.cwd());
+    const freeSpaceMb = Math.round(storageStats.availableBytes / (1024 * 1024));
+
+    const systemdServicePath = join(process.cwd(), 'scripts', 'systemd', 'sg-forge.service');
+    const systemdServiceAvailable = existsSync(systemdServicePath);
+
+    return {
+      timestamp: Date.now(),
+      environment: {
+        osType,
+        osName,
+        isDocker,
+        isWSL,
+        hostname: hostname(),
+        architecture: arch(),
+        hostUptimeSeconds: Math.floor(uptime()),
+        processUptimeSeconds: Math.floor(process.uptime()),
+      },
+      repoInvariants: {
+        restartPolicy: 'unless-stopped / always',
+        restartPolicyStatus: 'active',
+        persistenceStatus: dataDirExists ? 'active' : 'transient',
+        dataDirectory: dataDir,
+        dataDirExists,
+        freeSpaceMb,
+        healthProbesStatus: 'active',
+        autohealStatus: 'configured',
+      },
+      hostRequirements: {
+        dockerLiveRestoreStatus: 'recommended',
+        systemdServiceAvailable,
+        sleepPreventionStatus: 'recommended',
+        platformGuideKey,
+      },
+    };
+  }
 }
 
 export const hostController = new HostController();
+

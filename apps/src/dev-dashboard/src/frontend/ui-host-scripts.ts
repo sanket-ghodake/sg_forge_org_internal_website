@@ -15,6 +15,7 @@ export function getHostDashboardScripts(): string {
           renderHostStorage(res.storage, res.memory);
           renderHostNetwork(res.network);
         }
+        loadReliabilityDiagnostics();
       } catch (err) {
         console.error('Failed to load host vitals', err);
       }
@@ -195,5 +196,87 @@ export function getHostDashboardScripts(): string {
         </table>
       \`;
     }
+
+    async function loadReliabilityDiagnostics() {
+      try {
+        const res = await fetch(apiBase + '/api/host/reliability').then(r => r.json());
+        if (res && res.status === 'ok') {
+          const osPill = document.getElementById('ha-os-pill');
+          const settingOsPill = document.getElementById('settings-ha-os-pill');
+          if (osPill) osPill.textContent = res.environment?.osName || 'Linux';
+          if (settingOsPill) settingOsPill.textContent = res.environment?.osName || 'Linux';
+
+          const chipStorage = document.getElementById('ha-chip-storage-free');
+          if (chipStorage && res.repoInvariants?.freeSpaceMb) {
+            chipStorage.textContent = '💾 ' + res.repoInvariants.freeSpaceMb + ' MB Free Storage';
+          }
+
+          // Set default active tab in guide modal according to detected platform
+          if (res.hostRequirements?.platformGuideKey) {
+            window._detectedPlatformGuideKey = res.hostRequirements.platformGuideKey;
+          }
+        }
+      } catch (err) {
+        console.error('Failed to load reliability diagnostics', err);
+      }
+    }
+
+    function toggleHaGuide(stageId) {
+      const guideEl = document.getElementById('guide-' + stageId);
+      const arrowEl = document.getElementById('arrow-' + stageId);
+      if (guideEl) {
+        const isHidden = guideEl.style.display === 'none' || !guideEl.style.display;
+        guideEl.style.display = isHidden ? 'block' : 'none';
+        if (arrowEl) arrowEl.textContent = isHidden ? '▴' : '▾';
+      }
+    }
+
+    function open247GuideModal() {
+      const modal = document.getElementById('modal-247-guide');
+      if (modal) {
+        modal.classList.add('open');
+        modal.style.display = 'flex';
+        const key = window._detectedPlatformGuideKey || 'ubuntu';
+        switch247GuideTab(key);
+      }
+    }
+
+    function close247GuideModal() {
+      const modal = document.getElementById('modal-247-guide');
+      if (modal) {
+        modal.classList.remove('open');
+        modal.style.display = 'none';
+      }
+    }
+
+    function switch247GuideTab(tabKey) {
+      const allTabs = document.querySelectorAll('.guide-tab-btn');
+      const allPanes = document.querySelectorAll('.guide-tab-pane');
+      allTabs.forEach(t => t.classList.remove('active'));
+      allPanes.forEach(p => p.style.display = 'none');
+
+      const activeBtn = document.querySelector('.guide-tab-btn[data-guide-tab="' + tabKey + '"]');
+      const activePane = document.getElementById('guide-pane-' + tabKey);
+      if (activeBtn) activeBtn.classList.add('active');
+      if (activePane) activePane.style.display = 'block';
+    }
+
+    function copyGuideCode(btn, codeText) {
+      navigator.clipboard.writeText(codeText).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = '✓ Copied!';
+        btn.style.color = 'var(--forge-success)';
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.style.color = '';
+        }, 2000);
+      });
+    }
+
+    window.open247GuideModal = open247GuideModal;
+    window.close247GuideModal = close247GuideModal;
+    window.switch247GuideTab = switch247GuideTab;
+    window.toggleHaGuide = toggleHaGuide;
+    window.copyGuideCode = copyGuideCode;
   `;
 }

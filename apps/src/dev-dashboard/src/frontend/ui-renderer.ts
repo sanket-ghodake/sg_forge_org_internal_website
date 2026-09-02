@@ -395,7 +395,43 @@ export function renderDashboardHtml(): string {
           <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
             <button class="astryx-btn btn-primary" onclick="openApiRegistryModal()">${astryxIcons.zap} API Route Explorer & cURL</button>
             <button class="astryx-btn btn-outline" onclick="openSafeEnvModal()">${astryxIcons.key} Masked Environment Inspector</button>
+            <button class="astryx-btn btn-outline" onclick="open247GuideModal()">🛡️ 24/7 Host Setup Guide</button>
             <button class="astryx-btn btn-outline" onclick="exportAuditCsv()">${astryxIcons.download} Export Audit CSV</button>
+          </div>
+        </div>
+
+        <div class="astryx-card" style="margin-bottom: 1rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+            <h2 style="font-size: 1.1rem; margin: 0; display: flex; align-items: center; gap: 0.45rem; font-weight: 600;">
+              <span style="color: var(--forge-primary); display: flex; align-items: center;">${astryxIcons.shield}</span> 24/7 High-Availability & Persistence
+            </h2>
+            <div style="display: flex; gap: 0.4rem; align-items: center;">
+              <span class="astryx-micro-pill" style="color: var(--forge-primary);" id="settings-ha-os-pill">Detected OS</span>
+              <button class="astryx-btn btn-outline" style="padding: 0.2rem 0.55rem; font-size: 0.72rem;" onclick="switchTab('host')">
+                View Live Telemetry →
+              </button>
+            </div>
+          </div>
+          <p style="color: var(--forge-text-muted); font-size: 0.8rem; margin-bottom: 0.85rem;">
+            Inspect container recovery policies, auto-healing watchdogs, named volume data persistence, and cross-platform setup commands.
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.6rem;">
+            <div style="background: var(--forge-bg-root); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.6rem 0.75rem;">
+              <div style="font-size: 0.7rem; color: var(--forge-text-muted); text-transform: uppercase;">Restart Policy</div>
+              <div style="font-size: 0.88rem; font-weight: 700; color: var(--forge-success);">Active (unless-stopped)</div>
+            </div>
+            <div style="background: var(--forge-bg-root); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.6rem 0.75rem;">
+              <div style="font-size: 0.7rem; color: var(--forge-text-muted); text-transform: uppercase;">Persistence</div>
+              <div style="font-size: 0.88rem; font-weight: 700; color: var(--forge-success);">Locked (Named Volumes)</div>
+            </div>
+            <div style="background: var(--forge-bg-root); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.6rem 0.75rem;">
+              <div style="font-size: 0.7rem; color: var(--forge-text-muted); text-transform: uppercase;">Health Probes</div>
+              <div style="font-size: 0.88rem; font-weight: 700; color: var(--forge-success);">Active (Dual Spider)</div>
+            </div>
+            <div style="background: var(--forge-bg-root); border: 1px solid var(--forge-border); border-radius: var(--forge-radius-sm); padding: 0.6rem 0.75rem;">
+              <div style="font-size: 0.7rem; color: var(--forge-text-muted); text-transform: uppercase;">Autoheal Watchdog</div>
+              <div style="font-size: 0.88rem; font-weight: 700; color: var(--forge-success);">Configured (Compose)</div>
+            </div>
           </div>
         </div>
         <div class="astryx-card">

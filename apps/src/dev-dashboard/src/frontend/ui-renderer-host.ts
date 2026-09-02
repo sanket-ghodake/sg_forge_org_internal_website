@@ -4,6 +4,7 @@
  */
 
 import { astryxIcons } from '@forge/ui';
+import { renderHighAvailabilitySuite } from './ui-renderer-ha';
 
 export function renderHostTab(): string {
   return `
@@ -23,11 +24,14 @@ export function renderHostTab(): string {
         </div>
         <div style="display: flex; gap: 0.45rem; align-items: center; flex-wrap: wrap;">
           <span class="astryx-micro-pill" style="color: var(--forge-success);" id="host-engine-pill">Bun v1.3.14 (Linux)</span>
-          <button class="astryx-btn btn-outline" style="padding: 0.28rem 0.65rem; font-size: 0.74rem;" onclick="loadHostVitals()">
+          <button class="astryx-btn btn-outline" style="padding: 0.28rem 0.65rem; font-size: 0.74rem;" onclick="loadHostVitals(); loadReliabilityDiagnostics();">
             Refresh Vitals ↺
           </button>
         </div>
       </div>
+
+      <!-- 1b. 24/7 High-Availability & Persistence Reliability Suite (6-Stage Matrix) -->
+      ${renderHighAvailabilitySuite()}
 
       <!-- 2. 4 Primary Circular SVG Gauge Vitals -->
       <div class="host-vitals-grid">

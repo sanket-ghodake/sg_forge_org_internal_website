@@ -436,5 +436,45 @@ export function getOverlayStyles(): string {
         max-width: unset;
       }
     }
+
+    /* ── Astryx Modern Floating Tooltips & Popovers (Anti-Browser Defaults) ── */
+    [data-astryx-tooltip], [data-tooltip] {
+      cursor: help;
+    }
+    .astryx-floating-tooltip {
+      position: fixed;
+      z-index: 100000;
+      pointer-events: none;
+      background: var(--forge-bg-surface);
+      border: 1px solid var(--forge-border-medium);
+      color: var(--forge-text-main);
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--forge-radius-sm);
+      font-size: 0.74rem;
+      font-weight: 500;
+      line-height: 1.4;
+      max-width: 290px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 12px rgba(59, 130, 246, 0.15);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      opacity: 0;
+      transform: translateY(4px) scale(0.97);
+      transition: opacity 0.14s cubic-bezier(0.16, 1, 0.3, 1), transform 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+      display: none;
+    }
+    .astryx-floating-tooltip.visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .astryx-tooltip-title {
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: var(--forge-primary);
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
   `;
 }

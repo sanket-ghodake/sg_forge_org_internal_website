@@ -13,4 +13,5 @@ export * from './header';
 export * from './state';
 export * from './error-page';
 export * from './icons';
+export * from './tooltip';
 

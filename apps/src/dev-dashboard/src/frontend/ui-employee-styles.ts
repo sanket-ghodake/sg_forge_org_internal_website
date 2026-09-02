@@ -163,9 +163,8 @@ export function getEmployeeStyles(): string {
 
     /* Slide-Over Employee Detail Drawer */
     .emp-drawer-backdrop { position: fixed; top: 48px; left: 0; right: 0; bottom: 0; width: 100vw; height: calc(100vh - 48px); background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; z-index: 90; opacity: 0; pointer-events: none; transition: opacity 0.22s ease; }
-    .emp-drawer-backdrop.open { opacity: 1; pointer-events: auto; }
-    .emp-drawer { position: fixed; top: 48px; right: 0; bottom: 0; width: min(94vw, 560px); height: calc(100vh - 48px); background: var(--forge-bg-surface); border-left: 1px solid var(--forge-border-medium); box-shadow: -16px 0 40px rgba(0, 0, 0, 0.35); transform: translateX(100%); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); z-index: 95; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; }
-    .emp-drawer.open { transform: translateX(0); }
+    .emp-drawer { position: fixed; top: 48px; right: 0; bottom: 0; width: min(94vw, 560px); height: calc(100vh - 48px); background: var(--forge-bg-surface); border-left: 1px solid var(--forge-border-medium); box-shadow: none; visibility: hidden; pointer-events: none; transform: translateX(100%); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s, box-shadow 0.25s; z-index: 95; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; }
+    .emp-drawer.open { transform: translateX(0); visibility: visible; pointer-events: auto; box-shadow: -16px 0 40px rgba(0, 0, 0, 0.35); }
     .emp-drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem; border-bottom: 1px solid var(--forge-border); background: var(--forge-bg-card); flex-shrink: 0; }
     .emp-drawer-tabs { display: flex; border-bottom: 1px solid var(--forge-border); background: var(--forge-bg-card); padding: 0 1.25rem; gap: 0.5rem; flex-shrink: 0; }
     .emp-tab-btn { background: transparent; border: none; border-bottom: 2px solid transparent; color: var(--forge-text-muted); font-size: 0.78rem; font-weight: 600; padding: 0.6rem 0.5rem; cursor: pointer; transition: var(--forge-transition); outline: none; }
