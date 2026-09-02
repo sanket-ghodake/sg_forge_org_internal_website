@@ -272,14 +272,6 @@ export function getDbDashboardScripts(): string {
       browseTableRows(currentSelectedDb, currentSelectedTable, 1);
     }
 
-    function launchDrizzleStudio() {
-      const db = currentSelectedDb;
-      if (window.astryxToast) {
-        window.astryxToast('Launching Drizzle Studio for ' + db + ' (Run "rtk bun run db:studio" in terminal)', 'info');
-      }
-      window.open('https://local.drizzle.studio', '_blank');
-    }
-
     function selectTable(dbName, tableName) {
       currentSelectedDb = document.getElementById('db-select')?.value || currentSelectedDb;
       currentSelectedTable = tableName;

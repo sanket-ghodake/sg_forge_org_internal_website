@@ -222,7 +222,6 @@ export function renderDashboardHtml(): string {
             </div>
             <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
               <button class="astryx-btn btn-outline" id="btn-db-fullscreen" onclick="toggleDbStudioFullscreen()">Fullscreen</button>
-              <button class="astryx-btn btn-outline" style="border-color: var(--forge-primary); color: var(--forge-primary);" onclick="launchDrizzleStudio()" title="Launch Drizzle Studio for selected microservice DB">${astryxIcons.zap} Drizzle Studio</button>
               <button class="astryx-btn btn-outline" style="border-color: var(--forge-primary); color: var(--forge-primary);" onclick="openConnectModal()">${astryxIcons.plus} Connect Remote DB</button>
             </div>
           </div>

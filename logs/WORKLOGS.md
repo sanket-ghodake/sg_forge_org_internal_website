@@ -433,3 +433,6 @@
 2026-09-02 21:29 | Created 100% Air-Gapped Compliance implementation plan covering font localization, centralized CSP, proxy TLS hardening, and automated negative assertion tests
 2026-09-02 21:30 | Implemented 100% Air-Gapped Compliance across UI typography, SDK security headers, offline proxy TLS, and automated compliance test suite (317 tests passing)
 2026-09-02 21:32 | [46e86d9] feat(security): achieve 100% air-gapped compliance across typography, sdk headers, and proxy tls (+297, -18)
+2026-09-02 21:32 | Committed 100% Air-Gapped Compliance features and updated SDK, UI, and proxy documentation
+2026-09-02 21:39 | Completely removed Drizzle Studio, drizzle-kit, and cloud UI bridge; verified 100% open-source local toolchain
+2026-09-02 21:45 | [b59f775] feat(toolchain): remove Drizzle Studio and enforce 100% open-source local toolchain (+5, -224)
