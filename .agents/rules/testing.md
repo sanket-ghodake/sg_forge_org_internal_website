@@ -90,4 +90,10 @@ rtk bun test apps/src/auth/test/security/
 
 # Run Playwright browser tests:
 rtk bun x playwright test
+
+# Lint OpenAPI 3.1 contract specifications (Spectral):
+rtk ./run.sh contracts
+
+# Run property contract schema verification (Schemathesis):
+rtk ./portables/bin/schemathesis run docs/api/openapi.yaml
 ```

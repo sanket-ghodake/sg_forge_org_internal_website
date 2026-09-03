@@ -12,7 +12,7 @@ Manual Dispatch (workflow_dispatch)
   ├──► [Node 1: Secrets & File Hygiene] (< 10s)
   │      │
   │      ▼
-  ├──► [Node 2: Typecheck & 21-Gate Verification] (< 25s)
+  ├──► [Node 2: Typecheck & 27-Gate Verification] (< 25s)
   │      │
   │      ▼
   ├──► [Node 3: 5-Tier Test Suites] (< 30s)
@@ -48,7 +48,7 @@ gh workflow run pipeline.yml --ref main -f run_codeql=false -f run_sbom=false
 
 ## Performance & Invariant Optimizations
 
-- **Deterministic 21-Gate Parity**: Node 2 executes `scripts/verify-gate.ts`, providing 100% parity with local pre-commit checks.
+- **Deterministic 27-Gate Parity**: Node 2 executes `scripts/verify-gate.ts`, providing 100% parity with local pre-commit checks.
 - **Bun Cache Keying**: Caches `~/.bun/install/cache` against `bun.lock`, enabling sub-2-second installs.
 - **Fail-Fast Hierarchy**: Halts in $< 10$ seconds if secret leaks or syntax issues exist before running heavy analysis.
 - **Zero OS Host Modifications**: Portable Bun runtime (1.3.14) with frozen lockfile validation.

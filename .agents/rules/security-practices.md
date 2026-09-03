@@ -80,3 +80,13 @@ This standard applies universally across all source code, API routes, microservi
 - **Fast Pre-Commit Pattern Check**: `scripts/lint-security.sh` verifies zero high-risk patterns in staged files.
 - **Polyglot SAST Scanner**: Semgrep and Ruff Bandit rules run on modified source files.
 - **Agent Self-Audit**: Agents must execute `rtk run "./scripts/lint-security.sh"` after modifying backend routes, authentication logic, or proxy controllers.
+
+---
+
+## 11. Supply Chain & Vibecoding Security Guardrails (2026 Standards)
+1. **OSV-Scanner Automated Lockfile Audit**: Continuous scanning of `bun.lock` against Google's Open Source Vulnerability database via `./run.sh vuln`. Zero critical vulnerabilities permitted.
+2. **Anti-Slopsquatting Pre-Install Verification**: AI agents must never introduce external npm dependencies without first verifying registry metadata via `./run.sh check-pkg <pkg>`. Requires $\ge 14$ days publication age, legitimate maintainer provenance, and non-hallucinated packages.
+3. **Trivy Container & Configuration Auditing**: Audits all Dockerfiles and compose manifests for misconfigurations and vulnerable base layers via `./run.sh trivy`.
+4. **Permissive License Allowlist**: All dependencies must conform strictly to permissive OSI licenses (MIT, Apache-2.0, BSD, ISC, MPL-2.0). Viral copyleft (AGPL/GPL) is strictly prohibited in platform services.
+5. **Syft CycloneDX 1.5 SBOM**: Continuous SBOM generation and cryptographic verification via `./run.sh sbom`.
+

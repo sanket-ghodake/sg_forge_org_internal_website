@@ -22,14 +22,19 @@ Before writing code, running commands, or staging/committing changes, verify:
 13. [ ] **5-Tier Microservice Test Governance & Testing for Truth**: Every microservice across `apps/src/*` and `forge-apps/*` MUST maintain an isolated `test/` folder with required subtiers (`unit/`, `integration/`, `security/`, `contracts/`, `e2e/`). Zero shallow mocks that bypass real network/cookie boundaries; 100% Branch Coverage on Auth & RBAC; $\ge 90\%$ on business logic.
 14. [ ] **AI Semantic Scenario Audit**: All critical security invariants (anti-brute force, token replay defense, tamper detection, cross-tenant isolation) MUST have explicit negative assertion tests.
 15. [ ] **Strict Portal SPA & Fluid Responsiveness Governance**: The Portal application (`@forge/portal`) MUST strictly operate as a Single Page Application (SPA) with zero full-page hard refreshes across internal navigation (using client-side view routing, instantaneous DOM hydration, and history management). Fully fluid and responsive across desktop, tablet, and mobile down to 320px viewport with zero horizontal overflow.
+16. [ ] **Supply Chain & Anti-Slopsquatting Guard**: Zero unverified npm dependencies. Any proposed external package MUST be verified against registry provenance, age (>=14 days), and permissible license via `rtk ./run.sh check-pkg <pkg>` before addition.
+17. [ ] **API Contract & Schema Parity**: All endpoint alterations must conform to OpenAPI 3.1 specifications and pass `rtk ./run.sh contracts` (Spectral ruleset).
+18. [ ] **Complexity & Function Line Cap**: Source functions must satisfy Cyclomatic Complexity $\text{CCN} \le 10$ and modular line limits, audited via `rtk ./run.sh complexity` (Lizard AST engine).
+19. [ ] **Permissive License Governance**: Zero viral copyleft (AGPL/GPL) or non-OSI licenses imported into platform services (`rtk ./run.sh licenses`).
+20. [ ] **Automated CycloneDX 1.5 SBOM**: Continuous SBOM generation and validation via `rtk ./run.sh sbom` (Syft engine).
 
 ---
 
 ## 🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)
 
 ### 1. Correctness, Grounding & "No Guessing"
-- **NEVER** hallucinate, assume, or invent APIs, database columns, schemas, or behaviors.
-- **ALWAYS** inspect callers, schemas, types, and existing tests using Graphify (`.agents/rules/graphify.md`) and ripgrep before editing.
+- **NEVER** hallucinate, assume, or invent APIs, database columns, schemas, external packages, or behaviors.
+- **ALWAYS** inspect callers, schemas, types, and existing tests using Graphify (`.agents/rules/graphify.md`) and ripgrep before editing. Validate any new dependency via `./run.sh check-pkg <pkg>`.
 
 ### 2. Strict File Size Governance & 500-Line Soft Cap
 - **$\le 300$ lines**: Healthy modular standard.

@@ -13,10 +13,10 @@ if [ -x "$LOCAL_BIN" ]; then
     exec "$LOCAL_BIN" "$@"
 elif command -v k6 >/dev/null 2>&1; then
     exec k6 "$@"
-elif command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
-    exec docker run --rm -i --net=host grafana/k6:latest "$@"
+elif command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1 && docker image inspect grafana/k6:latest >/dev/null 2>&1; then
+    exec docker run --rm --net=host -v "$REPO_ROOT:/src" -w /src grafana/k6:latest "$@"
 else
-    # Zero-dependency portable fallback: Uses existing autocannon runner
-    echo "⚡ [k6 Portable] Running performance benchmark via autocannon fallback..."
-    "$REPO_ROOT/portables/bin/autocannon" "$@"
+    # Zero-dependency portable fallback: Uses instant autocannon runner
+    echo "⚡ [k6 Portable] k6 image not cached locally. Running instant load benchmark via Autocannon (< 3s)..."
+    exec "$REPO_ROOT/portables/bin/autocannon" "$@"
 fi

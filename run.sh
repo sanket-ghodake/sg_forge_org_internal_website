@@ -57,10 +57,19 @@ function show_help() {
     echo "  restart [svc]         Restart Docker container service"
     echo ""
     echo "Quality, Security & Toolchain:"
-    echo "  verify                Run automated AI Agent 2-Tier Quality Gate"
+    echo "  verify                Run automated AI Agent 2-Tier Quality Gate (27 Checks)"
     echo "  lint                  Run Biome fast AST code quality & style checks"
     echo "  deadcode              Run Knip dead code & unexported symbol audit"
     echo "  secrets               Run Gitleaks 160+ secret & token scanner"
+    echo "  vuln                  Run Google OSV-Scanner on lockfile dependencies"
+    echo "  trivy                 Run Trivy container and filesystem configuration scanner"
+    echo "  sbom                  Generate CycloneDX 1.5 Software Bill of Materials (Syft)"
+    echo "  contracts             Lint OpenAPI 3.1 specifications (Spectral)"
+    echo "  complexity            Audit Cyclomatic Complexity CCN <= 10 & function caps (Lizard)"
+    echo "  check-pkg [pkg]       Audit dependencies for package hallucination & slopsquatting"
+    echo "  licenses              Audit dependency licenses against permissive OSI allowlist"
+    echo "  fuzz                  Run Schemathesis property contract fuzzer against OpenAPI specs"
+    echo "  loadtest [script]     Run k6 load & performance stress testing engine"
     echo "  benchmark [url]       Run Autocannon HTTP latency benchmark (<2ms target)"
     echo "  pack                  Run Repomix token-compressed AI context packager"
     echo ""
@@ -201,8 +210,27 @@ case "$CMD" in
         "$REPO_ROOT/portables/bin/axe" "$@"
         ;;
 
-    spectral)
-        "$REPO_ROOT/portables/bin/spectral" "$@"
+    spectral|contracts)
+        if [ $# -ge 2 ]; then
+            shift
+            "$REPO_ROOT/portables/bin/spectral" "$@"
+        else
+            "$REPO_ROOT/portables/bin/spectral" lint "$REPO_ROOT/docs/api/openapi.yaml"
+        fi
+        ;;
+
+    complexity)
+        shift
+        "$REPO_ROOT/portables/bin/lizard" "$@"
+        ;;
+
+    check-pkg)
+        shift
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/check-package-health.ts" "$@"
+        ;;
+
+    licenses)
+        $PORTABLE_BUN -e 'import { checkDependencyLicenses } from "./scripts/verify-checks.ts"; const res = checkDependencyLicenses(); console.log(res.details);'
         ;;
 
     vuln)
@@ -219,6 +247,16 @@ case "$CMD" in
 
     lhci)
         "$REPO_ROOT/portables/bin/lhci" "$@"
+        ;;
+
+    fuzz|schemathesis)
+        shift
+        "$REPO_ROOT/portables/bin/schemathesis" "$@"
+        ;;
+
+    loadtest|k6)
+        shift
+        "$REPO_ROOT/portables/bin/k6" "$@"
         ;;
 
     benchmark)

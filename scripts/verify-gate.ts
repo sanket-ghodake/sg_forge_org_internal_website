@@ -29,6 +29,12 @@ import {
   checkShellScripts,
   checkAxeAccessibility,
   checkSemgrepInvariants,
+  checkOsvVulnerabilities,
+  checkTrivySecurity,
+  checkSpectralContracts,
+  checkCodeComplexity,
+  checkDependencyLicenses,
+  checkSyftSbomIntegrity,
 } from './verify-checks';
 
 const REPO_ROOT = process.cwd();
@@ -336,7 +342,15 @@ runTier1Check(12, '5-Tier Automated Test Suites', 'Bun Test Runner', () => {
     },
   });
   const stdout = proc.stdout.toString();
-  if (proc.exitCode !== 0) return { status: 'FAILED', details: `Tests failed:\n${stdout}` };
+  const stderr = proc.stderr.toString();
+  if (proc.exitCode !== 0) {
+    const errorLines = (stderr + '\n' + stdout)
+      .split('\n')
+      .filter((l) => l.toLowerCase().includes('fail') || l.toLowerCase().includes('error'))
+      .slice(0, 5)
+      .join('; ');
+    return { status: 'FAILED', details: `Tests failed (code ${proc.exitCode}): ${errorLines.slice(0, 200)}` };
+  }
 
   const passMatch = stdout.match(/(\d+)\s+pass/);
   const totalPass = passMatch ? passMatch[1] : 'All';
@@ -402,6 +416,24 @@ runTier1Check(20, 'WCAG 2.1 AA Accessibility Standards', 'Axe Portable Auditor',
 
 // 21. SAST AppSec Rules & Multi-Tenant Scoping
 runTier1Check(21, 'SAST Security & Multi-Tenant Scoping', 'Semgrep Portable Engine', () => checkSemgrepInvariants());
+
+// 22. Supply Chain & Lockfile Vulnerability Audit
+runTier1Check(22, 'Supply Chain Vulnerability Audit', 'OSV-Scanner Portable', () => checkOsvVulnerabilities());
+
+// 23. Container & Workspace Configuration Security Scan
+runTier1Check(23, 'Workspace & Manifest Security', 'Trivy Portable', () => checkTrivySecurity());
+
+// 24. Spectral OpenAPI Contract Compliance
+runTier1Check(24, 'OpenAPI 3.1 Contract Compliance', 'Spectral Portable', () => checkSpectralContracts());
+
+// 25. Cyclomatic Complexity & Function Line Cap
+runTier1Check(25, 'Complexity Cap (CCN <= 10)', 'Lizard AST Engine', () => checkCodeComplexity());
+
+// 26. Permissive License Governance & Anti-Contamination
+runTier1Check(26, 'Permissive License Governance', 'License Compliance Guard', () => checkDependencyLicenses());
+
+// 27. Syft Automated CycloneDX 1.5 SBOM Integrity
+runTier1Check(27, 'CycloneDX 1.5 SBOM Integrity', 'Syft SBOM Engine', () => checkSyftSbomIntegrity());
 
 // ==============================================================================
 // TIER 2: AI AGENT SEMANTIC CHECKS (TOKEN-OPTIMIZED COMPACT REVIEW)

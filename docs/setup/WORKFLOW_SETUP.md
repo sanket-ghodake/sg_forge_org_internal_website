@@ -139,18 +139,39 @@ To ensure AI agent behavior is identical across Antigravity, Claude Code, GitHub
 
 ---
 
-## 7. Development Commands Summary
+## 7. Development & Quality Gate Commands Summary
 
 ```bash
 # Run local dev environment
 ./run.sh dev
 
-# Run unit tests
-bun test test/unit
+# Run 27-Check Pre-Commit Verification Gate
+./run.sh verify
 
-# Sync agent instructions across IDEs
-./.agents/scripts/sync-agent-instructions.sh
+# Run 5-Tier microservice tests
+./run.sh test
+
+# Audit dependencies against Google OSV vulnerability database
+./run.sh vuln
+
+# Audit container manifests and configurations with Trivy
+./run.sh trivy
+
+# Verify an external package before installation (Anti-Slopsquatting)
+./run.sh check-pkg <pkg>
+
+# Lint OpenAPI 3.1 contracts with Spectral
+./run.sh contracts
+
+# Audit function complexity (CCN <= 10) with Lizard
+./run.sh complexity
+
+# Audit workspace dependency licenses against OSI allowlist
+./run.sh licenses
+
+# Generate CycloneDX 1.5 SBOM with Syft
+./run.sh sbom
 
 # Append task summary to worklogs
-./.agents/hooks/append-log.sh "your log message"
+rtk bun scripts/append-worklog.ts "your log message"
 ```
