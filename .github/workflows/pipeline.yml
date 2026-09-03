@@ -63,12 +63,6 @@ jobs:
       - name: Initialize Isolated Development Databases
         run: bun run scripts/init-all-databases.ts
 
-      - name: Gitleaks Secret Audit
-        run: bun ./portables/bin/gitleaks
-
-      - name: TypeScript Static Compilation (tsc)
-        run: bunx tsc --noEmit
-
       - name: Deterministic 27-Gate Quality Verification
         run: |
           bun scripts/verify-gate.ts 2>&1 | tee gate_run.log || {
@@ -78,12 +72,7 @@ jobs:
             echo '```' >> $GITHUB_STEP_SUMMARY
             exit 1
           }
-
-      - name: Execute Full 5-Tier Test Suite
-        run: bun test
-
-      - name: CycloneDX SBOM Verification & Generation
-        run: bash scripts/generate-sbom.sh
+          echo "### ✅ All 27 Quality Gates Passed" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload SBOM Artifact
         uses: actions/upload-artifact@v4

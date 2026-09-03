@@ -512,3 +512,5 @@
 2026-09-03 18:32 | [47a32f9] fix(ci): add db initialization to pipeline, fix trivy docker path, and make sbom idempotent (+21, -2)
 2026-09-03 18:41 | Removed Dependabot to ensure single workflow, fixed dev dashboard test auth and test DB routing, and added deploy chmod in CI
 2026-09-03 18:44 | [acce30f] fix(ci): ensure single workflow by removing dependabot, fix test auth mode and db routing (+7, -25)
+2026-09-03 19:02 | fix(ci): consolidate pipeline.yml to single-source-of-truth verify-gate, remove 4 redundant steps (gitleaks/tsc/bun-test/sbom), update workflows README, identified 8 stale dependabot branches for deletion
+2026-09-03 19:17 | [1664a4e] fix(ci): consolidate pipeline to single-source-of-truth verify-gate, remove redundant steps (+27, -32)
