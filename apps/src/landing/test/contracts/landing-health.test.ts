@@ -9,11 +9,11 @@ import { startLandingServer } from '../../src/server';
 describe('Tier 4 Contract: Landing Health Probe Schema', () => {
   it('returns valid JSON health specification on /health', async () => {
     // Arrange
-    const server = startLandingServer(3192);
+    const server = startLandingServer(0);
 
     try {
       // Act
-      const res = await fetch('http://localhost:3192/health');
+      const res = await fetch(`http://localhost:${server.port}/health`);
       const json: any = await res.json();
 
       // Assert

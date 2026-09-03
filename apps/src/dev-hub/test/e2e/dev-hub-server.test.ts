@@ -9,11 +9,11 @@ import { startDevHubServer } from '../../src/server';
 describe('Tier 5 E2E: Developer Hub Full Server Lifecycle', () => {
   it('serves developer hub layout with Astryx header and documentation cards', async () => {
     // Arrange
-    const server = startDevHubServer(3197);
+    const server = startDevHubServer(0);
 
     try {
       // Act
-      const res = await fetch('http://localhost:3197/');
+      const res = await fetch(`http://localhost:${server.port}/`);
       const html = await res.text();
 
       // Assert

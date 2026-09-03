@@ -10,12 +10,12 @@ import { startLandingServer } from '../../src/server';
 describe('Tier 2 Integration: Landing Dynamic Registry Synchronization', () => {
   it('serves dynamic catalog containing all services registered in .env', async () => {
     // Arrange
-    const server = startLandingServer(3190);
+    const server = startLandingServer(0);
     const services = loadServiceRegistry();
 
     try {
       // Act
-      const res = await fetch('http://localhost:3190/');
+      const res = await fetch(`http://localhost:${server.port}/`);
       const html = await res.text();
 
       // Assert

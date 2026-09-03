@@ -12,14 +12,12 @@ import { startFallbackServer } from '../fallback-server';
 
 const REPO_ROOT = process.cwd();
 const ERRORS_DIR = join(REPO_ROOT, 'proxy', 'errors');
-const TEST_PORT = 8995;
-
 describe('Tier 1 Unit: Static Error Pages & Host Fallback Server', () => {
   let serverInstance: ReturnType<typeof Bun.serve>;
 
   beforeAll(() => {
-    // Start fallback server on isolated test port
-    serverInstance = startFallbackServer({ port: TEST_PORT, quiet: true });
+    // Start fallback server on isolated ephemeral port 0
+    serverInstance = startFallbackServer({ port: 0, quiet: true });
   });
 
   afterAll(() => {
@@ -58,7 +56,7 @@ describe('Tier 1 Unit: Static Error Pages & Host Fallback Server', () => {
 
     // Act & Assert
     for (const route of testRoutes) {
-      const res = await fetch(`http://localhost:${TEST_PORT}${route}`);
+      const res = await fetch(`http://localhost:${serverInstance.port}${route}`);
       expect(res.status).toBe(503);
       expect(res.headers.get('Content-Type')).toContain('text/html');
       expect(res.headers.get('X-Forge-Fallback')).toBe('active');
@@ -71,7 +69,7 @@ describe('Tier 1 Unit: Static Error Pages & Host Fallback Server', () => {
 
   it('Arrange, Act, Assert: fallback server responds 200 OK to dual health check probes', async () => {
     // Arrange
-    const healthUrl = `http://localhost:${TEST_PORT}/health`;
+    const healthUrl = `http://localhost:${serverInstance.port}/health`;
 
     // Act
     const res = await fetch(healthUrl);

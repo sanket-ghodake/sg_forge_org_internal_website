@@ -34,11 +34,11 @@ describe('Tier 3 Security: SQL Sandbox Defense & Input Hardening', () => {
 
   it('rejects malformed log ingest payloads with HTTP 400', async () => {
     // Arrange
-    const server = startDevDashboardServer(3181);
+    const server = startDevDashboardServer(0);
 
     try {
       // Act: Invalid log payload without service or message
-      const res = await fetch('http://localhost:3181/api/logs/ingest', {
+      const res = await fetch(`http://localhost:${server.port}/api/logs/ingest`, {
         method: 'POST',
         headers: AUTH_HEADERS,
         body: JSON.stringify({ invalidField: true }),

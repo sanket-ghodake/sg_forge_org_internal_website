@@ -11,18 +11,18 @@ describe('Tier 5 E2E: Dev Dashboard Server & UI Rendering', () => {
   it('serves dynamic Astryx HTML, dual-probe health checks, and 1-Click Latency Benchmark', async () => {
     // Arrange
     const brand = loadBrandConfig();
-    const server = startDevDashboardServer(3184);
+    const server = startDevDashboardServer(0);
 
     try {
       // Act 1: Dual-Probe Health Check (Public)
-      const healthRes = await fetch('http://localhost:3184/health');
+      const healthRes = await fetch(`http://localhost:${server.port}/health`);
       const healthJson: any = await healthRes.json();
 
       expect(healthRes.status).toBe(200);
       expect(healthJson.status).toBe('ok');
 
       // Act 2: Unauthenticated Astryx HTML UI entrypoint renders Login Screen
-      const unauthRes = await fetch('http://localhost:3184/');
+      const unauthRes = await fetch(`http://localhost:${server.port}/`);
       const unauthHtml = await unauthRes.text();
 
       expect(unauthRes.status).toBe(200);
@@ -31,7 +31,7 @@ describe('Tier 5 E2E: Dev Dashboard Server & UI Rendering', () => {
       expect(unauthHtml).toContain('Single-Operator Session Enforced');
 
       // Act 3: Authenticate operator via /api/auth/login
-      const loginRes = await fetch('http://localhost:3184/api/auth/login', {
+      const loginRes = await fetch(`http://localhost:${server.port}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password: 'password123' }),
@@ -42,7 +42,7 @@ describe('Tier 5 E2E: Dev Dashboard Server & UI Rendering', () => {
       const sessionCookie = `dev_session=${loginData.sessionToken}`;
 
       // Act 4: Authenticated Astryx HTML UI entrypoint renders Full Dashboard
-      const authHtmlRes = await fetch('http://localhost:3184/', {
+      const authHtmlRes = await fetch(`http://localhost:${server.port}/`, {
         headers: { Cookie: sessionCookie },
       });
       const authHtml = await authHtmlRes.text();
@@ -54,7 +54,7 @@ describe('Tier 5 E2E: Dev Dashboard Server & UI Rendering', () => {
       expect(authHtml).toContain('dashboard-watchdog');
 
       // Act 5: Authenticated 1-Click HTTP Latency Benchmark
-      const benchRes = await fetch('http://localhost:3184/api/benchmark', {
+      const benchRes = await fetch(`http://localhost:${server.port}/api/benchmark`, {
         method: 'POST',
         headers: { Cookie: sessionCookie },
       });

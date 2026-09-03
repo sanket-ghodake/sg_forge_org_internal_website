@@ -4,19 +4,34 @@
  */
 
 import { describe, expect, it } from 'bun:test';
+import { telemetryDb } from '../../src/db';
 
 describe('Tier 1 Unit: Telemetry Metrics Engine', () => {
-  it('should compute p95 and p99 percentiles accurately', () => {
+  it('Arrange, Act, Assert: records and retrieves telemetry snapshot in isolated database', () => {
     // Arrange
-    const latencies = [10, 12, 14, 15, 18, 20, 25, 30, 45, 120];
+    const snapId = `snap_${Date.now()}`;
+    const cpu = 14.5;
+    const memory = 128.4;
+    const now = Date.now();
 
     // Act
-    const sorted = [...latencies].sort((a, b) => a - b);
-    const p90Index = Math.floor(sorted.length * 0.9);
-    const p90Val = sorted[p90Index];
+    telemetryDb.run(
+      'INSERT INTO telemetry_snapshots (id, cpu_percent, memory_mb, active_services, timestamp) VALUES (?, ?, ?, ?, ?);',
+      [snapId, cpu, memory, 8, now]
+    );
+
+    const record = telemetryDb
+      .query('SELECT * FROM telemetry_snapshots WHERE id = ?;')
+      .get(snapId) as any;
 
     // Assert
-    expect(p90Val).toBe(120);
-    expect(sorted.length).toBe(10);
+    expect(record).toBeDefined();
+    expect(record.id).toBe(snapId);
+    expect(record.cpu_percent).toBe(14.5);
+    expect(record.memory_mb).toBe(128.4);
+    expect(record.active_services).toBe(8);
+
+    // Cleanup
+    telemetryDb.run('DELETE FROM telemetry_snapshots WHERE id = ?;', [snapId]);
   });
 });

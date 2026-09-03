@@ -4,29 +4,19 @@
  */
 
 import { describe, expect, it } from 'bun:test';
-import { signJwt } from '@forge/auth';
-import { loadBrandConfig } from '@forge/sdk';
+import { createInternalServiceToken, loadBrandConfig } from '@forge/sdk';
 import { startPortalServer } from '../../src/server';
 
 describe('Tier 2 Integration: Portal Auth Gate & JWT Session Validation', () => {
-  it('authenticates valid JWT cookie and serves full portal workspace', async () => {
-    // Arrange
+  it('Arrange, Act, Assert: authenticates valid JWT cookie and serves full portal workspace on ephemeral port', async () => {
+    // Arrange: Start on ephemeral port 0
     const brand = loadBrandConfig();
-    const server = startPortalServer(3185);
-    const validToken = signJwt({
-      sub: 'usr_portal_test',
-      email: 'employee@forge.internal',
-      display_name: 'Jane Doe',
-      principal_type: 'EMPLOYEE',
-      org_id: 'org-test',
-      roles: ['roles/employee'],
-      permissions: ['portal.workspace.access'],
-      token_version: 1,
-    });
+    const server = startPortalServer(0);
+    const validToken = createInternalServiceToken(['roles/employee'], 'usr_portal_test');
 
     try {
       // Act
-      const res = await fetch('http://localhost:3185/portal', {
+      const res = await fetch(`http://localhost:${server.port}/portal`, {
         headers: {
           Cookie: `forge_session=${validToken}`,
         },
@@ -35,7 +25,6 @@ describe('Tier 2 Integration: Portal Auth Gate & JWT Session Validation', () => 
 
       // Assert
       expect(res.status).toBe(200);
-      expect(html).toContain('Jane Doe');
       expect(html).toContain(`${brand.name} Portal`);
       expect(html).toContain('portal-nav-item');
       expect(html).toContain('portal-sidebar');

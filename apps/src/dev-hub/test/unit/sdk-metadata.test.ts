@@ -1,19 +1,22 @@
 /**
- * @forge/dev-hub - Tier 1 Unit: SDK Metadata & Scaffolding Template Parsing
+ * @forge/dev-hub - Tier 1 Unit: SDK Metadata & Documentation Rendering
  * 3A Pattern (Arrange, Act, Assert) Testing Suite
  */
 
 import { describe, expect, it } from 'bun:test';
+import { renderDevHubHtml } from '../../src/frontend/hub-view';
 
-describe('Tier 1 Unit: Developer Hub Metadata Specs', () => {
-  it('defines valid SDK protocols and scaffolding contracts', () => {
-    // Arrange
-    const supportedLanguages = ['typescript', 'python', 'go'];
-    const protocols = ['PostMessage Handshake', 'Scoped Token Validation'];
+describe('Tier 1 Unit: Developer Hub Metadata Specs & Views', () => {
+  it('Arrange, Act, Assert: renders developer hub documentation with SDK specifications', () => {
+    // Act
+    const html = renderDevHubHtml();
 
-    // Act & Assert
-    expect(supportedLanguages).toContain('typescript');
-    expect(supportedLanguages).toHaveLength(3);
-    expect(protocols).toHaveLength(2);
+    // Assert: Check structure, AST, and Astryx components
+    expect(html).toBeDefined();
+    expect(html).toContain('astryx-container');
+    expect(html).toContain('Developer Hub');
+    expect(html).toContain('@forge/sdk');
+    expect(html).toContain('createLogger');
+    expect(html).toContain('authGuard');
   });
 });

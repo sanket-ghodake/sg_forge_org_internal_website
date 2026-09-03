@@ -14,11 +14,11 @@ describe('Tier 4 Contract: RFC 7807 Problem Details & API Schema', () => {
 
   it('returns valid JSON schema contracts for /api/services and /api/apps', async () => {
     // Arrange
-    const server = startDevDashboardServer(3182);
+    const server = startDevDashboardServer(0);
 
     try {
       // Act: /api/services
-      const resServices = await fetch('http://localhost:3182/api/services', {
+      const resServices = await fetch(`http://localhost:${server.port}/api/services`, {
         headers: AUTH_HEADERS,
       });
       const jsonServices: any = await resServices.json();
@@ -31,7 +31,7 @@ describe('Tier 4 Contract: RFC 7807 Problem Details & API Schema', () => {
       expect(typeof jsonServices.summary.sloAvailabilityPercent).toBe('number');
 
       // Act: /api/apps
-      const resApps = await fetch('http://localhost:3182/api/apps', {
+      const resApps = await fetch(`http://localhost:${server.port}/api/apps`, {
         headers: AUTH_HEADERS,
       });
       const jsonApps: any = await resApps.json();
@@ -49,11 +49,11 @@ describe('Tier 4 Contract: RFC 7807 Problem Details & API Schema', () => {
 
   it('enforces required parameters contract on service control actions', async () => {
     // Arrange
-    const server = startDevDashboardServer(3183);
+    const server = startDevDashboardServer(0);
 
     try {
       // Act: Missing serviceId on restart
-      const resRestart = await fetch('http://localhost:3183/api/services/restart', {
+      const resRestart = await fetch(`http://localhost:${server.port}/api/services/restart`, {
         method: 'POST',
         headers: AUTH_HEADERS,
         body: JSON.stringify({}),

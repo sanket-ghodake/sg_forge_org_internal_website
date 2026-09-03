@@ -7,13 +7,13 @@ import { describe, expect, it } from 'bun:test';
 import { startPortalServer } from '../../src/server';
 
 describe('Tier 4 Contract: Portal Endpoints & Healthcheck Schema', () => {
-  it('returns valid operational contract on /health probe', async () => {
-    // Arrange
-    const server = startPortalServer(3188);
+  it('Arrange, Act, Assert: returns valid operational contract on /health probe', async () => {
+    // Arrange: Start portal on ephemeral port 0
+    const server = startPortalServer(0);
 
     try {
       // Act
-      const res = await fetch('http://localhost:3188/health');
+      const res = await fetch(`http://localhost:${server.port}/health`);
       const json: any = await res.json();
 
       // Assert

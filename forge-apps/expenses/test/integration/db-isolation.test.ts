@@ -4,16 +4,17 @@
  */
 
 import { describe, expect, it } from 'bun:test';
+import { createInternalServiceToken } from '@forge/sdk';
 import { startExpensesServer } from '../../src/server';
 
 describe('Tier 2 Integration: Expenses Dedicated Database & Observability', () => {
-  it('serves expenses health probe with memory metrics and dual-probe signals', async () => {
-    // Arrange
-    const server = startExpensesServer(3198);
+  it('Arrange, Act, Assert: serves expenses health probe with memory metrics and dual-probe signals', async () => {
+    // Arrange: Start on ephemeral port 0
+    const server = startExpensesServer(0);
 
     try {
       // Act
-      const res = await fetch('http://localhost:3198/health');
+      const res = await fetch(`http://localhost:${server.port}/health`);
       const json: any = await res.json();
 
       // Assert
@@ -23,6 +24,23 @@ describe('Tier 2 Integration: Expenses Dedicated Database & Observability', () =
       expect(json.livez).toBe(true);
       expect(json.readyz).toBe(true);
       expect(typeof json.memoryMb).toBe('number');
+    } finally {
+      server.stop();
+    }
+  });
+
+  it('Arrange, Act, Assert: serves browser telemetry event log ingestion endpoint', async () => {
+    const server = startExpensesServer(0);
+
+    try {
+      const res = await fetch(`http://localhost:${server.port}/api/logs/browser`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ severity: 'INFO', message: 'Client approval action' }),
+      });
+      expect(res.status).toBe(200);
+      const data = await res.json();
+      expect(data.status).toBe('ok');
     } finally {
       server.stop();
     }

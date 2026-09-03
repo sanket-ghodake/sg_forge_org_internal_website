@@ -14,11 +14,11 @@ describe('Tier 2 Integration: Telemetry Pipeline & Log Stream', () => {
 
   it('ingests, stores, and filters logs via REST endpoints', async () => {
     // Arrange
-    const server = startDevDashboardServer(3180);
+    const server = startDevDashboardServer(0);
 
     try {
       // Act: Ingest log
-      const ingestRes = await fetch('http://localhost:3180/api/logs/ingest', {
+      const ingestRes = await fetch(`http://localhost:${server.port}/api/logs/ingest`, {
         method: 'POST',
         headers: AUTH_HEADERS,
         body: JSON.stringify({
@@ -36,7 +36,7 @@ describe('Tier 2 Integration: Telemetry Pipeline & Log Stream', () => {
       expect(ingestJson.status).toBe('ok');
 
       // Act: Query recent logs
-      const queryRes = await fetch('http://localhost:3180/api/logs/recent?service=test-service-ingest', {
+      const queryRes = await fetch(`http://localhost:${server.port}/api/logs/recent?service=test-service-ingest`, {
         headers: AUTH_HEADERS,
       });
       const queryJson: any = await queryRes.json();

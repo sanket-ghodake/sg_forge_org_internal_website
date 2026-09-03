@@ -66,6 +66,7 @@ function runTier1Check(
   toolUsed: string,
   fn: () => { status: 'PASSED' | 'FAILED' | 'WARNING'; details: string }
 ) {
+  process.stdout.write(`   [${id.toString().padStart(2, '0')}/27] Running ${name} (${toolUsed})...\n`);
   const start = performance.now();
   try {
     const res = fn();

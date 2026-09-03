@@ -4,27 +4,18 @@
  */
 
 import { describe, expect, it } from 'bun:test';
+import { createInternalServiceToken } from '@forge/sdk';
 import { startExpensesServer } from '../../src/server';
-import { signJwt } from '@forge/auth';
 
 describe('Tier 5 E2E: Expenses Micro-App Full Server Bootstrap', () => {
-  it('serves expenses dashboard with Astryx header and database badge', async () => {
-    // Arrange
-    const server = startExpensesServer(3200);
-    const token = signJwt({
-      sub: 'usr-employee',
-      email: 'employee@forge.internal',
-      display_name: 'Standard Employee',
-      principal_type: 'EMPLOYEE',
-      org_id: 'org-test',
-      roles: ['roles/employee'],
-      permissions: ['expenses.reports.submit'],
-      token_version: 1,
-    });
+  it('Arrange, Act, Assert: serves expenses dashboard with Astryx header and database badge on ephemeral port', async () => {
+    // Arrange: Start on ephemeral port 0
+    const server = startExpensesServer(0);
+    const token = createInternalServiceToken(['roles/employee'], 'usr-employee');
 
     try {
       // Act
-      const res = await fetch('http://localhost:3200/', {
+      const res = await fetch(`http://localhost:${server.port}/`, {
         headers: { Cookie: `forge_session=${token}` },
       });
       const html = await res.text();

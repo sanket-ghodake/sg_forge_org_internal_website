@@ -4,29 +4,19 @@
  */
 
 import { describe, expect, it } from 'bun:test';
-import { signJwt } from '@forge/auth';
-import { loadBrandConfig } from '@forge/sdk';
+import { createInternalServiceToken, loadBrandConfig } from '@forge/sdk';
 import { startPortalServer } from '../../src/server';
 
 describe('Tier 5 E2E: Portal Server Bootstrap & Astryx UI Lifecycle', () => {
-  it('serves full authenticated portal page with Astryx header and tabs', async () => {
-    // Arrange
+  it('Arrange, Act, Assert: serves full authenticated portal page with Astryx header and tabs on ephemeral port', async () => {
+    // Arrange: Start portal on ephemeral port 0
     const brand = loadBrandConfig();
-    const server = startPortalServer(3189);
-    const token = signJwt({
-      sub: 'usr_e2e_portal',
-      email: 'alex@forge.internal',
-      display_name: 'Alex Chen',
-      principal_type: 'EMPLOYEE',
-      org_id: 'org-test',
-      roles: ['roles/employee'],
-      permissions: ['portal.workspace.access'],
-      token_version: 1,
-    });
+    const server = startPortalServer(0);
+    const token = createInternalServiceToken(['roles/employee'], 'usr_e2e_portal');
 
     try {
       // Act
-      const res = await fetch('http://localhost:3189/', {
+      const res = await fetch(`http://localhost:${server.port}/`, {
         headers: {
           Cookie: `forge_session=${token}`,
         },

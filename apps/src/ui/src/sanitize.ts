@@ -27,7 +27,7 @@ export function escapeHtml(input: string | null | undefined): string {
 export function sanitizeLocalUrl(url: string | null | undefined, fallback: string = '/portal'): string {
   if (!url || typeof url !== 'string') return fallback;
   const trimmed = url.trim();
-  if (trimmed.startsWith('/') && !trimmed.startsWith('//') && !trimmed.includes('://')) {
+  if (trimmed.startsWith('/') && !trimmed.startsWith('//') && !trimmed.startsWith('/\\') && !trimmed.includes('://') && !trimmed.includes('\\')) {
     return trimmed === '/' ? fallback : trimmed;
   }
   return fallback;

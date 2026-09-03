@@ -7,13 +7,13 @@ import { describe, expect, it } from 'bun:test';
 import { startTelemetryServer } from '../../src/server';
 
 describe('Tier 5 E2E: Telemetry Full Server Bootstrap', () => {
-  it('serves telemetry dashboard with Astryx header and database badge', async () => {
-    // Arrange
-    const server = startTelemetryServer(3206);
+  it('Arrange, Act, Assert: serves telemetry dashboard with Astryx header and database badge on ephemeral port', async () => {
+    // Arrange: Start on ephemeral port 0
+    const server = startTelemetryServer(0);
 
     try {
       // Act
-      const res = await fetch('http://localhost:3206/');
+      const res = await fetch(`http://localhost:${server.port}/`);
       const html = await res.text();
 
       // Assert

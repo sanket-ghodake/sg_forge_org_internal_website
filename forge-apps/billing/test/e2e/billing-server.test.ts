@@ -4,27 +4,18 @@
  */
 
 import { describe, expect, it } from 'bun:test';
+import { createInternalServiceToken } from '@forge/sdk';
 import { startBillingServer } from '../../src/server';
-import { signJwt } from '@forge/auth';
 
 describe('Tier 5 E2E: Billing Full Server Bootstrap', () => {
-  it('serves billing service UI with Astryx header and database badge', async () => {
-    // Arrange
-    const server = startBillingServer(3203);
-    const token = signJwt({
-      sub: 'usr-admin',
-      email: 'billing.admin@forge.internal',
-      display_name: 'Marcus Sterling',
-      principal_type: 'ADMIN',
-      org_id: 'org-test',
-      roles: ['roles/billing.admin'],
-      permissions: ['billing.invoices.view'],
-      token_version: 1,
-    });
+  it('Arrange, Act, Assert: serves billing service UI with Astryx header and database badge on ephemeral port', async () => {
+    // Arrange: Start on ephemeral port 0
+    const server = startBillingServer(0);
+    const token = createInternalServiceToken(['roles/billing.admin'], 'usr-billing-admin');
 
     try {
       // Act
-      const res = await fetch('http://localhost:3203/', {
+      const res = await fetch(`http://localhost:${server.port}/`, {
         headers: { Cookie: `forge_session=${token}` },
       });
       const html = await res.text();

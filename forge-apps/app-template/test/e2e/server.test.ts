@@ -1,17 +1,29 @@
 /**
- * @forge-apps/template - Tier 5 E2E: Server Lifecycle Test
+ * @forge/app-template - Tier 5 E2E: Server Lifecycle & Bootstrap Test
+ * 3A Pattern (Arrange, Act, Assert) Testing Suite
  */
 
 import { describe, expect, it } from 'bun:test';
+import { createInternalServiceToken } from '@forge/sdk';
 import { startTemplateServer } from '../../src/server';
 
 describe('Tier 5 E2E: App Template Server Bootstrap', () => {
-  it('successfully boots server and responds to health and authenticated routes', async () => {
-    const server = startTemplateServer(3284);
+  it('Arrange, Act, Assert: successfully boots server and responds to health and authenticated routes', async () => {
+    const server = startTemplateServer(0);
+    const token = createInternalServiceToken(['roles/employee'], 'usr_e2e_template');
 
     try {
-      const res = await fetch('http://localhost:3284/health');
-      expect(res.status).toBe(200);
+      // 1. Health check probe
+      const healthRes = await fetch(`http://localhost:${server.port}/health`);
+      expect(healthRes.status).toBe(200);
+
+      // 2. Authenticated UI view
+      const uiRes = await fetch(`http://localhost:${server.port}/`, {
+        headers: { Cookie: `forge_session=${token}` },
+      });
+      expect(uiRes.status).toBe(200);
+      const html = await uiRes.text();
+      expect(html).toContain('astryx-container');
     } finally {
       server.stop();
     }

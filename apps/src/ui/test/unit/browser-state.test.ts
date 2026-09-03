@@ -12,7 +12,7 @@ import {
   getHeadStateScript,
   getUrlParam,
   setUrlParam,
-} from '../src/state';
+} from '../../src/state';
 
 // Mock browser Storage & Window environment for server-side testing
 class MockStorage implements Storage {

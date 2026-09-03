@@ -7,19 +7,22 @@ import { describe, expect, it } from 'bun:test';
 import { startExpensesServer } from '../../src/server';
 
 describe('Tier 4 Contract: Expenses Health Probe Schema', () => {
-  it('returns valid JSON health specification on /health', async () => {
-    // Arrange
-    const server = startExpensesServer(3199);
+  it('Arrange, Act, Assert: returns valid JSON health specification on /health', async () => {
+    // Arrange: Start on ephemeral port 0
+    const server = startExpensesServer(0);
 
     try {
       // Act
-      const res = await fetch('http://localhost:3199/health');
+      const res = await fetch(`http://localhost:${server.port}/health`);
       const json: any = await res.json();
 
       // Assert
       expect(res.status).toBe(200);
       expect(json.status).toBe('ok');
       expect(json.app).toBe('expenses');
+      expect(typeof json.livez).toBe('boolean');
+      expect(typeof json.readyz).toBe('boolean');
+      expect(typeof json.uptime).toBe('number');
     } finally {
       server.stop();
     }

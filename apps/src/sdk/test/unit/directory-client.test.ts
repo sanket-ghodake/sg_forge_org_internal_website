@@ -88,4 +88,31 @@ describe('Tier 1 Unit: Directory & Scoped Hierarchy Client', () => {
       globalThis.fetch = originalFetch;
     }
   });
+
+  it('should reject with descriptive error when directory API returns HTTP 500', async () => {
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = mock(async () => {
+      return new Response('Internal Server Error', { status: 500 });
+    }) as any;
+
+    try {
+      await expect(fetchOrgDirectory('http://mock-auth:3004')).rejects.toThrow('HTTP 500');
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+
+  it('should handle network timeout/rejection gracefully', async () => {
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = mock(async () => {
+      throw new Error('Connection refused: ECONNREFUSED');
+    }) as any;
+
+    try {
+      await expect(getScopedHierarchy('usr-1', 'http://mock-auth:3004')).rejects.toThrow('ECONNREFUSED');
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
 });
+

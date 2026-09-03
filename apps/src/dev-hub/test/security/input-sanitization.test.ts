@@ -9,11 +9,11 @@ import { startDevHubServer } from '../../src/server';
 describe('Tier 3 Security: Dev Hub Ingress Hardening', () => {
   it('renders static templates safely without evaluating arbitrary expressions', async () => {
     // Arrange
-    const server = startDevHubServer(3195);
+    const server = startDevHubServer(0);
 
     try {
       // Act
-      const res = await fetch('http://localhost:3195/');
+      const res = await fetch(`http://localhost:${server.port}/`);
       const html = await res.text();
 
       // Assert

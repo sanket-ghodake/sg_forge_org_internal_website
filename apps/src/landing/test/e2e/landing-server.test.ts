@@ -11,11 +11,11 @@ describe('Tier 5 E2E: Landing Discovery Hub & Universal Route Directory', () => 
   it('serves dynamic Astryx landing page with cards and responsive grid', async () => {
     // Arrange
     const brand = loadBrandConfig();
-    const server = startLandingServer(3193);
+    const server = startLandingServer(0);
 
     try {
       // Act
-      const res = await fetch('http://localhost:3193/');
+      const res = await fetch(`http://localhost:${server.port}/`);
       const html = await res.text();
 
       // Assert

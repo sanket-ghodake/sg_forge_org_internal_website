@@ -7,13 +7,13 @@ import { describe, expect, it } from 'bun:test';
 import { startPortalServer } from '../../src/server';
 
 describe('Tier 3 Security: Portal Access Defense & Redirection', () => {
-  it('redirects unauthenticated requests to /auth/login with return_url preservation', async () => {
-    // Arrange
-    const server = startPortalServer(3186);
+  it('Arrange, Act, Assert: redirects unauthenticated requests to /auth/login with return_url preservation', async () => {
+    // Arrange: Start portal on ephemeral port 0
+    const server = startPortalServer(0);
 
     try {
       // Act: Unauthenticated fetch with redirect manual mode
-      const res = await fetch('http://localhost:3186/portal', {
+      const res = await fetch(`http://localhost:${server.port}/portal`, {
         redirect: 'manual',
       });
 
@@ -27,14 +27,14 @@ describe('Tier 3 Security: Portal Access Defense & Redirection', () => {
     }
   });
 
-  it('rejects tampered and forged JWT tokens with 302 login redirect', async () => {
-    // Arrange
-    const server = startPortalServer(3187);
+  it('Arrange, Act, Assert: rejects tampered and forged JWT tokens with 302 login redirect', async () => {
+    // Arrange: Start portal on ephemeral port 0
+    const server = startPortalServer(0);
     const tamperedToken = 'eyJhbGciOiJFZERTQTE5In0.eyJzdWIiOiJoYWNrZXIifQ.invalidsignature';
 
     try {
       // Act
-      const res = await fetch('http://localhost:3187/portal', {
+      const res = await fetch(`http://localhost:${server.port}/portal`, {
         headers: {
           Cookie: `forge_session=${tamperedToken}`,
         },

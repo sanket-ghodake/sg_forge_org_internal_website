@@ -9,11 +9,11 @@ import { startDevHubServer } from '../../src/server';
 describe('Tier 4 Contract: Dev Hub Operational Probes', () => {
   it('returns valid JSON contract on /health', async () => {
     // Arrange
-    const server = startDevHubServer(3196);
+    const server = startDevHubServer(0);
 
     try {
       // Act
-      const res = await fetch('http://localhost:3196/health');
+      const res = await fetch(`http://localhost:${server.port}/health`);
       const json: any = await res.json();
 
       // Assert

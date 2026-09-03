@@ -43,7 +43,7 @@ export function getOfflinePageHtml(): string {
 
 export function startFallbackServer(options: FallbackServerOptions = {}) {
   const envPort = process.env.HTTP_PORT || process.env.PORT || '8080';
-  const port = options.port || Number(envPort);
+  const port = options.port !== undefined ? options.port : Number(envPort);
 
   // Guarantee error pages exist
   if (!existsSync(join(ERRORS_DIR, '503.html'))) {

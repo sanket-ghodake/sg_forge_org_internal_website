@@ -4,7 +4,7 @@
  */
 
 import { describe, expect, it } from 'bun:test';
-import { loadServiceRegistry, explainLog, redactSensitiveData } from '@forge/sdk';
+import { loadServiceRegistry, createInternalServiceToken, verifySessionToken, redactSensitiveData } from '@forge/sdk';
 
 describe('Tier 5 E2E Journey: Dynamic Micro-App Discovery, Ingress & Dispatch', () => {
   it('should discover all registered microservices from dynamic environment registry', () => {
@@ -30,14 +30,18 @@ describe('Tier 5 E2E Journey: Dynamic Micro-App Discovery, Ingress & Dispatch', 
   it('should simulate portal iframe postMessage handshake contract for all registered apps', async () => {
     // 1. Arrange: Prepare mock user and test harness
     const registry = loadServiceRegistry();
+    const realToken = createInternalServiceToken(['roles/employee'], 'usr-dynamic-test');
     const mockUser = {
       id: 'usr-dynamic-test',
       email: 'tester@forge.internal',
       displayName: 'Dynamic QA Tester',
-      role: 'admin',
+      role: 'employee',
     };
-    const mockToken = 'mock_ed25519_jwt_token_payload';
     const mockTheme = 'dark' as const;
+
+    // Verify cryptographic validity of the token
+    const verified = verifySessionToken(realToken);
+    expect(verified.valid).toBe(true);
 
     // 2. Act & Assert: For each micro-app, verify iframe bridge contract payload
     for (const app of registry) {
@@ -53,7 +57,7 @@ describe('Tier 5 E2E Journey: Dynamic Micro-App Discovery, Ingress & Dispatch', 
         type: 'FORGE_APP_CONTEXT' as const,
         payload: {
           user: mockUser,
-          token: mockToken,
+          token: realToken,
           theme: mockTheme,
         },
       };

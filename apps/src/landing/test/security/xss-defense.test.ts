@@ -9,11 +9,11 @@ import { startLandingServer } from '../../src/server';
 describe('Tier 3 Security: Landing Ingress & Security Headers', () => {
   it('serves secure HTML markup with responsive viewport and valid lang attribute', async () => {
     // Arrange
-    const server = startLandingServer(3191);
+    const server = startLandingServer(0);
 
     try {
       // Act
-      const res = await fetch('http://localhost:3191/');
+      const res = await fetch(`http://localhost:${server.port}/`);
       const html = await res.text();
 
       // Assert

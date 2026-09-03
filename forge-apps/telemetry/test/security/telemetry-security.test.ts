@@ -4,14 +4,25 @@
  */
 
 import { describe, expect, it } from 'bun:test';
+import { startTelemetryServer } from '../../src/server';
 
 describe('Tier 3 Security: Telemetry Ingress Defense', () => {
-  it('enforces multi-tenant data boundaries on metric streams', () => {
-    // Arrange
-    const streamA = { orgId: 'org_telemetry_a', streamId: 'stm_1' };
-    const streamB = { orgId: 'org_telemetry_b', streamId: 'stm_2' };
+  it('Arrange, Act, Assert: securely exposes dashboard interface under zero-trust public policy', async () => {
+    // Arrange: Start telemetry on ephemeral port 0
+    const server = startTelemetryServer(0);
 
-    // Act & Assert
-    expect(streamA.orgId).not.toEqual(streamB.orgId);
+    try {
+      // Act
+      const res = await fetch(`http://localhost:${server.port}/`);
+      expect(res.status).toBe(200);
+      const html = await res.text();
+
+      // Assert
+      expect(html).toContain('Live Telemetry');
+      expect(html).toContain('telemetry_turso.db');
+      expect(html).not.toContain('<script>eval(');
+    } finally {
+      server.stop();
+    }
   });
 });

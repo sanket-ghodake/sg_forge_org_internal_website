@@ -9,11 +9,11 @@ import { startDevHubServer } from '../../src/server';
 describe('Tier 2 Integration: Dev Hub Navigation & Links', () => {
   it('serves interactive developer documentation with portal & hub return links', async () => {
     // Arrange
-    const server = startDevHubServer(3194);
+    const server = startDevHubServer(0);
 
     try {
       // Act
-      const res = await fetch('http://localhost:3194/');
+      const res = await fetch(`http://localhost:${server.port}/`);
       const html = await res.text();
 
       // Assert
