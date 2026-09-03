@@ -24,6 +24,7 @@ describe('Tier 5 E2E Journey: End-to-End Auth Gateway to Portal Live Network Han
   afterEach(() => {
     if (authServer) authServer.stop(true);
     if (portalServer) portalServer.stop(true);
+    seedAuthDatabase(true);
   });
 
   it('should complete dynamic live HTTP lifecycle: unauthenticated 302 -> login -> password setup -> cookie handoff -> portal 200 OK (no redirect loop)', async () => {

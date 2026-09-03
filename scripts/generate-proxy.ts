@@ -17,9 +17,13 @@ export function generateCaddyfile(): string {
   const services = loadServiceRegistry();
   const httpPort = process.env.HTTP_PORT || '80';
   const httpsPort = process.env.HTTPS_PORT;
-  const enableTls = process.env.ENABLE_HTTPS === 'true' || Boolean(httpsPort);
+  const enableTls = process.env.ENABLE_HTTPS === 'true';
   const tlsCert = process.env.TLS_CERT_PATH;
   const tlsKey = process.env.TLS_KEY_PATH;
+
+  const siteBinding = enableTls
+    ? (httpsPort ? `http://:${httpPort}, https://:${httpsPort}` : `http://:${httpPort}`)
+    : `http://:${httpPort}`;
 
   let caddyContent = `# ==============================================================================
 # ${brand.name} - Unified Reverse Proxy Gateway (Auto-Generated from .env)
@@ -27,7 +31,7 @@ export function generateCaddyfile(): string {
 # DO NOT EDIT DIRECTLY: Modify routes in .env and run './run.sh sync-proxy'
 # ==============================================================================
 
-:${httpPort}${enableTls ? `, :${httpsPort || '443'}` : ''} {
+${siteBinding} {
     # Structured Logging
     log {
         output stdout

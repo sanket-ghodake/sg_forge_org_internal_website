@@ -244,11 +244,59 @@ function initDevHubDb() {
   console.log('  ✅ dev_hub.db initialized (api_specs, webhooks)');
 }
 
+// 6. Platform Core Database (platform_core.db)
+function initPlatformCoreDb() {
+  const dbPath = join(DATA_DIR, 'platform_core.db');
+  const db = new Database(dbPath, { create: true });
+  db.run('PRAGMA journal_mode = WAL;');
+  db.run('PRAGMA busy_timeout = 5000;');
+  db.run('PRAGMA auto_vacuum = INCREMENTAL;');
+  db.run('PRAGMA synchronous = NORMAL;');
+
+  db.run(`CREATE TABLE IF NOT EXISTS apps_registry (
+    id TEXT PRIMARY KEY, name TEXT NOT NULL, port INTEGER NOT NULL, ingress_path TEXT NOT NULL UNIQUE,
+    category TEXT NOT NULL DEFAULT 'Micro-Apps', access_role TEXT NOT NULL DEFAULT 'General',
+    container_name TEXT, db_file_path TEXT, runtime_type TEXT NOT NULL DEFAULT 'bun-watch',
+    remote_url TEXT, status TEXT NOT NULL DEFAULT 'active', storage_quota_mb INTEGER NOT NULL DEFAULT 50,
+    created_at INTEGER NOT NULL DEFAULT (strftime('%s', 'now')), updated_at INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
+  );`);
+
+  db.run(`CREATE TABLE IF NOT EXISTS traffic_events (
+    id TEXT PRIMARY KEY, app_id TEXT NOT NULL, path TEXT NOT NULL, method TEXT NOT NULL,
+    status_code INTEGER NOT NULL, duration_ms REAL NOT NULL, ip_hash TEXT, user_agent TEXT,
+    trace_id TEXT, timestamp INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
+  );`);
+
+  db.run(`CREATE TABLE IF NOT EXISTS issue_reports (
+    id TEXT PRIMARY KEY, app_id TEXT NOT NULL, fingerprint TEXT NOT NULL UNIQUE, error_type TEXT NOT NULL,
+    message TEXT NOT NULL, stack_trace TEXT, context_json TEXT, trace_id TEXT,
+    occurrence_count INTEGER NOT NULL DEFAULT 1, status TEXT NOT NULL DEFAULT 'open',
+    first_seen INTEGER NOT NULL DEFAULT (strftime('%s', 'now')), last_seen INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
+  );`);
+
+  db.run(`CREATE TABLE IF NOT EXISTS audit_logs (
+    id TEXT PRIMARY KEY, actor_id TEXT NOT NULL, action_type TEXT NOT NULL, target_service TEXT NOT NULL,
+    payload_json TEXT, ip_hash TEXT, result_status TEXT NOT NULL DEFAULT 'success',
+    timestamp INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
+  );`);
+
+  db.run(`CREATE TABLE IF NOT EXISTS remote_connections (
+    id TEXT PRIMARY KEY, name TEXT NOT NULL, type TEXT NOT NULL DEFAULT 'turso',
+    url TEXT NOT NULL, auth_token TEXT, is_active INTEGER NOT NULL DEFAULT 1,
+    last_ping_ms REAL, error_message TEXT,
+    created_at INTEGER NOT NULL DEFAULT (strftime('%s', 'now')), updated_at INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
+  );`);
+
+  db.close();
+  console.log('  ✅ platform_core.db initialized (apps_registry, traffic, issues, audit, remotes)');
+}
+
 // Run all initializations
 initAuthDb();
 initBillingDb();
 initExpensesDb();
 initTelemetryDb();
 initDevHubDb();
+initPlatformCoreDb();
 
 console.log('🎉 All microservices databases successfully configured & seeded in:', DATA_DIR);

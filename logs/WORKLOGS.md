@@ -469,3 +469,22 @@
 2026-09-03 12:53 | Committed 14 portable open-source tools with zero host modification, 21-gate verification, and git hooks (commit 39b97bc)
 2026-09-03 12:59 | consolidated github actions into single manual DAG pipeline with step-by-step nodes
 2026-09-03 13:01 | [36229c2] feat(ci): consolidate github actions into single manual DAG pipeline with step-by-step nodes (+247, -109)
+2026-09-03 13:05 | Provided comprehensive architecture guide for single-VM dev, test, prod hosting with rollback, data persistence, and open-source tools
+2026-09-03 13:10 | Provided architectural guide for single-VM dev and prod deployment with zero downtime
+2026-09-03 14:52 | Provided two-directory single-machine dev vs prod Git deployment and rollback guide
+2026-09-03 14:56 | Provided one-click and no-click auto-deployment blueprint with open-source tools
+2026-09-03 15:04 | Drafted implementation plan for dev port relocation, prod scripts, and OliveTin web dashboard
+2026-09-03 15:09 | Updated plan: dedicated OliveTin app under apps/src/olivetin with developer password authentication
+2026-09-03 15:11 | Updated plan: dropped web tools in favor of robust self-healing deployment scripts
+2026-09-03 15:13 | Updated plan: incorporated selective microservice deployment via git diff
+2026-09-03 15:20 | Implemented dev/prod port separation, selective microservice deployment engine, and rollback scripts
+2026-09-03 15:24 | Verified cross-platform compatibility and added Windows run.bat parity
+2026-09-03 15:32 | fix(orchestration): resolve docker compose down project mismatch by passing explicit -p project names in run.sh
+2026-09-03 15:35 | fix(orchestration): eliminate static fallbacks and ensure dynamic .env reading across run.sh, run.bat, and deploy scripts
+2026-09-03 15:59 | feat(orchestration): integrate ctop, add ergonomic aliases, implement scripts/dev-runner.ts with SIGINT trap, and harden production security locks
+2026-09-03 16:01 | Comprehensive repo security and architecture audit completed: identified 16 vulnerabilities across Auth, DevCenter, Portal, and Supply Chain
+2026-09-03 16:05 | Authored comprehensive security implementation plan for 16 audit findings awaiting user approval
+2026-09-03 16:16 | fix(orchestrator): replace --project-directory with --env-file to fix relative path resolution, make monitor dynamic with --once mode, and ensure zero hardcoded ports
+2026-09-03 16:23 | fix(networking): fix Caddy reverse proxy port 8080 binding, bundle standalone ctop portable with TTY fallback, and clarify dev access URLs
+2026-09-03 16:30 | fix(auth): reset all seeded accounts to must_change_password=1 and prevent test suites from modifying active dev auth state
+2026-09-03 16:36 | [1964501] feat(orchestrator): harden platform orchestrator, integrate ctop, fix compose path resolution, and secure dev auth (+1102, -68)

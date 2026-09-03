@@ -32,8 +32,8 @@ services:
     container_name: ${CONTAINER_PREFIX:-ag}-proxy-prod
     profiles: ["core", "apps", "monitoring", "all"]
     ports:
-      - "${HTTP_PORT:-80}:80"
-      - "${HTTPS_PORT:-443}:443"
+      - "${PROD_HTTP_PORT:-80}:${PROD_HTTP_PORT:-80}"
+      - "${PROD_HTTPS_PORT:-443}:${PROD_HTTPS_PORT:-443}"
     volumes:
       - ../../proxy/Caddyfile:/etc/caddy/Caddyfile:ro
       - ag_caddy_data:/data
@@ -42,7 +42,7 @@ services:
       - forge-net
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:80/ || exit 1"]
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:${PROD_HTTP_PORT:-80}/ || exit 1"]
       interval: 10s
       timeout: 3s
       retries: 3

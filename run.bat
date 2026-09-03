@@ -8,14 +8,33 @@ set "REPO_ROOT=%~dp0"
 set "PORTABLE_BUN=%REPO_ROOT%portables\bun\bin\bun.exe"
 set "PATH=%REPO_ROOT%portables\bin;%REPO_ROOT%portables\bun\bin;%PATH%"
 
+set "COMPOSE_PROJECT_NAME=ag_dashboard"
+if exist "%REPO_ROOT%.env" (
+    for /f "usebackq tokens=1,* delims==" %%A in ("%REPO_ROOT%.env") do (
+        if "%%A"=="COMPOSE_PROJECT_NAME" (
+            set "COMPOSE_PROJECT_NAME=%%~B"
+        )
+    )
+)
+
 if "%1"=="" goto help
 if "%1"=="help" goto help
 if "%1"=="setup" goto setup
 if "%1"=="dev" goto dev
+if "%1"=="up" goto alias_up
+if "%1"=="down" goto alias_down
+if "%1"=="ps" goto alias_status
+if "%1"=="status" goto alias_status
+if "%1"=="top" goto alias_top
+if "%1"=="ctop" goto alias_top
+if "%1"=="monitor" goto alias_monitor
 if "%1"=="doctor" goto doctor
 if "%1"=="clean" goto clean
 if "%1"=="test" goto test
 if "%1"=="docker" goto docker
+if "%1"=="deploy-prod" goto deploy_prod
+if "%1"=="rollback-prod" goto rollback_prod
+if "%1"=="prod-status" goto prod_status
 goto help
 
 :setup
@@ -32,9 +51,35 @@ echo ✨ Setup completed successfully! Run 'run.bat dev' or 'run.bat docker up' 
 goto end
 
 :dev
-echo 🚀 Starting development services...
-bun run "%REPO_ROOT%scripts\generate-proxy.ts"
-bun run apps/src/landing/src/server.ts
+bun run "%REPO_ROOT%scripts\dev-runner.ts" %2 %3
+goto end
+
+:alias_up
+docker compose -p "%COMPOSE_PROJECT_NAME%-dev" --env-file "%REPO_ROOT%.env" -f "%REPO_ROOT%docker\dev\docker-compose.yml" up -d
+goto end
+
+:alias_down
+docker compose -p "%COMPOSE_PROJECT_NAME%-dev" --env-file "%REPO_ROOT%.env" -f "%REPO_ROOT%docker\dev\docker-compose.yml" --profile all down
+docker compose -p "%COMPOSE_PROJECT_NAME%-prod" --env-file "%REPO_ROOT%.env" -f "%REPO_ROOT%docker\prod\docker-compose.yml" --profile all down
+docker compose -p "%COMPOSE_PROJECT_NAME%" --env-file "%REPO_ROOT%.env" -f "%REPO_ROOT%docker\dev\docker-compose.yml" --profile all down
+goto end
+
+:alias_status
+docker compose -p "%COMPOSE_PROJECT_NAME%-dev" --env-file "%REPO_ROOT%.env" -f "%REPO_ROOT%docker\dev\docker-compose.yml" --profile all ps
+docker compose -p "%COMPOSE_PROJECT_NAME%-prod" --env-file "%REPO_ROOT%.env" -f "%REPO_ROOT%docker\prod\docker-compose.yml" --profile all ps
+goto end
+
+:alias_top
+where ctop >nul 2>&1
+if %ERRORLEVEL% EQU 0 (
+    ctop
+) else (
+    docker stats
+)
+goto end
+
+:alias_monitor
+bun run "%REPO_ROOT%scripts\terminal-monitor.ts"
 goto end
 
 :doctor
@@ -66,13 +111,47 @@ goto end
 :docker
 if "%2"=="up" (
     bun run "%REPO_ROOT%scripts\generate-proxy.ts"
-    docker compose --project-directory "%REPO_ROOT%" -f "%REPO_ROOT%docker\dev\docker-compose.yml" up -d
+    docker compose -p "%COMPOSE_PROJECT_NAME%-dev" --env-file "%REPO_ROOT%.env" -f "%REPO_ROOT%docker\dev\docker-compose.yml" up -d
 ) else if "%2"=="down" (
-    docker compose --project-directory "%REPO_ROOT%" -f "%REPO_ROOT%docker\dev\docker-compose.yml" down
+    docker compose -p "%COMPOSE_PROJECT_NAME%-dev" --env-file "%REPO_ROOT%.env" -f "%REPO_ROOT%docker\dev\docker-compose.yml" --profile all down
+    docker compose -p "%COMPOSE_PROJECT_NAME%-prod" --env-file "%REPO_ROOT%.env" -f "%REPO_ROOT%docker\prod\docker-compose.yml" --profile all down
+    docker compose -p "%COMPOSE_PROJECT_NAME%" --env-file "%REPO_ROOT%.env" -f "%REPO_ROOT%docker\dev\docker-compose.yml" --profile all down
 ) else if "%2"=="status" (
-    docker compose --project-directory "%REPO_ROOT%" -f "%REPO_ROOT%docker\dev\docker-compose.yml" ps
+    docker compose -p "%COMPOSE_PROJECT_NAME%-dev" --env-file "%REPO_ROOT%.env" -f "%REPO_ROOT%docker\dev\docker-compose.yml" --profile all ps
+    docker compose -p "%COMPOSE_PROJECT_NAME%-prod" --env-file "%REPO_ROOT%.env" -f "%REPO_ROOT%docker\prod\docker-compose.yml" --profile all ps
 ) else (
     echo Usage: run.bat docker [up ^| down ^| status]
+)
+goto end
+
+:deploy_prod
+where bash >nul 2>&1
+if %ERRORLEVEL% EQU 0 (
+    bash "%REPO_ROOT%deploy\deploy-prod.sh"
+) else (
+    echo 🚀 [Windows] Running Production Deployment via Docker Compose...
+    docker compose -p "%COMPOSE_PROJECT_NAME%-prod" --env-file "%REPO_ROOT%.env" -f "%REPO_ROOT%docker\prod\docker-compose.yml" --profile all up -d --build
+)
+goto end
+
+:rollback_prod
+where bash >nul 2>&1
+if %ERRORLEVEL% EQU 0 (
+    bash "%REPO_ROOT%deploy\rollback-prod.sh" %2 %3
+) else (
+    echo ⚠️ [Windows] Reverting to last-known-good...
+    git checkout last-known-good
+    docker compose -p "%COMPOSE_PROJECT_NAME%-prod" --env-file "%REPO_ROOT%.env" -f "%REPO_ROOT%docker\prod\docker-compose.yml" --profile all up -d --build
+)
+goto end
+
+:prod_status
+where bash >nul 2>&1
+if %ERRORLEVEL% EQU 0 (
+    bash "%REPO_ROOT%deploy\status-prod.sh"
+) else (
+    echo 📊 [Windows] Production Container Status:
+    docker compose -p "%COMPOSE_PROJECT_NAME%-prod" --env-file "%REPO_ROOT%.env" -f "%REPO_ROOT%docker\prod\docker-compose.yml" --profile all ps
 )
 goto end
 
@@ -80,7 +159,7 @@ goto end
 echo ======================================================================
 echo 🚀 Platform Orchestrator (Windows 2026 LTS)
 echo ======================================================================
-echo Usage: run.bat [setup ^| dev ^| doctor ^| clean ^| test ^| docker]
+echo Usage: run.bat [setup ^| dev ^| doctor ^| clean ^| test ^| docker ^| deploy-prod ^| rollback-prod ^| prod-status]
 echo ======================================================================
 goto end
 

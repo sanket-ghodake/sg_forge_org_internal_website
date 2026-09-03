@@ -10,11 +10,16 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 LOCAL_BIN="$REPO_ROOT/portables/ctop/ctop"
 
 if [ -x "$LOCAL_BIN" ]; then
+    if [ ! -t 0 ] || [ ! -t 1 ] || [ "$TERM" = "dumb" ] || [ -z "$TERM" ]; then
+        if [ "$1" = "-v" ] || [ "$1" = "--version" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+            exec "$LOCAL_BIN" "$@"
+        fi
+        echo "📊 [ctop] Headless or non-TTY terminal detected. Streaming live container stats:"
+        exec docker stats --no-stream
+    fi
     exec "$LOCAL_BIN" "$@"
 elif command -v ctop >/dev/null 2>&1; then
     exec ctop "$@"
-elif command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
-    exec docker run --rm -ti --name=ctop --volume /var/run/docker.sock:/var/run/docker.sock:ro bcicen/ctop:latest "$@"
 else
     echo "📊 [ctop Portable] Monitoring containers via Docker stats..."
     if command -v docker >/dev/null 2>&1; then
