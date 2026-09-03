@@ -171,11 +171,11 @@ class PlatformDatabaseManager {
       });
     }
 
-    // Prune transient / stale test entries not present in .env
+    // Prune only transient test entries not present in .env, preserving user-created dynamic apps
     const validIds = services.map((s) => s.id);
     if (validIds.length > 0) {
       const placeholders = validIds.map(() => '?').join(',');
-      this.db.run(`DELETE FROM apps_registry WHERE id NOT IN (${placeholders})`, validIds);
+      this.db.run(`DELETE FROM apps_registry WHERE (id LIKE 'test_%' OR id LIKE 'e2e_%' OR id LIKE 'mock_%') AND id NOT IN (${placeholders})`, validIds);
     }
 
     logger.info(`🌱 Synchronized ${services.length} services from .env registry into apps_registry`);

@@ -3,20 +3,10 @@
  * Strict Per-App Database Isolation (Google & Meta Multi-Tenant Standard)
  */
 
-import { Database } from 'bun:sqlite';
-import { existsSync, mkdirSync } from 'node:fs';
-import { join } from 'node:path';
-import { createLogger } from '@forge/sdk';
+import { createLogger, getDatabaseClient } from '@forge/sdk';
 
 const logger = createLogger('billing-db');
-const DATA_DIR = join(import.meta.dir, '..', '..', '..', '..', 'apps', 'data');
-
-if (!existsSync(DATA_DIR)) {
-  mkdirSync(DATA_DIR, { recursive: true });
-}
-
-const DB_PATH = join(DATA_DIR, 'billing.db');
-export const billingDb = new Database(DB_PATH);
+export const billingDb = getDatabaseClient('billing.db');
 
 // Initialize isolated invoices table
 billingDb.run(`
@@ -45,5 +35,5 @@ if (count.total === 0) {
   insert.run({ $id: 'inv_102', $num: 'INV-2026-002', $client: 'CyberShield Security Ltd', $amount: 8200.0, $status: 'PENDING', $dept: '/root/tech/sec-ops', $created: now - 86400000 * 2 });
   insert.run({ $id: 'inv_103', $num: 'INV-2026-003', $client: 'Global Logistics Hub', $amount: 23100.0, $status: 'PAID', $dept: '/root/finops/accounting', $created: now });
 
-  logger.info(`Seeded initial ledger records into ${DB_PATH}`);
+  logger.info('Seeded initial ledger records into billing.db');
 }

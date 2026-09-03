@@ -16,18 +16,20 @@ describe('E2E: Dev Dashboard Employee Studio Journey', () => {
     Authorization: 'Bearer password123',
   };
 
+  const AUTH_TEST_PORT = 3291;
+
   beforeAll(() => {
-    try {
-      authServer = startAuthServer(3004);
-    } catch {
-      // 3004 already active in background
-    }
+    process.env.AUTH_SERVICE_URL = `http://localhost:${AUTH_TEST_PORT}`;
+    process.env.TEST_AUTH_SERVICE_URL = `http://localhost:${AUTH_TEST_PORT}`;
+    authServer = startAuthServer(AUTH_TEST_PORT);
     server = startDevDashboardServer(TEST_PORT);
   });
 
   afterAll(() => {
     if (server) server.stop(true);
     if (authServer) authServer.stop(true);
+    delete process.env.AUTH_SERVICE_URL;
+    delete process.env.TEST_AUTH_SERVICE_URL;
     seedAuthDatabase(true);
   });
 

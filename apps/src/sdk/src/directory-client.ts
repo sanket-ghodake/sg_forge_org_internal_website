@@ -68,7 +68,7 @@ export interface ListEmployeesResponseDto {
 
 export function resolveAuthBaseUrl(customUrl?: string): string {
   if (customUrl) return customUrl.replace(/\/+$/, '');
-  const envUrl = process.env.AUTH_SERVICE_URL || process.env.NEXT_PUBLIC_AUTH_URL;
+  const envUrl = process.env.TEST_AUTH_SERVICE_URL || process.env.AUTH_SERVICE_URL || process.env.NEXT_PUBLIC_AUTH_URL;
   if (envUrl) return envUrl.replace(/\/+$/, '');
   const authPort = process.env.AUTH_PORT || 3004;
 

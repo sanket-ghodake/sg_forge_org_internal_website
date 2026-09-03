@@ -3,20 +3,10 @@
  * Strict Per-App Database Isolation (Google & Meta Multi-Tenant Standard)
  */
 
-import { Database } from 'bun:sqlite';
-import { existsSync, mkdirSync } from 'node:fs';
-import { join } from 'node:path';
-import { createLogger } from '@forge/sdk';
+import { createLogger, getDatabaseClient } from '@forge/sdk';
 
 const logger = createLogger('telemetry-db');
-const DATA_DIR = join(import.meta.dir, '..', '..', '..', '..', 'apps', 'data');
-
-if (!existsSync(DATA_DIR)) {
-  mkdirSync(DATA_DIR, { recursive: true });
-}
-
-const DB_PATH = join(DATA_DIR, 'telemetry.db');
-export const telemetryDb = new Database(DB_PATH);
+export const telemetryDb = getDatabaseClient('telemetry.db');
 
 // Initialize telemetry snapshots table
 telemetryDb.run(`
@@ -29,4 +19,4 @@ telemetryDb.run(`
   );
 `);
 
-logger.info(`Initialized isolated Turso DB for telemetry microservice at ${DB_PATH}`);
+logger.info('Initialized isolated Turso DB for telemetry microservice');

@@ -11,8 +11,8 @@
 
 import { cpSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { Database } from 'bun:sqlite';
 import { loadServiceRegistry } from '../apps/src/sdk/src/registry';
+import { getDatabaseClient } from '../apps/src/sdk/src/database';
 import { generateCaddyfile } from './generate-proxy';
 
 const REPO_ROOT = process.cwd();
@@ -142,11 +142,8 @@ export function createApp(options: CreateAppOptions): {
     'utf8'
   );
 
-  // 4. Provision Dedicated Turso DB in apps/data/
-  const dataDir = join(REPO_ROOT, 'apps', 'data');
-  if (!existsSync(dataDir)) mkdirSync(dataDir, { recursive: true });
-  const dbPath = join(dataDir, `${appName}.db`);
-  const db = new Database(dbPath);
+  // 4. Provision Dedicated Turso DB via SDK
+  const db = getDatabaseClient(`${appName}.db`);
   db.run(`
     CREATE TABLE IF NOT EXISTS ${appName.replace(/-/g, '_')}_records (
       id TEXT PRIMARY KEY,

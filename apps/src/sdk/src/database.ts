@@ -130,18 +130,29 @@ export function resolveCanonicalDataDir(): string {
 }
 
 /**
- * Resolves the full path to a SQLite database file, applying test isolation when applicable.
+ * Resolves the full path to a SQLite database file, applying strict test isolation when applicable.
  */
 export function resolveCanonicalDbPath(dbFileName: string, forceLive: boolean = false): string {
-  const dataDir = resolveCanonicalDataDir();
   const baseName = dbFileName.endsWith('.db') ? dbFileName : `${dbFileName}.db`;
 
   // Isolate automated tests from mutating live development or production databases
-  if (isTestEnvironment() && !forceLive) {
-    const testDbName = baseName.startsWith('test-') ? baseName : `test-${baseName}`;
-    return join(dataDir, testDbName);
+  if (isTestEnvironment()) {
+    if (forceLive && process.env.ALLOW_LIVE_DB_IN_TEST !== 'true') {
+      logger.warn(`Blocked attempt to access live database '${baseName}' during automated test execution! Set ALLOW_LIVE_DB_IN_TEST=true to override.`);
+      forceLive = false;
+    }
+
+    if (!forceLive) {
+      const testDir = process.env.FORGE_TEST_DATA_DIR || join(resolveCanonicalDataDir(), 'test-isolated');
+      if (!existsSync(testDir)) {
+        mkdirSync(testDir, { recursive: true });
+      }
+      const testDbName = baseName.startsWith('test-') ? baseName : `test-${baseName}`;
+      return join(testDir, testDbName);
+    }
   }
 
+  const dataDir = resolveCanonicalDataDir();
   return join(dataDir, baseName);
 }
 

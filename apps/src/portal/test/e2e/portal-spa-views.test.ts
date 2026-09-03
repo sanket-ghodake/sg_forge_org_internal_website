@@ -9,22 +9,20 @@ import { startPortalServer } from '../../src/server';
 
 describe('Tier 5 E2E: Full SPA Views & Interactive Ecosystem', () => {
   let authServer: any = null;
+  const AUTH_TEST_PORT = 3295;
 
   beforeAll(async () => {
-    try {
-      const ping = await fetch('http://localhost:3004/health').catch(() => null);
-      if (!ping || !ping.ok) {
-        authServer = startAuthServer(3004);
-      }
-    } catch {
-      authServer = startAuthServer(3004);
-    }
+    process.env.AUTH_SERVICE_URL = `http://localhost:${AUTH_TEST_PORT}`;
+    process.env.TEST_AUTH_SERVICE_URL = `http://localhost:${AUTH_TEST_PORT}`;
+    authServer = startAuthServer(AUTH_TEST_PORT);
   });
 
   afterAll(() => {
     if (authServer) {
       authServer.stop(true);
     }
+    delete process.env.AUTH_SERVICE_URL;
+    delete process.env.TEST_AUTH_SERVICE_URL;
   });
 
   it('renders all 10 interactive SPA views inside the unified portal layout', async () => {

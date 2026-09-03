@@ -3,20 +3,10 @@
  * Strict Per-App Database Isolation (Google & Meta Multi-Tenant Standard)
  */
 
-import { Database } from 'bun:sqlite';
-import { existsSync, mkdirSync } from 'node:fs';
-import { join } from 'node:path';
-import { createLogger } from '@forge/sdk';
+import { createLogger, getDatabaseClient } from '@forge/sdk';
 
 const logger = createLogger('template-db');
-const DATA_DIR = join(import.meta.dir, '..', '..', '..', '..', 'apps', 'data');
-
-if (!existsSync(DATA_DIR)) {
-  mkdirSync(DATA_DIR, { recursive: true });
-}
-
-const DB_PATH = join(DATA_DIR, 'template.db');
-export const templateDb = new Database(DB_PATH);
+export const templateDb = getDatabaseClient('template.db');
 
 // Initialize isolated tables
 templateDb.run(`
@@ -27,4 +17,4 @@ templateDb.run(`
   );
 `);
 
-logger.info(`Initialized isolated Turso DB for template microservice at ${DB_PATH}`);
+logger.info('Initialized isolated Turso DB for template microservice');

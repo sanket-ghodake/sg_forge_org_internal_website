@@ -493,3 +493,5 @@
 2026-09-03 16:40 | audit test db isolation, leaked e2e credentials, and container db persistence flaws
 2026-09-03 16:52 | Remediate 16 security vulnerabilities across Auth RBAC, JWKS, cookies, SQL sandbox, XSS, and Open Redirect
 2026-09-03 16:53 | [2528350] fix(security): remediate 16 vulnerabilities across auth rbac, cookies, sql sandbox, and xss (+3932, -813)
+2026-09-03 17:01 | implement database test isolation, purge leaked e2e credentials, and harden persistence across restarts
+2026-09-03 17:03 | [1ec5c1b] fix(database): enforce strict test db isolation, prevent live db mutation, and harden persistence across restarts (+1083, -802)

@@ -396,7 +396,7 @@
       "source_location": "L335",
       "_origin": "ast",
       "id": "backend_api_handlers_handlelogout",
-      "community": 226,
+      "community": 267,
       "norm_label": "handlelogout()"
     },
     {
@@ -416,7 +416,7 @@
       "source_location": "L373",
       "_origin": "ast",
       "id": "backend_api_handlers_handlejwks",
-      "community": 291,
+      "community": 226,
       "norm_label": "handlejwks()"
     },
     {
@@ -626,7 +626,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_audit_logger",
-      "community": 291,
+      "community": 24,
       "norm_label": "audit-logger.ts"
     },
     {
@@ -636,7 +636,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "backend_audit_logger_auditaction",
-      "community": 291,
+      "community": 24,
       "norm_label": "auditaction"
     },
     {
@@ -646,7 +646,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "backend_audit_logger_auditeventparams",
-      "community": 291,
+      "community": 24,
       "norm_label": "auditeventparams"
     },
     {
@@ -666,7 +666,7 @@
       "source_location": "L60",
       "_origin": "ast",
       "id": "backend_audit_logger_getuseraudithistory",
-      "community": 291,
+      "community": 24,
       "norm_label": "getuseraudithistory()"
     },
     {
@@ -676,7 +676,7 @@
       "source_location": "L87",
       "_origin": "ast",
       "id": "backend_audit_logger_getorgauditlogs",
-      "community": 291,
+      "community": 24,
       "norm_label": "getorgauditlogs()"
     },
     {
@@ -686,7 +686,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_audit_session_controller",
-      "community": 291,
+      "community": 24,
       "norm_label": "audit-session-controller.ts"
     },
     {
@@ -696,7 +696,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "backend_audit_session_controller_extracttoken",
-      "community": 291,
+      "community": 24,
       "norm_label": "extracttoken()"
     },
     {
@@ -706,7 +706,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "backend_audit_session_controller_handlegetauditlogs",
-      "community": 291,
+      "community": 24,
       "norm_label": "handlegetauditlogs()"
     },
     {
@@ -716,7 +716,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "backend_audit_session_controller_handlegetusersessions",
-      "community": 291,
+      "community": 24,
       "norm_label": "handlegetusersessions()"
     },
     {
@@ -796,7 +796,7 @@
       "source_location": "L80",
       "_origin": "ast",
       "id": "backend_crypto_hashtoken",
-      "community": 226,
+      "community": 296,
       "norm_label": "hashtoken()"
     },
     {
@@ -856,7 +856,7 @@
       "source_location": "L187",
       "_origin": "ast",
       "id": "backend_crypto_verifyjwt",
-      "community": 291,
+      "community": 226,
       "norm_label": "verifyjwt()"
     },
     {
@@ -866,7 +866,7 @@
       "source_location": "L224",
       "_origin": "ast",
       "id": "backend_crypto_getpublicjwks",
-      "community": 291,
+      "community": 226,
       "norm_label": "getpublicjwks()"
     },
     {
@@ -1066,7 +1066,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_hierarchy",
-      "community": 226,
+      "community": 336,
       "norm_label": "hierarchy.ts"
     },
     {
@@ -1076,7 +1076,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "backend_hierarchy_getscopedhierarchydata",
-      "community": 226,
+      "community": 336,
       "norm_label": "getscopedhierarchydata()"
     },
     {
@@ -1086,7 +1086,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_iam_engine",
-      "community": 18,
+      "community": 296,
       "norm_label": "iam-engine.ts"
     },
     {
@@ -1096,7 +1096,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "backend_iam_engine_evaluatediamcontext",
-      "community": 18,
+      "community": 296,
       "norm_label": "evaluatediamcontext"
     },
     {
@@ -1106,7 +1106,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "backend_iam_engine_evaluateuserpermissions",
-      "community": 18,
+      "community": 296,
       "norm_label": "evaluateuserpermissions()"
     },
     {
@@ -1116,7 +1116,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "backend_iam_engine_haspermission",
-      "community": 18,
+      "community": 296,
       "norm_label": "haspermission()"
     },
     {
@@ -1136,7 +1136,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_org_tree_service",
-      "community": 281,
+      "community": 18,
       "norm_label": "org-tree-service.ts"
     },
     {
@@ -1146,7 +1146,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "backend_org_tree_service_logger",
-      "community": 281,
+      "community": 18,
       "norm_label": "logger"
     },
     {
@@ -1156,7 +1156,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "backend_org_tree_service_orgtreenode",
-      "community": 281,
+      "community": 18,
       "norm_label": "orgtreenode"
     },
     {
@@ -1166,7 +1166,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "backend_org_tree_service_orgtreeresponse",
-      "community": 281,
+      "community": 18,
       "norm_label": "orgtreeresponse"
     },
     {
@@ -1176,7 +1176,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "backend_org_tree_service_rawemployeerow",
-      "community": 281,
+      "community": 18,
       "norm_label": "rawemployeerow"
     },
     {
@@ -1186,7 +1186,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "backend_org_tree_service_resolvelivestatus",
-      "community": 281,
+      "community": 18,
       "norm_label": "resolvelivestatus()"
     },
     {
@@ -1196,7 +1196,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "backend_org_tree_service_getrealorgtree",
-      "community": 281,
+      "community": 18,
       "norm_label": "getrealorgtree()"
     },
     {
@@ -1206,7 +1206,7 @@
       "source_location": "L211",
       "_origin": "ast",
       "id": "backend_org_tree_service_getorgtree",
-      "community": 281,
+      "community": 18,
       "norm_label": "getorgtree()"
     },
     {
@@ -1216,7 +1216,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_rate_limiter",
-      "community": 299,
+      "community": 226,
       "norm_label": "rate-limiter.ts"
     },
     {
@@ -1226,7 +1226,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "backend_rate_limiter_ratelimitstatus",
-      "community": 299,
+      "community": 226,
       "norm_label": "ratelimitstatus"
     },
     {
@@ -1236,7 +1236,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "backend_rate_limiter_attemptrecord",
-      "community": 299,
+      "community": 226,
       "norm_label": "attemptrecord"
     },
     {
@@ -1246,7 +1246,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "backend_rate_limiter_ipattempts",
-      "community": 299,
+      "community": 226,
       "norm_label": "ipattempts"
     },
     {
@@ -1256,7 +1256,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "backend_rate_limiter_emailattempts",
-      "community": 299,
+      "community": 226,
       "norm_label": "emailattempts"
     },
     {
@@ -1266,7 +1266,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "backend_rate_limiter_getorcleanrecord",
-      "community": 299,
+      "community": 226,
       "norm_label": "getorcleanrecord()"
     },
     {
@@ -1276,7 +1276,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "backend_rate_limiter_checkratelimit",
-      "community": 299,
+      "community": 226,
       "norm_label": "checkratelimit()"
     },
     {
@@ -1286,7 +1286,7 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "backend_rate_limiter_recordfailedattempt",
-      "community": 299,
+      "community": 226,
       "norm_label": "recordfailedattempt()"
     },
     {
@@ -1306,7 +1306,7 @@
       "source_location": "L85",
       "_origin": "ast",
       "id": "backend_rate_limiter_clearallratelimits",
-      "community": 299,
+      "community": 226,
       "norm_label": "clearallratelimits()"
     },
     {
@@ -1316,7 +1316,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_security_headers",
-      "community": 267,
+      "community": 337,
       "norm_label": "security-headers.ts"
     },
     {
@@ -1326,7 +1326,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "backend_security_headers_security_headers",
-      "community": 267,
+      "community": 337,
       "norm_label": "security_headers"
     },
     {
@@ -1336,7 +1336,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "backend_security_headers_applysecurityheaders",
-      "community": 267,
+      "community": 337,
       "norm_label": "applysecurityheaders()"
     },
     {
@@ -1346,7 +1346,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_session_manager",
-      "community": 226,
+      "community": 296,
       "norm_label": "session-manager.ts"
     },
     {
@@ -1356,7 +1356,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "backend_session_manager_logger",
-      "community": 226,
+      "community": 296,
       "norm_label": "logger"
     },
     {
@@ -1366,7 +1366,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "backend_session_manager_sessionissueresult",
-      "community": 226,
+      "community": 296,
       "norm_label": "sessionissueresult"
     },
     {
@@ -1376,7 +1376,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "backend_session_manager_createsession",
-      "community": 226,
+      "community": 296,
       "norm_label": "createsession()"
     },
     {
@@ -1386,7 +1386,7 @@
       "source_location": "L92",
       "_origin": "ast",
       "id": "backend_session_manager_rotaterefreshtoken",
-      "community": 226,
+      "community": 296,
       "norm_label": "rotaterefreshtoken()"
     },
     {
@@ -1396,7 +1396,7 @@
       "source_location": "L175",
       "_origin": "ast",
       "id": "backend_session_manager_revokesession",
-      "community": 226,
+      "community": 296,
       "norm_label": "revokesession()"
     },
     {
@@ -1406,7 +1406,7 @@
       "source_location": "L182",
       "_origin": "ast",
       "id": "backend_session_manager_getuseractivesessions",
-      "community": 226,
+      "community": 296,
       "norm_label": "getuseractivesessions()"
     },
     {
@@ -1416,7 +1416,7 @@
       "source_location": "L209",
       "_origin": "ast",
       "id": "backend_session_manager_revokeothersessions",
-      "community": 226,
+      "community": 296,
       "norm_label": "revokeothersessions()"
     },
     {
@@ -1666,7 +1666,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "db_db_resolveauthdatadir",
-      "community": 281,
+      "community": 291,
       "norm_label": "resolveauthdatadir()"
     },
     {
@@ -1676,7 +1676,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "db_db_getauthdb",
-      "community": 281,
+      "community": 296,
       "norm_label": "getauthdb()"
     },
     {
@@ -1976,7 +1976,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_auth_src_index_ts_src_index",
-      "community": 296,
+      "community": 291,
       "norm_label": "index.ts"
     },
     {
@@ -2016,7 +2016,7 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "src_server_startauthserver",
-      "community": 296,
+      "community": 291,
       "norm_label": "startauthserver()"
     },
     {
@@ -2026,7 +2026,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "contracts_jwks_contract_test",
-      "community": 291,
+      "community": 226,
       "norm_label": "jwks-contract.test.ts"
     },
     {
@@ -2116,7 +2116,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_session_rotation_test",
-      "community": 226,
+      "community": 296,
       "norm_label": "session-rotation.test.ts"
     },
     {
@@ -2136,7 +2136,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "security_rate_limiter_test",
-      "community": 296,
+      "community": 226,
       "norm_label": "rate-limiter.test.ts"
     },
     {
@@ -2146,7 +2146,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "security_replay_defense_test",
-      "community": 226,
+      "community": 296,
       "norm_label": "replay-defense.test.ts"
     },
     {
@@ -2156,7 +2156,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "security_security_headers_test",
-      "community": 267,
+      "community": 337,
       "norm_label": "security-headers.test.ts"
     },
     {
@@ -2166,7 +2166,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_audit_sessions_test",
-      "community": 291,
+      "community": 24,
       "norm_label": "audit-sessions.test.ts"
     },
     {
@@ -2176,7 +2176,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_crypto_test",
-      "community": 291,
+      "community": 226,
       "norm_label": "crypto.test.ts"
     },
     {
@@ -2196,7 +2196,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_auth_test_unit_employee_controller_test_ts_unit_employee_controller_test",
-      "community": 296,
+      "community": 18,
       "norm_label": "employee-controller.test.ts"
     },
     {
@@ -2206,7 +2206,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_hierarchy_test",
-      "community": 226,
+      "community": 336,
       "norm_label": "hierarchy.test.ts"
     },
     {
@@ -2216,7 +2216,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_iam_engine_test",
-      "community": 18,
+      "community": 296,
       "norm_label": "iam-engine.test.ts"
     },
     {
@@ -2376,7 +2376,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "backend_api_handlers_handleapirequest",
-      "community": 227,
+      "community": 312,
       "norm_label": "handleapirequest()"
     },
     {
@@ -2946,7 +2946,7 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller",
-      "community": 249,
+      "community": 233,
       "norm_label": "servicescontroller"
     },
     {
@@ -2956,7 +2956,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_constructor",
-      "community": 249,
+      "community": 233,
       "norm_label": ".constructor()"
     },
     {
@@ -2966,7 +2966,7 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_getcandidateurls",
-      "community": 249,
+      "community": 233,
       "norm_label": ".getcandidateurls()"
     },
     {
@@ -2976,7 +2976,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_pollservicehealth",
-      "community": 249,
+      "community": 233,
       "norm_label": ".pollservicehealth()"
     },
     {
@@ -2986,7 +2986,7 @@
       "source_location": "L158",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_appendhistory",
-      "community": 249,
+      "community": 233,
       "norm_label": ".appendhistory()"
     },
     {
@@ -2996,7 +2996,7 @@
       "source_location": "L166",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_pollallservices",
-      "community": 249,
+      "community": 233,
       "norm_label": ".pollallservices()"
     },
     {
@@ -3006,7 +3006,7 @@
       "source_location": "L171",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_getallhealthstatuses",
-      "community": 249,
+      "community": 233,
       "norm_label": ".getallhealthstatuses()"
     },
     {
@@ -3016,7 +3016,7 @@
       "source_location": "L195",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_getservicesvitalssummary",
-      "community": 249,
+      "community": 233,
       "norm_label": ".getservicesvitalssummary()"
     },
     {
@@ -3026,7 +3026,7 @@
       "source_location": "L242",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_restartservice",
-      "community": 249,
+      "community": 233,
       "norm_label": ".restartservice()"
     },
     {
@@ -3036,7 +3036,7 @@
       "source_location": "L264",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_toggleservice",
-      "community": 249,
+      "community": 233,
       "norm_label": ".toggleservice()"
     },
     {
@@ -3396,7 +3396,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_dev_dashboard_src_db_db_ts_db_db",
-      "community": 233,
+      "community": 333,
       "norm_label": "db.ts"
     },
     {
@@ -3406,7 +3406,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "db_db_logger",
-      "community": 233,
+      "community": 333,
       "norm_label": "logger"
     },
     {
@@ -3416,7 +3416,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "db_db_data_dir",
-      "community": 233,
+      "community": 333,
       "norm_label": "data_dir"
     },
     {
@@ -3426,7 +3426,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "db_db_core_db_path",
-      "community": 233,
+      "community": 333,
       "norm_label": "core_db_path"
     },
     {
@@ -3456,7 +3456,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "db_db_trafficeventrecord",
-      "community": 233,
+      "community": 333,
       "norm_label": "trafficeventrecord"
     },
     {
@@ -3476,7 +3476,7 @@
       "source_location": "L76",
       "_origin": "ast",
       "id": "db_db_auditlogrecord",
-      "community": 233,
+      "community": 333,
       "norm_label": "auditlogrecord"
     },
     {
@@ -3756,7 +3756,7 @@
       "source_location": "L497",
       "_origin": "ast",
       "id": "db_db_platformdb",
-      "community": 233,
+      "community": 312,
       "norm_label": "platformdb"
     },
     {
@@ -4616,7 +4616,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_dev_dashboard_src_server_ts_src_server",
-      "community": 270,
+      "community": 321,
       "norm_label": "server.ts"
     },
     {
@@ -4626,7 +4626,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "apps_src_dev_dashboard_src_server_ts_src_server_port",
-      "community": 270,
+      "community": 321,
       "norm_label": "port"
     },
     {
@@ -4636,7 +4636,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "apps_src_dev_dashboard_src_server_ts_src_server_logger",
-      "community": 270,
+      "community": 321,
       "norm_label": "logger"
     },
     {
@@ -4646,7 +4646,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "src_server_startdevdashboardserver",
-      "community": 270,
+      "community": 315,
       "norm_label": "startdevdashboardserver()"
     },
     {
@@ -4656,7 +4656,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "contracts_api_registry_contract_test",
-      "community": 227,
+      "community": 312,
       "norm_label": "api-registry-contract.test.ts"
     },
     {
@@ -4666,7 +4666,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "contracts_apps_api_contract_test",
-      "community": 227,
+      "community": 312,
       "norm_label": "apps-api-contract.test.ts"
     },
     {
@@ -4676,7 +4676,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "contracts_problem_details_test",
-      "community": 270,
+      "community": 315,
       "norm_label": "problem-details.test.ts"
     },
     {
@@ -4686,7 +4686,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_apps_command_center_journey_test",
-      "community": 270,
+      "community": 315,
       "norm_label": "apps-command-center-journey.test.ts"
     },
     {
@@ -4696,7 +4696,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_dashboard_server_test",
-      "community": 270,
+      "community": 315,
       "norm_label": "dashboard-server.test.ts"
     },
     {
@@ -4746,7 +4746,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_apps_lifecycle_test",
-      "community": 233,
+      "community": 312,
       "norm_label": "apps-lifecycle.test.ts"
     },
     {
@@ -4756,7 +4756,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_db_explorer_endpoints_test",
-      "community": 227,
+      "community": 312,
       "norm_label": "db-explorer-endpoints.test.ts"
     },
     {
@@ -4806,7 +4806,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_telemetry_pipeline_test",
-      "community": 270,
+      "community": 315,
       "norm_label": "telemetry-pipeline.test.ts"
     },
     {
@@ -4846,7 +4846,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "security_env_secret_defense_test",
-      "community": 233,
+      "community": 312,
       "norm_label": "env-secret-defense.test.ts"
     },
     {
@@ -4856,7 +4856,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "security_sql_sandbox_defense_test",
-      "community": 270,
+      "community": 315,
       "norm_label": "sql-sandbox-defense.test.ts"
     },
     {
@@ -4866,7 +4866,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_apps_controller_test",
-      "community": 233,
+      "community": 312,
       "norm_label": "apps-controller.test.ts"
     },
     {
@@ -4886,7 +4886,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_db_diagnostics_test",
-      "community": 222,
+      "community": 312,
       "norm_label": "db-diagnostics.test.ts"
     },
     {
@@ -4896,7 +4896,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_db_sandbox_test",
-      "community": 233,
+      "community": 312,
       "norm_label": "db-sandbox.test.ts"
     },
     {
@@ -4956,7 +4956,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_table_browser_test",
-      "community": 233,
+      "community": 312,
       "norm_label": "table-browser.test.ts"
     },
     {
@@ -5726,7 +5726,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_catalog_grouping_test",
-      "community": 323,
+      "community": 223,
       "norm_label": "catalog-grouping.test.ts"
     },
     {
@@ -5966,7 +5966,7 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "backend_inbox_service_getlivenotifications",
-      "community": 268,
+      "community": 162,
       "norm_label": "getlivenotifications()"
     },
     {
@@ -6083,7 +6083,7 @@
       "label": "getUserApiTokens()",
       "file_type": "code",
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
-      "source_location": "L477",
+      "source_location": "L469",
       "_origin": "ast",
       "id": "backend_inbox_service_getuserapitokens",
       "community": 162,
@@ -6093,7 +6093,7 @@
       "label": "revokeApiToken()",
       "file_type": "code",
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
-      "source_location": "L492",
+      "source_location": "L478",
       "_origin": "ast",
       "id": "backend_inbox_service_revokeapitoken",
       "community": 162,
@@ -6596,7 +6596,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "frontend_ui_renderer_apps_renderappsview",
-      "community": 157,
+      "community": 316,
       "norm_label": "renderappsview()"
     },
     {
@@ -7006,7 +7006,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_org_tree_service_test",
-      "community": 281,
+      "community": 18,
       "norm_label": "org-tree-service.test.ts"
     },
     {
@@ -7016,7 +7016,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "unit_org_tree_service_test_checkdepth",
-      "community": 281,
+      "community": 18,
       "norm_label": "checkdepth()"
     },
     {
@@ -7026,7 +7026,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "unit_org_tree_service_test_checkdepth3",
-      "community": 281,
+      "community": 18,
       "norm_label": "checkdepth3()"
     },
     {
@@ -7416,7 +7416,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "src_database_istestenvironment",
-      "community": 296,
+      "community": 281,
       "norm_label": "istestenvironment()"
     },
     {
@@ -7443,7 +7443,7 @@
       "label": "DatabaseClientOptions",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/database.ts",
-      "source_location": "L148",
+      "source_location": "L159",
       "_origin": "ast",
       "id": "src_database_databaseclientoptions",
       "community": 281,
@@ -7453,7 +7453,7 @@
       "label": "getDatabaseClient()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/database.ts",
-      "source_location": "L158",
+      "source_location": "L169",
       "_origin": "ast",
       "id": "src_database_getdatabaseclient",
       "community": 281,
@@ -7463,7 +7463,7 @@
       "label": "closeDatabaseClient()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/database.ts",
-      "source_location": "L188",
+      "source_location": "L199",
       "_origin": "ast",
       "id": "src_database_closedatabaseclient",
       "community": 281,
@@ -7686,7 +7686,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_error_handler",
-      "community": 321,
+      "community": 320,
       "norm_label": "error-handler.ts"
     },
     {
@@ -7906,7 +7906,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "src_registry_serviceentry",
-      "community": 323,
+      "community": 223,
       "norm_label": "serviceentry"
     },
     {
@@ -8066,7 +8066,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_error_handler_test",
-      "community": 321,
+      "community": 320,
       "norm_label": "error-handler.test.ts"
     },
     {
@@ -8216,7 +8216,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "src_index_authuser",
-      "community": 159,
+      "community": 330,
       "norm_label": "authuser"
     },
     {
@@ -8276,7 +8276,7 @@
       "source_location": "L80",
       "_origin": "ast",
       "id": "src_index_employeesummary",
-      "community": 183,
+      "community": 336,
       "norm_label": "employeesummary"
     },
     {
@@ -8286,7 +8286,7 @@
       "source_location": "L92",
       "_origin": "ast",
       "id": "src_index_managerchainentry",
-      "community": 183,
+      "community": 336,
       "norm_label": "managerchainentry"
     },
     {
@@ -8296,7 +8296,7 @@
       "source_location": "L102",
       "_origin": "ast",
       "id": "src_index_scopedhierarchyresponse",
-      "community": 159,
+      "community": 330,
       "norm_label": "scopedhierarchyresponse"
     },
     {
@@ -8376,7 +8376,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_dropdown",
-      "community": 315,
+      "community": 246,
       "norm_label": "dropdown.ts"
     },
     {
@@ -8386,7 +8386,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_dropdown_getastryxdropdownscript",
-      "community": 315,
+      "community": 246,
       "norm_label": "getastryxdropdownscript()"
     },
     {
@@ -8436,7 +8436,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_header",
-      "community": 315,
+      "community": 246,
       "norm_label": "header.ts"
     },
     {
@@ -8446,7 +8446,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "src_header_astryxheaderoptions",
-      "community": 315,
+      "community": 246,
       "norm_label": "astryxheaderoptions"
     },
     {
@@ -8466,7 +8466,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_icons",
-      "community": 315,
+      "community": 246,
       "norm_label": "icons.ts"
     },
     {
@@ -8476,7 +8476,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "src_icons_astryxicons",
-      "community": 157,
+      "community": 227,
       "norm_label": "astryxicons"
     },
     {
@@ -8486,7 +8486,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_ui_src_index_ts_src_index",
-      "community": 315,
+      "community": 246,
       "norm_label": "index.ts"
     },
     {
@@ -8876,7 +8876,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_toast",
-      "community": 315,
+      "community": 246,
       "norm_label": "toast.ts"
     },
     {
@@ -8886,7 +8886,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "src_toast_getastryxtoastscript",
-      "community": 315,
+      "community": 246,
       "norm_label": "getastryxtoastscript()"
     },
     {
@@ -8896,7 +8896,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_tooltip",
-      "community": 315,
+      "community": 246,
       "norm_label": "tooltip.ts"
     },
     {
@@ -8906,7 +8906,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_tooltip_getastryxtooltipscript",
-      "community": 227,
+      "community": 246,
       "norm_label": "getastryxtooltipscript()"
     },
     {
@@ -9026,7 +9026,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_toast_dropdown_test",
-      "community": 315,
+      "community": 246,
       "norm_label": "toast-dropdown.test.ts"
     },
     {
@@ -9036,7 +9036,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "chaos_concurrent_wal_writes_test",
-      "community": 281,
+      "community": 296,
       "norm_label": "concurrent-wal-writes.test.ts"
     },
     {
@@ -9176,7 +9176,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_dynamic_rebranding_test",
-      "community": 221,
+      "community": 251,
       "norm_label": "dynamic-rebranding.test.ts"
     },
     {
@@ -9246,7 +9246,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_dev_dashboard_test",
-      "community": 270,
+      "community": 315,
       "norm_label": "dev-dashboard.test.ts"
     },
     {
@@ -9546,47 +9546,27 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_app_template_src_db_index_ts_db_index",
-      "community": 321,
+      "community": 281,
       "norm_label": "index.ts"
     },
     {
       "label": "logger",
       "file_type": "code",
       "source_file": "forge-apps/app-template/src/db/index.ts",
-      "source_location": "L11",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "forge_apps_app_template_src_db_index_ts_db_index_logger",
-      "community": 321,
+      "community": 281,
       "norm_label": "logger"
-    },
-    {
-      "label": "DATA_DIR",
-      "file_type": "code",
-      "source_file": "forge-apps/app-template/src/db/index.ts",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "forge_apps_app_template_src_db_index_ts_db_index_data_dir",
-      "community": 321,
-      "norm_label": "data_dir"
-    },
-    {
-      "label": "DB_PATH",
-      "file_type": "code",
-      "source_file": "forge-apps/app-template/src/db/index.ts",
-      "source_location": "L18",
-      "_origin": "ast",
-      "id": "forge_apps_app_template_src_db_index_ts_db_index_db_path",
-      "community": 321,
-      "norm_label": "db_path"
     },
     {
       "label": "templateDb",
       "file_type": "code",
       "source_file": "forge-apps/app-template/src/db/index.ts",
-      "source_location": "L19",
+      "source_location": "L9",
       "_origin": "ast",
       "id": "db_index_templatedb",
-      "community": 321,
+      "community": 281,
       "norm_label": "templatedb"
     },
     {
@@ -9596,7 +9576,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_app_template_src_server_ts_src_server",
-      "community": 159,
+      "community": 330,
       "norm_label": "server.ts"
     },
     {
@@ -9606,7 +9586,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "forge_apps_app_template_src_server_ts_src_server_log_dir",
-      "community": 159,
+      "community": 330,
       "norm_label": "log_dir"
     },
     {
@@ -9616,7 +9596,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "forge_apps_app_template_src_server_ts_src_server_logger",
-      "community": 159,
+      "community": 330,
       "norm_label": "logger"
     },
     {
@@ -9626,7 +9606,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "forge_apps_app_template_src_server_ts_src_server_port",
-      "community": 159,
+      "community": 330,
       "norm_label": "port"
     },
     {
@@ -9636,7 +9616,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "forge_apps_app_template_src_server_ts_src_server_renderapphtml",
-      "community": 159,
+      "community": 330,
       "norm_label": "renderapphtml()"
     },
     {
@@ -9756,57 +9736,37 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_billing_src_db_index_ts_db_index",
-      "community": 169,
+      "community": 321,
       "norm_label": "index.ts"
     },
     {
       "label": "logger",
       "file_type": "code",
       "source_file": "forge-apps/billing/src/db/index.ts",
-      "source_location": "L11",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "forge_apps_billing_src_db_index_ts_db_index_logger",
-      "community": 169,
+      "community": 321,
       "norm_label": "logger"
-    },
-    {
-      "label": "DATA_DIR",
-      "file_type": "code",
-      "source_file": "forge-apps/billing/src/db/index.ts",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "forge_apps_billing_src_db_index_ts_db_index_data_dir",
-      "community": 169,
-      "norm_label": "data_dir"
-    },
-    {
-      "label": "DB_PATH",
-      "file_type": "code",
-      "source_file": "forge-apps/billing/src/db/index.ts",
-      "source_location": "L18",
-      "_origin": "ast",
-      "id": "forge_apps_billing_src_db_index_ts_db_index_db_path",
-      "community": 169,
-      "norm_label": "db_path"
     },
     {
       "label": "billingDb",
       "file_type": "code",
       "source_file": "forge-apps/billing/src/db/index.ts",
-      "source_location": "L19",
+      "source_location": "L9",
       "_origin": "ast",
       "id": "db_index_billingdb",
-      "community": 169,
+      "community": 321,
       "norm_label": "billingdb"
     },
     {
       "label": "count",
       "file_type": "code",
       "source_file": "forge-apps/billing/src/db/index.ts",
-      "source_location": "L36",
+      "source_location": "L26",
       "_origin": "ast",
       "id": "db_index_count",
-      "community": 169,
+      "community": 321,
       "norm_label": "count"
     },
     {
@@ -9816,7 +9776,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_billing_src_server_ts_src_server",
-      "community": 169,
+      "community": 159,
       "norm_label": "server.ts"
     },
     {
@@ -9826,7 +9786,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "forge_apps_billing_src_server_ts_src_server_log_dir",
-      "community": 169,
+      "community": 159,
       "norm_label": "log_dir"
     },
     {
@@ -9836,7 +9796,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "forge_apps_billing_src_server_ts_src_server_logger",
-      "community": 169,
+      "community": 159,
       "norm_label": "logger"
     },
     {
@@ -9846,7 +9806,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "forge_apps_billing_src_server_ts_src_server_port",
-      "community": 169,
+      "community": 159,
       "norm_label": "port"
     },
     {
@@ -9856,7 +9816,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "src_server_invoice",
-      "community": 169,
+      "community": 159,
       "norm_label": "invoice"
     },
     {
@@ -9866,7 +9826,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "forge_apps_billing_src_server_ts_src_server_renderapphtml",
-      "community": 169,
+      "community": 159,
       "norm_label": "renderapphtml()"
     },
     {
@@ -9936,7 +9896,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_expenses_src_server_ts_src_server",
-      "community": 159,
+      "community": 330,
       "norm_label": "server.ts"
     },
     {
@@ -9946,7 +9906,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "forge_apps_expenses_src_server_ts_src_server_log_dir",
-      "community": 159,
+      "community": 330,
       "norm_label": "log_dir"
     },
     {
@@ -9956,7 +9916,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "forge_apps_expenses_src_server_ts_src_server_logger",
-      "community": 159,
+      "community": 330,
       "norm_label": "logger"
     },
     {
@@ -9966,7 +9926,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "forge_apps_expenses_src_server_ts_src_server_port",
-      "community": 159,
+      "community": 330,
       "norm_label": "port"
     },
     {
@@ -9976,7 +9936,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "forge_apps_expenses_src_server_ts_src_server_renderapphtml",
-      "community": 159,
+      "community": 330,
       "norm_label": "renderapphtml()"
     },
     {
@@ -9986,7 +9946,7 @@
       "source_location": "L137",
       "_origin": "ast",
       "id": "src_server_startexpensesserver",
-      "community": 333,
+      "community": 330,
       "norm_label": "startexpensesserver()"
     },
     {
@@ -9996,7 +9956,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_expenses_test_contracts_problem_json_test_ts_contracts_problem_json_test",
-      "community": 333,
+      "community": 330,
       "norm_label": "problem-json.test.ts"
     },
     {
@@ -10006,7 +9966,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_expenses_server_test",
-      "community": 333,
+      "community": 330,
       "norm_label": "expenses-server.test.ts"
     },
     {
@@ -10016,7 +9976,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_expenses_test_integration_db_isolation_test_ts_integration_db_isolation_test",
-      "community": 333,
+      "community": 330,
       "norm_label": "db-isolation.test.ts"
     },
     {
@@ -10046,47 +10006,27 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_telemetry_src_db_index_ts_db_index",
-      "community": 24,
+      "community": 321,
       "norm_label": "index.ts"
     },
     {
       "label": "logger",
       "file_type": "code",
       "source_file": "forge-apps/telemetry/src/db/index.ts",
-      "source_location": "L11",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "forge_apps_telemetry_src_db_index_ts_db_index_logger",
-      "community": 24,
+      "community": 321,
       "norm_label": "logger"
-    },
-    {
-      "label": "DATA_DIR",
-      "file_type": "code",
-      "source_file": "forge-apps/telemetry/src/db/index.ts",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "forge_apps_telemetry_src_db_index_ts_db_index_data_dir",
-      "community": 24,
-      "norm_label": "data_dir"
-    },
-    {
-      "label": "DB_PATH",
-      "file_type": "code",
-      "source_file": "forge-apps/telemetry/src/db/index.ts",
-      "source_location": "L18",
-      "_origin": "ast",
-      "id": "forge_apps_telemetry_src_db_index_ts_db_index_db_path",
-      "community": 24,
-      "norm_label": "db_path"
     },
     {
       "label": "telemetryDb",
       "file_type": "code",
       "source_file": "forge-apps/telemetry/src/db/index.ts",
-      "source_location": "L19",
+      "source_location": "L9",
       "_origin": "ast",
       "id": "db_index_telemetrydb",
-      "community": 24,
+      "community": 321,
       "norm_label": "telemetrydb"
     },
     {
@@ -11128,13 +11068,83 @@
       "norm_label": "appendworklog()"
     },
     {
+      "label": "clean-leaked-test-data.ts",
+      "file_type": "code",
+      "source_file": "scripts/clean-leaked-test-data.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "scripts_clean_leaked_test_data",
+      "community": 323,
+      "norm_label": "clean-leaked-test-data.ts"
+    },
+    {
+      "label": "dbPath",
+      "file_type": "code",
+      "source_file": "scripts/clean-leaked-test-data.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "scripts_clean_leaked_test_data_dbpath",
+      "community": 323,
+      "norm_label": "dbpath"
+    },
+    {
+      "label": "db",
+      "file_type": "code",
+      "source_file": "scripts/clean-leaked-test-data.ts",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "scripts_clean_leaked_test_data_db",
+      "community": 323,
+      "norm_label": "db"
+    },
+    {
+      "label": "totalUsersBefore",
+      "file_type": "code",
+      "source_file": "scripts/clean-leaked-test-data.ts",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "scripts_clean_leaked_test_data_totalusersbefore",
+      "community": 323,
+      "norm_label": "totalusersbefore"
+    },
+    {
+      "label": "leakedUsers",
+      "file_type": "code",
+      "source_file": "scripts/clean-leaked-test-data.ts",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "scripts_clean_leaked_test_data_leakedusers",
+      "community": 323,
+      "norm_label": "leakedusers"
+    },
+    {
+      "label": "totalUsersAfter",
+      "file_type": "code",
+      "source_file": "scripts/clean-leaked-test-data.ts",
+      "source_location": "L59",
+      "_origin": "ast",
+      "id": "scripts_clean_leaked_test_data_totalusersafter",
+      "community": 323,
+      "norm_label": "totalusersafter"
+    },
+    {
+      "label": "canonicalUsers",
+      "file_type": "code",
+      "source_file": "scripts/clean-leaked-test-data.ts",
+      "source_location": "L62",
+      "_origin": "ast",
+      "id": "scripts_clean_leaked_test_data_canonicalusers",
+      "community": 323,
+      "norm_label": "canonicalusers"
+    },
+    {
       "label": "create-app.ts",
       "file_type": "code",
       "source_file": "scripts/create-app.ts",
       "source_location": "L1",
       "_origin": "ast",
       "id": "scripts_create_app",
-      "community": 223,
+      "community": 281,
       "norm_label": "create-app.ts"
     },
     {
@@ -11144,7 +11154,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "scripts_create_app_repo_root",
-      "community": 223,
+      "community": 281,
       "norm_label": "repo_root"
     },
     {
@@ -11154,7 +11164,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "scripts_create_app_createappoptions",
-      "community": 223,
+      "community": 281,
       "norm_label": "createappoptions"
     },
     {
@@ -11164,7 +11174,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "scripts_create_app_createapp",
-      "community": 223,
+      "community": 281,
       "norm_label": "createapp()"
     },
     {
@@ -11174,7 +11184,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scripts_dev_runner",
-      "community": 323,
+      "community": 223,
       "norm_label": "dev-runner.ts"
     },
     {
@@ -11184,7 +11194,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "scripts_dev_runner_repo_root",
-      "community": 323,
+      "community": 223,
       "norm_label": "repo_root"
     },
     {
@@ -11194,7 +11204,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "scripts_dev_runner_brand",
-      "community": 323,
+      "community": 223,
       "norm_label": "brand"
     },
     {
@@ -11204,7 +11214,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "scripts_dev_runner_resolvedservice",
-      "community": 323,
+      "community": 223,
       "norm_label": "resolvedservice"
     },
     {
@@ -11214,7 +11224,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "scripts_dev_runner_resolveentrypoint",
-      "community": 323,
+      "community": 223,
       "norm_label": "resolveentrypoint()"
     },
     {
@@ -11224,7 +11234,7 @@
       "source_location": "L51",
       "_origin": "ast",
       "id": "scripts_dev_runner_isportinuse",
-      "community": 323,
+      "community": 223,
       "norm_label": "isportinuse()"
     },
     {
@@ -11234,7 +11244,7 @@
       "source_location": "L81",
       "_origin": "ast",
       "id": "scripts_dev_runner_main",
-      "community": 323,
+      "community": 223,
       "norm_label": "main()"
     },
     {
@@ -11314,7 +11324,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "scripts_generate_proxy_generatecaddyfile",
-      "community": 223,
+      "community": 281,
       "norm_label": "generatecaddyfile()"
     },
     {
@@ -11352,7 +11362,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "scripts_init_all_databases",
-      "community": 296,
+      "community": 249,
       "norm_label": "init-all-databases.ts"
     },
     {
@@ -11362,7 +11372,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "scripts_init_all_databases_data_dir",
-      "community": 296,
+      "community": 249,
       "norm_label": "data_dir"
     },
     {
@@ -11372,7 +11382,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "scripts_init_all_databases_initauthdb",
-      "community": 296,
+      "community": 249,
       "norm_label": "initauthdb()"
     },
     {
@@ -11382,47 +11392,47 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "scripts_init_all_databases_initbillingdb",
-      "community": 296,
+      "community": 249,
       "norm_label": "initbillingdb()"
     },
     {
       "label": "initExpensesDb()",
       "file_type": "code",
       "source_file": "scripts/init-all-databases.ts",
-      "source_location": "L97",
+      "source_location": "L109",
       "_origin": "ast",
       "id": "scripts_init_all_databases_initexpensesdb",
-      "community": 296,
+      "community": 249,
       "norm_label": "initexpensesdb()"
     },
     {
       "label": "initTelemetryDb()",
       "file_type": "code",
       "source_file": "scripts/init-all-databases.ts",
-      "source_location": "L154",
+      "source_location": "L166",
       "_origin": "ast",
       "id": "scripts_init_all_databases_inittelemetrydb",
-      "community": 296,
+      "community": 249,
       "norm_label": "inittelemetrydb()"
     },
     {
       "label": "initDevHubDb()",
       "file_type": "code",
       "source_file": "scripts/init-all-databases.ts",
-      "source_location": "L209",
+      "source_location": "L221",
       "_origin": "ast",
       "id": "scripts_init_all_databases_initdevhubdb",
-      "community": 296,
+      "community": 249,
       "norm_label": "initdevhubdb()"
     },
     {
       "label": "initPlatformCoreDb()",
       "file_type": "code",
       "source_file": "scripts/init-all-databases.ts",
-      "source_location": "L248",
+      "source_location": "L260",
       "_origin": "ast",
       "id": "scripts_init_all_databases_initplatformcoredb",
-      "community": 296,
+      "community": 249,
       "norm_label": "initplatformcoredb()"
     },
     {
@@ -11820,7 +11830,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "test_create_app_test",
-      "community": 223,
+      "community": 281,
       "norm_label": "create-app.test.ts"
     },
     {
@@ -22394,6 +22404,76 @@
       "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
     },
     {
+      "label": "REPORT_20260903_2528350.md",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_2528350.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_09_report_20260903_2528350",
+      "community": 299,
+      "norm_label": "report_20260903_2528350.md"
+    },
+    {
+      "label": "\ud83d\udee1\ufe0f SG Forge Atomic Commit Audit Report",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_2528350.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_09_report_20260903_2528350_sg_forge_atomic_commit_audit_report",
+      "community": 299,
+      "norm_label": "\ud83d\udee1\ufe0f sg forge atomic commit audit report"
+    },
+    {
+      "label": "\ud83d\udcdd Commit Overview & Context",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_2528350.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "2026_09_report_20260903_2528350_commit_overview_context",
+      "community": 299,
+      "norm_label": "\ud83d\udcdd commit overview & context"
+    },
+    {
+      "label": "\ud83d\udcca Changes & Diff Statistics",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_2528350.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "2026_09_report_20260903_2528350_changes_diff_statistics",
+      "community": 299,
+      "norm_label": "\ud83d\udcca changes & diff statistics"
+    },
+    {
+      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (26 Files)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_2528350.md",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "2026_09_report_20260903_2528350_detailed_file_changes_26_files",
+      "community": 299,
+      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (26 files)"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_2528350.md",
+      "source_location": "L61",
+      "_origin": "ast",
+      "id": "2026_09_report_20260903_2528350_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "community": 299,
+      "norm_label": "\ud83d\udee0\ufe0f tier 1: deterministic engine checks (checked by logic & open source tools)"
+    },
+    {
+      "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_2528350.md",
+      "source_location": "L82",
+      "_origin": "ast",
+      "id": "2026_09_report_20260903_2528350_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "community": 299,
+      "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
+    },
+    {
       "label": "REPORT_20260903_29f73a3.md",
       "file_type": "document",
       "source_file": "logs/reports/2026-09/REPORT_20260903_29f73a3.md",
@@ -22854,20 +22934,20 @@
       "norm_label": "\ud83d\udcca changes & diff statistics"
     },
     {
-      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (6 Files)",
+      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (26 Files)",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
       "source_location": "L28",
       "_origin": "ast",
-      "id": "reports_latest_commit_report_detailed_file_changes_6_files",
+      "id": "reports_latest_commit_report_detailed_file_changes_26_files",
       "community": 27,
-      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (6 files)"
+      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (26 files)"
     },
     {
       "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
-      "source_location": "L41",
+      "source_location": "L61",
       "_origin": "ast",
       "id": "reports_latest_commit_report_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
       "community": 27,
@@ -22877,7 +22957,7 @@
       "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
-      "source_location": "L62",
+      "source_location": "L82",
       "_origin": "ast",
       "id": "reports_latest_commit_report_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
       "community": 27,
@@ -25435,9 +25515,9 @@
       "source_file": "apps/src/auth/src/backend/api-handlers.ts",
       "source_location": "L387",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_api_handlers_handledirectory",
-      "target": "backend_api_handlers_problem",
-      "confidence_score": 1.0
+      "target": "backend_api_handlers_problem"
     },
     {
       "relation": "calls",
@@ -25457,9 +25537,9 @@
       "source_file": "apps/src/auth/src/backend/api-handlers.ts",
       "source_location": "L484",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_api_handlers_handlegettelemetrylogs",
-      "target": "backend_api_handlers_problem",
-      "confidence_score": 1.0
+      "target": "backend_api_handlers_problem"
     },
     {
       "relation": "calls",
@@ -25567,9 +25647,9 @@
       "source_file": "apps/src/auth/src/backend/api-handlers.ts",
       "source_location": "L386",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_api_handlers_handledirectory",
-      "target": "backend_api_handlers_extractbearerorcookietoken",
-      "confidence_score": 1.0
+      "target": "backend_api_handlers_extractbearerorcookietoken"
     },
     {
       "relation": "calls",
@@ -25589,9 +25669,9 @@
       "source_file": "apps/src/auth/src/backend/api-handlers.ts",
       "source_location": "L483",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_api_handlers_handlegettelemetrylogs",
-      "target": "backend_api_handlers_extractbearerorcookietoken",
-      "confidence_score": 1.0
+      "target": "backend_api_handlers_extractbearerorcookietoken"
     },
     {
       "relation": "calls",
@@ -26422,9 +26502,9 @@
       "source_file": "apps/src/auth/src/backend/api-org-handlers.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_api_org_handlers",
-      "target": "backend_employee_controller_sanitizecsvfield",
-      "confidence_score": 1.0
+      "target": "backend_employee_controller_sanitizecsvfield"
     },
     {
       "relation": "imports_from",
@@ -26719,9 +26799,9 @@
       "source_file": "apps/src/auth/src/backend/api-org-handlers.ts",
       "source_location": "L315",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_api_org_handlers_handleexportemployees",
-      "target": "backend_api_org_handlers_extractauthcontext",
-      "confidence_score": 1.0
+      "target": "backend_api_org_handlers_extractauthcontext"
     },
     {
       "relation": "calls",
@@ -26785,9 +26865,9 @@
       "source_file": "apps/src/auth/src/backend/api-org-handlers.ts",
       "source_location": "L319",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_api_org_handlers_handleexportemployees",
-      "target": "backend_api_org_handlers_hasadminrole",
-      "confidence_score": 1.0
+      "target": "backend_api_org_handlers_hasadminrole"
     },
     {
       "relation": "calls",
@@ -27687,9 +27767,9 @@
       "source_file": "apps/src/auth/test/integration/org-api.test.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "integration_org_api_test",
-      "target": "backend_crypto",
-      "confidence_score": 1.0
+      "target": "backend_crypto"
     },
     {
       "relation": "imports_from",
@@ -28083,9 +28163,9 @@
       "source_file": "apps/src/auth/test/integration/org-api.test.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "integration_org_api_test",
-      "target": "backend_crypto_signjwt",
-      "confidence_score": 1.0
+      "target": "backend_crypto_signjwt"
     },
     {
       "relation": "imports",
@@ -31448,9 +31528,9 @@
       "source_file": "apps/src/auth/src/frontend/login-view.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_login_view",
-      "target": "src_sanitize_escapehtml",
-      "confidence_score": 1.0
+      "target": "src_sanitize_escapehtml"
     },
     {
       "relation": "imports",
@@ -31459,9 +31539,9 @@
       "source_file": "apps/src/auth/src/frontend/login-view.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_login_view",
-      "target": "src_sanitize_sanitizelocalurl",
-      "confidence_score": 1.0
+      "target": "src_sanitize_sanitizelocalurl"
     },
     {
       "relation": "imports",
@@ -31612,9 +31692,9 @@
       "source_file": "apps/src/auth/src/frontend/set-password-view.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_set_password_view",
-      "target": "src_sanitize_escapehtml",
-      "confidence_score": 1.0
+      "target": "src_sanitize_escapehtml"
     },
     {
       "relation": "imports",
@@ -34410,9 +34490,9 @@
       "source_file": "apps/src/dev-dashboard/src/db/db-diagnostics.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "db_db_diagnostics",
-      "target": "src_database_resolvecanonicaldatadir",
-      "confidence_score": 1.0
+      "target": "src_database_resolvecanonicaldatadir"
     },
     {
       "relation": "method",
@@ -34491,9 +34571,9 @@
       "source_file": "apps/src/dev-dashboard/src/db/db.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_dev_dashboard_src_db_db_ts_db_db",
-      "target": "db_db_getsafedbpath",
-      "confidence_score": 1.0
+      "target": "db_db_getsafedbpath"
     },
     {
       "relation": "contains",
@@ -34606,9 +34686,9 @@
       "source_file": "apps/src/dev-dashboard/src/db/db.ts",
       "source_location": "L354",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "db_db_platformdatabasemanager_backupdatabase",
-      "target": "db_db_getsafedbpath",
-      "confidence_score": 1.0
+      "target": "db_db_getsafedbpath"
     },
     {
       "relation": "calls",
@@ -34617,9 +34697,9 @@
       "source_file": "apps/src/dev-dashboard/src/db/db.ts",
       "source_location": "L300",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "db_db_platformdatabasemanager_executequery",
-      "target": "db_db_getsafedbpath",
-      "confidence_score": 1.0
+      "target": "db_db_getsafedbpath"
     },
     {
       "relation": "calls",
@@ -34628,9 +34708,9 @@
       "source_file": "apps/src/dev-dashboard/src/db/db.ts",
       "source_location": "L384",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "db_db_platformdatabasemanager_gettableddl",
-      "target": "db_db_getsafedbpath",
-      "confidence_score": 1.0
+      "target": "db_db_getsafedbpath"
     },
     {
       "relation": "calls",
@@ -34639,9 +34719,9 @@
       "source_file": "apps/src/dev-dashboard/src/db/db.ts",
       "source_location": "L407",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "db_db_platformdatabasemanager_gettablerows",
-      "target": "db_db_getsafedbpath",
-      "confidence_score": 1.0
+      "target": "db_db_getsafedbpath"
     },
     {
       "relation": "calls",
@@ -34650,9 +34730,9 @@
       "source_file": "apps/src/dev-dashboard/src/db/db.ts",
       "source_location": "L370",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "db_db_platformdatabasemanager_gettableschema",
-      "target": "db_db_getsafedbpath",
-      "confidence_score": 1.0
+      "target": "db_db_getsafedbpath"
     },
     {
       "relation": "calls",
@@ -34661,9 +34741,9 @@
       "source_file": "apps/src/dev-dashboard/src/db/db.ts",
       "source_location": "L339",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "db_db_platformdatabasemanager_optimizedatabase",
-      "target": "db_db_getsafedbpath",
-      "confidence_score": 1.0
+      "target": "db_db_getsafedbpath"
     },
     {
       "relation": "calls",
@@ -34672,9 +34752,9 @@
       "source_file": "apps/src/dev-dashboard/src/db/db.ts",
       "source_location": "L448",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "db_db_platformdatabasemanager_runintegritycheck",
-      "target": "db_db_getsafedbpath",
-      "confidence_score": 1.0
+      "target": "db_db_getsafedbpath"
     },
     {
       "relation": "method",
@@ -43384,9 +43464,9 @@
       "source_file": "apps/src/sdk/src/auth-guard.ts",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_auth_guard",
-      "target": "src_auth_guard_createinternalservicetoken",
-      "confidence_score": 1.0
+      "target": "src_auth_guard_createinternalservicetoken"
     },
     {
       "relation": "contains",
@@ -43501,9 +43581,9 @@
       "source_file": "apps/src/sdk/src/directory-client.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_directory_client",
-      "target": "src_auth_guard",
-      "confidence_score": 1.0
+      "target": "src_auth_guard"
     },
     {
       "relation": "imports_from",
@@ -43523,9 +43603,9 @@
       "source_file": "apps/src/sdk/src/directory-client.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_directory_client",
-      "target": "src_auth_guard_createinternalservicetoken",
-      "confidence_score": 1.0
+      "target": "src_auth_guard_createinternalservicetoken"
     },
     {
       "relation": "calls",
@@ -43534,9 +43614,9 @@
       "source_file": "apps/src/sdk/src/directory-client.ts",
       "source_location": "L91",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_directory_client_getinternalheaders",
-      "target": "src_auth_guard_createinternalservicetoken",
-      "confidence_score": 1.0
+      "target": "src_auth_guard_createinternalservicetoken"
     },
     {
       "relation": "calls",
@@ -43813,9 +43893,9 @@
       "source_file": "scripts/dev-runner.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_dev_runner",
-      "target": "src_branding_loadbrandconfig",
-      "confidence_score": 1.0
+      "target": "src_branding_loadbrandconfig"
     },
     {
       "relation": "imports",
@@ -44076,6 +44156,17 @@
       "target": "src_database"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/create-app.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "scripts_create_app",
+      "target": "src_database",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/src/sdk/src/database.ts",
@@ -44256,6 +44347,61 @@
       "target": "src_database_resolvecanonicaldbpath"
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/app-template/src/db/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "forge_apps_app_template_src_db_index_ts_db_index",
+      "target": "src_database_getdatabaseclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/billing/src/db/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "forge_apps_billing_src_db_index_ts_db_index",
+      "target": "src_database_getdatabaseclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "forge-apps/telemetry/src/db/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "forge_apps_telemetry_src_db_index_ts_db_index",
+      "target": "src_database_getdatabaseclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/create-app.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "scripts_create_app",
+      "target": "src_database_getdatabaseclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/create-app.ts",
+      "source_location": "L146",
+      "weight": 1.0,
+      "source": "scripts_create_app_createapp",
+      "target": "src_database_getdatabaseclient"
+    },
+    {
       "relation": "re_exports",
       "context": "export",
       "confidence": "EXTRACTED",
@@ -44372,9 +44518,9 @@
       "source_file": "apps/src/sdk/src/directory-client.ts",
       "source_location": "L84",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_directory_client",
-      "target": "src_directory_client_getinternalheaders",
-      "confidence_score": 1.0
+      "target": "src_directory_client_getinternalheaders"
     },
     {
       "relation": "contains",
@@ -44649,9 +44795,9 @@
       "source_file": "apps/src/sdk/src/directory-client.ts",
       "source_location": "L290",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_directory_client_batchimportemployeesapi",
-      "target": "src_directory_client_getinternalheaders",
-      "confidence_score": 1.0
+      "target": "src_directory_client_getinternalheaders"
     },
     {
       "relation": "calls",
@@ -44660,9 +44806,9 @@
       "source_file": "apps/src/sdk/src/directory-client.ts",
       "source_location": "L319",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_directory_client_bulkactionemployeesapi",
-      "target": "src_directory_client_getinternalheaders",
-      "confidence_score": 1.0
+      "target": "src_directory_client_getinternalheaders"
     },
     {
       "relation": "calls",
@@ -44671,9 +44817,9 @@
       "source_file": "apps/src/sdk/src/directory-client.ts",
       "source_location": "L204",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_directory_client_createemployeeapi",
-      "target": "src_directory_client_getinternalheaders",
-      "confidence_score": 1.0
+      "target": "src_directory_client_getinternalheaders"
     },
     {
       "relation": "calls",
@@ -44682,9 +44828,9 @@
       "source_file": "apps/src/sdk/src/directory-client.ts",
       "source_location": "L173",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_directory_client_fetchemployeehierarchy",
-      "target": "src_directory_client_getinternalheaders",
-      "confidence_score": 1.0
+      "target": "src_directory_client_getinternalheaders"
     },
     {
       "relation": "calls",
@@ -44693,9 +44839,9 @@
       "source_file": "apps/src/sdk/src/directory-client.ts",
       "source_location": "L152",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_directory_client_fetchemployeeslist",
-      "target": "src_directory_client_getinternalheaders",
-      "confidence_score": 1.0
+      "target": "src_directory_client_getinternalheaders"
     },
     {
       "relation": "calls",
@@ -44704,9 +44850,9 @@
       "source_file": "apps/src/sdk/src/directory-client.ts",
       "source_location": "L342",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_directory_client_fetchorgdirectory",
-      "target": "src_directory_client_getinternalheaders",
-      "confidence_score": 1.0
+      "target": "src_directory_client_getinternalheaders"
     },
     {
       "relation": "calls",
@@ -44715,9 +44861,9 @@
       "source_file": "apps/src/sdk/src/directory-client.ts",
       "source_location": "L118",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_directory_client_fetchorgtree",
-      "target": "src_directory_client_getinternalheaders",
-      "confidence_score": 1.0
+      "target": "src_directory_client_getinternalheaders"
     },
     {
       "relation": "calls",
@@ -44726,9 +44872,9 @@
       "source_file": "apps/src/sdk/src/directory-client.ts",
       "source_location": "L261",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_directory_client_revokeemployeesessionsapi",
-      "target": "src_directory_client_getinternalheaders",
-      "confidence_score": 1.0
+      "target": "src_directory_client_getinternalheaders"
     },
     {
       "relation": "calls",
@@ -44737,9 +44883,9 @@
       "source_file": "apps/src/sdk/src/directory-client.ts",
       "source_location": "L233",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_directory_client_updateemployeeapi",
-      "target": "src_directory_client_getinternalheaders",
-      "confidence_score": 1.0
+      "target": "src_directory_client_getinternalheaders"
     },
     {
       "relation": "imports",
@@ -45643,9 +45789,9 @@
       "source_file": "scripts/verify-checks.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_checks",
-      "target": "src_registry",
-      "confidence_score": 1.0
+      "target": "src_registry"
     },
     {
       "relation": "imports_from",
@@ -45747,9 +45893,9 @@
       "source_file": "scripts/dev-runner.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_dev_runner",
-      "target": "src_registry_serviceentry",
-      "confidence_score": 1.0
+      "target": "src_registry_serviceentry"
     },
     {
       "relation": "references",
@@ -45758,9 +45904,9 @@
       "source_file": "scripts/dev-runner.ts",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_dev_runner_resolvedservice",
-      "target": "src_registry_serviceentry",
-      "confidence_score": 1.0
+      "target": "src_registry_serviceentry"
     },
     {
       "relation": "calls",
@@ -45846,9 +45992,9 @@
       "source_file": "scripts/dev-runner.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_dev_runner",
-      "target": "src_registry_loadserviceregistry",
-      "confidence_score": 1.0
+      "target": "src_registry_loadserviceregistry"
     },
     {
       "relation": "calls",
@@ -45857,9 +46003,9 @@
       "source_file": "scripts/dev-runner.ts",
       "source_location": "L87",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_dev_runner_main",
-      "target": "src_registry_loadserviceregistry",
-      "confidence_score": 1.0
+      "target": "src_registry_loadserviceregistry"
     },
     {
       "relation": "imports",
@@ -45890,9 +46036,9 @@
       "source_file": "scripts/terminal-monitor.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_terminal_monitor",
-      "target": "src_registry_loadserviceregistry",
-      "confidence_score": 1.0
+      "target": "src_registry_loadserviceregistry"
     },
     {
       "relation": "imports",
@@ -45901,9 +46047,9 @@
       "source_file": "scripts/verify-checks.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_checks",
-      "target": "src_registry_loadserviceregistry",
-      "confidence_score": 1.0
+      "target": "src_registry_loadserviceregistry"
     },
     {
       "relation": "calls",
@@ -46409,9 +46555,9 @@
       "source_file": "apps/src/ui/src/error-page.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_error_page",
-      "target": "src_header",
-      "confidence_score": 1.0
+      "target": "src_header"
     },
     {
       "relation": "imports",
@@ -46431,9 +46577,9 @@
       "source_file": "apps/src/ui/src/error-page.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_error_page",
-      "target": "src_styles",
-      "confidence_score": 1.0
+      "target": "src_styles"
     },
     {
       "relation": "imports",
@@ -46464,9 +46610,9 @@
       "source_file": "apps/src/ui/src/error-page.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_error_page",
-      "target": "state_index",
-      "confidence_score": 1.0
+      "target": "state_index"
     },
     {
       "relation": "imports_from",
@@ -46714,9 +46860,9 @@
       "source_file": "apps/src/ui/src/index.ts",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_ui_src_index_ts_src_index",
-      "target": "src_sanitize",
-      "confidence_score": 1.0
+      "target": "src_sanitize"
     },
     {
       "relation": "re_exports",
@@ -46768,9 +46914,9 @@
       "source_file": "apps/src/ui/src/sanitize.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_sanitize",
-      "target": "src_sanitize_escapehtml",
-      "confidence_score": 1.0
+      "target": "src_sanitize_escapehtml"
     },
     {
       "relation": "contains",
@@ -46778,9 +46924,9 @@
       "source_file": "apps/src/ui/src/sanitize.ts",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_sanitize",
-      "target": "src_sanitize_sanitizelocalurl",
-      "confidence_score": 1.0
+      "target": "src_sanitize_sanitizelocalurl"
     },
     {
       "relation": "imports_from",
@@ -46789,9 +46935,9 @@
       "source_file": "apps/src/ui/test/unit/sanitize.test.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_sanitize_test",
-      "target": "src_sanitize",
-      "confidence_score": 1.0
+      "target": "src_sanitize"
     },
     {
       "relation": "imports",
@@ -46800,9 +46946,9 @@
       "source_file": "apps/src/ui/test/unit/sanitize.test.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_sanitize_test",
-      "target": "src_sanitize_escapehtml",
-      "confidence_score": 1.0
+      "target": "src_sanitize_escapehtml"
     },
     {
       "relation": "imports",
@@ -46811,9 +46957,9 @@
       "source_file": "apps/src/ui/test/unit/sanitize.test.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_sanitize_test",
-      "target": "src_sanitize_sanitizelocalurl",
-      "confidence_score": 1.0
+      "target": "src_sanitize_sanitizelocalurl"
     },
     {
       "relation": "contains",
@@ -47881,9 +48027,9 @@
       "source_file": "apps/test/unit/deploy-engine.test.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_deploy_engine_test",
-      "target": "unit_deploy_engine_test_repo_root",
-      "confidence_score": 1.0
+      "target": "unit_deploy_engine_test_repo_root"
     },
     {
       "relation": "imports_from",
@@ -47967,9 +48113,9 @@
       "source_file": "deploy/deploy-prod.sh",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "deploy_deploy_prod",
-      "target": "deploy_deploy_prod_fail",
-      "confidence_score": 1.0
+      "target": "deploy_deploy_prod_fail"
     },
     {
       "relation": "defines",
@@ -47977,9 +48123,9 @@
       "source_file": "deploy/deploy-prod.sh",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "deploy_deploy_prod",
-      "target": "deploy_deploy_prod_log",
-      "confidence_score": 1.0
+      "target": "deploy_deploy_prod_log"
     },
     {
       "relation": "contains",
@@ -47987,9 +48133,9 @@
       "source_file": "deploy/deploy-prod.sh",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "deploy_deploy_prod",
-      "target": "home_sanket_desktop_sanket_org_website_clone_deploy_deploy_prod_sh__entry",
-      "confidence_score": 1.0
+      "target": "home_sanket_desktop_sanket_org_website_clone_deploy_deploy_prod_sh__entry"
     },
     {
       "relation": "calls",
@@ -47998,9 +48144,9 @@
       "source_location": "L49",
       "weight": 1.0,
       "context": "call",
+      "confidence_score": 1.0,
       "source": "home_sanket_desktop_sanket_org_website_clone_deploy_deploy_prod_sh__entry",
-      "target": "deploy_deploy_prod_fail",
-      "confidence_score": 1.0
+      "target": "deploy_deploy_prod_fail"
     },
     {
       "relation": "calls",
@@ -48009,9 +48155,9 @@
       "source_location": "L45",
       "weight": 1.0,
       "context": "call",
+      "confidence_score": 1.0,
       "source": "home_sanket_desktop_sanket_org_website_clone_deploy_deploy_prod_sh__entry",
-      "target": "deploy_deploy_prod_log",
-      "confidence_score": 1.0
+      "target": "deploy_deploy_prod_log"
     },
     {
       "relation": "calls",
@@ -48020,9 +48166,9 @@
       "source_location": "L38",
       "weight": 1.0,
       "context": "call",
+      "confidence_score": 1.0,
       "source": "deploy_deploy_prod_fail",
-      "target": "deploy_deploy_prod_log",
-      "confidence_score": 1.0
+      "target": "deploy_deploy_prod_log"
     },
     {
       "relation": "defines",
@@ -48030,9 +48176,9 @@
       "source_file": "deploy/rollback-prod.sh",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "deploy_rollback_prod",
-      "target": "deploy_rollback_prod_fail",
-      "confidence_score": 1.0
+      "target": "deploy_rollback_prod_fail"
     },
     {
       "relation": "defines",
@@ -48040,9 +48186,9 @@
       "source_file": "deploy/rollback-prod.sh",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "deploy_rollback_prod",
-      "target": "deploy_rollback_prod_log",
-      "confidence_score": 1.0
+      "target": "deploy_rollback_prod_log"
     },
     {
       "relation": "contains",
@@ -48050,9 +48196,9 @@
       "source_file": "deploy/rollback-prod.sh",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "deploy_rollback_prod",
-      "target": "home_sanket_desktop_sanket_org_website_clone_deploy_rollback_prod_sh__entry",
-      "confidence_score": 1.0
+      "target": "home_sanket_desktop_sanket_org_website_clone_deploy_rollback_prod_sh__entry"
     },
     {
       "relation": "calls",
@@ -48061,9 +48207,9 @@
       "source_location": "L54",
       "weight": 1.0,
       "context": "call",
+      "confidence_score": 1.0,
       "source": "home_sanket_desktop_sanket_org_website_clone_deploy_rollback_prod_sh__entry",
-      "target": "deploy_rollback_prod_fail",
-      "confidence_score": 1.0
+      "target": "deploy_rollback_prod_fail"
     },
     {
       "relation": "calls",
@@ -48072,9 +48218,9 @@
       "source_location": "L46",
       "weight": 1.0,
       "context": "call",
+      "confidence_score": 1.0,
       "source": "home_sanket_desktop_sanket_org_website_clone_deploy_rollback_prod_sh__entry",
-      "target": "deploy_rollback_prod_log",
-      "confidence_score": 1.0
+      "target": "deploy_rollback_prod_log"
     },
     {
       "relation": "calls",
@@ -48083,9 +48229,9 @@
       "source_location": "L33",
       "weight": 1.0,
       "context": "call",
+      "confidence_score": 1.0,
       "source": "deploy_rollback_prod_fail",
-      "target": "deploy_rollback_prod_log",
-      "confidence_score": 1.0
+      "target": "deploy_rollback_prod_log"
     },
     {
       "relation": "contains",
@@ -48093,9 +48239,9 @@
       "source_file": "deploy/status-prod.sh",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "deploy_status_prod",
-      "target": "home_sanket_desktop_sanket_org_website_clone_deploy_status_prod_sh__entry",
-      "confidence_score": 1.0
+      "target": "home_sanket_desktop_sanket_org_website_clone_deploy_status_prod_sh__entry"
     },
     {
       "relation": "contains",
@@ -48221,26 +48367,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "forge-apps/app-template/src/db/index.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "forge_apps_app_template_src_db_index_ts_db_index",
-      "target": "forge_apps_app_template_src_db_index_ts_db_index_data_dir"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/app-template/src/db/index.ts",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "forge_apps_app_template_src_db_index_ts_db_index",
-      "target": "forge_apps_app_template_src_db_index_ts_db_index_db_path"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/app-template/src/db/index.ts",
       "source_location": "L11",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -48360,26 +48486,6 @@
       "confidence_score": 1.0,
       "source": "forge_apps_billing_src_db_index_ts_db_index",
       "target": "db_index_count"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/billing/src/db/index.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "forge_apps_billing_src_db_index_ts_db_index",
-      "target": "forge_apps_billing_src_db_index_ts_db_index_data_dir"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/billing/src/db/index.ts",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "forge_apps_billing_src_db_index_ts_db_index",
-      "target": "forge_apps_billing_src_db_index_ts_db_index_db_path"
     },
     {
       "relation": "contains",
@@ -48587,26 +48693,6 @@
       "confidence_score": 1.0,
       "source": "forge_apps_telemetry_src_db_index_ts_db_index",
       "target": "db_index_telemetrydb"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/telemetry/src/db/index.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "forge_apps_telemetry_src_db_index_ts_db_index",
-      "target": "forge_apps_telemetry_src_db_index_ts_db_index_data_dir"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "forge-apps/telemetry/src/db/index.ts",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "forge_apps_telemetry_src_db_index_ts_db_index",
-      "target": "forge_apps_telemetry_src_db_index_ts_db_index_db_path"
     },
     {
       "relation": "contains",
@@ -48857,9 +48943,9 @@
       "source_file": "package.json",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_devdependencies",
-      "target": "package_devdependencies_axe_core_playwright",
-      "confidence_score": 1.0
+      "target": "package_devdependencies_axe_core_playwright"
     },
     {
       "relation": "contains",
@@ -48867,9 +48953,9 @@
       "source_file": "package.json",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_devdependencies",
-      "target": "package_devdependencies_dependency_cruiser",
-      "confidence_score": 1.0
+      "target": "package_devdependencies_dependency_cruiser"
     },
     {
       "relation": "contains",
@@ -48887,9 +48973,9 @@
       "source_file": "package.json",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_devdependencies",
-      "target": "package_devdependencies_lhci_cli",
-      "confidence_score": 1.0
+      "target": "package_devdependencies_lhci_cli"
     },
     {
       "relation": "contains",
@@ -48907,9 +48993,9 @@
       "source_file": "package.json",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_devdependencies",
-      "target": "package_devdependencies_madge",
-      "confidence_score": 1.0
+      "target": "package_devdependencies_madge"
     },
     {
       "relation": "contains",
@@ -48917,9 +49003,9 @@
       "source_file": "package.json",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_devdependencies",
-      "target": "package_devdependencies_stoplight_spectral_cli",
-      "confidence_score": 1.0
+      "target": "package_devdependencies_stoplight_spectral_cli"
     },
     {
       "relation": "contains",
@@ -48927,9 +49013,9 @@
       "source_file": "package.json",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_devdependencies",
-      "target": "package_devdependencies_type_coverage",
-      "confidence_score": 1.0
+      "target": "package_devdependencies_type_coverage"
     },
     {
       "relation": "contains",
@@ -49693,6 +49779,66 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "scripts/clean-leaked-test-data.ts",
+      "source_location": "L62",
+      "weight": 1.0,
+      "source": "scripts_clean_leaked_test_data",
+      "target": "scripts_clean_leaked_test_data_canonicalusers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/clean-leaked-test-data.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "scripts_clean_leaked_test_data",
+      "target": "scripts_clean_leaked_test_data_db",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/clean-leaked-test-data.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "scripts_clean_leaked_test_data",
+      "target": "scripts_clean_leaked_test_data_dbpath",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/clean-leaked-test-data.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "scripts_clean_leaked_test_data",
+      "target": "scripts_clean_leaked_test_data_leakedusers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/clean-leaked-test-data.ts",
+      "source_location": "L59",
+      "weight": 1.0,
+      "source": "scripts_clean_leaked_test_data",
+      "target": "scripts_clean_leaked_test_data_totalusersafter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/clean-leaked-test-data.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "scripts_clean_leaked_test_data",
+      "target": "scripts_clean_leaked_test_data_totalusersbefore",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "scripts/create-app.ts",
       "source_location": "L27",
       "weight": 1.0,
@@ -49781,9 +49927,9 @@
       "source_file": "scripts/dev-runner.ts",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_dev_runner",
-      "target": "scripts_dev_runner_brand",
-      "confidence_score": 1.0
+      "target": "scripts_dev_runner_brand"
     },
     {
       "relation": "contains",
@@ -49791,9 +49937,9 @@
       "source_file": "scripts/dev-runner.ts",
       "source_location": "L51",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_dev_runner",
-      "target": "scripts_dev_runner_isportinuse",
-      "confidence_score": 1.0
+      "target": "scripts_dev_runner_isportinuse"
     },
     {
       "relation": "contains",
@@ -49801,9 +49947,9 @@
       "source_file": "scripts/dev-runner.ts",
       "source_location": "L81",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_dev_runner",
-      "target": "scripts_dev_runner_main",
-      "confidence_score": 1.0
+      "target": "scripts_dev_runner_main"
     },
     {
       "relation": "contains",
@@ -49811,9 +49957,9 @@
       "source_file": "scripts/dev-runner.ts",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_dev_runner",
-      "target": "scripts_dev_runner_repo_root",
-      "confidence_score": 1.0
+      "target": "scripts_dev_runner_repo_root"
     },
     {
       "relation": "contains",
@@ -49821,9 +49967,9 @@
       "source_file": "scripts/dev-runner.ts",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_dev_runner",
-      "target": "scripts_dev_runner_resolvedservice",
-      "confidence_score": 1.0
+      "target": "scripts_dev_runner_resolvedservice"
     },
     {
       "relation": "contains",
@@ -49831,9 +49977,9 @@
       "source_file": "scripts/dev-runner.ts",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_dev_runner",
-      "target": "scripts_dev_runner_resolveentrypoint",
-      "confidence_score": 1.0
+      "target": "scripts_dev_runner_resolveentrypoint"
     },
     {
       "relation": "imports_from",
@@ -49842,9 +49988,9 @@
       "source_file": "scripts/dev-runner.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_dev_runner",
-      "target": "scripts_generate_proxy",
-      "confidence_score": 1.0
+      "target": "scripts_generate_proxy"
     },
     {
       "relation": "imports",
@@ -49853,9 +49999,9 @@
       "source_file": "scripts/dev-runner.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_dev_runner",
-      "target": "scripts_generate_proxy_generatecaddyfile",
-      "confidence_score": 1.0
+      "target": "scripts_generate_proxy_generatecaddyfile"
     },
     {
       "relation": "calls",
@@ -49864,9 +50010,9 @@
       "source_file": "scripts/dev-runner.ts",
       "source_location": "L101",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_dev_runner_main",
-      "target": "scripts_dev_runner_resolveentrypoint",
-      "confidence_score": 1.0
+      "target": "scripts_dev_runner_resolveentrypoint"
     },
     {
       "relation": "calls",
@@ -49875,9 +50021,9 @@
       "source_file": "scripts/dev-runner.ts",
       "source_location": "L123",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_dev_runner_main",
-      "target": "scripts_dev_runner_isportinuse",
-      "confidence_score": 1.0
+      "target": "scripts_dev_runner_isportinuse"
     },
     {
       "relation": "calls",
@@ -49886,9 +50032,9 @@
       "source_file": "scripts/dev-runner.ts",
       "source_location": "L85",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_dev_runner_main",
-      "target": "scripts_generate_proxy_generatecaddyfile",
-      "confidence_score": 1.0
+      "target": "scripts_generate_proxy_generatecaddyfile"
     },
     {
       "relation": "contains",
@@ -50060,9 +50206,9 @@
       "source_file": "scripts/init-all-databases.ts",
       "source_location": "L248",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_init_all_databases",
-      "target": "scripts_init_all_databases_initplatformcoredb",
-      "confidence_score": 1.0
+      "target": "scripts_init_all_databases_initplatformcoredb"
     },
     {
       "relation": "contains",
@@ -50407,9 +50553,9 @@
       "source_file": "scripts/terminal-monitor.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_terminal_monitor",
-      "target": "scripts_terminal_monitor_brand",
-      "confidence_score": 1.0
+      "target": "scripts_terminal_monitor_brand"
     },
     {
       "relation": "contains",
@@ -50457,9 +50603,9 @@
       "source_file": "scripts/terminal-monitor.ts",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_terminal_monitor",
-      "target": "scripts_terminal_monitor_getdynamicendpoints",
-      "confidence_score": 1.0
+      "target": "scripts_terminal_monitor_getdynamicendpoints"
     },
     {
       "relation": "contains",
@@ -50467,9 +50613,9 @@
       "source_file": "scripts/terminal-monitor.ts",
       "source_location": "L229",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_terminal_monitor",
-      "target": "scripts_terminal_monitor_isonce",
-      "confidence_score": 1.0
+      "target": "scripts_terminal_monitor_isonce"
     },
     {
       "relation": "contains",
@@ -50488,9 +50634,9 @@
       "source_file": "scripts/terminal-monitor.ts",
       "source_location": "L81",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_terminal_monitor_fetchclusterstate",
-      "target": "scripts_terminal_monitor_getdynamicendpoints",
-      "confidence_score": 1.0
+      "target": "scripts_terminal_monitor_getdynamicendpoints"
     },
     {
       "relation": "calls",
@@ -50531,9 +50677,9 @@
       "source_file": "scripts/verify-checks.ts",
       "source_location": "L76",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_checks",
-      "target": "scripts_verify_checks_checkarchitectureboundaries",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_checkarchitectureboundaries"
     },
     {
       "relation": "contains",
@@ -50541,9 +50687,9 @@
       "source_file": "scripts/verify-checks.ts",
       "source_location": "L140",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_checks",
-      "target": "scripts_verify_checks_checkaxeaccessibility",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_checkaxeaccessibility"
     },
     {
       "relation": "contains",
@@ -50551,9 +50697,9 @@
       "source_file": "scripts/verify-checks.ts",
       "source_location": "L92",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_checks",
-      "target": "scripts_verify_checks_checkcirculardependencies",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_checkcirculardependencies"
     },
     {
       "relation": "contains",
@@ -50561,9 +50707,9 @@
       "source_file": "scripts/verify-checks.ts",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_checks",
-      "target": "scripts_verify_checks_checkdynamic5tierarchitecture",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_checkdynamic5tierarchitecture"
     },
     {
       "relation": "contains",
@@ -50571,9 +50717,9 @@
       "source_file": "scripts/verify-checks.ts",
       "source_location": "L71",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_checks",
-      "target": "scripts_verify_checks_checkresult",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_checkresult"
     },
     {
       "relation": "contains",
@@ -50581,9 +50727,9 @@
       "source_file": "scripts/verify-checks.ts",
       "source_location": "L155",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_checks",
-      "target": "scripts_verify_checks_checksemgrepinvariants",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_checksemgrepinvariants"
     },
     {
       "relation": "contains",
@@ -50591,9 +50737,9 @@
       "source_file": "scripts/verify-checks.ts",
       "source_location": "L125",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_checks",
-      "target": "scripts_verify_checks_checkshellscripts",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_checkshellscripts"
     },
     {
       "relation": "contains",
@@ -50601,9 +50747,9 @@
       "source_file": "scripts/verify-checks.ts",
       "source_location": "L107",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_checks",
-      "target": "scripts_verify_checks_checktypecoverage",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_checktypecoverage"
     },
     {
       "relation": "contains",
@@ -50611,9 +50757,9 @@
       "source_file": "scripts/verify-checks.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_checks",
-      "target": "scripts_verify_checks_repo_root",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_repo_root"
     },
     {
       "relation": "contains",
@@ -50621,9 +50767,9 @@
       "source_file": "scripts/verify-checks.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_checks",
-      "target": "scripts_verify_checks_resolvemicroservicedir",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_resolvemicroservicedir"
     },
     {
       "relation": "imports_from",
@@ -50632,9 +50778,9 @@
       "source_file": "scripts/verify-gate.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_gate",
-      "target": "scripts_verify_checks",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks"
     },
     {
       "relation": "calls",
@@ -50643,9 +50789,9 @@
       "source_file": "scripts/verify-checks.ts",
       "source_location": "L33",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_checks_checkdynamic5tierarchitecture",
-      "target": "scripts_verify_checks_resolvemicroservicedir",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_resolvemicroservicedir"
     },
     {
       "relation": "imports",
@@ -50654,9 +50800,9 @@
       "source_file": "scripts/verify-gate.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_gate",
-      "target": "scripts_verify_checks_resolvemicroservicedir",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_resolvemicroservicedir"
     },
     {
       "relation": "imports",
@@ -50665,9 +50811,9 @@
       "source_file": "scripts/verify-gate.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_gate",
-      "target": "scripts_verify_checks_checkdynamic5tierarchitecture",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_checkdynamic5tierarchitecture"
     },
     {
       "relation": "imports",
@@ -50676,9 +50822,9 @@
       "source_file": "scripts/verify-gate.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_gate",
-      "target": "scripts_verify_checks_checkarchitectureboundaries",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_checkarchitectureboundaries"
     },
     {
       "relation": "imports",
@@ -50687,9 +50833,9 @@
       "source_file": "scripts/verify-gate.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_gate",
-      "target": "scripts_verify_checks_checkcirculardependencies",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_checkcirculardependencies"
     },
     {
       "relation": "imports",
@@ -50698,9 +50844,9 @@
       "source_file": "scripts/verify-gate.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_gate",
-      "target": "scripts_verify_checks_checktypecoverage",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_checktypecoverage"
     },
     {
       "relation": "imports",
@@ -50709,9 +50855,9 @@
       "source_file": "scripts/verify-gate.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_gate",
-      "target": "scripts_verify_checks_checkshellscripts",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_checkshellscripts"
     },
     {
       "relation": "imports",
@@ -50720,9 +50866,9 @@
       "source_file": "scripts/verify-gate.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_gate",
-      "target": "scripts_verify_checks_checkaxeaccessibility",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_checkaxeaccessibility"
     },
     {
       "relation": "imports",
@@ -50731,9 +50877,9 @@
       "source_file": "scripts/verify-gate.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_verify_gate",
-      "target": "scripts_verify_checks_checksemgrepinvariants",
-      "confidence_score": 1.0
+      "target": "scripts_verify_checks_checksemgrepinvariants"
     },
     {
       "relation": "contains",
@@ -52597,9 +52743,9 @@
       "source_file": ".github/workflows/README.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workflows_readme",
-      "target": "workflows_readme_sg_forge_ci_cd_workflows",
-      "confidence_score": 1.0
+      "target": "workflows_readme_sg_forge_ci_cd_workflows"
     },
     {
       "relation": "contains",
@@ -52607,9 +52753,9 @@
       "source_file": ".github/workflows/README.md",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workflows_readme_sg_forge_ci_cd_workflows",
-      "target": "workflows_readme_architecture",
-      "confidence_score": 1.0
+      "target": "workflows_readme_architecture"
     },
     {
       "relation": "contains",
@@ -52617,9 +52763,9 @@
       "source_file": ".github/workflows/README.md",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workflows_readme_sg_forge_ci_cd_workflows",
-      "target": "workflows_readme_how_to_trigger",
-      "confidence_score": 1.0
+      "target": "workflows_readme_how_to_trigger"
     },
     {
       "relation": "contains",
@@ -52627,9 +52773,9 @@
       "source_file": ".github/workflows/README.md",
       "source_location": "L49",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workflows_readme_sg_forge_ci_cd_workflows",
-      "target": "workflows_readme_performance_invariant_optimizations",
-      "confidence_score": 1.0
+      "target": "workflows_readme_performance_invariant_optimizations"
     },
     {
       "relation": "contains",
@@ -52637,9 +52783,9 @@
       "source_file": ".github/workflows/README.md",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workflows_readme_how_to_trigger",
-      "target": "workflows_readme_1_via_github_web_interface",
-      "confidence_score": 1.0
+      "target": "workflows_readme_1_via_github_web_interface"
     },
     {
       "relation": "contains",
@@ -52647,9 +52793,9 @@
       "source_file": ".github/workflows/README.md",
       "source_location": "L40",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workflows_readme_how_to_trigger",
-      "target": "workflows_readme_2_via_github_cli_gh",
-      "confidence_score": 1.0
+      "target": "workflows_readme_2_via_github_cli_gh"
     },
     {
       "relation": "contains",
@@ -54777,9 +54923,9 @@
       "source_file": "deploy/README.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "deploy_readme_platform_deployment_cloud_native_orchestration_2026_lts",
-      "target": "deploy_readme_single_machine_dev_vs_prod_operations",
-      "confidence_score": 1.0
+      "target": "deploy_readme_single_machine_dev_vs_prod_operations"
     },
     {
       "relation": "contains",
@@ -54787,9 +54933,9 @@
       "source_file": "deploy/README.md",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "deploy_readme_single_machine_dev_vs_prod_operations",
-      "target": "deploy_readme_1_ingress_port_separation",
-      "confidence_score": 1.0
+      "target": "deploy_readme_1_ingress_port_separation"
     },
     {
       "relation": "contains",
@@ -54797,9 +54943,9 @@
       "source_file": "deploy/README.md",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "deploy_readme_single_machine_dev_vs_prod_operations",
-      "target": "deploy_readme_2_operational_workflows",
-      "confidence_score": 1.0
+      "target": "deploy_readme_2_operational_workflows"
     },
     {
       "relation": "contains",
@@ -59347,9 +59493,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_1964501.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_1964501",
-      "target": "2026_09_report_20260903_1964501_sg_forge_atomic_commit_audit_report",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_1964501_sg_forge_atomic_commit_audit_report"
     },
     {
       "relation": "contains",
@@ -59357,9 +59503,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_1964501.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_1964501_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_1964501_changes_diff_statistics",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_1964501_changes_diff_statistics"
     },
     {
       "relation": "contains",
@@ -59367,9 +59513,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_1964501.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_1964501_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_1964501_commit_overview_context",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_1964501_commit_overview_context"
     },
     {
       "relation": "contains",
@@ -59377,9 +59523,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_1964501.md",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_1964501_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_1964501_detailed_file_changes_21_files",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_1964501_detailed_file_changes_21_files"
     },
     {
       "relation": "contains",
@@ -59387,9 +59533,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_1964501.md",
       "source_location": "L56",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_1964501_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_1964501_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_1964501_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -59397,8 +59543,68 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_1964501.md",
       "source_location": "L77",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_1964501_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_1964501_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "target": "2026_09_report_20260903_1964501_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_2528350.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "2026_09_report_20260903_2528350",
+      "target": "2026_09_report_20260903_2528350_sg_forge_atomic_commit_audit_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_2528350.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "2026_09_report_20260903_2528350_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260903_2528350_changes_diff_statistics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_2528350.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "2026_09_report_20260903_2528350_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260903_2528350_commit_overview_context",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_2528350.md",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "2026_09_report_20260903_2528350_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260903_2528350_detailed_file_changes_26_files",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_2528350.md",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "2026_09_report_20260903_2528350_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260903_2528350_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_2528350.md",
+      "source_location": "L82",
+      "weight": 1.0,
+      "source": "2026_09_report_20260903_2528350_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260903_2528350_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
       "confidence_score": 1.0
     },
     {
@@ -59407,9 +59613,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_29f73a3.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_29f73a3",
-      "target": "2026_09_report_20260903_29f73a3_sg_forge_atomic_commit_audit_report",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_29f73a3_sg_forge_atomic_commit_audit_report"
     },
     {
       "relation": "contains",
@@ -59417,9 +59623,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_29f73a3.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_29f73a3_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_29f73a3_changes_diff_statistics",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_29f73a3_changes_diff_statistics"
     },
     {
       "relation": "contains",
@@ -59427,9 +59633,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_29f73a3.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_29f73a3_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_29f73a3_commit_overview_context",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_29f73a3_commit_overview_context"
     },
     {
       "relation": "contains",
@@ -59437,9 +59643,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_29f73a3.md",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_29f73a3_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_29f73a3_detailed_file_changes_12_files",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_29f73a3_detailed_file_changes_12_files"
     },
     {
       "relation": "contains",
@@ -59447,9 +59653,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_29f73a3.md",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_29f73a3_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_29f73a3_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_29f73a3_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -59457,9 +59663,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_29f73a3.md",
       "source_location": "L68",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_29f73a3_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_29f73a3_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_29f73a3_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
     },
     {
       "relation": "contains",
@@ -59467,9 +59673,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_36229c2.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_36229c2",
-      "target": "2026_09_report_20260903_36229c2_sg_forge_atomic_commit_audit_report",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_36229c2_sg_forge_atomic_commit_audit_report"
     },
     {
       "relation": "contains",
@@ -59477,9 +59683,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_36229c2.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_36229c2_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_36229c2_changes_diff_statistics",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_36229c2_changes_diff_statistics"
     },
     {
       "relation": "contains",
@@ -59487,9 +59693,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_36229c2.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_36229c2_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_36229c2_commit_overview_context",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_36229c2_commit_overview_context"
     },
     {
       "relation": "contains",
@@ -59497,9 +59703,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_36229c2.md",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_36229c2_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_36229c2_detailed_file_changes_6_files",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_36229c2_detailed_file_changes_6_files"
     },
     {
       "relation": "contains",
@@ -59507,9 +59713,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_36229c2.md",
       "source_location": "L41",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_36229c2_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_36229c2_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_36229c2_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -59517,9 +59723,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_36229c2.md",
       "source_location": "L62",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_36229c2_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_36229c2_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_36229c2_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
     },
     {
       "relation": "contains",
@@ -59527,9 +59733,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_78dcacb.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_78dcacb",
-      "target": "2026_09_report_20260903_78dcacb_sg_forge_atomic_commit_audit_report",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_78dcacb_sg_forge_atomic_commit_audit_report"
     },
     {
       "relation": "contains",
@@ -59537,9 +59743,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_78dcacb.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_78dcacb_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_78dcacb_changes_diff_statistics",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_78dcacb_changes_diff_statistics"
     },
     {
       "relation": "contains",
@@ -59547,9 +59753,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_78dcacb.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_78dcacb_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_78dcacb_commit_overview_context",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_78dcacb_commit_overview_context"
     },
     {
       "relation": "contains",
@@ -59557,9 +59763,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_78dcacb.md",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_78dcacb_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_78dcacb_detailed_file_changes_6_files",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_78dcacb_detailed_file_changes_6_files"
     },
     {
       "relation": "contains",
@@ -59567,9 +59773,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_78dcacb.md",
       "source_location": "L41",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_78dcacb_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_78dcacb_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_78dcacb_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -59577,9 +59783,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_78dcacb.md",
       "source_location": "L62",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_78dcacb_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_78dcacb_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_78dcacb_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
     },
     {
       "relation": "contains",
@@ -59587,9 +59793,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_9fe8c52.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_9fe8c52",
-      "target": "2026_09_report_20260903_9fe8c52_sg_forge_atomic_commit_audit_report",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_9fe8c52_sg_forge_atomic_commit_audit_report"
     },
     {
       "relation": "contains",
@@ -59597,9 +59803,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_9fe8c52.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_9fe8c52_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_9fe8c52_changes_diff_statistics",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_9fe8c52_changes_diff_statistics"
     },
     {
       "relation": "contains",
@@ -59607,9 +59813,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_9fe8c52.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_9fe8c52_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_9fe8c52_commit_overview_context",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_9fe8c52_commit_overview_context"
     },
     {
       "relation": "contains",
@@ -59617,9 +59823,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_9fe8c52.md",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_9fe8c52_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_9fe8c52_detailed_file_changes_26_files",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_9fe8c52_detailed_file_changes_26_files"
     },
     {
       "relation": "contains",
@@ -59627,9 +59833,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_9fe8c52.md",
       "source_location": "L61",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_9fe8c52_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_9fe8c52_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_9fe8c52_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -59637,9 +59843,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_9fe8c52.md",
       "source_location": "L82",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_9fe8c52_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_9fe8c52_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_9fe8c52_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
     },
     {
       "relation": "contains",
@@ -59798,7 +60004,7 @@
       "source_location": "L28",
       "weight": 1.0,
       "source": "reports_latest_commit_report_sg_forge_atomic_commit_audit_report",
-      "target": "reports_latest_commit_report_detailed_file_changes_6_files",
+      "target": "reports_latest_commit_report_detailed_file_changes_26_files",
       "confidence_score": 1.0
     },
     {
@@ -59857,9 +60063,9 @@
       "source_file": "portables/ctop/README.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ctop_readme",
-      "target": "ctop_readme_portable_ctop_container_top_terminal_metrics_dashboard",
-      "confidence_score": 1.0
+      "target": "ctop_readme_portable_ctop_container_top_terminal_metrics_dashboard"
     },
     {
       "relation": "contains",
@@ -59867,9 +60073,9 @@
       "source_file": "portables/ctop/README.md",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ctop_readme_portable_ctop_container_top_terminal_metrics_dashboard",
-      "target": "ctop_readme_architectural_invariants",
-      "confidence_score": 1.0
+      "target": "ctop_readme_architectural_invariants"
     },
     {
       "relation": "contains",
@@ -59877,9 +60083,9 @@
       "source_file": "portables/ctop/README.md",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ctop_readme_portable_ctop_container_top_terminal_metrics_dashboard",
-      "target": "ctop_readme_features",
-      "confidence_score": 1.0
+      "target": "ctop_readme_features"
     },
     {
       "relation": "contains",
@@ -59887,9 +60093,9 @@
       "source_file": "portables/ctop/README.md",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ctop_readme_portable_ctop_container_top_terminal_metrics_dashboard",
-      "target": "ctop_readme_usage",
-      "confidence_score": 1.0
+      "target": "ctop_readme_usage"
     },
     {
       "relation": "contains",
@@ -59897,9 +60103,9 @@
       "source_file": "portables/ctop/README.md",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ctop_readme_usage",
-      "target": "ctop_readme_headless_pipe_usage",
-      "confidence_score": 1.0
+      "target": "ctop_readme_headless_pipe_usage"
     },
     {
       "relation": "contains",
@@ -59907,9 +60113,9 @@
       "source_file": "portables/ctop/README.md",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "ctop_readme_usage",
-      "target": "ctop_readme_interactive_terminal_tui",
-      "confidence_score": 1.0
+      "target": "ctop_readme_interactive_terminal_tui"
     },
     {
       "relation": "contains",
@@ -61643,5 +61849,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "f034a1f5d8b5300183d10e25d770a18698c8b42b"
+  "built_at_commit": "ae22bfd717e71bb70c5750336653b133284a58a4"
 }

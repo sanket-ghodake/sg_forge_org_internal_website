@@ -59,16 +59,28 @@ function initBillingDb() {
       FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE
     );
 
-    CREATE TABLE IF NOT EXISTS transactions (
+    CREATE TABLE IF NOT EXISTS billing_invoices (
       id TEXT PRIMARY KEY,
-      invoice_id TEXT NOT NULL,
-      amount_cents INTEGER NOT NULL,
-      payment_method TEXT NOT NULL DEFAULT 'card_stripe',
-      status TEXT NOT NULL DEFAULT 'succeeded',
-      transaction_time INTEGER NOT NULL DEFAULT (strftime('%s', 'now')),
-      FOREIGN KEY (invoice_id) REFERENCES invoices(id) ON DELETE CASCADE
+      invoice_number TEXT NOT NULL UNIQUE,
+      client_name TEXT NOT NULL,
+      amount REAL NOT NULL,
+      currency TEXT NOT NULL DEFAULT 'USD',
+      status TEXT NOT NULL DEFAULT 'PENDING',
+      department_path TEXT NOT NULL DEFAULT '/root/finops/accounting',
+      created_at INTEGER NOT NULL
     );
   `);
+
+  const billingInvoicesCount = db.query('SELECT COUNT(*) as c FROM billing_invoices;').get() as any;
+  if (!billingInvoicesCount?.c) {
+    const nowMs = Date.now();
+    db.run(`
+      INSERT INTO billing_invoices (id, invoice_number, client_name, amount, currency, status, department_path, created_at) VALUES
+      ('inv_101', 'INV-2026-001', 'Acme Cloud Infrastructure', 14500.0, 'USD', 'PAID', '/root/tech/eng-core', ${nowMs - 86400000 * 5}),
+      ('inv_102', 'INV-2026-002', 'CyberShield Security Ltd', 8200.0, 'USD', 'PENDING', '/root/tech/sec-ops', ${nowMs - 86400000 * 2}),
+      ('inv_103', 'INV-2026-003', 'Global Logistics Hub', 23100.0, 'USD', 'PAID', '/root/finops/accounting', ${nowMs});
+    `);
+  }
 
   const custCount = db.query('SELECT COUNT(*) as c FROM customers;').get() as any;
   if (!custCount?.c) {
@@ -90,7 +102,7 @@ function initBillingDb() {
     `);
   }
   db.close();
-  console.log('  ✅ billing.db initialized (customers, invoices, subscriptions, transactions)');
+  console.log('  ✅ billing.db initialized (customers, invoices, subscriptions, transactions, billing_invoices)');
 }
 
 // 3. Expenses Database (expenses.db)
