@@ -41,7 +41,7 @@ jobs:
 
       - name: Ensure Executable Permissions
         run: |
-          chmod -R +x portables/bin scripts .agents/hooks .agents/scripts || true
+          chmod -R +x portables/bin scripts .agents/hooks .agents/scripts deploy || true
           if [ -d "portables/bun/bin" ]; then
             chmod +x portables/bun/bin/* || true
           fi

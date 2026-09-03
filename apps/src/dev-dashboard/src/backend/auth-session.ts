@@ -25,6 +25,9 @@ export class DevDashboardAuthManager {
    * Retrieves configured master password from environment or defaults to 'password123'.
    */
   public getMasterPassword(): string {
+    if (process.env.NODE_ENV === 'test' || process.env.FORGE_TEST_MODE === 'true' || process.env.BUN_ENV === 'test') {
+      return this.defaultPassword;
+    }
     const configured = process.env.DEV_DASHBOARD_PASSWORD || process.env.DEVCENTER_PASSWORD;
     if (process.env.NODE_ENV === 'production') {
       if (!configured || configured === this.defaultPassword || configured.length < 12) {

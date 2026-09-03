@@ -510,3 +510,5 @@
 2026-09-03 18:14 | [a445d7e] feat(ci): consolidate github actions to single workflow and auto-stage sbom in hooks (+210, -211)
 2026-09-03 18:28 | Made generate-sbom.sh idempotent to prevent pre-push mutation, fixed trivy -w /src path, and added db init to CI pipeline
 2026-09-03 18:32 | [47a32f9] fix(ci): add db initialization to pipeline, fix trivy docker path, and make sbom idempotent (+21, -2)
+2026-09-03 18:41 | Removed Dependabot to ensure single workflow, fixed dev dashboard test auth and test DB routing, and added deploy chmod in CI
+2026-09-03 18:44 | [acce30f] fix(ci): ensure single workflow by removing dependabot, fix test auth mode and db routing (+7, -25)

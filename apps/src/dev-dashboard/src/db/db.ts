@@ -23,9 +23,8 @@ const CORE_DB_PATH = resolveCanonicalDbPath('platform_core.db');
 export function getSafeDbPath(dbName: string): string | null {
   if (!dbName || typeof dbName !== 'string') return null;
   const safeName = basename(dbName);
-  return safeName !== dbName || dbName.includes('..') || dbName.includes('/') || dbName.includes('\\')
-    ? null
-    : join(DATA_DIR, safeName);
+  if (safeName !== dbName || dbName.includes('..') || dbName.includes('/') || dbName.includes('\\')) return null;
+  return safeName === 'platform_core.db' || safeName === basename(CORE_DB_PATH) ? CORE_DB_PATH : join(DATA_DIR, safeName);
 }
 
 export interface AppRegistryRecord {
