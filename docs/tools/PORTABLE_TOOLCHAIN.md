@@ -19,6 +19,7 @@
 | **Repomix** | `v1.10.2` | `v1.10.2` | AI Tooling | Token-compressed AI context packager | `./run.sh pack` | `< 50ms` |
 | **SCC** | `v3.4.0` | `v3.4.0` | Metrics | Lines of code & 500-line soft cap counter | `scc apps/` | `< 5ms` |
 | **Hyperfine** | `v1.18.0` | `v1.18.0` | Benchmarking | Statistical execution time benchmark engine | `hyperfine --warmup 3` | `< 100ms` |
+| **ctop** | `v0.7.7` | `v0.7.7` | Monitoring | Real-time container top resource telemetry | `./run.sh top` | `< 10ms` |
 | **Caveman** | `v1.0.0` | `v1.0.0` | AI Communication | Agent token compression CLI (Ultra mode) | `caveman status` | `< 2ms` |
 | **Graphify** | `v0.5.0` | `v0.5.0` | Knowledge Graph | AST knowledge graph & dependency visualizer | `graphify update .` | `< 30ms` |
 | **Caddy Server** | `v2.11.4` | `v2.11.4` | Reverse Proxy | Ingress gateway on Ports 80 & 443 | Docker Container | `< 1ms` |

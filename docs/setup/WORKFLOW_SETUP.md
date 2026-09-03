@@ -90,6 +90,7 @@ All code analysis, benchmarking, design system, and token optimization tools are
 | **`lizard`** | Cyclomatic Complexity Analyzer (CCN ≤ 10) | `./portables/bin/lizard` | `./portables/bin/lizard -C 10 core/ packages/` |
 | **`tree`** | Project Hierarchy Visualizer | `./portables/bin/tree` | `./portables/bin/tree -L 3` |
 | **`hyperfine`** | Build & Test Benchmarker | `./portables/bin/hyperfine` | `./portables/bin/hyperfine 'bun test test/unit'` |
+| **`ctop`** | Real-Time Container Resource Telemetry | `./portables/bin/ctop` | `./run.sh top` |
 | **`astryx`** | Meta Design System CLI | `./portables/bin/astryx` | `./portables/bin/astryx status` |
 | **`caveman`** | Token Compression CLI | `./portables/bin/caveman` | `./portables/bin/caveman status` |
 

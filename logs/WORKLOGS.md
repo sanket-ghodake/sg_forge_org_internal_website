@@ -488,3 +488,5 @@
 2026-09-03 16:23 | fix(networking): fix Caddy reverse proxy port 8080 binding, bundle standalone ctop portable with TTY fallback, and clarify dev access URLs
 2026-09-03 16:30 | fix(auth): reset all seeded accounts to must_change_password=1 and prevent test suites from modifying active dev auth state
 2026-09-03 16:36 | [1964501] feat(orchestrator): harden platform orchestrator, integrate ctop, fix compose path resolution, and secure dev auth (+1102, -68)
+2026-09-03 16:38 | docs(portables): document standalone ctop portable across master toolchain manuals and directory index
+2026-09-03 16:39 | [78dcacb] docs(portables): document standalone ctop portable across master toolchain manuals and directory index (+38, -6)

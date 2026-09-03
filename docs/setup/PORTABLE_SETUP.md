@@ -27,6 +27,7 @@ This repository is engineered with a **Zero-Host-Modification Policy**. All deve
 | **Repomix Context Packager** | `v1.10.2` | `v1.10.2` | `portables/bin/repomix` | ❌ No |
 | **SCC Complexity Counter** | `v3.4.0` | `v3.4.0` | `portables/bin/scc` | ❌ No |
 | **Hyperfine Benchmarker** | `v1.18.0` | `v1.18.0` | `portables/bin/hyperfine` | ❌ No |
+| **ctop Container Top** | `v0.7.7` | `v0.7.7` | `portables/bin/ctop` | ❌ No |
 | **Caveman CLI** | `v1.0.0` | `v1.0.0` | `portables/bin/caveman` | ❌ No |
 | **Graphify Knowledge Graph** | `v0.5.0` | `v0.5.0` | `portables/bin/graphify` | ❌ No |
 

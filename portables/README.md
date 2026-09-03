@@ -14,9 +14,14 @@ Zero-host portable binaries, runtime engines, and cross-platform CLI toolchains.
   * **Benchmarking & Telemetry**: `autocannon`, `hyperfine`, `k6`, `ctop`
   * **AI Context & Engineering**: `rtk`, `repomix`, `graphify`, `caveman`
 * **[`bun/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/bun/)**: Portable Bun v1.3.14 (LTS 2026) runtime and portable `bunx` runner.
+* **[`ctop/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/ctop/)**: Portable standalone `ctop` (v0.7.7) container top terminal metrics dashboard.
 * **[`rtk/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/rtk/)**: Portable RTK Token Optimizer.
 * **[`scc/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/scc/)**: Portable Sloc, Cloc & Complexity Analyzer.
 * **[`hyperfine/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/hyperfine/)**: Portable CLI benchmarking engine.
+* **[`lizard/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/lizard/)**: Portable cyclomatic code complexity scanner.
+* **[`tree/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/tree/)**: Portable filesystem hierarchy visualizer.
+* **[`caveman/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/caveman/)**: Portable token compression utility.
+* **[`astryx/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/astryx/)**: Portable Meta Astryx design token validator.
 
 ---
 
