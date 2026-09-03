@@ -514,3 +514,7 @@
 2026-09-03 18:44 | [acce30f] fix(ci): ensure single workflow by removing dependabot, fix test auth mode and db routing (+7, -25)
 2026-09-03 19:02 | fix(ci): consolidate pipeline.yml to single-source-of-truth verify-gate, remove 4 redundant steps (gitleaks/tsc/bun-test/sbom), update workflows README, identified 8 stale dependabot branches for deletion
 2026-09-03 19:17 | [1664a4e] fix(ci): consolidate pipeline to single-source-of-truth verify-gate, remove redundant steps (+27, -32)
+2026-09-03 20:12 | Comprehensive 12-dimension production readiness audit: 3 critical findings (rate-limiter bug, env secret, in-memory state), 5 high-severity items, 114 test files verified, overall score 8.1/10 near-ready
+2026-09-03 20:34 | Implement static Astryx system-down error pages, Caddy handle_errors for all routes and Forge Apps, and standalone Host Fallback Server
+2026-09-03 20:37 | Change CI/CD pipeline triggers from push/PR to workflow_dispatch manual trigger only
+2026-09-03 20:38 | [76cf8ee] feat(ci): switch CI/CD pipeline to manual workflow_dispatch trigger only (+5540, -8)

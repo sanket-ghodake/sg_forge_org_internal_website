@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>502 Service Temporarily Offline - AG Dashboard</title>
+  <script>(function(){ try { /* 1. Universal Browser Error & Extension Telemetry Shield */ var isNoise = function(m, s, stk) { var str = ((m || '') + ' ' + (s || '') + ' ' + (stk || '')).toLowerCase(); return ( str.indexOf("reading 'starttime'") !== -1 || str.indexOf("reportallchanges") !== -1 || str.indexOf("chrome-extension:") !== -1 || str.indexOf("moz-extension:") !== -1 || str.indexOf("safari-extension:") !== -1 || str.indexOf("edge-extension:") !== -1 || str.indexOf("extensions::") !== -1 || (str.indexOf("starttime") !== -1 && (str.indexOf("vm") !== -1 || str.indexOf("<anonymous>") !== -1)) ); }; var prevOnError = window.onerror; window.onerror = function(msg, src, line, col, err) { if (isNoise(msg, src, err && err.stack)) { return true; } if (typeof prevOnError === 'function') { return prevOnError.apply(this, arguments); } return false; }; window.addEventListener('error', function(e) { if (isNoise(e.message, e.filename, e.error && e.error.stack)) { e.preventDefault && e.preventDefault(); e.stopPropagation && e.stopPropagation(); e.stopImmediatePropagation && e.stopImmediatePropagation(); } }, true); window.addEventListener('unhandledrejection', function(e) { var reason = e.reason; var msg = reason instanceof Error ? reason.message : String(reason || ''); var stk = reason instanceof Error ? reason.stack : ''; if (isNoise(msg, '', stk)) { e.preventDefault && e.preventDefault(); e.stopPropagation && e.stopPropagation(); e.stopImmediatePropagation && e.stopImmediatePropagation(); } }, true); /* 2. Defensive PerformanceObserver Safe-Guard */ if (typeof PerformanceObserver !== 'undefined' && PerformanceObserver.prototype && PerformanceObserver.prototype.observe) { var origObserve = PerformanceObserver.prototype.observe; PerformanceObserver.prototype.observe = function(opts) { try { return origObserve.call(this, opts); } catch(err) { /* Ignore unsupported metrics or observe collisions from injected scripts */ } }; } /* 3. Zero-FOUC Theme & Sidebar State Restoration */ var rawTheme = localStorage.getItem('forge:v1:platform:theme') || localStorage.getItem('sg-forge-theme'); var theme = 'dark'; if (rawTheme) { try { var env = JSON.parse(rawTheme); theme = (env && typeof env === 'object' && env.data) ? env.data : env; } catch(e) { theme = rawTheme; } } if (theme !== 'light' && theme !== 'dark') theme = 'dark'; document.documentElement.setAttribute('data-theme', theme); var rawSidebar = localStorage.getItem('forge:v1:platform:sidebar-collapsed'); if (rawSidebar) { try { var envS = JSON.parse(rawSidebar); var collapsed = (envS && typeof envS === 'object' && 'data' in envS) ? envS.data : envS; if (collapsed === true || collapsed === 'true') { document.documentElement.setAttribute('data-sidebar-collapsed', 'true'); } } catch(e) {} } } catch(err) {} })();</script>
+  <style>
+    
+    
+    :root, [data-theme="dark"] {
+      --forge-bg-root: #121212;
+      --forge-bg-surface: #171717;
+      --forge-bg-card: #1c1c1c;
+      --forge-bg-card-hover: #232323;
+      --forge-bg-elevated: #191919;
+      --forge-border: #282828;
+      --forge-border-subtle: #282828;
+      --forge-border-medium: #383838;
+      --forge-border-hover: #383838;
+      --forge-primary: #3ecf8e;
+      --forge-primary-hover: #34b27b;
+      --forge-primary-bg: rgba(62, 207, 142, 0.12);
+      --forge-primary-btn-text: #121212;
+      --forge-primary-gradient: linear-gradient(135deg, #3ecf8e 0%, #24b47e 100%);
+      --forge-accent: #7053ff;
+      --forge-text-main: #ededed;
+      --forge-text-muted: #8a8a8a;
+      --forge-text-subtle: #606060;
+      --forge-text-contrast: #ffffff;
+      --forge-success: #3ecf8e;
+      --forge-success-bg: rgba(62, 207, 142, 0.12);
+      --forge-shadow-card: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+      --forge-shadow-hover: 0 6px 20px -4px rgba(0, 0, 0, 0.5);
+      --forge-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, Helvetica, Arial, sans-serif;
+      --forge-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+      --forge-warning: #f59e0b;
+      --forge-warning-bg: rgba(245, 158, 11, 0.12);
+      --forge-error: #ef4444;
+      --forge-error-bg: rgba(239, 68, 68, 0.12);
+      --forge-radius: 8px;
+      --forge-radius-sm: 5px;
+      --forge-radius-full: 9999px;
+      --forge-transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="light"] {
+      --forge-bg-root: #fafafa;
+      --forge-bg-surface: #ffffff;
+      --forge-bg-card: #ffffff;
+      --forge-bg-card-hover: #f5f5f5;
+      --forge-bg-elevated: #f7f7f8;
+      --forge-border: #eaeaea;
+      --forge-border-subtle: #eaeaea;
+      --forge-border-medium: #d8d8d8;
+      --forge-border-hover: #d8d8d8;
+      --forge-primary: #24b47e;
+      --forge-primary-hover: #1ea672;
+      --forge-primary-bg: rgba(36, 180, 126, 0.10);
+      --forge-primary-btn-text: #ffffff;
+      --forge-primary-gradient: linear-gradient(135deg, #24b47e 0%, #1ea672 100%);
+      --forge-accent: #6366f1;
+      --forge-text-main: #171717;
+      --forge-text-muted: #666666;
+      --forge-text-subtle: #8c8c8c;
+      --forge-text-contrast: #ffffff;
+      --forge-success: #1ea672;
+      --forge-success-bg: rgba(36, 180, 126, 0.10);
+      --forge-shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+      --forge-shadow-hover: 0 4px 12px -2px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+      --forge-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, Helvetica, Arial, sans-serif;
+      --forge-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+      --forge-warning: #d97706;
+      --forge-warning-bg: rgba(217, 119, 6, 0.10);
+      --forge-error: #dc2626;
+      --forge-error-bg: rgba(220, 38, 38, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Custom Slim Astryx Scrollbars (Anti-Browser Defaults) */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--forge-border-medium) transparent;
+    }
+
+    *::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    *::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background: var(--forge-border-medium);
+      border-radius: var(--forge-radius-full);
+      border: 1px solid transparent;
+      background-clip: padding-box;
+      transition: background-color 0.15s ease;
+    }
+
+    *::-webkit-scrollbar-thumb:hover {
+      background: var(--forge-primary);
+    }
+
+    *::-webkit-scrollbar-corner {
+      background: transparent;
+    }
+
+    /* 100% Air-Gapped High Performance Typography (Zero External Network Imports) */
+    body {
+      font-family: var(--forge-font-sans);
+      background-color: var(--forge-bg-root);
+      color: var(--forge-text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.45;
+      letter-spacing: -0.015em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    code, kbd, pre, .astryx-mono, .astryx-badge, .astryx-stat-value {
+      font-family: var(--forge-font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .astryx-container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+  
+    
+    /* Enterprise Navigation Header Bar */
+    .astryx-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.75rem;
+      height: 48px;
+      min-height: 48px;
+      max-height: 48px;
+      background: var(--forge-bg-surface);
+      border-bottom: 1px solid var(--forge-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+      box-sizing: border-box;
+    }
+
+    .astryx-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+      user-select: none;
+      height: 100%;
+    }
+
+    .astryx-brand-logo-img {
+      height: 32px;
+      max-height: 80%;
+      width: auto;
+      max-width: 180px;
+      object-fit: contain;
+      flex-shrink: 0;
+      display: inline-block;
+      vertical-align: middle;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .astryx-brand-logo-img:hover {
+      transform: scale(1.02);
+    }
+
+    [data-theme="light"] .astryx-brand-logo-img {
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.08));
+    }
+
+    [data-theme="dark"] .astryx-brand-logo-img {
+      filter: drop-shadow(0 2px 10px rgba(235, 87, 87, 0.35));
+    }
+
+    .astryx-app-tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: var(--forge-text-main);
+      background: var(--forge-bg-card);
+      border: 1px solid var(--forge-border);
+      padding: 0.18rem 0.55rem;
+      border-radius: 5px;
+      transition: var(--forge-transition);
+    }
+
+    .astryx-logo-badge {
+      background: var(--forge-primary-gradient);
+      color: #ffffff;
+      padding: 0.2rem 0.55rem;
+      border-radius: 5px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      display: inline-block;
+    }
+
+    /* Theme Toggle Button */
+    .astryx-theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--forge-radius-sm);
+      background: var(--forge-bg-card);
+      border: 1px solid var(--forge-border);
+      color: var(--forge-text-main);
+      cursor: pointer;
+      transition: var(--forge-transition);
+      outline: none;
+    }
+
+    .astryx-theme-toggle:hover {
+      border-color: var(--forge-primary);
+      background: var(--forge-bg-card-hover);
+    }
+
+    .astryx-theme-toggle svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Astryx Cards & Hero Layout */
+    .astryx-hero {
+      text-align: center;
+      padding: 3.5rem 1rem 2.5rem;
+    }
+
+    .astryx-hero h1 {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      color: var(--forge-text-main);
+    }
+
+    .astryx-hero p {
+      font-size: 1.15rem;
+      color: var(--forge-text-muted);
+      max-width: 680px;
+      margin: 0 auto;
+      font-weight: 400;
+    }
+
+    .astryx-card {
+      background: var(--forge-bg-card);
+      border: 1px solid var(--forge-border);
+      border-radius: var(--forge-radius);
+      padding: 1.25rem;
+      box-shadow: var(--forge-shadow-card);
+      transition: var(--forge-transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .astryx-card:hover {
+      border-color: var(--forge-border-medium);
+      background: var(--forge-bg-card-hover);
+      box-shadow: var(--forge-shadow-hover);
+    }
+
+    /* Supabase 3-Tier Card Anatomy */
+    .sb-card {
+      background: var(--forge-bg-card);
+      border: 1px solid var(--forge-border);
+      border-radius: var(--forge-radius);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--forge-transition);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: var(--forge-shadow-card);
+    }
+
+    .sb-card:hover {
+      border-color: var(--forge-border-medium);
+      background: var(--forge-bg-card-hover);
+      box-shadow: var(--forge-shadow-hover);
+    }
+
+    .sb-card-header {
+      padding: 1rem 1.15rem 0.5rem 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .sb-card-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--forge-text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: -0.015em;
+    }
+
+    .sb-card-kebab {
+      color: var(--forge-text-muted);
+      cursor: pointer;
+      padding: 0.2rem;
+      border-radius: var(--forge-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s ease;
+    }
+
+    .sb-card-kebab:hover {
+      color: var(--forge-text-main);
+      background: var(--forge-bg-card-hover);
+    }
+
+    .sb-card-body {
+      padding: 0.25rem 1.15rem 0.85rem 1.15rem;
+      font-size: 0.8rem;
+      color: var(--forge-text-muted);
+      line-height: 1.45;
+    }
+
+    .sb-card-footer {
+      padding: 0.6rem 1.15rem;
+      border-top: 1px solid var(--forge-border);
+      background: var(--forge-bg-elevated);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.74rem;
+      color: var(--forge-text-muted);
+    }
+
+    .astryx-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 0.18rem 0.5rem;
+      border-radius: var(--forge-radius-sm);
+      letter-spacing: 0.02em;
+      background: var(--forge-bg-elevated);
+      color: var(--forge-text-main);
+      border: 1px solid var(--forge-border);
+    }
+
+    .badge-online {
+      background: var(--forge-success-bg);
+      color: var(--forge-success);
+      border: 1px solid var(--forge-border-medium);
+    }
+
+    .badge-pill {
+      background: var(--forge-bg-elevated);
+      color: var(--forge-text-muted);
+      border: 1px solid var(--forge-border);
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .astryx-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      height: 32px;
+      padding: 0 0.85rem;
+      border-radius: var(--forge-radius-sm);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--forge-transition);
+      border: 1px solid transparent;
+      outline: none;
+      user-select: none;
+      box-sizing: border-box;
+    }
+
+    .btn-primary {
+      background: var(--forge-primary);
+      color: var(--forge-primary-btn-text, #121212) !important;
+      font-weight: 600;
+      border-color: transparent;
+    }
+
+    .btn-primary:hover {
+      background: var(--forge-primary-hover, #34b27b);
+      filter: brightness(1.05);
+      box-shadow: 0 1px 8px var(--forge-shadow-hover);
+    }
+
+    .btn-outline {
+      background: var(--forge-bg-card);
+      border-color: var(--forge-border);
+      color: var(--forge-text-main);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--forge-border-medium);
+      background: var(--forge-bg-card-hover);
+      color: var(--forge-text-main);
+    }
+
+    .astryx-input, .astryx-select {
+      height: 32px;
+      background: var(--forge-bg-card);
+      border: 1px solid var(--forge-border);
+      border-radius: var(--forge-radius-sm);
+      color: var(--forge-text-main);
+      padding: 0 0.75rem;
+      font-size: 0.82rem;
+      font-family: inherit;
+      outline: none;
+      transition: var(--forge-transition);
+      box-sizing: border-box;
+    }
+
+    .astryx-input:focus, .astryx-select:focus {
+      border-color: var(--forge-primary);
+      box-shadow: 0 0 0 1px var(--forge-primary);
+    }
+
+    .astryx-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .astryx-micro-pill {
+      font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--forge-border);
+      color: var(--forge-text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .astryx-code-badge {
+      font-family: 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.76rem;
+      background: var(--forge-bg-elevated);
+      color: var(--forge-primary);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      border: 1px solid var(--forge-border);
+    }
+
+    @media (max-width: 768px) {
+      .astryx-header { padding: 0.65rem 1rem; }
+      .astryx-grid { grid-template-columns: 1fr; }
+      .astryx-container { padding: 1.5rem 1rem; }
+      .astryx-hero { padding: 2.5rem 0.5rem 1.5rem; }
+    }
+  
+    
+    /* ── Astryx Modern Select & Custom Dropdowns (Anti-Browser OS Menus) ── */
+    select, .astryx-select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-color: var(--forge-bg-card);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a1a1aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 14px 14px;
+      padding: 0.45rem 2.2rem 0.45rem 0.75rem;
+      border: 1px solid var(--forge-border);
+      border-radius: var(--forge-radius-sm);
+      color: var(--forge-text-main);
+      font-size: 0.84rem;
+      font-family: inherit;
+      outline: none;
+      cursor: pointer;
+      transition: var(--forge-transition);
+    }
+
+    select:hover, .astryx-select:hover {
+      border-color: var(--forge-border-medium);
+      background-color: var(--forge-bg-card-hover);
+    }
+
+    select:focus, select:focus-visible, .astryx-select:focus, .astryx-select:focus-visible {
+      border-color: var(--forge-primary);
+      box-shadow: 0 0 0 2px rgba(62, 207, 142, 0.25);
+    }
+
+    select option {
+      background-color: var(--forge-bg-surface);
+      color: var(--forge-text-main);
+      padding: 0.5rem;
+    }
+
+    select:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* ── Astryx Custom Select & Floating Dropdown Engine ── */
+    .astryx-custom-select-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      user-select: none;
+      font-family: inherit;
+      vertical-align: middle;
+    }
+
+    .astryx-custom-select-trigger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+      background: var(--forge-bg-card);
+      border: 1px solid var(--forge-border);
+      border-radius: var(--forge-radius-sm);
+      padding: 0.4rem 0.85rem;
+      color: var(--forge-text-main);
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--forge-transition);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      white-space: nowrap;
+      min-height: 32px;
+      width: 100%;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    .astryx-custom-select-trigger:hover, .astryx-custom-select-wrap.open .astryx-custom-select-trigger {
+      border-color: var(--forge-primary);
+      background: var(--forge-bg-card-hover);
+      box-shadow: 0 0 10px -2px rgba(62, 207, 142, 0.25);
+    }
+
+    .astryx-custom-select-trigger:focus-visible {
+      border-color: var(--forge-primary);
+      box-shadow: 0 0 0 2px rgba(62, 207, 142, 0.3);
+    }
+
+    .astryx-custom-select-arrow {
+      width: 13px;
+      height: 13px;
+      color: var(--forge-primary);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .astryx-custom-select-wrap.open .astryx-custom-select-arrow {
+      transform: rotate(180deg);
+    }
+
+    .astryx-custom-select-menu {
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      min-width: 100%;
+      width: max-content;
+      max-width: min(340px, calc(100vw - 24px));
+      max-height: 280px;
+      overflow-y: auto;
+      background: var(--forge-bg-surface);
+      border: 1px solid var(--forge-border-medium);
+      border-radius: var(--forge-radius-sm);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      padding: 0.35rem;
+      z-index: 1200;
+      display: none;
+      flex-direction: column;
+      gap: 0.15rem;
+      box-sizing: border-box;
+      animation: selectDropIn 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+      scrollbar-width: thin;
+      scrollbar-color: var(--forge-border-medium) transparent;
+    }
+
+    .astryx-custom-select-wrap.open .astryx-custom-select-menu {
+      display: flex;
+    }
+
+    /* Smart Viewport Collision Classes */
+    .astryx-custom-select-menu.drop-up {
+      top: auto;
+      bottom: calc(100% + 5px);
+      animation: selectDropUp 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .astryx-custom-select-menu.align-right {
+      left: auto;
+      right: 0;
+    }
+
+    .astryx-custom-select-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.42rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.79rem;
+      color: var(--forge-text-main);
+      cursor: pointer;
+      transition: background 0.12s ease, color 0.12s ease;
+      white-space: nowrap;
+      gap: 0.75rem;
+      user-select: none;
+    }
+
+    .astryx-custom-select-item:hover {
+      background: rgba(62, 207, 142, 0.12);
+      color: var(--forge-primary);
+    }
+
+    .astryx-custom-select-item.selected {
+      background: rgba(62, 207, 142, 0.18);
+      color: var(--forge-primary);
+      font-weight: 600;
+    }
+
+    .astryx-custom-select-check {
+      font-size: 0.75rem;
+      color: var(--forge-primary);
+      font-weight: 700;
+      opacity: 0;
+    }
+
+    .astryx-custom-select-item.selected .astryx-custom-select-check {
+      opacity: 1;
+    }
+
+    @keyframes selectDropIn {
+      from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes selectDropUp {
+      from { opacity: 0; transform: translateY(4px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ── Astryx Universal Modals & Dialogs (Anti-Native Dialogs) ── */
+    .astryx-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      box-sizing: border-box;
+      opacity: 0;
+      transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .astryx-modal-backdrop.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .astryx-modal {
+      background: var(--forge-bg-surface);
+      border: 1px solid var(--forge-border-medium);
+      border-radius: var(--forge-radius);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      width: 100%;
+      max-width: min(640px, 92vw);
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(0.96) translateY(8px);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-sizing: border-box;
+    }
+
+    .astryx-modal-backdrop.open .astryx-modal {
+      transform: scale(1) translateY(0);
+    }
+
+    .astryx-modal-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--forge-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--forge-bg-card);
+      flex-shrink: 0;
+    }
+
+    .astryx-modal-header h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--forge-text-main);
+      margin: 0;
+    }
+
+    .astryx-modal-close {
+      background: transparent;
+      border: none;
+      color: var(--forge-text-muted);
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--forge-radius-sm);
+      transition: var(--forge-transition);
+    }
+
+    .astryx-modal-close:hover {
+      background: var(--forge-bg-card-hover);
+      color: var(--forge-text-main);
+    }
+
+    .astryx-modal-body {
+      padding: 1.25rem;
+      overflow-y: auto;
+      font-size: 0.88rem;
+      color: var(--forge-text-main);
+      line-height: 1.6;
+      flex: 1;
+      scrollbar-width: thin;
+      scrollbar-color: var(--forge-border-medium) transparent;
+    }
+
+    .astryx-modal-footer {
+      padding: 0.85rem 1.25rem;
+      border-top: 1px solid var(--forge-border);
+      background: var(--forge-bg-card);
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    /* ── Astryx Slideover Drawers ── */
+    .astryx-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .astryx-drawer-backdrop.open {
+      display: block;
+      opacity: 1;
+    }
+
+    .astryx-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: min(520px, 94vw);
+      height: 100vh;
+      background: var(--forge-bg-surface);
+      border-left: 1px solid var(--forge-border-medium);
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.7);
+      z-index: 2001;
+      transform: translateX(100%);
+      transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .astryx-drawer.open {
+      transform: translateX(0);
+    }
+
+    /* ── Astryx Modern Toast Notification System (Anti-Browser alert()) ── */
+    .astryx-toast-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      max-width: 420px;
+      width: calc(100vw - 3rem);
+      pointer-events: none;
+    }
+
+    .astryx-toast {
+      pointer-events: auto;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      background: var(--forge-bg-surface);
+      border: 1px solid var(--forge-border-medium);
+      border-radius: var(--forge-radius);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 1px 1px rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      color: var(--forge-text-main);
+      font-size: 0.84rem;
+      line-height: 1.45;
+      animation: astryxToastSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    @keyframes astryxToastSlideIn {
+      from { transform: translateY(16px) scale(0.95); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .astryx-toast-icon {
+      font-size: 1.15rem;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 1px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .astryx-toast-content {
+      flex: 1;
+      word-break: break-word;
+    }
+
+    .astryx-toast-close {
+      background: transparent;
+      border: none;
+      color: var(--forge-text-muted);
+      cursor: pointer;
+      font-size: 1.15rem;
+      line-height: 1;
+      padding: 0 0.2rem;
+      margin-left: auto;
+      border-radius: 3px;
+      transition: var(--forge-transition);
+    }
+
+    .astryx-toast-close:hover {
+      color: var(--forge-text-main);
+    }
+
+    .astryx-toast-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: var(--forge-primary);
+      width: 100%;
+      transform-origin: left;
+      animation: toastProgress linear forwards;
+    }
+
+    .astryx-toast-success { border-left: 4px solid var(--forge-success); }
+    .astryx-toast-success .astryx-toast-progress { background: var(--forge-success); }
+    .astryx-toast-error { border-left: 4px solid var(--forge-accent); }
+    .astryx-toast-error .astryx-toast-progress { background: var(--forge-accent); }
+    .astryx-toast-warning { border-left: 4px solid var(--forge-warning); }
+    .astryx-toast-warning .astryx-toast-progress { background: var(--forge-warning); }
+    .astryx-toast-info { border-left: 4px solid var(--forge-primary); }
+    .astryx-toast-info .astryx-toast-progress { background: var(--forge-primary); }
+
+    @media (max-width: 640px) {
+      .astryx-toast-container {
+        right: 0.75rem;
+        left: 0.75rem;
+        bottom: 1rem;
+        width: calc(100vw - 1.5rem);
+        max-width: unset;
+      }
+    }
+
+    /* ── Astryx Modern Floating Tooltips & Popovers (Anti-Browser Defaults) ── */
+    [data-astryx-tooltip], [data-tooltip] {
+      cursor: inherit;
+    }
+    .astryx-floating-tooltip {
+      position: fixed;
+      z-index: 100000;
+      pointer-events: none;
+      background: var(--forge-bg-surface);
+      border: 1px solid var(--forge-border-medium);
+      color: var(--forge-text-main);
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--forge-radius-sm);
+      font-size: 0.74rem;
+      font-weight: 500;
+      line-height: 1.4;
+      max-width: 290px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 12px rgba(59, 130, 246, 0.15);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      opacity: 0;
+      transition: opacity 0.12s ease;
+      display: none;
+    }
+    .astryx-floating-tooltip.visible {
+      display: block;
+      opacity: 1;
+    }
+    .astryx-tooltip-title {
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: var(--forge-primary);
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+  
+  
+    .error-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 60px);
+      padding: 1.5rem;
+    }
+    .error-card {
+      background: var(--forge-bg-surface);
+      border: 1px solid var(--forge-border);
+      border-radius: var(--forge-radius);
+      padding: 2.5rem;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--forge-shadow-card);
+    }
+    .badge-error-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.75rem;
+      background: rgba(239, 68, 68, 0.12);
+      color: var(--forge-danger, rgba(239, 68, 68, 1));
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: var(--forge-radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      margin-bottom: 1.25rem;
+    }
+    .user-pill {
+      display: inline-block;
+      font-size: 0.82rem;
+      color: var(--forge-text-muted);
+      background: var(--forge-bg-root);
+      border: 1px solid var(--forge-border);
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--forge-radius-sm);
+      margin-bottom: 1.25rem;
+    }
+    .trace-footer {
+      font-size: 0.75rem;
+      color: var(--forge-text-subtle);
+      margin-top: 1.5rem;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  
+  <header class="astryx-header">
+    <div class="astryx-logo" style="display: flex; align-items: center; gap: 0.65rem;">
+      <img src="/brand/logo.png" alt="HTTP 502" class="astryx-brand-logo-img" style="height: 32px; max-height: 80%; width: auto; max-width: 180px; object-fit: contain; flex-shrink: 0;" onerror="this.style.display='none'; if (this.nextElementSibling) this.nextElementSibling.style.display='inline-flex';" />
+      <span class="astryx-logo-badge" style="display: none;">ERROR</span>
+      <span class="astryx-app-tag">HTTP 502</span>
+    </div>
+    <div style="display: flex; gap: 0.75rem; align-items: center;">
+      <button class="astryx-theme-toggle" id="theme-toggle-btn" title="Toggle Light / Dark Theme" aria-label="Toggle Theme">
+        <!-- Sun Icon (shown in dark mode) -->
+        <svg id="sun-icon" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <!-- Moon Icon (shown in light mode) -->
+        <svg id="moon-icon" viewBox="0 0 24 24" style="display: none;">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+  <script>
+    (function() {
+      var THEME_KEY = 'forge:v1:platform:theme';
+      var LEGACY_KEY = 'sg-forge-theme';
+      var CHANNEL_NAME = 'sg_forge_state_sync_bus';
+
+      function readTheme() {
+        try {
+          var raw = localStorage.getItem(THEME_KEY) || localStorage.getItem(LEGACY_KEY);
+          if (!raw) return 'dark';
+          try {
+            var env = JSON.parse(raw);
+            return (env && typeof env === 'object' && env.data) ? env.data : (env || 'dark');
+          } catch(e) {
+            return raw || 'dark';
+          }
+        } catch(e) {
+          return 'dark';
+        }
+      }
+
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        updateThemeIcons(theme);
+      }
+
+      function persistTheme(theme) {
+        try {
+          var env = { version: 1, updatedAt: new Date().toISOString(), data: theme };
+          localStorage.setItem(THEME_KEY, JSON.stringify(env));
+          localStorage.setItem(LEGACY_KEY, theme);
+          if (typeof BroadcastChannel !== 'undefined') {
+            var bc = new BroadcastChannel(CHANNEL_NAME);
+            bc.postMessage({ key: THEME_KEY, data: theme, timestamp: Date.now() });
+            bc.close();
+          }
+        } catch(e) {}
+      }
+
+      var current = readTheme();
+      applyTheme(current);
+
+      var btn = document.getElementById('theme-toggle-btn');
+      if (btn) {
+        btn.addEventListener('click', function() {
+          var active = document.documentElement.getAttribute('data-theme') || 'dark';
+          var next = active === 'dark' ? 'light' : 'dark';
+          applyTheme(next);
+          persistTheme(next);
+        });
+      }
+
+      function updateThemeIcons(theme) {
+        var sun = document.getElementById('sun-icon');
+        var moon = document.getElementById('moon-icon');
+        if (sun && moon) {
+          sun.style.display = theme === 'dark' ? 'block' : 'none';
+          moon.style.display = theme === 'dark' ? 'none' : 'block';
+        }
+      }
+
+      // Cross-tab real-time listener
+      if (typeof BroadcastChannel !== 'undefined') {
+        try {
+          var receiver = new BroadcastChannel(CHANNEL_NAME);
+          receiver.onmessage = function(e) {
+            if (e.data && (e.data.key === THEME_KEY || e.data.key === LEGACY_KEY)) {
+              applyTheme(e.data.data);
+            }
+          };
+        } catch(e) {}
+      }
+      window.addEventListener('storage', function(e) {
+        if (e.key === THEME_KEY || e.key === LEGACY_KEY) {
+          applyTheme(readTheme());
+        }
+      });
+    })();
+  </script>
+  <script>
+    (function() {
+      if (typeof window === 'undefined') return;
+
+      function ensureToastContainer() {
+        var container = document.getElementById('astryx-toast-container');
+        if (!container) {
+          container = document.createElement('div');
+          container.id = 'astryx-toast-container';
+          container.className = 'astryx-toast-container';
+          container.setAttribute('aria-live', 'polite');
+          container.setAttribute('aria-atomic', 'true');
+          document.body.appendChild(container);
+        }
+        return container;
+      }
+
+      var ICON_SVGS = {
+        success: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--forge-success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>',
+        error: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--forge-accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>',
+        warning: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--forge-warning)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+        info: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--forge-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>'
+      };
+
+      /**
+       * Dispatches an Astryx toast notification to the viewport.
+       * @param {string} message Toast message text or HTML
+       * @param {'success'|'error'|'warning'|'info'} [type='info'] Notification status
+       * @param {number} [duration=4000] Auto-dismiss duration in ms (0 for persistent)
+       */
+      window.astryxToast = function(message, type, duration) {
+        if (!type) type = 'info';
+        if (duration === undefined) duration = 4000;
+
+        try {
+          var container = ensureToastContainer();
+          var toast = document.createElement('div');
+          toast.className = 'astryx-toast astryx-toast-' + type;
+          toast.setAttribute('role', 'status');
+
+          var icon = document.createElement('span');
+          icon.className = 'astryx-toast-icon';
+          icon.innerHTML = ICON_SVGS[type] || ICON_SVGS.info;
+
+          var content = document.createElement('div');
+          content.className = 'astryx-toast-content';
+          content.innerHTML = message;
+
+          var closeBtn = document.createElement('button');
+          closeBtn.className = 'astryx-toast-close';
+          closeBtn.innerHTML = '&times;';
+          closeBtn.title = 'Dismiss notification';
+          closeBtn.setAttribute('aria-label', 'Close');
+
+          function removeToast() {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(12px) scale(0.95)';
+            setTimeout(function() {
+              if (toast.parentElement) toast.remove();
+            }, 200);
+          }
+
+          closeBtn.onclick = removeToast;
+
+          toast.appendChild(icon);
+          toast.appendChild(content);
+          toast.appendChild(closeBtn);
+
+          var dismissTimer = null;
+          var remainingTime = duration;
+          var startTime = Date.now();
+
+          if (duration > 0) {
+            var progress = document.createElement('div');
+            progress.className = 'astryx-toast-progress';
+            progress.style.animationDuration = duration + 'ms';
+            toast.appendChild(progress);
+
+            function startTimer(ms) {
+              startTime = Date.now();
+              dismissTimer = setTimeout(removeToast, ms);
+            }
+
+            toast.addEventListener('mouseenter', function() {
+              if (dismissTimer) {
+                clearTimeout(dismissTimer);
+                dismissTimer = null;
+                remainingTime -= (Date.now() - startTime);
+                if (progress) progress.style.animationPlayState = 'paused';
+              }
+            });
+
+            toast.addEventListener('mouseleave', function() {
+              if (remainingTime > 0 && !dismissTimer) {
+                if (progress) progress.style.animationPlayState = 'running';
+                startTimer(remainingTime);
+              }
+            });
+
+            startTimer(duration);
+          }
+
+          container.appendChild(toast);
+        } catch (e) {
+          console.error('[Astryx Toast Error]', e);
+        }
+      };
+
+      window.astryxToast.show = function(message, type, duration) {
+        return window.astryxToast(message, type, duration);
+      };
+      window.astryxToast.success = function(message, duration) {
+        return window.astryxToast(message, 'success', duration);
+      };
+      window.astryxToast.error = function(message, duration) {
+        return window.astryxToast(message, 'error', duration);
+      };
+      window.astryxToast.warning = function(message, duration) {
+        return window.astryxToast(message, 'warning', duration);
+      };
+      window.astryxToast.info = function(message, duration) {
+        return window.astryxToast(message, 'info', duration);
+      };
+    })();
+  </script>
+  
+  <main class="error-wrapper">
+    <div class="error-card">
+      <div class="badge-error-status">🔌 502 BAD GATEWAY</div>
+      <h1 style="font-size: 1.65rem; color: var(--forge-text-main); margin: 0 0 0.6rem 0;">Service Temporarily Offline</h1>
+      
+      <p style="color: var(--forge-text-muted); font-size: 0.92rem; line-height: 1.55; margin-bottom: 1.25rem;">
+        The requested service or micro-app is currently offline, restarting, or unreachable. Telemetry has been notified.
+      </p>
+
+      
+
+      <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-top: 0.5rem;">
+        <a href="javascript:window.location.reload()" class="astryx-btn btn-outline">↻ Retry Connection</a>
+        <a href="/" class="astryx-btn btn-outline" style="border-color: var(--forge-border);">Platform Hub &rarr;</a>
+      </div>
+
+      
+    </div>
+  </main>
+</body>
+</html>

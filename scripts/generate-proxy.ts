@@ -8,11 +8,15 @@
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadBrandConfig, loadServiceRegistry } from '../apps/src/sdk/src';
+import { generateStaticErrorPages } from './generate-error-pages';
 
 const REPO_ROOT = process.cwd();
 const CADDYFILE_PATH = join(REPO_ROOT, 'proxy', 'Caddyfile');
 
 export function generateCaddyfile(): string {
+  // Guarantee static error pages are compiled and up to date
+  generateStaticErrorPages();
+
   const brand = loadBrandConfig();
   const services = loadServiceRegistry();
   const httpPort = process.env.HTTP_PORT || '80';
@@ -64,6 +68,20 @@ ${siteBinding} {
         Permissions-Policy "geolocation=(), camera=(), microphone=(), payment=()"
         Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
         -Server
+    }
+
+    # Intercept Upstream Service Outages & System Downtime (Meta Astryx Static Error Fallback)
+    handle_errors {
+        root * /etc/caddy/errors
+        @has_custom_error file /{err.status_code}.html
+        handle @has_custom_error {
+            rewrite * /{err.status_code}.html
+            file_server
+        }
+        handle {
+            rewrite * /502.html
+            file_server
+        }
     }
 `;
 

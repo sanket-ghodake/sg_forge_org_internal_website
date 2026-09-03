@@ -145,6 +145,8 @@ describe('Tier 3 Security: 100% Air-Gapped Compliance & Zero Data Leakage', () =
       expect(caddyfile).toContain('tls internal');
       expect(caddyfile).toContain('Content-Security-Policy');
       expect(caddyfile).toContain('100% Air-Gapped');
+      expect(caddyfile).toContain('handle_errors');
+      expect(caddyfile).toContain('/etc/caddy/errors');
       expect(caddyfile).not.toContain('acme');
       expect(caddyfile).not.toContain('letsencrypt');
     } finally {

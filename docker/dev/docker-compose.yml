@@ -37,6 +37,7 @@ services:
       - "${HTTPS_PORT:-8443}:${HTTPS_PORT:-8443}"
     volumes:
       - ../../proxy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ../../proxy/errors:/etc/caddy/errors:ro
       - ag_caddy_data:/data
       - ag_caddy_config:/config
     networks:

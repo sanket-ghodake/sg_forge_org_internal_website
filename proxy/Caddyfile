@@ -26,6 +26,20 @@ http://:8080, https://:8443 {
         -Server
     }
 
+    # Intercept Upstream Service Outages & System Downtime (Meta Astryx Static Error Fallback)
+    handle_errors {
+        root * /etc/caddy/errors
+        @has_custom_error file /{err.status_code}.html
+        handle @has_custom_error {
+            rewrite * /{err.status_code}.html
+            file_server
+        }
+        handle {
+            rewrite * /502.html
+            file_server
+        }
+    }
+
     # Main Workspace & Org Canvas (portal) [Role: Employee / Admin]
     handle_path /portal* {
         reverse_proxy http://portal:3001 {

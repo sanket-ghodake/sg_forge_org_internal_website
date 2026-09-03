@@ -40,6 +40,7 @@ function show_help() {
     echo "  setup                 Bootstrap workspace dependencies & portable runtimes"
     echo "  dev [svc]             Start platform services natively (opt: target single service)"
     echo "  sync-proxy            Auto-generate proxy/Caddyfile dynamically from .env"
+    echo "  fallback [port]       Run Host Fallback Server (Approach A offline maintenance)"
     echo "  sync-ignores          Auto-sync all 7 ignore files & .gitattributes"
     echo "  test [unit|all]       Run 5-tier test suites"
     echo "  reset-db              Reset local development databases to pristine state"
@@ -119,6 +120,11 @@ case "$CMD" in
 
     sync-proxy)
         $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
+        ;;
+
+    fallback)
+        shift
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/fallback-server.ts" "$@"
         ;;
 
     sync-ignores)

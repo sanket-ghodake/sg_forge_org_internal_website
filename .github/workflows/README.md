@@ -29,8 +29,6 @@ SG Forge enforces a **single, unified pipeline** ([pipeline.yml](pipeline.yml)) 
 
 | Trigger | When |
 |---------|------|
-| `push` to `main` | Automatic on every commit to main branch |
-| `pull_request` to `main` | Automatic on every PR targeting main |
 | `workflow_dispatch` | Manual via GitHub UI or CLI |
 
 ### Via GitHub CLI (`gh`)
