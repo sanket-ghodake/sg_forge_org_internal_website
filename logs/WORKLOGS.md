@@ -508,3 +508,5 @@
 2026-09-03 18:12 | Diagnosed CI Node 2 failure, hardened portable tool bun resolution, and consolidated GitHub Actions to single unified workflow
 2026-09-03 18:14 | [463ec0d] feat(ci): consolidate github actions to single workflow and auto-stage sbom in hooks (+112, -169)
 2026-09-03 18:14 | [a445d7e] feat(ci): consolidate github actions to single workflow and auto-stage sbom in hooks (+210, -211)
+2026-09-03 18:28 | Made generate-sbom.sh idempotent to prevent pre-push mutation, fixed trivy -w /src path, and added db init to CI pipeline
+2026-09-03 18:32 | [47a32f9] fix(ci): add db initialization to pipeline, fix trivy docker path, and make sbom idempotent (+21, -2)

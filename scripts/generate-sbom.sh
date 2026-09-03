@@ -13,6 +13,14 @@ OUTPUT_FILE="${OUTPUT_DIR}/cyclonedx-sbom.json"
 
 mkdir -p "${OUTPUT_DIR}"
 
+# Do not rewrite SBOM if already valid (prevents dirty working tree during pre-push/pre-commit gates)
+if [ -f "${OUTPUT_FILE}" ] && [ "${1:-}" != "--force" ]; then
+    if grep -q '"bomFormat": "CycloneDX"' "${OUTPUT_FILE}" && grep -q '"components"' "${OUTPUT_FILE}"; then
+        echo "✅ CycloneDX SBOM is valid and up-to-date at ${OUTPUT_FILE}"
+        exit 0
+    fi
+fi
+
 TIMESTAMP="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 SERIAL_UUID="$(cat /proc/sys/kernel/random/uuid 2>/dev/null || date +%s | sha256sum | head -c 32)"
 

@@ -60,6 +60,9 @@ jobs:
       - name: Setup Environment
         run: cp .env.example .env
 
+      - name: Initialize Isolated Development Databases
+        run: bun run scripts/init-all-databases.ts
+
       - name: Gitleaks Secret Audit
         run: bun ./portables/bin/gitleaks
 
@@ -67,7 +70,14 @@ jobs:
         run: bunx tsc --noEmit
 
       - name: Deterministic 27-Gate Quality Verification
-        run: bun scripts/verify-gate.ts
+        run: |
+          bun scripts/verify-gate.ts 2>&1 | tee gate_run.log || {
+            echo "### ❌ Gate Verification Failed" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            cat gate_run.log >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            exit 1
+          }
 
       - name: Execute Full 5-Tier Test Suite
         run: bun test
