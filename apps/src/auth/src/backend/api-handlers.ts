@@ -196,8 +196,9 @@ export async function handleLogin(req: Request): Promise<Response> {
       ip,
     });
 
-    const cookieHeader = `forge_refresh_token=${session.refreshToken}; Path=/; HttpOnly; SameSite=Strict; Max-Age=604800`;
-    const sessionCookieHeader = `forge_session=${session.accessToken}; Path=/; SameSite=Lax; Max-Age=604800`;
+    const isProd = process.env.NODE_ENV === 'production';
+    const cookieHeader = `forge_refresh_token=${session.refreshToken}; Path=/; HttpOnly; SameSite=Strict; Max-Age=604800${isProd ? '; Secure' : ''}`;
+    const sessionCookieHeader = `forge_session=${session.accessToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800${isProd ? '; Secure' : ''}`;
 
     const headers = new Headers();
     headers.append('Set-Cookie', cookieHeader);
@@ -268,8 +269,9 @@ export async function handleSetPassword(req: Request): Promise<Response> {
       return problem('Internal Error', 'Password changed but session initialization failed', 500);
     }
 
-    const cookieHeader = `forge_refresh_token=${session.refreshToken}; Path=/; HttpOnly; SameSite=Strict; Max-Age=604800`;
-    const sessionCookieHeader = `forge_session=${session.accessToken}; Path=/; SameSite=Lax; Max-Age=604800`;
+    const isProd = process.env.NODE_ENV === 'production';
+    const cookieHeader = `forge_refresh_token=${session.refreshToken}; Path=/; HttpOnly; SameSite=Strict; Max-Age=604800${isProd ? '; Secure' : ''}`;
+    const sessionCookieHeader = `forge_session=${session.accessToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800${isProd ? '; Secure' : ''}`;
 
     const headers = new Headers();
     headers.append('Set-Cookie', cookieHeader);
@@ -311,8 +313,9 @@ export async function handleRefresh(req: Request): Promise<Response> {
 
   authTelemetry.recordLog('app', 'DEBUG', `Rotated refresh token for user ${result.user.id}`, { ip });
 
-  const newCookie = `forge_refresh_token=${result.refreshToken}; Path=/; HttpOnly; SameSite=Strict; Max-Age=604800`;
-  const sessionCookie = `forge_session=${result.accessToken}; Path=/; SameSite=Lax; Max-Age=604800`;
+  const isProd = process.env.NODE_ENV === 'production';
+  const newCookie = `forge_refresh_token=${result.refreshToken}; Path=/; HttpOnly; SameSite=Strict; Max-Age=604800${isProd ? '; Secure' : ''}`;
+  const sessionCookie = `forge_session=${result.accessToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800${isProd ? '; Secure' : ''}`;
 
   const headers = new Headers();
   headers.append('Set-Cookie', newCookie);
@@ -378,7 +381,14 @@ export function handleJwks(): Response {
 
 import { getScopedHierarchyData } from './hierarchy';
 
-export function handleDirectory(): Response {
+export function handleDirectory(req?: Request): Response {
+  if (req) {
+    const token = extractBearerOrCookieToken(req);
+    if (!token) return problem('Unauthorized', 'Authentication required to access directory', 401);
+    const { valid, payload } = verifyJwt(token);
+    if (!valid || !payload) return problem('Unauthorized', 'Invalid or expired token', 401);
+  }
+
   const db = getAuthDb();
   const org = db.query('SELECT * FROM auth_organizations LIMIT 1;').get();
   const nodes = db.query('SELECT * FROM auth_org_nodes ORDER BY path ASC;').all();
@@ -470,6 +480,16 @@ export async function handleRevokeOtherSessions(req: Request): Promise<Response>
 }
 
 export function handleGetTelemetryLogs(req: Request): Response {
+  const token = extractBearerOrCookieToken(req);
+  if (!token) return problem('Unauthorized', 'Authentication required', 401);
+  const { valid, payload } = verifyJwt(token);
+  if (!valid || !payload) return problem('Unauthorized', 'Invalid or expired token', 401);
+
+  const hasAdmin = payload.principal_type === 'ADMIN' || (payload.roles && payload.roles.some((r: string) => r.includes('admin')));
+  if (!hasAdmin) {
+    return problem('Forbidden', 'Administrative privileges required to inspect system telemetry logs', 403);
+  }
+
   const url = new URL(req.url);
   const source = url.searchParams.get('source') || undefined;
   const limit = Math.min(200, Number(url.searchParams.get('limit') || 50));

@@ -24,6 +24,8 @@ describe('Tier 4 Contract: RFC 7517 JWKS Public Key Specification', () => {
     expect(key.use).toBe('sig');
     expect(key.alg).toBe('EdDSA');
     expect(typeof key.kid).toBe('string');
+    expect(typeof key.x).toBe('string');
+    expect(key.x.length).toBeGreaterThan(20);
     expect((key as any).d).toBeUndefined(); // Crucial: Private key must NEVER be leaked in public JWKS!
   });
 });

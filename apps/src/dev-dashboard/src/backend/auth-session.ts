@@ -25,7 +25,13 @@ export class DevDashboardAuthManager {
    * Retrieves configured master password from environment or defaults to 'password123'.
    */
   public getMasterPassword(): string {
-    return process.env.DEV_DASHBOARD_PASSWORD || process.env.DEVCENTER_PASSWORD || this.defaultPassword;
+    const configured = process.env.DEV_DASHBOARD_PASSWORD || process.env.DEVCENTER_PASSWORD;
+    if (process.env.NODE_ENV === 'production') {
+      if (!configured || configured === this.defaultPassword || configured.length < 12) {
+        throw new Error('[FATAL SECURITY] In production, DEV_DASHBOARD_PASSWORD must be configured with a secure password of at least 12 characters.');
+      }
+    }
+    return configured || this.defaultPassword;
   }
 
   /**
@@ -155,7 +161,8 @@ export async function handleDevAuthApi(path: string, req: Request): Promise<Resp
       return Response.json({ error: result.error || 'Authentication failed', code: 'UNAUTHORIZED' }, { status: 401 });
     }
 
-    const cookieHeader = `dev_session=${result.token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=86400`;
+    const isProd = process.env.NODE_ENV === 'production';
+    const cookieHeader = `dev_session=${result.token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=86400${isProd ? '; Secure' : ''}`;
     return new Response(JSON.stringify({ status: 'ok', sessionToken: result.token }), {
       status: 200,
       headers: {

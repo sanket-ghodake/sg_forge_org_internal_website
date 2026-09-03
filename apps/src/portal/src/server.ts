@@ -102,7 +102,7 @@ export function startPortalServer(port: number = PORT) {
       try {
         const maxDepth = url.searchParams.get('max_depth') ? Number(url.searchParams.get('max_depth')) : 10;
         const rootId = url.searchParams.get('root_id') || undefined;
-        const tree = await fetchOrgTree({ maxDepth, rootId });
+        const tree = await fetchOrgTree({ maxDepth, rootId, headers: forwardHeaders });
         return Response.json({ ok: true, data: tree });
       } catch (err: any) {
         logger.error('Failed to fetch org tree from Auth service:', err);
@@ -214,7 +214,7 @@ export function startPortalServer(port: number = PORT) {
 
     if (url.pathname === '/api/v1/portal/members' || url.pathname === '/portal/api/v1/portal/members') {
       try {
-        const empData = await fetchEmployeesList({ limit: 500 });
+        const empData = await fetchEmployeesList({ limit: 500, headers: forwardHeaders });
         const members = (empData.items || []).map((m: any) => ({
           id: m.id,
           name: m.display_name,
@@ -268,7 +268,7 @@ export function startPortalServer(port: number = PORT) {
 
     // ── Live Notifications & Announcements API ──
     if (url.pathname === '/api/v1/portal/notifications' || url.pathname === '/portal/api/v1/portal/notifications') {
-      const notifs = getLiveNotifications(auth.user!.id);
+      const notifs = getLiveNotifications(auth.user!.id, auth.user!.orgId);
       return Response.json({ ok: true, data: notifs });
     }
 

@@ -6,16 +6,54 @@
  * - Hierarchical RBAC gate (Role & Permission clearance with Meta Astryx 403 fallback)
  */
 
-import { createHash, createPrivateKey, createPublicKey, verify } from 'node:crypto';
+import { createHash, createPrivateKey, createPublicKey, sign, verify } from 'node:crypto';
 import { renderAstryxErrorHtml } from '@forge/ui';
 import type { AuthGuardOptions, AuthGuardResult, AuthUser } from '@forge/types';
 import { isAppDisabled } from './registry';
+
+export function createInternalServiceToken(
+  roles: string[] = ['roles/super_admin'],
+  sub: string = 'internal-service-worker'
+): string {
+  const secret = process.env.JWT_SECRET || 'dev-portable-secret-key-that-is-at-least-32-characters-long';
+  const seed = createHash('sha256').update(secret).digest();
+  const pkcs8Der = Buffer.concat([
+    Buffer.from('302e020100300506032b657004220420', 'hex'),
+    seed,
+  ]);
+  const privKey = createPrivateKey({ key: pkcs8Der, format: 'der', type: 'pkcs8' });
+  const kid = `forge-key-${seed.subarray(0, 4).toString('hex')}`;
+  const now = Math.floor(Date.now() / 1000);
+  const header = { alg: 'EdDSA', typ: 'JWT', kid };
+  const payload = {
+    iss: 'https://forge.internal/auth',
+    sub,
+    email: `${sub}@forge.internal`,
+    display_name: 'Internal Service Account',
+    principal_type: 'SERVICE',
+    org_id: 'org_default',
+    roles,
+    permissions: ['*'],
+    iat: now,
+    exp: now + 300,
+  };
+  const encHeader = Buffer.from(JSON.stringify(header)).toString('base64url');
+  const encPayload = Buffer.from(JSON.stringify(payload)).toString('base64url');
+  const data = `${encHeader}.${encPayload}`;
+  const sig = sign(null, Buffer.from(data), privKey).toString('base64url');
+  return `${data}.${sig}`;
+}
 
 let cachedPublicKeyPem: string | null = null;
 let cachedSecret: string | null = null;
 
 function getVerificationPublicKey(): string {
   const secret = process.env.JWT_SECRET || 'dev-portable-secret-key-that-is-at-least-32-characters-long';
+  if (process.env.NODE_ENV === 'production') {
+    if (!process.env.JWT_SECRET || process.env.JWT_SECRET.includes('dev-portable') || process.env.JWT_SECRET.length < 32) {
+      throw new Error('[FATAL SECURITY] In production, JWT_SECRET must be explicitly configured with an external high-entropy secret of at least 32 characters.');
+    }
+  }
   if (cachedPublicKeyPem && cachedSecret === secret) {
     return cachedPublicKeyPem;
   }
@@ -128,7 +166,23 @@ export function authGuard(req: Request, options: AuthGuardOptions = {}): AuthGua
   const rawToken = sessionMatch ? sessionMatch[1].trim() : bearerToken;
   const token = rawToken ? decodeURIComponent(rawToken) : null;
 
+  const isApiRequest = url.pathname.startsWith('/api/') || (req.headers.get('accept') || '').includes('application/json');
+
   if (!token) {
+    if (isApiRequest) {
+      return {
+        authenticated: false,
+        response: Response.json(
+          {
+            type: 'https://tools.ietf.org/html/rfc7807',
+            title: 'Unauthorized',
+            status: 401,
+            detail: 'Authentication token missing',
+          },
+          { status: 401, headers: { 'Content-Type': 'application/problem+json' } }
+        ),
+      };
+    }
     return {
       authenticated: false,
       response: new Response(null, {
@@ -141,6 +195,20 @@ export function authGuard(req: Request, options: AuthGuardOptions = {}): AuthGua
   // 5. Asymmetric Cryptographic Verification
   const { valid, payload, error } = verifySessionToken(token);
   if (!valid || !payload) {
+    if (isApiRequest) {
+      return {
+        authenticated: false,
+        response: Response.json(
+          {
+            type: 'https://tools.ietf.org/html/rfc7807',
+            title: 'Unauthorized',
+            status: 401,
+            detail: error || 'Invalid or expired session token',
+          },
+          { status: 401, headers: { 'Content-Type': 'application/problem+json' } }
+        ),
+      };
+    }
     return {
       authenticated: false,
       response: new Response(null, {

@@ -6,7 +6,7 @@
 
 import { Database } from 'bun:sqlite';
 import { accessSync, constants, copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs';
-import { join } from 'node:path';
+import { basename, join } from 'node:path';
 import {
   createLogger,
   loadServiceRegistry,
@@ -16,12 +16,17 @@ import {
 
 const logger = createLogger('dev-dashboard-db');
 
-export function resolveDataDir(): string {
-  return resolveCanonicalDataDir();
-}
-
+export const resolveDataDir = resolveCanonicalDataDir;
 const DATA_DIR = resolveDataDir();
 const CORE_DB_PATH = resolveCanonicalDbPath('platform_core.db');
+
+export function getSafeDbPath(dbName: string): string | null {
+  if (!dbName || typeof dbName !== 'string') return null;
+  const safeName = basename(dbName);
+  return safeName !== dbName || dbName.includes('..') || dbName.includes('/') || dbName.includes('\\')
+    ? null
+    : join(DATA_DIR, safeName);
+}
 
 export interface AppRegistryRecord {
   id: string;
@@ -264,10 +269,7 @@ class PlatformDatabaseManager {
   public logAudit(actorId: string, actionType: string, targetService: string, payload: string | null, status: string): void {
     const id = `audit-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
     const now = Math.floor(Date.now() / 1000);
-    this.db.run(
-      'INSERT INTO audit_logs (id, actor_id, action_type, target_service, payload_json, result_status, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [id, actorId, actionType, targetService, payload, status, now]
-    );
+    this.db.run('INSERT INTO audit_logs (id, actor_id, action_type, target_service, payload_json, result_status, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)', [id, actorId, actionType, targetService, payload, status, now]);
   }
 
   public recordTraffic(appId: string, path: string, method: string, statusCode: number, durationMs: number, traceId?: string): void {
@@ -295,20 +297,25 @@ class PlatformDatabaseManager {
 
   public executeQuery(dbName: string, sql: string, readOnly = true): { columns: string[]; rows: any[]; durationMs: number; affectedRows?: number; error?: string } {
     const start = performance.now();
-    const targetPath = join(DATA_DIR, dbName);
-    if (!existsSync(targetPath)) {
-      return { columns: [], rows: [], durationMs: 0, error: `Database file ${dbName} not found` };
+    const targetPath = getSafeDbPath(dbName);
+    if (!targetPath || !existsSync(targetPath)) {
+      return { columns: [], rows: [], durationMs: 0, error: `Database file ${dbName} not found or invalid name` };
     }
 
     try {
-      const dbInstance = new Database(targetPath, { readonly: readOnly });
       const trimmed = sql.trim();
-      const isSelect = trimmed.toUpperCase().startsWith('SELECT') || trimmed.toUpperCase().startsWith('PRAGMA') || trimmed.toUpperCase().startsWith('EXPLAIN');
+      const upper = trimmed.toUpperCase();
+      const isSelect = upper.startsWith('SELECT') || upper.startsWith('PRAGMA') || upper.startsWith('EXPLAIN');
 
       if (readOnly && !isSelect) {
-        dbInstance.close();
         return { columns: [], rows: [], durationMs: 0, error: 'Database is in READ_ONLY sandbox mode. Mutating queries are blocked.' };
       }
+
+      if (upper.includes('ATTACH') || upper.includes('DETACH')) {
+        return { columns: [], rows: [], durationMs: 0, error: 'ATTACH and DETACH statements are forbidden in developer console' };
+      }
+
+      const dbInstance = new Database(targetPath, { readonly: readOnly });
 
       if (isSelect) {
         const rows = dbInstance.query(sql).all() as any[];
@@ -329,8 +336,8 @@ class PlatformDatabaseManager {
   }
 
   public optimizeDatabase(dbName: string): { success: boolean; message: string } {
-    const targetPath = join(DATA_DIR, dbName);
-    if (!existsSync(targetPath)) return { success: false, message: 'Database not found' };
+    const targetPath = getSafeDbPath(dbName);
+    if (!targetPath || !existsSync(targetPath)) return { success: false, message: 'Database not found or invalid name' };
     try {
       const dbInstance = new Database(targetPath);
       dbInstance.run('PRAGMA optimize;');
@@ -344,8 +351,8 @@ class PlatformDatabaseManager {
   }
 
   public backupDatabase(dbName: string): { success: boolean; message: string; backupFile?: string } {
-    const targetPath = join(DATA_DIR, dbName);
-    if (!existsSync(targetPath)) return { success: false, message: 'Database not found' };
+    const targetPath = getSafeDbPath(dbName);
+    if (!targetPath || !existsSync(targetPath)) return { success: false, message: 'Database not found or invalid name' };
     try {
       const backupDir = join(DATA_DIR, 'backups');
       if (!existsSync(backupDir)) mkdirSync(backupDir, { recursive: true });
@@ -360,8 +367,8 @@ class PlatformDatabaseManager {
   }
 
   public getTableSchema(dbName: string, tableName: string): { columns: Array<{ cid: number; name: string; type: string; notnull: number; dflt_value: any; pk: number }>; error?: string } {
-    const targetPath = join(DATA_DIR, dbName);
-    if (!existsSync(targetPath)) return { columns: [], error: `Database ${dbName} not found` };
+    const targetPath = getSafeDbPath(dbName);
+    if (!targetPath || !existsSync(targetPath)) return { columns: [], error: `Database ${dbName} not found or invalid name` };
     try {
       const sanitizedTable = tableName.replace(/[^a-zA-Z0-9_]/g, '');
       const dbInstance = new Database(targetPath, { readonly: true });
@@ -374,8 +381,8 @@ class PlatformDatabaseManager {
   }
 
   public getTableDdl(dbName: string, tableName: string): { ddl: string; indexes: string[]; error?: string } {
-    const targetPath = join(DATA_DIR, dbName);
-    if (!existsSync(targetPath)) return { ddl: '', indexes: [], error: `Database ${dbName} not found` };
+    const targetPath = getSafeDbPath(dbName);
+    if (!targetPath || !existsSync(targetPath)) return { ddl: '', indexes: [], error: `Database ${dbName} not found or invalid name` };
     try {
       const dbInstance = new Database(targetPath, { readonly: true });
       const tableRow = dbInstance.query(`SELECT sql FROM sqlite_master WHERE type = 'table' AND name = ?;`).get(tableName) as { sql: string } | null;
@@ -397,8 +404,8 @@ class PlatformDatabaseManager {
     limit = 25,
     search?: string
   ): { columns: string[]; rows: any[]; totalCount: number; page: number; limit: number; error?: string } {
-    const targetPath = join(DATA_DIR, dbName);
-    if (!existsSync(targetPath)) return { columns: [], rows: [], totalCount: 0, page, limit, error: `Database ${dbName} not found` };
+    const targetPath = getSafeDbPath(dbName);
+    if (!targetPath || !existsSync(targetPath)) return { columns: [], rows: [], totalCount: 0, page, limit, error: `Database ${dbName} not found or invalid name` };
     try {
       const sanitizedTable = tableName.replace(/[^a-zA-Z0-9_]/g, '');
       const safeLimit = Math.max(1, Math.min(100, Number(limit) || 25));
@@ -438,8 +445,8 @@ class PlatformDatabaseManager {
   }
 
   public runIntegrityCheck(dbName: string): { integrity: string[]; foreignKeyErrors: any[]; success: boolean; error?: string } {
-    const targetPath = join(DATA_DIR, dbName);
-    if (!existsSync(targetPath)) return { integrity: [], foreignKeyErrors: [], success: false, error: `Database ${dbName} not found` };
+    const targetPath = getSafeDbPath(dbName);
+    if (!targetPath || !existsSync(targetPath)) return { integrity: [], foreignKeyErrors: [], success: false, error: `Database ${dbName} not found or invalid name` };
     try {
       const dbInstance = new Database(targetPath, { readonly: true });
       const integrity = (dbInstance.query('PRAGMA integrity_check;').all() as Array<{ integrity_check: string }>).map(r => r.integrity_check);
@@ -473,18 +480,14 @@ class PlatformDatabaseManager {
   }
 
   public updateIssueStatus(id: string, status: string): boolean {
-    const res = this.db.run('UPDATE issue_reports SET status = ? WHERE id = ?', [status, id]);
-    return (res as any).changes > 0;
+    return (this.db.run('UPDATE issue_reports SET status = ? WHERE id = ?', [status, id]) as any).changes > 0;
   }
 
   public deleteIssue(id: string): boolean {
-    const res = this.db.run('DELETE FROM issue_reports WHERE id = ?', [id]);
-    return (res as any).changes > 0;
+    return (this.db.run('DELETE FROM issue_reports WHERE id = ?', [id]) as any).changes > 0;
   }
 
-  public getRawDb(): Database {
-    return this.db;
-  }
+  public getRawDb(): Database { return this.db; }
 
   public getAuditLogs(limit = 50): AuditLogRecord[] {
     return this.db.query('SELECT * FROM audit_logs ORDER BY timestamp DESC LIMIT ?').all(limit) as AuditLogRecord[];

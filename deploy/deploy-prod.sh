@@ -53,7 +53,10 @@ command -v curl >/dev/null 2>&1 || fail "Curl is not installed."
 
 if [ -x "$PROD_ROOT/portables/bin/gitleaks" ]; then
     log "🔒 Running pre-deployment secret detection scan (Gitleaks)..."
-    "$PROD_ROOT/portables/bin/gitleaks" detect --source="$PROD_ROOT" --no-git --redact >/dev/null 2>&1 || log "   ✅ Secret audit completed."
+    if ! "$PROD_ROOT/portables/bin/gitleaks" detect --source="$PROD_ROOT" --no-git --redact >/dev/null 2>&1; then
+        fail "Secrets or credentials detected by Gitleaks in source tree. Deployment aborted."
+    fi
+    log "   ✅ Zero secrets detected in pre-deployment audit."
 fi
 
 # ------------------------------------------------------------------------------

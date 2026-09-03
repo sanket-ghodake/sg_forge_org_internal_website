@@ -5,6 +5,7 @@
  */
 
 import type { Database } from 'bun:sqlite';
+import { randomBytes } from 'node:crypto';
 import { createLogger, getDatabaseClient } from '@forge/sdk';
 
 const logger = createLogger('portal-inbox-service');
@@ -189,11 +190,12 @@ export function clearAllNotifications(): void {
   db.exec('DELETE FROM portal_notifications; DELETE FROM portal_notification_reads; DELETE FROM portal_notification_dismissals;');
 }
 
-export function getLiveNotifications(userId?: string): LiveNotificationItem[] {
+export function getLiveNotifications(userId?: string, orgId?: string): LiveNotificationItem[] {
   const db = getDatabase();
   try {
     const uid = userId || null;
-    const rows = db.query<any, [string | null, string | null, string | null]>(`
+    const oid = orgId || null;
+    const rows = db.query<any, [string | null, string | null, string | null, string | null, string | null]>(`
       SELECT n.id, n.user_id, n.org_id, n.type, n.title, n.message, n.sender, n.sender_role,
              n.timestamp_text, n.is_unread, n.priority, n.action_label, n.action_type, n.category_tag, n.created_at,
              (CASE 
@@ -205,9 +207,10 @@ export function getLiveNotifications(userId?: string): LiveNotificationItem[] {
       LEFT JOIN portal_notification_reads nr ON nr.notification_id = n.id AND nr.user_id = ?
       LEFT JOIN portal_notification_dismissals nd ON nd.notification_id = n.id AND nd.user_id = ?
       WHERE (n.user_id IS NULL OR n.user_id = ?)
+        AND (n.org_id IS NULL OR ? IS NULL OR n.org_id = ?)
         AND (nd.dismissed_at IS NULL)
       ORDER BY n.created_at DESC
-    `).all(uid, uid, uid);
+    `).all(uid, uid, uid, oid, oid);
 
     return rows.map((r: any) => ({
       id: r.id,
@@ -446,8 +449,8 @@ export function cancelAppAccessRequest(userId: string, requestId: string): boole
 export function createApiToken(userId: string, name: string): { token: string; item: UserApiTokenItem } | null {
   const db = getDatabase();
   try {
-    const id = `pat_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
-    const secret = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+    const id = `pat_${Date.now()}_${randomBytes(4).toString('hex')}`;
+    const secret = randomBytes(24).toString('hex');
     const token = `forge_pat_${secret}`;
     const prefix = token.slice(0, 14) + '...';
     const hasher = new Bun.CryptoHasher('sha256');
@@ -455,16 +458,8 @@ export function createApiToken(userId: string, name: string): { token: string; i
     const tokenHash = hasher.digest('hex');
     const now = Date.now();
     const expiresAt = now + 90 * 86400000;
-
-    db.run(`
-      INSERT INTO portal_user_tokens (id, user_id, name, token_hash, prefix, created_at, expires_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
-    `, [id, userId, name, tokenHash, prefix, now, expiresAt]);
-
-    return {
-      token,
-      item: { id, name, prefix, createdAt: now },
-    };
+    db.run('INSERT INTO portal_user_tokens (id, user_id, name, token_hash, prefix, created_at, expires_at) VALUES (?, ?, ?, ?, ?, ?, ?)', [id, userId, name, tokenHash, prefix, now, expiresAt]);
+    return { token, item: { id, name, prefix, createdAt: now } };
   } catch (err: any) {
     logger.error('Failed to create user API token', err);
     return null;
@@ -472,24 +467,17 @@ export function createApiToken(userId: string, name: string): { token: string; i
 }
 
 export function getUserApiTokens(userId: string): UserApiTokenItem[] {
-  const db = getDatabase();
   try {
-    const rows = db.query<any, [string]>('SELECT id, name, prefix, created_at FROM portal_user_tokens WHERE user_id = ? ORDER BY created_at DESC').all(userId);
-    return rows.map((r: any) => ({
-      id: r.id,
-      name: r.name,
-      prefix: r.prefix,
-      createdAt: r.created_at,
-    }));
+    const rows = getDatabase().query<any, [string]>('SELECT id, name, prefix, created_at FROM portal_user_tokens WHERE user_id = ? ORDER BY created_at DESC').all(userId);
+    return rows.map((r: any) => ({ id: r.id, name: r.name, prefix: r.prefix, createdAt: r.created_at }));
   } catch {
     return [];
   }
 }
 
 export function revokeApiToken(userId: string, tokenId: string): boolean {
-  const db = getDatabase();
   try {
-    db.run('DELETE FROM portal_user_tokens WHERE id = ? AND user_id = ?', [tokenId, userId]);
+    getDatabase().run('DELETE FROM portal_user_tokens WHERE id = ? AND user_id = ?', [tokenId, userId]);
     return true;
   } catch {
     return false;

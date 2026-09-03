@@ -3,7 +3,7 @@
  * Mandatory First-Login Password Setup with Live Entropy Validation & Browser Telemetry Bridge.
  */
 
-import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript } from '@forge/ui';
+import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript, escapeHtml } from '@forge/ui';
 import { getAuthViewStyles } from './auth-styles';
 import { resolveBrandConfig } from './branding';
 
@@ -43,7 +43,7 @@ export function renderSetPasswordHtml(emailParam: string = ''): string {
       <div class="auth-header">
         <h1 class="auth-title">Set Your Password</h1>
         <p class="auth-subtitle">
-          First-time access detected for <strong id="user-email-display" style="color: var(--forge-text-main);">${emailParam || 'your account'}</strong>. Please configure a permanent password.
+          First-time access detected for <strong id="user-email-display" style="color: var(--forge-text-main);">${escapeHtml(emailParam || 'your account')}</strong>. Please configure a permanent password.
         </p>
       </div>
 

@@ -112,7 +112,7 @@ export function startAuthServer(port: number = PORT) {
     }
 
     if (path === '/api/v1/auth/directory' || path === '/auth/api/v1/auth/directory') {
-      if (method === 'GET') response = handleDirectory();
+      if (method === 'GET') response = handleDirectory(req);
       else response = new Response('Method Not Allowed', { status: 405 });
       return applySecurityHeaders(response);
     }

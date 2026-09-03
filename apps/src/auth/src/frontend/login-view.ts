@@ -3,13 +3,13 @@
  * White-Labeled Meta Astryx Clean Enterprise Login Page with Browser Telemetry Bridge.
  */
 
-import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript } from '@forge/ui';
+import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript, escapeHtml, sanitizeLocalUrl } from '@forge/ui';
 import { getAuthViewStyles } from './auth-styles';
 import { resolveBrandConfig } from './branding';
 
 export function renderLoginHtml(returnUrl: string = '/portal'): string {
   const brand = resolveBrandConfig();
-  const safeReturnUrl = returnUrl === '/' || !returnUrl ? '/portal' : returnUrl;
+  const safeReturnUrl = sanitizeLocalUrl(returnUrl, '/portal');
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -37,7 +37,7 @@ export function renderLoginHtml(returnUrl: string = '/portal'): string {
       <div id="auth-alert" class="auth-alert"></div>
 
       <form id="login-form">
-        <input type="hidden" id="return-url" value="${safeReturnUrl}">
+        <input type="hidden" id="return-url" value="${escapeHtml(safeReturnUrl)}">
 
         <div class="auth-form-group">
           <label class="auth-label" for="email">Work Email</label>
@@ -109,8 +109,10 @@ export function renderLoginHtml(returnUrl: string = '/portal'): string {
     var emailInput = document.getElementById('email');
     var passwordInput = document.getElementById('password');
     var returnUrlInput = document.getElementById('return-url');
-    var returnUrl = returnUrlInput.value || '/portal';
-    if (returnUrl === '/') returnUrl = '/portal';
+    var rawReturnUrl = (returnUrlInput.value || '').trim();
+    var returnUrl = (rawReturnUrl.startsWith('/') && !rawReturnUrl.startsWith('//') && rawReturnUrl.indexOf('://') === -1)
+      ? (rawReturnUrl === '/' ? '/portal' : rawReturnUrl)
+      : '/portal';
 
     function showAlert(msg, isError) {
       if (isError === undefined) isError = true;
@@ -158,9 +160,6 @@ export function renderLoginHtml(returnUrl: string = '/portal'): string {
         }
 
         if (data.status === 'SUCCESS') {
-          if (data.accessToken) {
-            document.cookie = 'forge_session=' + encodeURIComponent(data.accessToken) + '; path=/; max-age=604800; SameSite=Lax';
-          }
           showAlert('Authentication successful. Redirecting...', false);
           setTimeout(function() {
             window.location.href = returnUrl;

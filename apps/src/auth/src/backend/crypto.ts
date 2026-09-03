@@ -97,6 +97,11 @@ export function getOrInitAuthKeys(forceReload: boolean = false): KeyPairHolder {
   if (activeKeys && !forceReload) return activeKeys;
 
   const secret = process.env.JWT_SECRET || 'dev-portable-secret-key-that-is-at-least-32-characters-long';
+  if (process.env.NODE_ENV === 'production') {
+    if (!process.env.JWT_SECRET || process.env.JWT_SECRET.includes('dev-portable') || process.env.JWT_SECRET.length < 32) {
+      throw new Error('[FATAL SECURITY] In production, JWT_SECRET must be explicitly configured with an external high-entropy secret of at least 32 characters.');
+    }
+  }
   const seed = createHash('sha256').update(secret).digest();
   const kid = `forge-key-${seed.subarray(0, 4).toString('hex')}`;
 
@@ -218,6 +223,8 @@ export function verifyJwt(token: string): { valid: boolean; payload?: JwtPayload
 
 export function getPublicJwks(): { keys: JwkKey[] } {
   const keys = getOrInitAuthKeys();
+  const pubKey = createPublicKey(keys.publicKeyPem);
+  const jwk = pubKey.export({ format: 'jwk' }) as any;
   return {
     keys: [
       {
@@ -226,6 +233,7 @@ export function getPublicJwks(): { keys: JwkKey[] } {
         use: 'sig',
         kid: keys.kid,
         alg: 'EdDSA',
+        x: jwk.x,
       },
     ],
   };

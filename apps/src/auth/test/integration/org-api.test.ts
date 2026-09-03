@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach } from 'bun:test';
 import { seedAuthDatabase } from '../../src/db/seed';
+import { signJwt } from '../../src/backend/crypto';
 import {
   handleGetOrgTree,
   handleListEmployees,
@@ -26,10 +27,19 @@ describe('Tier 2 Integration: Org & Employee REST Handlers (@forge/auth)', () =>
   });
 
   it('handleCreateEmployee creates an employee with admin context', async () => {
+    const adminToken = signJwt({
+      sub: 'usr-admin-test',
+      email: 'admin@forge.internal',
+      roles: ['roles/super_admin'],
+    });
+
     const timestamp = Date.now();
     const req = new Request('http://localhost:3004/api/v1/auth/org/employees', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${adminToken}`,
+      },
       body: JSON.stringify({
         display_name: 'Integration Dev',
         email: `dev.${timestamp}@forge.internal`,
@@ -45,6 +55,12 @@ describe('Tier 2 Integration: Org & Employee REST Handlers (@forge/auth)', () =>
   });
 
   it('handleBatchImport processes bulk employee imports', async () => {
+    const adminToken = signJwt({
+      sub: 'usr-admin-test',
+      email: 'admin@forge.internal',
+      roles: ['roles/super_admin'],
+    });
+
     const timestamp = Date.now();
     const records = [
       {
@@ -64,7 +80,10 @@ describe('Tier 2 Integration: Org & Employee REST Handlers (@forge/auth)', () =>
 
     const req = new Request('http://localhost:3004/api/v1/auth/org/employees/import', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${adminToken}`,
+      },
       body: JSON.stringify({ records, options: { dryRun: false } }),
     });
 

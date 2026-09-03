@@ -4,7 +4,7 @@
  */
 
 import { createLogger } from '@forge/sdk';
-import { employeeController } from './employee-controller';
+import { employeeController, sanitizeCsvField } from './employee-controller';
 import { getOrgTree } from './org-tree-service';
 import { verifyJwt, hashToken } from './crypto';
 import { getAuthDb } from '../db/db';
@@ -172,8 +172,10 @@ export async function handleCreateEmployee(req: Request): Promise<Response> {
   const ip = extractClientIp(req);
   const auth = extractAuthContext(req);
 
-  // When called internally or with admin token, allow creation
-  if (auth.isAuthenticated && !hasAdminRole(auth.roles)) {
+  if (!auth.isAuthenticated) {
+    return problem('Unauthorized', 'Authentication required to create employee', 401);
+  }
+  if (!hasAdminRole(auth.roles)) {
     return problem('Forbidden', 'Insufficient permissions. Requires administrative role.', 403);
   }
 
@@ -197,7 +199,10 @@ export async function handleUpdateEmployee(req: Request, employeeId?: string): P
   const ip = extractClientIp(req);
   const auth = extractAuthContext(req);
 
-  if (auth.isAuthenticated && !hasAdminRole(auth.roles)) {
+  if (!auth.isAuthenticated) {
+    return problem('Unauthorized', 'Authentication required to update employee', 401);
+  }
+  if (!hasAdminRole(auth.roles)) {
     return problem('Forbidden', 'Insufficient permissions. Requires administrative role.', 403);
   }
 
@@ -224,7 +229,10 @@ export async function handleRevokeEmployee(req: Request, employeeId?: string): P
   const ip = extractClientIp(req);
   const auth = extractAuthContext(req);
 
-  if (auth.isAuthenticated && !hasAdminRole(auth.roles)) {
+  if (!auth.isAuthenticated) {
+    return problem('Unauthorized', 'Authentication required to revoke sessions', 401);
+  }
+  if (!hasAdminRole(auth.roles)) {
     return problem('Forbidden', 'Insufficient permissions. Requires administrative role.', 403);
   }
 
@@ -249,7 +257,10 @@ export async function handleBatchImport(req: Request): Promise<Response> {
   const ip = extractClientIp(req);
   const auth = extractAuthContext(req);
 
-  if (auth.isAuthenticated && !hasAdminRole(auth.roles)) {
+  if (!auth.isAuthenticated) {
+    return problem('Unauthorized', 'Authentication required for bulk import', 401);
+  }
+  if (!hasAdminRole(auth.roles)) {
     return problem('Forbidden', 'Insufficient permissions. Requires administrative role.', 403);
   }
 
@@ -275,7 +286,10 @@ export async function handleBulkAction(req: Request): Promise<Response> {
   const ip = extractClientIp(req);
   const auth = extractAuthContext(req);
 
-  if (auth.isAuthenticated && !hasAdminRole(auth.roles)) {
+  if (!auth.isAuthenticated) {
+    return problem('Unauthorized', 'Authentication required for bulk actions', 401);
+  }
+  if (!hasAdminRole(auth.roles)) {
     return problem('Forbidden', 'Insufficient permissions. Requires administrative role.', 403);
   }
 
@@ -298,6 +312,14 @@ export async function handleBulkAction(req: Request): Promise<Response> {
  * Handle GET /api/v1/auth/org/employees/export
  */
 export function handleExportEmployees(req: Request): Response {
+  const auth = extractAuthContext(req);
+  if (!auth.isAuthenticated) {
+    return problem('Unauthorized', 'Authentication required to export directory', 401);
+  }
+  if (!hasAdminRole(auth.roles)) {
+    return problem('Forbidden', 'Insufficient permissions. Export requires administrative role.', 403);
+  }
+
   try {
     const url = new URL(req.url);
     const format = url.searchParams.get('format') || 'csv';
@@ -325,15 +347,15 @@ export function handleExportEmployees(req: Request): Response {
       data.items
         .map((item) =>
           [
-            JSON.stringify(item.id || ''),
-            JSON.stringify(item.display_name || ''),
-            JSON.stringify(item.email || ''),
-            JSON.stringify(item.job_title || ''),
-            JSON.stringify(item.employee_code || ''),
-            JSON.stringify(item.department_name || ''),
-            JSON.stringify(item.manager_email || ''),
-            JSON.stringify(item.status || ''),
-            JSON.stringify((item.roles || []).join('; ')),
+            JSON.stringify(sanitizeCsvField(item.id)),
+            JSON.stringify(sanitizeCsvField(item.display_name)),
+            JSON.stringify(sanitizeCsvField(item.email)),
+            JSON.stringify(sanitizeCsvField(item.job_title)),
+            JSON.stringify(sanitizeCsvField(item.employee_code)),
+            JSON.stringify(sanitizeCsvField(item.department_name)),
+            JSON.stringify(sanitizeCsvField(item.manager_email)),
+            JSON.stringify(sanitizeCsvField(item.status)),
+            JSON.stringify(sanitizeCsvField((item.roles || []).join('; '))),
           ].join(',')
         )
         .join('\n');

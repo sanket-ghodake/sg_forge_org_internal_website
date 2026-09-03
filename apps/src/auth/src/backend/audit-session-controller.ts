@@ -25,6 +25,19 @@ export function handleGetAuditLogs(req: Request): Response {
     return Response.json({ ok: false, error: 'Invalid token' }, { status: 401 });
   }
 
+  const hasAdmin =
+    payload.principal_type === 'ADMIN' ||
+    (payload.roles &&
+      payload.roles.some((r: string) =>
+        r === 'roles/super_admin' ||
+        r === 'roles/security.admin' ||
+        r === 'roles/admin' ||
+        r.includes('admin')
+      ));
+  if (!hasAdmin) {
+    return Response.json({ ok: false, error: 'Forbidden: Security & Audit logs require administrative roles' }, { status: 403 });
+  }
+
   const url = new URL(req.url);
   const limit = Math.min(100, Number(url.searchParams.get('limit') || 50));
   const logs = getOrgAuditLogs(limit);

@@ -8,6 +8,25 @@ describe('Tier 3 Security: Employee Directory RBAC & Zero-Trust Invariants (@for
     seedAuthDatabase();
   });
 
+  it('blocks unauthenticated requests from creating employees with HTTP 401', async () => {
+    const req = new Request('http://localhost:3004/api/v1/auth/org/employees', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        display_name: 'Anonymous Hacker',
+        email: 'anon@forge.internal',
+        job_title: 'Attacker',
+      }),
+    });
+
+    const res = await handleCreateEmployee(req);
+    expect(res.status).toBe(401);
+    const body: any = await res.json();
+    expect(body.title).toBe('Unauthorized');
+  });
+
   it('blocks non-admin users from creating employees with HTTP 403', async () => {
     const nonAdminToken = signJwt({
       sub: 'usr-employee-basic',

@@ -490,3 +490,6 @@
 2026-09-03 16:36 | [1964501] feat(orchestrator): harden platform orchestrator, integrate ctop, fix compose path resolution, and secure dev auth (+1102, -68)
 2026-09-03 16:38 | docs(portables): document standalone ctop portable across master toolchain manuals and directory index
 2026-09-03 16:39 | [78dcacb] docs(portables): document standalone ctop portable across master toolchain manuals and directory index (+38, -6)
+2026-09-03 16:40 | audit test db isolation, leaked e2e credentials, and container db persistence flaws
+2026-09-03 16:52 | Remediate 16 security vulnerabilities across Auth RBAC, JWKS, cookies, SQL sandbox, XSS, and Open Redirect
+2026-09-03 16:53 | [2528350] fix(security): remediate 16 vulnerabilities across auth rbac, cookies, sql sandbox, and xss (+3932, -813)

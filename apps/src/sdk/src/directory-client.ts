@@ -9,6 +9,7 @@
 
 import { existsSync } from 'node:fs';
 import type { OrgDirectoryResponse, ScopedHierarchyResponse } from '@forge/types';
+import { createInternalServiceToken } from './auth-guard';
 
 export interface OrgTreeNodeDto {
   id: string;
@@ -80,6 +81,22 @@ export function resolveAuthBaseUrl(customUrl?: string): string {
   return `http://${authHost}:${authPort}`;
 }
 
+function getInternalHeaders(userHeaders?: Record<string, string>): Record<string, string> {
+  const headers: Record<string, string> = { ...(userHeaders || {}) };
+  const hasAuth = Object.keys(headers).some(
+    (k) => k.toLowerCase() === 'authorization' || k.toLowerCase() === 'cookie'
+  );
+  if (!hasAuth) {
+    try {
+      const token = createInternalServiceToken();
+      headers['Authorization'] = `Bearer ${token}`;
+    } catch {
+      // Ignore if crypto token generation is not available in environment
+    }
+  }
+  return headers;
+}
+
 /**
  * Fetch the complete progressive organizational tree from the Auth service.
  */
@@ -98,7 +115,7 @@ export async function fetchOrgTree(options: {
 
   const target = `${base}/api/v1/auth/org/tree?${params.toString()}`;
   const res = await fetch(target, {
-    headers: { Accept: 'application/json', ...(options.headers || {}) },
+    headers: getInternalHeaders({ Accept: 'application/json', ...(options.headers || {}) }),
     signal: AbortSignal.timeout(5000),
   });
 
@@ -132,7 +149,7 @@ export async function fetchEmployeesList(params: {
 
   const target = `${base}/api/v1/auth/org/employees?${qs.toString()}`;
   const res = await fetch(target, {
-    headers: { Accept: 'application/json', ...(params.headers || {}) },
+    headers: getInternalHeaders({ Accept: 'application/json', ...(params.headers || {}) }),
     signal: AbortSignal.timeout(5000),
   });
 
@@ -153,7 +170,7 @@ export async function fetchEmployeeHierarchy(
   const base = resolveAuthBaseUrl(options.baseUrl);
   const target = `${base}/api/v1/auth/org/employees/${encodeURIComponent(userId)}`;
   const res = await fetch(target, {
-    headers: { Accept: 'application/json', ...(options.headers || {}) },
+    headers: getInternalHeaders({ Accept: 'application/json', ...(options.headers || {}) }),
     signal: AbortSignal.timeout(5000),
   });
 
@@ -184,11 +201,11 @@ export async function createEmployeeApi(
   const target = `${base}/api/v1/auth/org/employees`;
   const res = await fetch(target, {
     method: 'POST',
-    headers: {
+    headers: getInternalHeaders({
       'Content-Type': 'application/json',
       Accept: 'application/json',
       ...(options.headers || {}),
-    },
+    }),
     body: JSON.stringify(payload),
     signal: AbortSignal.timeout(5000),
   });
@@ -213,11 +230,11 @@ export async function updateEmployeeApi(
   const target = `${base}/api/v1/auth/org/employees/${encodeURIComponent(userId)}`;
   const res = await fetch(target, {
     method: 'PATCH',
-    headers: {
+    headers: getInternalHeaders({
       'Content-Type': 'application/json',
       Accept: 'application/json',
       ...(options.headers || {}),
-    },
+    }),
     body: JSON.stringify(payload),
     signal: AbortSignal.timeout(5000),
   });
@@ -241,11 +258,11 @@ export async function revokeEmployeeSessionsApi(
   const target = `${base}/api/v1/auth/org/employees/${encodeURIComponent(userId)}/revoke`;
   const res = await fetch(target, {
     method: 'POST',
-    headers: {
+    headers: getInternalHeaders({
       'Content-Type': 'application/json',
       Accept: 'application/json',
       ...(options.headers || {}),
-    },
+    }),
     body: JSON.stringify({ id: userId }),
     signal: AbortSignal.timeout(5000),
   });
@@ -270,11 +287,11 @@ export async function batchImportEmployeesApi(
   const target = `${base}/api/v1/auth/org/employees/import`;
   const res = await fetch(target, {
     method: 'POST',
-    headers: {
+    headers: getInternalHeaders({
       'Content-Type': 'application/json',
       Accept: 'application/json',
       ...(options.headers || {}),
-    },
+    }),
     body: JSON.stringify({ records, options: importOptions }),
     signal: AbortSignal.timeout(10000),
   });
@@ -299,11 +316,11 @@ export async function bulkActionEmployeesApi(
   const target = `${base}/api/v1/auth/org/employees/bulk-action`;
   const res = await fetch(target, {
     method: 'POST',
-    headers: {
+    headers: getInternalHeaders({
       'Content-Type': 'application/json',
       Accept: 'application/json',
       ...(options.headers || {}),
-    },
+    }),
     body: JSON.stringify({ action, userIds, orgId: options.orgId || 'org_main' }),
     signal: AbortSignal.timeout(5000),
   });
@@ -322,7 +339,7 @@ export async function bulkActionEmployeesApi(
 export async function fetchOrgDirectory(baseUrl?: string): Promise<OrgDirectoryResponse> {
   const target = `${resolveAuthBaseUrl(baseUrl)}/api/v1/auth/directory`;
   const res = await fetch(target, {
-    headers: { Accept: 'application/json' },
+    headers: getInternalHeaders({ Accept: 'application/json' }),
     signal: AbortSignal.timeout(3000),
   });
 
