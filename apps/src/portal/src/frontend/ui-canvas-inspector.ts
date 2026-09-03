@@ -5,6 +5,15 @@
 
 export function getCanvasInspectorScript(): string {
   return `
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
     // ── Upward Reporting Path Highlighting ──
     function highlightPathToRoot(nodeId) {
       clearPathHighlights();
@@ -35,7 +44,7 @@ export function getCanvasInspectorScript(): string {
       const selected = document.querySelector('.canvas-org-cluster[data-node-id="' + node.id + '"]');
       if (selected) selected.classList.add('selected-node');
 
-      const initials = node.name.split(' ').map(function(w) { return w[0]; }).join('').slice(0, 2).toUpperCase();
+      const initials = escapeHtml(node.name.split(' ').map(function(w) { return w[0]; }).join('').slice(0, 2).toUpperCase());
       document.getElementById('inspector-avatar').textContent = initials;
       document.getElementById('inspector-full-name').textContent = node.name;
       document.getElementById('inspector-role').textContent = node.title;
@@ -62,7 +71,9 @@ export function getCanvasInspectorScript(): string {
         }
         chainContainer.innerHTML = chain.map(function(c, i) {
           const isLast = i === chain.length - 1;
-          return '<span class="breadcrumb-chip ' + (isLast ? 'active' : '') + '" onclick="inspectById(\\'' + c.id + '\\')">' + c.name + '</span>' +
+          const safeCName = escapeHtml(c.name);
+          const safeCId = escapeHtml(c.id);
+          return '<span class="breadcrumb-chip ' + (isLast ? 'active' : '') + '" onclick="inspectById(\\'' + safeCId + '\\')">' + safeCName + '</span>' +
             (!isLast ? '<span class="breadcrumb-separator">›</span>' : '');
         }).join('');
       }
@@ -95,10 +106,12 @@ export function getCanvasInspectorScript(): string {
         if (directReports.length > 0) {
           document.getElementById('inspector-reports-label').textContent = 'Direct Reports (' + directReports.length + '):';
           reportsGrid.innerHTML = directReports.map(function(r) {
-            const rInit = r.name.split(' ').map(function(w) { return w[0]; }).join('').slice(0, 2).toUpperCase();
-            return '<div class="report-chip" onclick="inspectById(\\'' + r.id + '\\')">' +
+            const rInit = escapeHtml(r.name.split(' ').map(function(w) { return w[0]; }).join('').slice(0, 2).toUpperCase());
+            const safeRName = escapeHtml(r.name);
+            const safeRId = escapeHtml(r.id);
+            return '<div class="report-chip" onclick="inspectById(\\'' + safeRId + '\\')">' +
               '<span class="report-chip-avatar">' + rInit + '</span>' +
-              '<span>' + r.name + '</span>' +
+              '<span>' + safeRName + '</span>' +
             '</div>';
           }).join('');
           reportsBox.style.display = 'block';
@@ -119,7 +132,7 @@ export function getCanvasInspectorScript(): string {
       if (copyBtn) {
         copyBtn.onclick = function() {
           if (navigator.clipboard) navigator.clipboard.writeText(node.email);
-          if (window.astryxToast) window.astryxToast.show('Copied email: ' + node.email, 'success');
+          if (window.astryxToast) window.astryxToast('Copied email: ' + node.email, 'success');
         };
       }
 

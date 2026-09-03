@@ -174,7 +174,7 @@ export function renderPageCards(user?: HeaderUserContext): string {
     email: user?.email || 'employee@forge.internal',
     displayName: user?.displayName || 'Authorized Member',
     roles: user?.roles || ['roles/employee'],
-    isAdmin: user?.isAdmin ?? Boolean(user?.roles?.some(r => r.includes('admin') || r.includes('manager'))),
+    isAdmin: user !== undefined ? (user.isAdmin ?? Boolean(user.roles?.some(r => r.includes('admin') || r.includes('manager')))) : true,
   };
 
   return `
@@ -182,10 +182,12 @@ export function renderPageCards(user?: HeaderUserContext): string {
     ${renderAppsView(userContext.roles)}
     ${renderProfileView(userContext)}
     ${renderInboxView(userContext)}
-    ${renderAdminMembersView()}
-    ${renderAdminAppsView()}
-    ${renderAdminOrgView()}
-    ${renderAdminAuditView()}
-    ${renderAdminSettingsView()}
+    ${userContext.isAdmin ? `
+      ${renderAdminMembersView()}
+      ${renderAdminAppsView()}
+      ${renderAdminOrgView()}
+      ${renderAdminAuditView()}
+      ${renderAdminSettingsView()}
+    ` : ''}
   `;
 }

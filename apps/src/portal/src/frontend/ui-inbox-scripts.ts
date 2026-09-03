@@ -7,6 +7,20 @@
 export function getInboxClientScript(): string {
   return `
     (function initInboxInteractions() {
+      function getApiPrefix() {
+        return window.location.pathname.startsWith('/portal') ? '/portal' : '';
+      }
+
+      function showInboxToast(msg, type) {
+        if (typeof window.astryxToast === 'function') {
+          window.astryxToast(msg, type);
+        } else if (window.AstryxToast && typeof window.AstryxToast.show === 'function') {
+          window.AstryxToast.show(msg, type);
+        } else if (typeof window.AstryxToast === 'function') {
+          window.AstryxToast(msg, type);
+        }
+      }
+
       function bindInbox() {
         var inboxView = document.getElementById('view-notifications');
         if (!inboxView) return;
@@ -97,13 +111,11 @@ export function getInboxClientScript(): string {
               b.classList.add('badge-neutral');
             });
 
-            if (window.AstryxToast) {
-              window.AstryxToast.show('All notifications marked as read', 'success');
-            }
+            showInboxToast('All notifications marked as read', 'success');
             updateCardVisibility();
 
             try {
-              await fetch('/portal/api/v1/portal/notifications/mark-read', {
+              await fetch(getApiPrefix() + '/api/v1/portal/notifications/mark-read', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
               });
@@ -118,14 +130,12 @@ export function getInboxClientScript(): string {
             if (target && target.name === 'digest-pref') {
               var val = target.value;
               try {
-                await fetch('/portal/api/v1/portal/preferences', {
+                await fetch(getApiPrefix() + '/api/v1/portal/preferences', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ pref: val })
                 });
-                if (window.AstryxToast) {
-                  window.AstryxToast.show('Delivery preference saved: ' + (val === 'instant' ? 'Instant Alerts' : 'Morning Digest'), 'success');
-                }
+                showInboxToast('Delivery preference saved: ' + (val === 'instant' ? 'Instant Alerts' : 'Morning Digest'), 'success');
               } catch(e) {}
             }
           });
@@ -148,13 +158,11 @@ export function getInboxClientScript(): string {
                 setTimeout(function() {
                   card.remove();
                   updateCardVisibility();
-                  if (window.AstryxToast) {
-                    window.AstryxToast.show('Notification dismissed', 'info');
-                  }
+                  showInboxToast('Notification dismissed', 'info');
                 }, 250);
 
                 try {
-                  await fetch('/portal/api/v1/portal/notifications/dismiss', {
+                  await fetch(getApiPrefix() + '/api/v1/portal/notifications/dismiss', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ id: id })
@@ -170,13 +178,11 @@ export function getInboxClientScript(): string {
               var notifId = celebrateBtn.dataset.id;
               celebrateBtn.classList.add('celebrated');
               celebrateBtn.innerHTML = '🎉 Celebrated! 👏';
-              if (window.AstryxToast) {
-                window.AstryxToast.show('Celebration recorded! 🎈', 'success');
-              }
+              showInboxToast('Celebration recorded! 🎈', 'success');
 
               if (notifId) {
                 try {
-                  await fetch('/portal/api/v1/portal/notifications/celebrate', {
+                  await fetch(getApiPrefix() + '/api/v1/portal/notifications/celebrate', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ id: notifId })
@@ -189,11 +195,8 @@ export function getInboxClientScript(): string {
             // Primary Action Buttons
             var actionBtn = target.closest('.inbox-action-cta');
             if (actionBtn) {
-              var actionType = actionBtn.dataset.action || 'view';
               var title = actionBtn.dataset.title || 'Item';
-              if (window.AstryxToast) {
-                window.AstryxToast.show('Opening: ' + title, 'info');
-              }
+              showInboxToast('Opening: ' + title, 'info');
             }
           });
         }

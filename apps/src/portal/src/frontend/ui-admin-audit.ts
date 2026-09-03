@@ -15,44 +15,7 @@ export interface AuditEntry {
   traceId: string;
 }
 
-export const SAMPLE_AUDIT_LOGS: AuditEntry[] = [
-  {
-    id: 'aud_1',
-    timestamp: '2026-09-01 14:38:12',
-    actor: 'sanket@forge.internal',
-    action: 'iam.roles.grant',
-    resource: 'users/usr_alex (roles/super_admin)',
-    status: 'SUCCESS',
-    traceId: 'trc_9f8e7d6c5b',
-  },
-  {
-    id: 'aud_2',
-    timestamp: '2026-09-01 14:15:00',
-    actor: 'maya.r@forge.internal',
-    action: 'apps.launch',
-    resource: 'apps/dev-dashboard',
-    status: 'SUCCESS',
-    traceId: 'trc_1a2b3c4d5e',
-  },
-  {
-    id: 'aud_3',
-    timestamp: '2026-09-01 13:54:21',
-    actor: 'david.k@forge.internal',
-    action: 'apps.launch',
-    resource: 'apps/telemetry',
-    status: 'DENIED',
-    traceId: 'trc_77a88b99cc',
-  },
-  {
-    id: 'aud_4',
-    timestamp: '2026-09-01 12:10:05',
-    actor: 'elena.r@forge.internal',
-    action: 'members.invite',
-    resource: 'users/invited (developer)',
-    status: 'SUCCESS',
-    traceId: 'trc_44d55e66ff',
-  },
-];
+export const SAMPLE_AUDIT_LOGS: AuditEntry[] = [];
 
 export function renderAdminAuditView(): string {
   return `
@@ -90,7 +53,7 @@ export function renderAdminAuditView(): string {
           <input type="text" id="audit-search-input" placeholder="Search by trace ID, actor, or action..." />
         </div>
         <div class="table-summary-pill">
-          Showing <strong id="audit-events-count">${SAMPLE_AUDIT_LOGS.length}</strong> security events
+          Showing <strong id="audit-events-count">--</strong> security events
         </div>
       </div>
 
@@ -108,20 +71,14 @@ export function renderAdminAuditView(): string {
             </tr>
           </thead>
           <tbody id="admin-audit-tbody">
-            ${SAMPLE_AUDIT_LOGS.map(a => `
-              <tr>
-                <td style="font-family: var(--forge-font-mono, monospace); font-size: 0.78rem; color: var(--forge-text-muted);">${a.timestamp}</td>
-                <td><strong style="color: var(--forge-text-main); font-size: 0.84rem;">${a.actor}</strong></td>
-                <td><code>${a.action}</code></td>
-                <td><span style="font-size: 0.82rem; color: var(--forge-text-muted);">${a.resource}</span></td>
-                <td>
-                  <span class="astryx-badge badge-${a.status === 'SUCCESS' ? 'online' : (a.status === 'DENIED' ? 'warning' : 'danger')}">
-                    ${a.status}
-                  </span>
-                </td>
-                <td><code style="font-size: 0.75rem; color: var(--forge-primary);">${a.traceId}</code></td>
-              </tr>
-            `).join('')}
+            <tr>
+              <td colspan="6" style="text-align: center; padding: 2.5rem; color: var(--forge-text-muted);">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 0.6rem;">
+                  <span class="badge-dot" style="background: var(--forge-primary);"></span>
+                  <span>Loading security audit stream from central identity...</span>
+                </div>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

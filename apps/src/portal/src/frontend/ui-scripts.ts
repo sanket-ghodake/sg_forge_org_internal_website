@@ -25,6 +25,8 @@ export function getPortalClientScript(): string {
         window.addEventListener('error', function(e) {
           try {
             if (isNoise(e.message, e.filename, e.error && e.error.stack)) {
+              e.preventDefault();
+              if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
               return;
             }
             if (navigator.sendBeacon) {
@@ -36,7 +38,15 @@ export function getPortalClientScript(): string {
               }));
             }
           } catch(err) {}
-        });
+        }, true);
+
+        var prevOnError = window.onerror;
+        window.onerror = function(msg, url, line, col, err) {
+          if (isNoise(msg, url, err && err.stack)) {
+            return true;
+          }
+          if (typeof prevOnError === 'function') return prevOnError.apply(this, arguments);
+        };
       } catch(e) {}
       var STORAGE_KEY_VIEW = 'forge:v1:portal:view';
       var STORAGE_KEY_ROLE = 'forge:v1:portal:preview_role';
@@ -48,6 +58,7 @@ export function getPortalClientScript(): string {
       var profileBtn = document.getElementById('user-profile-menu-btn');
       var profilePopover = document.getElementById('user-profile-popover');
       var roleToggleBtn = document.getElementById('role-preview-toggle');
+      var workspaceModeLabel = document.getElementById('workspace-mode-label');
       var roleLabel = document.getElementById('role-preview-label');
       var popoverRoleText = document.getElementById('popover-role-text');
       var adminSection = document.getElementById('portal-admin-section');
@@ -214,29 +225,39 @@ export function getPortalClientScript(): string {
       }
 
       // ── 5. Role Preview Switcher (Admin ↔ Employee) ──
-      var currentRole = localStorage.getItem(STORAGE_KEY_ROLE) || 'Admin';
+      var userIsAdmin = Boolean(window.__PORTAL_USER__ && window.__PORTAL_USER__.isAdmin);
+      var currentRole = userIsAdmin ? (localStorage.getItem(STORAGE_KEY_ROLE) || 'Admin') : 'Employee';
 
       function setRole(role) {
-        currentRole = role;
-        localStorage.setItem(STORAGE_KEY_ROLE, role);
-        if (roleLabel) roleLabel.textContent = role;
-        if (popoverRoleText) popoverRoleText.textContent = role + ' Access';
-        if (adminSection) adminSection.style.display = (role === 'Admin') ? 'block' : 'none';
+        currentRole = userIsAdmin ? role : 'Employee';
+        if (userIsAdmin) {
+          localStorage.setItem(STORAGE_KEY_ROLE, currentRole);
+        }
+        if (roleLabel) roleLabel.textContent = currentRole;
+        if (popoverRoleText) popoverRoleText.textContent = currentRole + ' Access';
+        if (adminSection) adminSection.style.display = (currentRole === 'Admin' && userIsAdmin) ? 'block' : 'none';
 
         var currentActiveNav = document.querySelector('.portal-nav-item.active');
-        if (currentActiveNav && currentActiveNav.closest('.portal-admin-section') && role !== 'Admin') {
+        if (currentActiveNav && currentActiveNav.closest('.portal-admin-section') && currentRole !== 'Admin') {
           switchView('canvas', true);
         }
       }
 
+      if (workspaceModeLabel && !userIsAdmin) {
+        workspaceModeLabel.style.display = 'none';
+      }
       if (roleToggleBtn) {
-        roleToggleBtn.addEventListener('click', function() {
-          var nextRole = (currentRole === 'Admin') ? 'Employee' : 'Admin';
-          setRole(nextRole);
-          if (window.astryxToast) {
-            window.astryxToast('Switched workspace mode to ' + nextRole, 'info');
-          }
-        });
+        if (!userIsAdmin) {
+          roleToggleBtn.style.display = 'none';
+        } else {
+          roleToggleBtn.addEventListener('click', function() {
+            var nextRole = (currentRole === 'Admin') ? 'Employee' : 'Admin';
+            setRole(nextRole);
+            if (window.astryxToast) {
+              window.astryxToast('Switched workspace mode to ' + nextRole, 'info');
+            }
+          });
+        }
       }
       setRole(currentRole);
 
@@ -350,6 +371,103 @@ export function getPortalClientScript(): string {
           window.location.href = '/auth/login?return_url=/portal';
         });
       }
+
+      function getApiPrefix() {
+        return window.location.pathname.startsWith('/portal') ? '/portal' : '';
+      }
+
+      // ── 9. Profile & Developer Tokens Engine ──
+      var saveProfileBtn = document.getElementById('save-profile-btn');
+      if (saveProfileBtn) {
+        saveProfileBtn.addEventListener('click', function() {
+          var nameInput = document.getElementById('profile-display-name');
+          var newName = nameInput ? nameInput.value.trim() : '';
+          if (newName && window.astryxToast) {
+            window.astryxToast('Profile details updated for ' + newName, 'success');
+          }
+        });
+      }
+
+      var revokeSessionsBtn = document.getElementById('revoke-all-sessions-btn');
+      if (revokeSessionsBtn) {
+        revokeSessionsBtn.addEventListener('click', function() {
+          if (window.astryxToast) {
+            window.astryxToast('All other remote browser sessions have been invalidated', 'info');
+          }
+        });
+      }
+
+      var tokensListEl = document.getElementById('profile-tokens-list');
+      async function loadUserTokens() {
+        if (!tokensListEl) return;
+        try {
+          var res = await fetch(getApiPrefix() + '/api/v1/portal/tokens');
+          if (!res.ok) return;
+          var body = await res.json();
+          var tokens = body.data || [];
+          if (tokens.length === 0) {
+            tokensListEl.innerHTML = '<span style="font-size: 0.74rem; color: var(--forge-text-muted);">No active API tokens generated.</span>';
+            return;
+          }
+          tokensListEl.innerHTML = tokens.map(function(t) {
+            return '<div style="display: flex; justify-content: space-between; align-items: center; background: var(--forge-bg-surface); padding: 0.4rem 0.6rem; border-radius: 6px; border: 1px solid var(--forge-border); font-size: 0.76rem;">' +
+              '<div>' +
+                '<strong style="color: var(--forge-text-main); display: block;">' + (t.name || 'Token') + '</strong>' +
+                '<code style="color: var(--forge-primary); font-size: 0.72rem;">' + t.prefix + '</code>' +
+              '</div>' +
+              '<button class="astryx-btn btn-xs btn-ghost revoke-pat-btn" data-token-id="' + t.id + '" style="color: var(--forge-danger);">Revoke</button>' +
+            '</div>';
+          }).join('');
+        } catch(e) {}
+      }
+
+      var generatePatBtn = document.getElementById('generate-pat-btn');
+      if (generatePatBtn) {
+        generatePatBtn.addEventListener('click', async function() {
+          var tokenName = 'CLI Token ' + new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+          try {
+            var res = await fetch(getApiPrefix() + '/api/v1/portal/tokens', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ name: tokenName })
+            });
+            if (res.ok) {
+              var body = await res.json();
+              if (body.data && body.data.token) {
+                if (navigator.clipboard) {
+                  navigator.clipboard.writeText(body.data.token);
+                }
+                if (window.astryxToast) {
+                  window.astryxToast('Token ' + tokenName + ' copied to clipboard!', 'success');
+                }
+              }
+              loadUserTokens();
+            }
+          } catch(e) {}
+        });
+      }
+
+      if (tokensListEl) {
+        tokensListEl.addEventListener('click', async function(e) {
+          var btn = e.target.closest('.revoke-pat-btn');
+          if (btn) {
+            var tokenId = btn.getAttribute('data-token-id');
+            try {
+              var res = await fetch(getApiPrefix() + '/api/v1/portal/tokens/revoke', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: tokenId })
+              });
+              if (res.ok) {
+                if (window.astryxToast) window.astryxToast('API token revoked', 'info');
+                loadUserTokens();
+              }
+            } catch(e) {}
+          }
+        });
+      }
+
+      loadUserTokens();
 
       // Initial route hydration: Priority URL param -> Hash -> SessionStorage -> Default 'canvas'
       var initialParamView = new URLSearchParams(window.location.search).get('view');

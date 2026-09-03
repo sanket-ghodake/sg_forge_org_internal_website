@@ -6,6 +6,15 @@
 import { astryxIcons } from '@forge/ui';
 import type { HeaderUserContext } from './layout-header';
 
+function escapeHtml(str: string): string {
+  return (str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function parseUserAgentMeta(ua?: string): string {
   if (!ua) return 'Modern Web Browser · Active Now';
   let os = 'Linux / Unix';
@@ -25,6 +34,8 @@ function parseUserAgentMeta(ua?: string): string {
 
 export function renderProfileView(user: HeaderUserContext): string {
   const initial = (user.displayName || 'U').charAt(0).toUpperCase();
+  const safeName = escapeHtml(user.displayName);
+  const safeEmail = escapeHtml(user.email);
 
   return `
     <div id="view-profile" class="portal-page-view">
@@ -52,8 +63,8 @@ export function renderProfileView(user: HeaderUserContext): string {
             <div class="profile-hero-section">
               <div class="profile-hero-avatar">${initial}</div>
               <div class="profile-hero-info">
-                <h2 class="profile-hero-name">${user.displayName}</h2>
-                <div class="profile-hero-email">${user.email}</div>
+                <h2 class="profile-hero-name">${safeName}</h2>
+                <div class="profile-hero-email">${safeEmail}</div>
                 <div class="profile-hero-badge">
                   <span class="status-indicator status-online"></span>
                   <span>${user.isAdmin ? 'Super Admin / Workspace Admin' : 'Full-Time Member'}</span>
@@ -64,11 +75,11 @@ export function renderProfileView(user: HeaderUserContext): string {
             <div class="profile-form-grid">
               <div class="form-field">
                 <label>Display Name</label>
-                <input type="text" class="astryx-input" id="profile-display-name" value="${user.displayName}" />
+                <input type="text" class="astryx-input" id="profile-display-name" value="${safeName}" />
               </div>
               <div class="form-field">
                 <label>Work Email</label>
-                <input type="email" class="astryx-input" value="${user.email}" disabled />
+                <input type="email" class="astryx-input" value="${safeEmail}" disabled />
               </div>
               <div class="form-field">
                 <label>Timezone</label>
@@ -136,7 +147,7 @@ export function renderProfileView(user: HeaderUserContext): string {
                   <span class="role-icon">
                     <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="var(--forge-primary)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                   </span>
-                  <span class="role-name">${r}</span>
+                  <span class="role-name">${escapeHtml(r)}</span>
                 </div>
               `).join('')}
             </div>
@@ -151,6 +162,7 @@ export function renderProfileView(user: HeaderUserContext): string {
             <button class="astryx-btn btn-sm btn-outline" style="width: 100%;" id="generate-pat-btn">
               ${astryxIcons.key || '🔑'} Generate New Token
             </button>
+            <div id="profile-tokens-list" style="margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem;"></div>
           </div>
         </div>
       </div>

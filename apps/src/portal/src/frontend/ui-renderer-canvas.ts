@@ -30,15 +30,15 @@ export function renderCanvasView(): string {
         </div>
 
         <div class="canvas-hero-actions">
-          <button class="astryx-btn btn-outline btn-sm" id="canvas-btn-fit" title="Fit Visible Map to Window">
+          <button class="astryx-btn btn-outline btn-sm" id="canvas-btn-fit" data-astryx-tooltip="Fit Visible Map to Window">
             <span class="btn-icon">${astryxIcons.layers}</span>
             <span>Fit to Window</span>
           </button>
-          <button class="astryx-btn btn-outline btn-sm" id="canvas-btn-lead" title="Focus Executive Leadership">
+          <button class="astryx-btn btn-outline btn-sm" id="canvas-btn-lead" data-astryx-tooltip="Focus Executive Leadership">
             <span class="btn-icon">${astryxIcons.topology}</span>
             <span>Leadership</span>
           </button>
-          <button class="astryx-btn btn-primary btn-sm" id="canvas-find-me-btn" title="Focus My Team Hierarchy">
+          <button class="astryx-btn btn-primary btn-sm" id="canvas-find-me-btn" data-astryx-tooltip="Focus My Team Hierarchy">
             <span class="btn-icon">${astryxIcons.user}</span>
             <span>My Team</span>
           </button>
@@ -66,22 +66,22 @@ export function renderCanvasView(): string {
         <div class="canvas-actions-right">
           <div class="canvas-depth-selector">
             <span class="depth-label">Scope:</span>
-            <button class="depth-btn active" data-depth="2" title="Executive & Division Heads (Fast L1-L2)">Heads</button>
-            <button class="depth-btn" data-depth="3" title="Department Managers (L1-L3)">Managers</button>
-            <button class="depth-btn" data-depth="5" title="Full Functional Teams (L1-L5)">Teams</button>
-            <button class="depth-btn" data-depth="10" title="All Extended Levels">All</button>
+            <button class="depth-btn active" data-depth="2" data-astryx-tooltip="Executive & Division Heads (Fast L1-L2)">Heads</button>
+            <button class="depth-btn" data-depth="3" data-astryx-tooltip="Department Managers (L1-L3)">Managers</button>
+            <button class="depth-btn" data-depth="5" data-astryx-tooltip="Full Functional Teams (L1-L5)">Teams</button>
+            <button class="depth-btn" data-depth="10" data-astryx-tooltip="All Extended Levels">All</button>
           </div>
 
           <!-- Zoom Controls -->
           <div class="canvas-zoom-controls">
-            <button class="astryx-btn btn-sm btn-ghost" id="canvas-zoom-out" title="Zoom Out" aria-label="Zoom Out">
+            <button class="astryx-btn btn-sm btn-ghost" id="canvas-zoom-out" data-astryx-tooltip="Zoom Out" aria-label="Zoom Out">
               <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
             </button>
             <span class="canvas-zoom-level" id="canvas-zoom-level">100%</span>
-            <button class="astryx-btn btn-sm btn-ghost" id="canvas-zoom-in" title="Zoom In" aria-label="Zoom In">
+            <button class="astryx-btn btn-sm btn-ghost" id="canvas-zoom-in" data-astryx-tooltip="Zoom In" aria-label="Zoom In">
               <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
             </button>
-            <button class="astryx-btn btn-sm btn-ghost" id="canvas-reset-btn" title="Reset Viewport">
+            <button class="astryx-btn btn-sm btn-ghost" id="canvas-reset-btn" data-astryx-tooltip="Reset Viewport">
               <span style="display:flex; align-items:center;">${astryxIcons.refresh}</span>
             </button>
           </div>
@@ -115,7 +115,7 @@ export function renderCanvasView(): string {
           </div>
 
           <!-- Position-Fixed Minimap Radar Overlay -->
-          <div class="canvas-minimap-box" id="canvas-minimap" title="Organization Minimap (Drag or Click to Pan)">
+          <div class="canvas-minimap-box" id="canvas-minimap" data-astryx-tooltip="Organization Minimap (Drag or Click to Pan)">
             <div class="minimap-viewport-indicator" id="minimap-indicator"></div>
           </div>
 

@@ -444,3 +444,12 @@
 2026-09-03 00:27 | Fix ReferenceError in ui-admin-scripts.ts by moving initialization calls after function definitions and resolving DOM references dynamically
 2026-09-03 00:34 | Fix App Details modal opening and visibility by adding .open class and dynamic DOM resolution in ui-apps-scripts.ts
 2026-09-03 00:36 | [a9936b1] feat(portal): add dynamic micro apps discovery real audit logs and details modal fix (+2355, -663)
+2026-09-03 00:36 | Commit a9936b1: dynamic micro-apps discovery, real audit logs, and app details modal fix
+2026-09-03 08:58 | Comprehensive code, logic, security, and hardcoding audit of @forge/portal
+2026-09-03 09:22 | Explain dev database persistence, password reset flow, and production storage architecture
+2026-09-03 09:24 | Remediated @forge/portal: dedicated portal.db isolation, real-time persistence, zero hardcoding, strict RBAC, XSS defense, and Astryx tooltips
+2026-09-03 09:31 | Fixed browser syntax error in portal canvas: replaced unescaped regex literal in escapeCsvField with charAt check and closed exportCsvBtn block
+2026-09-03 09:35 | Fixed browser unclosed string syntax error in escapeCsvField using charCodeAt and served SVG favicon on /favicon.ico with 200 OK
+2026-09-03 09:40 | Removed Workspace Mode header and Workspace Settings menu item from profile popover for regular employee users
+2026-09-03 09:44 | Prevented browser console DevTools Web Vitals noise error via preventDefault and early head script error suppression
+2026-09-03 09:46 | [c9c5275] fix(portal): complete audit remediation, portal.db isolation, real-time persistence, and RBAC hardening (+2958, -862)

@@ -63,18 +63,25 @@ export function initBrowserLogBridge(
     );
   };
 
-  window.addEventListener('error', (event) => {
-    // Suppress browser extension, Chrome DevTools, and third-party script errors
-    if (isNoise(event.message, event.filename, event.error?.stack)) {
-      return;
-    }
-    sendBrowserLog('ERROR', event.message || 'Uncaught Script Error', event.error?.stack);
-  });
+  window.addEventListener(
+    'error',
+    (event) => {
+      // Suppress browser extension, Chrome DevTools, and third-party script errors
+      if (isNoise(event.message, event.filename, event.error?.stack)) {
+        if (typeof event.preventDefault === 'function') event.preventDefault();
+        if (typeof event.stopImmediatePropagation === 'function') event.stopImmediatePropagation();
+        return;
+      }
+      sendBrowserLog('ERROR', event.message || 'Uncaught Script Error', event.error?.stack);
+    },
+    true
+  );
 
   window.addEventListener('unhandledrejection', (event) => {
     const msg = event.reason instanceof Error ? event.reason.message : String(event.reason);
     const stack = event.reason instanceof Error ? event.reason.stack : undefined;
     if (isNoise(msg, undefined, stack)) {
+      if (typeof event.preventDefault === 'function') event.preventDefault();
       return;
     }
     sendBrowserLog('ERROR', `Unhandled Promise Rejection: ${msg}`, stack);

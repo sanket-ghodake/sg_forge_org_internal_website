@@ -1,6 +1,7 @@
 /**
  * @forge/portal - Apps & Tools Hub Client Controller (2026 LTS)
- * Human-Factor UI: Simplified 2-mode switcher, real-time pinning, unclipped cards, search & category filtering.
+ * Human-Factor UI: 2-mode switcher, real-time pinning, unclipped cards, search, category filtering,
+ * and database-backed application access request persistence.
  */
 
 export function getAppsClientScript(): string {
@@ -8,6 +9,19 @@ export function getAppsClientScript(): string {
     (function() {
       var PINNED_STORAGE_KEY = 'forge:v1:portal:pinned_apps';
       var VIEW_MODE_KEY = 'forge:v1:portal:apps_view_mode';
+
+      function escapeHtml(str) {
+        return String(str || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function getApiPrefix() {
+        return window.location.pathname.startsWith('/portal') ? '/portal' : '';
+      }
 
       // ── 1. Simple View Mode Switching ──
       function initAppsTabs() {
@@ -46,7 +60,7 @@ export function getAppsClientScript(): string {
           var firstId = firstCard.getAttribute('data-app-id');
           if (firstId) return [firstId];
         }
-        return ['expenses'];
+        return [];
       }
 
       function savePinnedAppIds(ids) {
@@ -73,7 +87,7 @@ export function getAppsClientScript(): string {
           card.classList.toggle('is-pinned', isPinned);
           if (pinBtn) {
             pinBtn.classList.toggle('active', isPinned);
-            pinBtn.setAttribute('title', isPinned ? 'Unpin from favorites' : 'Pin to favorites');
+            pinBtn.setAttribute('data-astryx-tooltip', isPinned ? 'Unpin from favorites' : 'Pin to favorites');
             var svg = pinBtn.querySelector('svg');
             if (svg) svg.setAttribute('fill', isPinned ? 'currentColor' : 'none');
           }
@@ -90,13 +104,13 @@ export function getAppsClientScript(): string {
               var icon = card.querySelector('.app-card-icon-box') ? card.querySelector('.app-card-icon-box').innerHTML : '';
               var launchLink = card.querySelector('.app-launch-action') ? card.querySelector('.app-launch-action').getAttribute('href') : '#';
               
-              cardsHtml += '<a href="' + launchLink + '" class="pinned-dock-card" data-app-id="' + id + '">' +
+              cardsHtml += '<a href="' + escapeHtml(launchLink) + '" class="pinned-dock-card" data-app-id="' + escapeHtml(id) + '">' +
                 '<div class="dock-card-icon">' + icon + '</div>' +
                 '<div class="dock-card-info">' +
-                  '<span class="dock-card-title">' + name + '</span>' +
-                  '<span class="dock-card-category">' + cat + '</span>' +
+                  '<span class="dock-card-title">' + escapeHtml(name) + '</span>' +
+                  '<span class="dock-card-category">' + escapeHtml(cat) + '</span>' +
                 '</div>' +
-                '<span class="status-indicator status-online" title="Ready to launch"></span>' +
+                '<span class="status-indicator status-online" data-astryx-tooltip="Ready to launch"></span>' +
               '</a>';
             }
           });
@@ -210,7 +224,7 @@ export function getAppsClientScript(): string {
         if (listBtn) listBtn.addEventListener('click', function() { applyViewMode('list'); });
       }
 
-      // ── 5. Real-Time Request Access Flow ──
+      // ── 5. Real-Time Persistent Request Access Engine ──
       var activeRequests = [];
 
       function updateRequestsUI() {
@@ -242,14 +256,17 @@ export function getAppsClientScript(): string {
             '</div>' +
             '<div class="requests-cards-stack">' +
               activeRequests.map(function(r) {
+                var safeAppName = escapeHtml(r.appName);
+                var safeReason = escapeHtml(r.reasonType + (r.notes ? ' · ' + r.notes : ''));
+                var safeId = escapeHtml(r.id);
                 return '<div class="user-request-chip">' +
                   '<div class="user-request-info">' +
-                    '<strong>' + r.appName + '</strong>' +
-                    '<span class="user-request-reason">' + r.reason + '</span>' +
+                    '<strong>' + safeAppName + '</strong>' +
+                    '<span class="user-request-reason">' + safeReason + '</span>' +
                   '</div>' +
                   '<div class="user-request-status">' +
                     '<span class="astryx-badge badge-warning">Pending Approval</span>' +
-                    '<button class="astryx-btn btn-sm btn-ghost cancel-user-req-btn" data-req-app="' + r.appName + '" style="color: var(--forge-danger);">Cancel</button>' +
+                    '<button class="astryx-btn btn-sm btn-ghost cancel-user-req-btn" data-req-id="' + safeId + '" data-req-app="' + safeAppName + '" style="color: var(--forge-danger);">Cancel</button>' +
                   '</div>' +
                 '</div>';
               }).join('') +
@@ -258,20 +275,32 @@ export function getAppsClientScript(): string {
         }
       }
 
+      async function loadUserAccessRequests() {
+        try {
+          var res = await fetch(getApiPrefix() + '/api/v1/portal/apps/requests');
+          if (!res.ok) return;
+          var body = await res.json();
+          activeRequests = body.data || [];
+          updateRequestsUI();
+        } catch(e) {}
+      }
+
       function initRequestAccess() {
         var reqModal = document.getElementById('modal-request-access');
         var appNameSpan = document.getElementById('req-access-app-name');
         var submitBtn = document.getElementById('submit-access-req-btn');
         var reasonSelect = document.getElementById('req-access-justification-type');
         var reasonText = document.getElementById('req-access-reason');
-        var activeRequestTargetApp = '';
+        var activeRequestTargetAppId = '';
+        var activeRequestTargetAppName = '';
 
         document.addEventListener('click', function(e) {
           var reqBtn = e.target.closest('.request-access-btn');
           if (reqBtn && reqModal) {
             e.preventDefault();
-            activeRequestTargetApp = reqBtn.getAttribute('data-app-name') || 'Application';
-            if (appNameSpan) appNameSpan.textContent = activeRequestTargetApp;
+            activeRequestTargetAppId = reqBtn.getAttribute('data-app-id') || 'app_custom';
+            activeRequestTargetAppName = reqBtn.getAttribute('data-app-name') || 'Application';
+            if (appNameSpan) appNameSpan.textContent = activeRequestTargetAppName;
             if (reasonText) reasonText.value = '';
             reqModal.classList.add('active');
             reqModal.setAttribute('aria-hidden', 'false');
@@ -279,38 +308,54 @@ export function getAppsClientScript(): string {
         });
 
         if (submitBtn && reqModal) {
-          submitBtn.addEventListener('click', function() {
+          submitBtn.addEventListener('click', async function() {
             var reasonType = reasonSelect ? reasonSelect.value : 'Core Job Requirement';
-            var note = reasonText ? reasonText.value.trim() : '';
-            var fullReason = reasonType + (note ? ' - ' + note : '');
+            var notes = reasonText ? reasonText.value.trim() : '';
 
-            activeRequests.unshift({
-              appName: activeRequestTargetApp,
-              reason: fullReason,
-              date: new Date().toLocaleDateString()
-            });
+            try {
+              var res = await fetch(getApiPrefix() + '/api/v1/portal/apps/requests', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  appId: activeRequestTargetAppId,
+                  appName: activeRequestTargetAppName,
+                  reasonType: reasonType,
+                  notes: notes
+                })
+              });
+              if (res.ok) {
+                if (window.astryxToast) {
+                  window.astryxToast('Access request submitted for ' + activeRequestTargetAppName, 'success');
+                }
+                loadUserAccessRequests();
+              }
+            } catch(e) {}
 
-            updateRequestsUI();
             reqModal.classList.remove('active');
             reqModal.setAttribute('aria-hidden', 'true');
-
-            if (window.astryxToast) {
-              window.astryxToast('Access request submitted for ' + activeRequestTargetApp, 'success');
-            }
           });
         }
 
-        // Cancel Request Handler
-        document.addEventListener('click', function(e) {
+        // Cancel Request Handler with Database Sync
+        document.addEventListener('click', async function(e) {
           var cancelBtn = e.target.closest('.cancel-user-req-btn');
           if (cancelBtn) {
             e.preventDefault();
-            var targetApp = cancelBtn.getAttribute('data-req-app');
-            activeRequests = activeRequests.filter(function(r) { return r.appName !== targetApp; });
-            updateRequestsUI();
-            if (window.astryxToast) {
-              window.astryxToast('Access request cancelled', 'info');
-            }
+            var reqId = cancelBtn.getAttribute('data-req-id');
+            try {
+              var res = await fetch(getApiPrefix() + '/api/v1/portal/apps/requests/cancel', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: reqId })
+              });
+              if (res.ok) {
+                activeRequests = activeRequests.filter(function(r) { return r.id !== reqId; });
+                updateRequestsUI();
+                if (window.astryxToast) {
+                  window.astryxToast('Access request cancelled', 'info');
+                }
+              }
+            } catch(e) {}
           }
         });
       }
@@ -344,7 +389,7 @@ export function getAppsClientScript(): string {
               if (dTags) {
                 var tagArr = tags.split(' ').filter(Boolean);
                 dTags.innerHTML = tagArr.map(function(t) {
-                  return '<span class="app-tag-pill">' + t + '</span>';
+                  return '<span class="app-tag-pill">' + escapeHtml(t) + '</span>';
                 }).join('');
               }
               if (dActionBtn) {
@@ -381,17 +426,7 @@ export function getAppsClientScript(): string {
       }
 
       // Initializer
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-          initAppsTabs();
-          initPinHandlers();
-          updatePinnedDockUI();
-          initFilterHandlers();
-          initViewMode();
-          initRequestAccess();
-          initAppDetailsModal();
-        });
-      } else {
+      function start() {
         initAppsTabs();
         initPinHandlers();
         updatePinnedDockUI();
@@ -399,6 +434,13 @@ export function getAppsClientScript(): string {
         initViewMode();
         initRequestAccess();
         initAppDetailsModal();
+        loadUserAccessRequests();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', start);
+      } else {
+        start();
       }
     })();
   `;

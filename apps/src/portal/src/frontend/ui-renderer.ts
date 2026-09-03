@@ -15,6 +15,15 @@ import { getPortalClientScript } from './ui-scripts';
 import { getPortalApps } from './ui-apps-data';
 import { getLiveNotifications } from '../backend/inbox-service';
 
+function escapeHtml(str: string): string {
+  return (str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 export function renderPortalHtml(user?: HeaderUserContext): string {
   const brand = loadBrandConfig();
   const userContext: HeaderUserContext = {
@@ -32,15 +41,43 @@ export function renderPortalHtml(user?: HeaderUserContext): string {
     unreadCount = notifs.filter((n) => n.isUnread).length;
   } catch {}
 
+  const safeBrandName = escapeHtml(brand.name);
+  const safeUserJson = JSON.stringify(userContext).replace(/</g, '\\u003c');
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${brand.name} Portal - Workspace & Admin Console</title>
+  <title>${safeBrandName} Portal - Workspace & Admin Console</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/></svg>">
   ${getHeadStateScript({ defaultTheme: 'dark' })}
   <script>
     (function() {
+      try {
+        var isNoise = function(m, s, stk) {
+          var str = ((m || '') + ' ' + (s || '') + ' ' + (stk || '')).toLowerCase();
+          return (
+            str.indexOf("reading 'starttime'") !== -1 ||
+            str.indexOf("reportallchanges") !== -1 ||
+            str.indexOf("chrome-extension:") !== -1 ||
+            (str.indexOf("starttime") !== -1 && (str.indexOf("vm") !== -1 || str.indexOf("<anonymous>") !== -1))
+          );
+        };
+        window.addEventListener('error', function(e) {
+          if (isNoise(e.message, e.filename, e.error && e.error.stack)) {
+            e.preventDefault();
+            if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+            return true;
+          }
+        }, true);
+        var prevOnError = window.onerror;
+        window.onerror = function(msg, url, line, col, err) {
+          if (isNoise(msg, url, err && err.stack)) return true;
+          if (typeof prevOnError === 'function') return prevOnError.apply(this, arguments);
+        };
+      } catch(e) {}
+
       try {
         var p = new URLSearchParams(window.location.search);
         var v = p.get('view') || (window.location.hash ? window.location.hash.slice(1) : '');
@@ -84,7 +121,7 @@ export function renderPortalHtml(user?: HeaderUserContext): string {
 
   <!-- Interactive Scripts -->
   <script>
-    window.__PORTAL_USER__ = ${JSON.stringify(userContext)};
+    window.__PORTAL_USER__ = ${safeUserJson};
     ${getAstryxToastScript()}
     ${getAstryxDropdownScript()}
     ${getAstryxTooltipScript()}

@@ -20,6 +20,19 @@ export function renderPortalHeader(user: HeaderUserContext): string {
   const roleDisplay = user.isAdmin ? 'Admin' : 'Employee';
   const initial = (user.displayName || 'U').charAt(0).toUpperCase();
 
+  const safeDisplayName = (user.displayName || 'Authorized Member')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+  const safeEmail = (user.email || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
   return `
     <header class="portal-header">
       <!-- Left: Brand & Org Switcher -->
@@ -36,7 +49,7 @@ export function renderPortalHeader(user: HeaderUserContext): string {
 
         <div class="portal-header-divider"></div>
 
-        <button class="portal-search-trigger" id="portal-search-btn" title="Open Quick Finder (⌘K)">
+        <button class="portal-search-trigger" id="portal-search-btn" data-astryx-tooltip="Open Quick Finder (⌘K)">
           <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           <span>Search anything...</span>
           <kbd class="portal-kbd">⌘K</kbd>
@@ -47,7 +60,7 @@ export function renderPortalHeader(user: HeaderUserContext): string {
       <div class="portal-header-right">
         <div class="user-menu-wrapper" style="position: relative;">
           <!-- User Trigger Button (Icon Only) -->
-          <button class="user-profile-trigger" id="user-profile-menu-btn" title="Account & Preferences (${user.displayName})" aria-haspopup="true" aria-expanded="false" data-user-id="${user.id}">
+          <button class="user-profile-trigger" id="user-profile-menu-btn" data-astryx-tooltip="Account & Preferences (${safeDisplayName})" aria-haspopup="true" aria-expanded="false" data-user-id="${user.id}">
             <div class="user-avatar-initial">${initial}</div>
           </button>
 
@@ -57,8 +70,8 @@ export function renderPortalHeader(user: HeaderUserContext): string {
             <div class="popover-user-card">
               <div class="popover-avatar">${initial}</div>
               <div class="popover-user-info">
-                <div class="popover-name">${user.displayName}</div>
-                <div class="popover-email" data-email="${user.email}">${user.email}</div>
+                <div class="popover-name">${safeDisplayName}</div>
+                <div class="popover-email" data-email="${safeEmail}">${safeEmail}</div>
                 <div class="popover-role-badge" id="popover-role-badge">
                   <span style="width: 5px; height: 5px; border-radius: 50%; background: var(--forge-primary); display: inline-block;"></span>
                   <span id="popover-role-text">${roleDisplay} Access</span>
@@ -66,10 +79,11 @@ export function renderPortalHeader(user: HeaderUserContext): string {
               </div>
             </div>
 
+            ${user.isAdmin ? `
             <div class="popover-divider"></div>
 
-            <!-- Role Mode Switcher -->
-            <div class="popover-section-label">Workspace Mode</div>
+            <!-- Role Mode Switcher (Admin Only) -->
+            <div class="popover-section-label" id="workspace-mode-label">Workspace Mode</div>
             <button class="popover-item" id="role-preview-toggle" role="menuitem">
               <div style="display: flex; align-items: center; gap: 0.6rem;">
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -79,6 +93,9 @@ export function renderPortalHeader(user: HeaderUserContext): string {
               </div>
               <span class="popover-badge-pill" id="role-preview-label">${roleDisplay}</span>
             </button>
+            ` : ''}
+
+            <div class="popover-divider"></div>
 
             <!-- Theme Switcher -->
             <div class="popover-section-label">Appearance</div>
@@ -115,6 +132,7 @@ export function renderPortalHeader(user: HeaderUserContext): string {
               </div>
             </button>
 
+            ${user.isAdmin ? `
             <button class="popover-item popover-nav-action" data-nav="admin-settings" role="menuitem">
               <div style="display: flex; align-items: center; gap: 0.6rem;">
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -124,6 +142,7 @@ export function renderPortalHeader(user: HeaderUserContext): string {
                 <span>Workspace Settings</span>
               </div>
             </button>
+            ` : ''}
 
             <div class="popover-divider"></div>
 

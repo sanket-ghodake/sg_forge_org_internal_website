@@ -82,7 +82,7 @@ export function renderAppsView(userContextOrAdmin: boolean | string[] = false): 
                   <span class="dock-card-title">${app.name}</span>
                   <span class="dock-card-category">${app.category}</span>
                 </div>
-                <span class="status-indicator status-online" title="Ready to launch"></span>
+                <span class="status-indicator status-online" data-astryx-tooltip="Ready to launch"></span>
               </a>
             `).join('')}
           </div>
@@ -95,10 +95,10 @@ export function renderAppsView(userContextOrAdmin: boolean | string[] = false): 
             ${uniqueCategories.map((cat) => `<button class="cat-pill" data-cat="${cat}">${cat}</button>`).join('')}
           </div>
           <div class="view-mode-toggle">
-            <button class="view-mode-btn active" id="view-mode-grid" title="Grid View">
+            <button class="view-mode-btn active" id="view-mode-grid" data-astryx-tooltip="Grid View">
               <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
             </button>
-            <button class="view-mode-btn" id="view-mode-list" title="Compact List View">
+            <button class="view-mode-btn" id="view-mode-list" data-astryx-tooltip="Compact List View">
               <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
             </button>
           </div>
@@ -116,7 +116,7 @@ export function renderAppsView(userContextOrAdmin: boolean | string[] = false): 
                     <span class="app-card-cat">${app.category}</span>
                   </div>
                 </div>
-                <button class="app-pin-btn ${app.isPinned ? 'active' : ''}" data-pin-id="${app.id}" title="${app.isPinned ? 'Unpin from favorites' : 'Pin to favorites'}">
+                <button class="app-pin-btn ${app.isPinned ? 'active' : ''}" data-pin-id="${app.id}" data-astryx-tooltip="${app.isPinned ? 'Unpin from favorites' : 'Pin to favorites'}">
                   <svg viewBox="0 0 24 24" width="14" height="14" fill="${app.isPinned ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                 </button>
               </div>
@@ -128,12 +128,12 @@ export function renderAppsView(userContextOrAdmin: boolean | string[] = false): 
               </div>
 
               <div class="app-card-footer">
-                <div class="app-status-badge" title="Single Sign-On Active">
+                <div class="app-status-badge" data-astryx-tooltip="Single Sign-On Active">
                   <span class="status-indicator status-online"></span>
                   <span style="font-size: 0.74rem; font-weight: 500; color: var(--forge-text-muted);">Active</span>
                 </div>
                 <div class="app-card-actions">
-                  <button class="astryx-btn btn-sm btn-ghost open-app-info-btn" data-info-id="${app.id}" title="App Details">
+                  <button class="astryx-btn btn-sm btn-ghost open-app-info-btn" data-info-id="${app.id}" data-astryx-tooltip="App Details">
                     Details
                   </button>
                   <a href="${app.ingressPath}" class="astryx-btn btn-sm btn-primary app-launch-action" target="_self">

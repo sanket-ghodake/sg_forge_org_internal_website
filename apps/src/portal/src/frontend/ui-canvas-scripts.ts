@@ -18,6 +18,15 @@ export function getCanvasClientScript(): string {
       let activeDivisionFilter = 'all';
       let activeMode = 'canvas';
 
+      function escapeHtml(str) {
+        return String(str || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
       // Pan State
       let isPanning = false;
       let startX = 0, startY = 0;
@@ -249,7 +258,8 @@ export function getCanvasClientScript(): string {
         if (!deptFiltersContainer) return;
         deptFiltersContainer.innerHTML = '<button class="filter-pill active" data-div="all">All Divisions</button>' +
           divisions.map(function(d) {
-            return '<button class="filter-pill" data-div="' + d.name + '">' + d.name + ' (' + d.headCount + ')</button>';
+            const safeDName = escapeHtml(d.name);
+            return '<button class="filter-pill" data-div="' + safeDName + '">' + safeDName + ' (' + d.headCount + ')</button>';
           }).join('');
 
         deptFiltersContainer.querySelectorAll('.filter-pill').forEach(function(pill) {
@@ -345,27 +355,32 @@ export function getCanvasClientScript(): string {
         let nodesHtml = '';
         nodePositions.forEach(function(pos, nodeId) {
           const n = pos.item.node;
-          const initials = n.name.split(' ').map(function(w) { return w[0]; }).join('').slice(0, 2).toUpperCase();
+          const initials = escapeHtml(n.name.split(' ').map(function(w) { return w[0]; }).join('').slice(0, 2).toUpperCase());
           const statusClass = n.status === 'ONLINE' ? 'status-online' : (n.status === 'BUSY' ? 'status-busy' : 'status-away');
+          const safeId = escapeHtml(n.id);
+          const safeDiv = escapeHtml(n.division);
+          const safeName = escapeHtml(n.name);
+          const safeTitle = escapeHtml(n.title);
+          const safeStatus = escapeHtml(n.status);
 
           let expandHtml = '';
           if (n.hasMoreChildren || (n.directReportCount > 0 && (!n.children || !n.children.length))) {
-            expandHtml = '<button class="node-expand-btn" data-expand-id="' + n.id + '">+ ' + n.directReportCount + ' Reports (Expand Team)</button>';
+            expandHtml = '<button class="node-expand-btn" data-expand-id="' + safeId + '">+ ' + n.directReportCount + ' Reports (Expand Team)</button>';
           }
 
           nodesHtml += '<div class="canvas-org-cluster" style="left: ' + pos.x + 'px; top: ' + pos.y + 'px;" ' +
-            'data-node-id="' + n.id + '" data-division="' + n.division + '" data-level="' + n.level + '" data-manager="' + (n.managerId || '') + '">' +
+            'data-node-id="' + safeId + '" data-division="' + safeDiv + '" data-level="' + n.level + '" data-manager="' + escapeHtml(n.managerId || '') + '">' +
             '<div class="cluster-header">' +
-              '<span class="cluster-badge">' + n.division + '</span>' +
+              '<span class="cluster-badge">' + safeDiv + '</span>' +
               '<span class="cluster-count">L' + n.level + (n.directReportCount > 0 ? ' • ' + n.directReportCount + ' reports' : '') + '</span>' +
             '</div>' +
             '<div class="org-node-card ' + (n.level === 1 ? 'node-lead' : '') + '">' +
               '<div class="node-avatar">' + initials + '</div>' +
               '<div class="node-info">' +
-                '<div class="node-name">' + n.name + '</div>' +
-                '<div class="node-role">' + n.title + '</div>' +
+                '<div class="node-name">' + safeName + '</div>' +
+                '<div class="node-role">' + safeTitle + '</div>' +
               '</div>' +
-              '<span class="status-indicator ' + statusClass + '" title="' + n.status + '"></span>' +
+              '<span class="status-indicator ' + statusClass + '" data-astryx-tooltip="' + safeStatus + '"></span>' +
             '</div>' +
             expandHtml +
           '</div>';

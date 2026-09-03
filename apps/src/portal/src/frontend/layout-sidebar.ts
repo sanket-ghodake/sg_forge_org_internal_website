@@ -79,7 +79,7 @@ export function renderPortalSidebar(isAdmin: boolean, counts?: { appsCount?: num
         <!-- Section: Workspace -->
         <div class="portal-nav-section-label">Workspace</div>
         ${navItems.map(item => `
-          <button class="portal-nav-item" data-view="${item.id}" title="${item.label}">
+          <button class="portal-nav-item" data-view="${item.id}" data-astryx-tooltip="${item.label}">
             <span class="portal-nav-icon">${item.iconSvg}</span>
             <span class="portal-nav-label">${item.label}</span>
             ${item.badge ? `<span class="portal-nav-badge">${item.badge}</span>` : ''}
@@ -94,7 +94,7 @@ export function renderPortalSidebar(isAdmin: boolean, counts?: { appsCount?: num
             <span>Admin Console</span>
           </div>
           ${ADMIN_NAV_ITEMS.map(item => `
-            <button class="portal-nav-item" data-view="${item.id}" title="${item.label}">
+            <button class="portal-nav-item" data-view="${item.id}" data-astryx-tooltip="${item.label}">
               <span class="portal-nav-icon">${item.iconSvg}</span>
               <span class="portal-nav-label">${item.label}</span>
             </button>

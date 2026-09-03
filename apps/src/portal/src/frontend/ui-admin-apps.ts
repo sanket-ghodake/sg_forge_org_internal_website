@@ -66,11 +66,11 @@ export function renderAdminAppsView(): string {
                   </span>
                 </td>
                 <td>
-                  <span class="status-indicator status-online"></span>
-                  <span style="font-size: 0.8rem; color: var(--forge-text-muted); margin-left: 4px;">Active (200 OK)</span>
+                  <span class="status-indicator status-${app.status === 'ONLINE' ? 'online' : 'away'}"></span>
+                  <span style="font-size: 0.8rem; color: var(--forge-text-muted); margin-left: 4px;">${app.status === 'ONLINE' ? 'Active Ingress' : 'Standby'}</span>
                 </td>
                 <td style="text-align: right;">
-                  <button class="astryx-btn btn-sm btn-ghost edit-app-policy-btn" data-id="${app.id}" title="Edit Policy">
+                  <button class="astryx-btn btn-sm btn-ghost edit-app-policy-btn" data-id="${app.id}" data-astryx-tooltip="Configure Access Policy">
                     ${astryxIcons.settings || '⚙️'}
                   </button>
                 </td>

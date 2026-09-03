@@ -24,6 +24,15 @@ export type NotificationItem = LiveNotificationItem;
 export const DEFAULT_NOTIFICATIONS: NotificationItem[] = [];
 export const SAMPLE_NOTIFICATIONS = DEFAULT_NOTIFICATIONS;
 
+function escapeHtml(str: string): string {
+  return (str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 export function renderInboxView(user?: HeaderUserContext): string {
   let notifications: NotificationItem[] = [];
   let events: CompanyEventItem[] = DEFAULT_COMPANY_EVENTS;
@@ -158,7 +167,7 @@ export function renderInboxView(user?: HeaderUserContext): string {
                 <span class="search-icon">${astryxIcons.search || '🔍'}</span>
                 <input type="text" id="inbox-search-input" class="inbox-search-input" placeholder="Filter notices by sender or topic..." />
               </div>
-              <label class="inbox-toggle-wrap" title="Show only unread items">
+              <label class="inbox-toggle-wrap" data-astryx-tooltip="Show only unread items">
                 <input type="checkbox" id="inbox-unread-only-toggle" class="inbox-toggle-input" />
                 <span class="inbox-toggle-label">Unread only</span>
               </label>
@@ -168,10 +177,15 @@ export function renderInboxView(user?: HeaderUserContext): string {
           <!-- Notification Feed List -->
           <div class="notifications-feed-list" id="notifications-feed-list">
             ${notifications.map(n => {
-              const initial = n.sender.charAt(0).toUpperCase();
+              const initial = escapeHtml(n.sender ? n.sender.charAt(0).toUpperCase() : 'U');
+              const safeTitle = escapeHtml(n.title);
+              const safeMessage = escapeHtml(n.message);
+              const safeSender = escapeHtml(n.sender);
+              const safeSenderRole = n.senderRole ? escapeHtml(n.senderRole) : '';
+              const safeActionLabel = n.actionLabel ? escapeHtml(n.actionLabel) : '';
               return `
                 <div class="astryx-card inbox-feed-card type-${n.type.toLowerCase()} ${n.isUnread ? 'is-unread' : ''}" data-id="${n.id}" data-type="${n.type}">
-                  ${n.isUnread ? '<span class="unread-indicator-dot" title="Unread"></span>' : ''}
+                  ${n.isUnread ? '<span class="unread-indicator-dot" data-astryx-tooltip="Unread"></span>' : ''}
                   
                   <div class="inbox-card-avatar type-${n.type.toLowerCase()}">
                     ${n.type === 'ACTION' ? '⚡' : ''}
@@ -184,36 +198,36 @@ export function renderInboxView(user?: HeaderUserContext): string {
                   <div class="inbox-card-body">
                     <div class="inbox-card-header-row">
                       <div class="inbox-card-tags">
-                        <span class="inbox-category-pill pill-${n.type.toLowerCase()}">${n.categoryTag}</span>
+                        <span class="inbox-category-pill pill-${n.type.toLowerCase()}">${escapeHtml(n.categoryTag)}</span>
                         ${n.priority === 'HIGH' ? '<span class="astryx-badge badge-warning">High Priority</span>' : ''}
                       </div>
-                      <span class="inbox-card-time">${n.timestamp}</span>
+                      <span class="inbox-card-time">${escapeHtml(n.timestamp)}</span>
                     </div>
 
-                    <h3 class="inbox-card-title">${n.title}</h3>
-                    <p class="inbox-card-message">${n.message}</p>
+                    <h3 class="inbox-card-title">${safeTitle}</h3>
+                    <p class="inbox-card-message">${safeMessage}</p>
 
                     <div class="inbox-card-footer-row">
                       <div class="inbox-card-sender-info">
                         <div class="sender-mini-avatar">${initial}</div>
                         <div class="sender-text">
-                          <span class="inbox-card-sender">${n.sender}</span>
-                          ${n.senderRole ? `<span class="sender-role"> · ${n.senderRole}</span>` : ''}
+                          <span class="inbox-card-sender">${safeSender}</span>
+                          ${safeSenderRole ? `<span class="sender-role"> · ${safeSenderRole}</span>` : ''}
                         </div>
                       </div>
 
                       <div class="inbox-card-actions">
                         ${n.type === 'CELEBRATION' ? `
                           <button class="astryx-btn btn-sm btn-outline inbox-celebrate-btn" data-id="${n.id}">
-                            ${n.actionLabel || 'Send Congratulations 🎉'}
+                            ${safeActionLabel || 'Send Congratulations 🎉'}
                           </button>
-                        ` : n.actionLabel ? `
-                          <button class="astryx-btn btn-sm ${n.type === 'ACTION' ? 'btn-primary' : 'btn-outline'} inbox-action-cta" data-action="${n.actionType}" data-title="${n.title}">
-                            ${n.actionLabel}
+                        ` : safeActionLabel ? `
+                          <button class="astryx-btn btn-sm ${n.type === 'ACTION' ? 'btn-primary' : 'btn-outline'} inbox-action-cta" data-action="${n.actionType || 'view'}" data-title="${safeTitle}">
+                            ${safeActionLabel}
                           </button>
                         ` : ''}
                         
-                        <button class="astryx-btn btn-sm btn-ghost inbox-dismiss-btn" data-id="${n.id}" title="Dismiss notice">
+                        <button class="astryx-btn btn-sm btn-ghost inbox-dismiss-btn" data-id="${n.id}" data-astryx-tooltip="Dismiss notice">
                           Dismiss
                         </button>
                       </div>

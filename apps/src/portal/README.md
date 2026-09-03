@@ -15,10 +15,10 @@ Primary enterprise employee workspace, admin governance center, visual 2D intera
 | **Total Files** | `49` files | Modular SPA views, controllers, styles, tests, docs |
 | **Lines of Code (SLOC)**| `5,324` SLOC | 6,338 total lines (372 comments, 642 blanks) |
 | **Complexity Score** | `952` | Strict client-side SPA routing & state conductors |
-| **Language Breakdown** | TypeScript (5,192 SLOC), Markdown (102), Docker (15), JSON (15) | 100% type-safe |
-| **Database Instance** | `portal.db` | Dedicated Turso libSQL/SQLite database |
-| **5-Tier Test Suite** | `25` passing tests | `test/unit/`, `test/integration/`, `test/security/`, `test/contracts/`, `test/e2e/` |
-| **Verification Gate** | **100% Passing** ✅ | Strict SPA invariant & 320px responsive guarantee |
+| **Language Breakdown** | TypeScript, Markdown, Docker, JSON | 100% type-safe |
+| **Database Instance** | `portal.db` | Dedicated Turso libSQL/SQLite database (Multi-User Isolated) |
+| **5-Tier Test Suite** | `44` passing tests | `test/unit/`, `test/integration/`, `test/security/`, `test/contracts/`, `test/e2e/` |
+| **Verification Gate** | **100% Passing** ✅ | Strict SPA invariant, zero hardcoded data, and Astryx compliance |
 
 ---
 

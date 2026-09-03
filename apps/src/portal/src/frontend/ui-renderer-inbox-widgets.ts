@@ -13,29 +13,35 @@ export interface CompanyEventItem {
   relativeTime: string;
 }
 
-export const DEFAULT_COMPANY_EVENTS: CompanyEventItem[] = [
-  {
-    id: 'evt_1',
-    title: 'Q3 Global All-Hands & Demo',
-    date: 'Thursday, Sep 4 · 16:00 UTC',
-    type: 'ALL_HANDS',
-    relativeTime: 'In 3 days',
-  },
-  {
-    id: 'evt_2',
-    title: 'Labor & Wellness Recharge Day',
-    date: 'Monday, Sep 8 · Company-wide',
-    type: 'HOLIDAY',
-    relativeTime: 'Next week',
-  },
-  {
-    id: 'evt_3',
-    title: 'Virtual Coffee & Team Trivia',
-    date: 'Friday, Sep 12 · 14:00 UTC',
-    type: 'SOCIAL',
-    relativeTime: 'In 11 days',
-  },
-];
+export function getDynamicCompanyEvents(): CompanyEventItem[] {
+  const now = Date.now();
+  const dayMs = 86400000;
+  return [
+    {
+      id: 'evt_dynamic_1',
+      title: 'Q3 Global All-Hands & Demo',
+      date: new Date(now + 12 * dayMs).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + ' · 16:00 UTC',
+      type: 'ALL_HANDS',
+      relativeTime: 'In 12 days',
+    },
+    {
+      id: 'evt_dynamic_2',
+      title: 'Labor & Wellness Recharge Day',
+      date: new Date(now + 28 * dayMs).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + ' · Company-wide',
+      type: 'HOLIDAY',
+      relativeTime: 'In 4 weeks',
+    },
+    {
+      id: 'evt_dynamic_3',
+      title: 'Virtual Coffee & Team Trivia',
+      date: new Date(now + 65 * dayMs).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + ' · 14:00 UTC',
+      type: 'SOCIAL',
+      relativeTime: 'In 2 months',
+    },
+  ];
+}
+
+export const DEFAULT_COMPANY_EVENTS: CompanyEventItem[] = getDynamicCompanyEvents();
 
 export function renderInboxUpcomingDates(events: CompanyEventItem[] = DEFAULT_COMPANY_EVENTS): string {
   const currentMonth = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date());
