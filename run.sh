@@ -34,6 +34,7 @@ function show_help() {
     echo "  sync-proxy            Auto-generate proxy/Caddyfile dynamically from .env"
     echo "  sync-ignores          Auto-sync all 7 ignore files & .gitattributes"
     echo "  test [unit|all]       Run 5-tier test suites"
+    echo "  reset-db              Reset local development databases to pristine state"
     echo "  doctor                Run pre-flight diagnostics & environment check"
     echo "  clean                 Clean build caches and temporary logs"
     echo "  create-app <name>     Scaffold a new Micro-App from template"
@@ -155,7 +156,26 @@ case "$CMD" in
     test)
         SUITE="${2:-all}"
         echo "🧪 [${BRAND_NAME}] Running test suite: $SUITE..."
-        $PORTABLE_BUN test
+        NODE_ENV=test BUN_ENV=test FORGE_TEST_MODE=true $PORTABLE_BUN test "$@"
+        ;;
+
+    reset-db)
+        echo "⚠️ [${BRAND_NAME}] Development Database Reset Tool"
+        FORCE="${2:-}"
+        if [ "$FORCE" = "--force" ] || [ "$FORCE" = "-y" ]; then
+            CONFIRM="y"
+        else
+            read -p "Are you sure you want to delete and re-seed all local development databases? [y/N]: " -n 1 -r CONFIRM
+            echo
+        fi
+        if [[ $CONFIRM =~ ^[Yy]$ ]]; then
+            rm -f "$REPO_ROOT"/apps/data/*.db "$REPO_ROOT"/apps/data/*.db-wal "$REPO_ROOT"/apps/data/*.db-shm
+            echo "🌱 Re-initializing and seeding clean databases..."
+            ALLOW_DB_WIPE=true $PORTABLE_BUN run "$REPO_ROOT/scripts/init-all-databases.ts"
+            echo "✨ All development databases reset to pristine seeded state."
+        else
+            echo "Cancelled."
+        fi
         ;;
 
     docker)

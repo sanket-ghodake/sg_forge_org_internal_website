@@ -306,7 +306,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_auth_src_backend_api_handlers_ts_backend_api_handlers",
-      "community": 18,
+      "community": 226,
       "norm_label": "api-handlers.ts"
     },
     {
@@ -316,7 +316,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "backend_api_handlers_logger",
-      "community": 18,
+      "community": 226,
       "norm_label": "logger"
     },
     {
@@ -326,7 +326,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "backend_api_handlers_passwordresettokens",
-      "community": 18,
+      "community": 226,
       "norm_label": "passwordresettokens"
     },
     {
@@ -336,7 +336,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "backend_api_handlers_problem",
-      "community": 18,
+      "community": 226,
       "norm_label": "problem()"
     },
     {
@@ -346,7 +346,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "backend_api_handlers_extractclientip",
-      "community": 18,
+      "community": 226,
       "norm_label": "extractclientip()"
     },
     {
@@ -356,7 +356,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "backend_api_handlers_extractbearerorcookietoken",
-      "community": 18,
+      "community": 226,
       "norm_label": "extractbearerorcookietoken()"
     },
     {
@@ -366,7 +366,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "backend_api_handlers_handlelogin",
-      "community": 18,
+      "community": 296,
       "norm_label": "handlelogin()"
     },
     {
@@ -386,7 +386,7 @@
       "source_location": "L295",
       "_origin": "ast",
       "id": "backend_api_handlers_handlerefresh",
-      "community": 18,
+      "community": 226,
       "norm_label": "handlerefresh()"
     },
     {
@@ -406,7 +406,7 @@
       "source_location": "L351",
       "_origin": "ast",
       "id": "backend_api_handlers_handlebrowserlog",
-      "community": 18,
+      "community": 226,
       "norm_label": "handlebrowserlog()"
     },
     {
@@ -426,7 +426,7 @@
       "source_location": "L381",
       "_origin": "ast",
       "id": "backend_api_handlers_handledirectory",
-      "community": 267,
+      "community": 281,
       "norm_label": "handledirectory()"
     },
     {
@@ -446,7 +446,7 @@
       "source_location": "L431",
       "_origin": "ast",
       "id": "backend_api_handlers_handlegetmysessions",
-      "community": 18,
+      "community": 226,
       "norm_label": "handlegetmysessions()"
     },
     {
@@ -456,7 +456,7 @@
       "source_location": "L442",
       "_origin": "ast",
       "id": "backend_api_handlers_handlerevokeothersessions",
-      "community": 18,
+      "community": 226,
       "norm_label": "handlerevokeothersessions()"
     },
     {
@@ -466,7 +466,7 @@
       "source_location": "L472",
       "_origin": "ast",
       "id": "backend_api_handlers_handlegettelemetrylogs",
-      "community": 267,
+      "community": 226,
       "norm_label": "handlegettelemetrylogs()"
     },
     {
@@ -626,7 +626,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_audit_logger",
-      "community": 291,
+      "community": 246,
       "norm_label": "audit-logger.ts"
     },
     {
@@ -636,7 +636,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "backend_audit_logger_auditaction",
-      "community": 291,
+      "community": 246,
       "norm_label": "auditaction"
     },
     {
@@ -646,7 +646,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "backend_audit_logger_auditeventparams",
-      "community": 291,
+      "community": 246,
       "norm_label": "auditeventparams"
     },
     {
@@ -656,7 +656,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "backend_audit_logger_logauditevent",
-      "community": 18,
+      "community": 242,
       "norm_label": "logauditevent()"
     },
     {
@@ -666,7 +666,7 @@
       "source_location": "L60",
       "_origin": "ast",
       "id": "backend_audit_logger_getuseraudithistory",
-      "community": 291,
+      "community": 246,
       "norm_label": "getuseraudithistory()"
     },
     {
@@ -676,7 +676,7 @@
       "source_location": "L87",
       "_origin": "ast",
       "id": "backend_audit_logger_getorgauditlogs",
-      "community": 291,
+      "community": 246,
       "norm_label": "getorgauditlogs()"
     },
     {
@@ -686,7 +686,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_audit_session_controller",
-      "community": 291,
+      "community": 246,
       "norm_label": "audit-session-controller.ts"
     },
     {
@@ -696,7 +696,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "backend_audit_session_controller_extracttoken",
-      "community": 291,
+      "community": 246,
       "norm_label": "extracttoken()"
     },
     {
@@ -706,7 +706,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "backend_audit_session_controller_handlegetauditlogs",
-      "community": 291,
+      "community": 246,
       "norm_label": "handlegetauditlogs()"
     },
     {
@@ -716,7 +716,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "backend_audit_session_controller_handlegetusersessions",
-      "community": 291,
+      "community": 246,
       "norm_label": "handlegetusersessions()"
     },
     {
@@ -776,7 +776,7 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "backend_crypto_verifypassword",
-      "community": 18,
+      "community": 291,
       "norm_label": "verifypassword()"
     },
     {
@@ -856,7 +856,7 @@
       "source_location": "L182",
       "_origin": "ast",
       "id": "backend_crypto_verifyjwt",
-      "community": 291,
+      "community": 226,
       "norm_label": "verifyjwt()"
     },
     {
@@ -1086,7 +1086,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_iam_engine",
-      "community": 311,
+      "community": 18,
       "norm_label": "iam-engine.ts"
     },
     {
@@ -1096,7 +1096,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "backend_iam_engine_evaluatediamcontext",
-      "community": 311,
+      "community": 18,
       "norm_label": "evaluatediamcontext"
     },
     {
@@ -1106,7 +1106,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "backend_iam_engine_evaluateuserpermissions",
-      "community": 311,
+      "community": 18,
       "norm_label": "evaluateuserpermissions()"
     },
     {
@@ -1116,7 +1116,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "backend_iam_engine_haspermission",
-      "community": 311,
+      "community": 18,
       "norm_label": "haspermission()"
     },
     {
@@ -1136,7 +1136,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_org_tree_service",
-      "community": 20,
+      "community": 281,
       "norm_label": "org-tree-service.ts"
     },
     {
@@ -1146,7 +1146,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "backend_org_tree_service_logger",
-      "community": 20,
+      "community": 281,
       "norm_label": "logger"
     },
     {
@@ -1156,7 +1156,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "backend_org_tree_service_orgtreenode",
-      "community": 20,
+      "community": 281,
       "norm_label": "orgtreenode"
     },
     {
@@ -1166,7 +1166,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "backend_org_tree_service_orgtreeresponse",
-      "community": 20,
+      "community": 281,
       "norm_label": "orgtreeresponse"
     },
     {
@@ -1176,7 +1176,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "backend_org_tree_service_rawemployeerow",
-      "community": 20,
+      "community": 281,
       "norm_label": "rawemployeerow"
     },
     {
@@ -1186,7 +1186,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "backend_org_tree_service_resolvelivestatus",
-      "community": 20,
+      "community": 281,
       "norm_label": "resolvelivestatus()"
     },
     {
@@ -1196,7 +1196,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "backend_org_tree_service_getrealorgtree",
-      "community": 20,
+      "community": 281,
       "norm_label": "getrealorgtree()"
     },
     {
@@ -1206,7 +1206,7 @@
       "source_location": "L211",
       "_origin": "ast",
       "id": "backend_org_tree_service_getorgtree",
-      "community": 20,
+      "community": 281,
       "norm_label": "getorgtree()"
     },
     {
@@ -1296,7 +1296,7 @@
       "source_location": "L80",
       "_origin": "ast",
       "id": "backend_rate_limiter_resetattempts",
-      "community": 18,
+      "community": 296,
       "norm_label": "resetattempts()"
     },
     {
@@ -1316,7 +1316,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_security_headers",
-      "community": 320,
+      "community": 267,
       "norm_label": "security-headers.ts"
     },
     {
@@ -1326,7 +1326,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "backend_security_headers_security_headers",
-      "community": 320,
+      "community": 267,
       "norm_label": "security_headers"
     },
     {
@@ -1336,7 +1336,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "backend_security_headers_applysecurityheaders",
-      "community": 320,
+      "community": 267,
       "norm_label": "applysecurityheaders()"
     },
     {
@@ -1426,7 +1426,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_auth_src_backend_telemetry_ts_backend_telemetry",
-      "community": 248,
+      "community": 243,
       "norm_label": "telemetry.ts"
     },
     {
@@ -1436,7 +1436,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "apps_src_auth_src_backend_telemetry_ts_backend_telemetry_logger",
-      "community": 248,
+      "community": 243,
       "norm_label": "logger"
     },
     {
@@ -1446,7 +1446,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "backend_telemetry_telemetrylogentry",
-      "community": 248,
+      "community": 243,
       "norm_label": "telemetrylogentry"
     },
     {
@@ -1456,7 +1456,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "backend_telemetry_dualprobehealthstatus",
-      "community": 248,
+      "community": 243,
       "norm_label": "dualprobehealthstatus"
     },
     {
@@ -1466,7 +1466,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "backend_telemetry_authtelemetryengine",
-      "community": 248,
+      "community": 243,
       "norm_label": "authtelemetryengine"
     },
     {
@@ -1476,7 +1476,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "backend_telemetry_authtelemetryengine_constructor",
-      "community": 248,
+      "community": 243,
       "norm_label": ".constructor()"
     },
     {
@@ -1486,7 +1486,7 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "backend_telemetry_authtelemetryengine_ensurelogdir",
-      "community": 248,
+      "community": 243,
       "norm_label": ".ensurelogdir()"
     },
     {
@@ -1496,7 +1496,7 @@
       "source_location": "L74",
       "_origin": "ast",
       "id": "backend_telemetry_authtelemetryengine_appendlogfile",
-      "community": 248,
+      "community": 243,
       "norm_label": ".appendlogfile()"
     },
     {
@@ -1506,7 +1506,7 @@
       "source_location": "L96",
       "_origin": "ast",
       "id": "backend_telemetry_authtelemetryengine_recordlog",
-      "community": 248,
+      "community": 243,
       "norm_label": ".recordlog()"
     },
     {
@@ -1516,7 +1516,7 @@
       "source_location": "L142",
       "_origin": "ast",
       "id": "backend_telemetry_authtelemetryengine_gethealthstatus",
-      "community": 248,
+      "community": 243,
       "norm_label": ".gethealthstatus()"
     },
     {
@@ -1526,7 +1526,7 @@
       "source_location": "L188",
       "_origin": "ast",
       "id": "backend_telemetry_authtelemetryengine_getrecentlogs",
-      "community": 248,
+      "community": 243,
       "norm_label": ".getrecentlogs()"
     },
     {
@@ -1536,7 +1536,7 @@
       "source_location": "L197",
       "_origin": "ast",
       "id": "backend_telemetry_authtelemetry",
-      "community": 18,
+      "community": 226,
       "norm_label": "authtelemetry"
     },
     {
@@ -1676,7 +1676,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "db_db_getauthdb",
-      "community": 296,
+      "community": 281,
       "norm_label": "getauthdb()"
     },
     {
@@ -2036,7 +2036,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_auth_test_contracts_problem_json_test_ts_contracts_problem_json_test",
-      "community": 18,
+      "community": 296,
       "norm_label": "problem-json.test.ts"
     },
     {
@@ -2096,7 +2096,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_observability_test",
-      "community": 18,
+      "community": 226,
       "norm_label": "observability.test.ts"
     },
     {
@@ -2156,7 +2156,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "security_security_headers_test",
-      "community": 320,
+      "community": 267,
       "norm_label": "security-headers.test.ts"
     },
     {
@@ -2166,7 +2166,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_audit_sessions_test",
-      "community": 291,
+      "community": 246,
       "norm_label": "audit-sessions.test.ts"
     },
     {
@@ -2216,7 +2216,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_iam_engine_test",
-      "community": 311,
+      "community": 18,
       "norm_label": "iam-engine.test.ts"
     },
     {
@@ -2376,7 +2376,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "backend_api_handlers_handleapirequest",
-      "community": 312,
+      "community": 270,
       "norm_label": "handleapirequest()"
     },
     {
@@ -2556,7 +2556,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_auth_session",
-      "community": 270,
+      "community": 201,
       "norm_label": "auth-session.ts"
     },
     {
@@ -2566,7 +2566,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "backend_auth_session_logger",
-      "community": 270,
+      "community": 201,
       "norm_label": "logger"
     },
     {
@@ -2576,7 +2576,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "backend_auth_session_devsessionrecord",
-      "community": 270,
+      "community": 201,
       "norm_label": "devsessionrecord"
     },
     {
@@ -2666,7 +2666,7 @@
       "source_location": "L140",
       "_origin": "ast",
       "id": "backend_auth_session_devauthmanager",
-      "community": 270,
+      "community": 201,
       "norm_label": "devauthmanager"
     },
     {
@@ -2686,7 +2686,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "backend_host_controller",
-      "community": 241,
+      "community": 248,
       "norm_label": "host-controller.ts"
     },
     {
@@ -2696,7 +2696,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "backend_host_controller_diskvolumestats",
-      "community": 241,
+      "community": 248,
       "norm_label": "diskvolumestats"
     },
     {
@@ -2706,7 +2706,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "backend_host_controller_networkinterfaceinfo",
-      "community": 241,
+      "community": 248,
       "norm_label": "networkinterfaceinfo"
     },
     {
@@ -2716,7 +2716,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "backend_host_controller_hostdiagnosticsreport",
-      "community": 241,
+      "community": 248,
       "norm_label": "hostdiagnosticsreport"
     },
     {
@@ -2726,7 +2726,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "backend_host_controller_highavailabilityreport",
-      "community": 241,
+      "community": 248,
       "norm_label": "highavailabilityreport"
     },
     {
@@ -2736,7 +2736,7 @@
       "source_location": "L102",
       "_origin": "ast",
       "id": "backend_host_controller_hostcontroller",
-      "community": 241,
+      "community": 248,
       "norm_label": "hostcontroller"
     },
     {
@@ -2746,7 +2746,7 @@
       "source_location": "L103",
       "_origin": "ast",
       "id": "backend_host_controller_hostcontroller_getdiskvolumestats",
-      "community": 241,
+      "community": 248,
       "norm_label": ".getdiskvolumestats()"
     },
     {
@@ -2756,7 +2756,7 @@
       "source_location": "L132",
       "_origin": "ast",
       "id": "backend_host_controller_hostcontroller_gethostdiagnostics",
-      "community": 241,
+      "community": 248,
       "norm_label": ".gethostdiagnostics()"
     },
     {
@@ -2766,7 +2766,7 @@
       "source_location": "L209",
       "_origin": "ast",
       "id": "backend_host_controller_hostcontroller_gethighavailabilityreport",
-      "community": 241,
+      "community": 248,
       "norm_label": ".gethighavailabilityreport()"
     },
     {
@@ -2946,7 +2946,7 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller",
-      "community": 241,
+      "community": 249,
       "norm_label": "servicescontroller"
     },
     {
@@ -2956,7 +2956,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_constructor",
-      "community": 241,
+      "community": 249,
       "norm_label": ".constructor()"
     },
     {
@@ -2966,7 +2966,7 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_getcandidateurls",
-      "community": 241,
+      "community": 249,
       "norm_label": ".getcandidateurls()"
     },
     {
@@ -2976,7 +2976,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_pollservicehealth",
-      "community": 241,
+      "community": 249,
       "norm_label": ".pollservicehealth()"
     },
     {
@@ -2986,7 +2986,7 @@
       "source_location": "L158",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_appendhistory",
-      "community": 241,
+      "community": 249,
       "norm_label": ".appendhistory()"
     },
     {
@@ -2996,7 +2996,7 @@
       "source_location": "L166",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_pollallservices",
-      "community": 241,
+      "community": 249,
       "norm_label": ".pollallservices()"
     },
     {
@@ -3006,7 +3006,7 @@
       "source_location": "L171",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_getallhealthstatuses",
-      "community": 241,
+      "community": 249,
       "norm_label": ".getallhealthstatuses()"
     },
     {
@@ -3016,7 +3016,7 @@
       "source_location": "L195",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_getservicesvitalssummary",
-      "community": 241,
+      "community": 249,
       "norm_label": ".getservicesvitalssummary()"
     },
     {
@@ -3026,7 +3026,7 @@
       "source_location": "L242",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_restartservice",
-      "community": 241,
+      "community": 249,
       "norm_label": ".restartservice()"
     },
     {
@@ -3036,7 +3036,7 @@
       "source_location": "L264",
       "_origin": "ast",
       "id": "backend_services_controller_servicescontroller_toggleservice",
-      "community": 241,
+      "community": 249,
       "norm_label": ".toggleservice()"
     },
     {
@@ -3046,7 +3046,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_dev_dashboard_src_backend_telemetry_ts_backend_telemetry",
-      "community": 241,
+      "community": 20,
       "norm_label": "telemetry.ts"
     },
     {
@@ -3056,7 +3056,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_src_dev_dashboard_src_backend_telemetry_ts_backend_telemetry_logger",
-      "community": 241,
+      "community": 20,
       "norm_label": "logger"
     },
     {
@@ -3066,7 +3066,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "backend_telemetry_detecthostmemoryandvirtualization",
-      "community": 241,
+      "community": 20,
       "norm_label": "detecthostmemoryandvirtualization()"
     },
     {
@@ -3076,7 +3076,7 @@
       "source_location": "L107",
       "_origin": "ast",
       "id": "backend_telemetry_logentry",
-      "community": 241,
+      "community": 20,
       "norm_label": "logentry"
     },
     {
@@ -3086,7 +3086,7 @@
       "source_location": "L119",
       "_origin": "ast",
       "id": "backend_telemetry_systemvitals",
-      "community": 241,
+      "community": 20,
       "norm_label": "systemvitals"
     },
     {
@@ -3096,7 +3096,7 @@
       "source_location": "L134",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine",
-      "community": 241,
+      "community": 20,
       "norm_label": "telemetryengine"
     },
     {
@@ -3106,7 +3106,7 @@
       "source_location": "L139",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_constructor",
-      "community": 241,
+      "community": 20,
       "norm_label": ".constructor()"
     },
     {
@@ -3116,7 +3116,7 @@
       "source_location": "L144",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_pushlog",
-      "community": 241,
+      "community": 20,
       "norm_label": ".pushlog()"
     },
     {
@@ -3126,7 +3126,7 @@
       "source_location": "L191",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_getrecentlogs",
-      "community": 241,
+      "community": 20,
       "norm_label": ".getrecentlogs()"
     },
     {
@@ -3136,7 +3136,7 @@
       "source_location": "L208",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_clearlogs",
-      "community": 241,
+      "community": 20,
       "norm_label": ".clearlogs()"
     },
     {
@@ -3146,7 +3146,7 @@
       "source_location": "L217",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_getsystemvitals",
-      "community": 241,
+      "community": 20,
       "norm_label": ".getsystemvitals()"
     },
     {
@@ -3156,7 +3156,7 @@
       "source_location": "L236",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_registersseclient",
-      "community": 241,
+      "community": 20,
       "norm_label": ".registersseclient()"
     },
     {
@@ -3166,7 +3166,7 @@
       "source_location": "L250",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_removesseclient",
-      "community": 241,
+      "community": 20,
       "norm_label": ".removesseclient()"
     },
     {
@@ -3176,7 +3176,7 @@
       "source_location": "L254",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_broadcastping",
-      "community": 241,
+      "community": 20,
       "norm_label": ".broadcastping()"
     },
     {
@@ -3186,7 +3186,7 @@
       "source_location": "L268",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_broadcastsse",
-      "community": 241,
+      "community": 20,
       "norm_label": ".broadcastsse()"
     },
     {
@@ -3196,7 +3196,7 @@
       "source_location": "L281",
       "_origin": "ast",
       "id": "backend_telemetry_telemetryengine_broadcastvitalstick",
-      "community": 241,
+      "community": 20,
       "norm_label": ".broadcastvitalstick()"
     },
     {
@@ -3386,7 +3386,7 @@
       "source_location": "L212",
       "_origin": "ast",
       "id": "db_db_diagnostics_dbdiagnostics",
-      "community": 312,
+      "community": 222,
       "norm_label": "dbdiagnostics"
     },
     {
@@ -3396,7 +3396,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_dev_dashboard_src_db_db_ts_db_db",
-      "community": 281,
+      "community": 310,
       "norm_label": "db.ts"
     },
     {
@@ -3406,7 +3406,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "db_db_logger",
-      "community": 281,
+      "community": 310,
       "norm_label": "logger"
     },
     {
@@ -3426,7 +3426,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "db_db_data_dir",
-      "community": 281,
+      "community": 310,
       "norm_label": "data_dir"
     },
     {
@@ -3436,7 +3436,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "db_db_core_db_path",
-      "community": 281,
+      "community": 310,
       "norm_label": "core_db_path"
     },
     {
@@ -3456,7 +3456,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "db_db_trafficeventrecord",
-      "community": 281,
+      "community": 310,
       "norm_label": "trafficeventrecord"
     },
     {
@@ -3476,7 +3476,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "db_db_auditlogrecord",
-      "community": 281,
+      "community": 310,
       "norm_label": "auditlogrecord"
     },
     {
@@ -3756,7 +3756,7 @@
       "source_location": "L494",
       "_origin": "ast",
       "id": "db_db_platformdb",
-      "community": 312,
+      "community": 270,
       "norm_label": "platformdb"
     },
     {
@@ -3766,7 +3766,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_dev_dashboard_src_db_index_ts_db_index",
-      "community": 222,
+      "community": 243,
       "norm_label": "index.ts"
     },
     {
@@ -3776,7 +3776,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "db_remote_connectors",
-      "community": 249,
+      "community": 243,
       "norm_label": "remote-connectors.ts"
     },
     {
@@ -3786,7 +3786,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "db_remote_connectors_logger",
-      "community": 249,
+      "community": 243,
       "norm_label": "logger"
     },
     {
@@ -3796,7 +3796,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "db_remote_connectors_remotedbconfig",
-      "community": 249,
+      "community": 243,
       "norm_label": "remotedbconfig"
     },
     {
@@ -3806,7 +3806,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "db_remote_connectors_remotequeryresult",
-      "community": 249,
+      "community": 243,
       "norm_label": "remotequeryresult"
     },
     {
@@ -3816,7 +3816,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "db_remote_connectors_remotedbconnectormanager",
-      "community": 249,
+      "community": 243,
       "norm_label": "remotedbconnectormanager"
     },
     {
@@ -3836,7 +3836,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "db_remote_connectors_remotedbconnectormanager_listremoteconnections",
-      "community": 249,
+      "community": 243,
       "norm_label": ".listremoteconnections()"
     },
     {
@@ -3846,7 +3846,7 @@
       "source_location": "L85",
       "_origin": "ast",
       "id": "db_remote_connectors_remotedbconnectormanager_testconnection",
-      "community": 249,
+      "community": 243,
       "norm_label": ".testconnection()"
     },
     {
@@ -3856,7 +3856,7 @@
       "source_location": "L124",
       "_origin": "ast",
       "id": "db_remote_connectors_remotedbconnectormanager_executeremotequery",
-      "community": 249,
+      "community": 243,
       "norm_label": ".executeremotequery()"
     },
     {
@@ -3866,7 +3866,7 @@
       "source_location": "L182",
       "_origin": "ast",
       "id": "db_remote_connectors_remotedbmanager",
-      "community": 249,
+      "community": 243,
       "norm_label": "remotedbmanager"
     },
     {
@@ -4656,7 +4656,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "contracts_api_registry_contract_test",
-      "community": 312,
+      "community": 270,
       "norm_label": "api-registry-contract.test.ts"
     },
     {
@@ -4666,7 +4666,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "contracts_apps_api_contract_test",
-      "community": 312,
+      "community": 270,
       "norm_label": "apps-api-contract.test.ts"
     },
     {
@@ -4746,7 +4746,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_apps_lifecycle_test",
-      "community": 312,
+      "community": 270,
       "norm_label": "apps-lifecycle.test.ts"
     },
     {
@@ -4756,7 +4756,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_db_explorer_endpoints_test",
-      "community": 312,
+      "community": 270,
       "norm_label": "db-explorer-endpoints.test.ts"
     },
     {
@@ -4826,7 +4826,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "security_dashboard_auth_test",
-      "community": 270,
+      "community": 201,
       "norm_label": "dashboard-auth.test.ts"
     },
     {
@@ -4846,7 +4846,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "security_env_secret_defense_test",
-      "community": 312,
+      "community": 270,
       "norm_label": "env-secret-defense.test.ts"
     },
     {
@@ -4866,7 +4866,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_apps_controller_test",
-      "community": 241,
+      "community": 270,
       "norm_label": "apps-controller.test.ts"
     },
     {
@@ -4886,7 +4886,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_db_diagnostics_test",
-      "community": 312,
+      "community": 222,
       "norm_label": "db-diagnostics.test.ts"
     },
     {
@@ -4896,7 +4896,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_db_sandbox_test",
-      "community": 312,
+      "community": 270,
       "norm_label": "db-sandbox.test.ts"
     },
     {
@@ -4926,7 +4926,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_ha_reliability_test",
-      "community": 241,
+      "community": 248,
       "norm_label": "ha-reliability.test.ts"
     },
     {
@@ -4936,7 +4936,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_remote_connectors_test",
-      "community": 249,
+      "community": 243,
       "norm_label": "remote-connectors.test.ts"
     },
     {
@@ -4956,7 +4956,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_table_browser_test",
-      "community": 312,
+      "community": 270,
       "norm_label": "table-browser.test.ts"
     },
     {
@@ -5666,7 +5666,7 @@
       "source_location": "L100",
       "_origin": "ast",
       "id": "src_server_startlandingserver",
-      "community": 169,
+      "community": 321,
       "norm_label": "startlandingserver()"
     },
     {
@@ -5676,7 +5676,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "contracts_landing_health_test",
-      "community": 169,
+      "community": 321,
       "norm_label": "landing-health.test.ts"
     },
     {
@@ -5686,7 +5686,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "e2e_landing_server_test",
-      "community": 169,
+      "community": 321,
       "norm_label": "landing-server.test.ts"
     },
     {
@@ -5696,7 +5696,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_not_found_route_test",
-      "community": 169,
+      "community": 321,
       "norm_label": "not-found-route.test.ts"
     },
     {
@@ -5706,7 +5706,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_registry_sync_test",
-      "community": 169,
+      "community": 321,
       "norm_label": "registry-sync.test.ts"
     },
     {
@@ -5716,7 +5716,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "security_xss_defense_test",
-      "community": 169,
+      "community": 321,
       "norm_label": "xss-defense.test.ts"
     },
     {
@@ -5726,7 +5726,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_catalog_grouping_test",
-      "community": 223,
+      "community": 323,
       "norm_label": "catalog-grouping.test.ts"
     },
     {
@@ -7006,7 +7006,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_org_tree_service_test",
-      "community": 20,
+      "community": 281,
       "norm_label": "org-tree-service.test.ts"
     },
     {
@@ -7016,7 +7016,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "unit_org_tree_service_test_checkdepth",
-      "community": 20,
+      "community": 281,
       "norm_label": "checkdepth()"
     },
     {
@@ -7026,7 +7026,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "unit_org_tree_service_test_checkdepth3",
-      "community": 20,
+      "community": 281,
       "norm_label": "checkdepth3()"
     },
     {
@@ -7326,7 +7326,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_client_bridge",
-      "community": 183,
+      "community": 311,
       "norm_label": "client-bridge.ts"
     },
     {
@@ -7336,7 +7336,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "src_client_bridge_forgeclientoptions",
-      "community": 183,
+      "community": 311,
       "norm_label": "forgeclientoptions"
     },
     {
@@ -7346,7 +7346,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "src_client_bridge_forgeclient",
-      "community": 183,
+      "community": 311,
       "norm_label": "forgeclient"
     },
     {
@@ -7356,7 +7356,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "src_client_bridge_forgeclient_constructor",
-      "community": 183,
+      "community": 311,
       "norm_label": ".constructor()"
     },
     {
@@ -7366,7 +7366,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "src_client_bridge_forgeclient_init",
-      "community": 183,
+      "community": 311,
       "norm_label": ".init()"
     },
     {
@@ -7376,7 +7376,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "src_client_bridge_forgeclient_fetch",
-      "community": 183,
+      "community": 311,
       "norm_label": ".fetch()"
     },
     {
@@ -7403,17 +7403,17 @@
       "label": "isTestEnvironment()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/database.ts",
-      "source_location": "L19",
+      "source_location": "L21",
       "_origin": "ast",
       "id": "src_database_istestenvironment",
-      "community": 281,
+      "community": 296,
       "norm_label": "istestenvironment()"
     },
     {
       "label": "resolveCanonicalDataDir()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/database.ts",
-      "source_location": "L36",
+      "source_location": "L64",
       "_origin": "ast",
       "id": "src_database_resolvecanonicaldatadir",
       "community": 281,
@@ -7423,7 +7423,7 @@
       "label": "resolveCanonicalDbPath()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/database.ts",
-      "source_location": "L107",
+      "source_location": "L135",
       "_origin": "ast",
       "id": "src_database_resolvecanonicaldbpath",
       "community": 281,
@@ -7433,7 +7433,7 @@
       "label": "DatabaseClientOptions",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/database.ts",
-      "source_location": "L120",
+      "source_location": "L148",
       "_origin": "ast",
       "id": "src_database_databaseclientoptions",
       "community": 281,
@@ -7443,7 +7443,7 @@
       "label": "getDatabaseClient()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/database.ts",
-      "source_location": "L130",
+      "source_location": "L158",
       "_origin": "ast",
       "id": "src_database_getdatabaseclient",
       "community": 281,
@@ -7453,7 +7453,7 @@
       "label": "closeDatabaseClient()",
       "file_type": "code",
       "source_file": "apps/src/sdk/src/database.ts",
-      "source_location": "L160",
+      "source_location": "L188",
       "_origin": "ast",
       "id": "src_database_closedatabaseclient",
       "community": 281,
@@ -7666,7 +7666,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_error_handler",
-      "community": 169,
+      "community": 320,
       "norm_label": "error-handler.ts"
     },
     {
@@ -7676,7 +7676,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "src_error_handler_createsafehandler",
-      "community": 169,
+      "community": 321,
       "norm_label": "createsafehandler()"
     },
     {
@@ -7686,7 +7686,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_src_sdk_src_index_ts_src_index",
-      "community": 183,
+      "community": 311,
       "norm_label": "index.ts"
     },
     {
@@ -7746,7 +7746,7 @@
       "source_location": "L105",
       "_origin": "ast",
       "id": "src_logger_forgelogger",
-      "community": 246,
+      "community": 243,
       "norm_label": "forgelogger"
     },
     {
@@ -7756,7 +7756,7 @@
       "source_location": "L108",
       "_origin": "ast",
       "id": "src_logger_forgelogger_constructor",
-      "community": 246,
+      "community": 243,
       "norm_label": ".constructor()"
     },
     {
@@ -7766,7 +7766,7 @@
       "source_location": "L114",
       "_origin": "ast",
       "id": "src_logger_forgelogger_setlogdir",
-      "community": 246,
+      "community": 243,
       "norm_label": ".setlogdir()"
     },
     {
@@ -7776,7 +7776,7 @@
       "source_location": "L118",
       "_origin": "ast",
       "id": "src_logger_forgelogger_appendtodisk",
-      "community": 246,
+      "community": 243,
       "norm_label": ".appendtodisk()"
     },
     {
@@ -7786,7 +7786,7 @@
       "source_location": "L143",
       "_origin": "ast",
       "id": "src_logger_forgelogger_log",
-      "community": 246,
+      "community": 243,
       "norm_label": ".log()"
     },
     {
@@ -7796,7 +7796,7 @@
       "source_location": "L227",
       "_origin": "ast",
       "id": "src_logger_forgelogger_debug",
-      "community": 246,
+      "community": 243,
       "norm_label": ".debug()"
     },
     {
@@ -7806,7 +7806,7 @@
       "source_location": "L230",
       "_origin": "ast",
       "id": "src_logger_forgelogger_info",
-      "community": 246,
+      "community": 243,
       "norm_label": ".info()"
     },
     {
@@ -7816,7 +7816,7 @@
       "source_location": "L233",
       "_origin": "ast",
       "id": "src_logger_forgelogger_warn",
-      "community": 246,
+      "community": 243,
       "norm_label": ".warn()"
     },
     {
@@ -7826,7 +7826,7 @@
       "source_location": "L236",
       "_origin": "ast",
       "id": "src_logger_forgelogger_error",
-      "community": 246,
+      "community": 243,
       "norm_label": ".error()"
     },
     {
@@ -7836,7 +7836,7 @@
       "source_location": "L243",
       "_origin": "ast",
       "id": "src_logger_forgelogger_fatal",
-      "community": 246,
+      "community": 243,
       "norm_label": ".fatal()"
     },
     {
@@ -7846,7 +7846,7 @@
       "source_location": "L251",
       "_origin": "ast",
       "id": "src_logger_forgelogger_logdbquery",
-      "community": 246,
+      "community": 243,
       "norm_label": ".logdbquery()"
     },
     {
@@ -7856,7 +7856,7 @@
       "source_location": "L258",
       "_origin": "ast",
       "id": "src_logger_forgelogger_logbrowserevent",
-      "community": 246,
+      "community": 243,
       "norm_label": ".logbrowserevent()"
     },
     {
@@ -7866,7 +7866,7 @@
       "source_location": "L269",
       "_origin": "ast",
       "id": "src_logger_createlogger",
-      "community": 169,
+      "community": 321,
       "norm_label": "createlogger()"
     },
     {
@@ -7876,7 +7876,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_registry",
-      "community": 223,
+      "community": 323,
       "norm_label": "registry.ts"
     },
     {
@@ -7886,7 +7886,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "src_registry_serviceentry",
-      "community": 223,
+      "community": 323,
       "norm_label": "serviceentry"
     },
     {
@@ -7896,7 +7896,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "src_registry_loadregistryoptions",
-      "community": 223,
+      "community": 323,
       "norm_label": "loadregistryoptions"
     },
     {
@@ -7906,7 +7906,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "src_registry_getappstatus",
-      "community": 223,
+      "community": 323,
       "norm_label": "getappstatus()"
     },
     {
@@ -7926,7 +7926,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "src_registry_findenvpath",
-      "community": 223,
+      "community": 323,
       "norm_label": "findenvpath()"
     },
     {
@@ -7936,7 +7936,7 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "src_registry_loadserviceregistry",
-      "community": 223,
+      "community": 323,
       "norm_label": "loadserviceregistry()"
     },
     {
@@ -7946,7 +7946,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_security_headers",
-      "community": 169,
+      "community": 320,
       "norm_label": "security-headers.ts"
     },
     {
@@ -7956,7 +7956,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "src_security_headers_air_gapped_csp",
-      "community": 169,
+      "community": 320,
       "norm_label": "air_gapped_csp"
     },
     {
@@ -7966,7 +7966,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "src_security_headers_air_gapped_security_headers",
-      "community": 169,
+      "community": 320,
       "norm_label": "air_gapped_security_headers"
     },
     {
@@ -7976,7 +7976,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "src_security_headers_applysecurityheaders",
-      "community": 169,
+      "community": 320,
       "norm_label": "applysecurityheaders()"
     },
     {
@@ -8046,7 +8046,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_error_handler_test",
-      "community": 169,
+      "community": 320,
       "norm_label": "error-handler.test.ts"
     },
     {
@@ -8056,7 +8056,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_external_ingress_test",
-      "community": 223,
+      "community": 323,
       "norm_label": "external-ingress.test.ts"
     },
     {
@@ -8076,7 +8076,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_registry_test",
-      "community": 223,
+      "community": 323,
       "norm_label": "registry.test.ts"
     },
     {
@@ -8166,7 +8166,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "src_index_usercontext",
-      "community": 183,
+      "community": 311,
       "norm_label": "usercontext"
     },
     {
@@ -8186,7 +8186,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "src_index_postmessageevent",
-      "community": 183,
+      "community": 311,
       "norm_label": "postmessageevent"
     },
     {
@@ -8256,7 +8256,7 @@
       "source_location": "L80",
       "_origin": "ast",
       "id": "src_index_employeesummary",
-      "community": 226,
+      "community": 183,
       "norm_label": "employeesummary"
     },
     {
@@ -8266,7 +8266,7 @@
       "source_location": "L92",
       "_origin": "ast",
       "id": "src_index_managerchainentry",
-      "community": 226,
+      "community": 183,
       "norm_label": "managerchainentry"
     },
     {
@@ -8276,7 +8276,7 @@
       "source_location": "L102",
       "_origin": "ast",
       "id": "src_index_scopedhierarchyresponse",
-      "community": 226,
+      "community": 321,
       "norm_label": "scopedhierarchyresponse"
     },
     {
@@ -8976,7 +8976,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "chaos_concurrent_wal_writes_test",
-      "community": 296,
+      "community": 281,
       "norm_label": "concurrent-wal-writes.test.ts"
     },
     {
@@ -8986,7 +8986,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "chaos_fault_injection_rfc7807_test",
-      "community": 169,
+      "community": 321,
       "norm_label": "fault-injection-rfc7807.test.ts"
     },
     {
@@ -9116,7 +9116,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_dynamic_rebranding_test",
-      "community": 251,
+      "community": 221,
       "norm_label": "dynamic-rebranding.test.ts"
     },
     {
@@ -9126,7 +9126,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "security_air_gap_compliance_test",
-      "community": 169,
+      "community": 320,
       "norm_label": "air-gap-compliance.test.ts"
     },
     {
@@ -9136,7 +9136,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "security_air_gap_compliance_test_repo_root",
-      "community": 169,
+      "community": 320,
       "norm_label": "repo_root"
     },
     {
@@ -9146,7 +9146,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "security_air_gap_compliance_test_getsourcefiles",
-      "community": 169,
+      "community": 320,
       "norm_label": "getsourcefiles()"
     },
     {
@@ -9196,7 +9196,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_sdk_test",
-      "community": 169,
+      "community": 321,
       "norm_label": "sdk.test.ts"
     },
     {
@@ -9596,7 +9596,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "forge_apps_billing_src_server_ts_src_server",
-      "community": 160,
+      "community": 169,
       "norm_label": "server.ts"
     },
     {
@@ -9606,7 +9606,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "forge_apps_billing_src_server_ts_src_server_log_dir",
-      "community": 160,
+      "community": 169,
       "norm_label": "log_dir"
     },
     {
@@ -9616,7 +9616,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "forge_apps_billing_src_server_ts_src_server_logger",
-      "community": 160,
+      "community": 169,
       "norm_label": "logger"
     },
     {
@@ -9626,7 +9626,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "forge_apps_billing_src_server_ts_src_server_port",
-      "community": 160,
+      "community": 169,
       "norm_label": "port"
     },
     {
@@ -9636,7 +9636,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "src_server_invoice",
-      "community": 160,
+      "community": 169,
       "norm_label": "invoice"
     },
     {
@@ -11527,7 +11527,7 @@
       "label": "tier2Checks",
       "file_type": "code",
       "source_file": "scripts/verify-gate.ts",
-      "source_location": "L431",
+      "source_location": "L439",
       "_origin": "ast",
       "id": "scripts_verify_gate_tier2checks",
       "community": 314,
@@ -21804,6 +21804,76 @@
       "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
     },
     {
+      "label": "REPORT_20260903_c9c5275.md",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_c9c5275.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_09_report_20260903_c9c5275",
+      "community": 324,
+      "norm_label": "report_20260903_c9c5275.md"
+    },
+    {
+      "label": "\ud83d\udee1\ufe0f SG Forge Atomic Commit Audit Report",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_c9c5275.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "2026_09_report_20260903_c9c5275_sg_forge_atomic_commit_audit_report",
+      "community": 324,
+      "norm_label": "\ud83d\udee1\ufe0f sg forge atomic commit audit report"
+    },
+    {
+      "label": "\ud83d\udcdd Commit Overview & Context",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_c9c5275.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "2026_09_report_20260903_c9c5275_commit_overview_context",
+      "community": 324,
+      "norm_label": "\ud83d\udcdd commit overview & context"
+    },
+    {
+      "label": "\ud83d\udcca Changes & Diff Statistics",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_c9c5275.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "2026_09_report_20260903_c9c5275_changes_diff_statistics",
+      "community": 324,
+      "norm_label": "\ud83d\udcca changes & diff statistics"
+    },
+    {
+      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (30 Files)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_c9c5275.md",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "2026_09_report_20260903_c9c5275_detailed_file_changes_30_files",
+      "community": 324,
+      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (30 files)"
+    },
+    {
+      "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_c9c5275.md",
+      "source_location": "L65",
+      "_origin": "ast",
+      "id": "2026_09_report_20260903_c9c5275_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "community": 324,
+      "norm_label": "\ud83d\udee0\ufe0f tier 1: deterministic engine checks (checked by logic & open source tools)"
+    },
+    {
+      "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
+      "file_type": "document",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_c9c5275.md",
+      "source_location": "L86",
+      "_origin": "ast",
+      "id": "2026_09_report_20260903_c9c5275_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "community": 324,
+      "norm_label": "\ud83e\udde0 tier 2: ai agent semantic & architecture quality checks (token-efficient digest)"
+    },
+    {
       "label": "LATEST_COMMIT_REPORT.md",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
@@ -21844,20 +21914,20 @@
       "norm_label": "\ud83d\udcca changes & diff statistics"
     },
     {
-      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (29 Files)",
+      "label": "\ud83d\uddc2\ufe0f Detailed File Changes (30 Files)",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
       "source_location": "L28",
       "_origin": "ast",
-      "id": "reports_latest_commit_report_detailed_file_changes_29_files",
+      "id": "reports_latest_commit_report_detailed_file_changes_30_files",
       "community": 27,
-      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (29 files)"
+      "norm_label": "\ud83d\uddc2\ufe0f detailed file changes (30 files)"
     },
     {
       "label": "\ud83d\udee0\ufe0f Tier 1: Deterministic Engine Checks (Checked by Logic & Open Source Tools)",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
-      "source_location": "L64",
+      "source_location": "L65",
       "_origin": "ast",
       "id": "reports_latest_commit_report_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
       "community": 27,
@@ -21867,7 +21937,7 @@
       "label": "\ud83e\udde0 Tier 2: AI Agent Semantic & Architecture Quality Checks (Token-Efficient Digest)",
       "file_type": "document",
       "source_file": "logs/reports/LATEST_COMMIT_REPORT.md",
-      "source_location": "L85",
+      "source_location": "L86",
       "_origin": "ast",
       "id": "reports_latest_commit_report_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
       "community": 27,
@@ -26894,9 +26964,9 @@
       "source_file": "apps/src/portal/test/security/portal-rbac-security.test.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "security_portal_rbac_security_test",
-      "target": "backend_crypto_signjwt",
-      "confidence_score": 1.0
+      "target": "backend_crypto_signjwt"
     },
     {
       "relation": "imports",
@@ -29716,6 +29786,17 @@
       "weight": 1.0,
       "source": "db_seed_seedauthdatabase",
       "target": "src_branding_loadbrandconfig"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/src/auth/src/db/seed.ts",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "db_seed_seedauthdatabase",
+      "target": "src_database_istestenvironment"
     },
     {
       "relation": "imports",
@@ -38204,9 +38285,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service",
-      "target": "backend_inbox_service_appaccessrequestitem",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_appaccessrequestitem"
     },
     {
       "relation": "contains",
@@ -38214,9 +38295,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L436",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service",
-      "target": "backend_inbox_service_cancelappaccessrequest",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_cancelappaccessrequest"
     },
     {
       "relation": "contains",
@@ -38234,9 +38315,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L57",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service",
-      "target": "backend_inbox_service_computerelativetime",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_computerelativetime"
     },
     {
       "relation": "contains",
@@ -38244,9 +38325,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L446",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service",
-      "target": "backend_inbox_service_createapitoken",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_createapitoken"
     },
     {
       "relation": "contains",
@@ -38254,9 +38335,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L376",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service",
-      "target": "backend_inbox_service_createappaccessrequest",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_createappaccessrequest"
     },
     {
       "relation": "contains",
@@ -38284,9 +38365,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L73",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service",
-      "target": "backend_inbox_service_formateventdate",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_formateventdate"
     },
     {
       "relation": "contains",
@@ -38324,9 +38405,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L474",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service",
-      "target": "backend_inbox_service_getuserapitokens",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_getuserapitokens"
     },
     {
       "relation": "contains",
@@ -38334,9 +38415,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L410",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service",
-      "target": "backend_inbox_service_getuserappaccessrequests",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_getuserappaccessrequests"
     },
     {
       "relation": "contains",
@@ -38354,9 +38435,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L89",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service",
-      "target": "backend_inbox_service_initportaltables",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_initportaltables"
     },
     {
       "relation": "contains",
@@ -38414,9 +38495,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L489",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service",
-      "target": "backend_inbox_service_revokeapitoken",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_revokeapitoken"
     },
     {
       "relation": "contains",
@@ -38434,9 +38515,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L50",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service",
-      "target": "backend_inbox_service_userapitokenitem",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_userapitokenitem"
     },
     {
       "relation": "imports",
@@ -38478,9 +38559,9 @@
       "source_file": "apps/src/portal/test/unit/portal-db-isolation.test.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_portal_db_isolation_test",
-      "target": "backend_inbox_service",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service"
     },
     {
       "relation": "imports_from",
@@ -38511,9 +38592,9 @@
       "source_file": "apps/src/portal/test/unit/portal-db-isolation.test.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_portal_db_isolation_test",
-      "target": "backend_inbox_service_computerelativetime",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_computerelativetime"
     },
     {
       "relation": "imports",
@@ -38522,9 +38603,9 @@
       "source_file": "apps/src/portal/test/unit/portal-db-isolation.test.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_portal_db_isolation_test",
-      "target": "backend_inbox_service_formateventdate",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_formateventdate"
     },
     {
       "relation": "calls",
@@ -38533,9 +38614,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L437",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service_cancelappaccessrequest",
-      "target": "backend_inbox_service_getdatabase",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_getdatabase"
     },
     {
       "relation": "calls",
@@ -38555,9 +38636,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L447",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service_createapitoken",
-      "target": "backend_inbox_service_getdatabase",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_getdatabase"
     },
     {
       "relation": "calls",
@@ -38566,9 +38647,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L384",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service_createappaccessrequest",
-      "target": "backend_inbox_service_getdatabase",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_getdatabase"
     },
     {
       "relation": "calls",
@@ -38599,9 +38680,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L85",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service_getdatabase",
-      "target": "backend_inbox_service_initportaltables",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_initportaltables"
     },
     {
       "relation": "calls",
@@ -38643,9 +38724,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L475",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service_getuserapitokens",
-      "target": "backend_inbox_service_getdatabase",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_getdatabase"
     },
     {
       "relation": "calls",
@@ -38654,9 +38735,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L411",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service_getuserappaccessrequests",
-      "target": "backend_inbox_service_getdatabase",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_getdatabase"
     },
     {
       "relation": "calls",
@@ -38698,9 +38779,9 @@
       "source_file": "apps/src/portal/src/backend/inbox-service.ts",
       "source_location": "L490",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_inbox_service_revokeapitoken",
-      "target": "backend_inbox_service_getdatabase",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_getdatabase"
     },
     {
       "relation": "calls",
@@ -38720,9 +38801,9 @@
       "source_file": "apps/src/portal/test/unit/portal-db-isolation.test.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_portal_db_isolation_test",
-      "target": "backend_inbox_service_clearallnotifications",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_clearallnotifications"
     },
     {
       "relation": "imports",
@@ -38797,9 +38878,9 @@
       "source_file": "apps/src/portal/test/unit/portal-db-isolation.test.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_portal_db_isolation_test",
-      "target": "backend_inbox_service_getlivenotifications",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_getlivenotifications"
     },
     {
       "relation": "imports",
@@ -38819,9 +38900,9 @@
       "source_file": "apps/src/portal/test/unit/portal-db-isolation.test.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_portal_db_isolation_test",
-      "target": "backend_inbox_service_createnotification",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_createnotification"
     },
     {
       "relation": "imports",
@@ -38852,9 +38933,9 @@
       "source_file": "apps/src/portal/test/unit/portal-db-isolation.test.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_portal_db_isolation_test",
-      "target": "backend_inbox_service_markallnotificationsasread",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_markallnotificationsasread"
     },
     {
       "relation": "imports",
@@ -38885,9 +38966,9 @@
       "source_file": "apps/src/portal/test/unit/portal-db-isolation.test.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_portal_db_isolation_test",
-      "target": "backend_inbox_service_dismissnotification",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_dismissnotification"
     },
     {
       "relation": "imports",
@@ -38995,9 +39076,9 @@
       "source_file": "apps/src/portal/src/server.ts",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_portal_src_server_ts_src_server",
-      "target": "backend_inbox_service_createappaccessrequest",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_createappaccessrequest"
     },
     {
       "relation": "imports",
@@ -39006,9 +39087,9 @@
       "source_file": "apps/src/portal/test/unit/portal-db-isolation.test.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_portal_db_isolation_test",
-      "target": "backend_inbox_service_createappaccessrequest",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_createappaccessrequest"
     },
     {
       "relation": "imports",
@@ -39017,9 +39098,9 @@
       "source_file": "apps/src/portal/src/server.ts",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_portal_src_server_ts_src_server",
-      "target": "backend_inbox_service_getuserappaccessrequests",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_getuserappaccessrequests"
     },
     {
       "relation": "imports",
@@ -39028,9 +39109,9 @@
       "source_file": "apps/src/portal/test/unit/portal-db-isolation.test.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_portal_db_isolation_test",
-      "target": "backend_inbox_service_getuserappaccessrequests",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_getuserappaccessrequests"
     },
     {
       "relation": "imports",
@@ -39039,9 +39120,9 @@
       "source_file": "apps/src/portal/src/server.ts",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_portal_src_server_ts_src_server",
-      "target": "backend_inbox_service_cancelappaccessrequest",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_cancelappaccessrequest"
     },
     {
       "relation": "imports",
@@ -39050,9 +39131,9 @@
       "source_file": "apps/src/portal/test/unit/portal-db-isolation.test.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_portal_db_isolation_test",
-      "target": "backend_inbox_service_cancelappaccessrequest",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_cancelappaccessrequest"
     },
     {
       "relation": "imports",
@@ -39061,9 +39142,9 @@
       "source_file": "apps/src/portal/src/server.ts",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_portal_src_server_ts_src_server",
-      "target": "backend_inbox_service_createapitoken",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_createapitoken"
     },
     {
       "relation": "imports",
@@ -39072,9 +39153,9 @@
       "source_file": "apps/src/portal/test/unit/portal-db-isolation.test.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_portal_db_isolation_test",
-      "target": "backend_inbox_service_createapitoken",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_createapitoken"
     },
     {
       "relation": "imports",
@@ -39083,9 +39164,9 @@
       "source_file": "apps/src/portal/src/server.ts",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_portal_src_server_ts_src_server",
-      "target": "backend_inbox_service_getuserapitokens",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_getuserapitokens"
     },
     {
       "relation": "imports",
@@ -39094,9 +39175,9 @@
       "source_file": "apps/src/portal/test/unit/portal-db-isolation.test.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_portal_db_isolation_test",
-      "target": "backend_inbox_service_getuserapitokens",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_getuserapitokens"
     },
     {
       "relation": "imports",
@@ -39105,9 +39186,9 @@
       "source_file": "apps/src/portal/src/server.ts",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_portal_src_server_ts_src_server",
-      "target": "backend_inbox_service_revokeapitoken",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_revokeapitoken"
     },
     {
       "relation": "imports",
@@ -39116,9 +39197,9 @@
       "source_file": "apps/src/portal/test/unit/portal-db-isolation.test.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_portal_db_isolation_test",
-      "target": "backend_inbox_service_revokeapitoken",
-      "confidence_score": 1.0
+      "target": "backend_inbox_service_revokeapitoken"
     },
     {
       "relation": "re_exports",
@@ -40071,9 +40152,9 @@
       "source_file": "apps/src/portal/test/unit/astryx-tooltip-compliance.test.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_astryx_tooltip_compliance_test",
-      "target": "frontend_ui_admin_audit",
-      "confidence_score": 1.0
+      "target": "frontend_ui_admin_audit"
     },
     {
       "relation": "imports",
@@ -40082,9 +40163,9 @@
       "source_file": "apps/src/portal/test/unit/astryx-tooltip-compliance.test.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_astryx_tooltip_compliance_test",
-      "target": "frontend_ui_admin_audit_renderadminauditview",
-      "confidence_score": 1.0
+      "target": "frontend_ui_admin_audit_renderadminauditview"
     },
     {
       "relation": "contains",
@@ -40801,9 +40882,9 @@
       "source_file": "apps/src/portal/test/unit/astryx-tooltip-compliance.test.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_astryx_tooltip_compliance_test",
-      "target": "frontend_ui_renderer_apps_renderappsview",
-      "confidence_score": 1.0
+      "target": "frontend_ui_renderer_apps_renderappsview"
     },
     {
       "relation": "imports",
@@ -40844,9 +40925,9 @@
       "source_file": "apps/src/portal/test/unit/astryx-tooltip-compliance.test.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_astryx_tooltip_compliance_test",
-      "target": "frontend_ui_renderer_canvas",
-      "confidence_score": 1.0
+      "target": "frontend_ui_renderer_canvas"
     },
     {
       "relation": "imports",
@@ -40855,9 +40936,9 @@
       "source_file": "apps/src/portal/test/unit/astryx-tooltip-compliance.test.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_astryx_tooltip_compliance_test",
-      "target": "frontend_ui_renderer_canvas_rendercanvasview",
-      "confidence_score": 1.0
+      "target": "frontend_ui_renderer_canvas_rendercanvasview"
     },
     {
       "relation": "imports_from",
@@ -40896,9 +40977,9 @@
       "source_file": "apps/src/portal/src/frontend/ui-renderer-inbox-widgets.ts",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_ui_renderer_inbox_widgets",
-      "target": "frontend_ui_renderer_inbox_widgets_getdynamiccompanyevents",
-      "confidence_score": 1.0
+      "target": "frontend_ui_renderer_inbox_widgets_getdynamiccompanyevents"
     },
     {
       "relation": "contains",
@@ -41078,9 +41159,9 @@
       "source_file": "apps/src/portal/src/frontend/ui-renderer-inbox.ts",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_ui_renderer_inbox",
-      "target": "frontend_ui_renderer_inbox_escapehtml",
-      "confidence_score": 1.0
+      "target": "frontend_ui_renderer_inbox_escapehtml"
     },
     {
       "relation": "contains",
@@ -41130,9 +41211,9 @@
       "source_file": "apps/src/portal/test/unit/astryx-tooltip-compliance.test.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_astryx_tooltip_compliance_test",
-      "target": "frontend_ui_renderer_inbox",
-      "confidence_score": 1.0
+      "target": "frontend_ui_renderer_inbox"
     },
     {
       "relation": "imports",
@@ -41152,9 +41233,9 @@
       "source_file": "apps/src/portal/test/unit/astryx-tooltip-compliance.test.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_astryx_tooltip_compliance_test",
-      "target": "frontend_ui_renderer_inbox_renderinboxview",
-      "confidence_score": 1.0
+      "target": "frontend_ui_renderer_inbox_renderinboxview"
     },
     {
       "relation": "imports",
@@ -41173,9 +41254,9 @@
       "source_file": "apps/src/portal/src/frontend/ui-renderer-profile.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_ui_renderer_profile",
-      "target": "frontend_ui_renderer_profile_escapehtml",
-      "confidence_score": 1.0
+      "target": "frontend_ui_renderer_profile_escapehtml"
     },
     {
       "relation": "contains",
@@ -41215,9 +41296,9 @@
       "source_file": "apps/src/portal/src/frontend/ui-renderer-profile.ts",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_ui_renderer_profile_renderprofileview",
-      "target": "frontend_ui_renderer_profile_escapehtml",
-      "confidence_score": 1.0
+      "target": "frontend_ui_renderer_profile_escapehtml"
     },
     {
       "relation": "calls",
@@ -41236,9 +41317,9 @@
       "source_file": "apps/src/portal/src/frontend/ui-renderer.ts",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_src_portal_src_frontend_ui_renderer_ts_frontend_ui_renderer",
-      "target": "frontend_ui_renderer_escapehtml",
-      "confidence_score": 1.0
+      "target": "frontend_ui_renderer_escapehtml"
     },
     {
       "relation": "contains",
@@ -41345,9 +41426,9 @@
       "source_file": "apps/src/portal/src/frontend/ui-renderer.ts",
       "source_location": "L44",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_ui_renderer_renderportalhtml",
-      "target": "frontend_ui_renderer_escapehtml",
-      "confidence_score": 1.0
+      "target": "frontend_ui_renderer_escapehtml"
     },
     {
       "relation": "imports",
@@ -41466,9 +41547,9 @@
       "source_file": "apps/src/portal/test/security/portal-rbac-security.test.ts",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "security_portal_rbac_security_test",
-      "target": "frontend_ui_renderer_renderportalhtml",
-      "confidence_score": 1.0
+      "target": "frontend_ui_renderer_renderportalhtml"
     },
     {
       "relation": "imports",
@@ -41477,9 +41558,9 @@
       "source_file": "apps/src/portal/test/unit/astryx-tooltip-compliance.test.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_astryx_tooltip_compliance_test",
-      "target": "frontend_ui_renderer_renderportalhtml",
-      "confidence_score": 1.0
+      "target": "frontend_ui_renderer_renderportalhtml"
     },
     {
       "relation": "imports",
@@ -41833,9 +41914,9 @@
       "source_file": "apps/src/portal/test/security/portal-rbac-security.test.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "security_portal_rbac_security_test",
-      "target": "src_server_startportalserver",
-      "confidence_score": 1.0
+      "target": "src_server_startportalserver"
     },
     {
       "relation": "imports",
@@ -56951,9 +57032,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_a9936b1.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_a9936b1",
-      "target": "2026_09_report_20260903_a9936b1_sg_forge_atomic_commit_audit_report",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_a9936b1_sg_forge_atomic_commit_audit_report"
     },
     {
       "relation": "contains",
@@ -56961,9 +57042,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_a9936b1.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_a9936b1_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_a9936b1_changes_diff_statistics",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_a9936b1_changes_diff_statistics"
     },
     {
       "relation": "contains",
@@ -56971,9 +57052,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_a9936b1.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_a9936b1_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_a9936b1_commit_overview_context",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_a9936b1_commit_overview_context"
     },
     {
       "relation": "contains",
@@ -56981,9 +57062,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_a9936b1.md",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_a9936b1_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_a9936b1_detailed_file_changes_29_files",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_a9936b1_detailed_file_changes_29_files"
     },
     {
       "relation": "contains",
@@ -56991,9 +57072,9 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_a9936b1.md",
       "source_location": "L64",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_a9936b1_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_a9936b1_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
-      "confidence_score": 1.0
+      "target": "2026_09_report_20260903_a9936b1_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools"
     },
     {
       "relation": "contains",
@@ -57001,8 +57082,68 @@
       "source_file": "logs/reports/2026-09/REPORT_20260903_a9936b1.md",
       "source_location": "L85",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_09_report_20260903_a9936b1_sg_forge_atomic_commit_audit_report",
-      "target": "2026_09_report_20260903_a9936b1_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
+      "target": "2026_09_report_20260903_a9936b1_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_c9c5275.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "2026_09_report_20260903_c9c5275",
+      "target": "2026_09_report_20260903_c9c5275_sg_forge_atomic_commit_audit_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_c9c5275.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "2026_09_report_20260903_c9c5275_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260903_c9c5275_changes_diff_statistics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_c9c5275.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "2026_09_report_20260903_c9c5275_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260903_c9c5275_commit_overview_context",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_c9c5275.md",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "2026_09_report_20260903_c9c5275_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260903_c9c5275_detailed_file_changes_30_files",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_c9c5275.md",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "2026_09_report_20260903_c9c5275_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260903_c9c5275_tier_1_deterministic_engine_checks_checked_by_logic_open_source_tools",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "logs/reports/2026-09/REPORT_20260903_c9c5275.md",
+      "source_location": "L86",
+      "weight": 1.0,
+      "source": "2026_09_report_20260903_c9c5275_sg_forge_atomic_commit_audit_report",
+      "target": "2026_09_report_20260903_c9c5275_tier_2_ai_agent_semantic_architecture_quality_checks_token_efficient_digest",
       "confidence_score": 1.0
     },
     {
@@ -57042,7 +57183,7 @@
       "source_location": "L28",
       "weight": 1.0,
       "source": "reports_latest_commit_report_sg_forge_atomic_commit_audit_report",
-      "target": "reports_latest_commit_report_detailed_file_changes_29_files",
+      "target": "reports_latest_commit_report_detailed_file_changes_30_files",
       "confidence_score": 1.0
     },
     {
@@ -58827,5 +58968,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "f892f30be352127fe772a91f422bd523cf2d9c37"
+  "built_at_commit": "f41bf609676f7ca137fc3cabd75e42caaa9b6308"
 }

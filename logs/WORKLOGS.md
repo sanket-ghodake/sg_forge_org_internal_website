@@ -453,3 +453,7 @@
 2026-09-03 09:40 | Removed Workspace Mode header and Workspace Settings menu item from profile popover for regular employee users
 2026-09-03 09:44 | Prevented browser console DevTools Web Vitals noise error via preventDefault and early head script error suppression
 2026-09-03 09:46 | [c9c5275] fix(portal): complete audit remediation, portal.db isolation, real-time persistence, and RBAC hardening (+2958, -862)
+2026-09-03 09:51 | Diagnose development DB reset root cause and prepare test isolation plan
+2026-09-03 09:52 | Configure GitHub Actions workflows to run manually via workflow_dispatch instead of on push/pull_request
+2026-09-03 09:53 | Harden test DB isolation, prevent dev database wipes, and add reset-db CLI tooling
+2026-09-03 09:56 | [29f73a3] feat(database): enforce test DB isolation, prevent dev wipes, and add reset-db CLI (+648, -429)

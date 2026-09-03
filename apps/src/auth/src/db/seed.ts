@@ -24,6 +24,11 @@ export function seedAuthDatabase(force: boolean = false): void {
   }
 
   if (force) {
+    // Safety invariant: NEVER force-wipe live development or production databases
+    if (!isTestEnvironment() && process.env.ALLOW_DB_WIPE !== 'true') {
+      logger.warn('Blocked attempt to force-wipe non-test database! Set ALLOW_DB_WIPE=true to override.');
+      return;
+    }
     db.run('DELETE FROM auth_audit_logs;');
     db.run('DELETE FROM auth_sessions;');
     db.run('DELETE FROM auth_iam_policy_bindings;');

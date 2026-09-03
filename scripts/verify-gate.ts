@@ -332,7 +332,15 @@ runTier1Check(11, 'Microservice Observability & Isolated Logs', 'Folder & Contra
 
 // 12. 5-Tier Test Suite Execution
 runTier1Check(12, '5-Tier Automated Test Suites', 'Bun Test Runner', () => {
-  const proc = Bun.spawnSync(['bun', 'test'], { cwd: REPO_ROOT });
+  const proc = Bun.spawnSync(['bun', 'test'], {
+    cwd: REPO_ROOT,
+    env: {
+      ...process.env,
+      NODE_ENV: 'test',
+      BUN_ENV: 'test',
+      FORGE_TEST_MODE: 'true',
+    },
+  });
   const stdout = proc.stdout.toString();
   if (proc.exitCode !== 0) return { status: 'FAILED', details: `Tests failed:\n${stdout}` };
 

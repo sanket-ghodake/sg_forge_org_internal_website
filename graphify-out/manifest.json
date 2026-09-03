@@ -15,13 +15,13 @@
     "semantic_hash": ""
   },
   "run.sh": {
-    "mtime": 1788370422.4808614,
-    "ast_hash": "3440aca79b26bce57b229dc65f70c52d",
+    "mtime": 1788409378.1611485,
+    "ast_hash": "db96e1424db9c3d7c5f72823224c28b6",
     "semantic_hash": ""
   },
   ".github/workflows/ci.yml": {
-    "mtime": 1788273202.1028163,
-    "ast_hash": "232839cb714e9bb322afbb49402c5bc9",
+    "mtime": 1788409322.9375086,
+    "ast_hash": "a9ce6724d5ca33a988a967f74dc8084e",
     "semantic_hash": ""
   },
   ".github/copilot-instructions.md": {
@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "logs/WORKLOGS.md": {
-    "mtime": 1788408606.95799,
-    "ast_hash": "005d6db4777caf96e5d015aef00a6c2b",
+    "mtime": 1788409359.558286,
+    "ast_hash": "4da3df436f2655ffa1474b55b2717ca3",
     "semantic_hash": ""
   },
   "docs/setup/PORTABLE_SETUP.md": {
@@ -80,13 +80,13 @@
     "semantic_hash": ""
   },
   ".github/workflows/codeql.yml": {
-    "mtime": 1788268732.8604658,
-    "ast_hash": "93cc02894764c5cc9ddd697d6f70911c",
+    "mtime": 1788409327.2467234,
+    "ast_hash": "f54d2fefb371e5c7da0d4bbf55547be5",
     "semantic_hash": ""
   },
   ".github/workflows/sbom-audit.yml": {
-    "mtime": 1788268739.7074614,
-    "ast_hash": "1c527a62575402b449621487063279eb",
+    "mtime": 1788409331.847951,
+    "ast_hash": "1f75d4d26acc426958184829f46c9cd5",
     "semantic_hash": ""
   },
   ".cursor/rules/AGENTS.md": {
@@ -280,8 +280,8 @@
     "semantic_hash": ""
   },
   "scripts/verify-gate.ts": {
-    "mtime": 1788354487.1621695,
-    "ast_hash": "67ed9d8a77836bca87e048a3a67ecce3",
+    "mtime": 1788409342.818487,
+    "ast_hash": "e049bad1ebc59cf73b3ea1d1acc3eef7",
     "semantic_hash": ""
   },
   "docs/tools/PORTABLE_TOOLCHAIN.md": {
@@ -295,8 +295,8 @@
     "semantic_hash": ""
   },
   "logs/reports/LATEST_COMMIT_REPORT.md": {
-    "mtime": 1788375996.9850054,
-    "ast_hash": "5fe668a8fec2d51df82ecb34cfec7f62",
+    "mtime": 1788408983.9665093,
+    "ast_hash": "9df8e31c4e0e8a2d675a259067bae14e",
     "semantic_hash": ""
   },
   "apps/src/sdk/src/registry.ts": {
@@ -1005,8 +1005,8 @@
     "semantic_hash": ""
   },
   "apps/src/auth/src/db/seed.ts": {
-    "mtime": 1788284964.1728446,
-    "ast_hash": "8fabbfcbf06d9f3614c2e225ee1d7063",
+    "mtime": 1788409351.8029184,
+    "ast_hash": "e96fafd6111ee4634b3faae8a4ce7caa",
     "semantic_hash": ""
   },
   "apps/src/auth/src/frontend/auth-styles.ts": {
@@ -2590,8 +2590,8 @@
     "semantic_hash": ""
   },
   "apps/src/sdk/src/database.ts": {
-    "mtime": 1788370458.2439973,
-    "ast_hash": "dbf4b8f2bbc820f9a35363ff4fb538aa",
+    "mtime": 1788409332.555986,
+    "ast_hash": "9451c1c661b7d4a41628b62036b8fde7",
     "semantic_hash": ""
   },
   "logs/reports/2026-09/REPORT_20260901_2700a63.md": {
@@ -2812,6 +2812,11 @@
   "logs/reports/2026-09/REPORT_20260903_a9936b1.md": {
     "mtime": 1788375996.9850054,
     "ast_hash": "5fe668a8fec2d51df82ecb34cfec7f62",
+    "semantic_hash": ""
+  },
+  "logs/reports/2026-09/REPORT_20260903_c9c5275.md": {
+    "mtime": 1788408983.9665093,
+    "ast_hash": "9df8e31c4e0e8a2d675a259067bae14e",
     "semantic_hash": ""
   }
 }

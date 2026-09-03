@@ -15,16 +15,44 @@ const logger = createLogger('sdk-database');
 
 /**
  * Determines whether the current process is running in an automated test environment.
+ * Multi-signal detection: checks environment variables, global test runner symbols (describe/it/test),
+ * and CLI arguments to ensure automated tests NEVER mutate live development or production databases.
  */
 export function isTestEnvironment(): boolean {
-  return (
+  if (
     process.env.NODE_ENV === 'test' ||
     process.env.BUN_ENV === 'test' ||
     process.env.VITEST === 'true' ||
     process.env.TEST === 'true' ||
     Boolean(process.env.FORGE_TEST_MODE)
-  );
+  ) {
+    return true;
+  }
+
+  // Runtime symbol detection (Bun test runner, Vitest, Jest globals)
+  const g = globalThis as any;
+  if (typeof g.describe === 'function' && (typeof g.it === 'function' || typeof g.test === 'function')) {
+    return true;
+  }
+
+  // Process argument inspection (bun test, vitest, jest)
+  if (Array.isArray(process.argv)) {
+    const isTestArg = process.argv.some(
+      (arg) =>
+        arg === 'test' ||
+        arg.endsWith('/bun:test') ||
+        arg.includes('bun:test') ||
+        arg.includes('.test.ts') ||
+        arg.includes('.test.js') ||
+        arg.includes('.spec.ts') ||
+        arg.includes('.spec.js')
+    );
+    if (isTestArg) return true;
+  }
+
+  return false;
 }
+
 
 /**
  * Resolves the canonical data directory across diverse runtime contexts:
