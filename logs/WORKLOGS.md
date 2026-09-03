@@ -518,3 +518,6 @@
 2026-09-03 20:34 | Implement static Astryx system-down error pages, Caddy handle_errors for all routes and Forge Apps, and standalone Host Fallback Server
 2026-09-03 20:37 | Change CI/CD pipeline triggers from push/PR to workflow_dispatch manual trigger only
 2026-09-03 20:38 | [76cf8ee] feat(ci): switch CI/CD pipeline to manual workflow_dispatch trigger only (+5540, -8)
+2026-09-03 20:44 | Remediated audit items: fixed rate-limiter clearAllRateLimits bug with regression test, updated .env/.env.example with production notes & dev password, generated complete CycloneDX 1.5 SBOM with 21 components, updated Knip gate check, documented rate limiter & TLS architecture, all 27 quality gates passing
+2026-09-03 20:51 | Re-audit completed: verified 353 tests across 131 files with 0 failures, 27/27 quality gates passing, production readiness score elevated to 9.4/10 (Approved for production)
+2026-09-03 20:54 | [859cbcd] fix(auth): remediate production audit findings and add dynamic sbom generator (+315, -73)

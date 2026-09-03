@@ -6,12 +6,12 @@
 import { describe, expect, it, beforeEach } from 'bun:test';
 import { seedAuthDatabase } from '../../src/db/seed';
 import { handleLogin } from '../../src/backend/api-handlers';
-import { resetAttempts } from '../../src/backend/rate-limiter';
+import { clearAllRateLimits, checkRateLimit, recordFailedAttempt, resetAttempts } from '../../src/backend/rate-limiter';
 
 describe('Tier 3 Security: Anti-Brute-Force Rate Limiting', () => {
   beforeEach(() => {
     seedAuthDatabase(true);
-    resetAttempts('10.0.0.1', 'target.victim@forge.internal');
+    clearAllRateLimits();
   });
 
   it('should block rapid credential stuffing attacks with HTTP 429 after 5 failed attempts', async () => {
@@ -45,5 +45,25 @@ describe('Tier 3 Security: Anti-Brute-Force Rate Limiting', () => {
     expect(blockedRes.status).toBe(429);
     expect(blockedRes.headers.get('retry-after')).toBeDefined();
     expect(blockedData.title).toBe('Too Many Requests');
+  });
+
+  it('should completely clear both IP and email attempt buckets when clearAllRateLimits is called', () => {
+    // 1. Arrange: Record 5 failed attempts for specific IP and email
+    const ip = '192.168.1.100';
+    const email = 'user.victim@example.com';
+    for (let i = 0; i < 5; i++) {
+      recordFailedAttempt(ip, email);
+    }
+    const blockedState = checkRateLimit(ip, email);
+    expect(blockedState.isBlocked).toBe(true);
+    expect(blockedState.remainingAttempts).toBe(0);
+
+    // 2. Act: Invoke clearAllRateLimits
+    clearAllRateLimits();
+
+    // 3. Assert: Both IP and email tracking are completely cleared
+    const clearedState = checkRateLimit(ip, email);
+    expect(clearedState.isBlocked).toBe(false);
+    expect(clearedState.remainingAttempts).toBe(5);
   });
 });

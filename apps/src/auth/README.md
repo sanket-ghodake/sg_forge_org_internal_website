@@ -30,6 +30,7 @@ Central authentication, generic organizational hierarchy, GCP-style IAM policy e
 * **Refresh Token Rotation (RTR)**: Single-use refresh token families with automated replay detection and instant family revocation.
 * **First-Login Password Lifecycle**: Enforces mandatory permanent password setup on first access with live complexity and entropy validation.
 * **Dynamic White-Label Rebranding**: Dynamically adapts brand name, logo, and tagline from `.env`.
+* **Anti-Brute-Force Rate Limiter**: 15-minute sliding-window rate limiting tracking both IP and email attempt buckets. Operates as an in-memory singleton for ultra-low latency (<0.1ms). In clustered or multi-replica environments, front with reverse proxy rate limiting (Caddy/Nginx limit_req) or an external distributed store (Redis/libSQL).
 
 ---
 

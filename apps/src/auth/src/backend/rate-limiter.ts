@@ -83,6 +83,6 @@ export function resetAttempts(ip: string, email: string): void {
 }
 
 export function clearAllRateLimits(): void {
-  ipAttempts.clear;
+  ipAttempts.clear();
   emailAttempts.clear();
 }

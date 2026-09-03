@@ -178,7 +178,13 @@ runTier1Check(4, 'TypeScript Compilation & Code Quality', 'TypeScript Compiler &
 // 5. Knip Dead Code & Unused Export Scanner
 runTier1Check(5, 'Dead Code & Unused Exports', 'Knip Portable', () => {
   const proc = Bun.spawnSync(['bun', join(REPO_ROOT, 'portables', 'bin', 'knip')], { cwd: REPO_ROOT });
-  return { status: 'PASSED', details: 'Monorepo workspaces analyzed. Zero dead code or unexported blocking issues.' };
+  if (proc.exitCode !== 0) {
+    return { status: 'FAILED', details: proc.stderr.toString().trim() || 'Knip detected dead code or unused exports.' };
+  }
+  const stdout = proc.stdout.toString().trim();
+  const match = stdout.match(/Audited\s+(\d+)\s+files/);
+  const fileCount = match ? match[1] : 'all';
+  return { status: 'PASSED', details: `Monorepo workspaces analyzed (${fileCount} files). Zero dead code or unexported blocking issues.` };
 });
 
 // 6. Hadolint Dockerfile & Container Linter & Healthcheck Parity
