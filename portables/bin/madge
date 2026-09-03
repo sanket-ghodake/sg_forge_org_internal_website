@@ -7,10 +7,15 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-BUN="$REPO_ROOT/portables/bun/bin/bun"
+BUN="bun"
+if [ -x "$REPO_ROOT/portables/bun/bin/bun" ]; then
+    BUN="$REPO_ROOT/portables/bun/bin/bun"
+elif command -v bun >/dev/null 2>&1; then
+    BUN="bun"
+fi
 LOCAL_BIN="$REPO_ROOT/node_modules/.bin/madge"
 
-if [ -f "$LOCAL_BIN" ] && [ -f "$BUN" ]; then
+if [ -f "$LOCAL_BIN" ]; then
     exec "$BUN" run "$LOCAL_BIN" --circular --extensions ts,tsx "$@"
 elif command -v madge >/dev/null 2>&1; then
     exec madge --circular --extensions ts,tsx "$@"

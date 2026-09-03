@@ -50,6 +50,20 @@ export function appendWorklog(summary: string): void {
     return;
   }
 
+  // Prevent redundant worklog if the latest commit was already recorded by post-commit hook
+  const lastCommitProc = Bun.spawnSync(['git', 'log', '-1', '--format=%ct%x00%h'], { cwd: REPO_ROOT });
+  if (lastCommitProc.exitCode === 0) {
+    const output = lastCommitProc.stdout.toString().trim();
+    const [commitTimestamp, shortHash] = output.split('\0');
+    if (commitTimestamp && shortHash) {
+      const commitAgeSec = Math.floor(Date.now() / 1000) - Number.parseInt(commitTimestamp, 10);
+      if (commitAgeSec < 300 && cleanSummary.toLowerCase().includes('commit')) {
+        console.log(`ℹ️ [Worklog] Recent commit was already recorded in WORKLOGS.md by post-commit hook.`);
+        return;
+      }
+    }
+  }
+
   const updatedContent = `${existing}\n${newEntry}\n`;
   writeFileSync(WORKLOGS_PATH, updatedContent, 'utf8');
 

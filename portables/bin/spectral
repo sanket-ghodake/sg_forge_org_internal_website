@@ -7,13 +7,23 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-BUN="$REPO_ROOT/portables/bun/bin/bun"
+BUN="bun"
+if [ -x "$REPO_ROOT/portables/bun/bin/bun" ]; then
+    BUN="$REPO_ROOT/portables/bun/bin/bun"
+elif command -v bun >/dev/null 2>&1; then
+    BUN="bun"
+fi
 LOCAL_BIN="$REPO_ROOT/node_modules/.bin/spectral"
 
-if [ -f "$LOCAL_BIN" ] && [ -f "$BUN" ]; then
-    exec "$BUN" run "$LOCAL_BIN" lint --ruleset "$REPO_ROOT/.spectral.yaml" "$@"
+ARGS=("$@")
+if [ "${ARGS[0]:-}" = "lint" ]; then
+    ARGS=("${ARGS[@]:1}")
+fi
+
+if [ -f "$LOCAL_BIN" ]; then
+    exec "$BUN" run "$LOCAL_BIN" lint --ruleset "$REPO_ROOT/.spectral.yaml" "${ARGS[@]}"
 elif command -v spectral >/dev/null 2>&1; then
-    exec spectral lint --ruleset "$REPO_ROOT/.spectral.yaml" "$@"
+    exec spectral lint --ruleset "$REPO_ROOT/.spectral.yaml" "${ARGS[@]}"
 else
     echo "❌ [spectral] Local binary not found at $LOCAL_BIN. Run './run.sh setup' to install." >&2
     exit 1

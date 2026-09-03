@@ -4,27 +4,19 @@ This directory contains the GitHub Actions workflow configurations for the SG Fo
 
 ## Architecture
 
-SG Forge enforces a **single, unified manual pipeline** ([pipeline.yml](file:///.github/workflows/pipeline.yml)) with step-by-step DAG (Directed Acyclic Graph) nodes rather than fragmented separate workflows.
+SG Forge enforces a **single, unified pipeline** ([pipeline.yml](file:///.github/workflows/pipeline.yml)) running as one streamlined, end-to-end job in a single runner environment:
 
 ```
-Manual Dispatch (workflow_dispatch)
-  │
-  ├──► [Node 1: Secrets & File Hygiene] (< 10s)
-  │      │
-  │      ▼
-  ├──► [Node 2: Typecheck & 27-Gate Verification] (< 25s)
-  │      │
-  │      ▼
-  ├──► [Node 3: 5-Tier Test Suites] (< 30s)
-  │      │
-  │      ├───────────────┬───────────────┐
-  │      ▼               ▼               │
-  ├──► [Node 4: CodeQL] [Node 5: SBOM]   │
-  │      │               │               │
-  │      └───────────────┴───────────────┘
-  │                      │
-  │                      ▼
-  └──► [Node 6: Pipeline Summary & Receipt]
+[SG Forge Unified CI/CD Pipeline]
+  ├── 1. Checkout Code & Setup Bun Runtime (1.3.14)
+  ├── 2. Ensure Executable Permissions on All Portables & Scripts
+  ├── 3. Frozen Lockfile Install (with Bun Cache) & Environment Setup
+  ├── 4. Gitleaks Secret Audit (160+ Token Rules)
+  ├── 5. TypeScript Static Compilation (tsc --noEmit)
+  ├── 6. Deterministic 27-Gate Quality Verification (verify-gate.ts)
+  ├── 7. Full 5-Tier Test Suites (bun test across all microservices)
+  ├── 8. CycloneDX 1.5 SBOM Generation & Artifact Upload
+  └── 9. Optional CodeQL Deep Security SAST Analysis
 ```
 
 ## How to Trigger
