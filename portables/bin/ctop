@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# Standalone Portable Wrapper for ctop (Container Top Terminal Dashboard)
+# Zero Host Modification - Standalone Binary / Docker / Native Fallback
+# ==============================================================================
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+LOCAL_BIN="$REPO_ROOT/portables/ctop/ctop"
+
+if [ -x "$LOCAL_BIN" ]; then
+    exec "$LOCAL_BIN" "$@"
+elif command -v ctop >/dev/null 2>&1; then
+    exec ctop "$@"
+elif command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
+    exec docker run --rm -ti --name=ctop --volume /var/run/docker.sock:/var/run/docker.sock:ro bcicen/ctop:latest "$@"
+else
+    echo "📊 [ctop Portable] Monitoring containers via Docker stats..."
+    if command -v docker >/dev/null 2>&1; then
+        exec docker stats
+    else
+        echo "❌ Docker not available for container metrics." >&2
+        exit 1
+    fi
+fi

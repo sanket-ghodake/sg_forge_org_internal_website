@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:138e7dbe-8e5f-499e-918b-3842e3d3deec",
+  "serialNumber": "urn:uuid:76470ee9-35b1-44b4-95f1-39a3340fd117",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-02T16:09:03Z",
+    "timestamp": "2026-09-03T07:16:31Z",
     "tools": [
       {
         "vendor": "SG Forge",

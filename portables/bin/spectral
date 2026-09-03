@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# Standalone Portable Wrapper for Spectral (OpenAPI & AsyncAPI Contract Linter)
+# Zero Host Modification - Uses Repo-Local Portable Toolchain
+# ==============================================================================
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+BUN="$REPO_ROOT/portables/bun/bin/bun"
+LOCAL_BIN="$REPO_ROOT/node_modules/.bin/spectral"
+
+if [ -f "$LOCAL_BIN" ] && [ -f "$BUN" ]; then
+    exec "$BUN" run "$LOCAL_BIN" lint --ruleset "$REPO_ROOT/.spectral.yaml" "$@"
+elif command -v spectral >/dev/null 2>&1; then
+    exec spectral lint --ruleset "$REPO_ROOT/.spectral.yaml" "$@"
+else
+    echo "❌ [spectral] Local binary not found at $LOCAL_BIN. Run './run.sh setup' to install." >&2
+    exit 1
+fi

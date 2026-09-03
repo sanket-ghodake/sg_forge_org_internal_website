@@ -6,7 +6,13 @@ Zero-host portable binaries, runtime engines, and cross-platform CLI toolchains.
 
 ## 📦 Directory Structure
 
-* **[`bin/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/bin/)**: Standalone executable CLI wrappers (`gitleaks`, `biome`, `knip`, `hadolint`, `autocannon`, `repomix`, `scc`, `hyperfine`, `caveman`, `graphify`, `rtk`, `astryx`).
+* **[`bin/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/bin/)**: Standalone executable CLI wrappers:
+  * **Architecture & Governance**: `depcruise`, `madge`, `spectral`, `schemathesis`
+  * **Quality & Static Analysis**: `biome`, `knip`, `type-coverage`, `shellcheck`, `scc`, `lizard`
+  * **Security & Supply Chain**: `gitleaks`, `semgrep`, `osv-scanner`, `trivy`, `syft`, `hadolint`
+  * **Frontend & Accessibility**: `astryx`, `axe`, `lhci`
+  * **Benchmarking & Telemetry**: `autocannon`, `hyperfine`, `k6`, `ctop`
+  * **AI Context & Engineering**: `rtk`, `repomix`, `graphify`, `caveman`
 * **[`bun/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/bun/)**: Portable Bun v1.3.14 (LTS 2026) runtime and portable `bunx` runner.
 * **[`rtk/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/rtk/)**: Portable RTK Token Optimizer.
 * **[`scc/`](file:///home/sanket/Desktop/Sanket/org_website_clone/portables/scc/)**: Portable Sloc, Cloc & Complexity Analyzer.

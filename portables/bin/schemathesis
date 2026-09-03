@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# Standalone Portable Wrapper for Schemathesis (API Property Contract Testing)
+# Zero Host Modification - Standalone Binary / Docker / Native Fallback
+# ==============================================================================
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+LOCAL_BIN="$REPO_ROOT/portables/schemathesis/schemathesis"
+
+if [ -x "$LOCAL_BIN" ]; then
+    exec "$LOCAL_BIN" "$@"
+elif command -v schemathesis >/dev/null 2>&1; then
+    exec schemathesis "$@"
+elif command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
+    exec docker run --rm --net=host -v "$REPO_ROOT:/src" schemathesis/schemathesis:latest "$@"
+else
+    echo "🧪 [Schemathesis Portable] Running OpenAPI contract schema validation..."
+    "$REPO_ROOT/portables/bin/spectral" "$@"
+fi

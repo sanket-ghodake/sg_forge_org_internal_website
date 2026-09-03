@@ -114,9 +114,72 @@ case "$CMD" in
         ;;
 
     verify)
-        echo "🛡️ [${BRAND_NAME}] Running Automated AI Agent Quality Gate..."
+        echo "🛡️ [${BRAND_NAME}] Running Automated AI Agent Quality Gate (21 Deterministic Gates)..."
         $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
         $PORTABLE_BUN run "$REPO_ROOT/scripts/verify-gate.ts"
+        ;;
+
+    lint)
+        "$REPO_ROOT/portables/bin/biome" "$@"
+        ;;
+
+    deadcode)
+        "$REPO_ROOT/portables/bin/knip" "$@"
+        ;;
+
+    secrets)
+        "$REPO_ROOT/portables/bin/gitleaks" "$@"
+        ;;
+
+    arch)
+        echo "🏛️ [${BRAND_NAME}] Auditing monorepo architecture and circular dependencies..."
+        "$REPO_ROOT/portables/bin/depcruise" apps/src forge-apps
+        "$REPO_ROOT/portables/bin/madge" apps/src
+        ;;
+
+    typecheck)
+        "$REPO_ROOT/portables/bin/type-coverage" "$@"
+        ;;
+
+    shellcheck)
+        "$REPO_ROOT/portables/bin/shellcheck" "$@"
+        ;;
+
+    semgrep)
+        "$REPO_ROOT/portables/bin/semgrep" "$@"
+        ;;
+
+    a11y)
+        "$REPO_ROOT/portables/bin/axe" "$@"
+        ;;
+
+    spectral)
+        "$REPO_ROOT/portables/bin/spectral" "$@"
+        ;;
+
+    vuln)
+        "$REPO_ROOT/portables/bin/osv-scanner" "$@"
+        ;;
+
+    trivy)
+        "$REPO_ROOT/portables/bin/trivy" "$@"
+        ;;
+
+    sbom)
+        "$REPO_ROOT/scripts/generate-sbom.sh" "$@"
+        ;;
+
+    lhci)
+        "$REPO_ROOT/portables/bin/lhci" "$@"
+        ;;
+
+    benchmark)
+        shift
+        "$REPO_ROOT/portables/bin/autocannon" "$@"
+        ;;
+
+    pack)
+        "$REPO_ROOT/portables/bin/repomix" "$@"
         ;;
 
     doctor)

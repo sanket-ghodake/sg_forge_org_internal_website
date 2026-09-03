@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# Standalone Portable Wrapper for Dependency Cruiser (Architecture Boundaries)
+# Zero Host Modification - Uses Repo-Local Portable Toolchain
+# ==============================================================================
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+BUN="$REPO_ROOT/portables/bun/bin/bun"
+LOCAL_BIN="$REPO_ROOT/node_modules/.bin/depcruise"
+
+if [ -f "$LOCAL_BIN" ] && [ -f "$BUN" ]; then
+    exec "$BUN" run "$LOCAL_BIN" --config "$REPO_ROOT/.dependency-cruiser.cjs" "$@"
+elif command -v depcruise >/dev/null 2>&1; then
+    exec depcruise --config "$REPO_ROOT/.dependency-cruiser.cjs" "$@"
+else
+    echo "❌ [depcruise] Local binary not found at $LOCAL_BIN. Run './run.sh setup' to install." >&2
+    exit 1
+fi

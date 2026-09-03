@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# Standalone Portable Wrapper for Lighthouse CI (Web Vitals & Performance)
+# Zero Host Modification - Uses Repo-Local Portable Toolchain
+# ==============================================================================
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+BUN="$REPO_ROOT/portables/bun/bin/bun"
+LOCAL_BIN="$REPO_ROOT/node_modules/.bin/lhci"
+
+if [ -f "$LOCAL_BIN" ] && [ -f "$BUN" ]; then
+    exec "$BUN" run "$LOCAL_BIN" --config "$REPO_ROOT/lighthouserc.json" "$@"
+elif command -v lhci >/dev/null 2>&1; then
+    exec lhci --config "$REPO_ROOT/lighthouserc.json" "$@"
+else
+    echo "❌ [lhci] Local binary not found at $LOCAL_BIN. Run './run.sh setup' to install." >&2
+    exit 1
+fi

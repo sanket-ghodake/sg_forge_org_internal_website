@@ -4,7 +4,9 @@
  * Renders consistent, high-aesthetic Astryx error screens for all HTTP error codes.
  */
 
-import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript } from './index';
+import { getAstryxHeaderHtml } from './header';
+import { getAstryxStyles } from './styles';
+import { getHeadStateScript } from './state';
 
 export interface ErrorPageOptions {
   statusCode: number;

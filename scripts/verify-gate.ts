@@ -20,25 +20,19 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 
 import { join, relative } from 'node:path';
 import { validateIgnores } from './sync-ignores';
 import { loadServiceRegistry } from '../apps/src/sdk/src/registry';
+import {
+  resolveMicroserviceDir,
+  checkDynamic5TierArchitecture,
+  checkArchitectureBoundaries,
+  checkCircularDependencies,
+  checkTypeCoverage,
+  checkShellScripts,
+  checkAxeAccessibility,
+  checkSemgrepInvariants,
+} from './verify-checks';
 
 const REPO_ROOT = process.cwd();
 const AGENTS_REPORTS_DIR = join(REPO_ROOT, '.agents', 'reports');
-
-function resolveMicroserviceDir(serviceId: string): string | null {
-  const directApp = join(REPO_ROOT, 'apps', 'src', serviceId);
-  if (existsSync(directApp)) return directApp;
-  if (serviceId === 'devcenter') {
-    const devDash = join(REPO_ROOT, 'apps', 'src', 'dev-dashboard');
-    if (existsSync(devDash)) return devDash;
-  }
-  if (serviceId === 'gateway') {
-    const devHub = join(REPO_ROOT, 'apps', 'src', 'dev-hub');
-    if (existsSync(devHub)) return devHub;
-  }
-  const forgeApp = join(REPO_ROOT, 'forge-apps', serviceId);
-  if (existsSync(forgeApp)) return forgeApp;
-  return null;
-}
 
 interface Tier1Check {
   id: number;
@@ -389,49 +383,25 @@ runTier1Check(14, 'Meta Astryx UI & Token Compliance', 'Astryx Portable Validato
 });
 
 // 15. Dynamic Microservice 5-Tier Test Architecture Scanner
-runTier1Check(15, 'Dynamic 5-Tier Test Architecture Scanner', 'Microservice Discovery Engine', () => {
-  const registeredServices = loadServiceRegistry();
-  const requiredTiers = ['unit', 'integration', 'security', 'contracts', 'e2e'];
-  const violations: string[] = [];
+runTier1Check(15, 'Dynamic 5-Tier Test Architecture Scanner', 'Microservice Discovery Engine', () => checkDynamic5TierArchitecture());
 
-  for (const s of registeredServices) {
-    const sPath = resolveMicroserviceDir(s.id);
-    if (!sPath) {
-      violations.push(`${s.id} (directory not found)`);
-      continue;
-    }
-    const rel = relative(REPO_ROOT, sPath);
-    const testDir = join(sPath, 'test');
-    if (!existsSync(testDir)) {
-      violations.push(`${rel} is missing test/ directory`);
-      continue;
-    }
-    if (!existsSync(join(testDir, 'README.md'))) {
-      violations.push(`${rel}/test/README.md is missing`);
-    }
+// 16. Monorepo Architecture & Domain Isolation Boundaries
+runTier1Check(16, 'Monorepo Architecture Boundaries', 'dependency-cruiser', () => checkArchitectureBoundaries());
 
-    for (const tier of requiredTiers) {
-      const tierDir = join(testDir, tier);
-      if (!existsSync(tierDir)) {
-        violations.push(`${rel}/test/${tier} (missing tier folder)`);
-      } else {
-        const testFiles = readdirSync(tierDir).filter((f) => f.endsWith('.test.ts') || f.endsWith('.pw.ts'));
-        if (testFiles.length === 0) {
-          violations.push(`${rel}/test/${tier} (no test files found)`);
-        }
-      }
-    }
-  }
+// 17. Circular Dependency Audit
+runTier1Check(17, 'Zero Circular Dependencies', 'Madge AST Graph', () => checkCircularDependencies());
 
-  if (violations.length > 0) {
-    return { status: 'FAILED', details: `5-Tier Test violations in ${violations.length} check(s): ${violations.join('; ')}` };
-  }
+// 18. TypeScript Strictness & Type Coverage Gate
+runTier1Check(18, 'TypeScript Strictness (>=90% Coverage)', 'Type-Coverage Auditor', () => checkTypeCoverage());
 
-  return {
-    status: 'PASSED',
-    details: `All ${registeredServices.length} registered microservices maintain complete, verified 5-Tier test architectures (unit, integration, security, contracts, e2e).`,
-  };
-});
+// 19. Shell Script Safety & POSIX Integrity
+runTier1Check(19, 'Shell Script Safety & POSIX Integrity', 'ShellCheck Portable', () => checkShellScripts());
+
+// 20. Automated WCAG 2.1 AA Accessibility Standards
+runTier1Check(20, 'WCAG 2.1 AA Accessibility Standards', 'Axe Portable Auditor', () => checkAxeAccessibility());
+
+// 21. SAST AppSec Rules & Multi-Tenant Scoping
+runTier1Check(21, 'SAST Security & Multi-Tenant Scoping', 'Semgrep Portable Engine', () => checkSemgrepInvariants());
 
 // ==============================================================================
 // TIER 2: AI AGENT SEMANTIC CHECKS (TOKEN-OPTIMIZED COMPACT REVIEW)
