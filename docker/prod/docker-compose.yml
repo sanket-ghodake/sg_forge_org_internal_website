@@ -345,6 +345,8 @@ services:
       - ../../package.json:/app/package.json:ro
       - ../../tsconfig.json:/app/tsconfig.json:ro
       - ../../apps/src/sdk:/app/apps/src/sdk:ro
+      - ../../apps/src/types:/app/apps/src/types:ro
+      - ../../apps/src/ui:/app/apps/src/ui:ro
       - ../../scripts:/app/scripts:ro
       - ../../backups:/app/backups:rw
       - ag_prod_db_auth:/app/data_sources/auth:ro

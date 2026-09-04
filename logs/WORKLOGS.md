@@ -566,3 +566,6 @@
 2026-09-04 20:35 | Implemented local-only cross-platform runtime AES-256-GCM field encryption, blind indexing, storage permission hardening, and passed 27-check quality gate
 2026-09-04 20:43 | audit: completed in-depth release audit and hardened all Dockerfiles to non-root USER bun
 2026-09-04 20:45 | [bb7c127] feat(release): production audit, container non-root hardening, and offline error resiliency (+4904, -792)
+2026-09-04 21:01 | Diagnosed and resolved production 502 Bad Gateway: fixed database volume UID permissions and db-backup volume mounts
+2026-09-04 21:09 | Created comprehensive Organization Deployment & Quickstart Guide in docs
+2026-09-04 21:10 | [77fdd07] fix(prod): resolve db volume permissions and add organization deployment guide (+166, -0)
