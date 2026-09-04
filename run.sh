@@ -193,14 +193,17 @@ case "$CMD" in
         ;;
 
     lint)
+        shift || true
         "$REPO_ROOT/portables/bin/biome" "$@"
         ;;
 
     deadcode)
+        shift || true
         "$REPO_ROOT/portables/bin/knip" "$@"
         ;;
 
     secrets)
+        shift || true
         "$REPO_ROOT/portables/bin/gitleaks" "$@"
         ;;
 
@@ -211,18 +214,22 @@ case "$CMD" in
         ;;
 
     typecheck)
+        shift || true
         "$REPO_ROOT/portables/bin/type-coverage" "$@"
         ;;
 
     shellcheck)
+        shift || true
         "$REPO_ROOT/portables/bin/shellcheck" "$@"
         ;;
 
     semgrep)
+        shift || true
         "$REPO_ROOT/portables/bin/semgrep" "$@"
         ;;
 
     a11y)
+        shift || true
         "$REPO_ROOT/portables/bin/axe" "$@"
         ;;
 
@@ -250,18 +257,22 @@ case "$CMD" in
         ;;
 
     vuln)
+        shift || true
         "$REPO_ROOT/portables/bin/osv-scanner" "$@"
         ;;
 
     trivy)
+        shift || true
         "$REPO_ROOT/portables/bin/trivy" "$@"
         ;;
 
     sbom)
+        shift || true
         "$REPO_ROOT/scripts/generate-sbom.sh" "$@"
         ;;
 
     lhci)
+        shift || true
         "$REPO_ROOT/portables/bin/lhci" "$@"
         ;;
 
@@ -281,6 +292,7 @@ case "$CMD" in
         ;;
 
     pack)
+        shift || true
         "$REPO_ROOT/portables/bin/repomix" "$@"
         ;;
 
@@ -326,9 +338,14 @@ case "$CMD" in
         ;;
 
     test)
-        SUITE="${2:-all}"
+        shift || true
+        SUITE="${1:-all}"
         echo "🧪 [${BRAND_NAME}] Running test suite: $SUITE..."
-        NODE_ENV=test BUN_ENV=test FORGE_TEST_MODE=true $PORTABLE_BUN test "$@"
+        if [ "$SUITE" = "all" ] || [ -z "$SUITE" ]; then
+            NODE_ENV=test BUN_ENV=test FORGE_TEST_MODE=true $PORTABLE_BUN test
+        else
+            NODE_ENV=test BUN_ENV=test FORGE_TEST_MODE=true $PORTABLE_BUN test "$@"
+        fi
         ;;
 
     reset-db)
@@ -507,6 +524,7 @@ case "$CMD" in
         ;;
 
     deploy-prod)
+        shift || true
         "$REPO_ROOT/deploy/deploy-prod.sh" "$@"
         ;;
 

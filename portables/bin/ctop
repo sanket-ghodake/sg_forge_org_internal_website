@@ -18,11 +18,12 @@ if [ "$(uname -s)" = "Linux" ] && [ -x "$LOCAL_BIN" ]; then
         echo "📊 [ctop] Headless or non-TTY terminal detected. Streaming live container stats:"
         exec docker stats --no-stream
     fi
-    exec "$LOCAL_BIN" "$@"
-elif command -v ctop >/dev/null 2>&1; then
-    exec ctop "$@"
 else
-    echo "📊 [ctop Portable] Monitoring containers via Docker stats..."
+    SYS_CTOP="$(which -a ctop 2>/dev/null | grep -v "$SCRIPT_DIR" | head -n 1 || true)"
+    if [ -n "$SYS_CTOP" ] && [ -x "$SYS_CTOP" ]; then
+        exec "$SYS_CTOP" "$@"
+    else
+        echo "📊 [ctop Portable] Monitoring containers via Docker stats..."
     if command -v docker >/dev/null 2>&1; then
         exec docker stats
     else

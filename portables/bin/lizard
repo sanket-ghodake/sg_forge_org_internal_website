@@ -8,14 +8,17 @@ else
   PYTHON="$WORKSPACE_ROOT/.venv/bin/python3"
   if [ -x "$PYTHON" ]; then
     exec "$PYTHON" -m lizard "$@"
-  elif command -v lizard &>/dev/null; then
-    exec lizard "$@"
   else
-    BUN="$WORKSPACE_ROOT/portables/bun/bin/bun"
-    if [ -x "$BUN" ]; then
-      exec "$BUN" run "$WORKSPACE_ROOT/scripts/ast-complexity.ts" "$@"
+    SYS_LIZARD="$(which -a lizard 2>/dev/null | grep -v "$SCRIPT_DIR" | head -n 1 || true)"
+    if [ -n "$SYS_LIZARD" ] && [ -x "$SYS_LIZARD" ]; then
+      exec "$SYS_LIZARD" "$@"
     else
-      exec bun "$WORKSPACE_ROOT/scripts/ast-complexity.ts" "$@"
+      BUN="$WORKSPACE_ROOT/portables/bun/bin/bun"
+      if [ -x "$BUN" ]; then
+        exec "$BUN" run "$WORKSPACE_ROOT/scripts/ast-complexity.ts" "$@"
+      else
+        exec bun "$WORKSPACE_ROOT/scripts/ast-complexity.ts" "$@"
+      fi
     fi
   fi
 fi

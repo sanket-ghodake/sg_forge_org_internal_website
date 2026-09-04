@@ -22,9 +22,12 @@ fi
 
 if [ -f "$LOCAL_BIN" ]; then
     exec "$BUN" run "$LOCAL_BIN" lint --ruleset "$REPO_ROOT/.spectral.yaml" "${ARGS[@]}"
-elif command -v spectral >/dev/null 2>&1; then
-    exec spectral lint --ruleset "$REPO_ROOT/.spectral.yaml" "${ARGS[@]}"
 else
-    echo "❌ [spectral] Local binary not found at $LOCAL_BIN. Run './run.sh setup' to install." >&2
-    exit 1
+    SYS_SPECTRAL="$(which -a spectral 2>/dev/null | grep -v "$SCRIPT_DIR" | head -n 1 || true)"
+    if [ -n "$SYS_SPECTRAL" ] && [ -x "$SYS_SPECTRAL" ]; then
+        exec "$SYS_SPECTRAL" lint --ruleset "$REPO_ROOT/.spectral.yaml" "${ARGS[@]}"
+    else
+        echo "❌ [spectral] Local binary not found at $LOCAL_BIN. Run './run.sh setup' to install." >&2
+        exit 1
+    fi
 fi

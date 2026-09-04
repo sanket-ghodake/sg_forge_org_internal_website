@@ -9,10 +9,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 LOCAL_BIN="$REPO_ROOT/portables/schemathesis/schemathesis"
 
+SYS_SCHEMATHESIS="$(which -a schemathesis 2>/dev/null | grep -v "$SCRIPT_DIR" | head -n 1 || true)"
 if [ -x "$LOCAL_BIN" ]; then
     exec "$LOCAL_BIN" "$@"
-elif command -v schemathesis >/dev/null 2>&1; then
-    exec schemathesis "$@"
+elif [ -n "$SYS_SCHEMATHESIS" ] && [ -x "$SYS_SCHEMATHESIS" ]; then
+    exec "$SYS_SCHEMATHESIS" "$@"
 elif command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
     exec docker run --rm --net=host -v "$REPO_ROOT:/src" schemathesis/schemathesis:latest "$@"
 else

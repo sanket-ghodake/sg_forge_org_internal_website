@@ -17,9 +17,12 @@ LOCAL_BIN="$REPO_ROOT/node_modules/.bin/depcruise"
 
 if [ -f "$LOCAL_BIN" ]; then
     exec "$BUN" run "$LOCAL_BIN" --config "$REPO_ROOT/.dependency-cruiser.cjs" "$@"
-elif command -v depcruise >/dev/null 2>&1; then
-    exec depcruise --config "$REPO_ROOT/.dependency-cruiser.cjs" "$@"
 else
-    echo "❌ [depcruise] Local binary not found at $LOCAL_BIN. Run './run.sh setup' to install." >&2
-    exit 1
+    SYS_DEP="$(which -a depcruise 2>/dev/null | grep -v "$SCRIPT_DIR" | head -n 1 || true)"
+    if [ -n "$SYS_DEP" ] && [ -x "$SYS_DEP" ]; then
+        exec "$SYS_DEP" --config "$REPO_ROOT/.dependency-cruiser.cjs" "$@"
+    else
+        echo "❌ [depcruise] Local binary not found at $LOCAL_BIN. Run './run.sh setup' to install." >&2
+        exit 1
+    fi
 fi

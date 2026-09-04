@@ -14,10 +14,11 @@ if [ ${#ARGS[@]} -eq 0 ]; then
     ARGS=("--lockfile=bun.lock")
 fi
 
+SYS_OSV="$(which -a osv-scanner 2>/dev/null | grep -v "$SCRIPT_DIR" | head -n 1 || true)"
 if [ -x "$LOCAL_OSV" ]; then
     exec "$LOCAL_OSV" "${ARGS[@]}"
-elif command -v osv-scanner >/dev/null 2>&1; then
-    exec osv-scanner "${ARGS[@]}"
+elif [ -n "$SYS_OSV" ] && [ -x "$SYS_OSV" ]; then
+    exec "$SYS_OSV" "${ARGS[@]}"
 elif command -v docker >/dev/null 2>&1 && timeout 1 docker version >/dev/null 2>&1 && docker image inspect ghcr.io/google/osv-scanner:latest >/dev/null 2>&1; then
     # Offline-safe execution with zero interactive hangs and pull prevention
     exec docker run --rm --pull=never -v "$REPO_ROOT:/src" -w /src ghcr.io/google/osv-scanner:latest "${ARGS[@]}"

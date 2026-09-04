@@ -9,10 +9,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 LOCAL_SYFT="$REPO_ROOT/portables/syft/syft"
 
+SYS_SYFT="$(which -a syft 2>/dev/null | grep -v "$SCRIPT_DIR" | head -n 1 || true)"
 if [ -x "$LOCAL_SYFT" ]; then
     exec "$LOCAL_SYFT" "$@"
-elif command -v syft >/dev/null 2>&1; then
-    exec syft "$@"
+elif [ -n "$SYS_SYFT" ] && [ -x "$SYS_SYFT" ]; then
+    exec "$SYS_SYFT" "$@"
 elif command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
     exec docker run --rm -v "$REPO_ROOT:/src" -w /src anchore/syft:latest "$@"
 else

@@ -17,9 +17,12 @@ LOCAL_BIN="$REPO_ROOT/node_modules/.bin/lhci"
 
 if [ -f "$LOCAL_BIN" ]; then
     exec "$BUN" run "$LOCAL_BIN" --config "$REPO_ROOT/lighthouserc.json" "$@"
-elif command -v lhci >/dev/null 2>&1; then
-    exec lhci --config "$REPO_ROOT/lighthouserc.json" "$@"
 else
-    echo "❌ [lhci] Local binary not found at $LOCAL_BIN. Run './run.sh setup' to install." >&2
-    exit 1
+    SYS_LHCI="$(which -a lhci 2>/dev/null | grep -v "$SCRIPT_DIR" | head -n 1 || true)"
+    if [ -n "$SYS_LHCI" ] && [ -x "$SYS_LHCI" ]; then
+        exec "$SYS_LHCI" --config "$REPO_ROOT/lighthouserc.json" "$@"
+    else
+        echo "❌ [lhci] Local binary not found at $LOCAL_BIN. Run './run.sh setup' to install." >&2
+        exit 1
+    fi
 fi

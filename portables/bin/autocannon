@@ -4,6 +4,12 @@
  * High-performance HTTP latency and throughput testing for reverse proxy and micro-apps.
  */
 
+if (process.argv[2] === '--help' || process.argv[2] === '-h') {
+  console.log(`Usage: autocannon [url] [duration_in_seconds]
+Example: autocannon http://localhost:8080/ 5`);
+  process.exit(0);
+}
+
 const TARGET_URL = process.argv[2] || "http://localhost/";
 const DURATION_SEC = Number(process.argv[3] || 3);
 

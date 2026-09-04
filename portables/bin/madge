@@ -17,9 +17,12 @@ LOCAL_BIN="$REPO_ROOT/node_modules/.bin/madge"
 
 if [ -f "$LOCAL_BIN" ]; then
     exec "$BUN" run "$LOCAL_BIN" --circular --extensions ts,tsx "$@"
-elif command -v madge >/dev/null 2>&1; then
-    exec madge --circular --extensions ts,tsx "$@"
 else
-    echo "❌ [madge] Local binary not found at $LOCAL_BIN. Run './run.sh setup' to install." >&2
-    exit 1
+    SYS_MADGE="$(which -a madge 2>/dev/null | grep -v "$SCRIPT_DIR" | head -n 1 || true)"
+    if [ -n "$SYS_MADGE" ] && [ -x "$SYS_MADGE" ]; then
+        exec "$SYS_MADGE" --circular --extensions ts,tsx "$@"
+    else
+        echo "❌ [madge] Local binary not found at $LOCAL_BIN. Run './run.sh setup' to install." >&2
+        exit 1
+    fi
 fi

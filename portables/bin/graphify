@@ -9,8 +9,8 @@ if [ -x "$VENV_GRAPHIFY" ]; then
   RUNNER="$VENV_GRAPHIFY"
 elif [ -x "$HOST_GRAPHIFY" ]; then
   RUNNER="$HOST_GRAPHIFY"
-elif command -v graphify &>/dev/null; then
-  RUNNER="graphify"
+elif [ -n "$(which -a graphify 2>/dev/null | grep -v "$SCRIPT_DIR" | head -n 1)" ]; then
+  RUNNER="$(which -a graphify 2>/dev/null | grep -v "$SCRIPT_DIR" | head -n 1)"
 else
   PYTHON="$WORKSPACE_ROOT/.venv/bin/python3"
   if [ -x "$PYTHON" ]; then

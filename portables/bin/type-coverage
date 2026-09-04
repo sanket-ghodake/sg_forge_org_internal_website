@@ -17,9 +17,12 @@ LOCAL_BIN="$REPO_ROOT/node_modules/.bin/type-coverage"
 
 if [ -f "$LOCAL_BIN" ]; then
     exec "$BUN" run "$LOCAL_BIN" --at-least 90 "$@"
-elif command -v type-coverage >/dev/null 2>&1; then
-    exec type-coverage --at-least 90 "$@"
 else
-    echo "❌ [type-coverage] Local binary not found at $LOCAL_BIN. Run './run.sh setup' to install." >&2
-    exit 1
+    SYS_TC="$(which -a type-coverage 2>/dev/null | grep -v "$SCRIPT_DIR" | head -n 1 || true)"
+    if [ -n "$SYS_TC" ] && [ -x "$SYS_TC" ]; then
+        exec "$SYS_TC" --at-least 90 "$@"
+    else
+        echo "❌ [type-coverage] Local binary not found at $LOCAL_BIN. Run './run.sh setup' to install." >&2
+        exit 1
+    fi
 fi
