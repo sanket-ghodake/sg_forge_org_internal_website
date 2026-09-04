@@ -8,12 +8,14 @@ import { handleBrandAssetRequest, loadBrandConfig, renderBrandLogoHtml } from '.
 
 describe('Tier 1 Unit: Brand Configuration Resolver Engine', () => {
   const originalBrandName = process.env.NEXT_PUBLIC_BRAND_NAME;
+  const originalOrgName = process.env.NEXT_PUBLIC_ORG_NAME;
   const originalBrandShort = process.env.NEXT_PUBLIC_BRAND_SHORT;
   const originalBrandTagline = process.env.NEXT_PUBLIC_BRAND_TAGLINE;
   const originalBrandLogo = process.env.NEXT_PUBLIC_BRAND_LOGO_URL;
 
   beforeEach(() => {
     delete process.env.NEXT_PUBLIC_BRAND_NAME;
+    delete process.env.NEXT_PUBLIC_ORG_NAME;
     delete process.env.NEXT_PUBLIC_BRAND_SHORT;
     delete process.env.NEXT_PUBLIC_BRAND_TAGLINE;
     delete process.env.NEXT_PUBLIC_BRAND_LOGO_URL;
@@ -21,6 +23,7 @@ describe('Tier 1 Unit: Brand Configuration Resolver Engine', () => {
 
   afterEach(() => {
     if (originalBrandName) process.env.NEXT_PUBLIC_BRAND_NAME = originalBrandName;
+    if (originalOrgName) process.env.NEXT_PUBLIC_ORG_NAME = originalOrgName;
     if (originalBrandShort) process.env.NEXT_PUBLIC_BRAND_SHORT = originalBrandShort;
     if (originalBrandTagline) process.env.NEXT_PUBLIC_BRAND_TAGLINE = originalBrandTagline;
     if (originalBrandLogo) process.env.NEXT_PUBLIC_BRAND_LOGO_URL = originalBrandLogo;
@@ -49,9 +52,26 @@ describe('Tier 1 Unit: Brand Configuration Resolver Engine', () => {
 
     // Assert
     expect(brand.name).toBe('Acme Global Cloud');
+    expect(brand.orgName).toBe('Acme Global Cloud');
     expect(brand.short).toBe('AGC');
     expect(brand.tagline).toBe('Next-Gen Enterprise Cloud Engine');
     expect(brand.logoUrl).toBe('/custom/logo.svg');
+    expect(brand.currentYear).toBe(new Date().getFullYear());
+    expect(brand.copyrightText).toContain('Acme Global Cloud');
+    expect(brand.copyrightText).toContain(String(new Date().getFullYear()));
+  });
+
+  it('Arrange, Act, Assert: resolves NEXT_PUBLIC_ORG_NAME when set independently', () => {
+    // Arrange
+    process.env.NEXT_PUBLIC_ORG_NAME = 'Starlight Technologies Ltd';
+
+    // Act
+    const brand = loadBrandConfig();
+
+    // Assert
+    expect(brand.orgName).toBe('Starlight Technologies Ltd');
+    expect(brand.name).toBe('Starlight Technologies Ltd');
+    expect(brand.copyrightText).toContain('Starlight Technologies Ltd');
   });
 
   it('Arrange, Act, Assert: dynamically resolves AG Dashboard branding and logo from .env', () => {

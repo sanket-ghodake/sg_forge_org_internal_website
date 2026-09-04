@@ -3,7 +3,7 @@
  * Meta Astryx Design Standards & Google Cloud Documentation UX.
  */
 
-import { getAstryxHeaderHtml, getHeadStateScript } from '@forge/ui';
+import { getAstryxHeaderHtml, getAstryxFooterHtml, getAstryxStyles, getHeadStateScript } from '@forge/ui';
 import { loadBrandConfig } from '@forge/sdk';
 import { getClientScripts } from './client-scripts';
 import { getDevHubStyles } from './hub-styles';
@@ -37,6 +37,7 @@ export function renderDevHubHtml(): string {
     })();
   </script>
   <style>
+    ${getAstryxStyles()}
     ${getDevHubStyles()}
   </style>
 </head>
@@ -85,9 +86,7 @@ export function renderDevHubHtml(): string {
     ${renderTestingSection()}
   </main>
 
-  <footer style="margin-top: 3rem; padding: 2rem; text-align: center; border-top: 1px solid var(--forge-border); font-size: 0.8rem; color: var(--forge-text-muted);">
-    ${brand.name} Developer Gateway &bull; @forge/sdk v2.0.0 LTS &bull; Meta Astryx Design System
-  </footer>
+  ${getAstryxFooterHtml({ orgName: brand.name, year: brand.currentYear, secondaryText: `${brand.name} Developer Gateway &bull; @forge/sdk v2.0.0 LTS` })}
 
   <script>
     ${getClientScripts()}

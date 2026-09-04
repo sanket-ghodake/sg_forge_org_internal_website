@@ -3,12 +3,8 @@
  * Meta Astryx Enterprise Design Standards.
  */
 
-import { getAstryxStyles } from '@forge/ui';
-
 export function getDevHubStyles(): string {
   return `
-    ${getAstryxStyles()}
-
     /* Layout & Actions */
     .hub-container { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1rem 3rem 1rem; }
     .hub-action-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }

@@ -11,6 +11,7 @@ import { renderDashboardHtml } from '../../src/dev-dashboard/src/frontend/ui-ren
 import { renderPortalHtml } from '../../src/portal/src/frontend/ui-renderer';
 import { renderDevHubHtml } from '../../src/dev-hub/src/frontend/hub-view';
 import { renderLoginHtml } from '../../src/auth/src/frontend/login-view';
+import { renderLandingHtml } from '../../src/landing/src/server';
 import { renderAstryxErrorHtml } from '../../src/ui/src/error-page';
 
 describe('Tier 2 Integration: Dynamic White-Label Rebranding Across All Services', () => {
@@ -36,11 +37,17 @@ describe('Tier 2 Integration: Dynamic White-Label Rebranding Across All Services
     const portalHtml = renderPortalHtml();
     const devHubHtml = renderDevHubHtml();
     const loginHtml = renderLoginHtml();
+    const landingHtml = renderLandingHtml();
     const errorHtml = renderAstryxErrorHtml({ statusCode: 404, title: 'Not Found' });
 
     // 3. Assert
     expect(brand.name).toBe('AG Dashboard');
     expect(brand.short).toBe('AG');
+
+    // Landing Discovery Hub
+    expect(landingHtml).toContain('<title>AG Dashboard - Modular Corporate Portal & Micro-App Engine</title>');
+    expect(landingHtml).toContain('AG Dashboard Workspace Platform');
+    expect(landingHtml).toContain(`&copy; ${brand.currentYear} AG Dashboard. All rights reserved.`);
 
     // Dev Dashboard
     expect(devDashboardHtml).toContain('<title>AG Dashboard - Developer Dashboard & Diagnostics</title>');
@@ -78,11 +85,17 @@ describe('Tier 2 Integration: Dynamic White-Label Rebranding Across All Services
     const portalHtml = renderPortalHtml();
     const devHubHtml = renderDevHubHtml();
     const loginHtml = renderLoginHtml();
+    const landingHtml = renderLandingHtml();
     const errorHtml = renderAstryxErrorHtml({ statusCode: 500, title: 'Server Error' });
 
     // 3. Assert
     expect(brand.name).toBe('Starlight Portal');
     expect(brand.short).toBe('SL');
+
+    // Landing Discovery Hub reflects Starlight
+    expect(landingHtml).toContain('<title>Starlight Portal - Modular Corporate Portal & Micro-App Engine</title>');
+    expect(landingHtml).toContain('Starlight Portal Workspace Platform');
+    expect(landingHtml).toContain(`&copy; ${brand.currentYear} Starlight Portal. All rights reserved.`);
 
     // Dev Dashboard reflects Starlight title and clean DEVELOPER CENTER app header
     expect(devDashboardHtml).toContain('Starlight Portal - Developer Dashboard & Diagnostics');

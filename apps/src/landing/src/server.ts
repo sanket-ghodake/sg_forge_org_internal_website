@@ -6,12 +6,12 @@
  */
 
 import { createLogger, createSafeHandler, loadServiceRegistry, loadBrandConfig, handleBrandAssetRequest, type ServiceEntry } from '@forge/sdk';
-import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript, renderAstryxErrorHtml } from '@forge/ui';
+import { getAstryxHeaderHtml, getAstryxFooterHtml, getAstryxStyles, getHeadStateScript, renderAstryxErrorHtml } from '@forge/ui';
 
 const logger = createLogger('landing-hub');
 const PORT = Number(process.env.LANDING_PORT || process.env.PORT || 3000);
 
-function renderHtml(): string {
+export function renderLandingHtml(): string {
   const brand = loadBrandConfig();
   const services = loadServiceRegistry({ includeDisabled: false });
 
@@ -41,7 +41,7 @@ function renderHtml(): string {
   <main class="astryx-container">
     <section class="astryx-hero">
       <div style="display: inline-block; margin-bottom: 0.75rem;">
-        <span class="astryx-badge badge-pill">Meta Astryx Design System v2.0</span>
+        <span class="astryx-badge badge-pill">${brand.name} Workspace Platform</span>
       </div>
       <h1>Enterprise Workspace & Micro-App Engine</h1>
       <p>Universal routing hub connecting core organizational workspaces and sandboxed micro-frontends with dedicated Turso DB instances.</p>
@@ -90,12 +90,12 @@ function renderHtml(): string {
       .join('')}
   </main>
 
-  <footer style="margin-top: auto; padding: 2.5rem 1.5rem; text-align: center; border-top: 1px solid var(--forge-border); font-size: 0.82rem; color: var(--forge-text-subtle);">
-    ${brand.name} Platform Engine v2.0.0 &bull; Meta Astryx Design Tokens &bull; Bun v1.3.14 Runtime &bull; Dynamic Service Registry
-  </footer>
+  ${getAstryxFooterHtml({ orgName: brand.name, year: brand.currentYear, secondaryText: 'Enterprise Workspace Platform &bull; Dynamic Service Registry' })}
 </body>
 </html>`;
 }
+
+export const renderHtml = renderLandingHtml;
 
 export function startLandingServer(port: number = PORT) {
   const handler = createSafeHandler('landing-hub', async (req: Request) => {

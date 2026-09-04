@@ -15,3 +15,4 @@ export * from './error-page';
 export * from './icons';
 export * from './tooltip';
 export * from './sanitize';
+export * from './footer';

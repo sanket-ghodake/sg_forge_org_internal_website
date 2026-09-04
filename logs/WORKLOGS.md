@@ -528,3 +528,6 @@
 2026-09-04 09:14 | Implemented multi-OS Git attributes and explicit binary protection for portable executables
 2026-09-04 09:46 | Engineered comprehensive cross-OS baseline: OS-aware binary dispatch, Windows CMD shims, and path normalization
 2026-09-04 09:48 | [53bc470] fix(toolchain): establish universal multi-OS git attributes and binary execution protections (+143, -23)
+2026-09-04 10:16 | Replaced Meta Astryx with dynamic org branding on landing hero and added automated copyright footer with current year from env
+2026-09-04 10:22 | Verified Caveman configuration status across skills, portable CLI, and documentation
+2026-09-04 10:23 | [7b53ef6] feat(branding): dynamic company branding on landing hero and automated copyright footer with current year (+5793, -1242)

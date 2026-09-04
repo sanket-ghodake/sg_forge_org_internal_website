@@ -13,6 +13,9 @@ export interface BrandConfig {
   tagline: string;
   logoUrl?: string;
   faviconUrl?: string;
+  orgName?: string;
+  currentYear?: number;
+  copyrightText?: string;
 }
 
 function findEnvPath(explicitPath?: string): string | null {
@@ -56,7 +59,7 @@ const MIME_TYPES: Record<string, string> = {
  * Dynamically loads and resolves brand tokens from process.env with fallback to .env parsing.
  */
 export function loadBrandConfig(envPath?: string): BrandConfig {
-  const envMap: Record<string, string> = { ...(process.env as Record<string, string>) };
+  const diskMap: Record<string, string> = {};
 
   const resolvedEnvPath = findEnvPath(envPath);
   if (resolvedEnvPath && existsSync(resolvedEnvPath)) {
@@ -75,9 +78,7 @@ export function loadBrandConfig(envPath?: string): BrandConfig {
           ) {
             val = val.slice(1, -1);
           }
-          if (!envMap[key]) {
-            envMap[key] = val;
-          }
+          diskMap[key] = val;
         }
       }
     } catch {
@@ -85,22 +86,62 @@ export function loadBrandConfig(envPath?: string): BrandConfig {
     }
   }
 
-  const name = envMap.NEXT_PUBLIC_BRAND_NAME || 'AG Dashboard';
-  const short = envMap.NEXT_PUBLIC_BRAND_SHORT || 'AG';
-  const tagline = envMap.NEXT_PUBLIC_BRAND_TAGLINE || 'Modular Corporate Portal & Sandboxing Engine';
+  // Priority 1: Direct runtime process.env overrides
+  // Priority 2: Disk .env configuration
+  // Priority 3: Sensible defaults
+  const procBrandName = process.env.NEXT_PUBLIC_BRAND_NAME || process.env.BRAND_NAME;
+  const procOrgName = process.env.NEXT_PUBLIC_ORG_NAME || process.env.ORGANIZATION_NAME;
+
+  const diskBrandName = diskMap.NEXT_PUBLIC_BRAND_NAME || diskMap.BRAND_NAME;
+  const diskOrgName = diskMap.NEXT_PUBLIC_ORG_NAME || diskMap.ORGANIZATION_NAME;
+
+  const resolvedOrg =
+    procOrgName ||
+    (procBrandName ? procBrandName : (diskOrgName || diskBrandName || 'AG Dashboard'));
+  const resolvedBrand =
+    procBrandName ||
+    (procOrgName ? procOrgName : (diskBrandName || diskOrgName || 'AG Dashboard'));
+
+  const short =
+    process.env.NEXT_PUBLIC_BRAND_SHORT ||
+    process.env.BRAND_SHORT ||
+    diskMap.NEXT_PUBLIC_BRAND_SHORT ||
+    diskMap.BRAND_SHORT ||
+    'AG';
+
+  const tagline =
+    process.env.NEXT_PUBLIC_BRAND_TAGLINE ||
+    process.env.BRAND_TAGLINE ||
+    diskMap.NEXT_PUBLIC_BRAND_TAGLINE ||
+    diskMap.BRAND_TAGLINE ||
+    'Modular Corporate Portal & Sandboxing Engine';
+
   const logoUrl =
-    envMap.NEXT_PUBLIC_BRAND_LOGO_URL ||
-    envMap.BRAND_LOGO_URL ||
-    envMap.BRAND_LOGO_PATH ||
+    process.env.NEXT_PUBLIC_BRAND_LOGO_URL ||
+    process.env.BRAND_LOGO_URL ||
+    process.env.BRAND_LOGO_PATH ||
+    diskMap.NEXT_PUBLIC_BRAND_LOGO_URL ||
+    diskMap.BRAND_LOGO_URL ||
+    diskMap.BRAND_LOGO_PATH ||
     '/brand/logo.png';
-  const faviconUrl = envMap.NEXT_PUBLIC_BRAND_FAVICON_URL || '/favicon.ico';
+
+  const faviconUrl =
+    process.env.NEXT_PUBLIC_BRAND_FAVICON_URL ||
+    diskMap.NEXT_PUBLIC_BRAND_FAVICON_URL ||
+    '/favicon.ico';
+
+  const currentYear = new Date().getFullYear();
+  const copyrightText = `© ${currentYear} ${resolvedOrg}. All rights reserved.`;
 
   return {
-    name,
+    name: resolvedBrand,
     short,
     tagline,
     logoUrl,
     faviconUrl,
+    orgName: resolvedOrg,
+    currentYear,
+    copyrightText,
   };
 }
 
