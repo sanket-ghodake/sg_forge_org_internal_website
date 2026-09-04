@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach } from 'bun:test';
+import { loadBrandConfig } from '@forge/sdk';
 import { employeeController } from '../../src/backend/employee-controller';
 import { getOrgTree } from '../../src/backend/org-tree-service';
 import { seedAuthDatabase } from '../../src/db/seed';
@@ -44,8 +45,10 @@ describe('Tier 1 Unit: EmployeeController & OrgTreeService (@forge/auth)', () =>
   });
 
   it('should construct hierarchical org tree with depth bounding', () => {
+    const brand = loadBrandConfig();
+    const expectedOrgName = brand.orgName || brand.name || 'SG Forge Enterprise';
     const tree = getOrgTree({ maxDepth: 5 });
-    expect(tree.organizationName).toBe('SG Forge Enterprise');
+    expect(tree.organizationName).toBe(expectedOrgName);
     expect(tree.totalEmployees).toBeGreaterThan(0);
     expect(tree.root).not.toBeNull();
     expect(tree.root!.level).toBe(1);

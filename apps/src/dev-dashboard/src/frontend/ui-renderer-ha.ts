@@ -4,6 +4,7 @@
  */
 
 import { astryxIcons } from '@forge/ui';
+import { loadBrandConfig } from '@forge/sdk';
 
 export function renderHighAvailabilitySuite(): string {
   return `
@@ -186,7 +187,7 @@ export function renderHighAvailabilitySuite(): string {
               <span class="ha-stage-num">STAGE 5</span>
               <span class="ha-badge-host" data-tooltip-title="⚡ HOST ACTION" data-astryx-tooltip="Requires one-time host operating system configuration (e.g. systemd autostart or service installer).">HOST ACTION</span>
             </div>
-            <span class="ha-status-badge ha-badge-warning" id="ha-status-stage-5" data-tooltip-title="🟡 HOST SETUP: BOOT AUTOSTART" data-astryx-tooltip="Enables Docker daemon at OS boot and installs SG Forge service unit so the platform auto-boots after machine restarts.">
+            <span class="ha-status-badge ha-badge-warning" id="ha-status-stage-5" data-tooltip-title="🟡 HOST SETUP: BOOT AUTOSTART" data-astryx-tooltip="Enables Docker daemon at OS boot and installs ${loadBrandConfig().name} service unit so the platform auto-boots after machine restarts.">
               <span class="ha-status-glow"></span> HOST SETUP
             </span>
           </div>

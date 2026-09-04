@@ -51,12 +51,14 @@ function extractClientIp(req: Request): string {
   return req.headers.get('x-forwarded-for')?.split(',')[0].trim() || '127.0.0.1';
 }
 
+const getSessionCookieName = () => process.env.SESSION_COOKIE_NAME || 'forge_session';
+
 function extractBearerOrCookieToken(req: Request): string | null {
   const authHeader = req.headers.get('authorization') || '';
   if (authHeader.startsWith('Bearer ')) return authHeader.slice(7);
-
   const cookieHeader = req.headers.get('cookie') || '';
-  const match = cookieHeader.match(/forge_session=([^;]+)/);
+  const cName = getSessionCookieName().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const match = cookieHeader.match(new RegExp(`(?:^|;\\s*)(?:${cName}|forge_session)=([^;]+)`));
   return match ? match[1] : null;
 }
 
@@ -197,22 +199,14 @@ export async function handleLogin(req: Request): Promise<Response> {
     });
 
     const isProd = process.env.NODE_ENV === 'production';
+    const sName = getSessionCookieName();
     const cookieHeader = `forge_refresh_token=${session.refreshToken}; Path=/; HttpOnly; SameSite=Strict; Max-Age=604800${isProd ? '; Secure' : ''}`;
-    const sessionCookieHeader = `forge_session=${session.accessToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800${isProd ? '; Secure' : ''}`;
+    const sessionCookieHeader = `${sName}=${session.accessToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800${isProd ? '; Secure' : ''}`;
 
     const headers = new Headers();
     headers.append('Set-Cookie', cookieHeader);
     headers.append('Set-Cookie', sessionCookieHeader);
-    headers.set('Content-Type', 'application/json');
-
-    return new Response(
-      JSON.stringify({
-        status: 'SUCCESS',
-        accessToken: session.accessToken,
-        user: session.user,
-      }),
-      { status: 200, headers }
-    );
+    return Response.json({ status: 'SUCCESS', accessToken: session.accessToken, user: session.user }, { status: 200, headers });
   } catch (err: any) {
     authTelemetry.recordLog('app', 'ERROR', `Login handler exception: ${err?.message || 'Unknown'}`, { error: String(err) });
     logger.error('Login handler error:', err);
@@ -270,23 +264,14 @@ export async function handleSetPassword(req: Request): Promise<Response> {
     }
 
     const isProd = process.env.NODE_ENV === 'production';
+    const sName = getSessionCookieName();
     const cookieHeader = `forge_refresh_token=${session.refreshToken}; Path=/; HttpOnly; SameSite=Strict; Max-Age=604800${isProd ? '; Secure' : ''}`;
-    const sessionCookieHeader = `forge_session=${session.accessToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800${isProd ? '; Secure' : ''}`;
+    const sessionCookieHeader = `${sName}=${session.accessToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800${isProd ? '; Secure' : ''}`;
 
     const headers = new Headers();
     headers.append('Set-Cookie', cookieHeader);
     headers.append('Set-Cookie', sessionCookieHeader);
-    headers.set('Content-Type', 'application/json');
-
-    return new Response(
-      JSON.stringify({
-        status: 'SUCCESS',
-        message: 'Password successfully updated.',
-        accessToken: session.accessToken,
-        user: session.user,
-      }),
-      { status: 200, headers }
-    );
+    return Response.json({ status: 'SUCCESS', message: 'Password successfully updated.', accessToken: session.accessToken, user: session.user }, { status: 200, headers });
   } catch (err: any) {
     logger.error('Set password error:', err);
     authTelemetry.recordLog('app', 'ERROR', `Set password exception: ${err?.message || 'Unknown'}`);
@@ -314,22 +299,14 @@ export async function handleRefresh(req: Request): Promise<Response> {
   authTelemetry.recordLog('app', 'DEBUG', `Rotated refresh token for user ${result.user.id}`, { ip });
 
   const isProd = process.env.NODE_ENV === 'production';
+  const sName = getSessionCookieName();
   const newCookie = `forge_refresh_token=${result.refreshToken}; Path=/; HttpOnly; SameSite=Strict; Max-Age=604800${isProd ? '; Secure' : ''}`;
-  const sessionCookie = `forge_session=${result.accessToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800${isProd ? '; Secure' : ''}`;
+  const sessionCookie = `${sName}=${result.accessToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800${isProd ? '; Secure' : ''}`;
 
   const headers = new Headers();
   headers.append('Set-Cookie', newCookie);
   headers.append('Set-Cookie', sessionCookie);
-  headers.set('Content-Type', 'application/json');
-
-  return new Response(
-    JSON.stringify({
-      status: 'SUCCESS',
-      accessToken: result.accessToken,
-      user: result.user,
-    }),
-    { status: 200, headers }
-  );
+  return Response.json({ status: 'SUCCESS', accessToken: result.accessToken, user: result.user }, { status: 200, headers });
 }
 
 export async function handleLogout(req: Request): Promise<Response> {
@@ -340,15 +317,12 @@ export async function handleLogout(req: Request): Promise<Response> {
     authTelemetry.recordLog('app', 'INFO', 'User session explicitly revoked via logout');
   }
 
+  const sName = getSessionCookieName();
   const headers = new Headers();
   headers.append('Set-Cookie', 'forge_refresh_token=; Path=/; HttpOnly; Max-Age=0');
-  headers.append('Set-Cookie', 'forge_session=; Path=/; Max-Age=0');
-  headers.set('Content-Type', 'application/json');
-
-  return new Response(JSON.stringify({ status: 'SUCCESS', message: 'Logged out successfully' }), {
-    status: 200,
-    headers,
-  });
+  headers.append('Set-Cookie', `${sName}=; Path=/; Max-Age=0`);
+  if (sName !== 'forge_session') headers.append('Set-Cookie', 'forge_session=; Path=/; Max-Age=0');
+  return Response.json({ status: 'SUCCESS', message: 'Logged out successfully' }, { status: 200, headers });
 }
 
 export async function handleBrowserLog(req: Request): Promise<Response> {

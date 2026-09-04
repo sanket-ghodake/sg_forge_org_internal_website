@@ -4,6 +4,7 @@
  */
 
 import { astryxIcons } from '@forge/ui';
+import { loadBrandConfig } from '@forge/sdk';
 
 export interface CompanyEventItem {
   id: string;
@@ -116,15 +117,15 @@ export function renderInboxSupportWidget(): string {
       <p class="inbox-widget-desc">Need assistance or have questions? Reach the right team directly.</p>
 
       <div class="inbox-support-links">
-        <a href="mailto:people@forge.internal" class="inbox-support-btn">
+        <a href="mailto:people@${loadBrandConfig().domain || 'forge.internal'}" class="inbox-support-btn">
           <span class="support-icon">${astryxIcons.user || '👤'}</span>
           <span>People & HR Operations</span>
         </a>
-        <a href="mailto:it-support@forge.internal" class="inbox-support-btn">
+        <a href="mailto:it-support@${loadBrandConfig().domain || 'forge.internal'}" class="inbox-support-btn">
           <span class="support-icon">${astryxIcons.layers || '💻'}</span>
           <span>IT & Access Helpdesk</span>
         </a>
-        <a href="mailto:facilities@forge.internal" class="inbox-support-btn">
+        <a href="mailto:facilities@${loadBrandConfig().domain || 'forge.internal'}" class="inbox-support-btn">
           <span class="support-icon">${astryxIcons.map || '🏢'}</span>
           <span>Workplace & Office Facilities</span>
         </a>

@@ -53,12 +53,14 @@ export function seedAuthDatabase(force: boolean = false): void {
   const orgId = 'org-sg-forge-global';
   const { hash: defaultHash, salt: defaultSalt } = hashPassword(DEFAULT_PASSWORD);
 
+  const domain = process.env.AUTH_ORG_DOMAIN || brand.domain || 'forge.internal';
+
   db.transaction(() => {
     // 1. Organization
     db.run(
       `INSERT INTO auth_organizations (id, name, domain, brand_name, brand_tagline, created_at, updated_at)
        VALUES (?, ?, ?, ?, ?, ?, ?);`,
-      [orgId, brandName, process.env.AUTH_ORG_DOMAIN || 'forge.internal', brandName, brandTagline, now, now]
+      [orgId, brandName, domain, brandName, brandTagline, now, now]
     );
 
     // 2. Generic Org Node Types (Dynamic levels)
@@ -380,10 +382,14 @@ export function seedAuthDatabase(force: boolean = false): void {
     ];
 
     for (const p of personas) {
+      const userEmail = p.email.includes('@forge.internal')
+        ? p.email.replace('@forge.internal', `@${domain}`)
+        : p.email;
+
       db.run(
         `INSERT INTO auth_users (id, org_id, email, password_hash, salt, display_name, principal_type, status, must_change_password, token_version, custom_attributes, created_at, updated_at)
          VALUES (?, ?, ?, ?, ?, ?, ?, 'ACTIVE', 1, 1, '{}', ?, ?);`,
-        [p.id, orgId, p.email, defaultHash, defaultSalt, p.name, p.type, now, now]
+        [p.id, orgId, userEmail, defaultHash, defaultSalt, p.name, p.type, now, now]
       );
 
       db.run(

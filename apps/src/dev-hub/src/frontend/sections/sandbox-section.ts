@@ -58,7 +58,7 @@ export function renderSandboxSection(): string {
             <button class="copy-btn" onclick="copySnippet('sandbox-response-body')">Copy Response</button>
           </div>
           <pre class="code-block response-body"><code id="sandbox-response-body">{
-  "info": "Click 'Send Request' to execute a live query against the SG Forge Gateway."
+  "info": "Click 'Send Request' to execute a live query against the ${brand.name} Gateway."
 }</code></pre>
         </div>
 
@@ -116,7 +116,7 @@ resp, err := http.DefaultClient.Do(req)</code></pre>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
             <div>
               <label class="sandbox-label">User Email</label>
-              <input type="text" id="sim-user" class="astryx-input" value="alice.eng@forge.internal" oninput="updateHeaderSimulation()" />
+              <input type="text" id="sim-user" class="astryx-input" value="alice.eng@${brand.domain || 'forge.internal'}" oninput="updateHeaderSimulation()" />
             </div>
             <div>
               <label class="sandbox-label">User ID</label>
@@ -132,7 +132,7 @@ resp, err := http.DefaultClient.Do(req)</code></pre>
             </div>
           </div>
 
-          <pre class="code-block"><code id="simulated-headers-preview">X-Forwarded-User: alice.eng@forge.internal
+          <pre class="code-block"><code id="simulated-headers-preview">X-Forwarded-User: alice.eng@${brand.domain || 'forge.internal'}
 X-Forwarded-User-Id: usr-alice-eng
 X-Forwarded-Role: roles/employee
 X-Forwarded-Org-Path: /root/tech/eng-core

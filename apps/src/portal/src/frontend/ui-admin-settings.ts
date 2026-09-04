@@ -49,11 +49,11 @@ export function renderAdminSettingsView(): string {
               </div>
               <div class="form-field">
                 <label>Custom Workspace Domain</label>
-                <input type="text" class="astryx-input" value="${process.env.PUBLIC_DOMAIN || 'app.forge.internal'}" disabled />
+                <input type="text" class="astryx-input" value="${process.env.PUBLIC_DOMAIN || 'app.' + (brand.domain || 'forge.internal')}" disabled />
               </div>
               <div class="form-field">
                 <label>Support Contact Email</label>
-                <input type="email" class="astryx-input" value="${process.env.SUPPORT_EMAIL || 'support@' + (brand.short || 'forge').toLowerCase() + '.internal'}" />
+                <input type="email" class="astryx-input" value="${brand.supportEmail || process.env.SUPPORT_EMAIL || 'support@' + (brand.domain || 'forge.internal')}" />
               </div>
             </div>
 
@@ -75,7 +75,7 @@ export function renderAdminSettingsView(): string {
               <div class="sso-provider-item">
                 <div class="sso-provider-info">
                   <div class="sso-provider-title">Google Workspace SSO</div>
-                  <div class="sso-provider-desc">Enables @forge.internal email login with OAuth 2.0 OpenID Connect</div>
+                  <div class="sso-provider-desc">Enables @${brand.domain || 'forge.internal'} email login with OAuth 2.0 OpenID Connect</div>
                 </div>
                 <div class="astryx-badge badge-online">Connected</div>
               </div>

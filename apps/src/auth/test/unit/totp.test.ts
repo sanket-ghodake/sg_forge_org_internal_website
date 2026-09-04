@@ -4,6 +4,7 @@
  */
 
 import { describe, expect, it } from 'bun:test';
+import { loadBrandConfig } from '@forge/sdk';
 import {
   generateTotpSecret,
   generateTotpCode,
@@ -45,6 +46,20 @@ describe('Tier 1 Unit: RFC 6238 TOTP Multi-Factor Engine', () => {
     expect(uri.startsWith('otpauth://totp/')).toBe(true);
     expect(uri).toContain(encodeURIComponent(issuer));
     expect(uri).toContain(`secret=${secret}`);
+  });
+
+  it('should dynamically default issuer from loadBrandConfig when omitted', () => {
+    // Arrange
+    const secret = 'JBSWY3DPEHPK3PXP';
+    const email = 'employee@forge.internal';
+    const expectedBrandName = loadBrandConfig().name || 'SG Forge';
+
+    // Act
+    const uri = generateTotpUri(secret, email);
+
+    // Assert
+    expect(uri.startsWith('otpauth://totp/')).toBe(true);
+    expect(uri).toContain(encodeURIComponent(expectedBrandName));
   });
 
   it('should generate, hash, and verify emergency single-use backup recovery codes', () => {

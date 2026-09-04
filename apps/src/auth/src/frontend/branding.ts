@@ -12,6 +12,7 @@ export interface BrandConfig {
   logoText: string;
   logoUrl?: string;
   faviconUrl?: string;
+  domain?: string;
 }
 
 export function resolveBrandConfig(): BrandConfig {
@@ -23,5 +24,6 @@ export function resolveBrandConfig(): BrandConfig {
     logoText: brand.short,
     logoUrl: brand.logoUrl,
     faviconUrl: brand.faviconUrl,
+    domain: brand.domain,
   };
 }

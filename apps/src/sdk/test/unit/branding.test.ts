@@ -134,4 +134,22 @@ describe('Tier 1 Unit: Brand Configuration Resolver Engine', () => {
     expect(html).toContain('height: 28px');
     expect(html).toContain('astryx-logo-badge');
   });
+
+  it('Arrange, Act, Assert: dynamically resolves custom domain and supportEmail', () => {
+    // Arrange
+    process.env.AUTH_ORG_DOMAIN = 'acme.corp';
+    process.env.SUPPORT_EMAIL = 'help@acme.corp';
+
+    try {
+      // Act
+      const brand = loadBrandConfig();
+
+      // Assert
+      expect(brand.domain).toBe('acme.corp');
+      expect(brand.supportEmail).toBe('help@acme.corp');
+    } finally {
+      delete process.env.AUTH_ORG_DOMAIN;
+      delete process.env.SUPPORT_EMAIL;
+    }
+  });
 });

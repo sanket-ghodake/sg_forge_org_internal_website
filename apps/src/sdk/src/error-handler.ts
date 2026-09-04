@@ -8,6 +8,7 @@
 
 import { createLogger } from './logger';
 import { applySecurityHeaders } from './security-headers';
+import { loadBrandConfig } from './branding';
 
 export function createSafeHandler(
   serviceName: string,
@@ -54,9 +55,11 @@ export function createSafeHandler(
         traceId
       );
 
+      const brand = loadBrandConfig();
+      const domain = brand.domain || 'forge.internal';
       const errResponse = Response.json(
         {
-          type: 'https://forge.internal/errors/internal-server-error',
+          type: `https://${domain}/errors/internal-server-error`,
           title: 'Internal Server Error',
           status: 500,
           detail: 'An unexpected system error occurred. Please contact support.',

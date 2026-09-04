@@ -4,6 +4,7 @@
  */
 
 import { astryxIcons } from '@forge/ui';
+import { loadBrandConfig } from '@forge/sdk';
 
 export function renderPortalModals(): string {
   return `
@@ -19,7 +20,7 @@ export function renderPortalModals(): string {
         <div class="astryx-modal-body">
           <div class="form-field">
             <label style="font-size: 0.78rem; font-weight: 600; color: var(--forge-text-muted); margin-bottom: 0.35rem; display: block;">Work Email Address</label>
-            <input type="email" class="form-input" id="invite-email" placeholder="colleague@forge.internal" style="width: 100%; box-sizing: border-box;" />
+            <input type="email" class="form-input" id="invite-email" placeholder="colleague@${loadBrandConfig().domain || 'forge.internal'}" style="width: 100%; box-sizing: border-box;" />
           </div>
           <div class="form-field" style="margin-top: 1rem;">
             <label style="font-size: 0.78rem; font-weight: 600; color: var(--forge-text-muted); margin-bottom: 0.35rem; display: block;">Full Display Name</label>

@@ -7,10 +7,16 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-SERVICE_NAME="sg-forge.service"
+
+ENV_PREFIX="sg-forge"
+if [ -f "$REPO_ROOT/.env" ]; then
+  PREFIX_MATCH="$(grep -E '^CONTAINER_PREFIX=' "$REPO_ROOT/.env" | head -n 1 | cut -d '=' -f2- | tr -d '"' | tr -d "'" || true)"
+  [ -n "$PREFIX_MATCH" ] && ENV_PREFIX="$PREFIX_MATCH"
+fi
+SERVICE_NAME="${SYSTEMD_SERVICE_NAME:-${ENV_PREFIX}.service}"
 TARGET_PATH="/etc/systemd/system/$SERVICE_NAME"
 
-echo "🚀 Installing SG Forge 24/7 Host Service..."
+echo "🚀 Installing 24/7 Host Service: $SERVICE_NAME..."
 
 if [ "$EUID" -ne 0 ]; then
   echo "⚠️  This installer requires root privileges. Re-running with sudo..."

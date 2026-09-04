@@ -4,7 +4,7 @@
  */
 
 import { join } from 'node:path';
-import { authGuard, createLogger, createSafeHandler } from '@forge/sdk';
+import { authGuard, createLogger, createSafeHandler, loadBrandConfig } from '@forge/sdk';
 import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript } from '@forge/ui';
 import type { AuthUser } from '@forge/types';
 import { billingDb } from './db';
@@ -25,8 +25,9 @@ interface Invoice {
 }
 
 function renderAppHtml(user?: AuthUser, invoices: Invoice[] = []): string {
+  const brand = loadBrandConfig();
   const userName = user?.displayName || 'Billing Administrator';
-  const userEmail = user?.email || 'billing.admin@forge.internal';
+  const userEmail = user?.email || `billing.admin@${brand.domain || 'forge.internal'}`;
   const userRole = user?.roles?.[0] || 'Billing Admin Clearance';
   const totalAmount = invoices.reduce((acc, inv) => acc + inv.amount, 0);
 
@@ -35,7 +36,7 @@ function renderAppHtml(user?: AuthUser, invoices: Invoice[] = []): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SG Forge - Billing Micro-App</title>
+  <title>${brand.name} - Billing Micro-App</title>
   ${getHeadStateScript({ defaultTheme: 'dark' })}
   <style>
     ${getAstryxStyles()}

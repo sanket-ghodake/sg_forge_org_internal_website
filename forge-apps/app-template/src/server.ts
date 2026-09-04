@@ -9,6 +9,7 @@ import {
   createLogger,
   createSafeHandler,
   getScopedHierarchy,
+  loadBrandConfig,
 } from '@forge/sdk';
 import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript } from '@forge/ui';
 import type { AuthUser, ScopedHierarchyResponse } from '@forge/types';
@@ -18,8 +19,9 @@ const logger = createLogger('app-template', LOG_DIR);
 const PORT = Number(process.env.PORT || 8099);
 
 function renderAppHtml(user?: AuthUser, hierarchy?: ScopedHierarchyResponse | null): string {
+  const brand = loadBrandConfig();
   const userName = user?.displayName || 'Authorized User';
-  const userEmail = user?.email || 'user@forge.internal';
+  const userEmail = user?.email || `user@${brand.domain || 'forge.internal'}`;
   const userRole = user?.roles?.[0] || 'Standard Access';
   const approver = hierarchy?.managementChain?.[0];
   const dept = hierarchy?.employee?.departmentName || 'Engineering Squad';
@@ -29,7 +31,7 @@ function renderAppHtml(user?: AuthUser, hierarchy?: ScopedHierarchyResponse | nu
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SG Forge - Micro-App Template</title>
+  <title>${brand.name} - Micro-App Template</title>
   ${getHeadStateScript({ defaultTheme: 'dark' })}
   <style>
     ${getAstryxStyles()}

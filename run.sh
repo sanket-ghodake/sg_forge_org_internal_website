@@ -186,9 +186,10 @@ case "$CMD" in
         ;;
 
     verify)
-        echo "🛡️ [${BRAND_NAME}] Running Automated AI Agent Quality Gate (21 Deterministic Gates)..."
+        echo "🛡️ [${BRAND_NAME}] Running Automated AI Agent Quality Gate (27 Deterministic Gates)..."
         $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
-        $PORTABLE_BUN run "$REPO_ROOT/scripts/verify-gate.ts"
+        shift || true
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/verify-gate.ts" "$@"
         ;;
 
     lint)
@@ -340,6 +341,9 @@ case "$CMD" in
         FORCE="${2:-}"
         if [ "$FORCE" = "--force" ] || [ "$FORCE" = "-y" ]; then
             CONFIRM="y"
+        elif [ ! -t 0 ]; then
+            echo "🛑 Non-interactive shell detected. Use '--force' or '-y' to confirm reset."
+            exit 1
         else
             read -p "Are you sure you want to delete and re-seed all local development databases? [y/N]: " -n 1 -r CONFIRM
             echo

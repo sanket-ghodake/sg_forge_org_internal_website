@@ -10,6 +10,7 @@ import { createHash, createPrivateKey, createPublicKey, sign, verify } from 'nod
 import { renderAstryxErrorHtml } from '@forge/ui';
 import type { AuthGuardOptions, AuthGuardResult, AuthUser } from '@forge/types';
 import { isAppDisabled } from './registry';
+import { loadBrandConfig } from './branding';
 
 export function createInternalServiceToken(
   roles: string[] = ['roles/super_admin'],
@@ -25,13 +26,16 @@ export function createInternalServiceToken(
   const kid = `forge-key-${seed.subarray(0, 4).toString('hex')}`;
   const now = Math.floor(Date.now() / 1000);
   const header = { alg: 'EdDSA', typ: 'JWT', kid };
+  const brand = loadBrandConfig();
+  const domain = brand.domain || 'forge.internal';
+  const orgId = brand.orgName || 'org_default';
   const payload = {
-    iss: 'https://forge.internal/auth',
+    iss: `https://${domain}/auth`,
     sub,
-    email: `${sub}@forge.internal`,
+    email: `${sub}@${domain}`,
     display_name: 'Internal Service Account',
     principal_type: 'SERVICE',
-    org_id: 'org_default',
+    org_id: orgId,
     roles,
     permissions: ['*'],
     iat: now,
@@ -96,10 +100,11 @@ export function verifySessionToken(token: string): { valid: boolean; payload?: a
 }
 
 function renderDisabledHtml(appName: string, userEmail?: string): string {
+  const defaultEmail = `user@${loadBrandConfig().domain || 'forge.internal'}`;
   return renderAstryxErrorHtml({
     statusCode: 503,
     appName,
-    userEmail: userEmail || 'user@forge.internal',
+    userEmail: userEmail || defaultEmail,
     title: 'Application Disabled',
     message: `This micro-app has been temporarily disabled by an administrator. Please access other tools via the Workspace Portal.`,
     primaryActionText: '&larr; Return to Workspace Portal',
@@ -160,7 +165,10 @@ export function authGuard(req: Request, options: AuthGuardOptions = {}): AuthGua
 
   // 4. Token extraction (Cookie -> Authorization Bearer)
   const cookieHeader = req.headers.get('cookie') || '';
-  const sessionMatch = cookieHeader.match(/forge_session=([^;]+)/);
+  const cookieName = process.env.SESSION_COOKIE_NAME || 'forge_session';
+  const escapedName = cookieName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const sessionRegex = new RegExp(`(?:^|;\\s*)(?:${escapedName}|forge_session)=([^;]+)`);
+  const sessionMatch = cookieHeader.match(sessionRegex);
   const authHeader = req.headers.get('authorization') || '';
   const bearerToken = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
   const rawToken = sessionMatch ? sessionMatch[1].trim() : bearerToken;

@@ -78,42 +78,49 @@ describe('Tier 2 Integration: Dynamic White-Label Rebranding Across All Services
     process.env.NEXT_PUBLIC_BRAND_NAME = 'Starlight Portal';
     process.env.NEXT_PUBLIC_BRAND_SHORT = 'SL';
     process.env.NEXT_PUBLIC_BRAND_TAGLINE = 'Unified Enterprise Sandboxing Cloud';
+    process.env.AUTH_ORG_DOMAIN = 'starlight.internal';
 
-    // 2. Act
-    const brand = loadBrandConfig();
-    const devDashboardHtml = renderDashboardHtml();
-    const portalHtml = renderPortalHtml();
-    const devHubHtml = renderDevHubHtml();
-    const loginHtml = renderLoginHtml();
-    const landingHtml = renderLandingHtml();
-    const errorHtml = renderAstryxErrorHtml({ statusCode: 500, title: 'Server Error' });
+    try {
+      // 2. Act
+      const brand = loadBrandConfig();
+      const devDashboardHtml = renderDashboardHtml();
+      const portalHtml = renderPortalHtml();
+      const devHubHtml = renderDevHubHtml();
+      const loginHtml = renderLoginHtml();
+      const landingHtml = renderLandingHtml();
+      const errorHtml = renderAstryxErrorHtml({ statusCode: 500, title: 'Server Error' });
 
-    // 3. Assert
-    expect(brand.name).toBe('Starlight Portal');
-    expect(brand.short).toBe('SL');
+      // 3. Assert
+      expect(brand.name).toBe('Starlight Portal');
+      expect(brand.short).toBe('SL');
+      expect(brand.domain).toBe('starlight.internal');
 
-    // Landing Discovery Hub reflects Starlight
-    expect(landingHtml).toContain('<title>Starlight Portal - Modular Corporate Portal & Micro-App Engine</title>');
-    expect(landingHtml).toContain('Starlight Portal Workspace Platform');
-    expect(landingHtml).toContain(`&copy; ${brand.currentYear} Starlight Portal. All rights reserved.`);
+      // Landing Discovery Hub reflects Starlight
+      expect(landingHtml).toContain('<title>Starlight Portal - Modular Corporate Portal & Micro-App Engine</title>');
+      expect(landingHtml).toContain('Starlight Portal Workspace Platform');
+      expect(landingHtml).toContain(`&copy; ${brand.currentYear} Starlight Portal. All rights reserved.`);
 
-    // Dev Dashboard reflects Starlight title and clean DEVELOPER CENTER app header
-    expect(devDashboardHtml).toContain('Starlight Portal - Developer Dashboard & Diagnostics');
-    expect(devDashboardHtml).toContain('DEVELOPER CENTER');
+      // Dev Dashboard reflects Starlight title and clean DEVELOPER CENTER app header
+      expect(devDashboardHtml).toContain('Starlight Portal - Developer Dashboard & Diagnostics');
+      expect(devDashboardHtml).toContain('DEVELOPER CENTER');
 
-    // Portal reflects Starlight title and clean PORTAL app header
-    expect(portalHtml).toContain('Starlight Portal Portal - Workspace & Admin Console');
-    expect(portalHtml).toContain('PORTAL');
+      // Portal reflects Starlight title and clean PORTAL app header
+      expect(portalHtml).toContain('Starlight Portal Portal - Workspace & Admin Console');
+      expect(portalHtml).toContain('PORTAL');
 
-    // Dev Hub reflects Starlight title and DEVELOPER GATEWAY app header
-    expect(devHubHtml).toContain('Starlight Portal - Developer Gateway & SDK Documentation');
-    expect(devHubHtml).toContain('DEVELOPER GATEWAY');
+      // Dev Hub reflects Starlight title and DEVELOPER GATEWAY app header
+      expect(devHubHtml).toContain('Starlight Portal - Developer Gateway & SDK Documentation');
+      expect(devHubHtml).toContain('DEVELOPER GATEWAY');
 
-    // Auth reflects Starlight
-    expect(loginHtml).toContain('Sign In - Starlight Portal');
-    expect(loginHtml).toContain('Unified Enterprise Sandboxing Cloud');
+      // Auth reflects Starlight & dynamic domain
+      expect(loginHtml).toContain('Sign In - Starlight Portal');
+      expect(loginHtml).toContain('Unified Enterprise Sandboxing Cloud');
+      expect(loginHtml).toContain('placeholder="user@starlight.internal"');
 
-    // Error page reflects Starlight
-    expect(errorHtml).toContain('500 Server Error - Starlight Portal');
+      // Error page reflects Starlight
+      expect(errorHtml).toContain('500 Server Error - Starlight Portal');
+    } finally {
+      delete process.env.AUTH_ORG_DOMAIN;
+    }
   });
 });

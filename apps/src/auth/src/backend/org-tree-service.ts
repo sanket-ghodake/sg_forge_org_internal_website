@@ -5,7 +5,7 @@
  */
 
 import type { Database } from 'bun:sqlite';
-import { createLogger } from '@forge/sdk';
+import { createLogger, loadBrandConfig } from '@forge/sdk';
 import { getAuthDb } from '../db/db';
 
 const logger = createLogger('auth-org-tree');
@@ -93,9 +93,12 @@ export function getRealOrgTree(
       ORDER BY u.created_at ASC;
     `).all() as RawEmployeeRow[]);
 
+    const brand = loadBrandConfig();
+    const resolvedOrgName = brand.orgName || brand.name || 'SG Forge Enterprise';
+
     if (!rawRows || rawRows.length === 0) {
       return {
-        organizationName: 'SG Forge Enterprise',
+        organizationName: resolvedOrgName,
         totalEmployees: 0,
         maxRenderedDepth: maxDepth,
         divisions: [],
@@ -188,7 +191,7 @@ export function getRealOrgTree(
     }));
 
     return {
-      organizationName: 'SG Forge Enterprise',
+      organizationName: resolvedOrgName,
       totalEmployees: rawRows.length,
       maxRenderedDepth: maxDepth,
       divisions,
@@ -197,8 +200,10 @@ export function getRealOrgTree(
     };
   } catch (err: any) {
     logger.error('Failed to construct real org tree from database:', err);
+    const brand = loadBrandConfig();
+    const fallbackOrgName = brand.orgName || brand.name || 'SG Forge Enterprise';
     return {
-      organizationName: 'SG Forge Enterprise',
+      organizationName: fallbackOrgName,
       totalEmployees: 0,
       maxRenderedDepth: maxDepth,
       divisions: [],

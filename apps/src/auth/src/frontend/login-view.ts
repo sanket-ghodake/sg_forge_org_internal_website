@@ -41,7 +41,7 @@ export function renderLoginHtml(returnUrl: string = '/portal'): string {
 
         <div class="auth-form-group">
           <label class="auth-label" for="email">Work Email</label>
-          <input type="email" id="email" class="auth-input" placeholder="user@forge.internal" required autocomplete="username">
+          <input type="email" id="email" class="auth-input" placeholder="user@${brand.domain || 'forge.internal'}" required autocomplete="username">
         </div>
 
         <div class="auth-form-group">

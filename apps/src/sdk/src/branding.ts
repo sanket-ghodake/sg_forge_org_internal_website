@@ -16,6 +16,8 @@ export interface BrandConfig {
   orgName?: string;
   currentYear?: number;
   copyrightText?: string;
+  domain?: string;
+  supportEmail?: string;
 }
 
 function findEnvPath(explicitPath?: string): string | null {
@@ -133,6 +135,18 @@ export function loadBrandConfig(envPath?: string): BrandConfig {
   const currentYear = new Date().getFullYear();
   const copyrightText = `© ${currentYear} ${resolvedOrg}. All rights reserved.`;
 
+  const domain =
+    process.env.AUTH_ORG_DOMAIN ||
+    process.env.PUBLIC_DOMAIN ||
+    diskMap.AUTH_ORG_DOMAIN ||
+    diskMap.PUBLIC_DOMAIN ||
+    'forge.internal';
+
+  const supportEmail =
+    process.env.SUPPORT_EMAIL ||
+    diskMap.SUPPORT_EMAIL ||
+    `support@${domain}`;
+
   return {
     name: resolvedBrand,
     short,
@@ -142,6 +156,8 @@ export function loadBrandConfig(envPath?: string): BrandConfig {
     orgName: resolvedOrg,
     currentYear,
     copyrightText,
+    domain,
+    supportEmail,
   };
 }
 

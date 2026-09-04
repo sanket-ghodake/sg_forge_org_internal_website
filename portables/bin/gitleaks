@@ -27,7 +27,7 @@ function getAllFiles(dir: string): string[] {
   for (const entry of entries) {
     const fullPath = join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (!['node_modules', '.git', '.next', 'dist', 'graphify-out', 'portables'].includes(entry.name)) {
+      if (!['node_modules', '.git', '.next', 'dist', 'graphify-out', 'portables', '.agents', 'logs', '.cache', 'coverage', 'scratch'].includes(entry.name)) {
         files = files.concat(getAllFiles(fullPath));
       }
     } else if (['.ts', '.tsx', '.js', '.jsx', '.json', '.env', '.yml', '.yaml'].some(ext => entry.name.endsWith(ext))) {

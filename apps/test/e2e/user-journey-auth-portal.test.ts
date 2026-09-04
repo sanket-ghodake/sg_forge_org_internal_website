@@ -58,6 +58,7 @@ describe('Tier 5 E2E Journey: End-to-End Auth Gateway to Portal Live Network Han
     // 2. Act - Step 1: Unauthenticated request to Portal over live HTTP socket
     const initialPortalRes = await fetch(portalUrl, {
       redirect: 'manual', // Do not auto-follow to inspect the 302 redirect location
+      signal: AbortSignal.timeout(3000),
     });
 
     // 3. Assert - Step 1: Portal returns 302 Redirect to Auth gateway
@@ -74,6 +75,7 @@ describe('Tier 5 E2E Journey: End-to-End Auth Gateway to Portal Live Network Han
         email: seededUser.email,
         password: 'password123',
       }),
+      signal: AbortSignal.timeout(3000),
     });
 
     const loginPayload = await loginRes.json();
@@ -91,6 +93,7 @@ describe('Tier 5 E2E Journey: End-to-End Auth Gateway to Portal Live Network Han
         tempToken: loginPayload.tempToken,
         newPassword: 'UpgradedEnterprisePassword2026!#',
       }),
+      signal: AbortSignal.timeout(3000),
     });
 
     const setPwdPayload = await setPwdRes.json();
@@ -116,6 +119,7 @@ describe('Tier 5 E2E Journey: End-to-End Auth Gateway to Portal Live Network Han
         'Cookie': `forge_session=${sessionCookieValue}`,
       },
       redirect: 'manual',
+      signal: AbortSignal.timeout(3000),
     });
 
     const brand = loadBrandConfig();

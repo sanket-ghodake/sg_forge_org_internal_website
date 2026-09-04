@@ -48,13 +48,13 @@ describe('Tier 5 E2E Journey: Direct-Jump Microservice SSO & RBAC Access Enforce
     const telemetryUrl = `http://localhost:${telemetryServer.port}/apps/telemetry`;
 
     // 2. Act - Step 1: Public App access (Telemetry) requires NO auth
-    const publicRes = await fetch(telemetryUrl);
+    const publicRes = await fetch(telemetryUrl, { signal: AbortSignal.timeout(3000) });
     expect(publicRes.status).toBe(200);
     const publicHtml = await publicRes.text();
     expect(publicHtml).toContain('PUBLIC ACCESS');
 
     // 3. Act - Step 2: Unauthenticated jump to Expenses
-    const initialExpensesRes = await fetch(expensesUrl, { redirect: 'manual' });
+    const initialExpensesRes = await fetch(expensesUrl, { redirect: 'manual', signal: AbortSignal.timeout(3000) });
     expect(initialExpensesRes.status).toBe(302);
     const redirectLocation = initialExpensesRes.headers.get('location');
     expect(redirectLocation).toContain('/auth/login?return_url=');
@@ -64,6 +64,7 @@ describe('Tier 5 E2E Journey: Direct-Jump Microservice SSO & RBAC Access Enforce
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: 'alice.eng@forge.internal', password: 'password123' }),
+      signal: AbortSignal.timeout(3000),
     });
     const loginData = await loginRes.json();
 
@@ -71,6 +72,7 @@ describe('Tier 5 E2E Journey: Direct-Jump Microservice SSO & RBAC Access Enforce
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ tempToken: loginData.tempToken, newPassword: 'AliceNewSecurePass9988!#' }),
+      signal: AbortSignal.timeout(3000),
     });
     const setCookie = setPwdRes.headers.get('set-cookie') || '';
     const match = setCookie.match(/forge_session=([^;]+)/);
@@ -81,6 +83,7 @@ describe('Tier 5 E2E Journey: Direct-Jump Microservice SSO & RBAC Access Enforce
     const authedExpensesRes = await fetch(expensesUrl, {
       headers: { Cookie: `forge_session=${aliceSession}` },
       redirect: 'manual',
+      signal: AbortSignal.timeout(3000),
     });
     expect(authedExpensesRes.status).toBe(200);
     const expensesHtml = await authedExpensesRes.text();
@@ -91,6 +94,7 @@ describe('Tier 5 E2E Journey: Direct-Jump Microservice SSO & RBAC Access Enforce
     const forbiddenBillingRes = await fetch(billingUrl, {
       headers: { Cookie: `forge_session=${aliceSession}` },
       redirect: 'manual',
+      signal: AbortSignal.timeout(3000),
     });
     expect(forbiddenBillingRes.status).toBe(403);
     const forbiddenHtml = await forbiddenBillingRes.text();
@@ -103,6 +107,7 @@ describe('Tier 5 E2E Journey: Direct-Jump Microservice SSO & RBAC Access Enforce
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: 'billing.admin@forge.internal', password: 'password123' }),
+      signal: AbortSignal.timeout(3000),
     });
     const marcusData = await marcusLogin.json();
 
@@ -110,6 +115,7 @@ describe('Tier 5 E2E Journey: Direct-Jump Microservice SSO & RBAC Access Enforce
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ tempToken: marcusData.tempToken, newPassword: 'MarcusBillingAdminPass2026!#' }),
+      signal: AbortSignal.timeout(3000),
     });
     const marcusCookie = (marcusSetPwd.headers.get('set-cookie') || '').match(/forge_session=([^;]+)/)![1];
 
@@ -117,6 +123,7 @@ describe('Tier 5 E2E Journey: Direct-Jump Microservice SSO & RBAC Access Enforce
     const billingOkRes = await fetch(billingUrl, {
       headers: { Cookie: `forge_session=${marcusCookie}` },
       redirect: 'manual',
+      signal: AbortSignal.timeout(3000),
     });
     expect(billingOkRes.status).toBe(200);
     const billingHtml = await billingOkRes.text();

@@ -3,6 +3,8 @@
  * Modular Astryx modal dialogs for Command Palette, Remote DB Connect, Safe Env, API Registry, and Logs.
  */
 
+import { loadBrandConfig } from '@forge/sdk';
+
 export function getModalsHtml(): string {
   return `
   <!-- Command Palette Modal (Cmd+K) -->
@@ -409,7 +411,7 @@ export function getModalsHtml(): string {
 
           <div class="guide-step-card">
             <div class="guide-step-header">
-              <span class="guide-step-title">3. Install SG Forge 24/7 Systemd Boot Service</span>
+              <span class="guide-step-title">3. Install ${loadBrandConfig().name} 24/7 Systemd Boot Service</span>
             </div>
             <div class="guide-step-desc">Registers the production compose stack as a managed system service.</div>
             <div class="guide-code-box">

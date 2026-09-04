@@ -4,6 +4,7 @@
  */
 
 import { createHmac, createHash, randomBytes, timingSafeEqual } from 'node:crypto';
+import { loadBrandConfig } from '@forge/sdk';
 
 const BASE32_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
 
@@ -104,8 +105,10 @@ export function verifyTotpCode(
   return false;
 }
 
-export function generateTotpUri(secret: string, email: string, issuer: string = 'SG Forge'): string {
-  const encodedIssuer = encodeURIComponent(issuer);
+export function generateTotpUri(secret: string, email: string, issuer?: string): string {
+  const brandName = loadBrandConfig().name || 'SG Forge';
+  const effectiveIssuer = issuer || brandName;
+  const encodedIssuer = encodeURIComponent(effectiveIssuer);
   const encodedAccount = encodeURIComponent(email);
   return `otpauth://totp/${encodedIssuer}:${encodedAccount}?secret=${secret}&issuer=${encodedIssuer}&algorithm=SHA1&digits=6&period=30`;
 }

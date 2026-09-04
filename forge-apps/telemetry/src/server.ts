@@ -4,7 +4,7 @@
  */
 
 import { join } from 'node:path';
-import { authGuard, createLogger, createSafeHandler } from '@forge/sdk';
+import { authGuard, createLogger, createSafeHandler, loadBrandConfig } from '@forge/sdk';
 import { getAstryxHeaderHtml, getAstryxStyles, getHeadStateScript } from '@forge/ui';
 import { telemetryDb } from './db';
 
@@ -13,12 +13,13 @@ const logger = createLogger('telemetry', LOG_DIR);
 const PORT = Number(process.env.PORT || 8087);
 
 function renderAppHtml(): string {
+  const brand = loadBrandConfig();
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SG Forge - Telemetry Micro-App (Public)</title>
+  <title>${brand.name} - Telemetry Micro-App (Public)</title>
   ${getHeadStateScript({ defaultTheme: 'dark' })}
   <style>
     ${getAstryxStyles()}
