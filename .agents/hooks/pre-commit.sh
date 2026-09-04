@@ -8,9 +8,9 @@ REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 
 echo "⚡ [Git Pre-Commit Hook] Running SG Forge Quality Gate (12 Deterministic Gates)..."
 
-# Determine bun runtime
+# Determine bun runtime (use portable ELF binary on Linux; fallback to host bun on macOS/other)
 BUN_BIN="bun"
-if [ -f "$REPO_ROOT/portables/bun/bin/bun" ]; then
+if [ "$(uname -s)" = "Linux" ] && [ -x "$REPO_ROOT/portables/bun/bin/bun" ]; then
     BUN_BIN="$REPO_ROOT/portables/bun/bin/bun"
 fi
 

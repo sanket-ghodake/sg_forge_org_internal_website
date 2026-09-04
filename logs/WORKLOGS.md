@@ -524,3 +524,7 @@
 2026-09-03 21:21 | Audit and verify @forge/sdk health and integrity
 2026-09-03 22:07 | Audit and complete 5-tier test architectures across all microservices, eliminating synthetic mocks and hardcoded ports
 2026-09-03 22:08 | [b7845d7] test: complete 5-tier test governance across platform services and micro-apps (+1806, -573)
+2026-09-04 08:42 | Completed in-depth forensic audit of Git attributes, ELF binary CRLF filtering, and repo dirtiness
+2026-09-04 09:14 | Implemented multi-OS Git attributes and explicit binary protection for portable executables
+2026-09-04 09:46 | Engineered comprehensive cross-OS baseline: OS-aware binary dispatch, Windows CMD shims, and path normalization
+2026-09-04 09:48 | [53bc470] fix(toolchain): establish universal multi-OS git attributes and binary execution protections (+143, -23)

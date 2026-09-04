@@ -146,7 +146,11 @@ async function main() {
     console.log(`\n🛑 [${brand.name}] Gracefully terminating ${children.length} microservices...`);
     for (const child of children) {
       try {
-        child.kill(15); // SIGTERM
+        if (process.platform === 'win32') {
+          child.kill();
+        } else {
+          child.kill(15); // SIGTERM
+        }
       } catch {
         // Process might already be dead
       }
@@ -166,7 +170,9 @@ async function main() {
 
   process.on('SIGINT', shutdownAll);
   process.on('SIGTERM', shutdownAll);
-  process.on('SIGHUP', shutdownAll);
+  if (process.platform !== 'win32') {
+    process.on('SIGHUP', shutdownAll);
+  }
 
   for (const item of resolvedList) {
     try {

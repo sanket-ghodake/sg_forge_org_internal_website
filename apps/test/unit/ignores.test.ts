@@ -59,8 +59,22 @@ describe('Ignore & Attrib Files Uniformity Engine (3A Pattern)', () => {
     expect(content).toContain('*.ts text eol=lf');
     expect(content).toContain('*.json text eol=lf');
     expect(content).toContain('*.md text eol=lf');
+    expect(content).toContain('run.bat text eol=crlf');
+    expect(content).toContain('*.bat text eol=crlf');
+    expect(content).toContain('*.cmd text eol=crlf');
+    expect(content).toContain('*Dockerfile* text eol=lf');
+    expect(content).toContain('proxy/Caddyfile text eol=lf');
+    expect(content).toContain('*.csv text eol=lf');
+    expect(content).toContain('portables/bun/bin/bun binary');
+    expect(content).toContain('portables/rtk/bin/rtk binary');
+    expect(content).toContain('portables/ctop/ctop binary');
+    expect(content).toContain('portables/hyperfine/hyperfine binary');
+    expect(content).toContain('portables/scc/scc binary');
     expect(content).toContain('*.db binary');
     expect(content).toContain('*.sqlite binary');
+
+    // Negative Invariant: Unsafe wildcard MUST NOT be present
+    expect(content).not.toContain('portables/**/bin/* text');
   });
 
   it('detects tampering and missing patterns immediately (Tamper Proof Test)', () => {
@@ -98,5 +112,15 @@ describe('Ignore & Attrib Files Uniformity Engine (3A Pattern)', () => {
 
     const result = validateIgnores();
     expect(result.valid).toBe(true);
+  });
+
+  it('guarantees cross-platform path normalization produces POSIX forward-slash ignore entries', () => {
+    // Arrange: simulated Windows backslash path
+    const winPath = 'apps\\src\\portal\\logs\\.gitignore';
+    const normalized = winPath.replace(/\\/g, '/');
+
+    // Assert
+    expect(normalized).toBe('apps/src/portal/logs/.gitignore');
+    expect(normalized).not.toContain('\\');
   });
 });

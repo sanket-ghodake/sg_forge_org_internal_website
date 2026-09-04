@@ -8,6 +8,17 @@ set "REPO_ROOT=%~dp0"
 set "PORTABLE_BUN=%REPO_ROOT%portables\bun\bin\bun.exe"
 set "PATH=%REPO_ROOT%portables\bin;%REPO_ROOT%portables\bun\bin;%PATH%"
 
+where bun >nul 2>&1
+if %ERRORLEVEL% NEQ 0 (
+    if not exist "%PORTABLE_BUN%" (
+        if "%1"=="setup" (
+            echo ⚠️ [Windows] Bun runtime not detected on PATH or portable toolchain.
+            echo    Please install Bun for Windows via PowerShell:
+            echo    powershell -c "irm bun.sh/install.ps1 | iex"
+        )
+    )
+)
+
 set "COMPOSE_PROJECT_NAME=ag_dashboard"
 if exist "%REPO_ROOT%.env" (
     for /f "usebackq tokens=1,* delims==" %%A in ("%REPO_ROOT%.env") do (

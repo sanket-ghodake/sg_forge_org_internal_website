@@ -12,9 +12,9 @@ fi
 REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 cd "$REPO_ROOT"
 
-# Run automated commit logger using portable Bun runtime
+# Run automated commit logger using portable Bun runtime (Linux ELF or host fallback)
 BUN_BIN="bun"
-if [ -f "$REPO_ROOT/portables/bun/bin/bun" ]; then
+if [ "$(uname -s)" = "Linux" ] && [ -x "$REPO_ROOT/portables/bun/bin/bun" ]; then
     BUN_BIN="$REPO_ROOT/portables/bun/bin/bun"
 fi
 

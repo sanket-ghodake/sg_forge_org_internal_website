@@ -6,11 +6,20 @@
 set -e
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PORTABLE_BUN="$REPO_ROOT/portables/bun/bin/bun"
+HOST_OS="$(uname -s)"
 RTK="$REPO_ROOT/portables/bin/rtk"
 
-# Ensure PATH includes portable binaries
-export PATH="$REPO_ROOT/portables/bin:$REPO_ROOT/portables/bun/bin:$PATH"
+# Resolve Bun runtime: on Linux use portable ELF binary; on macOS/others use system bun
+if [ "$HOST_OS" = "Linux" ] && [ -x "$REPO_ROOT/portables/bun/bin/bun" ]; then
+    PORTABLE_BUN="$REPO_ROOT/portables/bun/bin/bun"
+    export PATH="$REPO_ROOT/portables/bin:$REPO_ROOT/portables/bun/bin:$PATH"
+elif command -v bun >/dev/null 2>&1; then
+    PORTABLE_BUN="bun"
+    export PATH="$REPO_ROOT/portables/bin:$PATH"
+else
+    PORTABLE_BUN="$REPO_ROOT/portables/bun/bin/bun"
+    export PATH="$REPO_ROOT/portables/bin:$PATH"
+fi
 
 # Dynamically resolve branding and container variables from .env
 if [ -f "$REPO_ROOT/.env" ]; then

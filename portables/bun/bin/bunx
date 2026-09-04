@@ -7,7 +7,8 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [ -x "$SCRIPT_DIR/bun" ]; then
+# On Linux, execute portable ELF bun. On macOS or other OS, fall through to system bun.
+if [ "$(uname -s)" = "Linux" ] && [ -x "$SCRIPT_DIR/bun" ]; then
     exec "$SCRIPT_DIR/bun" x "$@"
 elif command -v bun >/dev/null 2>&1; then
     exec bun x "$@"

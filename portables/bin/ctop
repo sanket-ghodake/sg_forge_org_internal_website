@@ -9,7 +9,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 LOCAL_BIN="$REPO_ROOT/portables/ctop/ctop"
 
-if [ -x "$LOCAL_BIN" ]; then
+# On Linux, execute portable ELF binary. On macOS or other OS, fall through to system ctop or docker stats.
+if [ "$(uname -s)" = "Linux" ] && [ -x "$LOCAL_BIN" ]; then
     if [ ! -t 0 ] || [ ! -t 1 ] || [ "$TERM" = "dumb" ] || [ -z "$TERM" ]; then
         if [ "$1" = "-v" ] || [ "$1" = "--version" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
             exec "$LOCAL_BIN" "$@"

@@ -8,9 +8,10 @@
  */
 
 import { existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
 
 const REPO_ROOT = process.cwd();
+const toRelGitPath = (p: string) => relative(REPO_ROOT, p).replace(/\\/g, '/');
 
 /** Core shared exclusion rules across all toolchains */
 export const MANDATORY_EXCLUSIONS = [
@@ -56,7 +57,9 @@ export const MANDATORY_ATTRIBUTES = [
   '* text=auto',
   'run.sh text eol=lf',
   'portables/bin/* text eol=lf',
-  'portables/**/bin/* text eol=lf',
+  'run.bat text eol=crlf',
+  '*.bat text eol=crlf',
+  '*.cmd text eol=crlf',
   '*.sh text eol=lf',
   '*.bash text eol=lf',
   '*.ts text eol=lf',
@@ -69,6 +72,16 @@ export const MANDATORY_ATTRIBUTES = [
   '*.yml text eol=lf',
   '*.yaml text eol=lf',
   '*.toml text eol=lf',
+  '*Dockerfile* text eol=lf',
+  'proxy/Caddyfile text eol=lf',
+  '*.csv text eol=lf',
+  'portables/bun/bin/bun binary',
+  'portables/rtk/bin/rtk binary',
+  'portables/ctop/ctop binary',
+  'portables/hyperfine/hyperfine binary',
+  'portables/scc/scc binary',
+  '*.exe binary',
+  '*.wasm binary',
   '*.db binary',
   '*.sqlite binary',
   '*.sqlite3 binary',
@@ -146,7 +159,7 @@ export function validateIgnores(): ValidationResult {
       if (entry.isDirectory()) {
         const logGitignore = join(parentDir, entry.name, 'logs', '.gitignore');
         if (!existsSync(logGitignore)) {
-          subfolderLogIgnoresMissing.push(join(parentDir.replace(REPO_ROOT + '/', ''), entry.name, 'logs', '.gitignore'));
+          subfolderLogIgnoresMissing.push(toRelGitPath(logGitignore));
         }
       }
     }
@@ -167,7 +180,7 @@ export function validateIgnores(): ValidationResult {
         const fullPath = join(pDir, entry);
         const lstat = lstatSync(fullPath);
         if (lstat.isSymbolicLink()) {
-          symlinksDetected.push(join(pDir.replace(REPO_ROOT + '/', ''), entry));
+          symlinksDetected.push(toRelGitPath(fullPath));
         }
       }
     }
@@ -297,7 +310,7 @@ graphify-out/20*/
         const gitignoreFile = join(logsDir, '.gitignore');
         const content = `# Isolated microservice logs retention\n*.log\n*.log.*\n!.gitignore\n!README.md\n`;
         writeFileSync(gitignoreFile, content, 'utf8');
-        filesUpdated.push(gitignoreFile.replace(REPO_ROOT + '/', ''));
+        filesUpdated.push(toRelGitPath(gitignoreFile));
       }
     }
   };
@@ -317,7 +330,9 @@ graphify-out/20*/
 # Enforce strict LF line-endings on shell and code scripts
 run.sh text eol=lf
 portables/bin/* text eol=lf
-portables/**/bin/* text eol=lf
+run.bat text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
 *.sh text eol=lf
 *.bash text eol=lf
 *.ts text eol=lf
@@ -330,6 +345,18 @@ portables/**/bin/* text eol=lf
 *.yml text eol=lf
 *.yaml text eol=lf
 *.toml text eol=lf
+*Dockerfile* text eol=lf
+proxy/Caddyfile text eol=lf
+*.csv text eol=lf
+
+# Protect native executables from git line-ending corruption and phantom diffs
+portables/bun/bin/bun binary
+portables/rtk/bin/rtk binary
+portables/ctop/ctop binary
+portables/hyperfine/hyperfine binary
+portables/scc/scc binary
+*.exe binary
+*.wasm binary
 
 # Protect binary and compiled assets from git corruption
 *.db binary
