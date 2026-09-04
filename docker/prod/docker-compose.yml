@@ -37,6 +37,7 @@ services:
     volumes:
       - ../../proxy/Caddyfile:/etc/caddy/Caddyfile:ro
       - ../../proxy/errors:/etc/caddy/errors:ro
+      - ../../public:/etc/caddy/public:ro
       - ag_caddy_data:/data
       - ag_caddy_config:/config
     networks:
@@ -324,4 +325,49 @@ services:
         limits:
           memory: 64M
           cpus: '0.25'
+
+  # 🛡️ Continuous Database Backup Engine (Hourly Automatic Snapshots & Integrity Check)
+  db-backup:
+    image: oven/bun:1.3-alpine
+    container_name: ${CONTAINER_PREFIX:-ag}-db-backup-prod
+    profiles: ["monitoring", "all"]
+    working_dir: /app
+    env_file:
+      - ../../.env
+    environment:
+      - NODE_ENV=production
+      - DB_BACKUP_DIR=/app/backups/db
+      - DB_BACKUP_INTERVAL_MINUTES=${DB_BACKUP_INTERVAL_MINUTES:-60}
+      - DB_BACKUP_RETENTION_HOURS=${DB_BACKUP_RETENTION_HOURS:-168}
+      - DB_BACKUP_ENCRYPT=${DB_BACKUP_ENCRYPT:-false}
+      - DB_BACKUP_ENCRYPTION_KEY=${DB_BACKUP_ENCRYPTION_KEY:-}
+    volumes:
+      - ../../package.json:/app/package.json:ro
+      - ../../tsconfig.json:/app/tsconfig.json:ro
+      - ../../apps/src/sdk:/app/apps/src/sdk:ro
+      - ../../scripts:/app/scripts:ro
+      - ../../backups:/app/backups:rw
+      - ag_prod_db_auth:/app/data_sources/auth:ro
+      - ag_prod_db_portal:/app/data_sources/portal:ro
+      - ag_prod_db_dev_dashboard:/app/data_sources/dev_dashboard:ro
+      - ag_prod_db_expenses:/app/data_sources/expenses:ro
+      - ag_prod_db_billing:/app/data_sources/billing:ro
+      - ag_prod_db_telemetry:/app/data_sources/telemetry:ro
+    command: ["bun", "scripts/backup-databases.ts", "--daemon"]
+    networks:
+      - forge-net
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "test -d /app/backups/db || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+          cpus: '0.50'
+
 

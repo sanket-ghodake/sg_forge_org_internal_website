@@ -21,6 +21,11 @@ COPY apps/src/ui/ apps/src/ui/
 # 3. Telemetry Micro-App Source Code ONLY
 COPY forge-apps/telemetry/ forge-apps/telemetry/
 
+# 4. Create writable runtime directories and enforce non-root user
+RUN mkdir -p /app/data /app/apps/data /app/forge-apps/telemetry/logs && chown -R bun:bun /app
+
+USER bun
+
 EXPOSE 8087
 
 HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 \

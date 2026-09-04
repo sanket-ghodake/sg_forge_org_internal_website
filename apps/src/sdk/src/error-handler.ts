@@ -9,6 +9,7 @@
 import { createLogger } from './logger';
 import { applySecurityHeaders } from './security-headers';
 import { loadBrandConfig } from './branding';
+import { renderAstryxErrorHtml } from '@forge/ui';
 
 export function createSafeHandler(
   serviceName: string,
@@ -54,6 +55,36 @@ export function createSafeHandler(
         { durationMs, path: url.pathname },
         traceId
       );
+
+      const acceptHeader = req.headers.get('accept') || '';
+      const isHtmlRequest =
+        acceptHeader.includes('text/html') &&
+        !url.pathname.startsWith('/api/') &&
+        req.method === 'GET';
+
+      if (isHtmlRequest) {
+        const html = renderAstryxErrorHtml({
+          statusCode: 500,
+          title: 'Internal Server Error',
+          message:
+            'An unexpected system error occurred. System telemetry has logged this incident for review.',
+          appName: serviceName,
+          traceId,
+          primaryActionText: '↻ Reload Page',
+          primaryActionHref: 'javascript:window.location.reload()',
+          secondaryActionText: 'Platform Hub &rarr;',
+          secondaryActionHref: '/',
+        });
+
+        const htmlResponse = new Response(html, {
+          status: 500,
+          headers: {
+            'Content-Type': 'text/html; charset=utf-8',
+            'x-trace-id': traceId,
+          },
+        });
+        return applySecurityHeaders(htmlResponse);
+      }
 
       const brand = loadBrandConfig();
       const domain = brand.domain || 'forge.internal';

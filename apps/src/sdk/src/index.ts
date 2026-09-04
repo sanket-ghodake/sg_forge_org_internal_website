@@ -20,3 +20,6 @@ export * from './browser-bridge';
 export * from './branding';
 export * from './database';
 export * from './security-headers';
+export * from './service-worker';
+export * from './backup';
+export * from './crypto';

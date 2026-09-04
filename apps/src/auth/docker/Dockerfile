@@ -14,13 +14,19 @@ ENV AUTH_PORT=3004
 # 1. Monorepo manifests & TypeScript path resolution
 COPY package.json bun.lock* tsconfig.json ./
 
-# 2. Shared Core Platform Libraries ONLY
+# 2. Shared Core Platform Libraries & Static Assets
 COPY apps/src/sdk/ apps/src/sdk/
 COPY apps/src/types/ apps/src/types/
 COPY apps/src/ui/ apps/src/ui/
+COPY public/ public/
 
 # 3. Auth Service Source Code ONLY
 COPY apps/src/auth/ apps/src/auth/
+
+# 4. Create writable runtime directories and enforce non-root user
+RUN mkdir -p /app/data /app/apps/data /app/apps/src/auth/logs && chown -R bun:bun /app
+
+USER bun
 
 EXPOSE 3004
 

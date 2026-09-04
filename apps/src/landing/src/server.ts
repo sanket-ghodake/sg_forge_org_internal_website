@@ -5,7 +5,15 @@
  * 100% Dynamically driven by @forge/sdk service registry (.env)
  */
 
-import { createLogger, createSafeHandler, loadServiceRegistry, loadBrandConfig, handleBrandAssetRequest, type ServiceEntry } from '@forge/sdk';
+import {
+  createLogger,
+  createSafeHandler,
+  loadServiceRegistry,
+  loadBrandConfig,
+  handleBrandAssetRequest,
+  handleServiceWorkerRequest,
+  type ServiceEntry,
+} from '@forge/sdk';
 import { getAstryxHeaderHtml, getAstryxFooterHtml, getAstryxStyles, getHeadStateScript, renderAstryxErrorHtml } from '@forge/ui';
 
 const logger = createLogger('landing-hub');
@@ -104,6 +112,10 @@ export function startLandingServer(port: number = PORT) {
     // 0. Static Brand Asset Interceptor
     const assetRes = handleBrandAssetRequest(req);
     if (assetRes) return assetRes;
+
+    // 0.1 Service Worker & Offline Cache Asset Interceptor
+    const swRes = handleServiceWorkerRequest(req);
+    if (swRes) return swRes;
 
     if (url.pathname === '/health') {
       return Response.json({

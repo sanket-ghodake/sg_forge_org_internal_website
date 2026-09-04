@@ -11,6 +11,7 @@ export const AIR_GAPPED_CSP: string = [
   "font-src 'self' data:",
   "img-src 'self' data:",
   "connect-src 'self'",
+  "worker-src 'self'",
   "frame-ancestors 'self'",
   "object-src 'none'",
   "base-uri 'self'",

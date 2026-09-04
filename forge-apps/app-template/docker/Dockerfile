@@ -21,6 +21,11 @@ COPY apps/src/ui/ apps/src/ui/
 # 3. Micro-App Scaffold Source Code ONLY
 COPY forge-apps/app-template/ forge-apps/app-template/
 
+# 4. Create writable runtime directories and enforce non-root user
+RUN mkdir -p /app/data /app/apps/data /app/forge-apps/app-template/logs && chown -R bun:bun /app
+
+USER bun
+
 EXPOSE 8088
 
 HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 \

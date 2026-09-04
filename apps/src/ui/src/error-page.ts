@@ -19,6 +19,7 @@ export interface ErrorPageOptions {
   primaryActionHref?: string;
   secondaryActionText?: string;
   secondaryActionHref?: string;
+  brandName?: string;
 }
 
 const STATUS_DEFAULTS: Record<number, { pill: string; title: string; message: string }> = {
@@ -64,6 +65,21 @@ const STATUS_DEFAULTS: Record<number, { pill: string; title: string; message: st
   },
 };
 
+export function renderAstryxSystemDownPage(options: { brandName?: string; message?: string } = {}): string {
+  return renderAstryxErrorHtml({
+    statusCode: 503,
+    title: 'System Under Maintenance',
+    message:
+      options.message ||
+      'The platform is currently undergoing scheduled maintenance or system updates. All services will resume shortly.',
+    primaryActionText: '↻ Check Again',
+    primaryActionHref: 'javascript:window.location.reload()',
+    secondaryActionText: 'Platform Hub &rarr;',
+    secondaryActionHref: '/',
+    brandName: options.brandName,
+  });
+}
+
 export function renderAstryxErrorHtml(options: ErrorPageOptions): string {
   const code = options.statusCode || 500;
   const config = STATUS_DEFAULTS[code] || {
@@ -83,7 +99,11 @@ export function renderAstryxErrorHtml(options: ErrorPageOptions): string {
   const secondaryText = options.secondaryActionText || (code === 403 ? 'Switch Account &rarr;' : 'Platform Hub &rarr;');
   const secondaryHref = options.secondaryActionHref || (code === 403 ? '/auth/login' : '/');
 
-  const brandName = process.env.NEXT_PUBLIC_BRAND_NAME || 'AG Dashboard';
+  const brandName =
+    options.brandName ||
+    process.env.NEXT_PUBLIC_BRAND_NAME ||
+    process.env.BRAND_NAME ||
+    'SG Forge';
 
   return `<!DOCTYPE html>
 <html lang="en">

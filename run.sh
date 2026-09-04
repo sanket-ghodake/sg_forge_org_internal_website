@@ -100,6 +100,11 @@ function show_help() {
     echo "  deploy-prod           Deploy latest git changes with selective microservice updates"
     echo "  rollback-prod [tag]   Instant rollback to stable baseline (opt: --restore-db)"
     echo "  prod-status           Check production gateway health, containers & audit logs"
+    echo "  backup                Run atomic, live-safe snapshot of all databases (VACUUM INTO)"
+    echo "  backup-daemon         Start continuous background hourly backup daemon"
+    echo "  backup-verify         Verify integrity of latest database backup archive"
+    echo "  harden                Lock down local database file permissions (chmod 600 / ACLs)"
+    echo "  gen-key               Generate cryptographically secure 256-bit AES encryption key"
     echo "======================================================================"
 }
 
@@ -535,6 +540,31 @@ case "$CMD" in
 
     prod-status)
         "$REPO_ROOT/deploy/status-prod.sh"
+        ;;
+
+    backup)
+        shift || true
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/backup-databases.ts" "$@"
+        ;;
+
+    backup-daemon)
+        shift || true
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/backup-databases.ts" --daemon "$@"
+        ;;
+
+    backup-verify)
+        shift || true
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/backup-databases.ts" --verify "$@"
+        ;;
+
+    harden)
+        shift || true
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/harden-storage.ts" "$@"
+        ;;
+
+    gen-key)
+        shift || true
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/harden-storage.ts" --gen-key "$@"
         ;;
 
     *)

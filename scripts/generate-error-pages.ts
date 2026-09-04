@@ -84,6 +84,7 @@ export function generateStaticErrorPages(): GeneratedErrorPage[] {
       primaryActionHref: cfg.primaryActionHref,
       secondaryActionText: cfg.secondaryActionText,
       secondaryActionHref: cfg.secondaryActionHref,
+      brandName: brand.name,
     });
 
     const targetPath = join(ERRORS_DIR, cfg.filename);

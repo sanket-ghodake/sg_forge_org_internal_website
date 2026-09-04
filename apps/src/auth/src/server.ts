@@ -38,6 +38,7 @@ import { authTelemetry } from './backend/telemetry';
 import { applySecurityHeaders } from './backend/security-headers';
 import { renderLoginHtml } from './frontend/login-view';
 import { renderSetPasswordHtml } from './frontend/set-password-view';
+import { renderAstryxErrorHtml } from '@forge/ui';
 
 const logger = createLogger('auth-service');
 const PORT = Number(process.env.AUTH_PORT || process.env.PORT || 3004);
@@ -254,6 +255,27 @@ export function startAuthServer(port: number = PORT) {
     }
 
     // 404 Fallback
+    const acceptHeader = req.headers.get('accept') || '';
+    if (acceptHeader.includes('text/html') && !path.startsWith('/api/')) {
+      response = new Response(
+        renderAstryxErrorHtml({
+          statusCode: 404,
+          title: 'Page Not Found',
+          appName: 'Identity & Auth Gateway',
+          message: `The requested path ${path} does not exist on the auth service.`,
+          primaryActionText: '&larr; Sign In',
+          primaryActionHref: '/auth/login',
+          secondaryActionText: 'Platform Hub &rarr;',
+          secondaryActionHref: '/',
+        }),
+        {
+          status: 404,
+          headers: { 'Content-Type': 'text/html; charset=utf-8' },
+        }
+      );
+      return applySecurityHeaders(response);
+    }
+
     response = new Response(
       JSON.stringify({
         type: 'https://tools.ietf.org/html/rfc7807',

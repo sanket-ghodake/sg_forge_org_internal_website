@@ -29,6 +29,8 @@ export const MANDATORY_EXCLUSIONS = [
   'data/*.db-wal',
   'data/*.db-shm',
   'apps/data/',
+  'backups/',
+  '*.enc',
   '*.sqlite',
   '*.sqlite3',
   'logs/*.log',
@@ -263,6 +265,8 @@ data/*.db-shm
 data/*.db-journal
 data/backups/
 apps/data/
+backups/db/
+*.enc
 *.sqlite
 *.sqlite3
 *.db

@@ -19,15 +19,22 @@ export function generateCaddyfile(): string {
 
   const brand = loadBrandConfig();
   const services = loadServiceRegistry();
-  const httpPort = process.env.HTTP_PORT || '80';
-  const httpsPort = process.env.HTTPS_PORT;
+  const httpPorts = Array.from(
+    new Set([process.env.PROD_HTTP_PORT, process.env.HTTP_PORT, '80'].filter(Boolean))
+  ) as string[];
+  const httpsPorts = Array.from(
+    new Set([process.env.PROD_HTTPS_PORT, process.env.HTTPS_PORT].filter(Boolean))
+  ) as string[];
   const enableTls = process.env.ENABLE_HTTPS === 'true';
   const tlsCert = process.env.TLS_CERT_PATH;
   const tlsKey = process.env.TLS_KEY_PATH;
 
+  const httpBindings = httpPorts.map((p) => `http://:${p}`).join(', ');
+  const httpsBindings = httpsPorts.map((p) => `https://:${p}`).join(', ');
+
   const siteBinding = enableTls
-    ? (httpsPort ? `http://:${httpPort}, https://:${httpsPort}` : `http://:${httpPort}`)
-    : `http://:${httpPort}`;
+    ? (httpsBindings ? `${httpBindings}, ${httpsBindings}` : httpBindings)
+    : httpBindings;
 
   let caddyContent = `# ==============================================================================
 # ${brand.name} - Unified Reverse Proxy Gateway (Auto-Generated from .env)
@@ -66,7 +73,7 @@ ${siteBinding} {
         X-XSS-Protection "0"
         Referrer-Policy "strict-origin-when-cross-origin"
         Permissions-Policy "geolocation=(), camera=(), microphone=(), payment=()"
-        Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+        Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self'; worker-src 'self'; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
         -Server
     }
 
@@ -82,6 +89,12 @@ ${siteBinding} {
             rewrite * /502.html
             file_server
         }
+    }
+
+    # Static Brand Assets & Direct Public Delivery (Zero Upstream Bun Overhead)
+    handle_path /brand* {
+        root * /etc/caddy/public/brand
+        file_server
     }
 `;
 

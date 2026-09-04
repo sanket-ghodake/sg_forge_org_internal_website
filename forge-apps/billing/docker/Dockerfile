@@ -21,6 +21,11 @@ COPY apps/src/ui/ apps/src/ui/
 # 3. Billing Micro-App Source Code ONLY
 COPY forge-apps/billing/ forge-apps/billing/
 
+# 4. Create writable runtime directories and enforce non-root user
+RUN mkdir -p /app/data /app/apps/data /app/forge-apps/billing/logs && chown -R bun:bun /app
+
+USER bun
+
 EXPOSE 8086
 
 HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 \

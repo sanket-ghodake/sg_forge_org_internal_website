@@ -12,11 +12,12 @@ import { resolveCanonicalDataDir } from '../apps/src/sdk/src';
 import { seedAuthDatabase } from '../apps/src/auth/src/db/seed';
 
 const DATA_DIR = resolveCanonicalDataDir();
-console.log('🚀 Initializing microservices databases in:', DATA_DIR);
+const isForce = process.argv.includes('--force') || process.env.ALLOW_DB_WIPE === 'true';
+console.log(`🚀 Initializing microservices databases in: ${DATA_DIR}${isForce ? ' [FORCE RESEED]' : ''}`);
 
 // 1. Auth Database (auth.db)
 function initAuthDb() {
-  seedAuthDatabase(false);
+  seedAuthDatabase(isForce);
   console.log('  ✅ auth.db initialized (canonical IAM, org tree, test personas)');
 }
 
@@ -26,6 +27,13 @@ function initBillingDb() {
   const db = new Database(dbPath, { create: true });
   db.run('PRAGMA journal_mode = WAL;');
   db.run('PRAGMA synchronous = NORMAL;');
+
+  if (isForce) {
+    db.run('DROP TABLE IF EXISTS subscriptions;');
+    db.run('DROP TABLE IF EXISTS invoices;');
+    db.run('DROP TABLE IF EXISTS customers;');
+    db.run('DROP TABLE IF EXISTS billing_invoices;');
+  }
 
   db.run(`
     CREATE TABLE IF NOT EXISTS customers (
@@ -112,6 +120,12 @@ function initExpensesDb() {
   db.run('PRAGMA journal_mode = WAL;');
   db.run('PRAGMA synchronous = NORMAL;');
 
+  if (isForce) {
+    db.run('DROP TABLE IF EXISTS receipts;');
+    db.run('DROP TABLE IF EXISTS expense_claims;');
+    db.run('DROP TABLE IF EXISTS categories;');
+  }
+
   db.run(`
     CREATE TABLE IF NOT EXISTS categories (
       id TEXT PRIMARY KEY,
@@ -169,6 +183,12 @@ function initTelemetryDb() {
   db.run('PRAGMA journal_mode = WAL;');
   db.run('PRAGMA synchronous = NORMAL;');
 
+  if (isForce) {
+    db.run('DROP TABLE IF EXISTS system_alerts;');
+    db.run('DROP TABLE IF EXISTS trace_spans;');
+    db.run('DROP TABLE IF EXISTS service_metrics;');
+  }
+
   db.run(`
     CREATE TABLE IF NOT EXISTS service_metrics (
       id TEXT PRIMARY KEY,
@@ -224,6 +244,11 @@ function initDevHubDb() {
   db.run('PRAGMA journal_mode = WAL;');
   db.run('PRAGMA synchronous = NORMAL;');
 
+  if (isForce) {
+    db.run('DROP TABLE IF EXISTS webhooks;');
+    db.run('DROP TABLE IF EXISTS api_specs;');
+  }
+
   db.run(`
     CREATE TABLE IF NOT EXISTS api_specs (
       id TEXT PRIMARY KEY,
@@ -264,6 +289,14 @@ function initPlatformCoreDb() {
   db.run('PRAGMA busy_timeout = 5000;');
   db.run('PRAGMA auto_vacuum = INCREMENTAL;');
   db.run('PRAGMA synchronous = NORMAL;');
+
+  if (isForce) {
+    db.run('DROP TABLE IF EXISTS remote_connections;');
+    db.run('DROP TABLE IF EXISTS audit_logs;');
+    db.run('DROP TABLE IF EXISTS issue_reports;');
+    db.run('DROP TABLE IF EXISTS traffic_events;');
+    db.run('DROP TABLE IF EXISTS apps_registry;');
+  }
 
   db.run(`CREATE TABLE IF NOT EXISTS apps_registry (
     id TEXT PRIMARY KEY, name TEXT NOT NULL, port INTEGER NOT NULL, ingress_path TEXT NOT NULL UNIQUE,

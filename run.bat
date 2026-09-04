@@ -46,6 +46,11 @@ if "%1"=="docker" goto docker
 if "%1"=="deploy-prod" goto deploy_prod
 if "%1"=="rollback-prod" goto rollback_prod
 if "%1"=="prod-status" goto prod_status
+if "%1"=="backup" goto backup
+if "%1"=="backup-daemon" goto backup_daemon
+if "%1"=="backup-verify" goto backup_verify
+if "%1"=="harden" goto harden
+if "%1"=="gen-key" goto gen_key
 goto help
 
 :setup
@@ -166,11 +171,31 @@ if %ERRORLEVEL% EQU 0 (
 )
 goto end
 
+:backup
+bun run "%REPO_ROOT%scripts\backup-databases.ts" %2 %3
+goto end
+
+:backup_daemon
+bun run "%REPO_ROOT%scripts\backup-databases.ts" --daemon %2 %3
+goto end
+
+:backup_verify
+bun run "%REPO_ROOT%scripts\backup-databases.ts" --verify %2 %3
+goto end
+
+:harden
+bun run "%REPO_ROOT%scripts\harden-storage.ts" %2 %3
+goto end
+
+:gen_key
+bun run "%REPO_ROOT%scripts\harden-storage.ts" --gen-key %2 %3
+goto end
+
 :help
 echo ======================================================================
 echo 🚀 Platform Orchestrator (Windows 2026 LTS)
 echo ======================================================================
-echo Usage: run.bat [setup ^| dev ^| doctor ^| clean ^| test ^| docker ^| deploy-prod ^| rollback-prod ^| prod-status]
+echo Usage: run.bat [setup ^| dev ^| doctor ^| clean ^| test ^| docker ^| deploy-prod ^| rollback-prod ^| prod-status ^| backup ^| backup-daemon ^| backup-verify ^| harden ^| gen-key]
 echo ======================================================================
 goto end
 

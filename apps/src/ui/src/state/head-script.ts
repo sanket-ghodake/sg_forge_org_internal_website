@@ -17,6 +17,10 @@ export interface HeadStateScriptOptions {
   themeKey?: string;
   /** Sidebar collapse storage key */
   sidebarKey?: string;
+  /** Whether to register the offline fallback service worker. Defaults to true. */
+  enableServiceWorker?: boolean;
+  /** Path to the service worker file. Defaults to '/sw.js' */
+  swUrl?: string;
 }
 
 /**
@@ -116,6 +120,17 @@ export function getHeadStateScript(
             document.documentElement.setAttribute('data-sidebar-collapsed', 'true');
           }
         } catch(e) {}
+      }
+
+      /* 4. Client-Side Service Worker & Offline Cache Registration */
+      ${
+        options.enableServiceWorker !== false
+          ? `if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('${options.swUrl || '/sw.js'}', { scope: '/' }).catch(function() {});
+        });
+      }`
+          : ''
       }
     } catch(err) {}
   })();`.replace(/\s+/g, ' ').trim();

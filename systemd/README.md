@@ -7,6 +7,10 @@ This directory contains systemd service configuration templates for host-level p
   - Automatically runs when the main Docker/Caddy stack is offline.
   - Listens on HTTP Port 80 and serves `proxy/errors/503.html` (pre-rendered Meta Astryx maintenance screen).
   - Uses the portable Bun runtime with zero external dependencies.
+- **`sg-db-backup.service`**: Continuous Production Database Backup Daemon.
+  - Automatically runs hourly atomic snapshots (`VACUUM INTO`) across all platform databases.
+  - Verifies database integrity (`PRAGMA integrity_check`) post-backup.
+  - Automatically manages rolling retention windows and optional AES-256-GCM encryption.
 
 ## 🚀 Installation & Usage (Optional Production Automation)
 1. Copy the unit file into `/etc/systemd/system/`:

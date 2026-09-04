@@ -99,8 +99,12 @@ export class DevDashboardAuthManager {
     if (!token) return false;
 
     // 1. Direct master password API authorization (for CLI / testing / programmatic tools)
-    if (this.verifyPassword(token)) {
-      return true;
+    try {
+      if (this.verifyPassword(token)) {
+        return true;
+      }
+    } catch {
+      // Guard against unhandled configuration exceptions during session check
     }
 
     // 2. Active single operator session verification

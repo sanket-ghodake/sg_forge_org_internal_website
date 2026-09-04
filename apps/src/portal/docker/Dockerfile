@@ -14,14 +14,20 @@ ENV PORTAL_PORT=3001
 # 1. Monorepo manifests & TypeScript path resolution
 COPY package.json bun.lock* tsconfig.json ./
 
-# 2. Shared Core Platform Libraries & Auth SDK
+# 2. Shared Core Platform Libraries, Auth SDK & Static Assets
 COPY apps/src/sdk/ apps/src/sdk/
 COPY apps/src/types/ apps/src/types/
 COPY apps/src/ui/ apps/src/ui/
 COPY apps/src/auth/ apps/src/auth/
+COPY public/ public/
 
 # 3. Portal Service Source Code
 COPY apps/src/portal/ apps/src/portal/
+
+# 4. Create writable runtime directories and enforce non-root user
+RUN mkdir -p /app/data /app/apps/data /app/apps/src/portal/logs && chown -R bun:bun /app
+
+USER bun
 
 EXPOSE 3001
 

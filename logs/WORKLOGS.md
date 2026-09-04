@@ -549,3 +549,20 @@
 2026-09-04 16:58 | Audited all run.sh commands and portable wrappers; eliminated recursive infinite loops and argument misrouting across 14 CLI tools.
 2026-09-04 18:36 | Verified all run.sh commands and portable wrappers; 27/27 gates and all subcommands passed with zero regressions.
 2026-09-04 18:40 | [dae9e65] fix(orchestration): resolve portable wrapper self-recursion and sanitize argument forwarding in run.sh (+102, -46)
+2026-09-04 18:47 | Fix Caddy proxy port binding for production environment and verify static error fallback
+2026-09-04 19:11 | Fix prod docker ingress binding, universal Astryx error content negotiation, DevCenter session resilience, and prod security keys
+2026-09-04 19:21 | Fix portal default test persona password credentials and add Quick Personas card to login view
+2026-09-04 19:29 | Reseed all microservice databases fresh in prod and add force reseed support
+2026-09-04 19:35 | Audited codebase for open source secret rotation tooling
+2026-09-04 19:54 | Implemented air-gapped Client-Side Service Worker offline error caching and audited outage test suites without hardcoded parameters
+2026-09-04 20:01 | Fix production logo asset delivery across Caddy gateway and service Docker containers
+2026-09-04 20:02 | Explained production and development database storage architecture, WAL integrity, backup strategies, and replication
+2026-09-04 20:04 | audit: assess production release readiness and eliminate relative import traversal
+2026-09-04 20:14 | Provided enterprise security compliance evaluation on database encryption at rest (SOC 2, HIPAA, PCI-DSS, ASVS 5.0)
+2026-09-04 20:23 | Implemented automated hourly production database backup engine with VACUUM INTO, AES-256-GCM encryption, systemd unit, and passed 27-check quality gate
+2026-09-04 20:25 | Integrated automatic db-backup service into docker-compose.yml for zero-config production auto-backup, and evaluated local-hosting page-level encryption
+2026-09-04 20:28 | Verified cross-platform multi-OS parity across Linux, macOS, Windows, and WSL with run.bat backup commands and passed 27-check gate
+2026-09-04 20:30 | Documented runtime database encryption architecture covering page-level I/O encryption, memory isolation, and field-level encryption
+2026-09-04 20:35 | Implemented local-only cross-platform runtime AES-256-GCM field encryption, blind indexing, storage permission hardening, and passed 27-check quality gate
+2026-09-04 20:43 | audit: completed in-depth release audit and hardened all Dockerfiles to non-root USER bun
+2026-09-04 20:45 | [bb7c127] feat(release): production audit, container non-root hardening, and offline error resiliency (+4904, -792)
