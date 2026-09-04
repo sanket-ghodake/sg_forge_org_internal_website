@@ -116,4 +116,24 @@ describe('Tier 3 Security: Dev Dashboard Single-Session Authentication', () => {
     expect(logoutRes?.status).toBe(200);
     expect(devAuthManager.validateSession(goodData.sessionToken)).toBe(false);
   });
+
+  it('Arrange, Act, Assert: rejects default placeholder passwords when simulated in production', () => {
+    // Arrange: Save environment
+    const origNodeEnv = process.env.NODE_ENV;
+    const origPwd = process.env.DEV_DASHBOARD_PASSWORD;
+
+    try {
+      // Act: Simulate production environment with default template password
+      (process.env as any).NODE_ENV = 'production';
+      process.env.DEV_DASHBOARD_PASSWORD = 'dev-operator-secure-password-change-me';
+
+      // Assert: Must throw fatal security exception
+      expect(() => devAuthManager.getMasterPassword()).toThrow(/FATAL SECURITY/);
+    } finally {
+      // Cleanup
+      (process.env as any).NODE_ENV = origNodeEnv;
+      if (origPwd) process.env.DEV_DASHBOARD_PASSWORD = origPwd;
+      else delete process.env.DEV_DASHBOARD_PASSWORD;
+    }
+  });
 });

@@ -11,7 +11,9 @@ function extractToken(req: Request): string | null {
   const authHeader = req.headers.get('authorization') || '';
   if (authHeader.startsWith('Bearer ')) return authHeader.slice(7);
   const cookieHeader = req.headers.get('cookie') || '';
-  const match = cookieHeader.match(/forge_session=([^;]+)/);
+  const cookieName = process.env.SESSION_COOKIE_NAME || 'forge_session';
+  const escapedName = cookieName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const match = cookieHeader.match(new RegExp(`(?:^|;\\s*)(?:${escapedName}|forge_session)=([^;]+)`));
   return match ? match[1] : null;
 }
 

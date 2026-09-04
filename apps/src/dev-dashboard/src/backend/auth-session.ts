@@ -30,8 +30,16 @@ export class DevDashboardAuthManager {
     }
     const configured = process.env.DEV_DASHBOARD_PASSWORD || process.env.DEVCENTER_PASSWORD;
     if (process.env.NODE_ENV === 'production') {
-      if (!configured || configured === this.defaultPassword || configured.length < 12) {
-        throw new Error('[FATAL SECURITY] In production, DEV_DASHBOARD_PASSWORD must be configured with a secure password of at least 12 characters.');
+      if (
+        !configured ||
+        configured === this.defaultPassword ||
+        configured.length < 12 ||
+        configured.includes('change-me') ||
+        configured.includes('dev-operator')
+      ) {
+        throw new Error(
+          '[FATAL SECURITY] In production, DEV_DASHBOARD_PASSWORD must be configured with a secure, non-default password of at least 12 characters.'
+        );
       }
     }
     return configured || this.defaultPassword;

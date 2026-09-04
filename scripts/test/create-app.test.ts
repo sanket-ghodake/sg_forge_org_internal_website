@@ -40,16 +40,19 @@ describe('Tier 1 Unit: 1-Command Micro-App Generator', () => {
     } finally {
       if (existsSync(appDir)) rmSync(appDir, { recursive: true, force: true });
 
-      // Clean up .env
-      if (existsSync(envPath)) {
-        let env = readFileSync(envPath, 'utf8');
-        env = env
-          .split('\n')
-          .filter((line) => !line.includes('APP_UNIT_TEST_SCAFFOLD_DEMO='))
-          .join('\n');
-        writeFileSync(envPath, env, 'utf8');
-        generateCaddyfile();
+      // Clean up .env and .env.example
+      for (const file of ['.env', '.env.example']) {
+        const p = join(process.cwd(), file);
+        if (existsSync(p)) {
+          let env = readFileSync(p, 'utf8');
+          env = env
+            .split('\n')
+            .filter((line) => !line.includes('APP_UNIT_TEST_SCAFFOLD_DEMO='))
+            .join('\n');
+          writeFileSync(p, env, 'utf8');
+        }
       }
+      generateCaddyfile();
     }
   });
 });

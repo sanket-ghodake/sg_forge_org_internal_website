@@ -154,15 +154,18 @@ export function createApp(options: CreateAppOptions): {
   `);
   db.close();
 
-  // 5. Append to .env Registry
-  const envPath = join(REPO_ROOT, '.env');
-  if (existsSync(envPath)) {
-    const envUpper = appName.toUpperCase().replace(/-/g, '_');
-    const envLine = `APP_${envUpper}="${displayName}|${allocatedPort}|${ingressPath}|${category}|${role}|app-${appName}"\n`;
-    let envContent = readFileSync(envPath, 'utf8');
-    if (!envContent.includes(`APP_${envUpper}=`)) {
-      envContent += envLine;
-      writeFileSync(envPath, envContent, 'utf8');
+  // 5. Append to .env & .env.example Registry
+  const envUpper = appName.toUpperCase().replace(/-/g, '_');
+  const envLine = `APP_${envUpper}="${displayName}|${allocatedPort}|${ingressPath}|${category}|${role}|app-${appName}"\n`;
+
+  for (const file of ['.env', '.env.example']) {
+    const targetPath = join(REPO_ROOT, file);
+    if (existsSync(targetPath)) {
+      let content = readFileSync(targetPath, 'utf8');
+      if (!content.includes(`APP_${envUpper}=`)) {
+        content += envLine;
+        writeFileSync(targetPath, content, 'utf8');
+      }
     }
   }
 

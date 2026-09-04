@@ -10,8 +10,12 @@ import { createLogger } from '@forge/sdk';
 
 const logger = createLogger('auth-session');
 
-const REFRESH_TOKEN_EXPIRY_SECONDS = 7 * 24 * 3600; // 7 days
-const ACCESS_TOKEN_EXPIRY_SECONDS = 900; // 15 minutes
+const REFRESH_TOKEN_EXPIRY_SECONDS = Number(
+  process.env.JWT_REFRESH_TOKEN_EXPIRY_SECONDS || 7 * 24 * 3600
+); // 7 days default
+const ACCESS_TOKEN_EXPIRY_SECONDS = Number(
+  process.env.JWT_ACCESS_TOKEN_EXPIRY_SECONDS || process.env.JWT_EXPIRY_SECONDS || 900
+); // 15 minutes default
 
 export interface SessionIssueResult {
   accessToken: string;

@@ -52,7 +52,9 @@ function extractAuthContext(req: Request): {
     token = authHeader.slice(7);
   } else {
     const cookieHeader = req.headers.get('cookie') || '';
-    const match = cookieHeader.match(/forge_session=([^;]+)/);
+    const cookieName = process.env.SESSION_COOKIE_NAME || 'forge_session';
+    const escapedName = cookieName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const match = cookieHeader.match(new RegExp(`(?:^|;\\s*)(?:${escapedName}|forge_session)=([^;]+)`));
     if (match) token = match[1];
   }
 
