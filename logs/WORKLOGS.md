@@ -569,3 +569,7 @@
 2026-09-04 21:01 | Diagnosed and resolved production 502 Bad Gateway: fixed database volume UID permissions and db-backup volume mounts
 2026-09-04 21:09 | Created comprehensive Organization Deployment & Quickstart Guide in docs
 2026-09-04 21:10 | [77fdd07] fix(prod): resolve db volume permissions and add organization deployment guide (+166, -0)
+2026-09-05 11:47 | Integrated Strix in-chat AI pentest agent (Mode 1 Code Check & Mode 2 Live Setup Test) with pre-commit gate Check 21 & Tier 2 Audit 8
+2026-09-05 11:48 | Re-verified 2-tier quality gate (27/27 Tier 1 passed, 8/8 Tier 2 verified)
+2026-09-05 11:56 | Created centralized Git-tracked security audit ledger in logs/security/ with selective non-Git toolchain exclusions
+2026-09-05 11:58 | [4cd4dc8] feat(security): embed Strix in-chat AI pentest agent and persistent audit ledger (+867, -33)

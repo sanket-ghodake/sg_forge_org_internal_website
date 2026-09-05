@@ -5,7 +5,7 @@
 
 ---
 
-## ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (15 CHECKS)
+## ⚡ 1. PRE-FLIGHT & PRE-COMMIT VERIFICATION GATE (21 CHECKS)
 Before writing code, running commands, or staging/committing changes, verify:
 1. [ ] **RTK Command Prefix**: Every bash command MUST be prefixed with `rtk` (e.g. `rtk git status`, `rtk bun test`, `rtk git add .`).
 2. [ ] **Zero Host Modification & Cross-Platform Toolchain**: All runtimes/tools strictly use portable repo binaries (`portables/bun/bin/bun`, `portables/bin/*`) or Docker. ZERO host modifications (`apt`, `brew`, `npm -g`, `pip install`). All tool entries MUST use self-resolving POSIX wrappers (zero OS symlinks), with `eol=lf` enforced via `.gitattributes` to prevent cross-platform Git drift on Windows/WSL/macOS.
@@ -27,10 +27,11 @@ Before writing code, running commands, or staging/committing changes, verify:
 18. [ ] **Complexity & Function Line Cap**: Source functions must satisfy Cyclomatic Complexity $\text{CCN} \le 10$ and modular line limits, audited via `rtk ./run.sh complexity` (Lizard AST engine).
 19. [ ] **Permissive License Governance**: Zero viral copyleft (AGPL/GPL) or non-OSI licenses imported into platform services (`rtk ./run.sh licenses`).
 20. [ ] **Automated CycloneDX 1.5 SBOM**: Continuous SBOM generation and validation via `rtk ./run.sh sbom` (Syft engine).
+21. [ ] **In-Chat AI Security & Code Audit (Strix Standard)**: Before staging code, the AI agent performs an in-chat code check (`strix-code-audit` / `audit code`) on modified routes, auth flows, and queries to ensure zero injection, secret leaks, or RFC 7807 problem violations; if the local or dev server is up, also run the live test (`strix-live-pentest` / `test live dev`) to confirm security headers and cookie flags.
 
 ---
 
-## 🛑 2. THE 10 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)
+## 🛑 2. THE 11 NON-NEGOTIABLE ENGINEERING INVARIANTS (GOOGLE & META STANDARD)
 
 ### 1. Correctness, Grounding & "No Guessing"
 - **NEVER** hallucinate, assume, or invent APIs, database columns, schemas, external packages, or behaviors.
@@ -77,6 +78,12 @@ Before writing code, running commands, or staging/committing changes, verify:
 - **Comprehensive Header Comments & TSDoc**: Every file begins with standard header comment block; all exports have TSDoc descriptions.
 - **Per-Conversation Worklog Auto-Update**: At the end of every conversation task, the AI agent MUST append strictly ONE single line to `logs/WORKLOGS.md` (`YYYY-MM-DD HH:mm | <brief summary>`) using `rtk bun scripts/append-worklog.ts "<summary>"`. When a git commit occurs, post-commit hook automatically logs commit metadata to `logs/commits.jsonl`.
 
+### 11. In-Chat AI Security Auditor (Strix Standard)
+- **Zero-API Key & In-Chat Operation**: All agents must support immediate in-chat security assessments in two streamlined modes:
+  - **Mode 1 (Code Check)**: White-box static & semantic source review (`strix-code-audit` / `audit code` / `/audit-code`). Audits routes, middleware, Turso DB multi-tenant `org_id` scoping, JWT cookies, zero secret leaks, and RFC 7807 error boundaries.
+  - **Mode 2 (Live Setup Test)**: Dynamic non-destructive probing (`strix-live-pentest` / `test live dev` / `test live prod <url>` / `/audit-live`) using `rtk curl -sI` against running dev/prod servers (HSTS, CSP, CORS, cookie flags, auth redirects, error leakage).
+- Governed by [`.agents/rules/security-audit.md`](file:///.agents/rules/security-audit.md) and interactive workflow [`.agents/workflows/audit.md`](file:///.agents/workflows/audit.md).
+
 ---
 
 ## 🛠️ TECH STACK BASELINE (2026 LTS)
@@ -95,6 +102,7 @@ Before writing code, running commands, or staging/committing changes, verify:
 - **Frontend UI & Astryx Tokens**: [`.agents/rules/frontend-ui.md`](file:///.agents/rules/frontend-ui.md)
 - **Client State & Storage (Google Standard)**: [`.agents/rules/frontend-state.md`](file:///.agents/rules/frontend-state.md)
 - **Security & Zero-Trust**: [`.agents/rules/security-practices.md`](file:///.agents/rules/security-practices.md)
+- **In-Chat AI Security & Pentest Auditor**: [`.agents/rules/security-audit.md`](file:///.agents/rules/security-audit.md)
 - **Testing Standards (5-Tier)**: [`.agents/rules/testing.md`](file:///.agents/rules/testing.md)
 - **Graphify Knowledge Graph**: [`.agents/rules/graphify.md`](file:///.agents/rules/graphify.md)
 - **RTK Token Optimization**: [`.agents/rules/rtk.md`](file:///.agents/rules/rtk.md)

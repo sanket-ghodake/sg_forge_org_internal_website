@@ -292,9 +292,20 @@ graphify-out/20*/
 `;
 
   // 2. Write to each root ignore file
+  // Non-Git toolchains exclude report/security logs to prevent Docker/AST/AI context bloat,
+  // while Git intentionally tracks them for historical compliance and audit trails.
+  const nonGitExclusions = `
+# 8. Non-Git Toolchain Exclusions (Tracked in Git, excluded from Docker/AI/AST)
+logs/reports/
+logs/security/
+`;
+
   for (const file of ROOT_IGNORE_FILES) {
     const filePath = join(REPO_ROOT, file);
-    writeFileSync(filePath, canonicalIgnoreContent, 'utf8');
+    const content = file === '.gitignore'
+      ? canonicalIgnoreContent
+      : canonicalIgnoreContent + nonGitExclusions;
+    writeFileSync(filePath, content, 'utf8');
     filesUpdated.push(file);
   }
 

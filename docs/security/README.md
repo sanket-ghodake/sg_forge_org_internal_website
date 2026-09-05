@@ -4,21 +4,21 @@
 
 ---
 
-## 🛡️ The 6 Pillars of SG Forge Supply Chain & AppSec
+## 🛡️ The 4 Layers of SG Forge Supply Chain & AppSec
 
 ```
-                              SG FORGE ZERO-TRUST DEFENSE
-                              
-        LAYER 1                    LAYER 2                    LAYER 3
-┌───────────────────────┐  ┌───────────────────────┐  ┌───────────────────────┐
-│   SUPPLY CHAIN &      │  │    SAST, CODE &       │  │  MULTI-TENANT & DB    │
-│   ANTI-HALLUCINATION  │  │    SECRET AUDITING    │  │  ISOLATION BOUNDARIES │
-├───────────────────────┤  ├───────────────────────┤  ├───────────────────────┤
-│ • OSV-Scanner (Vulns) │  │ • Gitleaks (160+ keys)│  │ • Dedicated Turso DB  │
-│ • Slopsquatting Guard │  │ • Semgrep SAST        │  │ • Strict org_id scope │
-│ • Syft CycloneDX SBOM │  │ • Biome Rust AST Lint │  │ • RFC 7807 Boundaries │
-│ • Permissive Licenses │  │ • ShellCheck & Hadolint│ │ • PII Secret Redaction│
-└───────────────────────┘  └───────────────────────┘  └───────────────────────┘
+                                              SG FORGE ZERO-TRUST DEFENSE
+                               
+        LAYER 1                    LAYER 2                    LAYER 3                    LAYER 4
+┌───────────────────────┐  ┌───────────────────────┐  ┌───────────────────────┐  ┌───────────────────────┐
+│   SUPPLY CHAIN &      │  │    SAST, CODE &       │  │  MULTI-TENANT & DB    │  │  AI PENTESTING &      │
+│   ANTI-HALLUCINATION  │  │    SECRET AUDITING    │  │  ISOLATION BOUNDARIES │  │  IN-CHAT AUDITING     │
+├───────────────────────┤  ├───────────────────────┤  ├───────────────────────┤  ├───────────────────────┤
+│ • OSV-Scanner (Vulns) │  │ • Gitleaks (160+ keys)│  │ • Dedicated Turso DB  │  │ • Strix Code Audit    │
+│ • Slopsquatting Guard │  │ • Semgrep SAST        │  │ • Strict org_id scope │  │ • Strix Live Pentest  │
+│ • Syft CycloneDX SBOM │  │ • Biome Rust AST Lint │  │ • RFC 7807 Boundaries │  │ • Pre-Commit Check 21 │
+│ • Permissive Licenses │  │ • ShellCheck & Hadolint│ │ • PII Secret Redaction│  │ • Upstream usestrix   │
+└───────────────────────┘  └───────────────────────┘  └───────────────────────┘  └───────────────────────┘
 ```
 
 ---
@@ -63,10 +63,26 @@ In agentic "vibecoding" workflows, LLMs frequently introduce hallucinated depend
 
 ---
 
-## 5. Security CLI Quick Reference
+## 5. AI-Driven In-Chat Penetration Testing (Strix Standard)
+SG Forge embeds an in-chat AI security auditor powered by the open-source methodologies of **Strix**:
+
+1. **Mode 1: Code Check (`strix-code-audit`)**:
+   - Statically and semantically audits Next.js routes, middleware, Turso DB multi-tenant `org_id` scoping, JWT cookies, secret leaks, and RFC 7807 error boundaries.
+   - Run in chat via: `"audit code"`, `"/audit-code"`, or `"check code security"`.
+2. **Mode 2: Live Setup Test (`strix-live-pentest`)**:
+   - Performs non-destructive dynamic probing (`rtk curl -sI`) against active local development (`http://localhost:80/443`) or remote staging/production domains.
+   - Run in chat via: `"test live dev"`, `"test live prod <url>"`, or `"/audit-live"`.
+3. **Pre-Commit Verification Gate Integration**:
+   - Formally enforced under **Pre-Commit Check 21** in `AGENTS.md` and evaluated by **Tier 2 Semantic Audit 8** in `scripts/verify-gate.ts`.
+4. **Open-Source Attribution**:
+   - Derived and adapted from the open-source [usestrix/strix](https://github.com/usestrix/strix) project under the **Apache-2.0 License** by the Strix Security Team.
+
+---
+
+## 6. Security CLI & In-Chat Quick Reference
 
 ```bash
-# Run full 27-check verification gate:
+# Run full 27-check verification gate (including Tier 2 AI Semantic Audits):
 ./run.sh verify
 
 # Scan for hardcoded credentials:
@@ -83,4 +99,8 @@ In agentic "vibecoding" workflows, LLMs frequently introduce hallucinated depend
 
 # Run Semgrep SAST security rules:
 ./run.sh semgrep
+
+# In-Chat Triggers (for Antigravity, Claude, Cursor):
+# - "/audit-code" -> Mode 1: White-box source review
+# - "/audit-live" -> Mode 2: Dynamic live endpoint probing
 ```

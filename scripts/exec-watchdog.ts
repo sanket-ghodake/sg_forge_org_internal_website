@@ -66,7 +66,7 @@ export async function runWithWatchdog(
       stdout: stdout.trim(),
       stderr: stderr.trim(),
       exitCode,
-      timedOut: false,
+      timedOut,
       durationMs,
     };
   } catch (err: unknown) {

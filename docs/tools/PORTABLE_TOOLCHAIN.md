@@ -34,6 +34,7 @@
 | **Caveman** | `v1.0.0` | MIT | AI Communication | Agent token compression CLI (Ultra mode) | `caveman status` | `< 2ms` |
 | **Graphify** | `v0.5.0` | MIT / Apache-2.0 | Knowledge Graph | AST knowledge graph & dependency visualizer | `graphify update .` | `< 30ms` |
 | **Caddy Server**| `v2.11.4` | Apache-2.0 | Ingress | Zero-downtime reverse proxy on Ports 80 & 443 | Docker Container | `< 1ms` |
+| **Strix Agent**| `v1.0.0` | Apache-2.0 | AI Pentest | In-chat whitebox code review & live endpoint pentesting | In-Chat / `.agents/skills/strix-*` | `Native` |
 
 ---
 
@@ -72,6 +73,31 @@ Run the complete deterministic verification suite before staging any code:
 25. **Complexity Cap (CCN <= 10)**: Audits cyclomatic branching complexity and function caps using Lizard.
 26. **Permissive License Governance**: Audits dependencies for permissive OSI licenses (rejects copyleft).
 27. **CycloneDX 1.5 SBOM Integrity**: Validates automated Software Bill of Materials using Syft.
+
+### 🧠 Tier 2: AI Agent Semantic Review (8 Pre-Commit Audits)
+1. **Anti-Vibecoding & Aesthetic Review**: UI feels premium, accessible, and strictly consumes Meta Astryx tokens.
+2. **Correctness & "No Guessing" Verification**: Zero hallucinated database columns, APIs, or phantom imports.
+3. **Multi-Tenant Data Isolation & DB Boundaries**: Dedicated Turso DB per app; strict `org_id` scoping.
+4. **Commentary & Architectural Rationale**: TSDoc and standardized header comment blocks explaining *why*.
+5. **Isolated Observability & 4-Pillar Standard**: Colocated `logs/` folders, dual-probe healthcheck, zero cross-app coupling.
+6. **Ignore, Attrib & File Hygiene Governance**: Zero unignored transients, strict LF line-endings, binary safety.
+7. **AI Semantic Scenario & Negative Test Audit**: Explicit negative assertion tests on auth, RBAC, and rate limits.
+8. **In-Chat AI Security & Pentest Audit (Strix)**: White-box code check on modified routes/queries and non-destructive live endpoint verification before code staging.
+
+---
+
+## 🛡️ Strix AI Penetration Testing & In-Chat Security Agent
+
+The Strix Security Agent is an embedded, zero-API-key AI penetration testing and security auditing agent operating directly within coding agent chat sessions.
+
+### Execution Modes:
+- **Mode 1: Code Check (`strix-code-audit`)**: White-box static & semantic source review of Next.js routes, middleware, Turso DB multi-tenant `org_id` scoping, JWT cookies, and RFC 7807 problem boundaries. Trigger with `"audit code"`, `"/audit-code"`, or `"check code security"`.
+- **Mode 2: Live Setup Test (`strix-live-pentest`)**: Dynamic non-destructive probing (`rtk curl -sI`) against active local development (`http://localhost:80/443`) or remote staging/production domains. Validates HSTS, CSP, X-Frame-Options, cookie hygiene, CORS, and error response leakage. Trigger with `"test live dev"`, `"test live prod <url>"`, or `"/audit-live"`.
+
+### Open-Source Attribution & Credit:
+- **Upstream Project**: [usestrix/strix](https://github.com/usestrix/strix)
+- **Author**: Strix Security Team ([https://strix.ai](https://strix.ai))
+- **License**: Apache License 2.0
 
 ---
 

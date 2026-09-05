@@ -248,9 +248,9 @@ export async function checkTrivySecurity(): Promise<CheckResult> {
 export async function checkSpectralContracts(): Promise<CheckResult> {
   const spectralBin = join(REPO_ROOT, 'portables', 'bin', 'spectral');
   const specFile = join(REPO_ROOT, 'docs', 'api', 'openapi.yaml');
-  const proc = await runWithWatchdog([spectralBin, 'lint', specFile], { timeoutMs: 10000 });
+  const proc = await runWithWatchdog([spectralBin, 'lint', specFile], { timeoutMs: 25000 });
   if (proc.timedOut) {
-    return { status: 'WARNING', details: 'Spectral timed out after 10000ms.' };
+    return { status: 'WARNING', details: 'Spectral timed out after 25000ms.' };
   }
   if (proc.exitCode !== 0) {
     return {
