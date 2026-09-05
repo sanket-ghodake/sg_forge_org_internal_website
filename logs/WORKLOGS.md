@@ -579,3 +579,5 @@
 2026-09-05 19:32 | Created ready-made landing-custom starter base with git submodule isolation
 2026-09-05 19:44 | feat(security): implement automated git-ignored intranet TLS certificates and OS trust installer
 2026-09-05 19:49 | [af9e237] feat(security): implement automated git-ignored intranet TLS certificates and OS trust installer (+2993, -785)
+2026-09-05 19:57 | integrate security audit generation and auto-amend into pre-commit and post-commit hooks
+2026-09-05 19:59 | [e1da30d] feat(security): integrate security audit ledger into pre-commit staging and post-commit auto-amend (+1311, -467)

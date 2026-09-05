@@ -1,16 +1,16 @@
 # Graph Report - org_website_clone  (2026-09-05)
 
 ## Corpus Check
-- 564 files · ~283,906 words
+- 569 files · ~286,273 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2301 nodes · 3584 edges · 282 communities (184 shown, 98 thin omitted)
+- 2325 nodes · 3617 edges · 289 communities (186 shown, 103 thin omitted)
 - Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 114 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `24b99761`
+- Built from commit: `9f0f4ac6`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -203,8 +203,17 @@
 - [[_COMMUNITY_Community 188|Community 188]]
 - [[_COMMUNITY_Community 190|Community 190]]
 - [[_COMMUNITY_Community 191|Community 191]]
+- [[_COMMUNITY_Community 192|Community 192]]
+- [[_COMMUNITY_Community 193|Community 193]]
+- [[_COMMUNITY_Community 194|Community 194]]
+- [[_COMMUNITY_Community 195|Community 195]]
+- [[_COMMUNITY_Community 196|Community 196]]
+- [[_COMMUNITY_Community 197|Community 197]]
+- [[_COMMUNITY_Community 198|Community 198]]
+- [[_COMMUNITY_Community 199|Community 199]]
 - [[_COMMUNITY_Community 201|Community 201]]
 - [[_COMMUNITY_Community 202|Community 202]]
+- [[_COMMUNITY_Community 203|Community 203]]
 - [[_COMMUNITY_Community 204|Community 204]]
 - [[_COMMUNITY_Community 205|Community 205]]
 - [[_COMMUNITY_Community 206|Community 206]]
@@ -235,7 +244,6 @@
 - [[_COMMUNITY_Community 243|Community 243]]
 - [[_COMMUNITY_Community 244|Community 244]]
 - [[_COMMUNITY_Community 245|Community 245]]
-- [[_COMMUNITY_Community 248|Community 248]]
 - [[_COMMUNITY_Community 251|Community 251]]
 - [[_COMMUNITY_Community 253|Community 253]]
 - [[_COMMUNITY_Community 256|Community 256]]
@@ -286,7 +294,6 @@
 - [[_COMMUNITY_Community 345|Community 345]]
 - [[_COMMUNITY_Community 346|Community 346]]
 - [[_COMMUNITY_Community 347|Community 347]]
-- [[_COMMUNITY_Community 351|Community 351]]
 - [[_COMMUNITY_Community 356|Community 356]]
 
 ## God Nodes (most connected - your core abstractions)
@@ -302,6 +309,8 @@
 10. `getAstryxHeaderHtml()` - 24 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `initAuthDb()` --calls--> `seedAuthDatabase()`  [EXTRACTED]
+  scripts/init-all-databases.ts → apps/src/auth/src/db/seed.ts
 - `renderAppHtml()` --calls--> `loadBrandConfig()`  [INFERRED]
   forge-apps/billing/src/server.ts → apps/src/sdk/src/branding.ts
 - `renderAppHtml()` --calls--> `loadBrandConfig()`  [INFERRED]
@@ -310,13 +319,11 @@
   forge-apps/telemetry/src/server.ts → apps/src/sdk/src/branding.ts
 - `startBillingServer()` --calls--> `createSafeHandler()`  [INFERRED]
   forge-apps/billing/src/server.ts → apps/src/sdk/src/error-handler.ts
-- `startExpensesServer()` --calls--> `createSafeHandler()`  [INFERRED]
-  forge-apps/expenses/src/server.ts → apps/src/sdk/src/error-handler.ts
 
 ## Import Cycles
 - 1-file cycle: `apps/src/sdk/src/index.ts -> apps/src/sdk/src/index.ts`
 
-## Communities (282 total, 98 thin omitted)
+## Communities (289 total, 103 thin omitted)
 
 ### Community 0 - "devDependencies"
 Cohesion: 0.08
@@ -367,8 +374,8 @@ Cohesion: 0.17
 Nodes (11): 1. Multi-Tenant Isolation & SQL Parameterization (ASVS V3, V5), 2. Authentication, Session & Cookie Hygiene (ASVS V2, V3), 3. Centralized Logging & RFC 7807 Boundaries (Google SRE Standard), 4. Zero Hardcoded Secrets & Credentials (Gitleaks Standard), 5. Cross-Site Scripting (XSS) & Input Sanitization (ASVS V5), 6. Command & File Path Traversal Protection (ASVS V5), 💾 Audit Persistence & Git Ledger, 📋 Standardized Audit Finding Report Format (+3 more)
 
 ### Community 12 - "getSession"
-Cohesion: 0.19
-Nodes (15): PageDefinition, renderPageCards(), AuditEntry, renderAdminAuditView(), SAMPLE_AUDIT_LOGS, ADMIN_ROSTER_MEMBERS, AdminRosterMember, renderAdminMembersView() (+7 more)
+Cohesion: 0.18
+Nodes (14): PageDefinition, renderPageCards(), AuditEntry, renderAdminAuditView(), SAMPLE_AUDIT_LOGS, ADMIN_ROSTER_MEMBERS, AdminRosterMember, renderAdminMembersView() (+6 more)
 
 ### Community 13 - "AdminPanel.tsx"
 Cohesion: 0.33
@@ -387,8 +394,8 @@ Cohesion: 0.40
 Nodes (4): 📜 Attribution, 🚀 Purpose, Strix Code Audit Skill (`strix-code-audit`), 📌 Usage
 
 ### Community 18 - "Community 18"
-Cohesion: 0.22
-Nodes (16): renderAppHtml(), renderAppHtml(), renderAppHtml(), renderAppHtml(), getAuthViewStyles(), BrandConfig, resolveBrandConfig(), renderLoginHtml() (+8 more)
+Cohesion: 0.24
+Nodes (15): renderAppHtml(), renderAppHtml(), renderAppHtml(), renderAppHtml(), getAuthViewStyles(), BrandConfig, resolveBrandConfig(), renderLoginHtml() (+7 more)
 
 ### Community 19 - "ui-organisms.test.ts"
 Cohesion: 0.33
@@ -399,16 +406,12 @@ Cohesion: 0.18
 Nodes (5): logger, detectHostMemoryAndVirtualization(), LogEntry, SystemVitals, TelemetryEngine
 
 ### Community 24 - "Community 24"
-Cohesion: 0.20
-Nodes (12): handleJwks(), base64UrlDecode(), base64UrlEncode(), getOrInitAuthKeys(), getPublicJwks(), JwkKey, JwtHeader, JwtPayload (+4 more)
+Cohesion: 0.21
+Nodes (11): handleJwks(), base64UrlDecode(), base64UrlEncode(), getOrInitAuthKeys(), getPublicJwks(), JwkKey, JwtHeader, JwtPayload (+3 more)
 
 ### Community 25 - "Community 25"
 Cohesion: 0.40
 Nodes (4): 📜 Attribution, 🚀 Purpose, Strix Live Pentest Skill (`strix-live-pentest`), 📌 Usage
-
-### Community 26 - "Community 26"
-Cohesion: 0.09
-Nodes (7): AuditLogRecord, CORE_DB_PATH, DATA_DIR, getSafeDbPath(), logger, PlatformDatabaseManager, TrafficEventRecord
 
 ### Community 27 - "Community 27"
 Cohesion: 0.40
@@ -483,8 +486,8 @@ Cohesion: 0.33
 Nodes (5): 📊 Code & Architecture Metrics, 📁 Internal Architecture, 🚀 Key Features, 📈 Live Telemetry Service (`forge-apps/telemetry`), 🏃 Local Execution & Verification
 
 ### Community 54 - "Community 54"
-Cohesion: 0.17
-Nodes (15): CommitRecord, COMMITS_JSONL_PATH, CommitStats, extractAffectedApps(), FileChange, generateCommitReport(), LOGS_DIR, LOGS_REPORTS_DIR (+7 more)
+Cohesion: 0.15
+Nodes (16): CommitRecord, COMMITS_JSONL_PATH, CommitStats, extractAffectedApps(), FileChange, generateCommitReport(), LOGS_DIR, LOGS_REPORTS_DIR (+8 more)
 
 ### Community 56 - "Community 56"
 Cohesion: 0.50
@@ -519,8 +522,8 @@ Cohesion: 0.24
 Nodes (11): getLiveNotifications(), LiveNotificationItem, DEFAULT_NOTIFICATIONS, NotificationItem, renderInboxView(), SAMPLE_NOTIFICATIONS, CompanyEventItem, DEFAULT_COMPANY_EVENTS (+3 more)
 
 ### Community 74 - "Community 74"
-Cohesion: 0.54
-Nodes (5): renderAstryxSystemDownPage(), getServiceWorkerRegistrationScript(), getServiceWorkerScript(), handleServiceWorkerRequest(), ServiceWorkerOptions
+Cohesion: 0.22
+Nodes (11): BrandConfig, findBrandAssetPath(), findEnvPath(), handleBrandAssetRequest(), MIME_TYPES, renderBrandLogoHtml(), renderAstryxSystemDownPage(), getServiceWorkerRegistrationScript() (+3 more)
 
 ### Community 75 - "Community 75"
 Cohesion: 0.50
@@ -739,12 +742,12 @@ Cohesion: 0.36
 Nodes (7): renderAdminAppsView(), getCategoryIcon(), getPortalApps(), KNOWN_APP_METADATA, MicroAppItem, renderAppsView(), isAppDisabled()
 
 ### Community 153 - "Community 153"
-Cohesion: 0.24
-Nodes (4): getAstryxDropdownScript(), AstryxFooterOptions, AstryxHeaderOptions, getAstryxToastScript()
+Cohesion: 0.19
+Nodes (5): getAstryxDropdownScript(), AstryxFooterOptions, AstryxHeaderOptions, getAstryxToastScript(), getAstryxTooltipScript()
 
 ### Community 154 - "Community 154"
-Cohesion: 0.12
-Nodes (7): handleApiRequest(), BenchmarkResult, logger, RoutePerformanceRecord, TrafficController, TrafficMetricsResponse, platformDb
+Cohesion: 0.13
+Nodes (10): DiskVolumeStats, HighAvailabilityReport, HostController, HostDiagnosticsReport, NetworkInterfaceInfo, BenchmarkResult, logger, RoutePerformanceRecord (+2 more)
 
 ### Community 155 - "Community 155"
 Cohesion: 0.43
@@ -755,20 +758,20 @@ Cohesion: 0.14
 Nodes (12): AuditLogRecord, EmployeeProfileRecord, EmployeeRelationshipRecord, IamPermissionRecord, IamPolicyBindingRecord, IamRolePermissionRecord, IamRoleRecord, OrganizationRecord (+4 more)
 
 ### Community 157 - "Community 157"
-Cohesion: 0.15
-Nodes (8): logger, PORT, REPO_ROOT, createSafeHandler(), AIR_GAPPED_CSP, AIR_GAPPED_SECURITY_HEADERS, applySecurityHeaders(), startDevHubServer()
+Cohesion: 0.07
+Nodes (18): logger, PORT, telemetryDb, LOG_DIR, logger, PORT, LOG_DIR, logger (+10 more)
 
 ### Community 158 - "Community 158"
 Cohesion: 0.38
 Nodes (9): base32Decode(), base32Encode(), generateBackupCodes(), generateTotpCode(), generateTotpSecret(), generateTotpUri(), hashBackupCode(), verifyBackupCode() (+1 more)
 
 ### Community 159 - "Community 159"
-Cohesion: 0.14
-Nodes (15): LOG_DIR, logger, PORT, LOG_DIR, logger, PORT, authGuard(), getVerificationPublicKey() (+7 more)
+Cohesion: 0.27
+Nodes (8): authGuard(), getVerificationPublicKey(), renderDisabledHtml(), renderForbiddenHtml(), verifySessionToken(), ErrorPageOptions, renderAstryxErrorHtml(), STATUS_DEFAULTS
 
 ### Community 160 - "Community 160"
-Cohesion: 0.18
-Nodes (5): telemetryDb, LOG_DIR, logger, PORT, startTelemetryServer()
+Cohesion: 0.31
+Nodes (9): MANDATORY_ATTRIBUTES, MANDATORY_EXCLUSIONS, REPO_ROOT, ROOT_IGNORE_FILES, syncAllIgnores(), toRelGitPath(), validateIgnores(), ValidationResult (+1 more)
 
 ### Community 162 - "Community 162"
 Cohesion: 0.19
@@ -799,8 +802,8 @@ Cohesion: 0.39
 Nodes (5): PORT, createLandingHandler(), startServer(), LandingConfig, renderCustomLandingHtml()
 
 ### Community 169 - "Community 169"
-Cohesion: 0.14
-Nodes (11): logger, PORT, renderDevLoginHtml(), BrandConfig, findBrandAssetPath(), findEnvPath(), handleBrandAssetRequest(), loadBrandConfig() (+3 more)
+Cohesion: 0.12
+Nodes (5): logger, PORT, handleApiRequest(), platformDb, startDevDashboardServer()
 
 ### Community 170 - "Community 170"
 Cohesion: 0.50
@@ -846,9 +849,29 @@ Nodes (28): hardenDirectoryPosix(), HardeningResult, hardenWindowsAcl(), REPO_RO
 Cohesion: 0.29
 Nodes (9): AttemptRecord, checkRateLimit(), clearAllRateLimits(), emailAttempts, getOrCleanRecord(), ipAttempts, RateLimitStatus, recordFailedAttempt() (+1 more)
 
-### Community 186 - "Community 186"
-Cohesion: 0.14
-Nodes (10): AppDetailedInspect, AppRegistrationPayload, AppsFleetOverview, logger, logger, ServiceHealthStatus, ServiceOperationalState, ServicesController (+2 more)
+### Community 192 - "Community 192"
+Cohesion: 0.22
+Nodes (8): AUDIT_JSONL_PATH, LATEST_AUDIT_PATH, LogAuditOptions, recordSecurityAudit(), REPO_ROOT, SECURITY_LOGS_DIR, SecurityAuditRecord, REPO_ROOT
+
+### Community 193 - "Community 193"
+Cohesion: 0.33
+Nodes (8): brand, C, fetchClusterState(), formatBar(), formatUptime(), getDynamicEndpoints(), isOnce, renderFrame()
+
+### Community 194 - "Community 194"
+Cohesion: 0.25
+Nodes (7): 1. Automatic Generation (Developer Setup), 🍏 1-Click OS Trust Installation, 2. Files Produced, 3. Subject Alternative Names (SAN), 🛠️ Automated Setup & Management, 🛑 Security & Git-Ignore Policy (Zero Leakage), 🔐 TLS Certificates & Local PKI (`proxy/certs`)
+
+### Community 196 - "Community 196"
+Cohesion: 0.38
+Nodes (6): analyzeFileComplexity(), ComplexityViolation, getAllSourceFiles(), REPO_ROOT, runComplexityAudit(), checkCodeComplexity()
+
+### Community 197 - "Community 197"
+Cohesion: 0.29
+Nodes (5): WatchdogOptions, WatchdogResult, REPO_ROOT, tools, ToolTest
+
+### Community 198 - "Community 198"
+Cohesion: 0.70
+Nodes (3): EvaluatedIamContext, evaluateUserPermissions(), hasPermission()
 
 ### Community 201 - "Community 201"
 Cohesion: 0.25
@@ -863,40 +886,36 @@ Cohesion: 0.33
 Nodes (5): 1. Ingress Port Separation, 2. Operational Workflows, Directory Structure, Platform Deployment & Cloud-Native Orchestration (2026 LTS), Single-Machine Dev vs Prod Operations
 
 ### Community 221 - "Community 221"
-Cohesion: 0.18
-Nodes (14): getClientScripts(), getDevHubStyles(), renderDevHubHtml(), renderGatewaySection(), renderHealthMeshSection(), renderOverviewSection(), renderRegistryMatrixSection(), renderSandboxSection() (+6 more)
+Cohesion: 0.19
+Nodes (15): getClientScripts(), getDevHubStyles(), renderDevHubHtml(), renderGatewaySection(), renderHealthMeshSection(), renderOverviewSection(), renderRegistryMatrixSection(), renderSandboxSection() (+7 more)
 
 ### Community 222 - "Community 222"
 Cohesion: 0.18
 Nodes (7): DATA_DIR, DatabaseDiagnosticsManager, dbDiagnostics, DbTelemetryStats, SchemaGraphEdge, SchemaGraphNode, SchemaGraphResponse
 
 ### Community 226 - "Community 226"
-Cohesion: 0.22
-Nodes (17): extractBearerOrCookieToken(), extractClientIp(), getSessionCookieName(), handleBrowserLog(), handleDirectory(), handleGetMySessions(), handleGetTelemetryLogs(), handleLogout() (+9 more)
+Cohesion: 0.15
+Nodes (25): extractBearerOrCookieToken(), extractClientIp(), getSessionCookieName(), handleBrowserLog(), handleDirectory(), handleGetMySessions(), handleGetTelemetryLogs(), handleLogout() (+17 more)
 
 ### Community 227 - "Community 227"
 Cohesion: 0.05
-Nodes (37): fetch(), getAppsModalScripts(), getAppsDashboardScripts(), getAppsStyles(), getDbDashboardScripts(), getDbStudioStyles(), getDropdownScripts(), getDropdownStyles() (+29 more)
+Nodes (38): fetch(), getAppsModalScripts(), getAppsDashboardScripts(), getAppsStyles(), getDbDashboardScripts(), getDbStudioStyles(), getDropdownScripts(), getDropdownStyles() (+30 more)
 
 ### Community 233 - "Community 233"
-Cohesion: 0.32
-Nodes (3): AppsController, handleAppsApi(), resolveDataDir
+Cohesion: 0.15
+Nodes (12): AppDetailedInspect, AppRegistrationPayload, AppsController, AppsFleetOverview, handleAppsApi(), logger, logger, ServiceHealthStatus (+4 more)
 
 ### Community 242 - "Community 242"
-Cohesion: 0.15
-Nodes (11): logAuditEvent(), EmployeeController, EmployeeListItem, logger, sanitizeCsvField(), BatchImportOptions, BatchImportRecord, executeBatchImport() (+3 more)
+Cohesion: 0.16
+Nodes (11): hashPassword(), EmployeeController, EmployeeListItem, logger, sanitizeCsvField(), BatchImportOptions, BatchImportRecord, executeBatchImport() (+3 more)
 
 ### Community 243 - "Community 243"
 Cohesion: 0.07
 Nodes (15): logger, AuthTelemetryEngine, DualProbeHealthStatus, TelemetryLogEntry, logger, RemoteDbConfig, RemoteDbConnectorManager, remoteDbManager (+7 more)
 
-### Community 248 - "Community 248"
-Cohesion: 0.27
-Nodes (5): DiskVolumeStats, HighAvailabilityReport, HostController, HostDiagnosticsReport, NetworkInterfaceInfo
-
 ### Community 251 - "Community 251"
 Cohesion: 0.06
-Nodes (40): createApp(), CreateAppOptions, REPO_ROOT, brand, isPortInUse(), main(), REPO_ROOT, ResolvedService (+32 more)
+Nodes (43): createApp(), CreateAppOptions, REPO_ROOT, brand, isPortInUse(), main(), REPO_ROOT, ResolvedService (+35 more)
 
 ### Community 253 - "Community 253"
 Cohesion: 0.25
@@ -907,8 +926,8 @@ Cohesion: 0.25
 Nodes (18): logger, PORT, extractAuthContext(), extractClientIp(), handleBatchImport(), handleBulkAction(), handleCreateEmployee(), handleExportEmployees() (+10 more)
 
 ### Community 281 - "Community 281"
-Cohesion: 0.14
-Nodes (16): closeAuthDb(), getLogger(), initAuthSchema(), count, templateDb, logger, logger, logger (+8 more)
+Cohesion: 0.13
+Nodes (18): getOrgTree(), getRealOrgTree(), logger, OrgTreeNode, OrgTreeResponse, RawEmployeeRow, closeAuthDb(), getAuthDb() (+10 more)
 
 ### Community 283 - "Community 283"
 Cohesion: 0.50
@@ -927,16 +946,16 @@ Cohesion: 0.50
 Nodes (3): 24/7 Systemd Service & Linux Daemon Automation, 📁 Files, 🚀 Usage
 
 ### Community 296 - "Community 296"
-Cohesion: 0.13
-Nodes (8): handleLogin(), handleSetPassword(), hashPassword(), logger, seedAuthDatabase(), DATA_DIR, initAuthDb(), startAuthServer()
+Cohesion: 0.17
+Nodes (8): handleLogin(), handleSetPassword(), logAuditEvent(), generateSecureToken(), createSession(), logger, seedAuthDatabase(), startAuthServer()
 
 ### Community 297 - "Community 297"
-Cohesion: 0.21
-Nodes (5): IssueFilterParams, IssuesController, IssuesVitalsSummary, logger, IssueReportRecord
+Cohesion: 0.13
+Nodes (10): IssueFilterParams, IssuesController, IssuesVitalsSummary, logger, AuditLogRecord, CORE_DB_PATH, DATA_DIR, IssueReportRecord (+2 more)
 
 ### Community 298 - "Community 298"
-Cohesion: 0.16
-Nodes (22): AuditAction, AuditEventParams, getOrgAuditLogs(), getUserAuditHistory(), extractToken(), handleGetAuditLogs(), handleGetUserSessions(), generateSecureToken() (+14 more)
+Cohesion: 0.35
+Nodes (8): AuditAction, AuditEventParams, getOrgAuditLogs(), getUserAuditHistory(), extractToken(), handleGetAuditLogs(), handleGetUserSessions(), getUserActiveSessions()
 
 ### Community 303 - "Community 303"
 Cohesion: 0.40
@@ -947,12 +966,12 @@ Cohesion: 0.26
 Nodes (7): getAdminClientScript(), getAppsClientScript(), getCanvasInspectorScript(), getCanvasClientScript(), getCanvasViewsScript(), getInboxClientScript(), getPortalClientScript()
 
 ### Community 310 - "Community 310"
-Cohesion: 0.29
-Nodes (5): billingDb, LOG_DIR, logger, PORT, Invoice
+Cohesion: 0.20
+Nodes (7): billingDb, count, logger, LOG_DIR, logger, PORT, Invoice
 
 ### Community 314 - "Community 314"
-Cohesion: 0.06
-Nodes (49): analyzeFileComplexity(), ComplexityViolation, getAllSourceFiles(), REPO_ROOT, runComplexityAudit(), runWithWatchdog(), WatchdogOptions, WatchdogResult (+41 more)
+Cohesion: 0.15
+Nodes (22): runWithWatchdog(), checkArchitectureBoundaries(), checkAxeAccessibility(), checkCircularDependencies(), checkDependencyLicenses(), checkDynamic5TierArchitecture(), checkOsvVulnerabilities(), CheckResult (+14 more)
 
 ### Community 317 - "Community 317"
 Cohesion: 0.83
@@ -960,7 +979,7 @@ Nodes (3): createChunk(), paeth(), processAndGenerateLogo()
 
 ### Community 320 - "Community 320"
 Cohesion: 0.17
-Nodes (4): logger, PORT, getAstryxFooterHtml(), startLandingServer()
+Nodes (5): logger, PORT, getAstryxFooterHtml(), renderLandingHtml(), startLandingServer()
 
 ### Community 321 - "Community 321"
 Cohesion: 0.14
@@ -1010,28 +1029,24 @@ Nodes (3): Contents, 📑 SG Forge API Specifications, Validation & Linting
 Cohesion: 0.50
 Nodes (3): 🚀 Installation & Usage (Optional Production Automation), ⚙️ Linux Systemd Service Units (`systemd/`), 📌 Services
 
-### Community 351 - "Community 351"
-Cohesion: 0.22
-Nodes (6): getOrgTree(), getRealOrgTree(), logger, OrgTreeNode, OrgTreeResponse, RawEmployeeRow
-
 ### Community 356 - "Community 356"
 Cohesion: 0.50
 Nodes (3): 📦 Database Backups (`backups/`), 🛡️ Guarantees, 📌 Structure
 
 ## Knowledge Gaps
-- **967 isolated node(s):** `commit-msg.sh script`, `post-commit.sh script`, `pre-commit.sh script`, `validate-worklog.sh script`, `append-worklog.sh script` (+962 more)
+- **979 isolated node(s):** `commit-msg.sh script`, `post-commit.sh script`, `pre-commit.sh script`, `validate-worklog.sh script`, `append-worklog.sh script` (+974 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **98 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **103 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `createLogger()` connect `Community 281` to `Community 267`, `Community 20`, `Community 154`, `Community 26`, `Community 157`, `Community 159`, `Community 160`, `Community 162`, `Community 296`, `Community 169`, `Community 297`, `Community 298`, `Community 310`, `Community 186`, `Community 320`, `Community 201`, `Community 351`, `Community 226`, `Community 242`, `Community 243`, `Community 251`?**
-  _High betweenness centrality (0.056) - this node is a cross-community bridge._
-- **Why does `loadBrandConfig()` connect `Community 169` to `Community 320`, `Community 159`, `Community 160`, `Community 227`, `Community 71`, `Community 296`, `Community 73`, `Community 330`, `Community 74`, `getSession`, `Community 18`, `Community 310`, `Community 157`, `Community 251`, `Community 221`, `Community 158`, `Community 351`?**
-  _High betweenness centrality (0.047) - this node is a cross-community bridge._
-- **Why does `loadServiceRegistry()` connect `Community 251` to `Community 320`, `Community 26`, `Community 296`, `Community 314`, `Community 18`, `Community 243`, `Community 152`, `Community 154`?**
-  _High betweenness centrality (0.033) - this node is a cross-community bridge._
+- **Why does `loadBrandConfig()` connect `Community 221` to `Community 320`, `Community 193`, `Community 227`, `Community 71`, `Community 296`, `Community 169`, `Community 330`, `Community 73`, `getSession`, `Community 74`, `Community 18`, `Community 310`, `Community 281`, `Community 251`, `Community 157`, `Community 158`, `Community 159`?**
+  _High betweenness centrality (0.054) - this node is a cross-community bridge._
+- **Why does `createLogger()` connect `Community 157` to `Community 320`, `Community 226`, `Community 162`, `Community 199`, `Community 296`, `Community 297`, `Community 169`, `Community 267`, `Community 233`, `Community 201`, `Community 242`, `Community 243`, `Community 20`, `Community 310`, `Community 281`, `Community 154`, `Community 251`?**
+  _High betweenness centrality (0.051) - this node is a cross-community bridge._
+- **Why does `loadServiceRegistry()` connect `Community 251` to `Community 320`, `Community 193`, `Community 26`, `Community 296`, `Community 297`, `Community 169`, `Community 314`, `Community 18`, `Community 243`, `Community 152`, `Community 154`, `Community 157`?**
+  _High betweenness centrality (0.030) - this node is a cross-community bridge._
 - **Are the 8 inferred relationships involving `loadBrandConfig()` (e.g. with `renderAppHtml()` and `renderAppHtml()`) actually correct?**
   _`loadBrandConfig()` has 8 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 6 inferred relationships involving `getAuthDb()` (e.g. with `handleDirectory()` and `handleLogin()`) actually correct?**

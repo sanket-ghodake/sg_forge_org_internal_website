@@ -19,7 +19,7 @@ const LATEST_AUDIT_PATH = join(SECURITY_LOGS_DIR, 'LATEST_AUDIT.md');
 
 export interface SecurityAuditRecord {
   timestamp: string;
-  mode: 'code-check' | 'live-test' | 'pre-commit';
+  mode: 'code-check' | 'live-test' | 'pre-commit' | 'commit';
   target: string;
   status: 'PASSED' | 'WARNING' | 'FAILED';
   findingsCount: number;
@@ -28,7 +28,7 @@ export interface SecurityAuditRecord {
 }
 
 export interface LogAuditOptions {
-  mode: 'code-check' | 'live-test' | 'pre-commit';
+  mode: 'code-check' | 'live-test' | 'pre-commit' | 'commit';
   target: string;
   status: 'PASSED' | 'WARNING' | 'FAILED';
   findingsCount?: number;
@@ -111,7 +111,7 @@ ${findingsCount === 0 ? '✅ **Zero security vulnerabilities detected.** All ins
 // CLI entrypoint
 if (import.meta.main) {
   const args = process.argv.slice(2);
-  let mode: 'code-check' | 'live-test' | 'pre-commit' = 'code-check';
+  let mode: 'code-check' | 'live-test' | 'pre-commit' | 'commit' = 'code-check';
   let target = 'repo';
   let status: 'PASSED' | 'WARNING' | 'FAILED' = 'PASSED';
   let findingsCount = 0;
@@ -121,7 +121,7 @@ if (import.meta.main) {
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
     if (arg === '--mode' && args[i + 1]) {
-      mode = args[++i] as 'code-check' | 'live-test' | 'pre-commit';
+      mode = args[++i] as 'code-check' | 'live-test' | 'pre-commit' | 'commit';
     } else if (arg === '--target' && args[i + 1]) {
       target = args[++i];
     } else if (arg === '--status' && args[i + 1]) {
