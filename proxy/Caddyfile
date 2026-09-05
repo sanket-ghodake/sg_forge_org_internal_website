@@ -4,12 +4,15 @@
 # DO NOT EDIT DIRECTLY: Modify routes in .env and run './run.sh sync-proxy'
 # ==============================================================================
 
-http://:80, http://:8080 {
+http://:80, http://:8080, https://:443, https://:8443 {
     # Structured Logging
     log {
         output stdout
         format console
     }
+
+    # Air-Gapped Local Internal PKI (Zero External Network / ACME)
+    tls internal
 
     # Global Air-Gapped Security & CSP Headers
     header {

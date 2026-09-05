@@ -46,12 +46,11 @@ run.bat dev
 
 ## 🧭 Master Documentation & Architecture
 
-* **[Master Blueprint & Specifications](file:///home/sanket/Desktop/Sanket/org_website_clone/idea/README.md)**: Full architecture breakdown, diagrams, and design specifications.
+* **[Organization Deployment & Quickstart Guide](file:///home/sanket/Desktop/Sanket/org_website_clone/docs/ORGANIZATION_DEPLOYMENT_AND_QUICKSTART_GUIDE.md)**: Production deployment instructions, `.env` configuration, port mapping, and operational commands.
 * **[Portable Open-Source Toolchain Manual](file:///home/sanket/Desktop/Sanket/org_website_clone/docs/tools/PORTABLE_TOOLCHAIN.md)**: Complete guide to Gitleaks, Biome, Knip, Autocannon, Repomix, SCC, RTK, and Astryx CLI.
-* **[System Topology & Port Routing](file:///home/sanket/Desktop/Sanket/org_website_clone/idea/01_ARCHITECTURE.md)**: Reverse proxy ingress (Port 80/443), portal (3001), dev dashboard (3002), dev hub (3003), and micro-apps (8085+).
-* **[Forge Micro-Apps Spec](file:///home/sanket/Desktop/Sanket/org_website_clone/idea/02_FORGE_APPS_SPEC.md)**: App anatomy, dedicated Turso DB per app, and the Forge SDK bridge.
-* **[Security & RBAC Blueprint](file:///home/sanket/Desktop/Sanket/org_website_clone/idea/03_SECURITY_AND_RBAC.md)**: Zero-trust iframe sandboxing, scoped JWT tokens, and automated snapshots.
-* **[Testing Strategy](file:///home/sanket/Desktop/Sanket/org_website_clone/idea/04_TESTING_STRATEGY.md)**: 5-Tier Quality Assurance pyramid and automated test runners.
+* **[Developer Workflow & Testing Guide](file:///home/sanket/Desktop/Sanket/org_website_clone/docs/setup/WORKFLOW_SETUP.md)**: Daily developer workflows, 5-tier testing pyramid, and engineering standards.
+* **[Security & Zero-Trust Architecture](file:///home/sanket/Desktop/Sanket/org_website_clone/docs/security/README.md)**: Zero-trust iframe sandboxing, scoped JWT tokens, supply chain defense, and ASVS 5.0 invariants.
+* **[API Contracts & SDK Specifications](file:///home/sanket/Desktop/Sanket/org_website_clone/docs/api/README.md)**: OpenAPI 3.1 specifications, SDK bridge, and multi-app integration contracts.
 * **[Zero-Host Portable Setup Guide](file:///home/sanket/Desktop/Sanket/org_website_clone/docs/setup/PORTABLE_SETUP.md)**: Cross-platform portable runtimes (`bun`, `rtk`, `astryx`, `caveman`).
 
 ---
@@ -89,7 +88,6 @@ run.bat dev
 │   ├── bin/                       # gitleaks, biome, knip, hadolint, autocannon, repomix, scc, rtk, astryx
 │   └── bun/                       # Portable Bun v1.3.14 (LTS 2026)
 │
-├── idea/                          # 💡 Master System Blueprints & Infographics
 ├── run.sh                         # ⚡ Linux / macOS / WSL2 Orchestration CLI
 └── run.bat                        # ⚡ Windows Native Orchestration Script
 ```

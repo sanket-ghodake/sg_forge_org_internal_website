@@ -573,3 +573,5 @@
 2026-09-05 11:48 | Re-verified 2-tier quality gate (27/27 Tier 1 passed, 8/8 Tier 2 verified)
 2026-09-05 11:56 | Created centralized Git-tracked security audit ledger in logs/security/ with selective non-Git toolchain exclusions
 2026-09-05 11:58 | [4cd4dc8] feat(security): embed Strix in-chat AI pentest agent and persistent audit ledger (+867, -33)
+2026-09-05 18:59 | Removed idea/ directory and updated documentation links in README.md
+2026-09-05 19:05 | [dd71fff] docs: remove legacy idea folder and update documentation links (+19584, -29491)
