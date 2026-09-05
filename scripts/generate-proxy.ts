@@ -22,19 +22,24 @@ export function generateCaddyfile(): string {
   const httpPorts = Array.from(
     new Set([process.env.PROD_HTTP_PORT, process.env.HTTP_PORT, '80'].filter(Boolean))
   ) as string[];
+  const rawEnableHttp = process.env.ENABLE_HTTP !== 'false';
+  let enableTls = process.env.ENABLE_HTTPS === 'true';
+
+  // Safety fallback: If both protocols are disabled, fall back to HTTP to avoid dead gateway
+  let enableHttp = rawEnableHttp;
+  if (!rawEnableHttp && !enableTls) {
+    console.warn('⚠️  [SG Forge Ingress] Both ENABLE_HTTP and ENABLE_HTTPS are disabled. Falling back to HTTP.');
+    enableHttp = true;
+  }
+
   const httpsPorts = Array.from(
-    new Set([process.env.PROD_HTTPS_PORT, process.env.HTTPS_PORT].filter(Boolean))
+    new Set([process.env.PROD_HTTPS_PORT, process.env.HTTPS_PORT, enableTls ? '443' : null].filter(Boolean))
   ) as string[];
-  const enableTls = process.env.ENABLE_HTTPS === 'true';
   const tlsCert = process.env.TLS_CERT_PATH;
   const tlsKey = process.env.TLS_KEY_PATH;
 
   const httpBindings = httpPorts.map((p) => `http://:${p}`).join(', ');
   const httpsBindings = httpsPorts.map((p) => `https://:${p}`).join(', ');
-
-  const siteBinding = enableTls
-    ? (httpsBindings ? `${httpBindings}, ${httpsBindings}` : httpBindings)
-    : httpBindings;
 
   let caddyContent = `# ==============================================================================
 # ${brand.name} - Unified Reverse Proxy Gateway (Auto-Generated from .env)
@@ -42,29 +47,13 @@ export function generateCaddyfile(): string {
 # DO NOT EDIT DIRECTLY: Modify routes in .env and run './run.sh sync-proxy'
 # ==============================================================================
 
-${siteBinding} {
+(forge_gateway) {
     # Structured Logging
     log {
         output stdout
         format console
     }
-`;
 
-  if (enableTls) {
-    if (tlsCert && tlsKey) {
-      caddyContent += `
-    # Air-Gapped Enterprise Custom CA Certificate
-    tls ${tlsCert} ${tlsKey}
-`;
-    } else {
-      caddyContent += `
-    # Air-Gapped Local Internal PKI (Zero External Network / ACME)
-    tls internal
-`;
-    }
-  }
-
-  caddyContent += `
     # Global Air-Gapped Security & CSP Headers
     header {
         Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
@@ -92,8 +81,14 @@ ${siteBinding} {
     }
 
     # Static Brand Assets & Direct Public Delivery (Zero Upstream Bun Overhead)
+    # Checks for git-ignored custom logo overrides before falling back to default
     handle_path /brand* {
         root * /etc/caddy/public/brand
+        @hasCustomLogo {
+            path /logo.png
+            file /custom-logo.png
+        }
+        rewrite @hasCustomLogo /custom-logo.png
         file_server
     }
 `;
@@ -137,6 +132,31 @@ ${siteBinding} {
     handle {
         redir /portal 302
     }
+}
+`;
+  }
+
+  // Protocol Bindings
+  if (enableHttp && httpBindings) {
+    caddyContent += `
+${httpBindings} {
+    import forge_gateway
+}
+`;
+  }
+
+  if (enableTls && httpsBindings) {
+    let tlsDirective = '';
+    if (tlsCert && tlsKey) {
+      tlsDirective = `    # Air-Gapped Enterprise Custom CA Certificate\n    tls ${tlsCert} ${tlsKey}`;
+    } else {
+      tlsDirective = `    # Air-Gapped Local Internal PKI (Zero External Network / ACME)\n    tls internal`;
+    }
+
+    caddyContent += `
+${httpsBindings} {
+${tlsDirective}
+    import forge_gateway
 }
 `;
   }

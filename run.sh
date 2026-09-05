@@ -58,6 +58,9 @@ function show_help() {
     echo "  doctor                Run pre-flight diagnostics & environment check"
     echo "  clean                 Clean build caches and temporary logs"
     echo "  create-app <name>     Scaffold a new Micro-App from template"
+    echo "  lock-logo             Lock brand logo (skip-worktree) for in-place custom editing"
+    echo "  unlock-logo           Unlock brand logo to resume tracking upstream changes"
+    echo "  logo-status           Check Git tracking status of brand logo assets"
     echo ""
     echo "Ergonomic Aliases & Monitoring:"
     echo "  up [opt]              Shortcut for './run.sh docker up'"
@@ -272,6 +275,18 @@ case "$CMD" in
     check-pkg)
         shift
         $PORTABLE_BUN run "$REPO_ROOT/scripts/check-package-health.ts" "$@"
+        ;;
+
+    lock-logo)
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/brand-lock.ts" lock
+        ;;
+
+    unlock-logo)
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/brand-lock.ts" unlock
+        ;;
+
+    logo-status)
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/brand-lock.ts" status
         ;;
 
     licenses)

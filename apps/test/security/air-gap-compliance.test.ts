@@ -169,6 +169,7 @@ describe('Tier 3 Security: 100% Air-Gapped Compliance & Zero Data Leakage', () =
       } else {
         delete process.env.TLS_KEY_PATH;
       }
+      generateCaddyfile();
     }
   });
 });

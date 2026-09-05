@@ -10,6 +10,10 @@ High-performance reverse proxy routing gateway (Caddy v2.11.4 LTS).
 
 ## 🔒 Production TLS & Ingress Configuration
 
+* **Independent Ingress Protocol Controls (`.env`)**:
+  - `ENABLE_HTTP=true` (default): Serves HTTP on port `:80` (prod) or `:8080` (dev). Set to `false` to run in HTTPS-only mode and block unencrypted traffic.
+  - `ENABLE_HTTPS=true` (default): Serves TLS/HTTPS on port `:443` (prod) or `:8443` (dev). Set to `false` to run in HTTP-only mode.
+  - Dual-Stack (default): Both `ENABLE_HTTP=true` and `ENABLE_HTTPS=true` run simultaneously with zero port conflict.
 * **Air-Gapped Local Internal PKI (Default)**:
   Set `ENABLE_HTTPS=true` and `HTTPS_PORT=443` (or `PROD_HTTPS_PORT=443`) in `.env`. Running `./run.sh sync-proxy` adds `tls internal` to generate self-signed enterprise certificates offline without external ACME lookups.
 * **Custom Enterprise CA Certificates**:

@@ -4,15 +4,12 @@
 # DO NOT EDIT DIRECTLY: Modify routes in .env and run './run.sh sync-proxy'
 # ==============================================================================
 
-http://:80, http://:8080, https://:443, https://:8443 {
+(forge_gateway) {
     # Structured Logging
     log {
         output stdout
         format console
     }
-
-    # Air-Gapped Enterprise Custom CA Certificate
-    tls /etc/caddy/certs/cert.pem /etc/caddy/certs/key.pem
 
     # Global Air-Gapped Security & CSP Headers
     header {
@@ -41,8 +38,14 @@ http://:80, http://:8080, https://:443, https://:8443 {
     }
 
     # Static Brand Assets & Direct Public Delivery (Zero Upstream Bun Overhead)
+    # Checks for git-ignored custom logo overrides before falling back to default
     handle_path /brand* {
         root * /etc/caddy/public/brand
+        @hasCustomLogo {
+            path /logo.png
+            file /custom-logo.png
+        }
+        rewrite @hasCustomLogo /custom-logo.png
         file_server
     }
 
@@ -124,4 +127,14 @@ http://:80, http://:8080, https://:443, https://:8443 {
             header_up X-Forwarded-Proto {scheme}
         }
     }
+}
+
+http://:80, http://:8080 {
+    import forge_gateway
+}
+
+https://:443, https://:8443 {
+    # Air-Gapped Enterprise Custom CA Certificate
+    tls /etc/caddy/certs/cert.pem /etc/caddy/certs/key.pem
+    import forge_gateway
 }

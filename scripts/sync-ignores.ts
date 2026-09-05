@@ -47,6 +47,10 @@ export const MANDATORY_EXCLUSIONS = [
   'scratch/',
   'repomix-output.xml',
   '.coverage',
+  'public/brand/custom/',
+  'public/brand/custom-*',
+  'public/brand/*.custom.*',
+  'public/brand/custom-logo.*',
   'graphify-out/cache/',
   'graphify-out/.graphify_*',
   'graphify-out/20*/',
@@ -308,6 +312,12 @@ Thumbs.db
 graphify-out/cache/
 graphify-out/.graphify_*
 graphify-out/20*/
+
+# 8. Enterprise Custom Brand Overrides (Never track org-specific custom branding)
+public/brand/custom/
+public/brand/custom-*
+public/brand/*.custom.*
+public/brand/custom-logo.*
 `;
 
   // 2. Write to each root ignore file

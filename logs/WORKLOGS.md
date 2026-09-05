@@ -581,3 +581,9 @@
 2026-09-05 19:49 | [af9e237] feat(security): implement automated git-ignored intranet TLS certificates and OS trust installer (+2993, -785)
 2026-09-05 19:57 | integrate security audit generation and auto-amend into pre-commit and post-commit hooks
 2026-09-05 19:59 | [e1da30d] feat(security): integrate security audit ledger into pre-commit staging and post-commit auto-amend (+1311, -467)
+2026-09-05 20:06 | Generate clean SG isometric cubes brand logo from screenshot and replace legacy logo
+2026-09-05 20:17 | Implement hybrid zero-drift custom logo architecture with git ignores, auto-fallback, and skip-worktree CLI
+2026-09-05 20:19 | fix Caddy reverse proxy TLS configuration crash to restore browser access
+2026-09-05 20:24 | install root CA into user Chrome NSS database to resolve insecure browser warning
+2026-09-05 20:31 | implement independent ENABLE_HTTP and ENABLE_HTTPS protocol controls with dual-stack default
+2026-09-05 20:33 | [b642ce7] feat(ingress): add independent ENABLE_HTTP and ENABLE_HTTPS controls and fix proxy TLS conflict (+1431, -611)

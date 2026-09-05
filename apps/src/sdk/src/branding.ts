@@ -36,6 +36,21 @@ function findEnvPath(explicitPath?: string): string | null {
 function findBrandAssetPath(filename: string): string | null {
   let curr = process.cwd();
   for (let i = 0; i < 4; i++) {
+    // 1. Check for git-ignored organization custom logo overrides first
+    if (filename === 'logo.png' || filename === 'logo.svg') {
+      const ext = extname(filename);
+      const customCandidates = [
+        join(curr, 'public', 'brand', `custom-logo${ext}`),
+        join(curr, 'public', 'brand', 'custom', filename),
+        join(curr, 'public', 'brand', `logo.custom${ext}`),
+        join(curr, 'public', 'brand', 'custom-logo.png'),
+        join(curr, 'public', 'brand', 'custom', 'logo.png'),
+      ];
+      for (const customPath of customCandidates) {
+        if (existsSync(customPath)) return customPath;
+      }
+    }
+
     const candidatePublic = join(curr, 'public', 'brand', filename);
     if (existsSync(candidatePublic)) return candidatePublic;
     const candidateDirect = join(curr, 'public', filename);

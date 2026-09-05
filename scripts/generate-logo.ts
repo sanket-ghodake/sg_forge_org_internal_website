@@ -1,6 +1,8 @@
 /**
  * SG Forge - Enterprise Brand Logo Generator (2026 LTS)
- * Generates transparent, ultra-crisp dual-theme coral-red brand logo matching user screenshot.
+ * Generates transparent, ultra-crisp dual-theme brand logo matching user screenshot:
+ * - 3D Isometric cubes cluster (cyan / sky blue / ocean teal)
+ * - Rounded "SG" typographic emblem (ocean slate blue #377da3)
  */
 
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
@@ -36,13 +38,23 @@ function paeth(a: number, b: number, c: number): number {
 }
 
 export function processAndGenerateLogo(): void {
-  const uploadedPath = '/home/sanket/.gemini/antigravity-ide/brain/b21d09cc-fd77-470c-b9b5-201d29d027ae/.user_uploaded/media_1788361245582.png';
-  if (!existsSync(uploadedPath)) return;
+  const candidatePaths = [
+    join(process.cwd(), 'public', 'brand', 'source-screenshot.png'),
+    join(process.cwd(), 'scratch', 'screenshot.png'),
+    '/home/sanket/Pictures/Screenshots/Screenshot from 2026-09-05 19-55-48.png',
+  ];
 
-  const buf = readFileSync(uploadedPath);
+  const sourcePath = candidatePaths.find((p) => existsSync(p));
+  if (!sourcePath) {
+    console.error('Source screenshot not found in candidate paths.');
+    return;
+  }
+
+  const buf = readFileSync(sourcePath);
   let pos = 8;
   const idatChunks: Buffer[] = [];
-  let srcW = 0, srcH = 0;
+  let srcW = 0,
+    srcH = 0;
   while (pos < buf.length) {
     const len = buf.readUInt32BE(pos);
     const type = buf.toString('ascii', pos + 4, pos + 8);
@@ -83,17 +95,17 @@ export function processAndGenerateLogo(): void {
     }
   }
 
-  const minX = 39, maxX = 480;
-  const minY = 63, maxY = 155;
-  const pad = 6;
+  // Exact bounds of the logo in screenshot
+  const minX = 280,
+    maxX = 434;
+  const minY = 54,
+    maxY = 227;
+  const pad = 10;
 
-  const dstW = (maxX - minX + 1) + pad * 2;
-  const dstH = (maxY - minY + 1) + pad * 2;
+  const dstW = maxX - minX + 1 + pad * 2;
+  const dstH = maxY - minY + 1 + pad * 2;
   const dstStride = 1 + dstW * 4;
   const outData = Buffer.alloc(dstH * dstStride, 0);
-
-  // Vibrant Forge Coral: #E84D38 / #EB5757
-  const tr = 236, tg = 76, tb = 54;
 
   for (let dy = 0; dy < dstH; dy++) {
     outData[dy * dstStride] = 0;
@@ -105,42 +117,34 @@ export function processAndGenerateLogo(): void {
       if (sx < 0 || sx >= srcW) continue;
 
       const sIdx = (sy * srcW + sx) * bpp;
-      const r = uncompressed[sIdx], g = uncompressed[sIdx + 1], b = uncompressed[sIdx + 2];
+      const r = uncompressed[sIdx],
+        g = uncompressed[sIdx + 1],
+        b = uncompressed[sIdx + 2];
       const dIdx = dy * dstStride + 1 + dx * 4;
-      const gbAvg = (g + b) / 2;
-      const redDelta = r - gbAvg;
 
-      // Clean separation of red logo pixels vs watermark / background
-      if (r > 155 && redDelta > 28) {
-        const factor = Math.min(1, Math.max(0, (255 - gbAvg) / 165));
-        const alpha = Math.round(factor * 255);
-        if (alpha > 20) {
-          outData[dIdx] = tr;
-          outData[dIdx + 1] = tg;
-          outData[dIdx + 2] = tb;
-          outData[dIdx + 3] = redDelta > 70 ? 255 : alpha;
-        }
-      }
-    }
-  }
+      const sat = Math.max(r, g, b) - Math.min(r, g, b);
+      const blueDelta = b - r;
 
-  // Single-pixel micro-gap healing strictly within interior glyph lines
-  for (let dy = 1; dy < dstH - 1; dy++) {
-    for (let dx = 1; dx < dstW - 1; dx++) {
-      const idx = dy * dstStride + 1 + dx * 4;
-      if (outData[idx + 3] < 180) {
-        const top = outData[(dy - 1) * dstStride + 1 + dx * 4 + 3];
-        const bot = outData[(dy + 1) * dstStride + 1 + dx * 4 + 3];
-        const left = outData[dy * dstStride + 1 + (dx - 1) * 4 + 3];
-        const right = outData[dy * dstStride + 1 + (dx + 1) * 4 + 3];
+      // Color isolation: filter out white background and neutral watermark
+      if (sat > 10 && blueDelta > 8) {
+        const alpha = Math.min(
+          255,
+          Math.max(
+            0,
+            Math.round(Math.max((255 - r) / 200, (255 - g) / 130, blueDelta / 80) * 255)
+          )
+        );
 
-        const isSFlow = dx >= 45 && dx <= 80 && dy >= 20 && dy <= 65;
-        if (!isSFlow && ((top > 220 && bot > 220) || (left > 220 && right > 220))) {
-          outData[idx] = tr;
-          outData[idx + 1] = tg;
-          outData[idx + 2] = tb;
-          outData[idx + 3] = 255;
-        }
+        // Alpha un-multiplication against white background
+        const aNorm = Math.max(0.05, alpha / 255);
+        const trueR = Math.min(255, Math.max(0, Math.round((r - (1 - aNorm) * 255) / aNorm)));
+        const trueG = Math.min(255, Math.max(0, Math.round((g - (1 - aNorm) * 255) / aNorm)));
+        const trueB = Math.min(255, Math.max(0, Math.round((b - (1 - aNorm) * 255) / aNorm)));
+
+        outData[dIdx] = trueR;
+        outData[dIdx + 1] = trueG;
+        outData[dIdx + 2] = trueB;
+        outData[dIdx + 3] = alpha;
       }
     }
   }
@@ -165,12 +169,17 @@ export function processAndGenerateLogo(): void {
 
   const outPngPath = join(process.cwd(), 'public', 'brand', 'logo.png');
   writeFileSync(outPngPath, pngBuf);
-  console.log(`Generated exact clean transparent coral logo.png (${dstW}x${dstH}) at: ${outPngPath}`);
+  console.log(`Generated clean transparent SG logo.png (${dstW}x${dstH}) at: ${outPngPath}`);
 
+  // Generate self-contained standalone SVG with embedded data URI
+  const base64Png = pngBuf.toString('base64');
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${dstW} ${dstH}" width="${dstW}" height="${dstH}">
-  <image href="/brand/logo.png" width="${dstW}" height="${dstH}" />
-</svg>`;
-  writeFileSync(join(process.cwd(), 'public', 'brand', 'logo.svg'), svg, 'utf8');
+  <image href="data:image/png;base64,${base64Png}" width="${dstW}" height="${dstH}" />
+</svg>
+`;
+  const outSvgPath = join(process.cwd(), 'public', 'brand', 'logo.svg');
+  writeFileSync(outSvgPath, svg, 'utf8');
+  console.log(`Generated self-contained vector wrapper logo.svg (${dstW}x${dstH}) at: ${outSvgPath}`);
 }
 
 processAndGenerateLogo();

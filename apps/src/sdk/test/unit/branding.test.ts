@@ -105,6 +105,28 @@ describe('Tier 1 Unit: Brand Configuration Resolver Engine', () => {
     expect(res?.headers.get('Cache-Control')).toContain('max-age=86400');
   });
 
+  it('Arrange, Act, Assert: handleBrandAssetRequest automatically prioritizes custom-logo override when present', async () => {
+    // Arrange: Create a temporary custom-logo.png in public/brand/
+    const { writeFileSync, unlinkSync } = await import('node:fs');
+    const { join } = await import('node:path');
+    const customPath = join(process.cwd(), 'public', 'brand', 'custom-logo.png');
+    writeFileSync(customPath, Buffer.from('CUSTOM_LOGO_PNG_DATA'));
+
+    try {
+      // Act: Request default /brand/logo.png
+      const req = new Request('http://localhost:3000/brand/logo.png');
+      const res = handleBrandAssetRequest(req);
+
+      // Assert: The custom logo was served
+      expect(res).not.toBeNull();
+      expect(res?.status).toBe(200);
+      const text = await res?.text();
+      expect(text).toBe('CUSTOM_LOGO_PNG_DATA');
+    } finally {
+      unlinkSync(customPath);
+    }
+  });
+
   it('Arrange, Act, Assert: handleBrandAssetRequest returns null for non-asset routes', () => {
     // Arrange
     const req = new Request('http://localhost:3000/api/users');

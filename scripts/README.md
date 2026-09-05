@@ -10,3 +10,4 @@ Build, verification, orchestration, and audit logging scripts.
 * **[`fallback-server.ts`](file:///home/sanket/Desktop/Sanket/org_website_clone/scripts/fallback-server.ts)**: Standalone host-level micro-daemon (Approach A) serving Astryx system-down pages when Docker/Caddy is offline.
 * **[`dev-runner.ts`](file:///home/sanket/Desktop/Sanket/org_website_clone/scripts/dev-runner.ts)**: Dynamic native development supervisor with port collision detection, SIGINT process group cleanup, and registry-driven service discovery.
 * **[`exec-watchdog.ts`](file:///home/sanket/Desktop/Sanket/org_website_clone/scripts/exec-watchdog.ts)**: Subprocess execution watchdog and deadlock prevention utility enforcing hard timeouts and non-blocking I/O.
+* **[`brand-lock.ts`](file:///home/sanket/Desktop/Sanket/org_website_clone/scripts/brand-lock.ts)**: Brand asset Git lock & in-place customization engine leveraging skip-worktree to prevent Git drift.
