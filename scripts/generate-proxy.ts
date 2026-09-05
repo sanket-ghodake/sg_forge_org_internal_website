@@ -116,18 +116,30 @@ ${siteBinding} {
 `;
   }
 
-  // Root landing fallback handler
+  // Root landing / ingress handler
   const landing = services.find((s) => s.path === '/');
-  const landingPort = landing ? landing.port : 3000;
-  const landingHost = landing ? landing.containerName : 'landing';
-
-  caddyContent += `
-    # Public Platform Hub (Root Ingress)
+  if (landing) {
+    const upstream = landing.upstreamUrl || `http://${landing.containerName}:${landing.port}`;
+    caddyContent += `
+    # ${landing.name} (${landing.id}) [Root Ingress]
     handle {
-        reverse_proxy http://${landingHost}:${landingPort}
+        reverse_proxy ${upstream} {
+            header_up Host {host}
+            header_up X-Forwarded-Host {host}
+            header_up X-Forwarded-Proto {scheme}
+        }
     }
 }
 `;
+  } else {
+    caddyContent += `
+    # Headless Fallback: Direct Ingress to Portal
+    handle {
+        redir /portal 302
+    }
+}
+`;
+  }
 
   writeFileSync(CADDYFILE_PATH, caddyContent, 'utf8');
   return caddyContent;

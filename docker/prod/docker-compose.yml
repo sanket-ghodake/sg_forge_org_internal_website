@@ -37,6 +37,7 @@ services:
     volumes:
       - ../../proxy/Caddyfile:/etc/caddy/Caddyfile:ro
       - ../../proxy/errors:/etc/caddy/errors:ro
+      - ../../proxy/certs:/etc/caddy/certs:ro
       - ../../public:/etc/caddy/public:ro
       - ag_caddy_data:/data
       - ag_caddy_config:/config
@@ -62,7 +63,7 @@ services:
       context: ../../
       dockerfile: apps/src/landing/docker/Dockerfile
     container_name: ${CONTAINER_PREFIX:-ag}-landing-prod
-    profiles: ["core", "all"]
+    profiles: ["landing", "all"]
     env_file:
       - ../../.env
     environment:

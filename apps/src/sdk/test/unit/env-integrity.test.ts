@@ -78,6 +78,7 @@ describe('Tier 1 Unit: Environment & Service Registry Integrity', () => {
     // Arrange
     const envMap = parseEnvMap(envPath);
     const corePortMappings: Array<{ portVar: string; appVar: string }> = [
+      { portVar: 'LANDING_PORT', appVar: 'APP_LANDING' },
       { portVar: 'PORTAL_PORT', appVar: 'APP_PORTAL' },
       { portVar: 'DEV_DASHBOARD_PORT', appVar: 'APP_DEVCENTER' },
       { portVar: 'DEV_HUB_PORT', appVar: 'APP_GATEWAY' },

@@ -50,6 +50,11 @@ repomix-output.xml
 *.p12
 *.pfx
 *.keystore
+*.csr
+proxy/certs/*.pem
+proxy/certs/*.key
+proxy/certs/*.crt
+proxy/certs/*.csr
 
 # 5. Database Files, WAL Transients & Snapshots
 data/*.db

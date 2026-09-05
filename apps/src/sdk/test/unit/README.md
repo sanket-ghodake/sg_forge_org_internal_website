@@ -7,6 +7,7 @@ This directory houses Tier 1 unit test suites for the `@forge/sdk` core packages
 - `branding.test.ts`: Dynamic white-label branding loader and token resolution.
 - `browser-bridge.test.ts`: Real-time browser telemetry log streaming bridge.
 - `client-bridge.test.ts`: Micro-app iframe handshake and RPC message bridge.
+- `custom-landing-ingress.test.ts`: Dynamic custom landing container overrides, HTTPS upstreams, and Caddy proxy generation.
 - `directory-client.test.ts`: Hierarchical org tree and employee directory client.
 - `env-integrity.test.ts`: Environment variable validation and runtime invariants.
 - `error-handler.test.ts`: RFC 7807 problem details error boundaries and trace ID generation.

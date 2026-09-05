@@ -575,3 +575,7 @@
 2026-09-05 11:58 | [4cd4dc8] feat(security): embed Strix in-chat AI pentest agent and persistent audit ledger (+867, -33)
 2026-09-05 18:59 | Removed idea/ directory and updated documentation links in README.md
 2026-09-05 19:05 | [dd71fff] docs: remove legacy idea folder and update documentation links (+19584, -29491)
+2026-09-05 19:09 | Decoupled landing service from core into configurable APP_LANDING micro-app
+2026-09-05 19:32 | Created ready-made landing-custom starter base with git submodule isolation
+2026-09-05 19:44 | feat(security): implement automated git-ignored intranet TLS certificates and OS trust installer
+2026-09-05 19:49 | [af9e237] feat(security): implement automated git-ignored intranet TLS certificates and OS trust installer (+2993, -785)

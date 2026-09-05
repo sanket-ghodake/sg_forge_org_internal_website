@@ -49,6 +49,8 @@ function show_help() {
     echo "  setup                 Bootstrap workspace dependencies & portable runtimes"
     echo "  dev [svc]             Start platform services natively (opt: target single service)"
     echo "  sync-proxy            Auto-generate proxy/Caddyfile dynamically from .env"
+    echo "  certs [--force]       Generate local & intranet TLS certificates (proxy/certs)"
+    echo "  trust-cert            Install local Root CA into OS/browser trust store"
     echo "  fallback [port]       Run Host Fallback Server (Approach A offline maintenance)"
     echo "  sync-ignores          Auto-sync all 7 ignore files & .gitattributes"
     echo "  test [unit|all]       Run 5-tier test suites"
@@ -128,8 +130,23 @@ case "$CMD" in
         echo "📦 Installing workspace packages with Bun..."
         $PORTABLE_BUN install
         $PORTABLE_BUN run "$REPO_ROOT/scripts/sync-ignores.ts"
-        $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
+        if [ ! -f "$REPO_ROOT/proxy/certs/cert.pem" ]; then
+            echo "🔒 [${BRAND_NAME}] Generating local development TLS certificates..."
+            $PORTABLE_BUN run "$REPO_ROOT/scripts/setup-certs.ts"
+        else
+            $PORTABLE_BUN run "$REPO_ROOT/scripts/generate-proxy.ts"
+        fi
         echo "✨ Setup completed successfully! Run './run.sh dev' or './run.sh docker up' to start."
+        ;;
+
+    certs)
+        shift
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/setup-certs.ts" "$@"
+        ;;
+
+    trust-cert)
+        shift
+        $PORTABLE_BUN run "$REPO_ROOT/scripts/trust-cert.ts" "$@"
         ;;
 
     sync-proxy)

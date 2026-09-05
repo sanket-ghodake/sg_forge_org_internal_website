@@ -93,23 +93,6 @@ export function loadServiceRegistry(options?: string | LoadRegistryOptions): Ser
 
   const services: ServiceEntry[] = [];
 
-  // Default Platform Hub entry
-  const landingPort = Number(envMap.LANDING_PORT || 3000);
-  services.push({
-    id: 'landing',
-    name: 'Platform Hub (Landing)',
-    port: landingPort,
-    path: '/',
-    category: 'Core Workspaces',
-    role: 'Public Ingress',
-    containerName: 'landing',
-    upstreamUrl: `http://landing:${landingPort}`,
-    isExternal: false,
-    isPublic: true,
-    healthUrl: '/health',
-    status: 'active',
-  });
-
   for (const [key, value] of Object.entries(envMap)) {
     if (key.startsWith('APP_') && typeof value === 'string' && value.includes('|')) {
       const appId = key.replace('APP_', '').toLowerCase().replace(/_/g, '-');
@@ -150,6 +133,11 @@ export function loadServiceRegistry(options?: string | LoadRegistryOptions): Ser
           upstreamUrl = `http://${containerName}:${port}`;
         }
 
+        const isRoot = path === '/';
+        const isInternalLanding = isRoot && (containerName === 'landing' || containerName === 'ag-landing');
+        const isExternal = isRoot ? !isInternalLanding : path !== '/';
+        const healthUrl = isRoot ? '/health' : `${path}/health`;
+
         services.push({
           id: appId,
           name,
@@ -159,13 +147,34 @@ export function loadServiceRegistry(options?: string | LoadRegistryOptions): Ser
           role,
           containerName,
           upstreamUrl,
-          isExternal: path !== '/',
+          isExternal,
           isPublic,
-          healthUrl: `${path}/health`,
+          healthUrl,
           status,
         });
       }
     }
+  }
+
+  // Backward compatibility: If no root path '/' service was explicitly declared in envMap,
+  // register the default Platform Hub landing service unless explicitly disabled.
+  const hasRootService = services.some((s) => s.path === '/');
+  if (!hasRootService && envMap.DISABLE_LANDING !== 'true') {
+    const landingPort = Number(envMap.LANDING_PORT || 3000);
+    services.unshift({
+      id: 'landing',
+      name: 'Platform Hub (Landing)',
+      port: landingPort,
+      path: '/',
+      category: 'Core Workspaces',
+      role: 'Public Ingress',
+      containerName: 'landing',
+      upstreamUrl: `http://landing:${landingPort}`,
+      isExternal: false,
+      isPublic: true,
+      healthUrl: '/health',
+      status: 'active',
+    });
   }
 
   return services;

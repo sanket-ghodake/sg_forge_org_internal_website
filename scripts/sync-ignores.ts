@@ -25,6 +25,15 @@ export const MANDATORY_EXCLUSIONS = [
   '.env.*',
   '*.pem',
   '*.key',
+  '*.crt',
+  '*.csr',
+  '*.p12',
+  '*.pfx',
+  '*.keystore',
+  '**/certs/*.pem',
+  '**/certs/*.key',
+  '**/certs/*.crt',
+  '**/certs/*.csr',
   'data/*.db',
   'data/*.db-wal',
   'data/*.db-shm',
@@ -170,6 +179,11 @@ export function validateIgnores(): ValidationResult {
   checkSubfolders(appsDir);
   checkSubfolders(forgeAppsDir);
 
+  const landingCustomLogs = join(REPO_ROOT, 'landing-custom', 'logs', '.gitignore');
+  if (existsSync(join(REPO_ROOT, 'landing-custom')) && !existsSync(landingCustomLogs)) {
+    subfolderLogIgnoresMissing.push(toRelGitPath(landingCustomLogs));
+  }
+
   // 4. Validate Zero Symlinks in portable toolchains (guarantees Windows / WSL / macOS parity)
   const portableDirs = [
     join(REPO_ROOT, 'portables', 'bin'),
@@ -257,6 +271,11 @@ repomix-output.xml
 *.p12
 *.pfx
 *.keystore
+*.csr
+proxy/certs/*.pem
+proxy/certs/*.key
+proxy/certs/*.crt
+proxy/certs/*.csr
 
 # 5. Database Files, WAL Transients & Snapshots
 data/*.db
@@ -332,6 +351,15 @@ logs/security/
 
   syncSubfolderLogs(appsDir);
   syncSubfolderLogs(forgeAppsDir);
+
+  const landingCustomLogsDir = join(REPO_ROOT, 'landing-custom', 'logs');
+  if (existsSync(join(REPO_ROOT, 'landing-custom'))) {
+    mkdirSync(landingCustomLogsDir, { recursive: true });
+    const gitignoreFile = join(landingCustomLogsDir, '.gitignore');
+    const content = `# Isolated microservice logs retention\n*.log\n*.log.*\n!.gitignore\n!README.md\n`;
+    writeFileSync(gitignoreFile, content, 'utf8');
+    filesUpdated.push(toRelGitPath(gitignoreFile));
+  }
 
   // 4. Synchronize .gitattributes
   const canonicalGitattributes = `# ==============================================================================

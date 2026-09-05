@@ -1,16 +1,16 @@
 # 🛡️ Strix Security Audit Report: PRE-COMMIT
 
-- **Timestamp**: 2026-09-05T14:19:11.206Z
+- **Timestamp**: 2026-09-05T14:17:53.990Z
 - **Target**: `repository-precommit-gate`
 - **Execution Mode**: pre-commit
-- **Status**: `PASSED`
-- **Findings Count**: 0
-- **Summary**: Pre-commit gate verified: 0 security regressions detected across routes, DB isolation, and secrets
+- **Status**: `FAILED`
+- **Findings Count**: 1
+- **Summary**: Pre-commit gate flagged blocking verification issues
 
 ---
 
 ## Findings Summary
-✅ **Zero security vulnerabilities detected.** All inspected invariants passed.
+⚠️ **1 finding(s) detected.** See details below.
 
 ---
 

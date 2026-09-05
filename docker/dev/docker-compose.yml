@@ -38,6 +38,7 @@ services:
     volumes:
       - ../../proxy/Caddyfile:/etc/caddy/Caddyfile:ro
       - ../../proxy/errors:/etc/caddy/errors:ro
+      - ../../proxy/certs:/etc/caddy/certs:ro
       - ../../public:/etc/caddy/public:ro
       - ag_caddy_data:/data
       - ag_caddy_config:/config
@@ -61,7 +62,7 @@ services:
   landing:
     image: oven/bun:1.3-alpine
     container_name: ${CONTAINER_PREFIX:-ag}-landing-dev
-    profiles: ["core", "all"]
+    profiles: ["landing", "all"]
     working_dir: /app
     env_file:
       - ../../.env

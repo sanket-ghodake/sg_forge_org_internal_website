@@ -135,7 +135,11 @@ describe('Tier 3 Security: 100% Air-Gapped Compliance & Zero Data Leakage', () =
   it('Arrange, Act, Assert: generateCaddyfile configures offline-safe proxy with internal TLS & zero ACME lookups', () => {
     // Arrange
     const origHttps = process.env.ENABLE_HTTPS;
+    const origCert = process.env.TLS_CERT_PATH;
+    const origKey = process.env.TLS_KEY_PATH;
     process.env.ENABLE_HTTPS = 'true';
+    delete process.env.TLS_CERT_PATH;
+    delete process.env.TLS_KEY_PATH;
 
     try {
       // Act
@@ -154,6 +158,16 @@ describe('Tier 3 Security: 100% Air-Gapped Compliance & Zero Data Leakage', () =
         process.env.ENABLE_HTTPS = origHttps;
       } else {
         delete process.env.ENABLE_HTTPS;
+      }
+      if (origCert !== undefined) {
+        process.env.TLS_CERT_PATH = origCert;
+      } else {
+        delete process.env.TLS_CERT_PATH;
+      }
+      if (origKey !== undefined) {
+        process.env.TLS_KEY_PATH = origKey;
+      } else {
+        delete process.env.TLS_KEY_PATH;
       }
     }
   });

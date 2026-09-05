@@ -23,12 +23,28 @@ interface ResolvedService {
  * Resolves the server entrypoint file path for a registered service.
  */
 function resolveEntrypoint(service: ServiceEntry): string | null {
+  if (service.isExternal) {
+    return null;
+  }
+
   const candidates = [
     join(REPO_ROOT, 'apps', 'src', service.id, 'src', 'server.ts'),
     join(REPO_ROOT, 'forge-apps', service.id, 'src', 'server.ts'),
     join(REPO_ROOT, 'apps', 'src', service.containerName, 'src', 'server.ts'),
     join(REPO_ROOT, 'forge-apps', service.containerName.replace(/^app-/, ''), 'src', 'server.ts'),
+    join(REPO_ROOT, service.containerName, 'src', 'server.ts'),
   ];
+
+  if (service.id === 'landing') {
+    candidates.length = 0;
+    if (service.containerName === 'landing') {
+      candidates.push(join(REPO_ROOT, 'apps', 'src', 'landing', 'src', 'server.ts'));
+    } else if (service.containerName === 'landing-custom') {
+      candidates.push(join(REPO_ROOT, 'landing-custom', 'src', 'server.ts'));
+    } else {
+      candidates.push(join(REPO_ROOT, service.containerName, 'src', 'server.ts'));
+    }
+  }
 
   if (service.id === 'devcenter') {
     candidates.unshift(join(REPO_ROOT, 'apps', 'src', 'dev-dashboard', 'src', 'server.ts'));

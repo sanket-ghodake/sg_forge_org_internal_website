@@ -1,0 +1,13 @@
+{
+  "name": "@forge/landing-custom",
+  "version": "1.0.0",
+  "description": "Ready-made customizable landing page starter base with Git submodule isolation",
+  "private": true,
+  "main": "src/server.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch src/server.ts",
+    "start": "bun src/server.ts",
+    "test": "bun test test/"
+  }
+}
